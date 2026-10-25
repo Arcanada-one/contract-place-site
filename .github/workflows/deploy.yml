@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    uses: Arcanada-one/shared-workflows/.github/workflows/deploy-static-site.yml@b4a1d127ef0037836dafce6071b28db005a11eb2
+    with:
+      domain: contract.place
+      webroot: contract.place
+      publish_dir: public
+    secrets:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}

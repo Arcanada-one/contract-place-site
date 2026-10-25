@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: static-site-smoke
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Serve and check the published tree
+        run: |
+          python3 - <<'PY'
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from threading import Thread
+          from urllib.request import urlopen
+
+          handler = partial(SimpleHTTPRequestHandler, directory="public")
+          server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+          thread = Thread(target=server.serve_forever, daemon=True)
+          thread.start()
+          try:
+              base = f"http://127.0.0.1:{server.server_port}"
+              with urlopen(base + "/", timeout=5) as response:
+                  assert response.status == 200
+                  page = response.read().decode("utf-8")
+              assert "Knowledge Contract" in page
+              assert "3.0.0-draft.1" in page
+              for path in ("/styles.css", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
+                  with urlopen(base + path, timeout=5) as response:
+                      assert response.status == 200, path
+                      assert response.read(), path
+          finally:
+              server.shutdown()
+              server.server_close()
+              thread.join(timeout=5)
+          PY
+
+  security-audit:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    uses: Arcanada-one/datarim/.github/workflows/reusable-security-audit.yml@5a204199acd5b708ea63d99f6d642848f532bead
+    with:
+      stack: framework
+      datarim_ref: 5a204199acd5b708ea63d99f6d642848f532bead
+      runner_labels: '["ubuntu-latest"]'
+
+  network-exposure:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    uses: Arcanada-one/datarim/.github/workflows/network-exposure-lint.yml@5a204199acd5b708ea63d99f6d642848f532bead
+    with:
+      # This static repository has no Compose, Redis, PostgreSQL or systemd bind files.
+      compose_paths: ''
+      datarim_ref: 5a204199acd5b708ea63d99f6d642848f532bead
+      runner_labels: '["ubuntu-latest"]'

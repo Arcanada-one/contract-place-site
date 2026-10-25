@@ -1,0 +1,10 @@
+# Contract Place
+
+> Public home for Knowledge Contract research. The specification and experiments are in progress; 3.0.0-draft.1 is a target, not a released protocol.
+
+- Home: https://contract.place/
+- Knowledge Contract repository: https://github.com/Arcanada-one/knowledge-contract
+- Site source: https://github.com/Arcanada-one/contract-place-site
+- Ecosystem: https://arcanada.ai/
+
+No API, graph, vector, or MCP service is offered on this site yet.
