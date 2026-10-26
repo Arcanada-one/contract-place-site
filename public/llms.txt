@@ -1,4 +1,4 @@
-# Contract Place
+# Knowledge Contract Arcana
 
 > Public home for Knowledge Contract research. The specification and experiments are in progress; 3.0.0-draft.1 is a target, not a released protocol.
 
@@ -6,5 +6,7 @@
 - Knowledge Contract repository: https://github.com/Arcanada-one/knowledge-contract
 - Site source: https://github.com/Arcanada-one/contract-place-site
 - Ecosystem: https://arcanada.ai/
+- Architecture article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-architecture
+- Version 2 article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-v2
 
 No API, graph, vector, or MCP service is offered on this site yet.

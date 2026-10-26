@@ -34,7 +34,7 @@ jobs:
               with urlopen(base + "/", timeout=5) as response:
                   assert response.status == 200
                   page = response.read().decode("utf-8")
-              assert "Knowledge Contract" in page
+              assert "Knowledge Contract Arcana" in page
               assert "3.0.0-draft.1" in page
               for path in ("/styles.css", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
                   with urlopen(base + path, timeout=5) as response:

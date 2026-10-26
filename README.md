@@ -1,8 +1,10 @@
-# Contract Place
+# Knowledge Contract Arcana
 
-Contract Place is the planned public home for Knowledge Contract rules, research papers, and implementation resources. Knowledge Contract is a research effort toward a verifiable way to decide what an agent may know, reuse, and act on. Its current target is `3.0.0-draft.1`; the specification and experiments remain in progress.
+Knowledge Contract Arcana is an Arcanada research project on preserving the source, scope, evidence, and conditions of use when people and agents reuse knowledge. Its current Knowledge Contract target is `3.0.0-draft.1`; the specification and experiments remain in progress.
 
 This repository contains the static placeholder for [contract.place](https://contract.place). It publishes only the files in `public/`. Research materials and an API will be added through their own repositories when ready.
+
+Read the [research repository](https://github.com/Arcanada-one/knowledge-contract), the [Arcanada project page](https://arcanada.ai/en/ecosystem/contract-place), and the existing [architecture](https://arcanada.ai/en/blog/meaning-management-knowledge-contract-architecture) and [version 2](https://arcanada.ai/en/blog/meaning-management-knowledge-contract-v2) articles. The site and repository link to each other.
 
 ## Preview
 
