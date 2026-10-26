@@ -69,6 +69,9 @@ a { color: inherit; }
   letter-spacing: .02em;
 }
 
+.ecosystem-link { color: #a6e3d1; font-size: 12px; text-underline-offset: 4px; }
+.ecosystem-link:hover, .ecosystem-link:focus-visible { color: #e9eef1; }
+
 .status-dot {
   width: 7px;
   height: 7px;
@@ -142,7 +145,7 @@ footer {
 }
 
 @media (max-width: 650px) {
-  .masthead { align-items: flex-start; }
+  .masthead { align-items: flex-start; flex-wrap: wrap; }
   .status { max-width: 110px; line-height: 1.3; }
   .hero { padding-top: 105px; padding-bottom: 95px; }
   .details { grid-template-columns: 1fr; gap: 24px; }
