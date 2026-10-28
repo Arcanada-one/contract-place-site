@@ -9,7 +9,7 @@ SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana cont
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
-path = ["public/styles.css", "public/favicon.svg", "public/robots.txt", "public/sitemap.xml", ".github/**", "REUSE.toml"]
+path = ["public/styles.css", "public/favicon.svg", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"
