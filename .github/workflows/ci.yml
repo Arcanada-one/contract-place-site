@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Licensing markup (head link, footer, JSON-LD)
+        run: python3 scripts/check_page.py public/index.html
       - name: Serve and check the published tree
         run: |
           python3 - <<'PY'
@@ -45,6 +47,20 @@ jobs:
               server.server_close()
               thread.join(timeout=5)
           PY
+
+  reuse-lint:
+    name: reuse-lint
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: REUSE compliance
+        run: |
+          python3 -m venv "$RUNNER_TEMP/reuse"
+          "$RUNNER_TEMP/reuse/bin/pip" install --quiet reuse==6.2.0
+          "$RUNNER_TEMP/reuse/bin/reuse" lint
 
   security-audit:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
