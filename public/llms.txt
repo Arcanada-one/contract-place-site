@@ -9,6 +9,14 @@
 - Architecture article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-architecture
 - Version 2 article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-v2
 
+## Purpose
+
+Knowledge Contract Arcana is about managing knowledge and its reuse by people and agents: contracts for managing the heritage of human knowledge. It is designed to replace hand-written skills, rules and prompt files kept separately in each agent harness with one unified knowledge contract that evolves itself (evidence-gated, versioned, with rollback) and improves through the community and contributors.
+
+- Working today: public hub, licensing and attribution mechanics (CC BY 4.0, Apache-2.0, NOTICE, ATTRIBUTION.md, CITATION.cff, REUSE, DCO, source register), the knowledge-contract repository as a public scaffold, and two published articles on arcanada.ai.
+- Planned, not built: published specifications and papers in the repository, a sourced corpus (no approved entries yet), the unified contract for harnesses, the self-evolution loop, community intake and review, knowledge selection with provenance receipts, search and access (graph and vector search, an API and an MCP server).
+- The backend engine that processes, admits and evolves contracts stays closed and proprietary; whatever knowledge is published is open.
+
 No API, graph, vector, or MCP service is offered on this site yet.
 
 ## License and attribution
