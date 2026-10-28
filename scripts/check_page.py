@@ -24,6 +24,12 @@ def check(page: str) -> None:
     for url in (CC_DEED, APACHE, ATTR):
         assert 'href="' + url + '"' in f, "footer link missing: " + url
 
+    purpose = re.search(r'<section[^>]*\bid="purpose"[^>]*>(.*?)</section>', page, re.S)
+    assert purpose, "purpose section (#purpose) missing"
+    ptext = re.sub(r"<[^>]+>", " ", purpose.group(1))
+    assert "Working today" in ptext, "purpose: 'Working today' marker missing"
+    assert "Planned" in ptext, "purpose: 'Planned' marker missing"
+
     blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S)
     assert blocks, "no JSON-LD block"
     data = json.loads(blocks[0])

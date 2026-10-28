@@ -2,7 +2,7 @@
 
 Knowledge Contract Arcana is an Arcanada research project on preserving the source, scope, evidence, and conditions of use when people and agents reuse knowledge. Its current Knowledge Contract target is `3.0.0-draft.1`; the specification and experiments remain in progress.
 
-The project is about managing knowledge and its reuse by people and agents: contracts for managing the heritage of human knowledge, designed to replace hand-written skills, rules and prompt files kept in each agent harness with one unified, self-evolving knowledge contract that the community and contributors improve. The unified contract, the self-evolution loop, community intake, the sourced corpus and search/MCP access are planned, not built. The backend engine stays closed and proprietary; the knowledge is open.
+The project is about managing knowledge and its reuse by people and agents: contracts for managing the heritage of human knowledge, designed to replace hand-written skills, rules and prompt files kept in each agent harness with one unified, self-evolving knowledge contract that the community and contributors improve. The unified contract, the self-evolution loop, community intake, the sourced corpus and search/MCP access are planned, not built. The backend engine stays closed and proprietary; whatever knowledge is published is open.
 
 This repository contains the static placeholder for [contract.place](https://contract.place). It publishes only the files in `public/`. Research materials and an API will be added through their own repositories when ready.
 
