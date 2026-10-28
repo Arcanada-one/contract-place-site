@@ -14,6 +14,10 @@ Run `python3 -m http.server 8000 --directory public`, then open `http://localhos
 
 The `deploy` workflow calls the pinned shared static-site workflow. It publishes `public/` into the `contract.place` webroot on the site runner. Deployment is manual while the domain and origin are being configured.
 
+## Licensing
+
+Site content is licensed under [CC BY 4.0](LICENSE) and site code under [Apache-2.0](LICENSE-CODE). Reuse, including commercial and derivative projects, is free on the condition that you credit the author and link to the source (https://contract.place); keep the [NOTICE](NOTICE) and any upstream source credits. Credit lines are in [ATTRIBUTION.md](https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md) and in the "Use and cite" section of the site. The names "Knowledge Contract Arcana" and "Arcanada" and any logos are not licensed. Contributions are accepted under the Developer Certificate of Origin (sign off commits with `git commit -s`).
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) for private vulnerability reporting.

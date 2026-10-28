@@ -10,3 +10,7 @@
 - Version 2 article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-v2
 
 No API, graph, vector, or MCP service is offered on this site yet.
+
+## License and attribution
+
+Reuse allowed under CC BY 4.0; credit Knowledge Contract Arcana, https://contract.place; keep upstream source credits. Code is Apache-2.0. Credit lines: https://contract.place/#use-and-cite and https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md

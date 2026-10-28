@@ -1,0 +1,15 @@
+version = 1
+SPDX-PackageName = "contract-place-site"
+SPDX-PackageDownloadLocation = "https://github.com/Arcanada-one/contract-place-site"
+
+[[annotations]]
+path = ["public/index.html", "public/llms.txt", "README.md", "SECURITY.md", "NOTICE"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["public/styles.css", "public/favicon.svg", "public/robots.txt", "public/sitemap.xml", ".github/**", "REUSE.toml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "Apache-2.0"

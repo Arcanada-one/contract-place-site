@@ -36,6 +36,9 @@ jobs:
                   page = response.read().decode("utf-8")
               assert "Knowledge Contract Arcana" in page
               assert "3.0.0-draft.1" in page
+              assert 'rel="license"' in page
+              assert "Content" in page and "CC BY 4.0" in page and "Apache-2.0" in page
+              assert "application/ld+json" in page
               for path in ("/styles.css", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
@@ -45,6 +48,20 @@ jobs:
               server.server_close()
               thread.join(timeout=5)
           PY
+
+  reuse-lint:
+    name: reuse-lint
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: REUSE compliance
+        run: |
+          python3 -m venv "$RUNNER_TEMP/reuse"
+          "$RUNNER_TEMP/reuse/bin/pip" install --quiet reuse==6.2.0
+          "$RUNNER_TEMP/reuse/bin/reuse" lint
 
   security-audit:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
