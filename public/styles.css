@@ -156,3 +156,21 @@ footer {
 .cite h2 { margin: 0 0 12px; font-size: 22px; }
 .cite pre { margin: 6px 0 16px; padding: 12px 14px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; background: #ffffff0d; border-radius: 6px; font-size: 13px; }
 .cite a, footer a { color: inherit; }
+
+.search-form { margin: 18px 0 8px; }
+.search-row { display: flex; gap: 12px; margin-top: 8px; }
+.search-row input { flex: 1; min-width: 0; padding: 11px 13px; color: #e9eef1; background: #ffffff0d; border: 1px solid #ffffff24; border-radius: 6px; font: inherit; font-size: 15px; }
+.search-row input:focus-visible, .search-row button:focus-visible, .more:focus-visible { outline: 2px solid #a6e3d1; outline-offset: 2px; }
+.search-row button, .more { padding: 10px 18px; color: #a6e3d1; background: transparent; border: 1px solid #87c6b6; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; }
+.search-row button:hover, .more:hover { color: #e9eef1; border-color: #e9eef1; }
+.search-row button:disabled, .more:disabled { opacity: .5; cursor: progress; }
+.search-status { min-height: 1.5em; margin: 14px 0 0; color: #b2c0c8; font-size: 14px; }
+.search-status[data-state="error"] { color: #f5bd78; }
+.results { list-style: none; margin: 8px 0 0; padding: 0; }
+.result { padding: 16px 0; border-top: 1px solid #ffffff1b; }
+.result-title { margin: 0 0 6px; font-size: 17px; font-weight: 650; }
+.result-title a { color: #a6e3d1; text-underline-offset: 4px; }
+.result-snippet { margin: 0 0 8px; color: #c2cdd1; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.result-meta, .result-note { margin: 0 0 4px; color: #85969f; font-size: 12px; overflow-wrap: anywhere; }
+.more { margin-top: 14px; }
+@media (max-width: 650px) { .search-row { flex-direction: column; } }

@@ -13,6 +13,7 @@
     <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
+    <script src="/search.js" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -69,6 +70,7 @@
       </section>
 
       <nav class="project-links" aria-label="Project links">
+        <a href="#search">Search the documents</a>
         <a href="https://github.com/Arcanada-one/knowledge-contract">Knowledge Contract repository</a>
         <a href="https://github.com/Arcanada-one/contract-place-site">Site source</a>
         <a href="https://arcanada.ai/en/blog/meaning-management-knowledge-contract-architecture">Knowledge Contract architecture</a>
@@ -76,14 +78,30 @@
         <a href="https://arcanada.ai/en/ecosystem/contract-place">Arcanada project page</a>
       </nav>
 
+      <section class="cite search" id="search" aria-labelledby="search-title">
+        <h2 id="search-title">Search the published documents</h2>
+        <p>Search the documents published here through the public read API at api.contract.place. Each passage comes with its source, revision, status and licence. Passages are listed in the order the API returned them; the rank number is that position, not a relevance score. The API returns its closest passages even for unrelated words, so a result is not proof of relevance: read a passage before relying on it. Retrieval here is not knowledge admission and grants no action rights.</p>
+        <form id="search-form" class="search-form" role="search" hidden>
+          <label class="detail-label" for="search-q">Search text</label>
+          <div class="search-row">
+            <input id="search-q" name="q" type="search" maxlength="256" required autocomplete="off" spellcheck="false">
+            <button type="submit">Search</button>
+          </div>
+        </form>
+        <noscript><p>Search needs JavaScript. The same read API can be called directly: <a href="https://api.contract.place/health">api.contract.place</a>, routes <code>/v1/search</code>, <code>/v1/related</code>, <code>/v1/fetch</code>.</p></noscript>
+        <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+        <ol id="search-results" class="results"></ol>
+        <button id="search-more" class="more" type="button" hidden>Show more</button>
+      </section>
+
       <section class="cite purpose" id="purpose" aria-labelledby="purpose-title">
       <h2 id="purpose-title">Purpose</h2>
       <p>Knowledge Contract Arcana is about managing knowledge and its reuse by people and agents: contracts for managing the heritage of human knowledge. The contract is designed so that each piece of knowledge will travel with its source, author, scope and evidence.</p>
       <p>It is designed to replace the hand-written skills, rules and prompt files that are kept separately in each agent harness with one unified knowledge contract. The contract is meant to evolve itself (changes admitted only on evidence, versioned, with rollback) and to improve through the community and contributors, so that it stays ahead of any single harness or skill set.</p>
       <p class="detail-label">Working today</p>
-      <p>The public hub at contract.place; the licensing and attribution mechanics (CC BY 4.0 for text, Apache-2.0 for code, NOTICE, ATTRIBUTION.md, CITATION.cff, REUSE compliance, DCO sign-off and a source register with a CI check); the knowledge-contract repository as a public scaffold with rules, governance and tools; two published articles on arcanada.ai (architecture and version 2); and a read-only HTTP API at <a href="https://api.contract.place/health">api.contract.place</a> with search, related and fetch routes over the published documents (<code>/v1/search</code>, <code>/v1/related</code>, <code>/v1/fetch</code>; measured live on 2026-10-31).</p>
+      <p>The public hub at contract.place; the licensing and attribution mechanics (CC BY 4.0 for text, Apache-2.0 for code, NOTICE, ATTRIBUTION.md, CITATION.cff, REUSE compliance, DCO sign-off and a source register with a CI check); the knowledge-contract repository as a public scaffold with rules, governance and tools; two published articles on arcanada.ai (architecture and version 2); a read-only HTTP API at <a href="https://api.contract.place/health">api.contract.place</a> with search, related and fetch routes over the published documents (<code>/v1/search</code>, <code>/v1/related</code>, <code>/v1/fetch</code>; measured live on 2026-10-31); and a <a href="#search">search box on this site</a> that calls the search route.</p>
       <p class="detail-label">Planned, not built yet</p>
-      <p>Published specifications and papers in the repository; a sourced corpus of human knowledge on meaning management (no approved corpus entries yet); the unified contract for agent harnesses; the self-evolution loop; community contribution and review; knowledge selection with a provenance receipt for every answer; an MCP server and a search interface on this site; the read API above is the only access route today.</p>
+      <p>Published specifications and papers in the repository; a sourced corpus of human knowledge on meaning management (no approved corpus entries yet); the unified contract for agent harnesses; the self-evolution loop; community contribution and review; knowledge selection with a provenance receipt for every answer; an MCP server; the read API and the search box on this site are the access routes today.</p>
       <p class="detail-label">Open and closed</p>
       <p>Whatever knowledge, specifications, papers, schemas and reference code are published here and in the repository is open (see Use and cite). The backend engine that processes, admits and evolves contracts stays closed and proprietary.</p>
     </section>
