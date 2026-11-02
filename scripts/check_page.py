@@ -10,6 +10,29 @@ ATTR = "https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION
 FOOTER_TEXT = "Credit: Knowledge Contract Arcana,"
 
 
+def check_search(page: str, script: str) -> None:
+    """The search control and its script: markup present, no inline code, no third-party script, no unsafe sinks, no credentials or storage."""
+    assert re.search(r'<section[^>]*\bid="search"', page), "search section (#search) missing"
+    form = re.search(r'<form\b[^>]*\bid="search-form"[^>]*>', page)
+    assert form and re.search(r"\bhidden\b", form.group(0)), "search form missing or not hidden until JavaScript runs"
+    for needle in ('id="search-q"', 'id="search-status"', 'role="status"', 'aria-live="polite"', 'id="search-results"', 'id="search-more"', "<noscript>"):
+        assert needle in page, "search markup missing: " + needle
+    head = re.search(r"<head>(.*?)</head>", page, re.S).group(1)
+    assert '<script src="/search.js" defer></script>' in head, "search.js must be one deferred same-origin script in <head>"
+    srcs = re.findall(r"<script\b[^>]*\bsrc=\"([^\"]*)\"", page)
+    assert srcs == ["/search.js"], "unexpected script sources: %r" % srcs
+    inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if "src=" not in m and "application/ld+json" not in m]
+    assert not inline, "inline scripts are not allowed"
+    assert not re.search(r"\son[a-z]+\s*=", page, re.I), "inline event handler attributes are not allowed"
+    for bad in ("innerHTML", "outerHTML", "insertAdjacentHTML", "document.write", "eval(", "new Function", "localStorage", "sessionStorage", "document.cookie", "indexedDB", "sendBeacon", "XMLHttpRequest", "WebSocket"):
+        assert bad not in script, "search.js must not use " + bad
+    assert "credentials: 'omit'" in script, "search.js must send no credentials"
+    assert "referrerPolicy: 'no-referrer'" in script, "search.js must send no referrer"
+    assert re.findall(r"https?://[A-Za-z0-9.-]+", script).count("https://api.contract.place") >= 1, "API origin missing"
+    others = {h for h in re.findall(r"https?://[A-Za-z0-9.-]+", script)} - {"https://api.contract.place", "https://github.com"}
+    assert not others, "unexpected hosts in search.js: %r" % sorted(others)
+
+
 def check(page: str) -> None:
     head = re.search(r"<head>(.*?)</head>", page, re.S)
     assert head, "no <head>"
@@ -39,5 +62,9 @@ def check(page: str) -> None:
 
 
 if __name__ == "__main__":
-    check(open(sys.argv[1], encoding="utf-8").read())
+    page_text = open(sys.argv[1], encoding="utf-8").read()
+    check(page_text)
     print("page licensing checks OK")
+    if len(sys.argv) > 2:
+        check_search(page_text, open(sys.argv[2], encoding="utf-8").read())
+        print("search page checks OK")

@@ -17,8 +17,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Licensing markup (head link, footer, JSON-LD)
-        run: python3 scripts/check_page.py public/index.html
+      - name: Licensing markup (head link, footer, JSON-LD) and search markup
+        run: python3 scripts/check_page.py public/index.html public/search.js
+      - name: Search logic unit tests
+        run: node scripts/test_search.js
       - name: Serve and check the published tree
         run: |
           python3 - <<'PY'
@@ -38,7 +40,7 @@ jobs:
                   page = response.read().decode("utf-8")
               assert "Knowledge Contract Arcana" in page
               assert "3.0.0-draft.1" in page
-              for path in ("/styles.css", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
+              for path in ("/styles.css", "/search.js", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert response.read(), path
