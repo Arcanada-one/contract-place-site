@@ -19,6 +19,8 @@ jobs:
           persist-credentials: false
       - name: Licensing markup (head link, footer, JSON-LD) and search markup
         run: python3 scripts/check_page.py public/index.html public/search.js
+      - name: Papers section (structure, accessibility basics, no inline code)
+        run: python3 scripts/check_papers.py public/index.html
       - name: Search logic unit tests
         run: node scripts/test_search.js
       - name: Serve and check the published tree

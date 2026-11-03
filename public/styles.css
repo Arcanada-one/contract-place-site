@@ -174,3 +174,7 @@ footer {
 .result-meta, .result-note { margin: 0 0 4px; color: #85969f; font-size: 12px; overflow-wrap: anywhere; }
 .more { margin-top: 14px; }
 @media (max-width: 650px) { .search-row { flex-direction: column; } }
+.papers-list { margin: 14px 0 18px; padding: 0 0 0 4px; list-style: none; }
+.papers-list li { padding: 11px 0; border-top: 1px solid #ffffff1b; font-size: 15px; line-height: 1.6; }
+.papers-list a { color: #a6e3d1; font-size: 14px; text-underline-offset: 4px; }
+.paper-id { color: #f5bd78; font-weight: 700; margin-right: 6px; }
