@@ -8,11 +8,11 @@ Warm paper, blue-green ink, tactile layered materials and fine copper connection
 
 Generated using the built-in image generation tool. Full-resolution originals remain in the image-generation library. Website copies are optimized WebP assets:
 
-- `dist/assets/knowledge-landscape.webp`: hero background, versioning/context cover.
-- `dist/assets/knowledge-prism.webp`: source/evidence research and architecture cover.
-- `dist/assets/knowledge-dialogue.webp`: dialogue/transfer cover and project-section artwork.
+- `src/site/assets/knowledge-landscape.webp`: hero background, versioning/context cover.
+- `src/site/assets/knowledge-prism.webp`: source/evidence research and architecture cover.
+- `src/site/assets/knowledge-dialogue.webp`: dialogue/transfer cover and project-section artwork.
 
-These are editorial illustrations, not scientific evidence. The exact final asset hashes are in `asset-manifest.json`.
+These are editorial illustrations, not scientific evidence. Final asset hashes are the git blob hashes of the committed files (the design kit shipped a separate `asset-manifest.json`; it is not part of this repository).
 
 ## Final prompts
 
@@ -30,7 +30,7 @@ Use case: stylized-concept. A premium original research editorial cover, 3:2 lan
 
 ## Original publication figures
 
-- `dist/assets/architecture-original.jpg`: https://arcanada.ai/img/blog/meaning-management-knowledge-contract-architecture/transcript/IMG-030.jpg
-- `dist/assets/knowledge-v2-original.jpg`: https://arcanada.ai/img/blog/meaning-management-knowledge-contract-v2-en.jpg
+- `src/site/assets/architecture-original.jpg`: https://arcanada.ai/img/blog/meaning-management-knowledge-contract-architecture/transcript/IMG-030.jpg
+- `src/site/assets/knowledge-v2-original.jpg`: https://arcanada.ai/img/blog/meaning-management-knowledge-contract-v2-en.jpg
 
 Figures are kept distinct from the editorial cover art. Their source article, status and attribution remain visible on native article pages.

@@ -38,9 +38,11 @@ def check_head_and_scripts(page: str, where: str) -> None:
     assert re.search(r'<link rel="license" href="' + re.escape(CC_DEED) + r'">', head.group(1)), where + ": head license link missing"
     assert re.search(r'<link rel="canonical" href="https://contract\.place/', head.group(1)), where + ": canonical link on https://contract.place missing"
     srcs = re.findall(r"<script\b[^>]*\bsrc=\"([^\"]*)\"", page)
-    assert [s.split("?")[0] for s in srcs] == ["/content.js", "/search.js", "/app.js"], where + ": unexpected script sources: %r" % srcs
+    assert [s.split("?")[0] for s in srcs] == ["/theme.js", "/content.js", "/search.js", "/app.js"], where + ": unexpected script sources: %r" % srcs
+    # theme.js is synchronous (no defer/async) and comes before the stylesheet so the saved theme is applied before first paint
+    assert re.search(r'<script src="/theme\.js[^"]*"></script><link rel="stylesheet"', head.group(1)), where + ": theme.js must be a synchronous script before the stylesheet"
     inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if "src=" not in m and "application/ld+json" not in m]
-    assert len(inline) == 1, where + ": exactly one inline script (the theme bootstrap) is allowed, found %d" % len(inline)
+    assert not inline, where + ": inline scripts are blocked by the production CSP (script-src 'self')"
     assert not re.search(r"\son[a-z]+\s*=", page, re.I), where + ": inline event handler attributes are not allowed"
 
 
@@ -65,6 +67,50 @@ def check_jsonld(page: str) -> None:
     assert data.get("isPartOf", {}).get("url") == "https://arcanada.ai", "JSON-LD isPartOf (Arcanada)"
 
 
+NOINDEX_ROUTES = ("wiki/knowledge-contract", "wiki/provenance", "wiki/versioned-knowledge", "journal/building-a-place", "docs/model", "references",
+                  "research/anthropic", "research/deepmind", "research/hugging-face", "research/mcp", "research/stripe", "research/supabase")
+
+
+def url_target(root: Path, url: str) -> Path:
+    path = url[len("https://contract.place/"):]
+    assert path == "" or path.endswith("/") or "." in path.rsplit("/", 1)[-1], "URL must end with / or a file name: " + url
+    return root / path / "index.html" if (path == "" or path.endswith("/")) else root / path
+
+
+def check_urls(root: Path) -> None:
+    """Every sitemap URL, canonical and hreflang URL ends with / (or a file name) and maps to a built file; indexing decisions hold."""
+    locs = re.findall(r"<loc>([^<]+)</loc>", read(root, "sitemap.xml"))
+    for u in locs:
+        assert url_target(root, u).is_file(), "sitemap URL does not map to a built file: " + u
+    listed = set(locs)
+    for page in sorted(root.rglob("index.html")) + [root / "404.html"]:
+        rel = page.relative_to(root).as_posix()
+        text = page.read_text(encoding="utf-8")
+        head = re.search(r"<head>(.*?)</head>", text, re.S).group(1)
+        urls = re.findall(r'<link rel="(?:canonical|alternate)"[^>]*\bhref="(https://contract\.place/[^"]*)"', head)
+        route = rel[:-len("index.html")].strip("/")
+        parts = route.split("/", 1)
+        bare = parts[1] if len(parts) == 2 and parts[0] in LOCALES else ""
+        if rel == "404.html" or bare in NOINDEX_ROUTES:
+            assert 'name="robots" content="noindex' in head, rel + ": must be noindex"
+            assert not urls, rel + ": noindex page must not carry canonical/hreflang"
+            assert ("https://contract.place/" + route + "/") not in listed, rel + ": noindex page is in the sitemap"
+            continue
+        assert urls, rel + ": no canonical/hreflang"
+        for u in urls:
+            assert url_target(root, u).is_file(), rel + ": canonical/hreflang does not map to a built file: " + u
+        if rel != "index.html":
+            assert ("https://contract.place/" + route + "/") in listed, rel + ": indexable page missing from sitemap.xml"
+
+
+def check_zh_notice(root: Path) -> None:
+    for rel in ("zh-Hans/index.html", "zh-Hans/research/index.html", "zh-Hans/about/index.html"):
+        text = re.sub(r"<[^>]+>", "", read(root, rel))
+        assert "中文界面尚未经过母语编辑审校" in text, rel + ": zh-Hans pages must say the Chinese interface has no native editorial review"
+    for rel in ("en/index.html", "ru/index.html"):
+        assert "中文界面尚未经过母语编辑审校" not in read(root, rel)
+
+
 def check_site(root: Path) -> None:
     pages = ["index.html"] + ["%s/index.html" % l for l in LOCALES] + ["en/research/index.html", "en/research/p09/index.html", "en/search/index.html", "en/about/index.html"]
     for rel in pages:
@@ -73,6 +119,8 @@ def check_site(root: Path) -> None:
         check_footer(page, rel)
     check_jsonld(read(root, "index.html"))
     check_search(read(root, "en/search/index.html"), read(root, "search.js"))
+    check_urls(root)
+    check_zh_notice(root)
 
     robots = read(root, "robots.txt")
     assert re.search(r"(?mi)^User-agent:\s*\*\s*$", robots) and "Allow: /" in robots, "robots.txt must allow indexing"
@@ -82,16 +130,13 @@ def check_site(root: Path) -> None:
     sitemap = read(root, "sitemap.xml")
     locs = set(re.findall(r"<loc>([^<]+)</loc>", sitemap))
     for needed in ("https://contract.place/", "https://contract.place/en/", "https://contract.place/ru/", "https://contract.place/zh-Hans/",
-                   "https://contract.place/en/research", "https://contract.place/en/research/p09", "https://contract.place/ru/research/p09",
-                   "https://contract.place/en/docs", "https://contract.place/en/search", "https://contract.place/en/journal"):
+                   "https://contract.place/en/research/", "https://contract.place/en/research/p09/", "https://contract.place/ru/research/p09/",
+                   "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
         assert needed in locs, "sitemap.xml missing " + needed
     assert all(u.startswith("https://contract.place/") for u in locs), "sitemap.xml has a foreign host"
-    for u in locs:  # every sitemap URL is a built page
-        rel = u[len("https://contract.place/"):].strip("/")
-        assert (root / rel / "index.html").is_file(), "sitemap URL without a built page: " + u
 
     llms = read(root, "llms.txt")
-    for needed in ("https://contract.place/en/research", "https://api.contract.place", "https://arcanada.ai", "CC BY 4.0"):
+    for needed in ("https://contract.place/en/research/", "https://api.contract.place", "https://arcanada.ai", "CC BY 4.0"):
         assert needed in llms, "llms.txt missing " + needed
     assert (root / "favicon.svg").is_file(), "favicon.svg missing"
     notfound = read(root, "404.html")

@@ -29,12 +29,16 @@ for page in sorted(root.rglob("*.html")):
                 checked += 1
                 if not resolves(u.path or "/"):
                     bad.append("%s -> %s" % (page.relative_to(root), raw))
+                elif (root / unquote((u.path or "/").lstrip("/"))).is_dir() and not (u.path or "/").endswith("/"):
+                    bad.append("%s -> %s (directory route without trailing slash)" % (page.relative_to(root), raw))
             else:
                 external.add(raw.split("#")[0])
             continue
         checked += 1
         if u.path and not resolves(u.path):
             bad.append("%s -> %s" % (page.relative_to(root), raw))
+        elif u.path and (root / unquote(u.path.lstrip("/"))).is_dir() and not u.path.endswith("/"):
+            bad.append("%s -> %s (directory route without trailing slash: the host answers 301)" % (page.relative_to(root), raw))
         # hash targets inside the same page are checked only for links without a path
         elif not u.path and u.fragment and u.fragment not in ids:
             bad.append("%s -> #%s (no such id)" % (page.relative_to(root), u.fragment))

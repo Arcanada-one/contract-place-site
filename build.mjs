@@ -27,7 +27,7 @@ fs.writeFileSync(path.join(out, 'robots.txt'), 'User-agent: *\nAllow: /\nSitemap
 
 // llms.txt: structure of the site and the published corpus, generated from the catalog so it cannot drift.
 const base = 'https://contract.place';
-const line = (r) => `- ${r.id.toUpperCase()} ${r.title}: ${base}/en/${r.kind === 'paper' ? 'research' : 'docs'}/${r.id} (English entry page), ${r.russian} (Russian full text)`;
+const line = (r) => `- ${r.id.toUpperCase()} ${r.title}: ${base}/en/${r.kind === 'paper' ? 'research' : 'docs'}/${r.id}/ (English entry page), ${r.russian} (Russian full text)`;
 const papers = data.records.filter((r) => r.kind === 'paper');
 const specs = data.records.filter((r) => r.kind === 'spec');
 fs.writeFileSync(path.join(out, 'llms.txt'), `# Knowledge Contract Arcana
@@ -35,11 +35,11 @@ fs.writeFileSync(path.join(out, 'llms.txt'), `# Knowledge Contract Arcana
 > Public research hub for scoped, evidenced knowledge reuse, at contract.place. Part of the Arcanada ecosystem (https://arcanada.ai). The specification and experiments are in progress; 3.0.0-draft.1 is a target, not a released protocol.
 
 - Home: ${base}/ (languages: ${base}/en/, ${base}/ru/, ${base}/zh-Hans/; the Chinese interface has not received native editorial review)
-- Research (papers): ${base}/en/research
-- Specifications: ${base}/en/docs
-- Journal: ${base}/en/journal
-- Full-document search: ${base}/en/search#document-search
-- Use and cite (licences): ${base}/en/about
+- Research (papers): ${base}/en/research/
+- Specifications: ${base}/en/docs/
+- Journal: ${base}/en/journal/
+- Full-document search: ${base}/en/search/#document-search
+- Use and cite (licences): ${base}/en/about/
 - Knowledge Contract repository: https://github.com/Arcanada-one/knowledge-contract
 - Site source: https://github.com/Arcanada-one/contract-place-site
 - Ecosystem: https://arcanada.ai/

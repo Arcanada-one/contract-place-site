@@ -119,7 +119,7 @@ def main(argv):
             errs += e
             pages += 1
             if kind == "paper":
-                cards = {m for m in re.findall(r'href="/%s/research/(p\d\d)"' % lang, page)}
+                cards = {m for m in re.findall(r'href="/%s/research/(p\d\d)/"' % lang, page)}
                 if cards != {r["id"] for r in papers}:
                     errs.append("%s: research index does not list all 14 papers (found %d)" % (index, len(cards)))
                 text = re.sub(r"<[^>]+>", " ", page)

@@ -23,6 +23,8 @@ jobs:
           node build.mjs
           git diff --exit-code -- public
           test -z "$(git status --porcelain -- public)" || { git status --porcelain -- public; exit 1; }
+      - name: Public-surface and CSP hygiene (no private hosts; no inline script/style/handlers)
+        run: python3 scripts/check_hygiene.py .
       - name: Licensing, SEO, robots, sitemap, llms.txt and search markup
         run: python3 scripts/check_page.py public
       - name: Paper and specification pages (structure, accessibility basics, credits)

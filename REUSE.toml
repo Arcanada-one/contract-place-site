@@ -11,7 +11,7 @@ SPDX-License-Identifier = "CC-BY-4.0"
 
 # Site code, build and CI: Apache-2.0.
 [[annotations]]
-path = ["src/site/app.js", "src/site/search.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "build.mjs", "public/app.js", "public/search.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
+path = ["src/site/app.js", "src/site/search.js", "src/site/theme.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "build.mjs", "public/app.js", "public/search.js", "public/theme.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"
