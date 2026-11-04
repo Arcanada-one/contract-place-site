@@ -21,7 +21,7 @@ for(const [alias,target] of Object.entries(data.aliases))
   if(!/^[a-z0-9/-]+$/.test(alias)||!seen.has('/en/'+target+'/'))throw new Error('Invalid compatibility route');
 // Earlier reader URLs remain navigable without competing with the locale routes.
 data.reader_aliases={
-  science:'/en/research/',engineering:'/en/engineering/',
+  science:'/en/science/',engineering:'/en/engineering/',
   'engineering/specifications':'/en/engineering/specifications/',
   'engineering/studies':'/en/engineering/studies/',
   reference:'/en/reference/',appendices:'/en/appendices/',search:'/en/search/'
