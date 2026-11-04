@@ -86,6 +86,8 @@ repositoryIntro:['The 29 canonical documents, organized by purpose and bound to 
 localSearchDesc:['Local search covers 29 complete publications and two earlier journal articles. API search may use a different index revision.','Локальный поиск охватывает 29 полных публикаций и две прежние журнальные статьи. Поиск через API может использовать другую версию индекса.','本地搜索覆盖 29 份完整出版物和两篇较早的专栏文章。API 搜索可能使用不同的索引版本。'],
 viewAllPapers:['All 8 papers','Все 8 работ','全部 8 篇论文'],viewAllSpecs:['All 11 specifications','Все 11 спецификаций','全部 11 份规范'],
 compatibility:['Earlier address','Прежний адрес','历史地址'],
+chooseLanguage:['Choose language','Выберите язык','选择语言'],
+chooseLanguageText:['This address has no interface language. Continue to the English page, or switch the language there. The document text is English in every interface language.','У этого адреса нет языка интерфейса. Перейдите на английскую страницу или переключите язык там. Текст документов английский при любом языке интерфейса.','此地址没有界面语言。请继续访问英文页面，或在该页面切换语言。无论界面语言如何，文档正文均为英文。'],
 compatibilityText:['This address is retained for existing links. Continue to the complete current document; earlier manuscripts remain traceable in the source map.','Этот адрес сохранён для прежних ссылок. Перейдите к полному текущему документу; предыдущие рукописи доступны через карту источников.','保留此地址以兼容现有链接。请前往完整的当前文档；历史手稿可通过来源映射追溯。'],
 apiDesc:['The documented read routes are search, related and fetch. Compare a response’s source revision with the publication edition.','Документированные маршруты чтения — search, related и fetch. Сопоставляйте версию источника в ответе с редакцией публикаций.','已记录的只读路由为 search、related 和 fetch。请将响应的来源版本与出版版本比较。'],
 sourceStatus:['Document type','Тип документа','文档类型'],
@@ -145,14 +147,14 @@ return items.filter(x=>normalize(x.title+' '+x.desc+' '+x.type).includes(normali
 }
 function readerAlias(path,target){
  const record=corpus.records.find(r=>r.route===target);
- return '<article class="container reading">'+pageHead(t('compatibility'),t('compatibilityText'))+'<h2 lang="en">'+esc(record?record.title:'Knowledge Contract publication')+'</h2><a class="button" href="'+target+'">'+t('readPaper')+icon('arrow')+'</a></article>';
+ return '<article class="container reading">'+pageHead(t('chooseLanguage'),t('chooseLanguageText'))+'<h2 lang="en">'+esc(record?record.title:'Knowledge Contract publication')+'</h2><a class="button" href="'+target+'">'+t('readPaper')+icon('arrow')+'</a></article>';
 }
 
 function render(){
 closeDialogs();const parts=location.pathname.split('/').filter(Boolean);const localized=langs.includes(parts[0]);locale=localized?parts.shift():'en';const path=parts.join('/');
 document.documentElement.lang=locale;document.querySelector('.skip').textContent=t('skip');document.querySelector('#header').innerHTML=header(path);document.querySelector('#footer').innerHTML=footer();
 let html=null,title=null;const record=corpus.records.find(r=>recordPath(r)===path),article=corpus.articles.find(a=>'journal/'+a.id===path);
-if(!localized&&corpus.reader_aliases[path]){html=readerAlias(path,corpus.reader_aliases[path]);title=t('compatibility')}
+if(!localized&&corpus.reader_aliases[path]){html=readerAlias(path,corpus.reader_aliases[path]);title=t('chooseLanguage')}
 else if(record){html=sourceRecord(record);title=record.title}
 else if(corpus.aliases[path]){html=compatibilityPage(path);title=t('compatibility')}
 else if(!path){html=home();title=t('heroTitle')}

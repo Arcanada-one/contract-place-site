@@ -13,8 +13,10 @@ const LANGS=['en','ru','zh-Hans'];
 // noindex: pages that duplicate a paper/article under another URL (aliases) or are design-brief references, not project content.
 const NOINDEX=new Set(['wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','journal/building-a-place','docs/model','references','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase']);
 function seo(route,lang){
- if(!/^\/(?:en|ru|zh-Hans)(?:\/|$)/.test(route)&&data.reader_aliases[route.replace(/^\/|\/$/g,'')])return '<meta name="robots" content="noindex,follow">';
+ if(!/^\/(?:en|ru|zh-Hans)(?:\/|$)/.test(route)&&data.reader_aliases[route.replace(/^\/|\/$/g,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url='+data.reader_aliases[route.replace(/^\/|\/$/g,'')]+'">';
  const m=route.match(/^\/(?:en|ru|zh-Hans)(?:\/(.*))?$/);const rest=m&&m[1]?m[1]:'';
+ // Earlier numeric addresses forward to the current document in the same interface language (the page body keeps the link).
+ if(data.aliases[rest.replace(/\/+$/,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/'+lang+'/'+data.aliases[rest.replace(/\/+$/,'')]+'/">';
  const at=l=>ORIGIN+'/'+l+'/'+(rest?rest.replace(/\/+$/,'')+'/':'');
  if(NOINDEX.has(rest.replace(/\/+$/,'')))return '<meta name="robots" content="noindex,follow">';
  return `<link rel="canonical" href="${at(lang)}">`+LANGS.map(l=>`<link rel="alternate" hreflang="${l}" href="${at(l)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${at('en')}"><meta property="og:url" content="${at(lang)}"><meta property="og:site_name" content="Knowledge Contract Arcana">`;
