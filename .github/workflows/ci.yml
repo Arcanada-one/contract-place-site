@@ -47,7 +47,7 @@ jobs:
           try:
               base = f"http://127.0.0.1:{server.server_port}"
               for path, needle in (("/", "Knowledge Contract Arcana"), ("/en/", "contract.place"), ("/ru/", "contract.place"), ("/zh-Hans/", "contract.place"),
-                                   ("/en/research/", "3.0.0-draft.1"), ("/en/research/p09/", "Pavel Valentov"), ("/en/search/", "document-search")):
+                                   ("/en/research/", "Scientific draft"), ("/en/research/p09/", "Pavel Valentov"), ("/en/search/", "document-search")):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert needle in response.read().decode("utf-8"), (path, needle)
