@@ -190,7 +190,14 @@
   // ---- DOM binding (browser only) ----------------------------------------------------------------------------------------
   // The page is a client-rendered single-page app: the search form exists only on the search route, so the
   // application calls KcpSearch.mount(document) after each render of that route.
+  // Shared by every mount: a re-render of the search route mounts a new form, and the request started for the previous
+  // form must be aborted and its result ignored (it would only write into a detached form).
+  var inflight = null; // AbortController of the request that is currently running
+  var serial = 0;
+
   function mount(doc) {
+  if (inflight) { inflight.abort(); inflight = null; }
+  serial += 1;
   if (!doc || !doc.getElementById) return;
   var form = doc.getElementById('search-form');
   if (!form) return;
@@ -198,9 +205,7 @@
   var statusEl = doc.getElementById('search-status');
   var list = doc.getElementById('search-results');
   var more = doc.getElementById('search-more');
-  var inflight = null; // AbortController of the request that is currently running
   var current = null; // { q, cursor }
-  var serial = 0;
   var lang = (doc.documentElement && doc.documentElement.lang) || 'en';
   var M = messages(lang);
 
