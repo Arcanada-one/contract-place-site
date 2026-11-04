@@ -121,10 +121,11 @@
     normalizeQuery: normalizeQuery, buildUrl: buildUrl, safeLink: safeLink, toViewItem: toViewItem, describeStatus: describeStatus, runSearch: runSearch
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  root.KcpSearch = api;
 
   // ---- DOM binding (browser only) ----------------------------------------------------------------------------------------
-  var doc = root.document;
+  // The page is a client-rendered single-page app: the search form exists only on the search route, so the
+  // application calls KcpSearch.mount(document) after each render of that route.
+  function mount(doc) {
   if (!doc || !doc.getElementById) return;
   var form = doc.getElementById('search-form');
   if (!form) return;
@@ -230,4 +231,11 @@
   more.addEventListener('click', function () {
     if (current && current.cursor) start(current.q, current.cursor, true);
   });
+  var prefill = '';
+  try { prefill = new URLSearchParams(root.location.search).get('dq') || ''; } catch (e) { prefill = ''; }
+  if (prefill) { input.value = prefill; start(prefill, null, false); }
+  }
+
+  api.mount = mount;
+  root.KcpSearch = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

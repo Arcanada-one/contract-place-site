@@ -8,3 +8,6 @@ Source: https://contract.place and https://github.com/Arcanada-one/knowledge-con
 Site text and content: CC BY 4.0 (see LICENSE). Site code (HTML, CSS, JS): Apache-2.0 (see LICENSE-CODE).
 Derivative works and redistributions must retain this notice (Apache-2.0 section 4(d))
 and credit the author and source (CC BY 4.0 section 3(a)).
+
+Fonts: Manrope (SIL OFL 1.1, The Manrope Project Authors), Source Sans 3 and Source Serif 4 (SIL OFL 1.1, Adobe). Their licence notices are kept in src/site/assets/ and public/assets/.
+Editorial cover images are illustrations generated for this site (CC BY 4.0); they are not evidence or measured scientific results.

@@ -2,14 +2,29 @@ version = 1
 SPDX-PackageName = "contract-place-site"
 SPDX-PackageDownloadLocation = "https://github.com/Arcanada-one/contract-place-site"
 
+# Text, catalog data, figures and generated pages: CC BY 4.0.
 [[annotations]]
-path = ["public/index.html", "public/llms.txt", "README.md", "SECURITY.md", "NOTICE"]
+path = ["README.md", "SECURITY.md", "NOTICE", "src/DESIGN.md", "src/content/**", "src/site/*.md", "src/site/*.txt", "src/site/*.json", "src/site/assets/*.webp", "src/site/assets/*.jpg", "src/site/assets/*.svg", "public/**/*.html", "public/llms.txt", "public/content.js", "public/content-provenance.json", "public/ATTRIBUTION-source.md", "public/LICENSE-content.txt", "public/NOTICE-content.txt", "public/assets/*.webp", "public/assets/*.jpg", "public/assets/*.svg", "public/favicon.svg"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+# Site code, build and CI: Apache-2.0.
 [[annotations]]
-path = ["public/styles.css", "public/search.js", "public/favicon.svg", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
+path = ["src/site/app.js", "src/site/search.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "build.mjs", "public/app.js", "public/search.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+# Fonts: SIL Open Font License 1.1, each with its own notice kept beside it.
+[[annotations]]
+path = ["src/site/assets/Manrope-*", "public/assets/Manrope-*"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2018 The Manrope Project Authors (https://github.com/googlefonts/manrope)"
+SPDX-License-Identifier = "OFL-1.1"
+
+[[annotations]]
+path = ["src/site/assets/SourceSans3-*", "src/site/assets/SourceSerif4-*", "public/assets/SourceSans3-*", "public/assets/SourceSerif4-*"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2010-2024 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'"
+SPDX-License-Identifier = "OFL-1.1"
