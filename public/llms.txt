@@ -1,55 +1,58 @@
 # Knowledge Contract Arcana
 
-> Public research hub for scoped, evidenced knowledge reuse, at contract.place. Part of the Arcanada ecosystem (https://arcanada.ai). The specification and experiments are in progress; 3.0.0-draft.1 is a target, not a released protocol.
+Publication edition 1.0. Source commit 75f2a993021642b7ac2f14c22f4c061d839f63ac.
+Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
-- Home: https://contract.place/ (languages: https://contract.place/en/, https://contract.place/ru/, https://contract.place/zh-Hans/; the Chinese interface has not received native editorial review)
-- Research (papers): https://contract.place/en/research/
-- Specifications: https://contract.place/en/docs/
+- Home: https://contract.place/
+- Science: https://contract.place/en/research/
+- Engineering specifications: https://contract.place/en/engineering/specifications/
+- Engineering studies: https://contract.place/en/engineering/studies/
+- Glossary and bibliography: https://contract.place/en/reference/
+- Appendices: https://contract.place/en/appendices/
 - Journal: https://contract.place/en/journal/
 - Full-document search: https://contract.place/en/search/#document-search
-- Use and cite (licences): https://contract.place/en/about/
-- Knowledge Contract repository: https://github.com/Arcanada-one/knowledge-contract
-- Site source: https://github.com/Arcanada-one/contract-place-site
-- Ecosystem: https://arcanada.ai/
-- Architecture article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-architecture
-- Version 2 article: https://arcanada.ai/en/blog/meaning-management-knowledge-contract-v2
+- Manifest: https://contract.place/publication.json
+- Repository: https://github.com/Arcanada-one/knowledge-contract
+- Arcanada ecosystem: https://arcanada.ai
 
-## Access
+## Publication documents
 
-Read-only HTTP API at https://api.contract.place (search, related, fetch over the published documents; schema ContractPlaceRead/v1) and an MCP endpoint at https://api.contract.place/mcp. The site search page calls /v1/search with anonymous GET requests and lists passages in the order the API returns them; it states no relevance threshold.
+- [Semantic Objects, Context, and Conditions of Applicability](https://contract.place/en/science/semantic-objects-and-context/): paper.
+- [Constrained Transformations and the Limits of Knowledge Transfer](https://contract.place/en/science/constrained-transformations/): paper.
+- [Retrieval, Coverage, and Context Composition under Resource Limits](https://contract.place/en/science/retrieval-and-context-composition/): paper.
+- [Interaction, Documents, and Memory with Explicit Revision Boundaries](https://contract.place/en/science/interaction-and-memory/): paper.
+- [Evidence, Reasoning, and Falsification in Knowledge Systems](https://contract.place/en/science/evidence-and-falsification/): paper.
+- [Knowledge Revision, Version Identity, and the Adoption of Norms](https://contract.place/en/science/revision-and-governance/): paper.
+- [Knowledge Contracts and the Admission of Prepared Knowledge](https://contract.place/en/science/controlled-knowledge-reuse/): paper.
+- [Knowledge Utility, Resource Accounting, and Retention Decisions](https://contract.place/en/science/knowledge-utility/): paper.
+- [Knowledge Contract: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
+- [Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
+- [Semantic Types, Attribution, and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
+- [Context Packages: Coverage, Dependencies, and Delivery](https://contract.place/en/engineering/specifications/context-package/): specification.
+- [Compiled Knowledge Artifacts and Reproducible Derivation](https://contract.place/en/engineering/specifications/compiled-artifact-contract/): specification.
+- [Artifact Registry, Readable Names, and Document Formats](https://contract.place/en/engineering/specifications/artifact-registry/): specification.
+- [Assessment, Execution, and Publication States](https://contract.place/en/engineering/specifications/status-model/): specification.
+- [Cache Identity, Dependency Tracking, and Invalidation](https://contract.place/en/engineering/specifications/cache-identity-and-invalidation/): specification.
+- [Reuse Policy: Time, Authorization, and Decision Outcomes](https://contract.place/en/engineering/specifications/reuse-policy/): specification.
+- [Knowledge Evolution and Versioned Rules](https://contract.place/en/engineering/specifications/knowledge-evolution/): specification.
+- [Book Packages: Source Identity, Semantic Layers, and Validation](https://contract.place/en/engineering/specifications/book-package/): specification.
+- [Contract profiles: finite conformance, trust boundaries, and a strong simple comparator](https://contract.place/en/engineering/studies/contract-profile-conformance/): study.
+- [Dependency closure, readable artifact layouts, and a pinned package replay](https://contract.place/en/engineering/studies/dependency-closure-and-package-delivery/): study.
+- [Reproducible transcription is not preservation of uncertainty](https://contract.place/en/engineering/studies/source-transcription-and-uncertainty/): study.
+- [Executable projections, addressable revisions, and the limits of graph minimality](https://contract.place/en/engineering/studies/executable-projections-and-revision/): study.
+- [Controlled reuse: admission counterexamples and the cost of a cache hit](https://contract.place/en/engineering/studies/reuse-admission-and-cost-controls/): study.
+- [Editing a scientific section with a knowledge toolkit: a masked single-section comparison](https://contract.place/en/engineering/studies/editorial-skill-pilot/): study.
+- [Knowledge Contract Glossary](https://contract.place/en/reference/glossary/): glossary.
+- [Primary Sources and Research Foundations](https://contract.place/en/reference/bibliography/): bibliography.
+- [Source Map, Earlier Editions, and Protocol Compatibility](https://contract.place/en/appendices/source-map/): appendix.
+- [API Integration and Publication Consistency](https://contract.place/en/appendices/api-integration/): appendix.
 
-## Papers
+## Scope and access
 
-Meaning Management, first release: 14 papers and 10 specifications, published as scientific drafts (concept level). Independent semantic review has not been performed. Russian full texts are the originals; English entry pages are summaries, not translations. Text is CC BY 4.0.
+Scientific papers state assumptions, conditional results and counterexamples. Engineering specifications define requirements. Studies retain finite observations and their limitations. Publication is not runtime admission.
+The public read API at https://api.contract.place exposes search, related and fetch. An MCP endpoint is documented at https://api.contract.place/mcp. API results may belong to a different source snapshot. Task-specific contract delivery has separate requirements in the API appendix.
 
-- P00 Foundations of Meaning and Knowledge Management: https://contract.place/en/research/p00/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P00_introduction.md (Russian full text)
-- P01 Semantic Objects, Sources and Verifiable Extraction: https://contract.place/en/research/p01/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P01_semantic_objects_and_extraction.md (Russian full text)
-- P02 Context, Depth and Conditions of Applicability: https://contract.place/en/research/p02/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P02_context_and_applicability.md (Russian full text)
-- P03 Transformations, Composition and Bounded Transfer: https://contract.place/en/research/p03/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P03_transformations_and_transfer.md (Russian full text)
-- P04 Query, Retrieval and Verifiable Coverage: https://contract.place/en/research/p04/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P04_query_retrieval_and_coverage.md (Russian full text)
-- P05 Context Composition under a Limited Budget: https://contract.place/en/research/p05/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P05_budgeted_context_composition.md (Russian full text)
-- P06 Dialogue, Learning and Alignment of Understanding: https://contract.place/en/research/p06/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P06_dialogue_and_learning.md (Russian full text)
-- P07 Reasoning, Justification and Revision of Conclusions: https://contract.place/en/research/p07/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P07_reasoning_and_evidence.md (Russian full text)
-- P08 Documents, Representations and Long-Term Memory: https://contract.place/en/research/p08/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P08_documents_and_memory.md (Russian full text)
-- P09 Knowledge Contract v3: Synthesis of the General Model and a Professional Profile: https://contract.place/en/research/p09/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P09_work_roles_skills_and_kc.md (Russian full text)
-- P10 Revision of Knowledge, Versions and Acceptance of Norms: https://contract.place/en/research/p10/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P10_revision_and_canon.md (Russian full text)
-- P11 Evaluation, Counterexamples and the Limits of Claims: https://contract.place/en/research/p11/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P11_evaluation_and_falsification.md (Russian full text)
-- P12 Knowledge Compilation: Preparing Results and the Admissibility of Reuse: https://contract.place/en/research/p12/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P12_compilation_caching_and_reuse.md (Russian full text)
-- P13 Knowledge Utility, the Cost of Meaning Artifacts and Resource Management: https://contract.place/en/research/p13/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/papers/ru/P13_knowledge_utility_and_resource_economics.md (Russian full text)
+## Reuse
 
-## Specifications
-
-- ARTIFACT-REGISTRY Registry of Shared Artifacts: Identity, Fields and Obligations: https://contract.place/en/docs/artifact-registry/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/ARTIFACT_REGISTRY.md (Russian full text)
-- CACHE-IDENTITY-AND-INVALIDATION Identity, Dependencies and Invalidation: https://contract.place/en/docs/cache-identity-and-invalidation/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/CACHE_IDENTITY_AND_INVALIDATION.md (Russian full text)
-- COMPILED-ARTIFACT-CONTRACT Compiled Artifact Contract: https://contract.place/en/docs/compiled-artifact-contract/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/COMPILED_ARTIFACT_CONTRACT.md (Russian full text)
-- CONTEXT-PACKAGE ContextPackage: Specification and Bounded Executable Profile: https://contract.place/en/docs/context-package/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/CONTEXT_PACKAGE.md (Russian full text)
-- CONTRACT-FAMILY Family of Contracts for Operations on Meanings and Knowledge: https://contract.place/en/docs/contract-family/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/CONTRACT_FAMILY.md (Russian full text)
-- KNOWLEDGE-CONTRACT-V3 Knowledge Contract v3: Synthesis Specification: https://contract.place/en/docs/knowledge-contract-v3/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/KNOWLEDGE_CONTRACT_V3.md (Russian full text)
-- KNOWLEDGE-EVOLUTION-CONTRACT Knowledge Bases and Contract Evolution: https://contract.place/en/docs/knowledge-evolution-contract/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/KNOWLEDGE_EVOLUTION_CONTRACT.md (Russian full text)
-- REUSE-POLICY Policy for Permissible Reuse: https://contract.place/en/docs/reuse-policy/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/REUSE_POLICY.md (Russian full text)
-- SEMANTIC-TYPES Content Types and Independent Classification Axes: https://contract.place/en/docs/semantic-types/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/SEMANTIC_TYPES.md (Russian full text)
-- STATUS-MODEL Independent Statuses, Assessment Scopes and Transitions: https://contract.place/en/docs/status-model/ (English entry page), https://github.com/Arcanada-one/knowledge-contract/blob/main/spec/ru/STATUS_MODEL.md (Russian full text)
-
-## License and attribution
-
-Reuse allowed under CC BY 4.0; credit Knowledge Contract Arcana, https://contract.place; keep upstream source credits. Code is Apache-2.0. Attribution guidance: https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md
+Text: CC BY 4.0. Code and schemas: Apache-2.0. Credit Pavel Valentov, Knowledge Contract Arcana, https://contract.place, and retain upstream sources.
+Historical source versions and Russian manuscripts: https://contract.place/en/appendices/source-map/.

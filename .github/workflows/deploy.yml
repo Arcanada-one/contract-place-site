@@ -7,7 +7,10 @@ permissions:
   contents: read
 
 jobs:
+  validate:
+    uses: ./.github/workflows/check-publication.yml
   publish:
+    needs: validate
     uses: Arcanada-one/shared-workflows/.github/workflows/deploy-static-site.yml@b4a1d127ef0037836dafce6071b28db005a11eb2
     with:
       domain: contract.place

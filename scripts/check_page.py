@@ -86,6 +86,8 @@ def check_urls(root: Path) -> None:
     for u in locs:
         assert url_target(root, u).is_file(), "sitemap URL does not map to a built file: " + u
     listed = set(locs)
+    catalog = json.loads((root / "content.js").read_text().split("=", 1)[1].strip().rstrip(";"))
+    aliases = catalog["aliases"]
     for page in sorted(root.rglob("index.html")) + [root / "404.html"]:
         rel = page.relative_to(root).as_posix()
         text = page.read_text(encoding="utf-8")
@@ -94,7 +96,7 @@ def check_urls(root: Path) -> None:
         route = rel[:-len("index.html")].strip("/")
         parts = route.split("/", 1)
         bare = parts[1] if len(parts) == 2 and parts[0] in LOCALES else ""
-        if rel == "404.html" or bare in NOINDEX_ROUTES:
+        if rel == "404.html" or bare in NOINDEX_ROUTES or bare in aliases or route in catalog.get("reader_aliases", {}):
             assert 'name="robots" content="noindex' in head, rel + ": must be noindex"
             assert not urls, rel + ": noindex page must not carry canonical/hreflang"
             assert ("https://contract.place/" + route + "/") not in listed, rel + ": noindex page is in the sitemap"
@@ -115,7 +117,7 @@ def check_zh_notice(root: Path) -> None:
 
 
 def check_site(root: Path) -> None:
-    pages = ["index.html"] + ["%s/index.html" % l for l in LOCALES] + ["en/research/index.html", "en/research/p09/index.html", "en/search/index.html", "en/about/index.html"]
+    pages = ["index.html"] + ["%s/index.html" % l for l in LOCALES] + ["en/research/index.html", "en/science/controlled-knowledge-reuse/index.html", "en/search/index.html", "en/about/index.html"]
     for rel in pages:
         page = read(root, rel)
         check_head_and_scripts(page, rel)
@@ -133,7 +135,7 @@ def check_site(root: Path) -> None:
     sitemap = read(root, "sitemap.xml")
     locs = set(re.findall(r"<loc>([^<]+)</loc>", sitemap))
     for needed in ("https://contract.place/", "https://contract.place/en/", "https://contract.place/ru/", "https://contract.place/zh-Hans/",
-                   "https://contract.place/en/research/", "https://contract.place/en/research/p09/", "https://contract.place/ru/research/p09/",
+                   "https://contract.place/en/research/", "https://contract.place/en/science/controlled-knowledge-reuse/", "https://contract.place/ru/science/controlled-knowledge-reuse/",
                    "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
         assert needed in locs, "sitemap.xml missing " + needed
     assert all(u.startswith("https://contract.place/") for u in locs), "sitemap.xml has a foreign host"

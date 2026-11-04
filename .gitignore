@@ -1,0 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Pavel Valentov and Knowledge Contract Arcana contributors
+# SPDX-License-Identifier: Apache-2.0
+__pycache__/
+*.pyc

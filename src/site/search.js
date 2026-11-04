@@ -75,6 +75,31 @@
   };
   function messages(lang) { return I18N[lang] || I18N.en; }
 
+  Object.assign(I18N.en, {
+    snapshotUnknown: 'Publication snapshot unverified',
+    snapshotOutside: 'Source outside this publication',
+    snapshotDifferent: 'Different indexed snapshot',
+    snapshotUnpinned: 'Source link does not pin this snapshot',
+    snapshotMatch: 'Source revision matches publication edition',
+    details: 'Source and verification details'
+  });
+  Object.assign(I18N.ru, {
+    snapshotUnknown: 'Связь с редакцией публикаций не проверена',
+    snapshotOutside: 'Источник вне этой публикации',
+    snapshotDifferent: 'Другая версия индекса',
+    snapshotUnpinned: 'Ссылка не закрепляет эту версию',
+    snapshotMatch: 'Версия источника соответствует редакции публикаций',
+    details: 'Источник и сведения о проверке'
+  });
+  Object.assign(I18N['zh-Hans'], {
+    snapshotUnknown: '尚未验证出版版本',
+    snapshotOutside: '来源不属于本出版物',
+    snapshotDifferent: '索引为其他版本',
+    snapshotUnpinned: '来源链接未固定到此版本',
+    snapshotMatch: '来源版本与出版版本一致',
+    details: '来源与验证详情'
+  });
+
   function normalizeQuery(raw) {
     return String(raw == null ? '' : raw).trim().replace(/\s+/g, ' ');
   }
@@ -114,6 +139,7 @@
       link: safeLink(c.canonical_url),
       path: str(doc.path, 200),
       revision: str(r.source_revision, 40).slice(0, 12),
+      fullRevision: str(r.source_revision, 80),
       status: str(r.status, 40),
       license: str(r.license, 40),
       snippet: flagged ? '' : str(r.snippet, 1200),
@@ -127,6 +153,22 @@
 
   function failure(kind, message) {
     return { state: 'error', kind: kind, message: message, items: [], nextCursor: null };
+  }
+
+  /** A backend status of current does not identify the publication edition. */
+  function publicationState(item, publication, lang) {
+    var M = messages(lang);
+    function state(key, matched) { return { key: key, matched: matched === true, label: M[key] }; }
+    if (!publication || publication.repository !== 'Arcanada-one/knowledge-contract' ||
+        !/^[0-9a-f]{40}$/.test(publication.commit || '') || !item || !item.link) return state('snapshotUnknown');
+    var link = safeLink(item.link);
+    if (!link) return state('snapshotUnknown');
+    var url = new URL(link), prefix = '/' + publication.repository + '/blob/';
+    if (url.pathname.indexOf(prefix) !== 0) return state('snapshotOutside');
+    if (!/^[0-9a-f]{40}$/.test(item.fullRevision || '')) return state('snapshotUnknown');
+    if (item.fullRevision !== publication.commit) return state('snapshotDifferent');
+    if (url.pathname.slice(prefix.length).split('/')[0] !== publication.commit) return state('snapshotUnpinned');
+    return state('snapshotMatch', true);
   }
 
   function describeStatus(status, lang) {
@@ -183,7 +225,7 @@
 
   var api = {
     API_ORIGIN: API_ORIGIN, SCHEMA: SCHEMA, PAGE_SIZE: PAGE_SIZE, MAX_RESULTS: MAX_RESULTS, TIMEOUT_MS: TIMEOUT_MS, MAX_QUERY: MAX_QUERY,
-    messages: messages, normalizeQuery: normalizeQuery, buildUrl: buildUrl, safeLink: safeLink, toViewItem: toViewItem, describeStatus: describeStatus, runSearch: runSearch
+    messages: messages, normalizeQuery: normalizeQuery, buildUrl: buildUrl, safeLink: safeLink, toViewItem: toViewItem, publicationState: publicationState, describeStatus: describeStatus, runSearch: runSearch
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 
@@ -208,6 +250,12 @@
   var current = null; // { q, cursor }
   var lang = (doc.documentElement && doc.documentElement.lang) || 'en';
   var M = messages(lang);
+  var section = doc.getElementById('document-search');
+  var publication = section ? {
+    repository: section.getAttribute('data-publication-repository'),
+    commit: section.getAttribute('data-publication-commit'),
+    edition: section.getAttribute('data-publication-edition')
+  } : null;
 
   var deps = {
     fetch: function (u, o) { return root.fetch(u, o); },
@@ -243,17 +291,22 @@
     li.appendChild(h);
     if (it.flagged) li.appendChild(el('p', 'result-note', M.flagged));
     else if (it.snippet) li.appendChild(el('p', 'result-snippet', it.snippet + (it.snippetTruncated ? ' …' : '')));
+    var snapshot = publicationState(it, publication, lang);
+    li.appendChild(el('p', 'result-snapshot', snapshot.label));
+    var details = el('details', 'result-details');
+    details.appendChild(el('summary', null, M.details));
     var meta = [M.rank + ' ' + rank];
     if (it.path) meta.push(it.path);
     if (it.revision) meta.push(M.revision + ' ' + it.revision);
     if (it.status) meta.push(M.status + ' ' + it.status);
     if (it.license) meta.push(it.license);
-    if (meta.length) li.appendChild(el('p', 'result-meta', meta.join(' · ')));
+    if (meta.length) details.appendChild(el('p', 'result-meta', meta.join(' · ')));
     var marks = [];
     if (it.kc2) marks.push(M.kc2(it.kc2.replace(/_/g, ' ')));
     if (it.uncertainty.length) marks.push(M.uncertainty + ': ' + it.uncertainty.join(', '));
     if (it.missing.length) marks.push(M.missing + ': ' + it.missing.join(', '));
-    if (marks.length) li.appendChild(el('p', 'result-meta', marks.join(' | ')));
+    if (marks.length) details.appendChild(el('p', 'result-meta', marks.join(' | ')));
+    li.appendChild(details);
     return li;
   }
 

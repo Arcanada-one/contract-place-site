@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks."><link rel="canonical" href="https://contract.place/en/engineering/specifications/book-package/"><link rel="alternate" hreflang="en" href="https://contract.place/en/engineering/specifications/book-package/"><link rel="alternate" hreflang="ru" href="https://contract.place/ru/engineering/specifications/book-package/"><link rel="alternate" hreflang="zh-Hans" href="https://contract.place/zh-Hans/engineering/specifications/book-package/"><link rel="alternate" hreflang="x-default" href="https://contract.place/en/engineering/specifications/book-package/"><meta property="og:url" content="https://contract.place/en/engineering/specifications/book-package/"><meta property="og:site_name" content="Knowledge Contract Arcana"><meta name="theme-color" content="#F7F6F1"><title>Book Packages: Source Identity, Semantic Layers, and Validation — contract.place</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="preload" href="/assets/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin><script src="/theme.js?v=publication-1.0"></script><link rel="stylesheet" href="/style.css?v=publication-1.0"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Knowledge Contract Arcana","alternateName":"contract.place","url":"https://contract.place/","description":"Public research hub for scoped, evidenced knowledge reuse. Part of the Arcanada ecosystem.","license":"https://creativecommons.org/licenses/by/4.0/","inLanguage":["en","ru","zh-Hans"],"author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov"},"isPartOf":{"@type":"Organization","name":"Arcanada","url":"https://arcanada.ai"}}</script><script src="/content.js?v=75f2a993021642b7ac2f14c22f4c061d839f63ac" defer></script><script src="/search.js?v=publication-1.0" defer></script><script src="/app.js?v=publication-1.0" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Book Packages: Source Identity, Semantic Layers, and Validation","url":"https://contract.place/en/engineering/specifications/book-package/","inLanguage":"en","version":"1.0","license":"https://creativecommons.org/licenses/by/4.0/","author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"isBasedOn":"https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/engineering/specifications/book-package/SPECIFICATION.md"}</script></head><body><a class="skip" href="#main">Skip to main content</a><header id="header"><div class="container header-inner"><a class="brand brand-v2" href="/en/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><nav class="desktop-nav" aria-label="Menu"><details class="nav-group"><summary class="nav-item">Knowledge<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/en/wiki/">Reference<small>Clear definitions, linked ideas and the sources behind them.</small></a><a class="" href="/en/books/">Books<small>A quiet space for long-form reading, editions and chapters.</small></a><a class="" href="/en/repository/">Repository<small>Trace what changed, when it changed and where it came from.</small></a></div></details><a class="nav-item" href="/en/research/" >Science</a><a class="nav-item" href="/en/journal/" >Journal</a><details class="nav-group"><summary class="nav-item">Developers<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/en/docs/">Engineering</a><a class="" href="/en/docs/availability/">Integration availability</a></div></details></nav><div class="utilities"><button class="search-trigger" data-search aria-label="Search"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>Search</span><kbd>⌘ K</kbd></button><details class="language-picker"><summary class="locale-trigger" aria-label="Language: English"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span class="locale-name">English</span><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="locale-panel" aria-label="Language"><button type="button" class="locale-option" data-locale="en" lang="en" aria-pressed="true"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span>English</span><span class="locale-check" aria-hidden="true"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg></span></button><button type="button" class="locale-option" data-locale="ru" lang="ru" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h30v20H0z"/><path fill="#2855a4" d="M0 6.667h30v6.667H0z"/><path fill="#c83e43" d="M0 13.333h30V20H0z"/></svg><span>Русский</span><span class="locale-check" aria-hidden="true"></span></button><button type="button" class="locale-option" data-locale="zh-Hans" lang="zh-Hans" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span>简体中文</span><span class="locale-check" aria-hidden="true"></span></button></div></details><button class="icon-btn theme-btn" aria-label="Switch to dark theme"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5Z"/></svg></button><button class="icon-btn mobile-menu" data-menu aria-label="Menu"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button></div></div></header><main id="main" tabindex="-1"><div class="container source-record publication-record"><div class="page-head"><nav class="breadcrumb" aria-label="Breadcrumb"><a class="" href="/en/">Home</a><span>/</span><a class="" href="/en/engineering/specifications/">Engineering specifications</a></nav><div class="metadata"><span>Engineering specifications</span><span>Publication edition 1.0</span></div><h1 id="book-packages-source-identity-semantic-layers-and-validation" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</h1><p class="lead" lang="en">A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks.</p><div class="provenance metadata"><span>Pavel Valentov</span><span>CC BY 4.0</span><span>Full text in English</span></div><div class="actions"><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">Exact source<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/commits/75f2a993021642b7ac2f14c22f4c061d839f63ac/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">History<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><p class="reading-language-note">This is the complete English publication. The language selector changes the interface; historical Russian manuscripts are linked from the source map.</p></div>
+<div class="source-reading"><article><div class="source-body prose" lang="en"><p><strong>Author:</strong> Pavel Valentov · <strong>Publication edition:</strong> 1.0</p>
+<table>
+<colgroup>
+<col class="table-width-50" />
+<col class="table-width-50" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Implementation component</th>
+<th>Exact scope</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/schemas/book-package.schema.json">Schema</a></td>
+<td>Book-package records, version 1; Apache-2.0</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/tools/check_book_package.py">Validator</a></td>
+<td>Structural and cross-file checks; Apache-2.0</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/schemas/fixtures/book-package">Fixtures</a></td>
+<td>Original synthetic inputs and counterexamples</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/tools/test_book_package.py">Conformance tests</a></td>
+<td>Positive, negative and cross-file mutation checks</td>
+</tr>
+</tbody>
+</table>
+<p>This document specifies an implemented structural format. The implementation has a synthetic conformance suite; conversion fidelity on real books and downstream admission remain separate, unmeasured properties. Publication edition 1.0 does not change the schema’s record identifiers or grant runtime admission.</p>
+<h2 id="1-purpose-and-validation-boundary">1. Purpose and validation boundary</h2>
+<p>A book package is the unit in which one source representation of a book (one file) is carried through conversion into Markdown, semantic description and a relation graph, so that the result can travel inside the Knowledge Contract as a candidate. This document fixes the <strong>format</strong>. It makes no claim that any conversion is faithful, that any extracted meaning is correct, or that any package is admitted by the Knowledge Contract runtime (KC2). The manifest, semantic objects, relations and quality report carry <code>kc2_admission: not_measured</code>; a value of <code>admitted</code> is rejected by the schema, because admission is decided elsewhere and never by the producer.</p>
+<p>A successful validation establishes that the submitted package passes the implemented checks for shapes, digests, counts, endpoints, anchor identity and status coherence. It is not a proof that the implementation detects every structural defect. It does not prove that the text of an anchor says what an object claims. That is the job of review, recorded separately in the quality report.</p>
+<h2 id="2-layout">2. Layout</h2>
+<pre class="text"><code>&lt;package_id&gt;/
+  manifest.json      identity, source binding, components with digests, rights, status
+  document.md        faithful conversion of the source; no generated text
+  readable.md        readable edition; the only file edits may change
+  assets/            images and other extracted resources
+  edits.jsonl        edit ledger: one record per change from document.md to readable.md
+  objects.jsonl      semantic objects
+  relations.jsonl    relations between objects
+  quality.json       quality report</code></pre>
+<p><code>document.md</code> is never edited. A correction goes into <code>readable.md</code> through a ledger record that holds the source fragment, the replacement, the anchor, the basis, the reason and the input and output digests. Every accepted edit is reversible (<code>reversible</code> is the constant <code>true</code>). The ledger is tied to the files: the digests chain from <code>document.md</code> through each accepted edit, each <code>original_text</code> must occur in the text it edits, and <code>readable.md</code> must equal the replay of the accepted edits over <code>document.md</code>. Paths are relative, contain no <code>..</code>, and never start with <code>/</code>.</p>
+<h2 id="3-identity-and-source-binding">3. Identity and source binding</h2>
+<p>Three identifiers are kept apart: <code>work_id</code> (the work), <code>edition_id</code> (edition and language) and <code>representation_id</code> (one file). Translations of one work share a <code>related_works</code> relation (<code>translation_of</code>, <code>edition_of</code>, <code>same_work_as</code>, <code>packaged_with</code>) and keep separate editions, languages and evidence. The manifest holds the SHA-256 and size of the source representation, its format, an <code>integrity</code> state (<code>verified</code>, <code>mismatch</code>, <code>unverified</code>) and a <code>completeness</code> state (<code>full</code>, <code>partial</code>, <code>bibliography_only</code>). Rules enforced:</p>
+<ul>
+<li><code>mismatch</code> forces <code>package_status: blocked_integrity</code>; the expected hash is never replaced to make a package pass.</li>
+<li><code>bibliography_only</code> forces <code>package_status: bibliography_only</code> and forbids <code>document_md</code>; such a record is never queued as a full text.</li>
+<li><code>knowledge_ready</code> requires <code>verified</code> integrity and <code>full</code> completeness.</li>
+<li><code>document_md.input_sha256</code> equals the source representation hash, and names the converting tool and version.</li>
+</ul>
+<h2 id="4-semantic-objects">4. Semantic objects</h2>
+<p>An object (<code>KCBookObject/v1</code>) is a concept, claim, procedure, figure, table, formula, code block, example or other structure. It carries its text, language, origin, evidence anchors (at least one), qualifiers (conditions, numbers with units) and eight serialized semantic facets consistent with the dimensions in the <a href="/en/engineering/specifications/semantic-types/">semantic-types specification</a>: <code>representation_modes</code>, <code>content_kinds</code>, <code>discourse_functions</code>, <code>aboutness</code>, <code>source_position</code>, <code>semantic_operators</code>, <code>assessment_refs</code>, <code>governance_refs</code>. Each facet is present. A facet is either <code>known</code> with a value, or <code>unknown</code>, <code>not_applicable</code> or <code>withheld</code> with a reason and no value; absence of information is never an empty list. <code>content_kinds</code> uses the following declared profile vocabulary: <code>definition</code>, <code>state_description</code>, <code>observation_measurement</code>, <code>generalization</code>, <code>explanatory_model</code>, <code>formal_model</code>, <code>procedure</code>, <code>structure_configuration</code>, <code>constraint_norm</code>, <code>goal_intent</code>, <code>preference_evaluation</code>, <code>argument_evidence</code>, <code>example</code>, <code>counterexample</code>, <code>question_problem_gap</code>, <code>narrative_episode</code>, <code>analogy_metaphor</code>, <code>hypothesis_interpretation</code>, and <code>commitment_speech_act</code>. These nineteen values refine eighteen earlier content rubrics by separating example from counterexample. This profile vocabulary is not an exhaustive taxonomy of meaning. Attribution remains in the object origin and generation records; task applicability must be evaluated by the consuming contract and is not established by these eight facet fields. A claim of class <code>benchmark</code> must carry corpus, device, tool version, settings, units and mode (<code>encode</code>, <code>decode</code>, <code>encode_decode</code>).</p>
+<h2 id="5-relations">5. Relations</h2>
+<p>A relation (<code>KCBookRelation/v1</code>) connects two objects of the package and has one of six types: <code>defines</code>, <code>uses</code>, <code>variant_of</code>, <code>requires</code>, <code>compared_with</code>, <code>contradicts</code>. It carries evidence anchors tagged with the side they support (<code>from</code>, <code>to</code>, <code>both</code>). Rules:</p>
+<ul>
+<li>at least one anchor is required for every type;</li>
+<li><code>contradicts</code> needs an anchor for the <code>from</code> side and an anchor for the <code>to</code> side, because a contradiction asserted from one side only is a reading, not a finding;</li>
+<li>an object may not be related to itself; endpoints must exist in the same package;</li>
+<li>a relation that touches a stale object is stale or rejected (section 9).</li>
+</ul>
+<h2 id="6-evidence-anchors">6. Evidence anchors</h2>
+<p>Every anchor repeats the <code>representation_id</code> and the source <code>sha256</code> it points into; the validator rejects an anchor that names another representation or source. Coordinates are never bare numbers.</p>
+<table>
+<colgroup>
+<col class="table-width-33" />
+<col class="table-width-33" />
+<col class="table-width-33" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kind</th>
+<th>Source formats</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>page_bbox</code></td>
+<td>PDF, DjVu, PS after conversion</td>
+<td><code>page</code> (from 1), <code>bbox</code> (4 numbers, positive area), <code>bbox_origin</code>, <code>bbox_unit</code></td>
+</tr>
+<tr class="even">
+<td><code>spine_offset</code></td>
+<td>EPUB</td>
+<td><code>spine_item</code>, optional <code>element_path</code>, <code>start</code>, <code>end</code> (end not before start)</td>
+</tr>
+<tr class="odd">
+<td><code>section_block</code></td>
+<td>HTML, MD, TXT</td>
+<td><code>section_id</code>, <code>block_id</code></td>
+</tr>
+<tr class="even">
+<td><code>sheet_range</code></td>
+<td>XLSX</td>
+<td><code>sheet</code>, <code>range</code>, <code>layer</code> (<code>formula</code>, <code>cached_value</code>, <code>literal</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>json_pointer</code></td>
+<td>JSON, DocC</td>
+<td><code>pointer</code> (RFC 6901)</td>
+</tr>
+<tr class="even">
+<td><code>slide_block</code></td>
+<td>presentations</td>
+<td><code>slide</code>, <code>block_id</code></td>
+</tr>
+</tbody>
+</table>
+<p>A new source format needs a new anchor kind in a new schema revision, not a loose string. The validator requires the anchor kind to fit the source format of the manifest (for example <code>page_bbox</code> for PDF, <code>section_block</code> for Markdown). It does not resolve an anchor against the source: that a section, page or range exists, and that it says what an object claims, is not checked here.</p>
+<h2 id="7-generated-content-is-marked-always">7. Generated content is marked, always</h2>
+<p>Every object and relation has an <code>origin</code>: <code>author_statement</code>, <code>editor_correction</code>, <code>generated_meaning</code>, <code>generated_description</code>, <code>our_experiment</code> or <code>model_inference</code>. Everything except <code>author_statement</code> must carry a <code>generation</code> record (tool, version, optional model id, run id, input digest, time) and must set <code>presented_as_author</code> to <code>false</code>. An <code>author_statement</code> must not carry a <code>generation</code> record. Machine descriptions of illustrations and generated meanings live only in the object file; <code>document_md.contains_generated_text</code> is the constant <code>false</code>, and <code>readable_md</code> declares whether it holds any. The rendering of the knowledge layer to Markdown labels every generated block “GENERATED, not the author’s statement”. A missing asset is <code>state: missing_asset</code> with no path and no digest; no image or description is invented for it.</p>
+<h2 id="8-quality-report-extraction-and-semantics-apart">8. Quality report: extraction and semantics apart</h2>
+<p><code>quality.json</code> has two blocks that never merge. <code>extraction</code> holds a status (<code>pass</code>, <code>partial</code>, <code>adapter_required</code>, <code>failed</code>, <code>not_measured</code>), expected and seen units, a list of checks (<code>pass</code>, <code>fail</code>, <code>unknown</code>, <code>not_applicable</code>, each with a method) and a CER block. CER is either <code>measured</code> with a value, a gold or silver reference class and a sample size, or <code>not_measured</code> with value <code>null</code>; a null is not a zero. <code>semantics</code> holds a status (<code>not_built</code>, <code>built_unreviewed</code>, <code>reviewed</code>, <code>not_measured</code>), object and relation counts and, when reviewed, the reviewer type, sample size and result. <code>not_built</code> and <code>not_measured</code> force both counts to zero: an empty graph means that the semantic layer was not built, never that the book has no support for a question. There is no combined score; the schema rejects one.</p>
+<p><code>package_status</code> is derived, not chosen freely: <code>knowledge_ready</code> requires extraction <code>pass</code> and semantics <code>reviewed</code>; <code>structure_only</code> requires semantics <code>not_built</code>.</p>
+<h2 id="9-staleness">9. Staleness</h2>
+<p>A source span corrected after objects were derived from it makes those objects stale. The validator requires: an object listed under <code>depends_on_objects</code> of a <code>stale</code> edit is <code>stale</code> or <code>rejected</code>, and so is every relation that touches a stale object. A new context package must not reuse a stale quotation.</p>
+<h2 id="10-rights-and-layers">10. Rights and layers</h2>
+<p><code>rights.license_class</code> is <code>author_open</code>, <code>third_party_restricted</code> or <code>unknown</code>; <code>publishable_layers</code> lists what may leave the producer: <code>document_md</code>, <code>readable_md</code>, <code>assets</code>, <code>knowledge</code>, <code>quality</code>. A work that is not <code>author_open</code> may not publish <code>document_md</code>, <code>readable_md</code> or <code>assets</code>. This is a producer-side guard, not a legal opinion; whether the knowledge layer of a restricted work may quote it is a rights question for the publication decision.</p>
+<h2 id="11-mapping-to-candidate-export-v2-and-knowledge-contract-v3-admission">11. Mapping to candidate export v2 and Knowledge Contract V3 admission</h2>
+<p>The candidate exporter (<code>tools/export_corpus.py</code>, schema <code>KnowledgeContractCandidateExport/v2</code>, DEC-AUP-0171) carries only Markdown files whose path matches its path pattern under <code>papers/</code>, <code>spec/</code>, <code>articles/</code> or <code>schemas/</code>, that are listed in its explicit scope, have a merged source commit and a reviewed publication decision with a personal-name rights holder and a licence of CC-BY-4.0 or Apache-2.0. A package therefore maps as follows, as a <strong>proposal</strong> that the exporter’s own rules still decide.</p>
+<table>
+<colgroup>
+<col class="table-width-50" />
+<col class="table-width-50" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package element</th>
+<th>Candidate export v2 element</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>document.md</code>, <code>readable.md</code> (only if listed in <code>publishable_layers</code>)</td>
+<td>one entry each: <code>path</code>, <code>content sha256</code>, rights holder, licence, <code>status: current</code></td>
+</tr>
+<tr class="even">
+<td>objects and relations</td>
+<td>not carried as JSON; rendered to one Markdown file (<code>render_knowledge_markdown</code>) which becomes one entry</td>
+</tr>
+<tr class="odd">
+<td><code>manifest.json</code>, <code>objects.jsonl</code>, <code>relations.jsonl</code>, <code>edits.jsonl</code>, <code>quality.json</code>, assets</td>
+<td>not carried (not Markdown); stay in the package and are referenced by digest</td>
+</tr>
+<tr class="even">
+<td><code>rights.holder</code>, <code>rights.license</code></td>
+<td>publication decision <code>rights_holder</code> and <code>license</code>; the exporter requires a personal name as holder and CC-BY-4.0 or Apache-2.0 as licence, so a layer without <code>rights.license</code> gets no row; <code>rights_basis</code>, <code>third_party</code> and <code>attribution</code> are written by the publication step</td>
+</tr>
+<tr class="odd">
+<td><code>package_status</code>, quality blocks</td>
+<td><code>limits</code> text of the decision (built by <code>candidate_projection</code>); a proposed row has status <code>proposed</code>, and only the exporter’s allowlist makes it <code>current</code></td>
+</tr>
+<tr class="even">
+<td>layer not in <code>publishable_layers</code></td>
+<td>no allowlist row; an absent row means deny</td>
+</tr>
+<tr class="odd">
+<td><code>kc2_admission: not_measured</code></td>
+<td><code>kc2_admission: not_measured</code> (the exporter sets it; a producer cannot)</td>
+</tr>
+</tbody>
+</table>
+<p><code>candidate_projection</code> proposes such rows, with the repository path <code>articles/book-packages/&lt;package_id&gt;/&lt;file&gt;</code>. That path fits the exporter’s path pattern but is not in its scope list. The function does not widen the exporter’s scope: <code>SCOPE_PATHS</code> is an explicit list and widening it, or adding a path pattern for packages, needs a new decision in the programme record. Until then this specification is itself not an indexing input, and the mapping has not been tried against a real exporter run. Admission under <a href="/en/engineering/specifications/knowledge-contract-core/">the core contract specification</a> is a separate step performed by the runtime resolver; a package supplies identity, sources, scope and conditions, and is a candidate until that step records otherwise. No consumer of the v2 manifest was available to the author of this revision, so acceptance by the downstream indexer is <strong>not measured</strong>.</p>
+<h2 id="12-validation">12. Validation</h2>
+<ol type="1">
+<li>The JSON Schema checks the shape of each record and the conditional rules above (origin and generation, contradicts sides, CER null, not-built counts, status coherence, benchmark context, paths, admission constants).</li>
+<li><code>tools/check_book_package.py &lt;dir&gt;</code> adds the cross-file rules: file digests, counts, unique identifiers, endpoint existence, package, work and edition identity, anchor identity, geometry and fit to the source format, ledger chain and replay, staleness coupling, quality counts, status derivation, rights versus layers.</li>
+<li>Positive fixtures: one synthetic package and one object per anchor kind. Negative fixtures: one file per violated rule, regenerated byte for byte by <code>tools/book_package_fixture.py</code>.</li>
+<li>Mutation tests: every negative fixture is rejected for its own named reason, and every cross-file mutation of the valid package is reported with its expected message. A mutation that is accepted, or rejected for another reason, fails the build.</li>
+</ol>
+<p>These checks establish that the validator distinguishes the listed violations. They do not establish that the list is complete, that the fixtures resemble real books, or that a conversion is faithful.</p>
+<h2 id="13-limits-of-the-implemented-format">13. Limits of the implemented format</h2>
+<ul>
+<li>The format is exercised only on a synthetic fixture. No real book has been converted by this specification yet.</li>
+<li><code>generation.input_sha256</code>, <code>size_bytes</code> of the source and the existence of an anchored section are recorded but cannot be verified from the package alone.</li>
+<li>A fixture marked <code>reviewed</code> records a review that the fixture does not prove took place.</li>
+<li>Extraction quality and semantic quality are defined as separate blocks; no threshold for either is fixed here.</li>
+<li>Right-to-left scripts, vertical Japanese and ruby are not covered by any anchor refinement; coverage of them is <code>not_measured</code>.</li>
+<li>Whether the downstream indexer accepts the Markdown rendering is not measured.</li>
+</ul>
+<h2 id="14-provenance-and-relation-to-the-publication">14. Provenance and relation to the publication</h2>
+<p>The format, schema, fixtures and validator were introduced in the <a href="https://github.com/Arcanada-one/knowledge-contract/tree/570f76b6d9a189295c3229254821c30748383965">upstream book-package change</a>. This edition moves its full specification into the engineering collection, resolves its profile vocabulary and links, and makes the validation boundary explicit. The schema, validator, fixtures and original conformance tests retain their upstream bytes.</p>
+<p>The <a href="/en/engineering/studies/source-transcription-and-uncertainty/">source-transcription study</a> supplies related historical evidence about provenance and uncertainty loss. Its historical book experiments are not validation of this newly introduced schema. The <a href="/en/science/semantic-objects-and-context/">scientific model of semantic objects</a> explains why structural provenance cannot establish the truth of an interpretation.</p>
+<p>Credit and licence: Knowledge Contract Arcana, <a href="https://contract.place" class="uri">https://contract.place</a> (CC BY 4.0). See <a href="https://github.com/Arcanada-one/knowledge-contract/blob/75f2a993021642b7ac2f14c22f4c061d839f63ac/ATTRIBUTION.md">attribution</a>.</p>
+</div><section class="document-citation" aria-label="Citation"><h2>Cite this document</h2><p lang="en">Pavel Valentov. Book Packages: Source Identity, Semantic Layers, and Validation. Knowledge Contract Arcana, edition 1.0. <a href="https://contract.place/en/engineering/specifications/book-package/">https://contract.place/en/engineering/specifications/book-package/</a>. Source revision <code>75f2a993021642b7ac2f14c22f4c061d839f63ac</code>.</p><p>Pavel Valentov · Knowledge Contract Arcana · CC BY 4.0. Retain the cited sources when reusing this text.</p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>On this page</summary><nav aria-label="On this page"><a class="toc-level-2" href="#1-purpose-and-validation-boundary" lang="en">1. Purpose and validation boundary</a><a class="toc-level-2" href="#2-layout" lang="en">2. Layout</a><a class="toc-level-2" href="#3-identity-and-source-binding" lang="en">3. Identity and source binding</a><a class="toc-level-2" href="#4-semantic-objects" lang="en">4. Semantic objects</a><a class="toc-level-2" href="#5-relations" lang="en">5. Relations</a><a class="toc-level-2" href="#6-evidence-anchors" lang="en">6. Evidence anchors</a><a class="toc-level-2" href="#7-generated-content-is-marked-always" lang="en">7. Generated content is marked, always</a><a class="toc-level-2" href="#8-quality-report-extraction-and-semantics-apart" lang="en">8. Quality report: extraction and semantics apart</a><a class="toc-level-2" href="#9-staleness" lang="en">9. Staleness</a><a class="toc-level-2" href="#10-rights-and-layers" lang="en">10. Rights and layers</a><a class="toc-level-2" href="#11-mapping-to-candidate-export-v2-and-knowledge-contract-v3-admission" lang="en">11. Mapping to candidate export v2 and Knowledge Contract V3 admission</a><a class="toc-level-2" href="#12-validation" lang="en">12. Validation</a><a class="toc-level-2" href="#13-limits-of-the-implemented-format" lang="en">13. Limits of the implemented format</a><a class="toc-level-2" href="#14-provenance-and-relation-to-the-publication" lang="en">14. Provenance and relation to the publication</a></nav></details><hr><strong>Engineering specifications</strong><a href="/en/engineering/specifications/knowledge-contract-core/" lang="en">Knowledge Contract: Core Model and Admission Requirements</a><a href="/en/engineering/specifications/contract-family/" lang="en">Contracts for Knowledge Operations</a><a href="/en/engineering/specifications/semantic-types/" lang="en">Semantic Types, Attribution, and Representations</a><a href="/en/engineering/specifications/context-package/" lang="en">Context Packages: Coverage, Dependencies, and Delivery</a><a href="/en/engineering/specifications/compiled-artifact-contract/" lang="en">Compiled Knowledge Artifacts and Reproducible Derivation</a><a href="/en/engineering/specifications/artifact-registry/" lang="en">Artifact Registry, Readable Names, and Document Formats</a><a href="/en/engineering/specifications/status-model/" lang="en">Assessment, Execution, and Publication States</a><a href="/en/engineering/specifications/cache-identity-and-invalidation/" lang="en">Cache Identity, Dependency Tracking, and Invalidation</a><a href="/en/engineering/specifications/reuse-policy/" lang="en">Reuse Policy: Time, Authorization, and Decision Outcomes</a><a href="/en/engineering/specifications/knowledge-evolution/" lang="en">Knowledge Evolution and Versioned Rules</a><a href="/en/engineering/specifications/book-package/" aria-current="page" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</a><hr><a class="" href="/en/reference/glossary/">Reference</a><a class="" href="/en/appendices/source-map/">Source map and earlier editions</a></aside></div></div></main><footer id="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-v2" href="/en/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><p>Knowledge, connected to its foundations.</p><p class="ecosystem-note">Knowledge Contract Arcana is part of the Arcanada ecosystem.</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada <svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><div class="footer-group"><strong>Science</strong><a class="" href="/en/research/">Scientific papers</a><a class="" href="/en/journal/">Journal</a><a class="" href="/en/reference/">Reference</a><a class="" href="/en/appendices/">Appendices</a></div><div class="footer-group"><strong>Developers</strong><a class="" href="/en/engineering/specifications/">Engineering specifications</a><a class="" href="/en/engineering/studies/">Engineering studies</a><a class="" href="/en/repository/">Repository</a><a class="" href="/en/docs/availability/">Integration availability</a></div><div class="footer-group"><strong>contract.place</strong><a class="" href="/en/about/">Use and cite</a><a href="/en/search/#document-search">Search the published documents</a><a class="" href="/en/references/">Design references</a></div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · Knowledge Contract Arcana · Arcanada ecosystem</span><span>Content CC BY 4.0, code Apache-2.0.</span></div><p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div></footer><dialog id="search-dialog" aria-labelledby="search-title"></dialog><dialog id="menu-dialog" aria-label="Site menu"></dialog><div id="announcement" class="sr-only" aria-live="polite"></div></body></html>

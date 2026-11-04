@@ -149,5 +149,27 @@ const ok = (results, extra = {}) => json(200, Object.assign({ schema: 'ContractP
     await S.runSearch(deps(() => ok([item()])), 'q', null, { onController: (c) => { got = c; } });
     assert.ok(got && typeof got.abort === 'function');
   });
+  await t('publicationState requires matching repository, full source revision and pinned URL', () => {
+    const pin = { repository: 'Arcanada-one/knowledge-contract', commit: 'a'.repeat(40), edition: '1.0' };
+    const matching = S.toViewItem(item({
+      source_revision: pin.commit,
+      citation: { title: 'Exact', canonical_url: 'https://github.com/' + pin.repository + '/blob/' + pin.commit + '/papers/example/PAPER.md' }
+    }));
+    assert.equal(S.publicationState(matching, pin).key, 'snapshotMatch');
+    assert.equal(S.publicationState(matching, pin).matched, true);
+    assert.equal(S.publicationState(Object.assign({}, matching, { fullRevision: 'b'.repeat(40), status: 'current' }), pin).key, 'snapshotDifferent');
+    assert.equal(S.publicationState(Object.assign({}, matching, { fullRevision: pin.commit.slice(0,12) }), pin).key, 'snapshotUnknown');
+    assert.equal(S.publicationState(Object.assign({}, matching, { fullRevision: pin.commit + 'x' }), pin).key, 'snapshotUnknown');
+    assert.equal(S.publicationState(Object.assign({}, matching, { link: 'https://github.com/' + pin.repository + '/blob/main/papers/example/PAPER.md' }), pin).key, 'snapshotUnpinned');
+    assert.equal(S.publicationState(Object.assign({}, matching, { link: 'https://github.com/Arcanada-one/other/blob/' + pin.commit + '/PAPER.md' }), pin).key, 'snapshotOutside');
+    assert.equal(S.publicationState(Object.assign({}, matching, { link: 'https://github.com.evil.example/' + pin.repository + '/blob/' + pin.commit + '/PAPER.md' }), pin).matched, false);
+  });
+  await t('publicationState labels are localized without turning current into an admission', () => {
+    const v = S.toViewItem(item({status:'current'}));
+    const pin = {repository:'Arcanada-one/knowledge-contract',commit:'a'.repeat(40),edition:'1.0'};
+    assert.equal(S.publicationState(v,pin,'ru').label,S.messages('ru').snapshotDifferent);
+    assert.equal(S.publicationState(v,null,'zh-Hans').label,S.messages('zh-Hans').snapshotUnknown);
+    assert.equal(v.kc2,'not_measured');
+  });
   console.log('TESTS passed=' + n);
 })().catch((e) => { console.error('FAILED', e); process.exit(1); });

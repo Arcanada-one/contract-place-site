@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "edition": "1.0",
+  "repository": "Arcanada-one/knowledge-contract",
+  "commit": "75f2a993021642b7ac2f14c22f4c061d839f63ac",
+  "catalog": "publication-catalog.json",
+  "renderer": {
+    "name": "pandoc",
+    "version": "3.1.3",
+    "math": "MathML"
+  },
+  "interface_languages": [
+    "en",
+    "ru",
+    "zh-Hans"
+  ],
+  "document_language": "en",
+  "documents": [
+    {
+      "type": "paper",
+      "slug": "semantic-objects-and-context",
+      "path": "papers/semantic-objects-and-context/PAPER.md",
+      "title": "Semantic Objects, Context, and Conditions of Applicability",
+      "summary": "A formal account of source interpretations, context, mandatory dependencies and conditions of applicability.",
+      "language": "en",
+      "route": "/en/science/semantic-objects-and-context/",
+      "sha256": "a52ed66427fb840cfa6b2e06ad8f856c94bbfdbff01e9be19b70d7a2862b251f",
+      "math_count": 44
+    },
+    {
+      "type": "paper",
+      "slug": "constrained-transformations",
+      "path": "papers/constrained-transformations/PAPER.md",
+      "title": "Constrained Transformations and the Limits of Knowledge Transfer",
+      "summary": "Conditional preservation, composition and reconstruction of knowledge under explicit observations and losses.",
+      "language": "en",
+      "route": "/en/science/constrained-transformations/",
+      "sha256": "9cd74f05b1612e136060f2190a13099a35e6e4dfafe6c0a1fc1b543719ea0db0",
+      "math_count": 56
+    },
+    {
+      "type": "paper",
+      "slug": "retrieval-and-context-composition",
+      "path": "papers/retrieval-and-context-composition/PAPER.md",
+      "title": "Retrieval, Coverage, and Context Composition under Resource Limits",
+      "summary": "Search coverage, finite context selection, dependency closure and the limits of greedy composition.",
+      "language": "en",
+      "route": "/en/science/retrieval-and-context-composition/",
+      "sha256": "618d3af8d7f41823246627efe3c497069a374250fdf318d1c4089d890c1543cc",
+      "math_count": 39
+    },
+    {
+      "type": "paper",
+      "slug": "interaction-and-memory",
+      "path": "papers/interaction-and-memory/PAPER.md",
+      "title": "Interaction, Documents, and Memory with Explicit Revision Boundaries",
+      "summary": "Versioned requirements, dialogue branches, memory and evidence of learning in agent interaction.",
+      "language": "en",
+      "route": "/en/science/interaction-and-memory/",
+      "sha256": "1460a5f983dd83ee08e01023b37597f50bfbd7e37f371d0b3530f55c530f583a",
+      "math_count": 9
+    },
+    {
+      "type": "paper",
+      "slug": "evidence-and-falsification",
+      "path": "papers/evidence-and-falsification/PAPER.md",
+      "title": "Evidence, Reasoning, and Falsification in Knowledge Systems",
+      "summary": "How claims, proofs, finite tests, counterexamples and comparative evaluations support different conclusions.",
+      "language": "en",
+      "route": "/en/science/evidence-and-falsification/",
+      "sha256": "60bd9216daddf0dc69396acfe2da2e29cc046bdb807717847f13926e8ba398b4",
+      "math_count": 6
+    },
+    {
+      "type": "paper",
+      "slug": "revision-and-governance",
+      "path": "papers/revision-and-governance/PAPER.md",
+      "title": "Knowledge Revision, Version Identity, and the Adoption of Norms",
+      "summary": "Separate identities for content, assessment and normative adoption, with explicit revision and publication decisions.",
+      "language": "en",
+      "route": "/en/science/revision-and-governance/",
+      "sha256": "0e348ea0c656509cc24de82d444175fa7366e9edacb70e2a4a706672b5e61154",
+      "math_count": 2
+    },
+    {
+      "type": "paper",
+      "slug": "controlled-knowledge-reuse",
+      "path": "papers/controlled-knowledge-reuse/PAPER.md",
+      "title": "Knowledge Contracts and the Admission of Prepared Knowledge",
+      "summary": "The conditions under which saved knowledge may support a new task, recipient or execution.",
+      "language": "en",
+      "route": "/en/science/controlled-knowledge-reuse/",
+      "sha256": "9c799b25dbc7c7336e173f31a4877034fd05713151da8c380519f5884fa1370c",
+      "math_count": 29
+    },
+    {
+      "type": "paper",
+      "slug": "knowledge-utility",
+      "path": "papers/knowledge-utility/PAPER.md",
+      "title": "Knowledge Utility, Resource Accounting, and Retention Decisions",
+      "summary": "Task-relative benefit, complete resource accounting, comparison baselines and limits of causal inference.",
+      "language": "en",
+      "route": "/en/science/knowledge-utility/",
+      "sha256": "01f037b2266a8bbd85d0f69ed8e16a00fd4ebdd7e7f663b35949e006343ea383",
+      "math_count": 26
+    },
+    {
+      "type": "specification",
+      "slug": "knowledge-contract-core",
+      "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "title": "Knowledge Contract: Core Model and Admission Requirements",
+      "summary": "The nine core groups, first-class constraints, profiles, admission and execution requirements.",
+      "language": "en",
+      "route": "/en/engineering/specifications/knowledge-contract-core/",
+      "sha256": "3c6db41d46b0914441af90fb8984aae8f8da8b2a056e1904daf16f4f230d037b",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "contract-family",
+      "path": "engineering/specifications/contract-family/SPECIFICATION.md",
+      "title": "Contracts for Knowledge Operations",
+      "summary": "Common preconditions, invariants, postconditions, effects and evidence for knowledge operations.",
+      "language": "en",
+      "route": "/en/engineering/specifications/contract-family/",
+      "sha256": "3eb380947abb58ab73dcd3f97adc65f2b4805569728806f7802982bae4b8c635",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "semantic-types",
+      "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
+      "title": "Semantic Types, Attribution, and Representations",
+      "summary": "Semantic facets, attribution, scoped operators, ambiguous readings and multimodal representations.",
+      "language": "en",
+      "route": "/en/engineering/specifications/semantic-types/",
+      "sha256": "2c1323d7845fe1b18281b91880d0db4791048c9f22d888f0fed26e0188290c50",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "context-package",
+      "path": "engineering/specifications/context-package/SPECIFICATION.md",
+      "title": "Context Packages: Coverage, Dependencies, and Delivery",
+      "summary": "Requirements for selected context, coverage, mandatory dependencies, budgets and observed delivery.",
+      "language": "en",
+      "route": "/en/engineering/specifications/context-package/",
+      "sha256": "5f379fdad9b76b384a0b3abcc53ca42aaa8030ff5272ac28bf91bcc2f230aaa5",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "compiled-artifact-contract",
+      "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "title": "Compiled Knowledge Artifacts and Reproducible Derivation",
+      "summary": "Saved derivatives with exact inputs, recipes, dependency manifests, templates and output evidence.",
+      "language": "en",
+      "route": "/en/engineering/specifications/compiled-artifact-contract/",
+      "sha256": "102676d61dad36cc3cf4961b8ad68b342885272d065ee7506825f3b1a0609bd3",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "artifact-registry",
+      "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "title": "Artifact Registry, Readable Names, and Document Formats",
+      "summary": "Readable artifact names, canonical Markdown formats, identity rules and professional artifact distinctions.",
+      "language": "en",
+      "route": "/en/engineering/specifications/artifact-registry/",
+      "sha256": "8783552e775b1d4a3e0c0ca16c832dce552de753214a4c27041903d0095e5d34",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "status-model",
+      "path": "engineering/specifications/status-model/SPECIFICATION.md",
+      "title": "Assessment, Execution, and Publication States",
+      "summary": "Independent assessment, execution, effect, freshness, publication and review states.",
+      "language": "en",
+      "route": "/en/engineering/specifications/status-model/",
+      "sha256": "fa7c443248cca872e0ba77fc55e07ec69cb0ef52357c9fa2dbb88119bfae8d38",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "cache-identity-and-invalidation",
+      "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "title": "Cache Identity, Dependency Tracking, and Invalidation",
+      "summary": "Content, build and lookup identity, dependency changes and guarded publication and serving.",
+      "language": "en",
+      "route": "/en/engineering/specifications/cache-identity-and-invalidation/",
+      "sha256": "6ce6cdf9ae537dc61dea788e12eca4b38c009d0f8111d516f696fbb58e8c9155",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "reuse-policy",
+      "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "title": "Reuse Policy: Time, Authorization, and Decision Outcomes",
+      "summary": "Temporal modes, conservative deadlines, authorization, decision outcomes and retention boundaries.",
+      "language": "en",
+      "route": "/en/engineering/specifications/reuse-policy/",
+      "sha256": "919525f3e70ea3abe2b10de6d154f3693e8d213ca6dba7b37fa2c4ddec4593b2",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "knowledge-evolution",
+      "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "title": "Knowledge Evolution and Versioned Rules",
+      "summary": "Versioned creation rules, adoption, impact analysis, reassessment, migration and coherent publication.",
+      "language": "en",
+      "route": "/en/engineering/specifications/knowledge-evolution/",
+      "sha256": "421987294714317959697d9b2ea4c338a952585c19294a836567d4d701c07e96",
+      "math_count": 0
+    },
+    {
+      "type": "specification",
+      "slug": "book-package",
+      "path": "engineering/specifications/book-package/SPECIFICATION.md",
+      "title": "Book Packages: Source Identity, Semantic Layers, and Validation",
+      "summary": "A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks.",
+      "language": "en",
+      "route": "/en/engineering/specifications/book-package/",
+      "sha256": "9def8270ca1520a33ead519b00f8da0777c7ab62f04ee2413c578ffd8b25be70",
+      "math_count": 0
+    },
+    {
+      "type": "study",
+      "slug": "contract-profile-conformance",
+      "path": "engineering/studies/contract-profile-conformance/STUDY.md",
+      "title": "Contract profiles: finite conformance, trust boundaries, and a strong simple comparator",
+      "summary": "Finite contract checks, false trusted-input counterexamples and an equal strong-comparator result.",
+      "language": "en",
+      "route": "/en/engineering/studies/contract-profile-conformance/",
+      "sha256": "895d9d7f0603027a4b930ea336e3021b6b02f22ca78d989fb665869db642550b",
+      "math_count": 3
+    },
+    {
+      "type": "study",
+      "slug": "dependency-closure-and-package-delivery",
+      "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "title": "Dependency closure, readable artifact layouts, and a pinned package replay",
+      "summary": "Historical package evidence and a public exhaustive replay of a finite dependency graph.",
+      "language": "en",
+      "route": "/en/engineering/studies/dependency-closure-and-package-delivery/",
+      "sha256": "55029310ea64f27f9ed3ef8470d56815c755820ce45ad43cbe078ca58a12f684",
+      "math_count": 11
+    },
+    {
+      "type": "study",
+      "slug": "source-transcription-and-uncertainty",
+      "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "title": "Reproducible transcription is not preservation of uncertainty",
+      "summary": "Retained generated descriptions, lost uncertainty and a reproducible synthetic projection counterexample.",
+      "language": "en",
+      "route": "/en/engineering/studies/source-transcription-and-uncertainty/",
+      "sha256": "721553450ac3bf61f1db252a7cc53a76f92478ab77eb56c67937a7077dc5b266",
+      "math_count": 2
+    },
+    {
+      "type": "study",
+      "slug": "executable-projections-and-revision",
+      "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
+      "title": "Executable projections, addressable revisions, and the limits of graph minimality",
+      "summary": "Finite consumer checks, paired agent tasks, addressed revision and the limits of graph minimality.",
+      "language": "en",
+      "route": "/en/engineering/studies/executable-projections-and-revision/",
+      "sha256": "cfe6ab67c6ce6ed6295a5ec7b1b421c25f3b9f4e132daadb7f1ccfa8d7865bd3",
+      "math_count": 0
+    },
+    {
+      "type": "study",
+      "slug": "reuse-admission-and-cost-controls",
+      "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "title": "Controlled reuse: admission counterexamples and the cost of a cache hit",
+      "summary": "Executable admission counterexamples and an analytical break-even calculation with explicit costs.",
+      "language": "en",
+      "route": "/en/engineering/studies/reuse-admission-and-cost-controls/",
+      "sha256": "87af4b10639cf33fe29c4e19d06cd99b5460a41db6bdd70863c08fa3d5f6c07d",
+      "math_count": 38
+    },
+    {
+      "type": "study",
+      "slug": "editorial-skill-pilot",
+      "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
+      "title": "Editing a scientific section with a knowledge toolkit: a masked single-section comparison",
+      "summary": "One preregistered editorial comparison, exact initial outputs, masked review and an observed tie.",
+      "language": "en",
+      "route": "/en/engineering/studies/editorial-skill-pilot/",
+      "sha256": "3e3a185a836fdc4c7bb6a0e13bafed7205e59e4687a70cddc7b648983146bbe4",
+      "math_count": 0
+    },
+    {
+      "type": "glossary",
+      "slug": "glossary",
+      "path": "reference/glossary/GLOSSARY.md",
+      "title": "Knowledge Contract Glossary",
+      "summary": "Shared English definitions, Russian equivalents, technical spellings and distinctions between related concepts.",
+      "language": "en",
+      "route": "/en/reference/glossary/",
+      "sha256": "1c6be362e0d83b5f85f0c8b39b082780096beb0c8e3220728cf2832e36795814",
+      "math_count": 0
+    },
+    {
+      "type": "bibliography",
+      "slug": "bibliography",
+      "path": "reference/bibliography/BIBLIOGRAPHY.md",
+      "title": "Primary Sources and Research Foundations",
+      "summary": "Named primary sources and the exact conceptual or technical role each plays in the current edition.",
+      "language": "en",
+      "route": "/en/reference/bibliography/",
+      "sha256": "ff0f152231f03bdda4cecce9395f0a2814fc570a559e15398f214b8d0f3f294f",
+      "math_count": 0
+    },
+    {
+      "type": "appendix",
+      "slug": "source-map",
+      "path": "appendices/source-map/APPENDIX.md",
+      "title": "Source Map, Earlier Editions, and Protocol Compatibility",
+      "summary": "The migration from the earlier corpus, immutable history, evidence provenance and unchanged protocol versions.",
+      "language": "en",
+      "route": "/en/appendices/source-map/",
+      "sha256": "440e3209c8be8d432b5865febdd9719429a6dbc447e8428db9c87af2b404962b",
+      "math_count": 0
+    },
+    {
+      "type": "appendix",
+      "slug": "api-integration",
+      "path": "appendices/api-integration/APPENDIX.md",
+      "title": "API Integration and Publication Consistency",
+      "summary": "Published read interfaces, task-contract delivery requirements and consistency between repository, reader and index.",
+      "language": "en",
+      "route": "/en/appendices/api-integration/",
+      "sha256": "74265dc826bf5a1d8abdb390e7e9f1ab11b814d1b7c61e002b7e877a52a7b705",
+      "math_count": 0
+    }
+  ]
+}
