@@ -29,3 +29,43 @@ html[data-theme=dark] .hero-art-bg{background-image:linear-gradient(90deg,#111c2
 @media(max-width:640px){#search-form{flex-direction:column}}
 #page-search-form .button{margin-block:20px}.zh-notice{padding-top:0}
 [hidden]{display:none!important}
+
+/* Complete publications use the same typography and theme as the research hub. */
+.publication-paths{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px}
+.publication-sections{display:grid;gap:20px;margin-bottom:36px}
+.publication-snapshot{margin:0 0 60px;padding:20px;border:1px solid var(--line);border-radius:8px}
+.publication-snapshot summary{cursor:pointer;font-weight:600}
+.publication-snapshot code,.document-citation code{overflow-wrap:anywhere}
+.reading-language-note{font-size:14px;color:var(--secondary);max-width:850px;margin-top:24px}
+.publication-record .article-aside{max-height:calc(100vh - 135px);overflow-y:auto}
+.reader-contents summary{font-weight:600;cursor:pointer;padding-block:8px}
+.reader-contents .toc-level-3{padding-left:14px;font-size:14px}
+.publication-record .article-aside [aria-current=page]{color:var(--teal);font-weight:600}
+.source-body{min-width:0}
+.source-body table{display:block;max-width:100%;overflow-x:auto;margin-block:24px}
+.source-body th,.source-body td{min-width:115px}
+.source-body pre{overflow-x:auto;max-width:100%;white-space:pre}
+.source-body math[display=block]{display:block;max-width:100%;overflow-x:auto;margin-block:22px;padding-block:6px}
+.source-body math{font-size:1em}
+.document-citation{border-top:1px solid var(--line);margin-top:42px;padding-top:24px;font-size:15px;min-width:0;overflow-wrap:anywhere}
+.document-citation h2{font-size:22px}
+.spec-row>div{min-width:0}
+.spec-row p{color:var(--secondary);font-size:16px;overflow-wrap:anywhere}
+.cover-id{max-width:calc(100% - 30px)}
+.publication-record .source-reading{grid-template-columns:minmax(0,810px) minmax(0,225px)}
+@media(max-width:1279px){
+  .publication-record .source-reading{display:flex;flex-direction:column;gap:28px}
+  .publication-record .article-aside{display:block;order:-1;position:static;max-height:none;border-left:0;border-bottom:1px solid var(--line);padding:0 0 22px}
+  .publication-record .article-aside>strong,.publication-record .article-aside>a,.publication-record .article-aside>hr{display:none}
+  .reader-contents nav{max-height:260px;overflow-y:auto}
+}
+@media(max-width:767px){
+  .purpose-section,.access-section{grid-template-columns:minmax(0,1fr)}
+  .purpose-copy,.access-section>div{min-width:0;overflow-wrap:anywhere}
+  .access-section .button{max-width:100%;white-space:normal}
+  .access-section .button .icon{flex-shrink:0}
+}
+
+/* Pandoc table presentation under the existing style-src self policy. */
+.table-align-left{text-align:left}.table-align-center{text-align:center}.table-align-right{text-align:right}
+col.table-width-1{width:1%}col.table-width-2{width:2%}col.table-width-3{width:3%}col.table-width-4{width:4%}col.table-width-5{width:5%}col.table-width-6{width:6%}col.table-width-7{width:7%}col.table-width-8{width:8%}col.table-width-9{width:9%}col.table-width-10{width:10%}col.table-width-11{width:11%}col.table-width-12{width:12%}col.table-width-13{width:13%}col.table-width-14{width:14%}col.table-width-15{width:15%}col.table-width-16{width:16%}col.table-width-17{width:17%}col.table-width-18{width:18%}col.table-width-19{width:19%}col.table-width-20{width:20%}col.table-width-21{width:21%}col.table-width-22{width:22%}col.table-width-23{width:23%}col.table-width-24{width:24%}col.table-width-25{width:25%}col.table-width-26{width:26%}col.table-width-27{width:27%}col.table-width-28{width:28%}col.table-width-29{width:29%}col.table-width-30{width:30%}col.table-width-31{width:31%}col.table-width-32{width:32%}col.table-width-33{width:33%}col.table-width-34{width:34%}col.table-width-35{width:35%}col.table-width-36{width:36%}col.table-width-37{width:37%}col.table-width-38{width:38%}col.table-width-39{width:39%}col.table-width-40{width:40%}col.table-width-41{width:41%}col.table-width-42{width:42%}col.table-width-43{width:43%}col.table-width-44{width:44%}col.table-width-45{width:45%}col.table-width-46{width:46%}col.table-width-47{width:47%}col.table-width-48{width:48%}col.table-width-49{width:49%}col.table-width-50{width:50%}col.table-width-51{width:51%}col.table-width-52{width:52%}col.table-width-53{width:53%}col.table-width-54{width:54%}col.table-width-55{width:55%}col.table-width-56{width:56%}col.table-width-57{width:57%}col.table-width-58{width:58%}col.table-width-59{width:59%}col.table-width-60{width:60%}col.table-width-61{width:61%}col.table-width-62{width:62%}col.table-width-63{width:63%}col.table-width-64{width:64%}col.table-width-65{width:65%}col.table-width-66{width:66%}col.table-width-67{width:67%}col.table-width-68{width:68%}col.table-width-69{width:69%}col.table-width-70{width:70%}col.table-width-71{width:71%}col.table-width-72{width:72%}col.table-width-73{width:73%}col.table-width-74{width:74%}col.table-width-75{width:75%}col.table-width-76{width:76%}col.table-width-77{width:77%}col.table-width-78{width:78%}col.table-width-79{width:79%}col.table-width-80{width:80%}col.table-width-81{width:81%}col.table-width-82{width:82%}col.table-width-83{width:83%}col.table-width-84{width:84%}col.table-width-85{width:85%}col.table-width-86{width:86%}col.table-width-87{width:87%}col.table-width-88{width:88%}col.table-width-89{width:89%}col.table-width-90{width:90%}col.table-width-91{width:91%}col.table-width-92{width:92%}col.table-width-93{width:93%}col.table-width-94{width:94%}col.table-width-95{width:95%}col.table-width-96{width:96%}col.table-width-97{width:97%}col.table-width-98{width:98%}col.table-width-99{width:99%}col.table-width-100{width:100%}

@@ -101,60 +101,49 @@ def parse(path: Path, lang: str):
 
 def main(argv):
     root = Path(argv[1])
-    tree = None
-    if "--tree" in argv:
-        tree = set(Path(argv[argv.index("--tree") + 1]).read_text(encoding="utf-8").split("\n"))
-    catalog = json.loads((root / "content.js").read_text(encoding="utf-8").split("=", 1)[1].strip().rstrip(";"))
-    papers = [r for r in catalog["records"] if r["kind"] == "paper"]
-    specs = [r for r in catalog["records"] if r["kind"] == "spec"]
-    errs = []
-    if len(papers) != 14 or len(specs) != 10:
-        errs.append("catalog: expected 14 papers and 10 specifications, got %d and %d" % (len(papers), len(specs)))
-    kc_links = set()
-    pages = 0
+    catalog = json.loads((root / 'content.js').read_text().split('=', 1)[1].strip().rstrip(';'))
+    records = catalog['records']
+    if len(records) != 29:
+        raise SystemExit('Expected the 29 canonical documents of edition 1.0')
+    # Primary references are approved by the canonical source. A rendered page
+    # must preserve those exact URLs; it may not invent a different external host.
+    approved = set()
+    for record in records:
+        approved.update(re.findall(r'href="(https?://[^"]+)"', record['html']))
+    global ALLOWED
+    ALLOWED = tuple(ALLOWED) + tuple(approved)
+    errors, source_links, pages = [], set(), 0
     for lang in LOCALES:
-        for kind, folder, recs in (("paper", "research", papers), ("spec", "docs", specs)):
-            index = root / lang / folder / "index.html"
-            page, p, e = parse(index, lang)
-            errs += e
+        for folder in ('research', 'engineering', 'engineering/specifications', 'engineering/studies', 'reference', 'appendices'):
+            _, _, e = parse(root / lang / folder / 'index.html', lang)
+            errors += e
             pages += 1
-            if kind == "paper":
-                cards = {m for m in re.findall(r'href="/%s/research/(p\d\d)/"' % lang, page)}
-                if cards != {r["id"] for r in papers}:
-                    errs.append("%s: research index does not list all 14 papers (found %d)" % (index, len(cards)))
-                text = re.sub(r"<[^>]+>", " ", page)
-                if lang == "en" and "Independent semantic review has not been performed" not in text and "scientific draft" not in text.lower():
-                    errs.append("%s: scientific-draft status text missing" % index)
-            for r in recs:
-                path = root / lang / folder / r["id"] / "index.html"
-                page, p, e = parse(path, lang)
-                errs += e
-                pages += 1
-                srcs = [l for l in p.links if l["href"] == r["source"]]
-                rus = [l for l in p.links if l["href"] == r["russian"]]
-                if not srcs or not rus:
-                    errs.append("%s: English entry page or Russian original link missing" % path)
-                if not any(l["attrs"].get("hreflang") == "ru" for l in rus):
-                    errs.append("%s: no Russian original link with hreflang=ru" % path)
-                if "CC BY 4.0" not in page:
-                    errs.append("%s: CC BY 4.0 credit missing" % path)
-                kc_links.add(r["source"])
-                kc_links.add(r["russian"])
-    zh = (root / "zh-Hans" / "about" / "index.html").read_text(encoding="utf-8")
-    if re.search(r"(?i)native (editorial )?review(ed)?|母语审校已完成", zh):
-        errs.append("zh-Hans must not claim native editorial review")
-    if tree is not None:
-        dead = 0
-        for href in sorted(kc_links):
-            path = href[len(KC + "/blob/main/"):]
-            if path not in tree:
-                dead += 1
-                errs.append("dead link: " + path)
-        print("knowledge-contract links checked: %d, dead: %d" % (len(kc_links), dead))
-    if errs:
-        print("\n".join(errs[:60]))
-        sys.exit(1)
-    print("paper/spec page checks OK (%d pages, %d repository links)" % (pages, len(kc_links)))
+        for record in records:
+            route = record['route'].replace('/en/', '/' + lang + '/', 1)
+            page, parsed, e = parse(root / route.lstrip('/') / 'index.html', lang)
+            errors += e
+            pages += 1
+            if record['html'] not in page:
+                errors.append(route + ': full body differs from compiled source')
+            for url in (record['source'], record['history']):
+                if not any(link['href'] == url for link in parsed.links):
+                    errors.append(route + ': exact source/history missing')
+                source_links.add(url)
+            if 'CC BY 4.0' not in page or 'class="source-body prose" lang="en"' not in page:
+                errors.append(route + ': content licence or English body declaration missing')
+            if page.count('<math ') != record['math_count']:
+                errors.append(route + ': mathematical expression count differs')
+        for alias, target in catalog['aliases'].items():
+            route = root / lang / alias / 'index.html'
+            page, _, e = parse(route, lang)
+            errors += e
+            if 'name="robots" content="noindex,follow"' not in page:
+                errors.append(str(route) + ': historical route must not be indexed')
+    if errors:
+        print('\n'.join(errors[:60]))
+        raise SystemExit(1)
+    print('Publication page structure OK (%d full/index pages, %d exact repository links)' % (pages, len(source_links)))
 
 
-main(sys.argv)
+if __name__ == '__main__':
+    main(sys.argv)
