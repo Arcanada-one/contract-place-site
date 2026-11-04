@@ -30,6 +30,9 @@ def check_search(page: str, script: str) -> None:
     assert "https://api.contract.place" in hosts, "API origin missing"
     assert not hosts - {"https://api.contract.place", "https://github.com"}, "unexpected hosts in search.js: %r" % sorted(hosts)
     assert "mount" in script and "KcpSearch" in script, "search.js must expose KcpSearch.mount for the single-page app"
+    css = (Path(__file__).resolve().parent.parent / "public" / "style.css").read_text(encoding="utf-8")
+    assert "[hidden]{display:none!important}" in css, "style.css must keep [hidden] hidden (.button sets display and would show a hidden More button)"
+    assert re.search(r"var inflight = null;[^\n]*\n\s*var serial = 0;\n\n\s*function mount", script), "inflight/serial must be shared by all mounts"
 
 
 def check_head_and_scripts(page: str, where: str) -> None:

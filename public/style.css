@@ -28,3 +28,4 @@ html[data-theme=dark] .hero-art-bg{background-image:linear-gradient(90deg,#111c2
 .footer-credit{margin:0;padding-bottom:24px;font-size:13px;color:var(--muted)}.footer-credit a{text-decoration:underline;text-underline-offset:3px}.ecosystem-note{margin:12px 0 4px;font-size:14px;color:var(--secondary)}
 @media(max-width:640px){#search-form{flex-direction:column}}
 #page-search-form .button{margin-block:20px}.zh-notice{padding-top:0}
+[hidden]{display:none!important}
