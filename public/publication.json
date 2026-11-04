@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.0",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "08a109316053d99055e34fb7f422e2d4fcb14dc6",
+  "commit": "ed2e188c89a1a50a187f3d55bf32baab54c87f7e",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -222,7 +222,7 @@
       "summary": "A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks.",
       "language": "en",
       "route": "/en/engineering/specifications/book-package/",
-      "sha256": "9def8270ca1520a33ead519b00f8da0777c7ab62f04ee2413c578ffd8b25be70",
+      "sha256": "5fb89acc3656fcfd07682e4c4fb91ff58f656ce545c98804fa962f4f85c3948c",
       "math_count": 0
     },
     {
