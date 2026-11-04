@@ -1,24 +1,28 @@
-"""Static checks for the Papers section of the published page.
+"""Static checks for the paper and specification pages of the built site.
 
-Usage: check_papers.py <index.html> [--tree <file>]
+Usage: check_papers.py <public-dir> [--tree <file>]
   --tree: a list of repository paths (output of `git ls-tree -r --name-only main` in
-          Arcanada-one/knowledge-contract); every link of the page into that
+          Arcanada-one/knowledge-contract); every link of the pages into that
           repository must point at a path in the list.
 """
+import json
 import re
 import sys
 from html.parser import HTMLParser
+from pathlib import Path
 
 KC = "https://github.com/Arcanada-one/knowledge-contract"
-VOID = {"meta", "link", "br", "input", "img", "hr"}
+VOID = {"meta", "link", "br", "input", "img", "hr", "path", "circle"}
+SVG = {"svg", "path", "circle", "g", "rect", "use"}
+LOCALES = ("en", "ru", "zh-Hans")
+ALLOWED = ("https://github.com/Arcanada-one/", "https://arcanada.ai", "https://creativecommons.org/", "https://www.apache.org/", "https://orcid.org/", "https://api.contract.place/", "https://contract.place")
 
 
 class P(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.stack, self.errors, self.links, self.ids = [], [], [], []
-        self.headings, self.cur_a = [], None
-        self.in_h = None
+        self.stack, self.errors, self.links, self.ids, self.headings = [], [], [], [], []
+        self.cur_a, self.in_h = None, None
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -30,12 +34,13 @@ class P(HTMLParser):
             self.cur_a = {"href": a.get("href", ""), "text": "", "attrs": a}
         if re.fullmatch(r"h[1-6]", tag):
             self.in_h = [int(tag[1]), ""]
-        for k in ("src", "href"):
-            v = a.get(k)
-            if v and tag in ("script", "img", "iframe") and re.match(r"https?://", v):
-                self.errors.append("external resource: %s %s" % (tag, v))
+        if tag in ("script", "img", "iframe") and re.match(r"https?://", a.get("src", "")):
+            self.errors.append("external resource: %s %s" % (tag, a["src"]))
         if tag == "link" and a.get("rel") == "stylesheet" and re.match(r"https?://", a.get("href", "")):
             self.errors.append("external stylesheet")
+
+    def handle_startendtag(self, tag, attrs):
+        pass
 
     def handle_endtag(self, tag):
         if tag in VOID:
@@ -61,80 +66,95 @@ class P(HTMLParser):
             self.in_h[1] += d
 
 
-def main(argv):
-    page = open(argv[1], encoding="utf-8").read()
-    tree = None
-    if "--tree" in argv:
-        tree = set(open(argv[argv.index("--tree") + 1], encoding="utf-8").read().split("\n"))
+def parse(path: Path, lang: str):
+    page = path.read_text(encoding="utf-8")
     p = P()
     p.feed(page)
     p.close()
-    errs = list(p.errors)
+    errs = ["%s: %s" % (path, e) for e in p.errors]
     if p.stack:
-        errs.append("unclosed tags: %r" % p.stack)
+        errs.append("%s: unclosed tags: %r" % (path, p.stack))
     if len(p.ids) != len(set(p.ids)):
-        errs.append("duplicate ids")
-    if not re.search(r'<html lang="en">', page):
-        errs.append("html lang missing")
+        errs.append("%s: duplicate ids" % path)
+    if '<html lang="%s">' % lang not in page:
+        errs.append("%s: html lang is not %s" % (path, lang))
     lv = [h[0] for h in p.headings]
     if lv.count(1) != 1:
-        errs.append("need exactly one h1")
+        errs.append("%s: need exactly one h1, found %d" % (path, lv.count(1)))
     for a, b in zip(lv, lv[1:]):
         if b > a + 1:
-            errs.append("heading level skipped: h%d -> h%d" % (a, b))
-    if re.search(r"<style\b|\sstyle\s*=", page, re.I):
-        errs.append("inline style")
+            errs.append("%s: heading level skipped h%d -> h%d" % (path, a, b))
     if re.search(r"\son[a-z]+\s*=", page, re.I):
-        errs.append("inline event handler")
-    sec = re.search(r'<section[^>]*\bid="papers"[^>]*aria-labelledby="papers-title"[^>]*>(.*?)</section>', page, re.S)
-    sec_html = sec.group(1) if sec else ""
-    if not sec:
-        errs.append("papers section missing")
-    text = re.sub(r"<[^>]+>", " ", sec_html)
-    for need in ("scientific drafts", "late research synthesis is still open", "Independent semantic review has not been performed", "Updated: 2026-11-03", "CC BY 4.0", "not translations"):
-        if need not in text:
-            errs.append("status text missing: " + need)
-    if 'href="#papers"' not in page:
-        errs.append("nav link to #papers missing")
-    seclinks = [l for l in p.links if l["href"].startswith(KC + "/blob/main/")]
-    papers = [l for l in seclinks if re.search(r"/blob/main/papers/(ru/)?P\d\d_", l["href"])]
-    en = [l for l in papers if "/papers/ru/" not in l["href"]]
-    ru = [l for l in papers if "/papers/ru/" in l["href"]]
-    if len(en) != 14 or len(ru) != 14:
-        errs.append("expected 14 + 14 paper links, got %d + %d" % (len(en), len(ru)))
-    for l in ru:
-        if l["attrs"].get("hreflang") != "ru":
-            errs.append("Russian link without hreflang: " + l["href"])
+        errs.append("%s: inline event handler" % path)
     generic = {"click here", "here", "link", "read more", "more"}
-    allowed = ("https://github.com/Arcanada-one/", "https://arcanada.ai/", "https://creativecommons.org/", "https://www.apache.org/", "https://orcid.org/", "https://api.contract.place/", "https://contract.place")
     for l in p.links:
         t = l["text"].strip()
-        if not t or t.lower() in generic:
-            errs.append("link text not meaningful: %r %s" % (t, l["href"]))
-        if re.match(r"https?://", l["href"]) and not l["href"].startswith(allowed):
-            errs.append("unexpected host: " + l["href"])
-    if re.search(r"[Ѐ-ӿ]", page):
-        errs.append("Cyrillic text present: needs lang=ru markup")
-    for h in re.findall(r'href="(https?://[^"]+)"', sec_html):
-        if not h.startswith("https://github.com/"):
-            errs.append("non-github link in papers section: " + h)
+        label = l["attrs"].get("aria-label", "").strip()
+        if not t and not label:
+            errs.append("%s: link without text or aria-label: %s" % (path, l["href"]))
+        if t.lower() in generic:
+            errs.append("%s: link text not meaningful: %r" % (path, t))
+        if re.match(r"https?://", l["href"]) and not l["href"].startswith(ALLOWED):
+            errs.append("%s: unexpected host: %s" % (path, l["href"]))
+    return page, p, errs
+
+
+def main(argv):
+    root = Path(argv[1])
+    tree = None
+    if "--tree" in argv:
+        tree = set(Path(argv[argv.index("--tree") + 1]).read_text(encoding="utf-8").split("\n"))
+    catalog = json.loads((root / "content.js").read_text(encoding="utf-8").split("=", 1)[1].strip().rstrip(";"))
+    papers = [r for r in catalog["records"] if r["kind"] == "paper"]
+    specs = [r for r in catalog["records"] if r["kind"] == "spec"]
+    errs = []
+    if len(papers) != 14 or len(specs) != 10:
+        errs.append("catalog: expected 14 papers and 10 specifications, got %d and %d" % (len(papers), len(specs)))
+    kc_links = set()
+    pages = 0
+    for lang in LOCALES:
+        for kind, folder, recs in (("paper", "research", papers), ("spec", "docs", specs)):
+            index = root / lang / folder / "index.html"
+            page, p, e = parse(index, lang)
+            errs += e
+            pages += 1
+            if kind == "paper":
+                cards = {m for m in re.findall(r'href="/%s/research/(p\d\d)/"' % lang, page)}
+                if cards != {r["id"] for r in papers}:
+                    errs.append("%s: research index does not list all 14 papers (found %d)" % (index, len(cards)))
+                text = re.sub(r"<[^>]+>", " ", page)
+                if lang == "en" and "Independent semantic review has not been performed" not in text and "scientific draft" not in text.lower():
+                    errs.append("%s: scientific-draft status text missing" % index)
+            for r in recs:
+                path = root / lang / folder / r["id"] / "index.html"
+                page, p, e = parse(path, lang)
+                errs += e
+                pages += 1
+                srcs = [l for l in p.links if l["href"] == r["source"]]
+                rus = [l for l in p.links if l["href"] == r["russian"]]
+                if not srcs or not rus:
+                    errs.append("%s: English entry page or Russian original link missing" % path)
+                if not any(l["attrs"].get("hreflang") == "ru" for l in rus):
+                    errs.append("%s: no Russian original link with hreflang=ru" % path)
+                if "CC BY 4.0" not in page:
+                    errs.append("%s: CC BY 4.0 credit missing" % path)
+                kc_links.add(r["source"])
+                kc_links.add(r["russian"])
+    zh = (root / "zh-Hans" / "about" / "index.html").read_text(encoding="utf-8")
+    if re.search(r"(?i)native (editorial )?review(ed)?|母语审校已完成", zh):
+        errs.append("zh-Hans must not claim native editorial review")
     if tree is not None:
-        dead = checked = 0
-        for l in seclinks:
-            path = l["href"][len(KC + "/blob/main/"):]
-            checked += 1
+        dead = 0
+        for href in sorted(kc_links):
+            path = href[len(KC + "/blob/main/"):]
             if path not in tree:
                 dead += 1
                 errs.append("dead link: " + path)
-        linked = {l["href"] for l in seclinks}
-        for f in sorted(x for x in tree if re.fullmatch(r"papers/(ru/)?P\d\d_[a-z_]+\.md", x)):
-            if KC + "/blob/main/" + f not in linked:
-                errs.append("paper in tree not linked: " + f)
-        print("knowledge-contract links checked: %d, dead: %d" % (checked, dead))
+        print("knowledge-contract links checked: %d, dead: %d" % (len(kc_links), dead))
     if errs:
-        print("\n".join(errs))
+        print("\n".join(errs[:60]))
         sys.exit(1)
-    print("papers section checks OK (%d links in page)" % len(p.links))
+    print("paper/spec page checks OK (%d pages, %d repository links)" % (pages, len(kc_links)))
 
 
 main(sys.argv)

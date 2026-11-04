@@ -1,0 +1,13 @@
+Knowledge Contract Arcana
+Copyright 2026 Pavel Valentov and Knowledge Contract Arcana contributors
+
+Author: Pavel Valentov, Independent Researcher (ORCID 0009-0001-2567-4584)
+Part of the Arcanada ecosystem.
+Source: https://contract.place and https://github.com/Arcanada-one/knowledge-contract
+
+Text and documentation are licensed under CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). Code, schemas and tools are
+licensed under Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+
+Derivative works and redistributions must retain this notice (Apache-2.0
+section 4(d)) and credit the author and source (CC BY 4.0 section 3(a)).

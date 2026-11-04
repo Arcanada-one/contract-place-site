@@ -17,10 +17,20 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Licensing markup (head link, footer, JSON-LD) and search markup
-        run: python3 scripts/check_page.py public/index.html public/search.js
-      - name: Papers section (structure, accessibility basics, no inline code)
-        run: python3 scripts/check_papers.py public/index.html
+      - name: Build is reproducible (node build.mjs reproduces public/ byte for byte)
+        run: |
+          node --version
+          node build.mjs
+          git diff --exit-code -- public
+          test -z "$(git status --porcelain -- public)" || { git status --porcelain -- public; exit 1; }
+      - name: Public-surface and CSP hygiene (no private hosts; no inline script/style/handlers)
+        run: python3 scripts/check_hygiene.py .
+      - name: Licensing, SEO, robots, sitemap, llms.txt and search markup
+        run: python3 scripts/check_page.py public
+      - name: Paper and specification pages (structure, accessibility basics, credits)
+        run: python3 scripts/check_papers.py public
+      - name: Internal links and assets resolve
+        run: python3 scripts/check_links.py public
       - name: Search logic unit tests
         run: node scripts/test_search.js
       - name: Serve and check the published tree
@@ -29,6 +39,7 @@ jobs:
           from functools import partial
           from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
           from threading import Thread
+          from urllib.error import HTTPError
           from urllib.request import urlopen
 
           handler = partial(SimpleHTTPRequestHandler, directory="public")
@@ -37,15 +48,20 @@ jobs:
           thread.start()
           try:
               base = f"http://127.0.0.1:{server.server_port}"
-              with urlopen(base + "/", timeout=5) as response:
-                  assert response.status == 200
-                  page = response.read().decode("utf-8")
-              assert "Knowledge Contract Arcana" in page
-              assert "3.0.0-draft.1" in page
-              for path in ("/styles.css", "/search.js", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml"):
+              for path, needle in (("/", "Knowledge Contract Arcana"), ("/en/", "contract.place"), ("/ru/", "contract.place"), ("/zh-Hans/", "contract.place"),
+                                   ("/en/research/", "Scientific draft"), ("/en/research/p09/", "Pavel Valentov"), ("/en/search/", "document-search")):
+                  with urlopen(base + path, timeout=5) as response:
+                      assert response.status == 200, path
+                      assert needle in response.read().decode("utf-8"), (path, needle)
+              for path in ("/style.css", "/app.js", "/content.js", "/search.js", "/favicon.svg", "/robots.txt", "/llms.txt", "/sitemap.xml", "/404.html"):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert response.read(), path
+              try:
+                  urlopen(base + "/en/no-such-page/", timeout=5)
+                  raise SystemExit("a missing page must not answer 200")
+              except HTTPError as e:
+                  assert e.code == 404
           finally:
               server.shutdown()
               server.server_close()

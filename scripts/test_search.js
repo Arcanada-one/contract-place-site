@@ -126,5 +126,28 @@ const ok = (results, extra = {}) => json(200, Object.assign({ schema: 'ContractP
     const vm = await S.runSearch(deps(() => ok([null, 5, 'x', item()])), 'q');
     assert.equal(vm.state, 'ok'); assert.equal(vm.items.length, 1); // null, 5 and 'x' are dropped
   });
+  await t('toViewItem: kc2.state (e.g. not_admitted) wins over the weaker kc2_admission string', () => {
+    const v = S.toViewItem(item({ kc2_admission: 'not_measured', kc2: { state: 'not_admitted', action_rights: 'none' } }));
+    assert.equal(v.kc2, 'not_admitted');
+    assert.equal(S.toViewItem(item({ kc2_admission: 'not_measured' })).kc2, 'not_measured'); // no kc2 object: fall back
+  });
+  await t('messages: ru and zh-Hans have every key of en; unknown language falls back to en', () => {
+    const en = Object.keys(S.messages('en')).sort();
+    for (const l of ['ru', 'zh-Hans']) assert.deepEqual(Object.keys(S.messages(l)).sort(), en);
+    assert.equal(S.messages('de'), S.messages('en'));
+    assert.notEqual(S.messages('ru').searching, S.messages('en').searching);
+  });
+  await t('runSearch: error messages are localized by deps.lang', async () => {
+    const d = deps(() => json(429, {})); d.lang = 'ru';
+    const vm = await S.runSearch(d, 'q');
+    assert.equal(vm.kind, 'rate_limited'); assert.equal(vm.message, S.messages('ru').rateLimited);
+    const z = deps(() => Promise.reject(new Error('x'))); z.lang = 'zh-Hans';
+    assert.equal((await S.runSearch(z, 'q')).message, S.messages('zh-Hans').network);
+  });
+  await t('runSearch: the controller is handed to the caller so a newer search can abort it', async () => {
+    let got = null;
+    await S.runSearch(deps(() => ok([item()])), 'q', null, { onController: (c) => { got = c; } });
+    assert.ok(got && typeof got.abort === 'function');
+  });
   console.log('TESTS passed=' + n);
 })().catch((e) => { console.error('FAILED', e); process.exit(1); });
