@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 const root=import.meta.dirname,src=path.join(root,'src'),out=path.join(root,'public');
 const data=JSON.parse(fs.readFileSync(path.join(src,'content/catalog.json'),'utf8'));
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'publication-manifest.json'),'utf8'));
@@ -31,8 +32,14 @@ fs.rmSync(out,{recursive:true,force:true});
 fs.cpSync(path.join(src,'site'),out,{recursive:true});
 // A previously cached catalog must never replace a new prerendered edition.
 // The source pin is an immutable cache identity shared by every localized page.
-const template=fs.readFileSync(path.join(out,'index.html'),'utf8');
-fs.writeFileSync(path.join(out,'index.html'),template.replace(/src="\/content\.js(?:\?[^"]*)?"/g,'src="/content.js?v='+manifest.commit+'"'));
+let template=fs.readFileSync(path.join(out,'index.html'),'utf8');
+template=template.replace(/src="\/content\.js(?:\?[^"]*)?"/g,'src="/content.js?v='+manifest.commit+'"');
+// Changed runtime code or styles must not reuse an earlier edition's browser cache entry.
+const assetHashes=Object.fromEntries(['theme.js','style.css','search.js','app.js'].map(name=>
+  [name,createHash('sha256').update(fs.readFileSync(path.join(out,name))).digest('hex')]));
+template=template.replace(/(src|href)="\/(theme\.js|style\.css|search\.js|app\.js)(?:\?[^"]*)?"/g,
+  (_,attribute,name)=>attribute+'="/'+name+'?v='+assetHashes[name]+'"');
+fs.writeFileSync(path.join(out,'index.html'),template);
 fs.copyFileSync(path.join(out,'assets/favicon.svg'),path.join(out,'favicon.svg'));
 fs.writeFileSync(path.join(out,'content.js'),'window.CP_CONTENT = '+JSON.stringify(data)+';\n');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://contract.place/sitemap.xml\n');

@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.0. Source commit ed2e188c89a1a50a187f3d55bf32baab54c87f7e.
+Publication edition 1.1. Source commit cf215dd8b740efc73439294f40f20f360349355a.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
@@ -24,7 +24,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 - [Evidence, Reasoning, and Falsification in Knowledge Systems](https://contract.place/en/science/evidence-and-falsification/): paper.
 - [Knowledge Revision, Version Identity, and the Adoption of Norms](https://contract.place/en/science/revision-and-governance/): paper.
 - [Knowledge Contracts and the Admission of Prepared Knowledge](https://contract.place/en/science/controlled-knowledge-reuse/): paper.
-- [Knowledge Utility, Resource Accounting, and Retention Decisions](https://contract.place/en/science/knowledge-utility/): paper.
+- [Knowledge Utility, Resource Accounting, and Lifecycle Decisions](https://contract.place/en/science/knowledge-utility/): paper.
 - [Knowledge Contract: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
 - [Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
 - [Semantic Types, Attribution, and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
