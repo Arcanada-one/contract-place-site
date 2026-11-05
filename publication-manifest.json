@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "edition": "1.0",
+  "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "ed2e188c89a1a50a187f3d55bf32baab54c87f7e",
+  "commit": "cf215dd8b740efc73439294f40f20f360349355a",
   "catalog": "publication-catalog.json"
 }

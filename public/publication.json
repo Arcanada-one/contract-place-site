@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "edition": "1.0",
+  "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "ed2e188c89a1a50a187f3d55bf32baab54c87f7e",
+  "commit": "cf215dd8b740efc73439294f40f20f360349355a",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -24,8 +24,8 @@
       "summary": "A formal account of source interpretations, context, mandatory dependencies and conditions of applicability.",
       "language": "en",
       "route": "/en/science/semantic-objects-and-context/",
-      "sha256": "a52ed66427fb840cfa6b2e06ad8f856c94bbfdbff01e9be19b70d7a2862b251f",
-      "math_count": 44
+      "sha256": "c3a3473e57ea472aef01613781e412f14d11321e4f05d05e6adf9f4535f697f8",
+      "math_count": 47
     },
     {
       "type": "paper",
@@ -35,8 +35,8 @@
       "summary": "Conditional preservation, composition and reconstruction of knowledge under explicit observations and losses.",
       "language": "en",
       "route": "/en/science/constrained-transformations/",
-      "sha256": "9cd74f05b1612e136060f2190a13099a35e6e4dfafe6c0a1fc1b543719ea0db0",
-      "math_count": 56
+      "sha256": "b9ec18c1ee93c869bd31a0e097014338605ba2937979db827bf8cde5f63d4050",
+      "math_count": 76
     },
     {
       "type": "paper",
@@ -46,8 +46,8 @@
       "summary": "Search coverage, finite context selection, dependency closure and the limits of greedy composition.",
       "language": "en",
       "route": "/en/science/retrieval-and-context-composition/",
-      "sha256": "618d3af8d7f41823246627efe3c497069a374250fdf318d1c4089d890c1543cc",
-      "math_count": 39
+      "sha256": "6ebbb43bcdd09ba44b60d6b0e4fce9ec05dcd1550f1d8c43bf451379508b6773",
+      "math_count": 47
     },
     {
       "type": "paper",
@@ -57,7 +57,7 @@
       "summary": "Versioned requirements, dialogue branches, memory and evidence of learning in agent interaction.",
       "language": "en",
       "route": "/en/science/interaction-and-memory/",
-      "sha256": "1460a5f983dd83ee08e01023b37597f50bfbd7e37f371d0b3530f55c530f583a",
+      "sha256": "8dacee80ed050c3013c7de092da2c17fbfaafd5fb3b45939dc8fdae3611df656",
       "math_count": 9
     },
     {
@@ -68,8 +68,8 @@
       "summary": "How claims, proofs, finite tests, counterexamples and comparative evaluations support different conclusions.",
       "language": "en",
       "route": "/en/science/evidence-and-falsification/",
-      "sha256": "60bd9216daddf0dc69396acfe2da2e29cc046bdb807717847f13926e8ba398b4",
-      "math_count": 6
+      "sha256": "95acb937c5aa68572eb60ec723d17c628bcd28a778490c09ef6b434ef0f63494",
+      "math_count": 15
     },
     {
       "type": "paper",
@@ -79,8 +79,8 @@
       "summary": "Separate identities for content, assessment and normative adoption, with explicit revision and publication decisions.",
       "language": "en",
       "route": "/en/science/revision-and-governance/",
-      "sha256": "0e348ea0c656509cc24de82d444175fa7366e9edacb70e2a4a706672b5e61154",
-      "math_count": 2
+      "sha256": "e221151a7c6778ef4c6843074a881efead94bad2f0b95e21c697f122c67f58dc",
+      "math_count": 11
     },
     {
       "type": "paper",
@@ -90,19 +90,19 @@
       "summary": "The conditions under which saved knowledge may support a new task, recipient or execution.",
       "language": "en",
       "route": "/en/science/controlled-knowledge-reuse/",
-      "sha256": "9c799b25dbc7c7336e173f31a4877034fd05713151da8c380519f5884fa1370c",
-      "math_count": 29
+      "sha256": "87908092cf64bb2cdb0fa81e1295ad6788f45f9e3b9fe25946cdbb77d7564e0c",
+      "math_count": 53
     },
     {
       "type": "paper",
       "slug": "knowledge-utility",
       "path": "papers/knowledge-utility/PAPER.md",
-      "title": "Knowledge Utility, Resource Accounting, and Retention Decisions",
+      "title": "Knowledge Utility, Resource Accounting, and Lifecycle Decisions",
       "summary": "Task-relative benefit, complete resource accounting, comparison baselines and limits of causal inference.",
       "language": "en",
       "route": "/en/science/knowledge-utility/",
-      "sha256": "01f037b2266a8bbd85d0f69ed8e16a00fd4ebdd7e7f663b35949e006343ea383",
-      "math_count": 26
+      "sha256": "e807eacfe0c69620457232e00a1f09edb1e9753493e5f5478f8bdfa7e05c73e1",
+      "math_count": 46
     },
     {
       "type": "specification",
@@ -112,7 +112,7 @@
       "summary": "The nine core groups, first-class constraints, profiles, admission and execution requirements.",
       "language": "en",
       "route": "/en/engineering/specifications/knowledge-contract-core/",
-      "sha256": "3c6db41d46b0914441af90fb8984aae8f8da8b2a056e1904daf16f4f230d037b",
+      "sha256": "81cb01a8326eaeb0c14e929609c52cc85e5a344c61f3744d2e0def228cdc60d5",
       "math_count": 0
     },
     {
@@ -123,7 +123,7 @@
       "summary": "Common preconditions, invariants, postconditions, effects and evidence for knowledge operations.",
       "language": "en",
       "route": "/en/engineering/specifications/contract-family/",
-      "sha256": "3eb380947abb58ab73dcd3f97adc65f2b4805569728806f7802982bae4b8c635",
+      "sha256": "310cd3f151275739a2391d2c8d8b7c23ad64b46f4c1a56717f7f0975866f60c8",
       "math_count": 0
     },
     {
@@ -134,7 +134,7 @@
       "summary": "Semantic facets, attribution, scoped operators, ambiguous readings and multimodal representations.",
       "language": "en",
       "route": "/en/engineering/specifications/semantic-types/",
-      "sha256": "2c1323d7845fe1b18281b91880d0db4791048c9f22d888f0fed26e0188290c50",
+      "sha256": "4428c3cdacfe5e8bcf00b8d9100a79f5ce9691edecd914063698bfb3f97e8f6f",
       "math_count": 0
     },
     {
@@ -145,7 +145,7 @@
       "summary": "Requirements for selected context, coverage, mandatory dependencies, budgets and observed delivery.",
       "language": "en",
       "route": "/en/engineering/specifications/context-package/",
-      "sha256": "5f379fdad9b76b384a0b3abcc53ca42aaa8030ff5272ac28bf91bcc2f230aaa5",
+      "sha256": "5bba82777b44dc0cf6b1b0c218292c1476c0271806acef195db6c3b8a9448e41",
       "math_count": 0
     },
     {
@@ -156,7 +156,7 @@
       "summary": "Saved derivatives with exact inputs, recipes, dependency manifests, templates and output evidence.",
       "language": "en",
       "route": "/en/engineering/specifications/compiled-artifact-contract/",
-      "sha256": "102676d61dad36cc3cf4961b8ad68b342885272d065ee7506825f3b1a0609bd3",
+      "sha256": "2cc5e781565136b5ad9fdbb2facae47d58564b1e300173d0a91a2c6cf16d5a82",
       "math_count": 0
     },
     {
@@ -167,7 +167,7 @@
       "summary": "Readable artifact names, canonical Markdown formats, identity rules and professional artifact distinctions.",
       "language": "en",
       "route": "/en/engineering/specifications/artifact-registry/",
-      "sha256": "8783552e775b1d4a3e0c0ca16c832dce552de753214a4c27041903d0095e5d34",
+      "sha256": "ec6584f97c5160fd3c8b17a5036aaeb8d302bf86dd61e567f2c5d858e9159470",
       "math_count": 0
     },
     {
@@ -178,7 +178,7 @@
       "summary": "Independent assessment, execution, effect, freshness, publication and review states.",
       "language": "en",
       "route": "/en/engineering/specifications/status-model/",
-      "sha256": "fa7c443248cca872e0ba77fc55e07ec69cb0ef52357c9fa2dbb88119bfae8d38",
+      "sha256": "2f66342472fc4198eba573d7d1eda5d58d5bae9de904f901f5094037dd628d0a",
       "math_count": 0
     },
     {
@@ -189,7 +189,7 @@
       "summary": "Content, build and lookup identity, dependency changes and guarded publication and serving.",
       "language": "en",
       "route": "/en/engineering/specifications/cache-identity-and-invalidation/",
-      "sha256": "6ce6cdf9ae537dc61dea788e12eca4b38c009d0f8111d516f696fbb58e8c9155",
+      "sha256": "742982eabd0d797ccc5bba4c8472d25a4236c84baed21281f13a7601a4ce2f39",
       "math_count": 0
     },
     {
@@ -200,7 +200,7 @@
       "summary": "Temporal modes, conservative deadlines, authorization, decision outcomes and retention boundaries.",
       "language": "en",
       "route": "/en/engineering/specifications/reuse-policy/",
-      "sha256": "919525f3e70ea3abe2b10de6d154f3693e8d213ca6dba7b37fa2c4ddec4593b2",
+      "sha256": "be75f0191414c07a113dafb0c983cd1d1e73834be0b670e0d610b4354f37ecd2",
       "math_count": 0
     },
     {
@@ -211,7 +211,7 @@
       "summary": "Versioned creation rules, adoption, impact analysis, reassessment, migration and coherent publication.",
       "language": "en",
       "route": "/en/engineering/specifications/knowledge-evolution/",
-      "sha256": "421987294714317959697d9b2ea4c338a952585c19294a836567d4d701c07e96",
+      "sha256": "4662bdd76c5716cb7d9b55c1b99e00dda626b34c3565e2f03ceecb61fe15685a",
       "math_count": 0
     },
     {
@@ -222,7 +222,7 @@
       "summary": "A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks.",
       "language": "en",
       "route": "/en/engineering/specifications/book-package/",
-      "sha256": "5fb89acc3656fcfd07682e4c4fb91ff58f656ce545c98804fa962f4f85c3948c",
+      "sha256": "1ce2ce4fa9e0e2647b3472f1da0a250fa3abae00c78b7518d3497f106c09722c",
       "math_count": 0
     },
     {
@@ -233,7 +233,7 @@
       "summary": "Finite contract checks, false trusted-input counterexamples and an equal strong-comparator result.",
       "language": "en",
       "route": "/en/engineering/studies/contract-profile-conformance/",
-      "sha256": "895d9d7f0603027a4b930ea336e3021b6b02f22ca78d989fb665869db642550b",
+      "sha256": "788c09269946b294420024f28656ef616e2df056e4d8246bfdf67c69ca4434a9",
       "math_count": 3
     },
     {
@@ -244,7 +244,7 @@
       "summary": "Historical package evidence and a public exhaustive replay of a finite dependency graph.",
       "language": "en",
       "route": "/en/engineering/studies/dependency-closure-and-package-delivery/",
-      "sha256": "55029310ea64f27f9ed3ef8470d56815c755820ce45ad43cbe078ca58a12f684",
+      "sha256": "0012f1506d1c9e95b29e7f8916952d2278e791bc2a7f7153e8c3c5980928f66a",
       "math_count": 11
     },
     {
@@ -255,7 +255,7 @@
       "summary": "Retained generated descriptions, lost uncertainty and a reproducible synthetic projection counterexample.",
       "language": "en",
       "route": "/en/engineering/studies/source-transcription-and-uncertainty/",
-      "sha256": "721553450ac3bf61f1db252a7cc53a76f92478ab77eb56c67937a7077dc5b266",
+      "sha256": "6119790ada666b76782c0952e12e47799c51893a85f71a7e36f72d9ac44f3fe0",
       "math_count": 2
     },
     {
@@ -266,7 +266,7 @@
       "summary": "Finite consumer checks, paired agent tasks, addressed revision and the limits of graph minimality.",
       "language": "en",
       "route": "/en/engineering/studies/executable-projections-and-revision/",
-      "sha256": "cfe6ab67c6ce6ed6295a5ec7b1b421c25f3b9f4e132daadb7f1ccfa8d7865bd3",
+      "sha256": "6242027572df695e1907e77d55588ea3b3a64741407b6922b87f0612de956ed8",
       "math_count": 0
     },
     {
@@ -277,8 +277,8 @@
       "summary": "Executable admission counterexamples and an analytical break-even calculation with explicit costs.",
       "language": "en",
       "route": "/en/engineering/studies/reuse-admission-and-cost-controls/",
-      "sha256": "87af4b10639cf33fe29c4e19d06cd99b5460a41db6bdd70863c08fa3d5f6c07d",
-      "math_count": 38
+      "sha256": "fa5494d6609d15a61ce071eb39c3a87fa0b982c61f756f3308276c127ae8484a",
+      "math_count": 56
     },
     {
       "type": "study",
@@ -288,7 +288,7 @@
       "summary": "One preregistered editorial comparison, exact initial outputs, masked review and an observed tie.",
       "language": "en",
       "route": "/en/engineering/studies/editorial-skill-pilot/",
-      "sha256": "3e3a185a836fdc4c7bb6a0e13bafed7205e59e4687a70cddc7b648983146bbe4",
+      "sha256": "59066d54a219c13214a113037b0f3257378d77c83105b755bc80251db51ae0d5",
       "math_count": 0
     },
     {
@@ -299,8 +299,8 @@
       "summary": "Shared English definitions, Russian equivalents, technical spellings and distinctions between related concepts.",
       "language": "en",
       "route": "/en/reference/glossary/",
-      "sha256": "1c6be362e0d83b5f85f0c8b39b082780096beb0c8e3220728cf2832e36795814",
-      "math_count": 0
+      "sha256": "5147262a4739b194cd1712d04f3b205ad701c77f7c214ba7cfb68094d12ddabb",
+      "math_count": 17
     },
     {
       "type": "bibliography",
@@ -310,7 +310,7 @@
       "summary": "Named primary sources and the exact conceptual or technical role each plays in the current edition.",
       "language": "en",
       "route": "/en/reference/bibliography/",
-      "sha256": "ff0f152231f03bdda4cecce9395f0a2814fc570a559e15398f214b8d0f3f294f",
+      "sha256": "bbfc162fcb52b74abefad92d0cda0f72cacc77ff1a697dfc685d5380b8cf457d",
       "math_count": 0
     },
     {
@@ -321,7 +321,7 @@
       "summary": "The migration from the earlier corpus, immutable history, evidence provenance and unchanged protocol versions.",
       "language": "en",
       "route": "/en/appendices/source-map/",
-      "sha256": "440e3209c8be8d432b5865febdd9719429a6dbc447e8428db9c87af2b404962b",
+      "sha256": "eca6631650eb303aa5451eb3f173ce82cd06d73c2184ed460abe65188c61f25c",
       "math_count": 0
     },
     {
@@ -332,7 +332,7 @@
       "summary": "Published read interfaces, task-contract delivery requirements and consistency between repository, reader and index.",
       "language": "en",
       "route": "/en/appendices/api-integration/",
-      "sha256": "74265dc826bf5a1d8abdb390e7e9f1ab11b814d1b7c61e002b7e877a52a7b705",
+      "sha256": "2e1c800cf2bb1c61696e34d516b23db1f3f65fa7c58f983bf3124c17854cefe3",
       "math_count": 0
     }
   ]

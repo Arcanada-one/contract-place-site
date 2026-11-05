@@ -19,7 +19,7 @@ for key in ('schema_version', 'commit', 'edition', 'repository', 'catalog'):
 assert Counter(d['type'] for d in published['documents']) == {
     'paper': 8, 'specification': 11, 'study': 6, 'glossary': 1,
     'bibliography': 1, 'appendix': 2,
-}, 'Edition 1.0 publication inventory is incomplete'
+}, 'Publication inventory is incomplete'
 records = {r['route']: r for r in catalog['records']}
 assert len(records) == 29
 equations = 0

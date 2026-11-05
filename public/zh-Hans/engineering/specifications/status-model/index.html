@@ -1,13 +1,21 @@
 <!doctype html>
-<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Independent assessment, execution, effect, freshness, publication and review states."><link rel="canonical" href="https://contract.place/zh-Hans/engineering/specifications/status-model/"><link rel="alternate" hreflang="en" href="https://contract.place/en/engineering/specifications/status-model/"><link rel="alternate" hreflang="ru" href="https://contract.place/ru/engineering/specifications/status-model/"><link rel="alternate" hreflang="zh-Hans" href="https://contract.place/zh-Hans/engineering/specifications/status-model/"><link rel="alternate" hreflang="x-default" href="https://contract.place/en/engineering/specifications/status-model/"><meta property="og:url" content="https://contract.place/zh-Hans/engineering/specifications/status-model/"><meta property="og:site_name" content="Knowledge Contract Arcana"><meta name="theme-color" content="#F7F6F1"><title>Assessment, Execution, and Publication States — contract.place</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="preload" href="/assets/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin><script src="/theme.js?v=publication-1.0"></script><link rel="stylesheet" href="/style.css?v=publication-1.0"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Knowledge Contract Arcana","alternateName":"contract.place","url":"https://contract.place/","description":"Public research hub for scoped, evidenced knowledge reuse. Part of the Arcanada ecosystem.","license":"https://creativecommons.org/licenses/by/4.0/","inLanguage":["en","ru","zh-Hans"],"author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov"},"isPartOf":{"@type":"Organization","name":"Arcanada","url":"https://arcanada.ai"}}</script><script src="/content.js?v=ed2e188c89a1a50a187f3d55bf32baab54c87f7e" defer></script><script src="/search.js?v=publication-1.0" defer></script><script src="/app.js?v=publication-1.0" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Assessment, Execution, and Publication States","url":"https://contract.place/en/engineering/specifications/status-model/","inLanguage":"en","version":"1.0","license":"https://creativecommons.org/licenses/by/4.0/","author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"isBasedOn":"https://github.com/Arcanada-one/knowledge-contract/blob/ed2e188c89a1a50a187f3d55bf32baab54c87f7e/engineering/specifications/status-model/SPECIFICATION.md"}</script></head><body><a class="skip" href="#main">Skip to main content</a><header id="header"><div class="container header-inner"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><nav class="desktop-nav" aria-label="菜单"><details class="nav-group"><summary class="nav-item">知识<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/wiki/">参考<small>清晰的定义、相互关联的想法及其来源。</small></a><a class="" href="/zh-Hans/books/">图书<small>为长篇阅读、版本与章节留出安静的空间。</small></a><a class="" href="/zh-Hans/repository/">版本库<small>追溯变化的内容、时间与来源。</small></a></div></details><a class="nav-item" href="/zh-Hans/research/" >科学</a><a class="nav-item" href="/zh-Hans/journal/" >专栏</a><details class="nav-group"><summary class="nav-item">开发者<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/docs/">工程</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div></details></nav><div class="utilities"><button class="search-trigger" data-search aria-label="搜索"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>搜索</span><kbd>⌘ K</kbd></button><details class="language-picker"><summary class="locale-trigger" aria-label="语言: 简体中文"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span class="locale-name">简体中文</span><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="locale-panel" aria-label="语言"><button type="button" class="locale-option" data-locale="en" lang="en" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span>English</span><span class="locale-check" aria-hidden="true"></span></button><button type="button" class="locale-option" data-locale="ru" lang="ru" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h30v20H0z"/><path fill="#2855a4" d="M0 6.667h30v6.667H0z"/><path fill="#c83e43" d="M0 13.333h30V20H0z"/></svg><span>Русский</span><span class="locale-check" aria-hidden="true"></span></button><button type="button" class="locale-option" data-locale="zh-Hans" lang="zh-Hans" aria-pressed="true"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span>简体中文</span><span class="locale-check" aria-hidden="true"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg></span></button></div></details><button class="icon-btn theme-btn" aria-label="切换为深色主题"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5Z"/></svg></button><button class="icon-btn mobile-menu" data-menu aria-label="菜单"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button></div></div></header><main id="main" tabindex="-1"><div class="container source-record publication-record"><div class="page-head"><nav class="breadcrumb" aria-label="Breadcrumb"><a class="" href="/zh-Hans/">首页</a><span>/</span><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a></nav><div class="metadata"><span>工程规范</span><span>出版版本 1.0</span></div><h1 id="assessment-execution-and-publication-states" lang="en">Assessment, Execution, and Publication States</h1><p class="lead" lang="en">Independent assessment, execution, effect, freshness, publication and review states.</p><div class="provenance metadata"><span>Pavel Valentov</span><span>CC BY 4.0</span><span>英文全文</span></div><div class="actions"><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/blob/ed2e188c89a1a50a187f3d55bf32baab54c87f7e/engineering/specifications/status-model/SPECIFICATION.md" target="_blank" rel="noopener">精确来源<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/commits/ed2e188c89a1a50a187f3d55bf32baab54c87f7e/engineering/specifications/status-model/SPECIFICATION.md" target="_blank" rel="noopener">历史<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><p class="reading-language-note">这是完整的英文出版物。语言选择器仅更改界面；历史俄文手稿链接见来源映射。</p></div>
-<div class="source-reading"><article><div class="source-body prose" lang="en"><p><strong>Author:</strong> Pavel Valentov · <strong>Publication edition:</strong> 1.0</p>
+<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Independent assessment, execution, effect, freshness, publication and review states."><link rel="canonical" href="https://contract.place/zh-Hans/engineering/specifications/status-model/"><link rel="alternate" hreflang="en" href="https://contract.place/en/engineering/specifications/status-model/"><link rel="alternate" hreflang="ru" href="https://contract.place/ru/engineering/specifications/status-model/"><link rel="alternate" hreflang="zh-Hans" href="https://contract.place/zh-Hans/engineering/specifications/status-model/"><link rel="alternate" hreflang="x-default" href="https://contract.place/en/engineering/specifications/status-model/"><meta property="og:url" content="https://contract.place/zh-Hans/engineering/specifications/status-model/"><meta property="og:site_name" content="Knowledge Contract Arcana"><meta name="theme-color" content="#F7F6F1"><title>Assessment, Execution, and Publication States — contract.place</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="preload" href="/assets/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin><script src="/theme.js?v=fbf6f88c25b0a8e49ffc2d4b9012d76e3e1d631df97b5b6a11574b091a63f9ac"></script><link rel="stylesheet" href="/style.css?v=4755620a7b3b4d8fe522aebee8b4bfa783e1df801792aafaf0402acab5dc2f1c"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Knowledge Contract Arcana","alternateName":"contract.place","url":"https://contract.place/","description":"Public research hub for scoped, evidenced knowledge reuse. Part of the Arcanada ecosystem.","license":"https://creativecommons.org/licenses/by/4.0/","inLanguage":["en","ru","zh-Hans"],"author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov"},"isPartOf":{"@type":"Organization","name":"Arcanada","url":"https://arcanada.ai"}}</script><script src="/content.js?v=cf215dd8b740efc73439294f40f20f360349355a" defer></script><script src="/search.js?v=538768dfd7c8e2d7e07811d64ae929bb0164f4527644299b4dcd5ce9d1f99437" defer></script><script src="/app.js?v=653f645570bbc31bd56bd563f6d22c50e3952e270e250b7b7bdac915d4d878f4" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Assessment, Execution, and Publication States","url":"https://contract.place/en/engineering/specifications/status-model/","inLanguage":"en","version":"1.1","license":"https://creativecommons.org/licenses/by/4.0/","author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"isBasedOn":"https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/engineering/specifications/status-model/SPECIFICATION.md"}</script></head><body><a class="skip" href="#main">Skip to main content</a><header id="header"><div class="container header-inner"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><nav class="desktop-nav" aria-label="菜单"><details class="nav-group"><summary class="nav-item">知识<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/wiki/">参考<small>清晰的定义、相互关联的想法及其来源。</small></a><a class="" href="/zh-Hans/books/">图书<small>为长篇阅读、版本与章节留出安静的空间。</small></a><a class="" href="/zh-Hans/repository/">版本库<small>追溯变化的内容、时间与来源。</small></a></div></details><a class="nav-item" href="/zh-Hans/research/" >科学</a><a class="nav-item" href="/zh-Hans/journal/" >专栏</a><details class="nav-group"><summary class="nav-item">开发者<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/docs/">工程</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div></details></nav><div class="utilities"><button class="search-trigger" data-search aria-label="搜索"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>搜索</span><kbd>⌘ K</kbd></button><details class="language-picker"><summary class="locale-trigger" aria-label="语言: 简体中文"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span class="locale-name">简体中文</span><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="locale-panel" aria-label="语言"><button type="button" class="locale-option" data-locale="en" lang="en" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span>English</span><span class="locale-check" aria-hidden="true"></span></button><button type="button" class="locale-option" data-locale="ru" lang="ru" aria-pressed="false"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h30v20H0z"/><path fill="#2855a4" d="M0 6.667h30v6.667H0z"/><path fill="#c83e43" d="M0 13.333h30V20H0z"/></svg><span>Русский</span><span class="locale-check" aria-hidden="true"></span></button><button type="button" class="locale-option" data-locale="zh-Hans" lang="zh-Hans" aria-pressed="true"><svg class="language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span>简体中文</span><span class="locale-check" aria-hidden="true"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg></span></button></div></details><button class="icon-btn theme-btn" aria-label="切换为深色主题"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5Z"/></svg></button><button class="icon-btn mobile-menu" data-menu aria-label="菜单"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button></div></div></header><main id="main" tabindex="-1"><div class="container source-record publication-record"><div class="page-head"><nav class="breadcrumb" aria-label="Breadcrumb"><a class="" href="/zh-Hans/">首页</a><span>/</span><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a></nav><div class="metadata"><span>工程规范</span><span>出版版本 1.1</span></div><h1 id="assessment-execution-and-publication-states" lang="en">Assessment, Execution, and Publication States</h1><p class="lead" lang="en">Independent assessment, execution, effect, freshness, publication and review states.</p><div class="provenance metadata"><span>Pavel Valentov</span><span>CC BY 4.0</span><span>英文全文</span></div><div class="actions"><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/engineering/specifications/status-model/SPECIFICATION.md" target="_blank" rel="noopener">精确来源<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/commits/cf215dd8b740efc73439294f40f20f360349355a/engineering/specifications/status-model/SPECIFICATION.md" target="_blank" rel="noopener">历史<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><p class="reading-language-note">这是完整的英文出版物。语言选择器仅更改界面；历史俄文手稿链接见来源映射。</p></div>
+<div class="source-reading"><article><div class="source-body prose" lang="en"><p><strong>Author:</strong> Pavel Valentov · <strong>Publication edition:</strong> 1.1</p>
 <h2 id="1-purpose-and-conformance">1. Purpose and conformance</h2>
+<p>This is an architectural requirement set. Interoperability requires a named representation profile; the implemented exchange subset is limited to <a href="/en/engineering/specifications/status-model/#8-bounded-exchange-profile">observations, change events and profile advertisements</a>, and the <a href="/en/engineering/specifications/book-package/">book-package profile</a> has its own schema. No full-contract wire format or deployed runtime is implied.</p>
 <p>A status is meaningful only for a named subject, property, revision and scope. One “verified” flag cannot faithfully represent schema validity, source fidelity, truth, coverage, authorization, execution outcome and publication review. This specification separates those questions and defines their transition obligations.</p>
-<p>Capitalized requirements use <a href="/en/reference/bibliography/#requirement-language">BCP 14</a>. A profile MUST select the dimensions needed for its purpose and declare any aggregation rule. It need not attach every possible dimension to every record. The <a href="/en/science/evidence-and-falsification/">evidence paper</a> explains why stronger conclusions need different evidence.</p>
+<p>Capitalized requirements use <a href="/en/reference/bibliography/#requirement-language">BCP 14</a>.</p>
+<p><strong>STA-R001.</strong> A profile MUST select the dimensions needed for its purpose and declare any aggregation rule.</p>
+<p>It need not attach every possible dimension to every record. The <a href="/en/science/evidence-and-falsification/">evidence paper</a> explains why stronger conclusions need different evidence.</p>
 <h2 id="2-observation-record">2. Observation record</h2>
-<p>Each observation MUST identify its subject and immutable revision, assessed property, requirements or criterion revision, method, observer, relevant time, result, grounds and limits. A result without a subject is not transferable evidence. If the method trusts supplied input rather than independently authenticating it, that assumption MUST be stated.</p>
-<p>The check result vocabulary is <code>pass</code>, <code>fail</code>, <code>unknown</code>, and <code>not_applicable</code>. The last value requires a demonstrated inapplicability rule, not missing data. For a conjunctive set of mandatory checks, any applicable failure prevents acceptance; any remaining applicable unknown prevents an all-pass conclusion. A positive result MUST NOT overwrite a negative or unresolved result on another mandatory property.</p>
-<h2 id="3-independent-dimensions">3. Independent dimensions</h2>
+<p><strong>STA-R002.</strong> Each observation MUST identify its subject and immutable revision, assessed property, requirements or criterion revision, method, observer, relevant time, result, grounds and limits.</p>
+<p>A result without a subject is not transferable evidence.</p>
+<p><strong>STA-R003.</strong> If the method trusts supplied input rather than independently authenticating it, that assumption MUST be stated.</p>
+<p>The check result vocabulary is <code>pass</code>, <code>fail</code>, <code>unknown</code>, and <code>not_applicable</code>. The last value requires a demonstrated inapplicability rule, not missing data. For a conjunctive set of mandatory checks, any applicable failure prevents acceptance; any remaining applicable unknown prevents an all-pass conclusion.</p>
+<p><strong>STA-R004.</strong> A positive result MUST NOT overwrite a negative or unresolved result on another mandatory property.</p>
+<h2 id="3-canonical-dimension-vocabularies">3. Canonical dimension vocabularies</h2>
+<p><strong>STA-R005.</strong> A profile using the current tokens MUST use the snake_case values below without overloading one dimension with another.</p>
+<p><strong>STA-R006.</strong> An older profile MAY retain its original lexical values only through an explicit, loss-reporting adapter.</p>
 <table>
 <colgroup>
 <col class="table-width-50" />
@@ -16,76 +24,369 @@
 <thead>
 <tr class="header">
 <th>Dimension</th>
-<th>Values or required distinction</th>
+<th>Tokens</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Availability of a value</td>
-<td>Known, unknown, justified not applicable, withheld</td>
+<td>Availability</td>
+<td><code>known</code>, <code>unknown</code>, <code>not_applicable</code>, <code>withheld</code></td>
 </tr>
 <tr class="even">
 <td>Coverage</td>
-<td>Supported, partial, unsupported in scope, conflicted, unknown</td>
+<td><code>supported</code>, <code>partial</code>, <code>unsupported</code>, <code>conflicted</code>, <code>unknown</code></td>
 </tr>
 <tr class="odd">
 <td>Search assurance</td>
-<td>Candidate-only, exhaustive in declared scope, incomplete procedure</td>
+<td><code>candidate_only</code>, <code>exhaustive_in_scope</code>, <code>incomplete_procedure</code></td>
 </tr>
 <tr class="even">
 <td>Local run phase</td>
-<td>Planned, ready, running, paused, finished</td>
+<td><code>planned</code>, <code>ready</code>, <code>running</code>, <code>paused</code>, <code>finished</code></td>
 </tr>
 <tr class="odd">
 <td>Operation outcome</td>
-<td>Success, partial, refused, failed, unresolved</td>
+<td><code>success</code>, <code>partial</code>, <code>refused</code>, <code>failed</code>, <code>unresolved</code></td>
 </tr>
 <tr class="even">
 <td>Stop reason</td>
-<td>Completed, clarification needed, budget insufficient, retrieval limit, stale evidence, precondition not met, cancelled, execution error, reconciliation pending</td>
+<td><code>completed</code>, <code>clarification_needed</code>, <code>budget_insufficient</code>, <code>retrieval_limit</code>, <code>stale_evidence</code>, <code>precondition_not_met</code>, <code>cancelled</code>, <code>execution_error</code>, <code>reconciliation_pending</code></td>
 </tr>
 <tr class="odd">
 <td>External effect</td>
-<td>No effect established, known effect, unknown effect, with the observed scope</td>
+<td><code>none_established</code>, <code>known_effect</code>, <code>unknown_effect</code></td>
 </tr>
 <tr class="even">
 <td>Artifact lifecycle</td>
-<td>Building, ready, quarantined, retired, failed</td>
+<td><code>building</code>, <code>ready</code>, <code>quarantined</code>, <code>retired</code>, <code>failed</code></td>
 </tr>
 <tr class="odd">
 <td>Residency</td>
-<td>Resident, evicted, absent, unknown in a named storage location</td>
+<td><code>resident</code>, <code>evicted</code>, <code>absent</code>, <code>unknown</code></td>
 </tr>
 <tr class="even">
 <td>Freshness</td>
-<td>Fresh, stale, expired, unknown under a named policy and time</td>
+<td><code>fresh</code>, <code>stale</code>, <code>expired</code>, <code>unknown</code></td>
 </tr>
 <tr class="odd">
 <td>Reuse eligibility</td>
-<td>Eligible, ineligible, unknown for a particular new use</td>
+<td><code>eligible</code>, <code>ineligible</code>, <code>unknown</code></td>
+</tr>
+<tr class="even">
+<td>Evolution impact</td>
+<td><code>compatible</code>, <code>restricted</code>, <code>requires_review</code>, <code>blocked</code>, <code>unknown_impact</code></td>
+</tr>
+<tr class="odd">
+<td>Reuse decision</td>
+<td><code>exact_reuse</code>, <code>revalidate</code>, <code>rebuild</code>, <code>instantiate</code>, <code>refuse</code>, <code>unresolved</code>, <code>serve_stale</code></td>
 </tr>
 <tr class="even">
 <td>Case evidence</td>
-<td>Planned, illustrated, executed, evaluated, with the actual protocol and outcome</td>
+<td><code>planned</code>, <code>illustrated</code>, <code>executed</code>, <code>evaluated</code></td>
 </tr>
 <tr class="odd">
-<td>Publication and review</td>
-<td>A fixed document edition; its publication decision; separate editorial, internal technical or external review observations</td>
+<td>Review kind</td>
+<td><code>editorial</code>, <code>internal_technical</code>, <code>independent_agent</code>, <code>external_peer</code></td>
 </tr>
 </tbody>
 </table>
-<p>The table is a semantic mapping. Existing wire profiles can retain different lexical values if their adapter declares an unambiguous mapping. Legacy labels MUST NOT be silently redefined.</p>
+<p><code>unsupported</code> always refers to the declared evaluated scope. <code>ready</code> describes run or artifact availability and is not a successful operation outcome. <code>none_established</code> reports no established effect within the observed scope; it does not assert that no remote effect exists. Review kind describes the actual protocol, not the name of the reviewer. An independently tasked agent review is not external human peer review.</p>
+<p><strong>STA-R007.</strong> Legacy labels MUST map explicitly: <code>terminated</code> → run phase <code>finished</code>; <code>unsupported in scope</code> → coverage <code>unsupported</code>; “incomplete execution of planned search” → <code>incomplete_procedure</code>; <code>not_measured</code> → assessment <code>unknown</code> with reason “no observation.” Profile-specific quality states such as book-package <code>reviewed</code> retain their own declared scope; they are not aliases for <code>pass</code>.</p>
+<p>Evolution impact is an input to admission, not a shortcut to its conclusion:</p>
+<table>
+<colgroup>
+<col class="table-width-50" />
+<col class="table-width-50" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Impact</th>
+<th>Eligibility and permitted next decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>compatible</code></td>
+<td>Still <code>unknown</code> until every other mandatory gate passes; then eligible for the policy’s permitted reuse</td>
+</tr>
+<tr class="even">
+<td><code>restricted</code></td>
+<td>Original broader request is ineligible; a separately identified narrowed request is assessed anew</td>
+</tr>
+<tr class="odd">
+<td><code>requires_review</code> / <code>unknown_impact</code></td>
+<td>Unknown eligibility; <code>revalidate</code> or <code>unresolved</code>, with no admitted serve yet</td>
+</tr>
+<tr class="even">
+<td><code>blocked</code></td>
+<td>Ineligible for that use; <code>refuse</code>, or a distinct permissible rebuild/instance evaluated from its own grounds</td>
+</tr>
+</tbody>
+</table>
 <h2 id="4-transition-rules">4. Transition rules</h2>
-<p>Execution can move from ready to running only when the attempt’s preconditions are established. Local termination records a stop reason and outcome; it does not determine an unobserved remote effect. A later reconciliation can add an observation about that attempt without claiming a second execution.</p>
-<p>An artifact becomes ready only under its build and publication policy. A later dependency change can make it ineligible while its bytes remain resident and intact. Eviction changes residency, not the truth of content or its historical applicability. Revalidation creates a new observation; it does not change the immutable payload unless a new revision is produced.</p>
-<p>A changed requirement, subject revision, environment or authority can invalidate the applicability of an earlier verdict. Reuse of that verdict requires an explicit preservation argument. The latest timestamp alone is not such an argument.</p>
+<p>Transitions apply to the same identified attempt, lifecycle instance, policy and use scope.</p>
+<p><strong>STA-R008.</strong> Implementations MUST follow the tables; transitions not listed are rejected.</p>
+<p>Creating a new subject or attempt starts a new history rather than changing the meaning of an old record.</p>
+<p><strong>STA-R009.</strong> Every transition MUST record the triggering observation, actor, prior state and guard result.</p>
+<h3 id="execution-phase">Execution phase</h3>
+<table>
+<colgroup>
+<col class="table-width-25" />
+<col class="table-width-25" />
+<col class="table-width-25" />
+<col class="table-width-25" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>From</th>
+<th>Event and guard</th>
+<th>To</th>
+<th>Terminal?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>no attempt</td>
+<td>Allocate a unique attempt with pinned Work Item and requirements</td>
+<td><code>planned</code></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>planned</code></td>
+<td>Establish inputs, capability and preconditions for dispatch</td>
+<td><code>ready</code></td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td><code>ready</code></td>
+<td>Recheck current authority and preconditions at actual dispatch</td>
+<td><code>running</code></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>running</code></td>
+<td>Record a resumable checkpoint under a declared pause policy</td>
+<td><code>paused</code></td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td><code>paused</code></td>
+<td>Validate checkpoint, current bindings and renewed dispatch guards</td>
+<td><code>running</code></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>planned</code> / <code>ready</code></td>
+<td>Cancel, refuse or fail before dispatch; record reason and actual effect observations</td>
+<td><code>finished</code></td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td><code>running</code> / <code>paused</code></td>
+<td>Terminate with explicit outcome, reason and effect observations</td>
+<td><code>finished</code></td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>STA-R010.</strong> A finished attempt MUST NOT return to running; retry uses a new attempt with a repeat policy.</p>
+<p>Later reconciliation adds effect observations to the same historical attempt without pretending another execution occurred. A successful process exit does not supply missing acceptance evidence.</p>
+<h3 id="artifact-lifecycle">Artifact lifecycle</h3>
+<table>
+<colgroup>
+<col class="table-width-25" />
+<col class="table-width-25" />
+<col class="table-width-25" />
+<col class="table-width-25" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>From</th>
+<th>Event and guard</th>
+<th>To</th>
+<th>Terminal?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>no lifecycle</td>
+<td>Allocate a build record</td>
+<td><code>building</code></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>building</code></td>
+<td>Successful build, required checks and the atomic publication guard all pass</td>
+<td><code>ready</code></td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td><code>building</code></td>
+<td>Build fails; retain cause and any explicitly partial output</td>
+<td><code>failed</code></td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td><code>building</code> / <code>ready</code></td>
+<td>Authorized integrity, safety or provenance investigation suppresses use</td>
+<td><code>quarantined</code></td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td><code>quarantined</code></td>
+<td>Authorized release after cause resolution, complete reassessment and current publication guard</td>
+<td><code>ready</code></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>building</code> / <code>ready</code> / <code>quarantined</code></td>
+<td>Authorized withdrawal or cancellation retires this lifecycle</td>
+<td><code>retired</code></td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<p><code>quarantined</code> means use is suspended while a named issue is investigated; only the policy’s authorized actor can release it. <code>retired</code> means this lifecycle is withdrawn and cannot become ready again. <code>failed</code> is also terminal for this build. A replacement or reinstatement creates a new lifecycle/adoption record and retains prior revocations and restrictions. Identical bytes do not erase those decisions.</p>
+<h3 id="freshness-and-eligibility-projections">Freshness and eligibility projections</h3>
+<p>These are projections of immutable observations, not edits to old verdicts.</p>
+<p><strong>STA-R011.</strong> New projection records MAY replace the current display only while preserving the observations on which earlier displays were based.</p>
+<table>
+<colgroup>
+<col class="table-width-33" />
+<col class="table-width-33" />
+<col class="table-width-33" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension: from</th>
+<th>Trigger and required evidence</th>
+<th>To</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Freshness: any</td>
+<td>A new applicable check, valid clock bounds and current policy establish a new window</td>
+<td><code>fresh</code></td>
+</tr>
+<tr class="even">
+<td>Freshness: <code>fresh</code></td>
+<td>Soft deadline reached while no hard deadline has expired</td>
+<td><code>stale</code></td>
+</tr>
+<tr class="odd">
+<td>Freshness: <code>fresh</code> / <code>stale</code></td>
+<td>A hard deadline or permitted age bound is reached</td>
+<td><code>expired</code></td>
+</tr>
+<tr class="even">
+<td>Freshness: any</td>
+<td>Mandatory time, policy or chronology cannot be established</td>
+<td><code>unknown</code></td>
+</tr>
+<tr class="odd">
+<td>Eligibility: any</td>
+<td>Every current mandatory gate for this exact request is discharged</td>
+<td><code>eligible</code></td>
+</tr>
+<tr class="even">
+<td>Eligibility: any</td>
+<td>A known mandatory restriction fails</td>
+<td><code>ineligible</code></td>
+</tr>
+<tr class="odd">
+<td>Eligibility: any</td>
+<td>A material dependency, authority or assessment becomes unknown</td>
+<td><code>unknown</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>STA-R012.</strong> An expired or ineligible observation MUST NOT be overwritten merely because another record has a later timestamp.</p>
+<p>Eligibility can become positive only after every known blocking cause is resolved under the current policy. Rechecking a digest alone cannot renew source-event age. The <a href="/en/engineering/specifications/reuse-policy/">reuse policy</a> defines deadline and decision semantics.</p>
+<p>Residency changes only on storage observations: storing and reading back the named bytes establishes <code>resident</code>; an eviction receipt establishes <code>evicted</code>; a scoped absence check establishes <code>absent</code>; lack of trustworthy storage observation gives <code>unknown</code>.</p>
+<p><strong>STA-R013.</strong> These transitions MUST NOT change truth, review, freshness or eligibility by themselves.</p>
+<p>Assessment, coverage, assurance, external effect, review and case-evidence records are append-only observations. They have no automatic success progression: an illustration never becomes an executed trial without a new execution record, and an unknown effect is resolved only by evidence from the relevant effect boundary. Conflicting observations remain addressable. The monotone properties are observation history, terminal attempt/lifecycle histories and non-reused <a href="/en/engineering/specifications/cache-identity-and-invalidation/#5-guarded-publication-and-serving">publication generations</a>, not steadily improving truth or eligibility.</p>
 <h2 id="5-scientific-and-editorial-status">5. Scientific and editorial status</h2>
-<p>A completed publication can state conditional propositions and report bounded results while acknowledging unanswered empirical questions. Its edition number identifies a coherent text, not proof of all future applications. The vocabulary MUST not equate “published,” “reviewed,” “implemented,” and “effective.”</p>
-<p>An internal agent review MUST identify the reviewer, input revision, method and conclusions, and MUST be labelled as such. It does not constitute independent external peer review. A finite test report requires actual outputs; an illustrated scenario is not an executed test. An executed failed trial remains useful evidence and MUST retain its negative result.</p>
+<p>A completed publication can state conditional propositions and report bounded results while acknowledging unanswered empirical questions. Its edition number identifies a coherent text, not proof of all future applications.</p>
+<p><strong>STA-R014.</strong> The vocabulary MUST NOT equate “published,” “reviewed,” “implemented,” and “effective.”</p>
+<p><strong>STA-R015.</strong> An internal agent review MUST identify the reviewer, input revision, method and conclusions, and MUST be labelled as such.</p>
+<p>It does not constitute independent external peer review. A finite test report requires actual outputs; an illustrated scenario is not an executed test.</p>
+<p><strong>STA-R016.</strong> An executed failed trial remains useful evidence and MUST retain its negative result.</p>
 <h2 id="6-user-facing-projections">6. User-facing projections</h2>
-<p>Interfaces MAY summarize these dimensions, but the summary MUST preserve the distinctions relevant to the user’s decision. “Indexed revision X” is more precise than an unqualified “current.” “Checks passed for the supplied record” must not become “the action is authorized” when current authorization was outside the checked boundary.</p>
-<p>An unknown effect after a timeout must remain visible when a user decides whether to retry. Technical detail can be expanded on demand, but critical uncertainty cannot be hidden behind a positive badge.</p>
+<p><strong>STA-R017.</strong> Interfaces MAY summarize these dimensions, but the summary MUST preserve the distinctions relevant to the user’s decision.</p>
+<p><strong>STA-R018.</strong> “Indexed revision X” is more precise than an unqualified “current.” “Checks passed for the supplied record” MUST NOT become “the action is authorized” when current authorization was outside the checked boundary.</p>
+<p><strong>STA-R019.</strong> An unknown effect after a timeout MUST remain visible when a user decides whether to retry.</p>
+<p>Technical detail can be expanded on demand, but critical uncertainty cannot be hidden behind a positive badge.</p>
 <h2 id="7-acceptance-and-evidence">7. Acceptance and evidence</h2>
-<p>Tests MUST cover a passed schema with false supplied grounds, successful execution with a failed result criterion, a finished run with unknown effect, a resident but revoked artifact, a correct historical result ineligible for a current task, and an internal review that does not establish empirical validity.</p>
+<p><strong>STA-R020.</strong> Tests MUST cover a passed schema with false supplied grounds, successful execution with a failed result criterion, a finished run with unknown effect, a resident but revoked artifact, a correct historical result ineligible for a current task, and an internal review that does not establish empirical validity.</p>
 <p>The <a href="/en/engineering/studies/contract-profile-conformance/">conformance study</a> demonstrates why a trusted-input premise matters. The <a href="/en/engineering/studies/editorial-skill-pilot/">editorial pilot</a> reports an equal observed score for the structured and baseline conditions. Neither result permits a general effectiveness label. See <a href="/en/science/revision-and-governance/">revision and governance</a> for the distinction between an observation and adoption of a rule.</p>
-</div><section class="document-citation" aria-label="Citation"><h2>引用本文档</h2><p lang="en">Pavel Valentov. Assessment, Execution, and Publication States. Knowledge Contract Arcana, edition 1.0. <a href="https://contract.place/en/engineering/specifications/status-model/">https://contract.place/en/engineering/specifications/status-model/</a>. Source revision <code>ed2e188c89a1a50a187f3d55bf32baab54c87f7e</code>.</p><p>Pavel Valentov · Knowledge Contract Arcana · CC BY 4.0。复用文字时请保留引用来源。</p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>本页目录</summary><nav aria-label="本页目录"><a class="toc-level-2" href="#1-purpose-and-conformance" lang="en">1. Purpose and conformance</a><a class="toc-level-2" href="#2-observation-record" lang="en">2. Observation record</a><a class="toc-level-2" href="#3-independent-dimensions" lang="en">3. Independent dimensions</a><a class="toc-level-2" href="#4-transition-rules" lang="en">4. Transition rules</a><a class="toc-level-2" href="#5-scientific-and-editorial-status" lang="en">5. Scientific and editorial status</a><a class="toc-level-2" href="#6-user-facing-projections" lang="en">6. User-facing projections</a><a class="toc-level-2" href="#7-acceptance-and-evidence" lang="en">7. Acceptance and evidence</a></nav></details><hr><strong>工程规范</strong><a href="/zh-Hans/engineering/specifications/knowledge-contract-core/" lang="en">Knowledge Contract: Core Model and Admission Requirements</a><a href="/zh-Hans/engineering/specifications/contract-family/" lang="en">Contracts for Knowledge Operations</a><a href="/zh-Hans/engineering/specifications/semantic-types/" lang="en">Semantic Types, Attribution, and Representations</a><a href="/zh-Hans/engineering/specifications/context-package/" lang="en">Context Packages: Coverage, Dependencies, and Delivery</a><a href="/zh-Hans/engineering/specifications/compiled-artifact-contract/" lang="en">Compiled Knowledge Artifacts and Reproducible Derivation</a><a href="/zh-Hans/engineering/specifications/artifact-registry/" lang="en">Artifact Registry, Readable Names, and Document Formats</a><a href="/zh-Hans/engineering/specifications/status-model/" aria-current="page" lang="en">Assessment, Execution, and Publication States</a><a href="/zh-Hans/engineering/specifications/cache-identity-and-invalidation/" lang="en">Cache Identity, Dependency Tracking, and Invalidation</a><a href="/zh-Hans/engineering/specifications/reuse-policy/" lang="en">Reuse Policy: Time, Authorization, and Decision Outcomes</a><a href="/zh-Hans/engineering/specifications/knowledge-evolution/" lang="en">Knowledge Evolution and Versioned Rules</a><a href="/zh-Hans/engineering/specifications/book-package/" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</a><hr><a class="" href="/zh-Hans/reference/glossary/">参考资料</a><a class="" href="/zh-Hans/appendices/source-map/">来源映射与历史版本</a></aside></div></div></main><footer id="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><p>让知识连接其根基。</p><p class="ecosystem-note">Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada <svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><div class="footer-group"><strong>科学</strong><a class="" href="/zh-Hans/research/">科学论文</a><a class="" href="/zh-Hans/journal/">专栏</a><a class="" href="/zh-Hans/reference/">参考资料</a><a class="" href="/zh-Hans/appendices/">附录</a></div><div class="footer-group"><strong>开发者</strong><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a><a class="" href="/zh-Hans/engineering/studies/">工程研究</a><a class="" href="/zh-Hans/repository/">版本库</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div><div class="footer-group"><strong>contract.place</strong><a class="" href="/zh-Hans/about/">使用与引用</a><a href="/zh-Hans/search/#document-search">搜索已发布文档</a><a class="" href="/zh-Hans/references/">设计参考</a></div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · Knowledge Contract Arcana · Arcanada 生态系统</span><span>内容 CC BY 4.0，代码 Apache-2.0。</span></div><p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p><p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div></footer><dialog id="search-dialog" aria-labelledby="search-title"></dialog><dialog id="menu-dialog" aria-label="Site menu"></dialog><div id="announcement" class="sr-only" aria-live="polite"></div></body></html>
+<h2 id="8-bounded-exchange-profile">8. Bounded exchange profile</h2>
+<p>The <a href="https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/schemas/contract-observation.schema.json">JSON Schema</a>, <a href="https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/tools/check_contract_profile.py">validator</a>, <a href="https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/schemas/fixtures/contract-observation/valid">examples</a> and <a href="https://github.com/Arcanada-one/knowledge-contract/blob/cf215dd8b740efc73439294f40f20f360349355a/tools/test_contract_profile.py">tests</a> define a concrete exchange subset: <code>kc-observation/1</code>, <code>kc-dependency-change/1</code> and <code>kc-profile-advertisement/1</code>. This is an original project profile using <a href="https://www.rfc-editor.org/rfc/rfc8259">JSON</a> and <a href="https://json-schema.org/draft/2020-12/json-schema-core">JSON Schema 2020-12</a>, not a claim that a full Knowledge Contract, executor or API is interoperable.</p>
+<p><strong>STA-R021.</strong> An exchange record MUST be a single strict UTF-8 JSON object without a BOM, duplicate member names at any depth, non-finite number tokens or isolated Unicode surrogates.</p>
+<p>Unknown fields, profiles and record versions are rejected.</p>
+<p><strong>STA-R022.</strong> Integers used as epochs or sequence numbers MUST be in 0 through 9,007,199,254,740,991.</p>
+<p>Timestamp strings use UTC seconds <code>YYYY-MM-DDTHH:MM:SSZ</code> with a valid calendar date; other clock models require another profile.</p>
+<table>
+<colgroup>
+<col class="table-width-50" />
+<col class="table-width-50" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Record</th>
+<th>Required fields and meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>KCObservation/v1</code></td>
+<td><code>observation_id</code>, <code>subject</code>, assessed <code>property</code>, pinned <code>criterion</code>, method <code>id</code>/<code>version</code>, <code>observer</code>, <code>observed_at</code>, check <code>result</code>, textual <code>scope</code>, <code>evidence_refs</code>, <code>trust_assumptions</code>, <code>limitations</code></td>
+</tr>
+<tr class="even">
+<td>Subject/criterion/evidence reference</td>
+<td><code>artifact_id</code>, immutable <code>revision</code>, <code>hash_domain</code>, exact <code>sha256</code></td>
+</tr>
+<tr class="odd">
+<td><code>not_applicable</code> observation</td>
+<td>Additionally, a pinned <code>inapplicability_rule</code>; presence is structural evidence only, not proof that the rule applies</td>
+</tr>
+<tr class="even">
+<td><code>KCDependencyChange/v1</code></td>
+<td><code>event_id</code>, ordering <code>namespace</code>, <code>sequence</code>, <code>dependency_id</code>, old/new epochs and revisions, event <code>kind</code>, impact, observer and time; see the cache specification</td>
+</tr>
+<tr class="odd">
+<td><code>KCProfileAdvertisement/v1</code></td>
+<td><code>reader_id</code>, explicit <code>read_profiles</code>, <code>write_profiles</code>, supported <code>hash_domains</code>; lists are capability declarations, not authorization grants</td>
+</tr>
+</tbody>
+</table>
+<p><strong>STA-R023.</strong> Implementations MUST compare schema/profile support before exchanging records.</p>
+<p><strong>STA-R024.</strong> They MUST NOT infer support for an entire contract family from support for this subset.</p>
+<p>Scope strings are exact descriptive bindings; automated semantic equivalence of two scope strings is outside this profile.</p>
+<table>
+<colgroup>
+<col class="table-width-50" />
+<col class="table-width-50" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Registered hash domain</th>
+<th>Exact input and equality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sha256/raw-bytes-v1</code></td>
+<td>SHA-256 of the exact referenced file bytes; no decoding or rewriting</td>
+</tr>
+<tr class="even">
+<td><code>sha256/raw-utf8-json-v1</code></td>
+<td>SHA-256 of the exact valid exchange JSON bytes, including whitespace; no canonicalization or Unicode normalization</td>
+</tr>
+</tbody>
+</table>
+<p><strong>STA-R025.</strong> Identity comparisons MUST include both domain and digest.</p>
+<p>Reserializing an equal JSON value can change byte identity and therefore creates a new representation.</p>
+<p><strong>STA-R026.</strong> This profile deliberately does not define value-level canonical JSON hashing; a profile that needs it MUST name a separate procedure and domain.</p>
+<p>Structural validation does not authenticate an observer, prove an observation or admit an action.</p>
+</div><section class="document-citation" aria-label="Citation"><h2>引用本文档</h2><p lang="en">Pavel Valentov. Assessment, Execution, and Publication States. Knowledge Contract Arcana, edition 1.1. <a href="https://contract.place/en/engineering/specifications/status-model/">https://contract.place/en/engineering/specifications/status-model/</a>. Source revision <code>cf215dd8b740efc73439294f40f20f360349355a</code>.</p><p>Pavel Valentov · Knowledge Contract Arcana · CC BY 4.0。复用文字时请保留引用来源。</p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>本页目录</summary><nav aria-label="本页目录"><a class="toc-level-2" href="#1-purpose-and-conformance" lang="en">1. Purpose and conformance</a><a class="toc-level-2" href="#2-observation-record" lang="en">2. Observation record</a><a class="toc-level-2" href="#3-canonical-dimension-vocabularies" lang="en">3. Canonical dimension vocabularies</a><a class="toc-level-2" href="#4-transition-rules" lang="en">4. Transition rules</a><a class="toc-level-3" href="#execution-phase" lang="en">Execution phase</a><a class="toc-level-3" href="#artifact-lifecycle" lang="en">Artifact lifecycle</a><a class="toc-level-3" href="#freshness-and-eligibility-projections" lang="en">Freshness and eligibility projections</a><a class="toc-level-2" href="#5-scientific-and-editorial-status" lang="en">5. Scientific and editorial status</a><a class="toc-level-2" href="#6-user-facing-projections" lang="en">6. User-facing projections</a><a class="toc-level-2" href="#7-acceptance-and-evidence" lang="en">7. Acceptance and evidence</a><a class="toc-level-2" href="#8-bounded-exchange-profile" lang="en">8. Bounded exchange profile</a></nav></details><hr><strong>工程规范</strong><a href="/zh-Hans/engineering/specifications/knowledge-contract-core/" lang="en">Knowledge Contract: Core Model and Admission Requirements</a><a href="/zh-Hans/engineering/specifications/contract-family/" lang="en">Contracts for Knowledge Operations</a><a href="/zh-Hans/engineering/specifications/semantic-types/" lang="en">Semantic Types, Attribution, and Representations</a><a href="/zh-Hans/engineering/specifications/context-package/" lang="en">Context Packages: Coverage, Dependencies, and Delivery</a><a href="/zh-Hans/engineering/specifications/compiled-artifact-contract/" lang="en">Compiled Knowledge Artifacts and Reproducible Derivation</a><a href="/zh-Hans/engineering/specifications/artifact-registry/" lang="en">Artifact Registry, Readable Names, and Document Formats</a><a href="/zh-Hans/engineering/specifications/status-model/" aria-current="page" lang="en">Assessment, Execution, and Publication States</a><a href="/zh-Hans/engineering/specifications/cache-identity-and-invalidation/" lang="en">Cache Identity, Dependency Tracking, and Invalidation</a><a href="/zh-Hans/engineering/specifications/reuse-policy/" lang="en">Reuse Policy: Time, Authorization, and Decision Outcomes</a><a href="/zh-Hans/engineering/specifications/knowledge-evolution/" lang="en">Knowledge Evolution and Versioned Rules</a><a href="/zh-Hans/engineering/specifications/book-package/" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</a><hr><a class="" href="/zh-Hans/reference/glossary/">参考资料</a><a class="" href="/zh-Hans/appendices/source-map/">来源映射与历史版本</a></aside></div></div></main><footer id="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><p>让知识连接其根基。</p><p class="ecosystem-note">Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada <svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><div class="footer-group"><strong>科学</strong><a class="" href="/zh-Hans/research/">科学论文</a><a class="" href="/zh-Hans/journal/">专栏</a><a class="" href="/zh-Hans/reference/">参考资料</a><a class="" href="/zh-Hans/appendices/">附录</a></div><div class="footer-group"><strong>开发者</strong><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a><a class="" href="/zh-Hans/engineering/studies/">工程研究</a><a class="" href="/zh-Hans/repository/">版本库</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div><div class="footer-group"><strong>contract.place</strong><a class="" href="/zh-Hans/about/">使用与引用</a><a href="/zh-Hans/search/#document-search">搜索已发布文档</a><a class="" href="/zh-Hans/references/">设计参考</a></div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · Knowledge Contract Arcana · Arcanada 生态系统</span><span>内容 CC BY 4.0，代码 Apache-2.0。</span></div><p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p><p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div></footer><dialog id="search-dialog" aria-labelledby="search-title"></dialog><dialog id="menu-dialog" aria-label="Site menu"></dialog><div id="announcement" class="sr-only" aria-live="polite"></div></body></html>

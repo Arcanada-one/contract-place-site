@@ -66,7 +66,7 @@ research:['Science','Наука','科学'],wiki:['Reference','Справочни
 papers:['Scientific papers','Научные работы','科学论文'],specs:['Engineering specifications','Инженерные спецификации','工程规范'],
 studies:['Engineering studies','Инженерные исследования','工程研究'],appendices:['Appendices','Приложения','附录'],reference:['Reference','Справочные материалы','参考资料'],
 publicationEdition:['Publication edition','Редакция публикаций','出版版本'],
-heroNote:['Edition 1.0 · Science, engineering and evidence','Редакция 1.0 · Наука, инженерия и доказательные материалы','版本 1.0 · 科学、工程与证据'],
+heroNote:[`Edition ${corpus.publication.edition} · Science, engineering and evidence`,`Редакция ${corpus.publication.edition} · Наука, инженерия и доказательные материалы`,`版本 ${corpus.publication.edition} · 科学、工程与证据`],
 readResearch:['Read the science','Читать научные работы','阅读科学论文'],browseSpecs:['Explore engineering','Изучить инженерную часть','探索工程'],
 releaseTitle:['The science of knowledge reuse','Научные основания использования знаний','知识复用的科学基础'],
 releaseDesc:['Eight connected papers develop definitions, conditional results, proofs and counterexamples.','Восемь связанных работ: определения, условные результаты, доказательства и контрпримеры.','八篇相互关联的论文，提出定义、有条件结论、证明与反例。'],
