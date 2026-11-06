@@ -30,6 +30,7 @@ FILES = {
     "roadmap/TASKS.md": "rendered",
     "roadmap/dependencies.json": "rendered",
     "roadmap/EXPERIMENTS.md": "linked",
+    "roadmap/FOUNDATIONS_RELEASE_PLAN.md": "linked",
     "roadmap/SITE_DELIVERY.md": "introduction",
 }
 TASK_IDS = ["RM-%02d" % n for n in range(1, 26)]
@@ -40,6 +41,9 @@ FIELDS = [
     ("gap", "Gap"), ("work", "Work"), ("deliverables", "Deliverables"),
     ("acceptance", "Acceptance"), ("adversarial", "Adversarial check"), ("start", "Start boundary"),
 ]
+# One optional field (RM-18 "Scope separation", source revision fb410a84) may follow Work; nothing else is tolerated.
+OPTIONAL_FIELD = ("scope", "Scope separation")
+FIELD_ORDERS = (FIELDS, FIELDS[:2] + [OPTIONAL_FIELD] + FIELDS[2:])
 PANDOC_FROM = "markdown+gfm_auto_identifiers+pipe_tables+tex_math_dollars+tex_math_single_backslash+autolink_bare_uris"
 # Private or internal details never belong on the public page.
 PRIVATE = [
@@ -191,12 +195,13 @@ def split_cards(text: str) -> dict[str, dict]:
         rest = body[header.end():]
         found = list(re.finditer(r"(?m)^\*\*([A-Za-z ]+)\.\*\* ", rest))
         labels = [m[1] for m in found]
-        if labels != [label for _, label in FIELDS]:
+        order = next((o for o in FIELD_ORDERS if labels == [label for _, label in o]), None)
+        if order is None:
             raise ValueError(f"{ident}: card fields {labels} differ from the expected {[label for _, label in FIELDS]}")
         fields = {}
         for index, match in enumerate(found):
             end = found[index + 1].start() if index + 1 < len(found) else len(rest)
-            fields[FIELDS[index][0]] = rest[match.end():end].strip()
+            fields[order[index][0]] = rest[match.end():end].strip()
         cards[ident] = {"id": ident, "title": title[1].strip(), "priority": header[1], "owner": header[2].strip(), "requires": required, "fields": fields}
     return cards
 
@@ -337,7 +342,9 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
     for ident in TASK_IDS:
         card = cards[ident]
         fields = []
-        for key, label in FIELDS:
+        for key, label in FIELD_ORDERS[1]:
+            if key not in card["fields"]:
+                continue
             html, _ = roadmap.markdown(card["fields"][key], "roadmap/TASKS.md")
             fields.append({"key": key, "label": label, "html": html})
         tasks.append({

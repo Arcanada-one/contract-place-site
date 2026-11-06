@@ -138,7 +138,9 @@ def main() -> None:
         if not contains(stream, tokens(intro)):
             errors.append(where + "public introduction from the source is missing")
         for ident, card in cards.items():
-            for key, label in roadmap.FIELDS:
+            for key, label in roadmap.FIELD_ORDERS[1]:
+                if key not in card["fields"]:
+                    continue
                 if not contains(stream, tokens(markdown_plain(card["fields"][key]))):
                     errors.append(where + f"{ident} {label}: source text missing from the built page")
             if not contains(stream, tokens(card["title"])):

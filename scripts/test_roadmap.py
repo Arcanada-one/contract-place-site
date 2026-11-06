@@ -59,6 +59,7 @@ class RoadmapCompiler(unittest.TestCase):
             "roadmap/TASKS.md": tasks or "# Tasks\n\nIntro.\n\n" + "".join(card_text(n) for n in range(1, 26)),
             "roadmap/dependencies.json": json.dumps(deps or deps_json(), indent=2) + "\n",
             "roadmap/EXPERIMENTS.md": "# Experiments\n",
+            "roadmap/FOUNDATIONS_RELEASE_PLAN.md": "# Foundations\n",
             "roadmap/SITE_DELIVERY.md": delivery or f"# Delivery\n\nSuggested public introduction:\n\n> {INTRO}\n",
         }
         for path, text in files.items():
@@ -190,6 +191,23 @@ class RoadmapCompiler(unittest.TestCase):
         tasks = "# Tasks\n\n" + "".join(card_text(n, extra="**Status.** completed\n\n" if n == 6 else "") for n in range(1, 26))
         self.write(tasks=tasks)
         self.fails("RM-06: card fields")
+
+    def test_optional_scope_separation_field_only_after_work(self):
+        def tasks(move_after_acceptance):
+            out = []
+            for n in range(1, 26):
+                text = card_text(n)
+                if n == 18:
+                    scope = "**Scope separation.** Scope separation sentence.\n\n"
+                    marker = "**Acceptance.**" if move_after_acceptance else "**Deliverables.**"
+                    text = text.replace(marker, scope + marker)
+                out.append(text)
+            return "# Tasks\n\n" + "".join(out)
+        self.write(tasks=tasks(False))
+        card = next(t for t in self.compile()["tasks"] if t["id"] == "RM-18")
+        self.assertEqual([f["label"] for f in card["fields"]][:4], ["Gap", "Work", "Scope separation", "Deliverables"])
+        self.write(tasks=tasks(True))
+        self.fails("RM-18: card fields")
 
     # --- status and privacy ------------------------------------------------------------------
     def test_non_planned_status_without_evidence_rejected(self):
