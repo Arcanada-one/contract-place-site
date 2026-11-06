@@ -99,6 +99,8 @@ col.table-width-1{width:1%}col.table-width-2{width:2%}col.table-width-3{width:3%
 .roadmap-fields dt{font-weight:700;color:var(--ink);font-size:15px;text-transform:none}
 .roadmap-fields dd{margin:2px 0 0}
 .roadmap-fields dd p{font-size:17px;line-height:1.65;color:var(--secondary);margin:0 0 8px;overflow-wrap:anywhere}
+.roadmap-page .article-aside{overflow-x:hidden}
+.roadmap-page .article-aside nav a{overflow-wrap:anywhere}
 .roadmap-page .toc-task{display:inline-block;padding:4px 8px 4px 0;font-size:13px}
 .roadmap-body .source-body pre{background:var(--subtle);padding:14px 16px;border-radius:5px}
 @media(max-width:767px){
