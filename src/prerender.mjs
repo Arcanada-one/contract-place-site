@@ -5,21 +5,25 @@ const root=path.resolve(process.argv[2]||path.join(import.meta.dirname,'..','pub
 const ORIGIN='https://contract.place';
 const original=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const template=original.replace(/<header id="header">[\s\S]*?<\/header>/,'<header id="header"></header>').replace(/<main id="main" tabindex="-1">[\s\S]*?<\/main>/,'<main id="main" tabindex="-1"></main>').replace(/<footer id="footer">[\s\S]*?<\/footer>/,'<footer id="footer"></footer>');
-const routes=['','science','engineering','engineering/specifications','engineering/studies','reference','appendices','wiki','wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','research','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase','books','repository','journal','journal/building-a-place','docs','docs/model','docs/availability','search'];
+const routes=['','science','engineering','engineering/specifications','engineering/studies','reference','appendices','wiki','wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','research','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase','books','repository','journal','journal/building-a-place','docs','docs/model','docs/availability','search','lab/knowledge-journey'];
 const content=fs.readFileSync(path.join(root,'content.js'),'utf8');
 const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
 const LANGS=['en','ru','zh-Hans'];
 // Indexing decision per route. Everything not listed here is canonical, in the sitemap and indexable.
 // noindex: pages that duplicate a paper/article under another URL (aliases) or are design-brief references, not project content.
-const NOINDEX=new Set(['wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','journal/building-a-place','docs/model','references','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase']);
+const LAB_ROUTES=new Set(['lab/knowledge-journey']);
+const NOINDEX=new Set([...LAB_ROUTES,'wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','journal/building-a-place','docs/model','references','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase']);
 function seo(route,lang){
  if(!/^\/(?:en|ru|zh-Hans)(?:\/|$)/.test(route)&&data.reader_aliases[route.replace(/^\/|\/$/g,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url='+data.reader_aliases[route.replace(/^\/|\/$/g,'')]+'">';
  const m=route.match(/^\/(?:en|ru|zh-Hans)(?:\/(.*))?$/);const rest=m&&m[1]?m[1]:'';
  // Earlier numeric addresses forward to the current document in the same interface language (the page body keeps the link).
  if(data.aliases[rest.replace(/\/+$/,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/'+lang+'/'+data.aliases[rest.replace(/\/+$/,'')]+'/">';
  const at=l=>ORIGIN+'/'+l+'/'+(rest?rest.replace(/\/+$/,'')+'/':'');
- if(NOINDEX.has(rest.replace(/\/+$/,'')))return '<meta name="robots" content="noindex,follow">';
- return `<link rel="canonical" href="${at(lang)}">`+LANGS.map(l=>`<link rel="alternate" hreflang="${l}" href="${at(l)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${at('en')}"><meta property="og:url" content="${at(lang)}"><meta property="og:site_name" content="Knowledge Contract Arcana">`;
+ const noindex=NOINDEX.has(rest.replace(/\/+$/,''));
+ const lab=LAB_ROUTES.has(rest.replace(/\/+$/,''));
+ if(noindex&&!lab)return '<meta name="robots" content="noindex,follow">';
+ // Lab routes retain locale identity while excluded from search discovery.
+ return (noindex?'<meta name="robots" content="noindex,follow">':'')+(lab?'<meta name="referrer" content="no-referrer">':'')+`<link rel="canonical" href="${at(lang)}">`+LANGS.map(l=>`<link rel="alternate" hreflang="${l}" href="${at(l)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${at('en')}"><meta property="og:url" content="${at(lang)}"><meta property="og:site_name" content="Knowledge Contract Arcana">`;
 }
 function generate(route,lang){
  const element=()=>({innerHTML:'',textContent:'',content:'',querySelector:()=>null,addEventListener(){},focus(){}});

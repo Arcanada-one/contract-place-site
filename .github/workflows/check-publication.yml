@@ -55,6 +55,7 @@ jobs:
         run: |
           python3 -B scripts/test_build.py
           node scripts/test_search.js
+          node scripts/test_lab.js
       - name: Verify committed inputs and output are reproducible
         run: |
           python3 - <<'PY'

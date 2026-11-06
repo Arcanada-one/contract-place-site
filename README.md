@@ -44,6 +44,7 @@ python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
 python3 -B scripts/test_build.py
 node scripts/test_search.js
+node scripts/test_lab.js
 python3 -m http.server 8000 --directory public
 ```
 
