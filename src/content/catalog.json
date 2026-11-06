@@ -2190,6 +2190,1356 @@
     "wiki/versioned-knowledge": "science/revision-and-governance",
     "docs/model": "engineering/specifications/knowledge-contract-core"
   },
+  "roadmap": {
+    "pin": {
+      "repository": "Arcanada-one/knowledge-contract",
+      "commit": "ea2586fbad28233b11b50e7c70a997def400f88b",
+      "files": [
+        {
+          "path": "ROADMAP.md",
+          "role": "rendered",
+          "sha256": "1a4c28e1a886dffe0de9cd947c920b6b6021443da9424b7f3b994896f654251d",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/ROADMAP.md"
+        },
+        {
+          "path": "roadmap/TASKS.md",
+          "role": "rendered",
+          "sha256": "a06b35ded8db53eb5813c840d3d26e5b7131bebd21cc931a7b9c95a8bd88709d",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/TASKS.md"
+        },
+        {
+          "path": "roadmap/dependencies.json",
+          "role": "rendered",
+          "sha256": "3abbb6b0eec9ef445f44c35d6d1944a1e4fb78da457cb00a4323b377ddb1b0a0",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/dependencies.json"
+        },
+        {
+          "path": "roadmap/EXPERIMENTS.md",
+          "role": "linked",
+          "sha256": "f9da63b7aaf2bc0e5c3054f9b256828018e76d80a8f247180f175ad010c030b5",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/EXPERIMENTS.md"
+        },
+        {
+          "path": "roadmap/SITE_DELIVERY.md",
+          "role": "introduction",
+          "sha256": "55dbe788a738d2b937b343c357f185c52880694546129413b8de0b1cfa1d72f0",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/SITE_DELIVERY.md"
+        }
+      ]
+    },
+    "revision": "2026-11-06.1",
+    "baseline_commit": "717c43deb514adc5b40f76837e7ee0fb2da37102",
+    "execution_authority": "Muneral",
+    "execution_bindings": "unverified; RM labels are not work-item IDs",
+    "edge_semantics": "requires_output: reviewed prerequisite for dependent acceptance/execution, not for exploratory design",
+    "introduction": "Knowledge Contract publishes bounded scientific and engineering results while maintaining a transparent research programme. This roadmap distinguishes existing evidence from planned work on human meaning, formal representations, algebra, geometry and practical verification. A planned task is not a completed result; negative or inconclusive findings will be preserved and reflected in future revisions.",
+    "overview_html": "<p><strong>A bounded publication now; a transparent programme of research next.</strong></p>\n<p>This roadmap separates two commitments: finish a readable and scientifically honest edition of the existing corpus, and develop missing foundations and verification without pretending that planned work is already evidence. It defines 25 work packages, priorities, acceptance conditions and adversarial checks. None of the future research results is asserted as completed.</p>\n<p>Read the <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/TASKS.md\">task definitions</a>, <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/dependencies.json\">dependency graph</a>, <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/EXPERIMENTS.md\">experiment and falsification plan</a>, and <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/SITE_DELIVERY.md\">Contract Place delivery specification</a>.</p>\n<h3 id=\"src-1-baseline-and-scope\">1. Baseline and scope</h3>\n<p>The baseline is Knowledge Contract commit <code>717c43deb514adc5b40f76837e7ee0fb2da37102</code>. Its <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/publication-catalog.json\">publication catalogue</a> contains 29 documents: eight papers, eleven engineering specifications, six studies, a glossary, a bibliography and two appendices. Editorial proposals already made for the first two papers are separate from this baseline; their current review and publication states need their own evidence. This roadmap does not rewrite those manuscripts or imply their deployment.</p>\n<p>We are not starting from an absence of mathematics. <a href=\"/en/science/semantic-objects-and-context/\">Semantic objects</a> and <a href=\"/en/science/constrained-transformations/\">constrained transformations</a> already define objects, observations, conditional preservation, equivalence, composition and reconstruction. The <a href=\"/en/appendices/source-map/\">source map</a> preserves earlier work, but its topical mapping is not a claim-by-claim completeness audit. Historical algebra/geometry drafts are research inputs, not automatically current normative authority.</p>\n<p>The missing work includes a coherent introduction from human meaning to explicit computational abstractions; a fuller family of algebraic and geometric profiles; diversified examples and attempted refutations; and verified links from claims through requirements to actual code, deployment and useful task outcomes. Mathematical notation alone, a schema pass, a small exhaustive enumeration and a production observation have different evidential roles.</p>\n<p>The scope is the Knowledge Contract scientific/engineering corpus and its agent/knowledge-base interfaces. It is not an instruction to restart a bulk conversion of third-party books. Existing source-derived skills may be used within declared applicability, rights and review limits.</p>\n<h3 id=\"src-2-two-tracks-and-a-finite-release-rule\">2. Two tracks and a finite release rule</h3>\n<p><strong>Track A: editorial completion (RM-25).</strong> Review the frozen catalogue document by document, including chapters, references and appendices. Improve research questions, contribution statements, definitions, argument order, examples, conclusions and typography. Preserve mathematical premises, normative identifiers and raw evidence; identify substantive corrections separately. Use genre-specific structures for papers, specifications and studies. Apply each accepted change to the owning repository, then verify the actual site output through the normal publishing workflow.</p>\n<p><strong>Track B: research and engineering (RM-01 to RM-24).</strong> Develop the missing materials as bounded work packages. A failed or inconclusive hypothesis is a valid research result when the method, evidence and consequence are reported honestly. It is not a reason to conceal the study or claim success.</p>\n<p>New research does not automatically block Track A. A local release block is justified only when a known defect makes an affected assertion false or materially misleading, a required evidence/source/rights condition fails, or the document/site delivery is broken. Correct, narrow or explicitly withdraw that assertion; do not wait for a universal theory. Optional richer examples, larger tests and future geometry results remain roadmap items. Completion of the existing corpus is not completion of all future research.</p>\n<p>The immediate sequencing checkpoint is: save this roadmap in the repository, communicate it to the collective and establish narrow execution requests before starting editorial document three. Publishing the roadmap has its own delivery evidence; finishing all 25 tasks is not that checkpoint.</p>\n<h3 id=\"src-3-known-gaps-and-work-packages\">3. Known gaps and work packages</h3>\n<table>\n<colgroup>\n<col class=\"table-width-33\" />\n<col class=\"table-width-33\" />\n<col class=\"table-width-33\" />\n</colgroup>\n<thead>\n<tr class=\"header\">\n<th>Gap or requested extension</th>\n<th>Work packages</th>\n<th>Nature of the gap</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td>Historical mathematical material is not mapped at claim level</td>\n<td>RM-01, RM-22</td>\n<td>Traceability and evidence recovery</td>\n</tr>\n<tr class=\"even\">\n<td>Finite counts lack sufficient explanation of carrier, bounds and implementation scope</td>\n<td>RM-02, RM-11</td>\n<td>Reporting and verification design</td>\n</tr>\n<tr class=\"odd\">\n<td>Readers cannot see the planned programme and actual execution bindings</td>\n<td>RM-03, RM-04</td>\n<td>Public communication and task reconciliation</td>\n</tr>\n<tr class=\"even\">\n<td>No unified foundations treatment from human interpretation to bounded computable use</td>\n<td>RM-05, RM-06, RM-07</td>\n<td>Exposition, research positioning and representation contract</td>\n</tr>\n<tr class=\"odd\">\n<td>Algebra profiles and practically diverse transformation examples are incomplete</td>\n<td>RM-08, RM-09, RM-10</td>\n<td>Theory, examples and attempted refutation</td>\n</tr>\n<tr class=\"even\">\n<td>Geometry is not yet a sufficiently explicit, validated current profile</td>\n<td>RM-12, RM-13, RM-14</td>\n<td>Definitions, evaluation and retrieval interface</td>\n</tr>\n<tr class=\"odd\">\n<td>Specification and reference models do not establish deployed enforcement</td>\n<td>RM-15, RM-16, RM-18, RM-19</td>\n<td>Traceability and runtime conformance</td>\n</tr>\n<tr class=\"even\">\n<td>Correct extraction of material context and ambiguity is not established by record validity</td>\n<td>RM-17, RM-21</td>\n<td>Source fidelity and robustness</td>\n</tr>\n<tr class=\"odd\">\n<td>General quality/cost benefit is not established</td>\n<td>RM-20</td>\n<td>Controlled empirical comparison</td>\n</tr>\n<tr class=\"even\">\n<td>Cross-language editorial effectiveness and comprehension remain bounded</td>\n<td>RM-23</td>\n<td>Applicability and reader evaluation</td>\n</tr>\n<tr class=\"odd\">\n<td>Results need controlled integration without an endless publication hold</td>\n<td>RM-24, RM-25</td>\n<td>Revision and finite editorial completion</td>\n</tr>\n</tbody>\n</table>\n<p>This is the currently identified scope, not a claim that no undiscovered gap exists. RM-01 refines the ledger without silently enlarging the frozen editorial release.</p>\n<h3 id=\"src-4-priorities-and-dependency-structure\">4. Priorities and dependency structure</h3>\n<p>P0 means immediate transparency or release enablement: RM-01, RM-02, RM-03, RM-04 and RM-25. P1 means next substantive foundations, algebra, geometry and verification work. P2 means subsequent robustness, comparisons and result integration. These are proposed ordering priorities, not dates or proof that a worker has started.</p>\n<p>The machine graph has 25 nodes and 45 <code>requires_output</code> edges. An edge means that the named reviewed output is needed for acceptance or dependent execution. Preliminary reading and design may proceed earlier. Four <code>informs_not_blocks</code> links are advisory and do not create execution cycles. The graph does not mean that a whole upstream research programme must finish before a useful incremental result can be used.</p>\n<p>The main research path is:</p>\n<pre class=\"text\"><code>Claim inventory -&gt; related work -&gt; human-meaning foundations -&gt; formal bridge\n    -&gt; algebra profiles -&gt; practical cases -&gt; scaled checks -&gt; conformance\n    -&gt; geometry profile -&gt; geometry tests -&gt; hybrid retrieval -&gt; agent use\nClaim inventory -&gt; falsification docket -&gt; theory/code/evidence trace\n    -&gt; runtime and revision checks -&gt; controlled comparisons</code></pre>\n<p>These lines summarize the graph; <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/roadmap/dependencies.json\">dependencies.json</a> is the exact edge definition. Site publication and task reconciliation run beside the research path. Editorial work is not dependent on completion of that path.</p>\n<h3 id=\"src-5-ownership-tasks-and-status\">5. Ownership, tasks and status</h3>\n<p>KC-Brain owns foundations, mathematical interpretation, manuscript content and scientific acceptance. Agent-Brain owns integration analysis, the independent adversarial view and cross-component designs. Brains write and review the actual artifacts themselves. Engineers receive only necessary server, implementation, registry or deployment operations with prepared inputs and acceptance conditions.</p>\n<p>The public <code>RM-xx</code> labels identify these definitions. They are not invented Muneral identifiers and do not establish execution status. Muneral remains the execution authority. RM-04 reconciles existing work and creates only missing items, retaining original task history. Its private binding report maps every public definition to actual work items or a precisely stated unresolved binding; no private identifiers, credentials, server locations or mail content need be published.</p>\n<p>A public status update is a dated projection of actual task evidence. At this roadmap revision, task execution bindings are <strong>not verified here</strong> and research is <strong>planned</strong>. Do not label all items scheduled, in progress or completed merely because they are written down. Avoid unsupported completion percentages and fixed delivery dates. Public status values may include planned, active, under review, blocked, completed or deferred only with the corresponding dated source; unknown remains unknown.</p>\n<p>Completing a task means delivering and assessing its promised output. A research output can refute the proposed hypothesis. Completion never means that a theory has become universally true.</p>\n<h3 id=\"src-6-startable-work\">6. Startable work</h3>\n<p>KC-Brain can begin RM-01 and RM-02 without waiting for a server. Agent-Brain can review the gap map and prepare the RM-10 adversarial docket from identified claims. KC-SWE can immediately reconcile the task graph (RM-04) and implement/publish the prepared roadmap surface (RM-03) under the repository and deployment rules. There is no broad instruction to delegate the theoretical work to SWE.</p>\n<p>Later server runs require a finite prepared input packet: source/build pins, cases, permitted operations, expected evidence, budgets and negative controls. Do not run a new costly benchmark merely because its task exists. Reconcile the existing consumer, readiness, editorial and verification work before adding a duplicate.</p>\n<h3 id=\"src-7-baseline-sources-and-evidence-boundaries\">7. Baseline sources and evidence boundaries</h3>\n<p>The baseline references are project documents, not new experiments:</p>\n<ul>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/717c43deb514adc5b40f76837e7ee0fb2da37102/publication-catalog.json\">Catalogue at the audited commit</a>.</li>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/717c43deb514adc5b40f76837e7ee0fb2da37102/papers/semantic-objects-and-context/PAPER.md\">Semantic objects and applicability</a>.</li>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/717c43deb514adc5b40f76837e7ee0fb2da37102/papers/constrained-transformations/PAPER.md\">Transformations, composition, equivalence and residuals</a>.</li>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/717c43deb514adc5b40f76837e7ee0fb2da37102/appendices/source-map/APPENDIX.md\">Historical source map and explicit limits of consolidation</a>.</li>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/engineering/studies/evidence-index.json\">Engineering claim/evidence index</a> and <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/engineering/studies/historical-recovery-gaps.json\">historical recovery inventory</a>.</li>\n<li><a href=\"/en/engineering/specifications/contract-family/\">Operation contracts</a> and <a href=\"/en/engineering/specifications/semantic-types/\">semantic representations</a>.</li>\n<li><a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/PUBLISHING.md\">Publication procedure</a>, <a href=\"https://github.com/Arcanada-one/knowledge-contract/blob/ea2586fbad28233b11b50e7c70a997def400f88b/CONTRIBUTING.md\">contribution rules</a> and <a href=\"https://github.com/Arcanada-one/contract-place-site/blob/main/README.md\">site build contract</a>. The site’s actual build source must be pinned again during delivery; this mutable documentation link is not a deployment receipt.</li>\n</ul>\n<p>The roadmap changes no theorem, wire profile, publication edition, allowlist or runtime permission. Proposed new foundations/geometry manuscripts enter the publication catalogue only after they exist and pass the relevant reviews.</p>\n",
+    "overview_toc": [
+      {
+        "level": 3,
+        "id": "src-1-baseline-and-scope",
+        "title": "1. Baseline and scope"
+      },
+      {
+        "level": 3,
+        "id": "src-2-two-tracks-and-a-finite-release-rule",
+        "title": "2. Two tracks and a finite release rule"
+      },
+      {
+        "level": 3,
+        "id": "src-3-known-gaps-and-work-packages",
+        "title": "3. Known gaps and work packages"
+      },
+      {
+        "level": 3,
+        "id": "src-4-priorities-and-dependency-structure",
+        "title": "4. Priorities and dependency structure"
+      },
+      {
+        "level": 3,
+        "id": "src-5-ownership-tasks-and-status",
+        "title": "5. Ownership, tasks and status"
+      },
+      {
+        "level": 3,
+        "id": "src-6-startable-work",
+        "title": "6. Startable work"
+      },
+      {
+        "level": 3,
+        "id": "src-7-baseline-sources-and-evidence-boundaries",
+        "title": "7. Baseline sources and evidence boundaries"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "RM-01",
+        "anchor": "rm-01",
+        "title": "Recover the claim-level mathematical crosswalk",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [],
+        "needed_by": [
+          "RM-05",
+          "RM-06",
+          "RM-08",
+          "RM-10",
+          "RM-12",
+          "RM-15",
+          "RM-22",
+          "RM-23",
+          "RM-24"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>The source map is topical, not a complete accounting of historical definitions, laws and geometry proposals.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Inventory all 29 catalogue documents by section and the historical I10/I12 leads. Map each relevant definition, proposition, counterexample and limitation to a current location or an explicit disposition. Separate absent exposition, unsupported claims, missing evidence and absent implementation; do not equate these gaps.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A version-pinned claim inventory, old-to-current crosswalk and gap ledger with source anchors.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every inspected historical item has retained, revised, superseded, deferred or rejected disposition and rationale; unknown coverage remains explicit; a second architect checks omissions.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Try to find a historical premise, exception or result not accounted for by the map; an omitted item reopens only the affected row.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>Ready for Brain analysis now; no server or full-corpus experiment is required.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-02",
+        "anchor": "rm-02",
+        "title": "Explain and publish the scope of each verification result",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [],
+        "needed_by": [
+          "RM-11",
+          "RM-23"
+        ],
+        "informs": [],
+        "informed_by": [
+          "RM-22"
+        ],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Raw case totals can conceal the carrier, duplicated behaviors, arbitrary bounds and the distinction between a model and production code.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Prepare a verification passport for each cited checker: exact program/hash, tested object, parameter space, enumeration formula, iteration bound, oracle, vacuous cases, observed verdicts and exclusions. Reconcile the graph-root 4096 cases with the different historical 16-cubed Boolean-function triples. Publish only original or cleared reproducible inputs.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>Public reproducibility packets and per-claim verification passports; preserved historical reports.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>A reviewer can derive each case count and rerun the named program; an arbitrary small bound is explained, not advertised as sufficient; all production imports or their absence are disclosed.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Remove a necessary assumption and inject an implementation defect. A checker unable to detect the intended defect cannot support that assertion; same-code reruns are not independent validation.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>Brain prepares the explanatory records now; KC-SWE later executes the exact prepared public packet on the required host.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-03",
+        "anchor": "rm-03",
+        "title": "Publish the research roadmap on Contract Place",
+        "priority": "P0",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": [],
+        "needed_by": [],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Readers need a visible separation between current results, known limits and planned research.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Implement the prepared roadmap reading surface using the canonical repository files, the existing site build and its pinned source revision. Provide localized navigation, task anchors, priorities, dependencies and truthful delivery state. Follow SITE_DELIVERY.md; do not create a second independent task database.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A site PR, generated roadmap pages, navigation entry, deployment and readback receipt.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>The deployed page identifies the exact source commit, shows all roadmap items and their definitions, preserves current paper routes, works on desktop/mobile and exposes no private execution data. The report includes real URLs, build/deploy identity and substantive content checks.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Test a stale source pin, broken task anchor, missing task and blocked/no-evidence status. None may render as completed research.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>Ready for the necessary site/server work after reconciling existing tasks and the reviewed source PR; no completed theory is a prerequisite.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-04",
+        "anchor": "rm-04",
+        "title": "Bind roadmap definitions to the execution work graph",
+        "priority": "P0",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": [],
+        "needed_by": [],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Public roadmap IDs describe planned work; they are not verified task identities or execution status.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Reconcile each item against existing Muneral work, including the existing editorial, validation and consumer tasks. Reuse or split existing scope without losing history; create only genuinely missing work items. Return actual IDs, owners and typed dependencies privately. Publish only a sanitized, timestamped status projection where supported.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A complete private RM-ID to real-work-item map and evidence-backed public status policy.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>All 25 definitions resolve to existing or newly created real tasks, or an exact unresolved binding is named. No invented UUIDs, duplicate engineering dispatch or status inferred from mail delivery; dependencies match the roadmap graph.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Attempt duplicate registration and conflicting status updates. Reconciliation preserves one execution authority and reports disagreement.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>Ready for the narrow registry operation now; task creation is not permission to run every research experiment.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-05",
+        "anchor": "rm-05",
+        "title": "Write the foundations: from human meaning to usable knowledge",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06"
+        ],
+        "needed_by": [
+          "RM-07"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>The corpus has semantic objects and conditional results but lacks a single accessible foundations treatment spanning human meaning and agent use.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Draft a standalone introduction with scope, research questions and a terminology map. Separate expression, referent, proposition, intended meaning, context, interpretation, truth, justification, applicability and authorization. Trace human abstraction to explicit representation, formal interpretation, checked operation, knowledge storage and bounded agent use. State where ambiguity or judgment cannot be made deterministic by declaration.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A proposed foundations PAPER.md, examples, glossary changes and a map to existing papers; no automatic publication-catalogue promotion.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>A new reader can follow one example end to end and locate all assumptions. Existing work and external ideas are credited. The text distinguishes definitions, conjectures, established arguments and implementation proposals.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Use ambiguous intent, metaphor, context-dependent reference and conflicting norms to test whether the proposed account overclaims a universal reduction of human meaning.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-06",
+        "anchor": "rm-06",
+        "title": "Establish related work and the boundary of novelty",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ],
+        "needed_by": [
+          "RM-05",
+          "RM-08",
+          "RM-12"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Standard mathematical constructions and project-specific integration need a transparent comparison with prior work.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Review primary sources in semantics/pragmatics, model theory and logic, program correctness, abstraction, database views/provenance, conceptual or vector representations and knowledge graphs. Compare assumptions, operations and guarantees rather than matching names. Treat unavailable or unpublished material as unavailable, not a reconstructed authoritative theory.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A primary-source matrix, bibliography additions and a novelty/non-novelty statement for each proposed contribution.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every borrowed definition or result has a specific attribution; unsupported priority or novelty claims are removed; external theories are not silently identified with KC.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Seek earlier work that already supplies the claimed contribution; narrowing or abandoning a novelty claim is an acceptable result.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-07",
+        "anchor": "rm-07",
+        "title": "Specify the human-to-formal semantic bridge",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-05"
+        ],
+        "needed_by": [
+          "RM-08",
+          "RM-09",
+          "RM-12",
+          "RM-14",
+          "RM-17"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>The structure of a semantic object does not itself define a correct conversion of arbitrary language into computable content.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Define a bounded typed representation with scoped negation, quantifiers, conditions, units, time, referents, attribution, alternatives, provenance and uncertainty. Specify candidate extraction separately from deterministic validation. Define abstract/concrete mappings, supported language fragments, loss accounting, computability limits and refusal or unresolved outcomes. Connect it to professional artifacts without treating a skill file as capability.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A representation/adapter specification, conversion contract and worked human-text to formal-object to artifact examples.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Each mapping has a declared domain/codomain, assumptions, loss record and executable checks where feasible; competing readings survive until justified resolution; unsupported constructs are not coerced into false precision.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Find a text pair collapsed into the same representation despite different required actions, or a round trip that drops a mandatory qualifier.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-08",
+        "anchor": "rm-08",
+        "title": "Complete the profile algebra of meaning operations",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06",
+          "RM-07"
+        ],
+        "needed_by": [
+          "RM-09"
+        ],
+        "informs": [
+          "RM-12"
+        ],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Operations exist, but a coherent family of carriers, partial domains and laws is not fully traced to all intended uses.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Specify equivalence, entailment, conjunction/merge, common consequence, projection, residual, reconstruction, composition and transfer for named profiles. State partial domains, nonempty/consistent interpretations, representative independence, supported decision procedures and resource limits. Distinguish observation equivalence from identity and similarity; list laws that do not hold.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>An algebra profile document, law register, proof obligations and bounded executable reference semantics.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every operation has types, domain, semantics, at least one positive and adverse example, and an explicit proof/test status. A standard Boolean result is not relabeled as a new theory or a universal document operation.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Attack domain congruence, noninjective reconstruction, incompatible observation interfaces, inconsistent premises, and claims of minimal residual size.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-09",
+        "anchor": "rm-09",
+        "title": "Build practical algebra examples and adversarial controls",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-08",
+          "RM-10"
+        ],
+        "needed_by": [
+          "RM-11",
+          "RM-13",
+          "RM-17"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Small synthetic spaces do not provide a diverse test set of practically meaningful transformations.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Instantiate the algebra families in EXPERIMENTS.md using original or licensed sources. Cover units, exceptions, roles, scoped negation, attributions, changing recipients, residuals, conflicting sources and cross-domain transfer. Preserve source anchors and both positive and minimally changed negative cases. Separate visible development cases from withheld evaluation cases.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A versioned algebra benchmark, independent annotations/oracles and a case-to-law coverage matrix.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every required semantic phenomenon has an expected observation and a counterexample control; ambiguous cases have sets of permissible answers rather than fabricated single labels; coverage is reported by family, not just count.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Have the independent architect construct unseen cases that defeat the proposed rule; retain failures, annotation disagreement and dataset leakage findings.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-10",
+        "anchor": "rm-10",
+        "title": "Maintain proof obligations and a falsification docket",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ],
+        "needed_by": [
+          "RM-09",
+          "RM-11",
+          "RM-13",
+          "RM-15",
+          "RM-17",
+          "RM-19",
+          "RM-24"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>A failed premise, failed implementation and counterexample to a theorem are different diagnoses.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>For every selected claim record quantifiers, assumptions, carrier, intended observation, proof route and attempted refutation. Classify evidence as deductive argument, bounded model, implementation regression or empirical comparison. A theorem counterexample satisfies all premises and violates the conclusion; premise-breaking cases test boundaries or conformance instead.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A claim/falsification register with adversarial cases, proof gaps and disposition rules.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Each major claim has a concrete attack and criterion for supported-within-scope, refuted, inconclusive or not measured. A verified counterexample forces correction/retraction of the affected claim, not a cosmetic roadmap note.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Search for vacuous success, hidden policy vetoes, inconsistent carriers, circular oracles and quantifier changes. Report unsuccessful searches with their actual bounds.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-11",
+        "anchor": "rm-11",
+        "title": "Scale bounded checks and connect them to implementation",
+        "priority": "P1",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": [
+          "RM-02",
+          "RM-09",
+          "RM-10"
+        ],
+        "needed_by": [
+          "RM-16"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Three-vertex enumeration and the fixed iteration limit do not establish large-graph or production correctness.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Run the Brain-prepared plan with parameterized graph sizes, independent closure oracle, long chains/cycles, generated and mutation cases, and explicit deterministic budgets. Start with complete n=1..4 scope when feasible and use justified generated cases beyond it. Replace size-specific loop bounds only through reviewed implementation; separate model-only runs from tests importing actual code.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>Versioned runner/results, mutation report, seed and environment manifest, time/resource measurements.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Counts are derived and regenerated; original 4096 cases remain reproducible; long-chain defects are detected; model-only, production and unexecuted scopes remain separate. Exhaustive n=5 is not an arbitrary release requirement.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Inject missing-edge, early-stop, wrong-root, inconsistent-oracle and vacuous-case mutations; surviving mutants are reported and explained.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-12",
+        "anchor": "rm-12",
+        "title": "Develop the geometry-of-meaning profile",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06",
+          "RM-07"
+        ],
+        "needed_by": [
+          "RM-13",
+          "RM-14",
+          "RM-21"
+        ],
+        "informs": [],
+        "informed_by": [
+          "RM-08"
+        ],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Historical geometry arguments exist, but a current explicit and validated geometry profile is not established.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Specify what points/regions represent, the embedding map and version, dimensions, context conditioning, similarity or distance, topology if used, and claimed invariants. State metric axioms only when proved or verified for the chosen definition; separate pseudometric, similarity and directed entailment. Define information loss and the limits of inverse interpretation.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A geometry research document with precise definitions, candidate claims, countermodels and an evaluation plan.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>No geometric term is decorative: each has a carrier, operation and intended use. Similarity never grants truth, equivalence or authority by itself; no embedding is advertised as complete human meaning.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Construct threshold nontransitivity, collisions, norm changes and context-dependent nearest-neighbor reversals; a contradiction narrows or rejects the affected claim.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-13",
+        "anchor": "rm-13",
+        "title": "Test geometry against semantic distinctions",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-09",
+          "RM-10",
+          "RM-12"
+        ],
+        "needed_by": [
+          "RM-14"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Geometric similarity has not been validated against the distinctions required by concrete KC tasks.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Prepare a frozen comparison of high-similarity contradictions and low-similarity equivalent expressions. Include negation, quantifier scope, units, numbers, actor swaps and context. Compare lexical, vector and formal/profile-aware routes. Calibrate thresholds only on development data; keep separate unseen evaluation and explicit coverage/refusal outcomes.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A geometry benchmark/protocol and a server-ready run packet; actual results supplied by the engineering executor.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Report unsafe equivalence/merge decisions, retrieval coverage, calibration and variability by phenomenon. Fix sample size, primary measures and confidence/uncertainty method before the held-out run; one favorable example is not a measured advantage.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Search for a system that looks precise only because it refuses everything, learns test labels, or uses similarity as an unexamined correctness oracle.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-14",
+        "anchor": "rm-14",
+        "title": "Specify hybrid retrieval without semantic overreach",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-12",
+          "RM-13"
+        ],
+        "needed_by": [
+          "RM-18"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Candidate ranking and contract-based admissibility need a documented interface between the geometric and logical layers.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Specify geometry/lexical retrieval as candidate generation, followed by source, scope, dependency, policy and semantic checks. Record ranking exclusions versus mandatory rejections. Define adapters to Scrutator without inventing new grants or namespaces. Retain an uncertainty/refusal route and a useful positive path.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A consumer interface/decision record and positive/adversarial fixtures with explicit handoff conditions.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>A similar but incompatible record is not delivered as accepted knowledge; a valid record can complete the path; cost and recall losses of checks are measured separately.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Attempt metadata-hash substitution, omitted dependency, misleading similarity, wrong reader and context-budget truncation.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-15",
+        "anchor": "rm-15",
+        "title": "Trace theory to requirements, code and observations",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-10"
+        ],
+        "needed_by": [
+          "RM-16",
+          "RM-18",
+          "RM-19"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Existing propositions, specifications, standalone checks and services are not connected by a complete verified map.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>For each selected property identify the exact definition/proposition, requirement ID, implementation function/build, tests, raw evidence and limits. Distinguish code read, component tested and live behavior observed. Mark specified-but-unimplemented operations explicitly; reuse existing consumer/readiness tasks rather than dispatch duplicates.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A versioned traceability matrix with missing links and bounded implementation requests.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every claimed implemented guarantee has a resolvable source and appropriately scoped observation; a document next to a model does not count as enforcement.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Follow an allegedly supported guarantee to an unrelated test, stale build, stub or unsupported representation; downgrade that row instead of treating the matrix as proof.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-16",
+        "anchor": "rm-16",
+        "title": "Run production-representative conformance and fault tests",
+        "priority": "P1",
+        "owner": "Agent-SWE",
+        "status": "planned",
+        "requires": [
+          "RM-11",
+          "RM-15"
+        ],
+        "needed_by": [
+          "RM-20"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Finite reference checks do not establish that the deployed implementation enforces the same contract.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Execute prepared fixtures against named actual builds in authorized environments. Exercise malformed data, unsupported profiles, missing dependencies, wrong subject/recipient, stale evidence and altered outputs; include positive controls and independent observable counters. Preserve secrets and unrelated environments.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>Build-pinned execution reports, raw logs, input manifests, coverage and unresolved defects.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every result names the exercised boundary and exact implementation; failures before a boundary do not verify later checks. No global conformance verdict from a subset.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Mutate or bypass an actual gate and show the test observes the intended violation; zero downstream calls require a positive-path control.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-17",
+        "anchor": "rm-17",
+        "title": "Evaluate extraction, ambiguity and source fidelity",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-09",
+          "RM-10"
+        ],
+        "needed_by": [
+          "RM-18",
+          "RM-21"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Well-formed records do not show that all material semantic conditions were extracted from a source.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Prepare independently annotated, rights-cleared tasks for extraction and transformation, with source coordinates, preserved alternatives and damage/uncertainty labels. Define omission, hallucination, attribution and operator-scope errors separately. Freeze the evaluation protocol before any model run and preserve human/agent reviewer roles honestly.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>Annotation guide, evaluation split, source-bound reference answers and exact run plan.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Disagreement and inaccessible source regions remain visible; no producer-only judgment is called independent ground truth; deterministic validation is not confused with semantic completeness.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Insert a crucial exception in a table, footnote, image or different chapter and test whether a structurally valid artifact silently loses it.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-18",
+        "anchor": "rm-18",
+        "title": "Demonstrate accepted knowledge in a bounded agent task",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-14",
+          "RM-15",
+          "RM-17"
+        ],
+        "needed_by": [
+          "RM-20"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Prepared artifacts, indexed entries, exact retrieval and successful task use are separate stages.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Prepare one accepted semantic artifact and its finite required closure, then reuse the existing private consumer route for exact readback, complete context delivery and bounded task use. Bind source, representation, revision, purpose and assessment. Engineer executes only the required ingestion/service operations.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>An exact-byte handoff manifest, task output, assessment and trace across storage/retrieval/use.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Whole-document returned bytes match accepted hashes; all mandatory dependencies are present; the actual output is evaluated. Native task-run authority is not inferred from ordinary-session use.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Change one source, request, reader grant or dependency while retaining the old artifact; stale acceptance must not silently survive.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-19",
+        "anchor": "rm-19",
+        "title": "Verify current-use authority and revision races",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-10",
+          "RM-15"
+        ],
+        "needed_by": [
+          "RM-20"
+        ],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>A recent check or TTL does not establish authorization at the protected operation or safe publication ordering.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Specify a concrete admission point, supported snapshot/lease/lock assumptions, generation identity and revocation behavior. Prepare races involving check-then-revoke, slow-old-writer, lost/reordered invalidation and changed recipients. Reuse existing authority/readiness/install work and request only missing bounded observations.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A concurrency/failure model, test fixtures and a requirements-to-observation review.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>The coordination mechanism is named and tested at its actual boundary; no native success from CONTRACT_MISSING; event deduplication is not presented as recovery of lost events.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Force the interleaving that violates the claimed current-state property and check whether the implementation detects or prevents it.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-20",
+        "anchor": "rm-20",
+        "title": "Measure practical benefit against strong alternatives",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-16",
+          "RM-18",
+          "RM-19"
+        ],
+        "needed_by": [],
+        "informs": [
+          "RM-24"
+        ],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>The corpus does not establish universal quality, latency or economic superiority.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Design task-matched comparisons among no reuse, simple strong reuse, lexical/vector retrieval and contract-aware routes where applicable. Equalize required quality and authority. Account for preparation, storage, validation, retries, review and coordination without double counting. Choose sample size and uncertainty reporting before evaluation.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A preregistered comparison protocol and, after execution, complete results including ties and adverse outcomes.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Separate causal claims from observations, retain all declared outcomes and report when overhead exceeds benefit. No selection of only successful cached tasks.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Test conditions where a simple baseline ties or wins and where safe rejection creates apparent speed improvements at the expense of usefulness.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-21",
+        "anchor": "rm-21",
+        "title": "Test multilingual, multimodal and shifted-context limits",
+        "priority": "P2",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-12",
+          "RM-17"
+        ],
+        "needed_by": [],
+        "informs": [],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Language/genre and modality transfer cannot be inferred from one textual profile.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Prepare paired cross-language and multimodal cases with independently checked references, including numeric notation, image legends, OCR damage, missing assets and changed professional context. Keep interface translation separate from manuscript translation. Bound intended use instead of promising universal transfer.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A robustness suite, profile applicability table and per-family report.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Failures and unresolved readings remain distinct; correlations across translated cases do not inflate independent sample counts; model/data versions and rights are recorded.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Find a translation or visual normalization that leaves topical similarity unchanged but reverses a scoped condition or numerical interpretation.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-22",
+        "anchor": "rm-22",
+        "title": "Recover historical evidence without rewriting history",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ],
+        "needed_by": [],
+        "informs": [
+          "RM-02"
+        ],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Some historical programs/fixtures remain unavailable and source-rights constraints limit reproducibility.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Audit the existing recovery inventory and cited reports; request only exact missing exports/logs from their owners. Preserve originals and hashes; distinguish recovered original, reconstructed view and new synthetic reproduction. Prepare public substitutes only when clearly labeled and appropriately licensed.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>An updated recovery inventory, evidence provenance and permitted reproduction bundles.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Every gap has recovered, unavailable or superseded-by-new-study disposition; no invented past execution or retrospective alteration of raw data.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Try to reproduce a historical conclusion from only available inputs; an inability is reported, not repaired by substituting a new result without disclosure.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-23",
+        "anchor": "rm-23",
+        "title": "Validate editorial skills and reader comprehension",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-02"
+        ],
+        "needed_by": [],
+        "informs": [
+          "RM-25"
+        ],
+        "informed_by": [],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Russian applied-writing skills and a single-section tie do not establish English scientific-editing effectiveness.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Define a bounded genre/language adaptation and protected-claim contract. Evaluate complete documents with separate scientific review and comprehension questions, and compare with a well-specified ordinary editing baseline where a benefit claim is intended. Preserve measured ties and unknown reader results.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>An adaptation profile, edit trace, independent review and appropriately scoped comprehension study.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Critical conditions, negations, equations and citations are retained or explicitly corrected; readable does not mean shorter; author self-review is not called external peer review.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Seek a clearer-sounding edit that turns sufficient conditions into necessary ones, deletes a qualifier or increases confidence without evidence.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-24",
+        "anchor": "rm-24",
+        "title": "Integrate new findings through versioned research updates",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-10"
+        ],
+        "needed_by": [],
+        "informs": [],
+        "informed_by": [
+          "RM-20"
+        ],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>New theory and negative results need a controlled route back into papers, specifications, studies and appendices.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>For each completed work package prepare its claim-level impact set, corrected manuscript/specification/study, evidence links and historical compatibility mapping. Add new foundations or geometry papers to the catalogue only when actual reviewed documents exist. Preserve task outcome separately from scientific support.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>Reviewed versioned changes, impact/review records and repository/site/index readback where applicable.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>A positive, negative or inconclusive research outcome is accurately reflected in every affected claim; planned work is never cited as completed evidence. Integrate incrementally, not after the entire backlog.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Check for stale downstream theorems, unsupported catalogue entries, rewritten old evidence or a site serving a different source commit.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>After the named dependency outputs are reviewed; design can start earlier without claiming them complete.</p>\n"
+          }
+        ]
+      },
+      {
+        "id": "RM-25",
+        "anchor": "rm-25",
+        "title": "Finish the bounded editorial publication pass",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [],
+        "needed_by": [],
+        "informs": [],
+        "informed_by": [
+          "RM-23"
+        ],
+        "fields": [
+          {
+            "key": "gap",
+            "label": "Gap",
+            "html": "<p>Unlimited research expansion must not prevent a readable, scientifically honest release of the existing corpus.</p>\n"
+          },
+          {
+            "key": "work",
+            "label": "Work",
+            "html": "<p>Freeze the current editorial inventory at the 29 catalogue documents, then review sections one document at a time with protected scientific content, genre-specific structure and exact repository changes. Include specifications, studies, glossary, bibliography and appendices. Repair material false claims locally; defer enrichment to this roadmap. Existing approved first/second-document publication work is preserved.</p>\n"
+          },
+          {
+            "key": "deliverables",
+            "label": "Deliverables",
+            "html": "<p>A finite per-document editorial checklist, reviewed changes and verified publication handoffs.</p>\n"
+          },
+          {
+            "key": "acceptance",
+            "label": "Acceptance",
+            "html": "<p>Each document has readable structure, correct attribution, intact or explicitly corrected claims, visible limitations, working references and actual site confirmation after release. No requirement to solve all meaning research first.</p>\n"
+          },
+          {
+            "key": "adversarial",
+            "label": "Adversarial check",
+            "html": "<p>Reject a pass that only looks scholarly, hides an unsupported result, lacks source traceability or treats successful typography/CI as scientific validation.</p>\n"
+          },
+          {
+            "key": "start",
+            "label": "Start boundary",
+            "html": "<p>Resume after this roadmap is durably saved and communicated; do not start document three during the roadmap-preparation turn.</p>\n"
+          }
+        ]
+      }
+    ],
+    "advisory": [
+      {
+        "from": "RM-23",
+        "to": "RM-25",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-20",
+        "to": "RM-24",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-22",
+        "to": "RM-02",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-08",
+        "to": "RM-12",
+        "kind": "informs_not_blocks"
+      }
+    ],
+    "required_edges": 45
+  },
   "source": "https://contract.place/",
   "license": "CC-BY-4.0",
   "author": "Pavel Valentov",

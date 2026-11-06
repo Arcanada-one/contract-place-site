@@ -5,6 +5,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 
 - Home: https://contract.place/
 - Science: https://contract.place/en/research/
+- Research roadmap (planned work, not results): https://contract.place/en/roadmap/ ; provenance https://contract.place/roadmap.json
 - Engineering specifications: https://contract.place/en/engineering/specifications/
 - Engineering studies: https://contract.place/en/engineering/studies/
 - Glossary and bibliography: https://contract.place/en/reference/

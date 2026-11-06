@@ -5,7 +5,7 @@ const root=path.resolve(process.argv[2]||path.join(import.meta.dirname,'..','pub
 const ORIGIN='https://contract.place';
 const original=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const template=original.replace(/<header id="header">[\s\S]*?<\/header>/,'<header id="header"></header>').replace(/<main id="main" tabindex="-1">[\s\S]*?<\/main>/,'<main id="main" tabindex="-1"></main>').replace(/<footer id="footer">[\s\S]*?<\/footer>/,'<footer id="footer"></footer>');
-const routes=['','science','engineering','engineering/specifications','engineering/studies','reference','appendices','wiki','wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','research','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase','books','repository','journal','journal/building-a-place','docs','docs/model','docs/availability','search'];
+const routes=['','science','engineering','engineering/specifications','engineering/studies','reference','appendices','wiki','wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','research','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase','books','repository','roadmap','journal','journal/building-a-place','docs','docs/model','docs/availability','search'];
 const content=fs.readFileSync(path.join(root,'content.js'),'utf8');
 const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
 const LANGS=['en','ru','zh-Hans'];

@@ -6,6 +6,8 @@ Read [README.md](README.md), [src/DESIGN.md](src/DESIGN.md), `publication-manife
 
 Use meaningful hyphenated slugs and separate science, engineering, reference and appendix routes. Earlier numbered addresses are compatibility entries. Historical protocol labels remain in their compatibility context. Distinguish completed documents from their actual deployment status.
 
+The roadmap (`/{en,ru,zh-Hans}/roadmap/`) is planned work with its own pin in `roadmap-manifest.json`, separate from the manuscript pin; never publish a task state other than planned without execution evidence, and never add roadmap items to the publication catalogue.
+
 ## Preserve the interface
 
 Retain the current design, English/Russian/Chinese navigation, local fonts, illustrations and licences. Manuscript bodies remain English unless an actual reviewed translation is supplied. Preserve the notice that Chinese interface text lacks native editorial review.
@@ -17,13 +19,15 @@ Keep complete text in prerendered HTML, accessible navigation and keyboard focus
 Use Node 24, Python 3 and Pandoc 3.1.3. Build from a clean checkout at the exact source pin:
 
 ```sh
-python3 -B scripts/build_publication.py --source-dir /absolute/path/to/knowledge-contract
+python3 -B scripts/build_publication.py --source-dir /absolute/path/to/knowledge-contract --roadmap-source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/check_publication.py
 python3 -B scripts/check_hygiene.py .
 python3 -B scripts/check_page.py public
 python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
+python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
 ```
 

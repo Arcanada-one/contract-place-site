@@ -253,21 +253,31 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-dir', type=Path, required=True)
     parser.add_argument('--manifest', type=Path, default=ROOT / 'publication-manifest.json')
+    parser.add_argument('--roadmap-source-dir', type=Path, required=True,
+                        help='clean checkout of the commit pinned in roadmap-manifest.json (independent of the manuscript pin)')
+    parser.add_argument('--roadmap-manifest', type=Path, default=ROOT / 'roadmap-manifest.json')
     args = parser.parse_args()
     source = args.source_dir.resolve()
     version = run(['pandoc', '--version']).splitlines()[0].split()[1]
     if version != PANDOC_VERSION:
         raise ValueError(f'Expected Pandoc {PANDOC_VERSION}, found {version}')
     manifest, documents = load_inputs(source, args.manifest)
+    # The roadmap is compiled and validated first: a stale pin, missing task or inconsistent graph
+    # stops the build before any generated file is written.
+    from roadmap import compile_roadmap
+    roadmap_source = args.roadmap_source_dir.resolve()
+    manuscripts = {d['path']: {'route': d['route'], 'source_sha256': d['sha256']} for d in documents}
+    roadmap = compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
     # Generate from the source before the JS build copies the current site assets.
     from publication_catalog import write_catalog
     renderer = Renderer(source, ROOT / 'src/site', manifest, documents)
-    write_catalog(source, ROOT, manifest, documents, renderer)
+    write_catalog(source, ROOT, manifest, documents, renderer, roadmap)
     print(run(['node', 'build.mjs'], cwd=ROOT).strip())
     from publication_checks import check_site
     count = check_site(ROOT / 'public')
     load_inputs(source, args.manifest)
-    print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}.')
+    compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
+    print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}; roadmap of {len(roadmap["tasks"])} planned tasks at {roadmap["pin"]["commit"]}.')
 
 
 if __name__ == '__main__':
