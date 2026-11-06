@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "fb410a8460677b229d2240ba0fb27d184f48aa61",
+  "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -16,6 +16,18 @@
   ],
   "document_language": "en",
   "documents": [
+    {
+      "type": "paper",
+      "slug": "human-meaning-and-computable-knowledge",
+      "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "title": "From Human Meaning to Contract-Governed Knowledge",
+      "summary": "A bounded foundation for preserving task-relevant distinctions between human expressions, formal representations, knowledge artifacts and authorized agent use.",
+      "language": "en",
+      "route": "/en/science/human-meaning-and-computable-knowledge/",
+      "sha256": "f5cdf5856b230cd8d406fc3aea584d33e81f06ef14a36ebabd238825b3526af7",
+      "math_count": 40,
+      "status": "research-draft"
+    },
     {
       "type": "paper",
       "slug": "semantic-objects-and-context",

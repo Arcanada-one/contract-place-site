@@ -225,8 +225,8 @@ def main() -> None:
         errors.append("roadmap.json tasks must be RM-01..RM-25, all planned")
     catalog = json.loads((ROOT / "src/content/catalog.json").read_text())
     publication = json.loads((public / "publication.json").read_text())
-    if len(catalog["records"]) != 29 or len(publication["documents"]) != 29 or "roadmap" in publication:
-        errors.append("the 29-document publication changed")
+    if len(catalog["records"]) != 30 or len(publication["documents"]) != 30 or "roadmap" in publication:
+        errors.append("the 30-document publication changed")
     if catalog["publication"]["commit"] != manuscript["commit"] or publication["commit"] != manuscript["commit"]:
         errors.append("the manuscript pin changed")
     if any("roadmap" in d["route"] or d["slug"].startswith("rm-") for d in publication["documents"]):

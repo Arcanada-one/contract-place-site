@@ -33,7 +33,7 @@ function generate(route,lang){
  const record=data.records.find(r=>r.route==='/en/'+bare+'/');
  if(record){
    const author={'@type':'Person',name:'Pavel Valentov',sameAs:'https://orcid.org/0009-0001-2567-4584'};
-   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source};
+   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source,...(record.status?{creativeWorkStatus:record.status}:{})};
    const block='<script type="application/ld+json">'+JSON.stringify(ld).replaceAll('<','\\u003c')+'</script>';
    return html.replace('</head>',block+'</head>');
  }
