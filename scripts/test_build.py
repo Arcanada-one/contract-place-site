@@ -6,7 +6,11 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import shutil
 from build_publication import Renderer, load_inputs, run, csp_table_classes
+from publication_checks import check_status_labels, STATUS_LABELS, LOCALES
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicationBuild(unittest.TestCase):
@@ -84,6 +88,87 @@ class PublicationBuild(unittest.TestCase):
         self.assertIn('class="table-align-right"', rendered)
         with self.assertRaises(ValueError):
             csp_table_classes('<td style="background:url(https://example.org/track)">Text</td>')
+
+
+
+
+class CatalogueStatusLabels(unittest.TestCase):
+    """A document with a catalogue status (research-draft) must be labelled on every page that shows it."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.records = json.loads((ROOT / "src/content/catalog.json").read_text())["records"]
+        cls.drafts = [r for r in cls.records if r.get("status") == "research-draft"]
+        if not cls.drafts:
+            raise unittest.SkipTest("no research-draft document in the pinned catalogue")
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.out = Path(self.temp.name)
+        for locale in LOCALES:
+            shutil.copytree(ROOT / "public" / locale, self.out / locale)
+        self.record = self.drafts[0]
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def page(self, locale, route):
+        return self.out / route.replace("/en/", f"/{locale}/", 1).strip("/") / "index.html"
+
+    def strip(self, path):
+        text = path.read_text(encoding="utf-8")
+        for label in STATUS_LABELS["research-draft"].values():
+            text = text.replace(f'<span class="status-badge">{label}</span>', "")
+        path.write_text(text, encoding="utf-8")
+
+    def test_control_built_site_is_labelled_everywhere_in_three_languages(self):
+        self.assertGreaterEqual(check_status_labels(self.out, self.records), 3 * 3)
+
+    def test_unlabelled_reading_page_fails_in_every_language(self):
+        for locale in LOCALES:
+            with self.subTest(locale=locale):
+                self.strip(self.page(locale, self.record["route"]))
+                with self.assertRaisesRegex(ValueError, "without the label"):
+                    check_status_labels(self.out, self.records)
+                shutil.copytree(ROOT / "public" / locale, self.out / locale, dirs_exist_ok=True)
+
+    def test_missing_draft_notice_fails(self):
+        path = self.page("en", self.record["route"])
+        path.write_text(path.read_text(encoding="utf-8").replace('class="draft-notice"', 'class="other"'), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "no draft notice"):
+            check_status_labels(self.out, self.records)
+
+    def test_unlabelled_listing_fails(self):
+        self.strip(self.out / "en/research/index.html")
+        with self.assertRaisesRegex(ValueError, "research/index.html: shows"):
+            check_status_labels(self.out, self.records)
+
+    def test_label_on_a_page_that_does_not_show_the_document_fails(self):
+        about = self.out / "en/about/index.html"
+        text = about.read_text(encoding="utf-8")
+        about.write_text(text.replace("<main", '<span class="status-badge">Research draft</span><main', 1), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "shows no such document"):
+            check_status_labels(self.out, self.records)
+
+    def test_status_without_public_label_fails(self):
+        records = [dict(self.record, status="accepted-ish")]
+        with self.assertRaisesRegex(ValueError, "without a public label"):
+            check_status_labels(self.out, records)
+
+    def test_unknown_catalogue_status_stops_the_build(self):
+        case = PublicationBuild("test_wrong_pin_rejected")
+        case.setUp()
+        try:
+            case.doc["status"] = "accepted-ish"
+            (case.source / "publication-catalog.json").write_text(json.dumps({"schema_version": 1, "edition": "1.0", "documents": [case.doc, case.target]}))
+            run(["git", "add", "."], cwd=case.source)
+            run(["git", "-c", "user.name=t", "-c", "user.email=t@example.invalid", "commit", "--quiet", "-m", "status"], cwd=case.source)
+            case.manifest["commit"] = run(["git", "rev-parse", "HEAD"], cwd=case.source).strip()
+            case.manifest_path.write_text(json.dumps(case.manifest))
+            with self.assertRaisesRegex(ValueError, "Unknown catalogue status"):
+                load_inputs(case.source, case.manifest_path)
+        finally:
+            case.tearDown()
 
 
 if __name__ == "__main__":

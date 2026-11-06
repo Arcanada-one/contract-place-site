@@ -58,3 +58,46 @@ def check_site(output: Path) -> int:
     if errors:
         raise ValueError("\n".join(errors))
     return len(pages)
+
+
+# Expected public labels for catalogue statuses, independent of the site code that renders them.
+STATUS_LABELS = {
+    "research-draft": {"en": "Research draft", "ru": "Исследовательский черновик", "zh-Hans": "研究草稿"},
+}
+LOCALES = ("en", "ru", "zh-Hans")
+
+
+def check_status_labels(output: Path, records: list[dict]) -> int:
+    """Every page that shows a document with a catalogue status must carry its label; no page may carry a label for
+    a document it does not show. Raises ValueError listing the failures; returns the number of labelled pages."""
+    import re
+    errors = []
+    unknown = sorted({r["status"] for r in records if r.get("status")} - set(STATUS_LABELS))
+    if unknown:
+        raise ValueError(f"Catalogue status without a public label: {unknown}")
+    drafts = [r for r in records if r.get("status")]
+    badge = re.compile(r'<span class="status-badge">([^<]*)</span>')
+    labelled = 0
+    for locale in LOCALES:
+        for page in sorted((output / locale).rglob("index.html")):
+            html = page.read_text(encoding="utf-8")
+            rel = page.relative_to(output).as_posix()
+            shown = set()
+            for record in drafts:
+                route = record["route"].replace("/en/", f"/{locale}/", 1)
+                label = STATUS_LABELS[record["status"]][locale]
+                is_own = rel == route.strip("/") + "/index.html"
+                links = html.count(f'href="{route}"')
+                if is_own or links:
+                    shown.add(label)
+                    if f'<span class="status-badge">{label}</span>' not in html:
+                        errors.append(f"{rel}: shows {record['id']} ({record['status']}) without the label {label!r}")
+                if is_own and 'class="draft-notice"' not in html:
+                    errors.append(f"{rel}: reading page of {record['id']} has no draft notice")
+            extra = [text for text in badge.findall(html) if text not in shown]
+            if extra:
+                errors.append(f"{rel}: status label {sorted(set(extra))} on a page that shows no such document")
+            labelled += bool(shown)
+    if errors:
+        raise ValueError("\n".join(errors))
+    return labelled

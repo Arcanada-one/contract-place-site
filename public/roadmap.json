@@ -3,7 +3,7 @@
   "status": "planned work; no execution state is published",
   "roadmap_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "fb410a8460677b229d2240ba0fb27d184f48aa61",
+    "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
     "files": [
       {
         "path": "ROADMAP.md",
@@ -39,7 +39,7 @@
   },
   "manuscript_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "fb410a8460677b229d2240ba0fb27d184f48aa61",
+    "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
     "edition": "1.1"
   },
   "same_commit": true,

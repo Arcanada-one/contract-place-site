@@ -2,7 +2,7 @@
 
 The source for [contract.place](https://contract.place). Publication edition **1.1** contains eight scientific papers, eleven engineering specifications, six engineering studies, a glossary, a bibliography and two appendices. Scientific arguments, normative requirements and observations have separate reading paths and explicit cross-references. This edition incorporates corrections to the published 1.0 corpus; its source review record distinguishes resolved findings from the remaining historical recovery gap.
 
-The interface retains the project's design, local fonts and illustrations in English, Russian and Chinese. **The 29 current manuscript texts are English.** Changing the interface language does not translate a manuscript. Earlier Russian texts remain traceable through the source-map appendix and pinned history. The Chinese interface has not received native editorial review.
+The interface retains the project's design, local fonts and illustrations in English, Russian and Chinese. **The 30 current manuscript texts are English.** Changing the interface language does not translate a manuscript. Earlier Russian texts remain traceable through the source-map appendix and pinned history. The Chinese interface has not received native editorial review.
 
 ## Reading structure
 
@@ -21,7 +21,7 @@ Full manuscripts are present in built HTML. Pandoc preserves equations as MathML
 
 ## Source identity and generated data
 
-`publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 29 canonical documents. The compiler generates their text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
+`publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 30 canonical documents. The compiler generates their text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
 
 `public/` is the complete deployment tree. Its `publication.json` records the source identity and document hashes. The catalogue also drives section indexes, sitemap and `llms.txt`. Do not edit generated HTML or replace manuscript paragraphs in generated data: change the canonical Markdown and rebuild.
 

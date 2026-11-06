@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit fb410a8460677b229d2240ba0fb27d184f48aa61.
+Publication edition 1.1. Source commit f6d42ca1d1d1e09d678332d4fec2311aa847d695.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
@@ -18,6 +18,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 
 ## Publication documents
 
+- [From Human Meaning to Contract-Governed Knowledge](https://contract.place/en/science/human-meaning-and-computable-knowledge/): paper (research draft, not an accepted paper).
 - [Semantic Objects, Context, and Conditions of Applicability](https://contract.place/en/science/semantic-objects-and-context/): paper.
 - [Constrained Transformations and the Limits of Knowledge Transfer](https://contract.place/en/science/constrained-transformations/): paper.
 - [Retrieval, Coverage, and Context Composition under Resource Limits](https://contract.place/en/science/retrieval-and-context-composition/): paper.

@@ -29,6 +29,8 @@ GITHUB = "https://github.com/" + REPOSITORY
 PANDOC_VERSION = "3.1.3"
 CC = "https://creativecommons.org/licenses/by/4.0/"
 APACHE = "https://www.apache.org/licenses/LICENSE-2.0"
+# Catalogue status values the site knows how to label. An unknown status stops the build (never silently shown as accepted).
+STATUSES = {"research-draft"}
 KINDS = {
     "paper": ("Scientific paper", "/en/science/", "Science"),
     "specification": ("Engineering specification", "/en/engineering/specifications/", "Specifications"),
@@ -108,6 +110,8 @@ def load_inputs(source: Path, manifest_path: Path, allow_uncommitted: bool = Fal
             raise ValueError(f"Catalog file missing: {path}")
         if doc.get("language", "en") != "en":
             raise ValueError(f"Reader catalog requires an English publication text: {path}")
+        if "status" in doc and doc["status"] not in STATUSES:
+            raise ValueError(f"Unknown catalogue status {doc['status']!r} for {path}; the site labels only {sorted(STATUSES)}")
         doc["route"] = KINDS[doc["type"]][1] + doc["slug"] + "/"
         if path in paths or doc["route"] in routes:
             raise ValueError(f"Duplicate catalog path or route: {path}")
@@ -275,6 +279,8 @@ def main() -> None:
     print(run(['node', 'build.mjs'], cwd=ROOT).strip())
     from publication_checks import check_site
     count = check_site(ROOT / 'public')
+    from publication_checks import check_status_labels
+    check_status_labels(ROOT / 'public', json.loads((ROOT / 'src/content/catalog.json').read_text())['records'])
     load_inputs(source, args.manifest)
     compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
     print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}; roadmap of {len(roadmap["tasks"])} planned tasks at {roadmap["pin"]["commit"]}.')

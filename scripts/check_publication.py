@@ -6,7 +6,7 @@ from collections import Counter
 import json
 from pathlib import Path
 import re
-from publication_checks import check_site
+from publication_checks import check_site, check_status_labels
 
 ROOT = Path(__file__).resolve().parents[1]
 public = ROOT / 'public'
@@ -17,11 +17,11 @@ assert not published.get('preview')
 for key in ('schema_version', 'commit', 'edition', 'repository', 'catalog'):
     assert published[key] == manifest[key] == catalog['publication'][key], key
 assert Counter(d['type'] for d in published['documents']) == {
-    'paper': 8, 'specification': 11, 'study': 6, 'glossary': 1,
+    'paper': 9, 'specification': 11, 'study': 6, 'glossary': 1,
     'bibliography': 1, 'appendix': 2,
 }, 'Publication inventory is incomplete'
 records = {r['route']: r for r in catalog['records']}
-assert len(records) == 29
+assert len(records) == 30
 equations = 0
 for doc in published['documents']:
     record = records[doc['route']]
@@ -57,4 +57,6 @@ for page in public.rglob('*.html'):
     html = page.read_text()
     assert 'src="/content.js?v=' + manifest['commit'] + '"' in html, 'Unversioned publication catalog: ' + str(page)
 count = check_site(public)
-print(f'Publication checks OK: 29 full documents / 87 localized reading pages, {equations} original MathML expressions, {count} pages; exact body and source bindings.')
+labelled = check_status_labels(public, catalog['records'])
+assert all(d.get('status') == records[d['route']].get('status') for d in published['documents']), 'publication.json status differs from the catalogue'
+print(f'Publication checks OK: 30 full documents / 90 localized reading pages, {equations} original MathML expressions, {count} pages, {labelled} pages carry a catalogue-status label; exact body and source bindings.')
