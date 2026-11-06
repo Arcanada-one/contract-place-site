@@ -139,7 +139,7 @@ const statusNotes={'research-draft':['This is a research draft. It is published 
 function statusOf(r){if(!r.status)return '';if(!statusLabels[r.status])throw new Error('Catalogue status has no label: '+r.status);return r.status;}
 function statusLabel(r){const s=statusOf(r);return s?statusLabels[s][langs.indexOf(locale)]:'';}
 function statusBadge(r){const l=statusLabel(r);return l?`<span class="status-badge">${esc(l)}</span>`:'';}
-function statusNote(r){const s=statusOf(r);return s?`<p class="draft-notice" role="note"><strong>${esc(statusLabel(r))}.</strong> ${esc(statusNotes[s][langs.indexOf(locale)])}</p>`:'';}
+function statusNote(r){const s=statusOf(r);return s?`<p class="draft-notice" role="note"><strong>${esc(statusLabel(r))}${locale==='zh-Hans'?'。':'.'}</strong>${locale==='zh-Hans'?'':' '}${esc(statusNotes[s][langs.indexOf(locale)])}</p>`:'';}
 function paperCategory(r){return r.category;}
 function paperCard(r){
 return `<article class="paper-card"><a href="${url(recordPath(r))}" class="paper-cover" aria-label="${esc(r.title)}">${cover(r)}<span class="cover-id">${recordLabel(r)}</span></a><div class="paper-content"><div class="metadata"><span>${t('publicationEdition')} ${esc(corpus.publication.edition)}</span><span>${t('englishText')}</span>${statusBadge(r)}</div><h3><a href="${url(recordPath(r))}">${esc(r.title)}</a></h3><p lang="en">${esc(r.summary)}</p>${link(recordPath(r),t('readPaper'))}</div></article>`;

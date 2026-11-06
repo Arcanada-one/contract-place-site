@@ -138,6 +138,18 @@ class CatalogueStatusLabels(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "no draft notice"):
             check_status_labels(self.out, self.records)
 
+    def test_zh_hans_notice_lead_ends_with_chinese_full_stop(self):
+        zh = self.page("zh-Hans", self.record["route"])
+        text = zh.read_text(encoding="utf-8")
+        self.assertIn("<strong>研究草稿。</strong>", text)  # control: the built page
+        self.assertNotIn("研究草稿.", text)
+        check_status_labels(self.out, self.records)
+        zh.write_text(text.replace("<strong>研究草稿。</strong>", "<strong>研究草稿.</strong>"), encoding="utf-8")  # negative control
+        with self.assertRaisesRegex(ValueError, "Chinese full stop"):
+            check_status_labels(self.out, self.records)
+        en = self.page("en", self.record["route"])
+        self.assertIn("<strong>Research draft.</strong> ", en.read_text(encoding="utf-8"))  # en/ru keep the ASCII stop
+
     def test_unlabelled_listing_fails(self):
         self.strip(self.out / "en/research/index.html")
         with self.assertRaisesRegex(ValueError, "research/index.html: shows"):

@@ -94,6 +94,9 @@ def check_status_labels(output: Path, records: list[dict]) -> int:
                         errors.append(f"{rel}: shows {record['id']} ({record['status']}) without the label {label!r}")
                 if is_own and 'class="draft-notice"' not in html:
                     errors.append(f"{rel}: reading page of {record['id']} has no draft notice")
+            for lead in re.findall(r'<p class="draft-notice"[^>]*><strong>([^<]*)</strong>', html):
+                if locale == "zh-Hans" and not lead.endswith("。"):
+                    errors.append(f"{rel}: zh-Hans notice lead {lead!r} must end with the Chinese full stop 。, not an ASCII '.'")
             extra = [text for text in badge.findall(html) if text not in shown]
             if extra:
                 errors.append(f"{rel}: status label {sorted(set(extra))} on a page that shows no such document")
