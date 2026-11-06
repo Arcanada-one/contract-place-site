@@ -33,16 +33,18 @@ An edition number identifies the documents. It does not certify scientific valid
 
 Use **Node.js 24**, Python 3.10 or newer, Git and **Pandoc 3.1.3**. The workflow uses Ubuntu 24.04 for the tested Pandoc version. Building makes no network requests.
 
-Obtain a clean knowledge checkout at the exact commit in `publication-manifest.json`, then run:
+Obtain a clean knowledge checkout at the exact commit in `publication-manifest.json` and a second clean checkout at the commit in `roadmap-manifest.json` (they may differ), then run:
 
 ```sh
-python3 -B scripts/build_publication.py --source-dir /absolute/path/to/knowledge-contract
+python3 -B scripts/build_publication.py --source-dir /absolute/path/to/knowledge-contract --roadmap-source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/check_publication.py
 python3 -B scripts/check_hygiene.py .
 python3 -B scripts/check_page.py public
 python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
+python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
 python3 -m http.server 8000 --directory public
 ```
@@ -50,6 +52,12 @@ python3 -m http.server 8000 --directory public
 Open `http://localhost:8000/en/`. Commit generated catalogue, provenance and `public/` with their source pin. `node build.mjs` reproduces the site from already compiled data for interface-only work; it does not reread Markdown. A source change requires the full Python compiler. Source commit and cleanliness are checked before and after compilation.
 
 Edit the interface in `src/site/app.js`, CSS in `src/site/style.css` and assets in `src/site/assets/`. Preserve [design decisions](src/DESIGN.md) and asset notices. Rendering dependencies and visual assets are local; no browser rendering CDN is required.
+
+## Research roadmap
+
+`/en/roadmap/`, `/ru/roadmap/` and `/zh-Hans/roadmap/` show the Knowledge Contract research roadmap as **planned work**: 25 task cards (`#rm-01` … `#rm-25`), priority bands, required and advisory dependencies as text tables, and links to the versioned sources. The task text is English on all three routes; the localized pages only translate navigation and labels. No task shows an execution state, date or progress, because none is synchronized: every task reads "planned".
+
+The roadmap has its own pin, `roadmap-manifest.json`: repository, a full 40-character commit and the SHA-256 of each source file (`ROADMAP.md`, `roadmap/TASKS.md`, `roadmap/dependencies.json`, the linked `roadmap/EXPERIMENTS.md` and `roadmap/FOUNDATIONS_RELEASE_PLAN.md` (linked at the pin, not rendered), and `roadmap/SITE_DELIVERY.md`, from which only the public introduction is taken). It is independent of `publication-manifest.json`; the page shows both commits and states that they are separate. `scripts/roadmap.py` refuses a pin that is not a full commit, a checkout at another commit or with uncommitted changes, a hash mismatch, a missing or duplicate task, any disagreement between a card and `dependencies.json` (priority, owner, required outputs), a dangling or cyclic edge, any task state other than planned, and private identifiers. Compilation happens before any generated file is written. Known limit: the compiler checks structured state (task fields, `dependencies.json` keys, the one accepted `execution_bindings` value, dates), but it does not scan the free prose of card fields or of `ROADMAP.md` for status words such as "completed" or "active"; that text is published as written by the content owner, who reviews it. The TASKS.md preamble before the first card is rendered above the cards, and any unexpected text between a card header and its first field is refused. The roadmap is not part of the 29-document catalogue, and `public/roadmap.json` records its provenance.
 
 ## Search and API
 

@@ -70,3 +70,42 @@ html[data-theme=dark] .hero-art-bg{background-image:linear-gradient(90deg,#111c2
 /* Pandoc table presentation under the existing style-src self policy. */
 .table-align-left{text-align:left}.table-align-center{text-align:center}.table-align-right{text-align:right}
 col.table-width-1{width:1%}col.table-width-2{width:2%}col.table-width-3{width:3%}col.table-width-4{width:4%}col.table-width-5{width:5%}col.table-width-6{width:6%}col.table-width-7{width:7%}col.table-width-8{width:8%}col.table-width-9{width:9%}col.table-width-10{width:10%}col.table-width-11{width:11%}col.table-width-12{width:12%}col.table-width-13{width:13%}col.table-width-14{width:14%}col.table-width-15{width:15%}col.table-width-16{width:16%}col.table-width-17{width:17%}col.table-width-18{width:18%}col.table-width-19{width:19%}col.table-width-20{width:20%}col.table-width-21{width:21%}col.table-width-22{width:22%}col.table-width-23{width:23%}col.table-width-24{width:24%}col.table-width-25{width:25%}col.table-width-26{width:26%}col.table-width-27{width:27%}col.table-width-28{width:28%}col.table-width-29{width:29%}col.table-width-30{width:30%}col.table-width-31{width:31%}col.table-width-32{width:32%}col.table-width-33{width:33%}col.table-width-34{width:34%}col.table-width-35{width:35%}col.table-width-36{width:36%}col.table-width-37{width:37%}col.table-width-38{width:38%}col.table-width-39{width:39%}col.table-width-40{width:40%}col.table-width-41{width:41%}col.table-width-42{width:42%}col.table-width-43{width:43%}col.table-width-44{width:44%}col.table-width-45{width:45%}col.table-width-46{width:46%}col.table-width-47{width:47%}col.table-width-48{width:48%}col.table-width-49{width:49%}col.table-width-50{width:50%}col.table-width-51{width:51%}col.table-width-52{width:52%}col.table-width-53{width:53%}col.table-width-54{width:54%}col.table-width-55{width:55%}col.table-width-56{width:56%}col.table-width-57{width:57%}col.table-width-58{width:58%}col.table-width-59{width:59%}col.table-width-60{width:60%}col.table-width-61{width:61%}col.table-width-62{width:62%}col.table-width-63{width:63%}col.table-width-64{width:64%}col.table-width-65{width:65%}col.table-width-66{width:66%}col.table-width-67{width:67%}col.table-width-68{width:68%}col.table-width-69{width:69%}col.table-width-70{width:70%}col.table-width-71{width:71%}col.table-width-72{width:72%}col.table-width-73{width:73%}col.table-width-74{width:74%}col.table-width-75{width:75%}col.table-width-76{width:76%}col.table-width-77{width:77%}col.table-width-78{width:78%}col.table-width-79{width:79%}col.table-width-80{width:80%}col.table-width-81{width:81%}col.table-width-82{width:82%}col.table-width-83{width:83%}col.table-width-84{width:84%}col.table-width-85{width:85%}col.table-width-86{width:86%}col.table-width-87{width:87%}col.table-width-88{width:88%}col.table-width-89{width:89%}col.table-width-90{width:90%}col.table-width-91{width:91%}col.table-width-92{width:92%}col.table-width-93{width:93%}col.table-width-94{width:94%}col.table-width-95{width:95%}col.table-width-96{width:96%}col.table-width-97{width:97%}col.table-width-98{width:98%}col.table-width-99{width:99%}col.table-width-100{width:100%}
+
+/* Roadmap: planned work, cards and dependency tables. */
+.roadmap-notice{max-width:850px;margin-top:20px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:5px;background:var(--surface);font-size:16px;color:var(--ink)}
+.roadmap-body section{margin-bottom:56px}
+.roadmap-body h2{font-size:30px;margin-top:0;scroll-margin-top:90px}
+.roadmap-table table{min-width:880px;margin-bottom:0}
+.roadmap-table caption{text-align:start;padding:12px 18px;font-weight:600;color:var(--ink);caption-side:top}
+.roadmap-table th[scope=row]{min-width:260px;font-weight:600;text-align:start}
+.roadmap-table td{min-width:90px}
+.roadmap-table a,.roadmap-card a,.roadmap-band a{color:var(--teal)}
+.roadmap-table code.hash{white-space:normal;overflow-wrap:anywhere;word-break:break-all}
+.roadmap-bands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.roadmap-band{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:var(--surface);min-width:0}
+.roadmap-band h3{font-size:22px;margin:0 0 8px}
+.roadmap-band ul{margin:0;padding-inline-start:20px}
+.roadmap-band li{font-size:15px;line-height:1.5;padding-block:4px;overflow-wrap:anywhere}
+.roadmap-card{border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin-bottom:24px;background:var(--surface);min-width:0;scroll-margin-top:90px}
+.roadmap-card h3{font-size:24px;line-height:1.3;margin:0 0 6px;overflow-wrap:anywhere}
+.roadmap-card .rm-id{font-weight:700;color:var(--teal);margin-inline-end:6px;white-space:nowrap}
+.roadmap-card .metadata{padding-block:10px;margin-top:0;border-top:0}
+.roadmap-card .rm-status{font-weight:600;color:var(--ink)}
+.roadmap-relations{display:flex;flex-wrap:wrap;gap:6px 28px;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line);font-size:15px}
+.roadmap-relations dt{display:inline;font-weight:600;color:var(--ink)}
+.roadmap-relations dd{display:inline;margin:0 0 0 6px;color:var(--secondary)}
+.roadmap-fields{margin:0}
+.roadmap-fields>div{margin-bottom:14px}
+.roadmap-fields dt{font-weight:700;color:var(--ink);font-size:15px;text-transform:none}
+.roadmap-fields dd{margin:2px 0 0}
+.roadmap-fields dd p{font-size:17px;line-height:1.65;color:var(--secondary);margin:0 0 8px;overflow-wrap:anywhere}
+.roadmap-page .article-aside{overflow-x:hidden}
+.roadmap-page .article-aside nav a{overflow-wrap:anywhere}
+.roadmap-page .toc-task{display:inline-block;padding:4px 8px 4px 0;font-size:13px}
+.roadmap-body .source-body pre{background:var(--subtle);padding:14px 16px;border-radius:5px}
+@media(max-width:767px){
+  .roadmap-bands{grid-template-columns:minmax(0,1fr)}
+  .roadmap-card{padding:18px 16px}
+  .roadmap-card h3{font-size:21px}
+  .roadmap-table table{min-width:760px}
+}

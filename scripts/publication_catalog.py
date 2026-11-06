@@ -8,6 +8,8 @@ from pathlib import Path, PurePosixPath
 import posixpath
 import re
 
+from roadmap import provenance as roadmap_provenance
+
 
 def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[str, str]:
     """Resolve compatibility pages through actual source links, never guessed IDs."""
@@ -41,7 +43,7 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
     return aliases
 
 
-def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer) -> None:
+def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict) -> None:
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
     aliases = legacy_aliases(source, previous, documents)
@@ -76,6 +78,7 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
     payload = {
         'publication': manifest,
         'records': records, 'articles': previous['articles'], 'aliases': aliases,
+        'roadmap': roadmap,
         'source': 'https://contract.place/', 'license': 'CC-BY-4.0',
         'author': 'Pavel Valentov', 'retrieved': '2026-11-04',
     }
@@ -85,6 +88,7 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         'publication': manifest,
         'records': [{k: r[k] for k in ('id', 'type', 'path', 'source', 'source_sha256', 'revision')} for r in records],
         'articles': old_provenance['articles'],
+        'roadmap': roadmap_provenance(roadmap),
         'site_integration_base': '91da6a35b4234d409de4c0a0777ff9c469bc8400',
         'license': 'CC-BY-4.0', 'author': 'Pavel Valentov',
     }
