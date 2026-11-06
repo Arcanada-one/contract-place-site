@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit cf215dd8b740efc73439294f40f20f360349355a.
+Publication edition 1.1. Source commit ea0c30575d56e793fb2875df47126ab3f6dc30ad.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/

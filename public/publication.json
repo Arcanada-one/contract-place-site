@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "cf215dd8b740efc73439294f40f20f360349355a",
+  "commit": "ea0c30575d56e793fb2875df47126ab3f6dc30ad",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -24,7 +24,7 @@
       "summary": "A formal account of source interpretations, context, mandatory dependencies and conditions of applicability.",
       "language": "en",
       "route": "/en/science/semantic-objects-and-context/",
-      "sha256": "c3a3473e57ea472aef01613781e412f14d11321e4f05d05e6adf9f4535f697f8",
+      "sha256": "6e466fed142538a5b147568e3a9e3aa017018083af0a1c3ac33afa48758c4c84",
       "math_count": 47
     },
     {
@@ -90,7 +90,7 @@
       "summary": "The conditions under which saved knowledge may support a new task, recipient or execution.",
       "language": "en",
       "route": "/en/science/controlled-knowledge-reuse/",
-      "sha256": "87908092cf64bb2cdb0fa81e1295ad6788f45f9e3b9fe25946cdbb77d7564e0c",
+      "sha256": "aadd6e7ecfb43e5fa912ec81adb5f367ee167397b5ce603d2fd0848d89d21ea4",
       "math_count": 53
     },
     {
