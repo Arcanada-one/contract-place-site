@@ -197,7 +197,7 @@ return `<div class="container source-record publication-record roadmap-page"><di
 <section aria-labelledby="roadmap-bands"><h2 id="roadmap-bands">${t('roadmapBands')}</h2><div class="roadmap-bands">${bands}</div></section>
 <section aria-labelledby="roadmap-dependencies"><h2 id="roadmap-dependencies">${t('roadmapDependencies')}</h2><p>${t('roadmapDepsIntro')}</p>${roadmapTable(road)}</section>
 <section aria-labelledby="roadmap-advisory"><h2 id="roadmap-advisory">${t('roadmapAdvisory')}</h2>${advisory}</section>
-<section aria-labelledby="roadmap-tasks"><h2 id="roadmap-tasks">${t('roadmapTasks')}</h2>${road.tasks.map(roadmapCard).join('')}</section>
+<section aria-labelledby="roadmap-tasks"><h2 id="roadmap-tasks">${t('roadmapTasks')}</h2><div class="source-body prose" lang="en">${road.tasks_intro_html}</div>${road.tasks.map(roadmapCard).join('')}</section>
 <section class="document-citation" aria-labelledby="roadmap-source"><h2 id="roadmap-source">${t('roadmapSources')}</h2><p>${same?t('roadmapPinsSame'):t('roadmapPinsDiffer')}</p><div class="metadata"><span>${t('roadmapDefRevision')}: <code>${esc(road.revision)}</code></span><span>${t('roadmapBaseline')}: <code>${esc(road.baseline_commit)}</code></span><span>${t('roadmapEdition')} (${t('roadmapManuscriptCommit')}): ${esc(corpus.publication.edition)}</span></div><p lang="en"><strong>${t('roadmapExecution')}:</strong> ${esc(road.execution_bindings)}</p>${files}<p><a href="/roadmap.json">roadmap.json</a></p></section></article>
 <aside class="article-aside"><details class="reader-contents" open><summary>${t('roadmapContents')}</summary><nav aria-label="${t('roadmapContents')}">${toc}</nav></details></aside></div></div>`;
 }

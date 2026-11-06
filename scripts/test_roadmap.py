@@ -35,7 +35,7 @@ def card_text(n: int, reqs=None, owner="KC-Brain", priority="P1", extra="") -> s
 def deps_json(**changes) -> dict:
     nodes = [{"id": IDS[n - 1], "priority": "P1", "content_owner": "KC-Brain", "requires": requires(n)} for n in range(1, 26)]
     data = {"kind": "roadmap-dependencies", "revision": "fixture.1", "baseline_commit": "a" * 40, "execution_authority": "tracker",
-            "execution_bindings": "unverified", "target_dates": None, "edge_semantics": "requires_output", "nodes": nodes,
+            "execution_bindings": roadmap.EXECUTION_BINDINGS, "target_dates": None, "edge_semantics": "requires_output", "nodes": nodes,
             "advisory_links": [{"from": "RM-03", "to": "RM-02", "kind": "informs_not_blocks"}]}
     data.update(changes)
     return data
@@ -208,6 +208,49 @@ class RoadmapCompiler(unittest.TestCase):
         self.assertEqual([f["label"] for f in card["fields"]][:4], ["Gap", "Work", "Scope separation", "Deliverables"])
         self.write(tasks=tasks(True))
         self.fails("RM-18: card fields")
+
+    def test_execution_bindings_accepts_only_the_known_value(self):
+        for text in ("RM-03 completed; RM-05 active, 60% done", "unverified", roadmap.EXECUTION_BINDINGS + " ", "", None, ["x"]):
+            self.write(deps=deps_json(execution_bindings=text))
+            self.fails("execution_bindings must be exactly")
+        self.write(deps=deps_json())
+        self.assertEqual(self.compile()["execution_bindings"], roadmap.EXECUTION_BINDINGS)  # negative control
+
+    def test_unknown_top_level_key_rejected(self):
+        self.write(deps=deps_json(task_states={"RM-03": "completed"}))
+        self.fails("unexpected top-level key")
+
+    def test_colon_label_cannot_bypass_the_field_set(self):
+        for label in ("**Status:** active", "**Progress:** 60%", "**Status**: done"):
+            tasks = "# Tasks\n\n" + "".join(
+                card_text(n).replace("**Acceptance.**", label + "\n\n**Acceptance.**") if n == 5 else card_text(n) for n in range(1, 26))
+            self.write(tasks=tasks)
+            self.fails("RM-05: card fields")
+        self.write()  # negative control: the unmodified cards compile
+        self.compile()
+
+    def test_scope_separation_allowed_only_on_rm18(self):
+        scope = "**Scope separation.** Scope sentence.\n\n"
+        tasks = "# Tasks\n\n" + "".join(
+            card_text(n).replace("**Deliverables.**", scope + "**Deliverables.**") if n == 7 else card_text(n) for n in range(1, 26))
+        self.write(tasks=tasks)
+        self.fails("RM-07: card fields")
+
+    def test_text_between_header_and_first_field_rejected(self):
+        tasks = "# Tasks\n\n" + "".join(
+            card_text(n).replace("**Gap.**", "Authored by somebody; status active.\n\n**Gap.**") if n == 4 else card_text(n) for n in range(1, 26))
+        self.write(tasks=tasks)
+        self.fails("RM-04: unexpected text between the card header")
+
+    def test_tasks_preamble_is_kept_for_rendering(self):
+        self.write(tasks="---\ntitle: t\n---\n\n# Tasks\n\nPreamble statement of authorship.\n\n" + "".join(card_text(n) for n in range(1, 26)))
+        record = self.compile()
+        self.assertIn("Preamble statement of authorship", record["tasks_intro_html"])
+
+    def test_internal_host_and_mailbox_names_rejected(self):
+        for leak in ("see arcana-devs host", "the dev-ai box", "file in inbox/contract-place", "via kc-mail", "node.tail1234.ts.net"):
+            self.write(roadmap_md=f"---\ntitle: x\n---\n\n# Roadmap\n\n## 1. Scope\n\nText: {leak}.\n")
+            self.fails("internal host name or mailbox path|private")
 
     # --- status and privacy ------------------------------------------------------------------
     def test_non_planned_status_without_evidence_rejected(self):

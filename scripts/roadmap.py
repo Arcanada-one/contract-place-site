@@ -43,6 +43,7 @@ FIELDS = [
 ]
 # One optional field (RM-18 "Scope separation", source revision fb410a84) may follow Work; nothing else is tolerated.
 OPTIONAL_FIELD = ("scope", "Scope separation")
+OPTIONAL_FIELD_CARD = "RM-18"
 FIELD_ORDERS = (FIELDS, FIELDS[:2] + [OPTIONAL_FIELD] + FIELDS[2:])
 PANDOC_FROM = "markdown+gfm_auto_identifiers+pipe_tables+tex_math_dollars+tex_math_single_backslash+autolink_bare_uris"
 # Private or internal details never belong on the public page.
@@ -51,7 +52,13 @@ PRIVATE = [
     (re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b"), "IPv4 address"),
     (re.compile(r"/home/|/Users/|arcanada-inbox|\.claude/|\bwss?://|\.internal\b|\.local\b"), "internal path or host"),
     (re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+"), "e-mail address"),
+    (re.compile(r"\barcana-[a-z]+|dev-ai|\binbox/|kc-mail|\.ts\.net", re.I), "internal host name or mailbox path"),
 ]
+# Known value of the only free-text execution field; anything else could publish a task state.
+EXECUTION_BINDINGS = "unverified; RM labels are not work-item IDs"
+TOP_LEVEL_KEYS = {"kind", "revision", "baseline_commit", "execution_authority", "execution_bindings", "target_dates",
+                  "edge_semantics", "preparation_sequence_policy", "nodes", "advisory_links"}
+CARD_LABEL = re.compile(r"(?m)^\*\*([^*\n]+?)(?:[.:]\*\*|\*\*\s*[.:])")
 
 
 def run(command: list[str], text: str | None = None, cwd: Path | None = None) -> str:
@@ -129,10 +136,15 @@ def check_graph(deps: dict) -> dict[str, dict]:
         missing = sorted(set(TASK_IDS) - set(by_id))
         extra = sorted(set(by_id) - set(TASK_IDS))
         raise ValueError(f"Dependency graph must contain exactly RM-01..RM-25 once each (missing {missing}, unexpected {extra})")
+    if deps.get("execution_bindings") != EXECUTION_BINDINGS:
+        raise ValueError(f"dependencies.json execution_bindings must be exactly {EXECUTION_BINDINGS!r}; any other text could publish a task state")
     if deps.get("target_dates") is not None:
         raise ValueError("The roadmap defines no target dates; a dated promise cannot be published without accepted estimates")
     if set(deps) & STATUS_KEYS:
         raise ValueError("dependencies.json carries execution state; this delivery publishes planned work only")
+    unknown_keys = set(deps) - TOP_LEVEL_KEYS
+    if unknown_keys:
+        raise ValueError(f"dependencies.json has unexpected top-level key(s) {sorted(unknown_keys)}; only planned-work fields are published")
     for node in by_id.values():
         if len(set(node["requires"])) != len(node["requires"]):
             raise ValueError(f"{node['id']}: duplicate required dependency")
@@ -144,6 +156,8 @@ def check_graph(deps: dict) -> dict[str, dict]:
     # Required edges must be acyclic (depth-first search with an explicit path for the diagnostic).
     state: dict[str, int] = {}
     def visit(task: str, path: list[str]) -> None:
+        if task not in by_id:
+            raise ValueError(f"Cycle search reached unknown task {task!r}")
         if state.get(task) == 2:
             return
         if state.get(task) == 1:
@@ -193,9 +207,16 @@ def split_cards(text: str) -> dict[str, dict]:
             raise ValueError(f"{ident}: title or priority/owner/required-output header missing")
         required = [] if header[3].strip() == "none" else [x.strip() for x in header[3].split(",")]
         rest = body[header.end():]
-        found = list(re.finditer(r"(?m)^\*\*([A-Za-z ]+)\.\*\* ", rest))
-        labels = [m[1] for m in found]
-        order = next((o for o in FIELD_ORDERS if labels == [label for _, label in o]), None)
+        found = list(CARD_LABEL.finditer(rest))
+        labels = [m[1].strip() for m in found]
+        before = rest[:found[0].start()] if found else rest
+        if before.strip():
+            raise ValueError(f"{ident}: unexpected text between the card header and the first field: {before.strip()[:80]!r}")
+        between = body[title.end():header.start()]
+        if between.strip():
+            raise ValueError(f"{ident}: unexpected text between the title and the card header: {between.strip()[:80]!r}")
+        allowed = FIELD_ORDERS if ident == OPTIONAL_FIELD_CARD else FIELD_ORDERS[:1]
+        order = next((o for o in allowed if labels == [label for _, label in o]), None)
         if order is None:
             raise ValueError(f"{ident}: card fields {labels} differ from the expected {[label for _, label in FIELDS]}")
         fields = {}
@@ -204,6 +225,12 @@ def split_cards(text: str) -> dict[str, dict]:
             fields[order[index][0]] = rest[match.end():end].strip()
         cards[ident] = {"id": ident, "title": title[1].strip(), "priority": header[1], "owner": header[2].strip(), "requires": required, "fields": fields}
     return cards
+
+
+def tasks_preamble(text: str) -> str:
+    """The TASKS.md text before the first card (front matter and the H1 title removed); it is rendered, never dropped."""
+    head = re.split(r"(?m)^## (?=RM-)", text, maxsplit=1)[0]
+    return re.sub(r"\A---\n.*?\n---\n", "", head, count=1, flags=re.S).strip()
 
 
 def extract_introduction(text: str) -> str:
@@ -328,6 +355,8 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
     introduction = extract_introduction((source / "roadmap/SITE_DELIVERY.md").read_text(encoding="utf-8"))
     overview_text = (source / "ROADMAP.md").read_text(encoding="utf-8")
     overview_text = re.sub(r"\A---\n.*?\n---\n", "", overview_text, count=1, flags=re.S)
+    preamble = tasks_preamble((source / "roadmap/TASKS.md").read_text(encoding="utf-8"))
+    preamble_html, _ = roadmap.markdown(preamble, "roadmap/TASKS.md", shift=1, prefix="tasks-", drop_title=True)
     overview_html, overview_toc = roadmap.markdown(overview_text, "ROADMAP.md", shift=1, prefix="src-", drop_title=True)
     needed_by = {ident: [] for ident in TASK_IDS}
     for ident in TASK_IDS:
@@ -358,7 +387,7 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         "revision": deps.get("revision"), "baseline_commit": deps.get("baseline_commit"),
         "execution_authority": deps.get("execution_authority"), "execution_bindings": deps.get("execution_bindings"),
         "edge_semantics": deps.get("edge_semantics"),
-        "introduction": introduction, "overview_html": overview_html, "overview_toc": overview_toc,
+        "introduction": introduction, "tasks_intro": preamble, "tasks_intro_html": preamble_html, "overview_html": overview_html, "overview_toc": overview_toc,
         "tasks": tasks, "advisory": advisory,
         "required_edges": sum(len(n["requires"]) for n in nodes.values()),
     }

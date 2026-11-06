@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 from hashlib import sha256
+from html import unescape
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -145,6 +146,15 @@ def main() -> None:
                     errors.append(where + f"{ident} {label}: source text missing from the built page")
             if not contains(stream, tokens(card["title"])):
                 errors.append(where + f"{ident}: title missing")
+        # The TASKS.md preamble (authorship and scope statements) is rendered above the cards.
+        for block in re.split(r"\n\s*\n", roadmap.tasks_preamble((source / "roadmap/TASKS.md").read_text(encoding="utf-8"))):
+            block = block.strip()
+            if block and not block.startswith("#") and not contains(stream, tokens(markdown_plain(block))):
+                errors.append(where + f"TASKS.md preamble paragraph missing: {block[:60]!r}")
+        # The rendered execution-state text must be exactly the one known value (no status can ride in this field).
+        shown = re.findall(r'<p lang="en"><strong>[^<]*:</strong> ([^<]*)</p>', html)
+        if [unescape(x) for x in shown] != [roadmap.EXECUTION_BINDINGS]:
+            errors.append(where + f"execution-state text must be exactly {roadmap.EXECUTION_BINDINGS!r} (found {shown})")
         # Every ROADMAP.md paragraph and list item is present (the page renders the document in full).
         for block in re.split(r"\n\s*\n", overview):
             block = block.strip()
