@@ -12,6 +12,7 @@ import copy
 from hashlib import sha256
 import json
 from pathlib import Path
+import posixpath
 import re
 import shutil
 import subprocess
@@ -21,7 +22,8 @@ import unittest
 
 from build_publication import Renderer, load_inputs, run
 from publication_checks import check_renditions
-from renditions import RenditionError, compile_renditions
+from renditions import RenditionError, compile_renditions, tree_paths
+from renditions_dry_run import audit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -50,7 +52,7 @@ $$a + b = c$$
 SYN_CODE_ID = "alpha"
 ```
 
-See the [companion](../synthetic-beta/PAPER.md#limits) and the [limits](#limits).
+See the [companion](../synthetic-beta/PAPER.md#limits), the [limits](#limits) and the [schema](../../schemas/synthetic.schema.json).
 
 A note.[^n]
 
@@ -99,7 +101,7 @@ $$a + b = c$$
 SYN_CODE_ID = "alpha"
 ```
 
-СМ. [ТЕСТ СОСЕД](../../../papers/synthetic-beta/PAPER.md#limits) И [ТЕСТ ПРЕДЕЛЫ](#predely).
+СМ. [ТЕСТ СОСЕД](../synthetic-beta/PAPER.md#limits), [ТЕСТ ПРЕДЕЛЫ](#predely) И [ТЕСТ СХЕМА](../../schemas/synthetic.schema.json).
 
 ТЕСТ СНОСКИ.[^n]
 
@@ -133,7 +135,7 @@ $$a + b = c$$
 SYN_CODE_ID = "alpha"
 ```
 
-参见[测试邻篇](../../../papers/synthetic-beta/PAPER.md#limits)和[测试界限](#jiexian)。
+参见[测试邻篇](../synthetic-beta/PAPER.md#limits)、[测试界限](#jiexian)和[测试模式](../../schemas/synthetic.schema.json)。
 
 测试脚注。[^n]
 
@@ -161,18 +163,51 @@ language: "ru"
 
 ТЕСТ.
 '''
+EN_GAMMA = '''---
+name: "synthetic-gamma"
+title: "Synthetic Gamma"
+language: "en"
+---
+
+# Synthetic Gamma
+
+SYNTHETIC TEST DATA, NOT A MANUSCRIPT.
+
+## Scope {#scope}
+
+Scope paragraph.
+'''
+RU_GAMMA = '''---
+name: "synthetic-gamma"
+title: "ТЕСТ ГАММА"
+language: "ru"
+---
+
+# ТЕСТ ГАММА
+
+СИНТЕТИЧЕСКИЕ ТЕСТОВЫЕ ДАННЫЕ.
+
+## ТЕСТ ОБЛАСТЬ {#oblast}
+
+ТЕСТ.
+'''
+SCHEMA = '{"synthetic": "invariant artifact"}\n'
 CATALOG = {"schema_version": 1, "edition": "1.1", "documents": [
     {"type": "paper", "slug": "synthetic-alpha", "title": "Synthetic Alpha", "path": "papers/synthetic-alpha/PAPER.md", "summary": "Synthetic test data.", "language": "en"},
     {"type": "paper", "slug": "synthetic-beta", "title": "Synthetic Beta", "path": "papers/synthetic-beta/PAPER.md", "summary": "Synthetic test data.", "language": "en"},
 ]}
+CATALOG_GAMMA = dict(CATALOG, documents=CATALOG["documents"] + [
+    {"type": "paper", "slug": "synthetic-gamma", "title": "Synthetic Gamma", "path": "papers/synthetic-gamma/PAPER.md", "summary": "Synthetic test data.", "language": "en"}])
 REVIEW_OK = {"status": "reviewed", "scope": "full", "method": "synthetic test review; no real review took place",
              "reviewers": [{"kind": "agent", "ref": "test-fixture-reviewer"}], "evidence": ["test-evidence-ref"],
              "limits": "SYNTHETIC TEST DATA; agent-only, non-blind"}
 REVIEW_NONE = {"status": "unreviewed", "scope": "full", "method": "", "reviewers": [], "evidence": [], "limits": ""}
 SECTIONS_RU = [{"source": "rules", "rendition": "pravila"}, {"source": "limits", "rendition": "predely"}]
 SECTIONS_ZH = [{"source": "rules", "rendition": "guize"}, {"source": "limits", "rendition": "jiexian"}]
-ALPHA, BETA = "papers/synthetic-alpha/PAPER.md", "papers/synthetic-beta/PAPER.md"
-REN = {"ru": "renditions/ru/synthetic-alpha/PAPER.md", "zh-Hans": "renditions/zh-Hans/synthetic-alpha/PAPER.md", "beta-ru": "renditions/ru/synthetic-beta/PAPER.md"}
+ALPHA, BETA, GAMMA = "papers/synthetic-alpha/PAPER.md", "papers/synthetic-beta/PAPER.md", "papers/synthetic-gamma/PAPER.md"
+# The real layout of the knowledge repository: translations/<language>/<same source-relative path>.
+REN = {"ru": "translations/ru/" + ALPHA, "zh-Hans": "translations/zh-Hans/" + ALPHA, "beta-ru": "translations/ru/" + BETA, "gamma-ru": "translations/ru/" + GAMMA}
+SCHEMA_PATH, DECOY_PATH = "schemas/synthetic.schema.json", "translations/ru/schemas/decoy.json"  # the decoy exists only where a naive resolution would look
 GIT = ["git", "-c", "user.name=Synthetic fixture", "-c", "user.email=fixture@example.invalid"]
 
 
@@ -194,14 +229,20 @@ class Scenario:
     """A synthetic knowledge repository in four commits: sources, renditions, a later source edit, then the sidecar."""
 
     def __init__(self, root: Path, *, alpha_ru=RU_ALPHA, alpha_zh=ZH_ALPHA, mutate_sidecar=None, via="catalog",
-                 after_renditions=None, review_ru=REVIEW_OK, review_zh=REVIEW_NONE, alpha_en=EN_ALPHA, renditions_first=False, side_source=False):
+                 after_renditions=None, review_ru=REVIEW_OK, review_zh=REVIEW_NONE, alpha_en=EN_ALPHA, renditions_first=False, side_source=False,
+                 gamma=False, extra_sources=None):
         review_ru, review_zh = copy.deepcopy(review_ru), copy.deepcopy(review_zh)
         self.root = root
         self.source = root / "source"
         self.source.mkdir()
         run(["git", "init", "--quiet"], cwd=self.source)
-        sources = {ALPHA: alpha_en, BETA: EN_BETA, "publication-catalog.json": json.dumps(CATALOG)}
-        renditions = {REN["ru"]: alpha_ru, REN["zh-Hans"]: alpha_zh, REN["beta-ru"]: RU_BETA}
+        self.catalog = CATALOG_GAMMA if gamma else CATALOG
+        sources = {ALPHA: alpha_en, BETA: EN_BETA, SCHEMA_PATH: SCHEMA, "publication-catalog.json": json.dumps(self.catalog)}
+        sources.update(extra_sources or {})
+        renditions = {REN["ru"]: alpha_ru, REN["zh-Hans"]: alpha_zh, REN["beta-ru"]: RU_BETA, DECOY_PATH: "{}\n"}
+        if gamma:
+            sources[GAMMA] = EN_GAMMA
+            renditions[REN["gamma-ru"]] = RU_GAMMA
         if renditions_first:  # the renditions' bytes exist before the source revision that they claim to render
             self.c2 = commit(self.source, renditions, "renditions")
             self.c1 = commit(self.source, sources, "sources")
@@ -226,13 +267,16 @@ class Scenario:
             {"work": "synthetic-beta", "language": "ru", "script": "Cyrl", "source": dict(pin(BETA, self.c1, EN_BETA), language="en"),
              "rendition": pin(REN["beta-ru"], self.c2, RU_BETA), "review": copy.deepcopy(REVIEW_OK), "sections": [{"source": "limits", "rendition": "predely"}], "counts_as_independent_source": False},
         ]}
+        if gamma:
+            sidecar["renditions"].append({"work": "synthetic-gamma", "language": "ru", "script": "Cyrl", "source": dict(pin(GAMMA, self.c1, EN_GAMMA), language="en"),
+                                          "rendition": pin(REN["gamma-ru"], self.c2, RU_GAMMA), "review": copy.deepcopy(REVIEW_NONE), "sections": [{"source": "scope", "rendition": "oblast"}], "counts_as_independent_source": False})
         sidecar = copy.deepcopy(sidecar)  # never share the module-level constants with a mutation
         if mutate_sidecar:
             mutate_sidecar(sidecar)
         self.sidecar = sidecar
         self.fixture_file = None
         if via == "catalog":
-            catalog = dict(CATALOG, renditions="publication-renditions.json")
+            catalog = dict(self.catalog, renditions="publication-renditions.json")
             self.head = commit(self.source, {"publication-renditions.json": json.dumps(sidecar, indent=1), "publication-catalog.json": json.dumps(catalog)}, "sidecar")
         else:
             self.head = self.c3
@@ -295,7 +339,9 @@ class CompilerPositiveControls(Base):
         self.assertEqual(ru["source"]["sha256"], sha256_text(EN_ALPHA))
         self.assertEqual(ru["rendition"]["sha256"], sha256_text(RU_ALPHA))
         self.assertIs(ru["counts_as_independent_source"], False)
-        self.assertIn('/en/', ru["html"])  # cross-document link resolved to the catalogued route
+        # The sibling link goes to the same interface language; the stale sibling is linked with an explicit English-fallback state.
+        self.assertRegex(ru["html"], r'<a href="/ru/science/synthetic-beta/#limits"[^>]*data-target-state="stale"[^>]*data-fallback="en"')
+        self.assertNotIn('"/en/science/synthetic-beta/', ru["html"])
         zh = compiled.for_work("synthetic-alpha")["zh-Hans"]
         self.assertEqual(zh["state"], "unreviewed")
         self.assertIn("测试结尾", zh["html"])
@@ -378,6 +424,7 @@ class CompilerNegativeControls(Base):
     def test_source_path_not_the_catalogued_document(self):
         def other(sidecar):
             sidecar["renditions"][0]["source"]["path"] = BETA
+            sidecar["renditions"][0]["rendition"]["path"] = REN["beta-ru"]  # keep the mirrored layout valid so that the pin is what fails
         self.refused("RENDITION_SOURCE_PIN", mutate_sidecar=other)
 
     def test_unknown_work_and_duplicate(self):
@@ -428,7 +475,6 @@ class CompilerNegativeControls(Base):
     def test_english_text_labelled_russian(self):
         english_as_russian = swap(EN_ALPHA.replace("synthetic-alpha", "synthetic-alpha"), 'language: "en"', 'language: "ru"')
         english_as_russian = english_as_russian.replace("## Rules {#rules}", "## Rules {#pravila}").replace("## Limits {#limits}", "## Limits {#predely}").replace("(#limits)", "(#predely)")
-        english_as_russian = english_as_russian.replace("../synthetic-beta/", "../../../papers/synthetic-beta/")
         self.refused("RENDITION_LANGUAGE", alpha_ru=english_as_russian)
 
     # --- review claims (ML05) ---
@@ -488,7 +534,7 @@ class CompilerNegativeControls(Base):
 
     # --- references (ML08/ML10) ---
     def test_reference_dropped(self):
-        self.refused("RENDITION_REFERENCE_DROPPED", alpha_ru=swap(RU_ALPHA, "[ТЕСТ СОСЕД](../../../papers/synthetic-beta/PAPER.md#limits)", "ТЕСТ СОСЕД"))
+        self.refused("RENDITION_REFERENCE_DROPPED", alpha_ru=swap(RU_ALPHA, "[ТЕСТ СОСЕД](../synthetic-beta/PAPER.md#limits)", "ТЕСТ СОСЕД"))
 
     def test_footnote_dropped(self):
         self.refused("RENDITION_REFERENCE_DROPPED", alpha_ru=swap(swap(RU_ALPHA, "ТЕСТ СНОСКИ.[^n]", "ТЕСТ СНОСКИ."), "[^n]: ТЕСТ СНОСКА.\n", ""))
@@ -500,7 +546,7 @@ class CompilerNegativeControls(Base):
         self.refused("RENDITION_REFERENCE_CHANGED", alpha_ru=swap(RU_ALPHA, "ТЕСТ ЗАВЕРШЕНИЕ.", "ТЕСТ ЗАВЕРШЕНИЕ [ТЕСТ](https://example.invalid/extra)."))
 
     def test_local_fragment_that_is_a_guessed_anchor(self):
-        self.refused("RENDITION_REFERENCE_DROPPED|RENDITION_REFERENCE_CHANGED", alpha_ru=swap(RU_ALPHA, "(#predely)", "(#limits)"))
+        self.refused("RENDITION_LINK_FRAGMENT", alpha_ru=swap(RU_ALPHA, "(#predely)", "(#limits)"))
 
     # --- authority ---
     def test_fixture_sidecar_cannot_override_a_declared_one(self):
@@ -519,6 +565,205 @@ class CompilerNegativeControls(Base):
             scenario.manifest_path.write_text(json.dumps(scenario.manifest))
             with self.subTest(value=value), self.assertRaisesRegex(RenditionError, "^RENDITION_SIDECAR_SCHEMA:"):
                 scenario.compile()
+
+
+class RealLayout(Base):
+    """The rendition lives at translations/<language>/<source-relative path> (the layout of the knowledge repository)."""
+
+    def test_rendition_path_is_the_mirrored_source_path(self):
+        _, _, _, compiled = Scenario(self.root).compile()
+        for language in ("ru", "zh-Hans"):
+            self.assertEqual(compiled.for_work("synthetic-alpha")[language]["rendition"]["path"], f"translations/{language}/{ALPHA}")
+
+    def test_any_other_rendition_path_is_refused(self):
+        wrong = {
+            "the previous renditions/ layout": "renditions/ru/synthetic-alpha/PAPER.md",
+            "another language directory": REN["zh-Hans"],
+            "a renamed file": "translations/ru/papers/synthetic-alpha/README.md",
+            "an extra directory": "translations/ru/extra/" + ALPHA,
+            "no language directory": "translations/" + ALPHA,
+            "the source path itself": ALPHA,
+            "a different case": "translations/ru/papers/Synthetic-alpha/PAPER.md",
+        }
+        for name, path in wrong.items():
+            with self.subTest(name):
+                def mutate(sidecar, path=path):
+                    sidecar["renditions"][0]["rendition"]["path"] = path
+                self.refused("RENDITION_LAYOUT", mutate_sidecar=mutate)
+
+    def test_a_source_document_cannot_live_under_translations(self):
+        def mutate(sidecar):
+            sidecar["renditions"][0]["source"]["path"] = "translations/ru/" + ALPHA
+            sidecar["renditions"][0]["rendition"]["path"] = "translations/ru/translations/ru/" + ALPHA
+        self.refused("RENDITION_LAYOUT", mutate_sidecar=mutate)
+
+
+class PinControls(Base):
+    def test_rendition_revision_with_the_right_bytes_on_an_unrelated_history(self):
+        """A rendition pinned to a commit that holds exactly its bytes but is not an ancestor of the manifest commit is refused."""
+        scenario = Scenario(self.root)
+        run(["git", "checkout", "--quiet", "--orphan", "side-rendition"], cwd=scenario.source)
+        run(["git", "rm", "-r", "-f", "--quiet", "."], cwd=scenario.source)
+        side = commit(scenario.source, {REN["ru"]: RU_ALPHA}, "a rendition on an unrelated history")
+        run(["git", "checkout", "--quiet", "-f", "-B", "main-line", scenario.head], cwd=scenario.source)
+        self.assertEqual(run(["git", "show", f"{side}:{REN['ru']}"], cwd=scenario.source), RU_ALPHA)  # the bytes are right
+        run(["git", "merge-base", "--is-ancestor", scenario.c1, scenario.head], cwd=scenario.source)  # the source pin is fine
+        sidecar = copy.deepcopy(scenario.sidecar)
+        sidecar["renditions"][0]["rendition"]["revision"] = side
+        catalog = dict(CATALOG, renditions="publication-renditions.json")
+        head = commit(scenario.source, {"publication-renditions.json": json.dumps(sidecar), "publication-catalog.json": json.dumps(catalog)}, "pin the side rendition")
+        self.assertNotEqual(subprocess.run(["git", "merge-base", "--is-ancestor", side, head], cwd=scenario.source).returncode, 0)
+        scenario.manifest["commit"] = head
+        scenario.manifest_path.write_text(json.dumps(scenario.manifest))
+        with self.assertRaisesRegex(RenditionError, "^RENDITION_REVISION_PIN:.*not an ancestor"):
+            scenario.compile()
+
+    def test_rendition_revision_that_does_not_exist(self):
+        def ghost(sidecar):
+            sidecar["renditions"][0]["rendition"]["revision"] = "0" * 40
+        with self.assertRaisesRegex(RenditionError, "^RENDITION_REVISION_PIN:.*not an ancestor"):
+            Scenario(self.root, mutate_sidecar=ghost).compile()
+
+
+class LinkResolution(Base):
+    """Every link of a rendition resolves deterministically from the SOURCE file's directory; nothing is guessed."""
+    SCHEMA_LINK = "(../../schemas/synthetic.schema.json)"
+
+    def test_mirrored_invariant_link_resolves_to_the_root_artifact(self):
+        """The defect of PR76: ../../schemas/x from translations/ru/... looks like translations/ru/schemas/x, which does not exist."""
+        scenario = Scenario(self.root)
+        _, _, _, compiled = scenario.compile()
+        literal = posixpath.normpath(posixpath.join(posixpath.dirname(REN["ru"]), "../../schemas/synthetic.schema.json"))
+        tree = tree_paths(scenario.source, scenario.head)
+        self.assertEqual(literal, "translations/ru/schemas/synthetic.schema.json")
+        self.assertNotIn(literal, tree)  # a literal resolution would be a broken link
+        self.assertIn(SCHEMA_PATH, tree)
+        for language in ("ru", "zh-Hans"):
+            html = compiled.for_work("synthetic-alpha")[language]["html"]
+            self.assertIn(f'href="https://github.com/Arcanada-one/knowledge-contract/blob/{scenario.head}/{SCHEMA_PATH}"', html)
+            self.assertNotIn("translations/", html)
+        self.assertEqual(compiled.for_work("synthetic-alpha")["ru"]["link_classes"],
+                         {"document": 1, "document_fallback": 1, "fragment": 1, "invariant": 1})
+
+    def test_the_english_source_resolves_the_same_invariant_target(self):
+        scenario = Scenario(self.root)
+        manifest, documents, renderer, compiled = scenario.compile()
+        english = renderer.document(next(d for d in documents if d["slug"] == "synthetic-alpha"))["html"]
+        target = f'href="https://github.com/Arcanada-one/knowledge-contract/blob/{scenario.head}/{SCHEMA_PATH}"'
+        self.assertIn(target, english)
+        self.assertIn(target, compiled.for_work("synthetic-alpha")["ru"]["html"])
+
+    def test_invariant_image_is_copied_from_the_canonical_tree(self):
+        picture = ("images/synthetic.svg", "<svg xmlns=\"http://www.w3.org/2000/svg\"/>\n")
+        scenario = Scenario(self.root, extra_sources=dict([picture]),
+                            alpha_en=EN_ALPHA + "\nAn inline ![figure](../../images/synthetic.svg) image.\n",
+                            alpha_ru=RU_ALPHA + "\nТЕСТ ![рисунок](../../images/synthetic.svg) РИСУНОК.\n",
+                            alpha_zh=ZH_ALPHA + "\n测试![图](../../images/synthetic.svg)图。\n")
+        _, _, _, compiled = scenario.compile()
+        self.assertIn('src="/assets/documents/images/synthetic.svg"', compiled.for_work("synthetic-alpha")["ru"]["html"])
+        self.assertTrue((self.root / "public/assets/documents/images/synthetic.svg").is_file())
+        self.assertEqual(compiled.for_work("synthetic-alpha")["ru"]["link_classes"]["invariant"], 2)
+
+    def test_depth_adjusted_invariant_link_is_refused(self):
+        """An author who 'fixes' the depth for the translations/ directory points above the canonical root: refused, not guessed."""
+        self.refused("RENDITION_LINK_ESCAPES", alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, "(../../../../schemas/synthetic.schema.json)"))
+
+    def test_invariant_link_whose_literal_location_exists_only_under_translations(self):
+        """The file exists next to the rendition, but not where the source's link points: refused, never silently redirected."""
+        scenario_root = Path(tempfile.mkdtemp(dir=self.root))
+        scenario = Scenario(scenario_root, alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, "(../../schemas/decoy.json)"))
+        self.assertIn(DECOY_PATH, tree_paths(scenario.source, scenario.c2))
+        with self.assertRaisesRegex(RenditionError, "^RENDITION_LINK_DANGLING:.*schemas/decoy.json"):
+            scenario.compile()
+
+    def test_link_that_names_a_translation_file_is_refused(self):
+        self.refused("RENDITION_LINK_TRANSLATION", alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, "(../../translations/ru/papers/synthetic-beta/PAPER.md)"))
+
+    def test_dangling_links_are_refused(self):
+        for name, link in {"missing file": "(../../schemas/missing.json)", "missing sibling document": "(../synthetic-delta/PAPER.md)"}.items():
+            with self.subTest(name):
+                self.refused("RENDITION_LINK_DANGLING", alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, link))
+
+    def test_link_that_escapes_the_repository_root_is_refused(self):
+        for name, link in {"relative": "(../../../outside.txt)", "rooted": "(/../outside.txt)", "deep": "(../../../../../../etc/passwd)"}.items():
+            with self.subTest(name):
+                self.refused("RENDITION_LINK_ESCAPES", alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, link))
+
+    def test_unsupported_scheme_is_refused(self):
+        self.refused("RENDITION_LINK_SCHEME", alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, "(data:text/plain,x)"))
+
+    def test_link_checks_run_before_the_parity_comparison(self):
+        """A dangling link is reported as such, not as a dropped reference."""
+        with self.assertRaisesRegex(RenditionError, "^RENDITION_LINK_DANGLING:"):
+            Scenario(self.root, alpha_ru=swap(RU_ALPHA, self.SCHEMA_LINK, "(../../schemas/missing.json)")).compile()
+
+    def test_sibling_document_links_go_to_the_same_language_route_with_an_explicit_state(self):
+        """A shown rendition is linked as such; a stale or missing one is linked with an explicit English-fallback state."""
+        scenario = Scenario(self.root, gamma=True,
+                            alpha_en=EN_ALPHA + "\nSee [gamma](../synthetic-gamma/PAPER.md).\n",
+                            alpha_ru=RU_ALPHA + "\nСМ. [ТЕСТ ГАММА](../synthetic-gamma/PAPER.md).\n",
+                            alpha_zh=ZH_ALPHA + "\n参见[测试丙](../synthetic-gamma/PAPER.md)。\n")
+        _, _, _, compiled = scenario.compile()
+        alpha = compiled.for_work("synthetic-alpha")
+        ru, zh = alpha["ru"]["html"], alpha["zh-Hans"]["html"]
+        # ru -> gamma: an unreviewed rendition exists and is shown, so the link says so and carries no fallback.
+        self.assertRegex(ru, r'<a href="/ru/science/synthetic-gamma/"[^>]*hreflang="ru"[^>]*data-target-state="unreviewed"')
+        self.assertNotRegex(ru, r'<a href="/ru/science/synthetic-gamma/"[^>]*data-fallback')
+        # ru -> beta: the rendition is stale, so the link carries the English-fallback state and the interface-language label.
+        self.assertRegex(ru, r'<a href="/ru/science/synthetic-beta/#limits"[^>]*hreflang="en"[^>]*data-target-state="stale"[^>]*data-fallback="en"')
+        self.assertIn("Перевод устарел: английский источник изменился. Вместо него показан закреплённый английский исходный текст.", ru)
+        # zh-Hans -> gamma and beta: there is no rendition, so both are explicit fallbacks in the zh-Hans route space.
+        self.assertRegex(zh, r'<a href="/zh-Hans/science/synthetic-gamma/"[^>]*hreflang="en"[^>]*data-target-state="missing"[^>]*data-fallback="en"')
+        self.assertRegex(zh, r'<a href="/zh-Hans/science/synthetic-beta/#limits"[^>]*data-target-state="missing"[^>]*data-fallback="en"')
+        self.assertNotIn('href="/en/', ru + zh)
+        counts = alpha["ru"]["link_classes"]
+        self.assertEqual((counts["document_shown"], counts["document_fallback"]), (1, 1))
+
+    def test_same_document_fragments_map_through_the_section_mapping(self):
+        _, _, _, compiled = Scenario(self.root).compile()
+        self.assertIn('href="#predely"', compiled.for_work("synthetic-alpha")["ru"]["html"])
+        self.assertIn('href="#jiexian"', compiled.for_work("synthetic-alpha")["zh-Hans"]["html"])
+
+    def test_guessed_same_document_fragment_is_refused(self):
+        self.refused("RENDITION_LINK_FRAGMENT", alpha_ru=swap(RU_ALPHA, "(#predely)", "(#no-such-section)"))
+        self.refused("RENDITION_LINK_FRAGMENT", alpha_ru=swap(RU_ALPHA, "(#predely)", "(#limits)"))  # the source's anchor is not the rendition's
+
+
+class DryRun(Base):
+    """The read-only audit of a checkout's translations/ directory: every file is an unreviewed draft."""
+
+    def test_counts_per_language_and_nothing_is_written(self):
+        scenario = Scenario(self.root)
+        before = run(["git", "status", "--porcelain", "--ignored"], cwd=scenario.source)
+        report = audit(scenario.source, scenario.c1)
+        self.assertEqual(run(["git", "status", "--porcelain", "--ignored"], cwd=scenario.source), before)
+        ru, zh = report["languages"]["ru"], report["languages"]["zh-Hans"]
+        self.assertEqual((ru["files_found"], ru["path_matches"], ru["absent_documents"], ru["unmatched_paths"]), (2, 2, 0, []))
+        self.assertEqual((zh["files_found"], zh["path_matches"], zh["absent_documents"]), (1, 1, 1))
+        self.assertEqual(ru["states"], {"stale": 1, "unreviewed": 1})  # nothing is reviewed, whatever the sidecar says
+        self.assertEqual(zh["states"], {"unreviewed": 1})
+        self.assertEqual(ru["link_classes"], {"document": 1, "document_fallback": 1, "fragment": 1, "invariant": 1})
+        self.assertEqual(ru["literal_resolution_missing"], {"invariant": 1})  # translations/ru/schemas/... does not exist
+        self.assertEqual((ru["unresolved_links"], ru["parity_failures"], ru["other_failures"]), ({}, {}, {}))
+        self.assertEqual((ru["files_clean"], ru["files_with_a_failure"]), (2, 0))
+        self.assertEqual(report["files"], [])
+
+    def test_unresolved_links_and_parity_failures_are_counted_not_fatal(self):
+        scenario = Scenario(self.root, alpha_ru=swap(swap(RU_ALPHA, "(../../schemas/synthetic.schema.json)", "(../../schemas/missing.json)"),
+                                                     "| Key | Value |\n|---|---|\n| k | v |\n", ""))
+        report = audit(scenario.source, scenario.c1)
+        ru = report["languages"]["ru"]
+        self.assertEqual(ru["unresolved_links"], {"RENDITION_LINK_DANGLING": 1})
+        self.assertEqual(ru["parity_failures"], {"RENDITION_STRUCTURE_MISMATCH": 1})
+        self.assertEqual((ru["files_clean"], ru["files_with_a_failure"]), (1, 1))
+        self.assertEqual({(f["stage"], f["code"]) for f in report["files"]}, {("links", "RENDITION_LINK_DANGLING"), ("parity", "RENDITION_STRUCTURE_MISMATCH")})
+
+    def test_a_misplaced_translation_is_counted_as_unmatched(self):
+        scenario = Scenario(self.root)
+        stray = commit(scenario.source, {"translations/zh-Hans/synthetic-alpha.md": ZH_ALPHA}, "a translation outside the mirrored layout")
+        report = audit(scenario.source, scenario.c1)
+        zh = report["languages"]["zh-Hans"]
+        self.assertEqual((zh["files_found"], zh["path_matches"], zh["unmatched_paths"]), (2, 1, ["translations/zh-Hans/synthetic-alpha.md"]))
 
 
 # ---------------------------------------------------------------------------------------------------------------

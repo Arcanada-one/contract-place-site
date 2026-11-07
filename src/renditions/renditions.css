@@ -5,3 +5,4 @@
 .rendition-pins dt{font-weight:600}
 .rendition-pins dd{margin:0;overflow-wrap:anywhere}
 .source-anchor{display:block;height:0}
+a[data-fallback="en"]::after{content:" [en]";font-size:.85em;color:var(--secondary)}

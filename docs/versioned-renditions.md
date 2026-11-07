@@ -22,13 +22,17 @@ The English-only guard in `scripts/build_publication.py::load_inputs` is **kept*
 
 In the **knowledge repository** (`Arcanada-one/knowledge-contract`), next to `publication-catalog.json`, because that repository is the source of truth for text. The rendition Markdown files live there too, so one publication commit pin covers the source, the sidecar and every rendition byte; the site stores no manuscript.
 
-Proposed layout (a proposal for KC-Brain and the knowledge repository owners; this change writes nothing there):
+Layout (the layout that the knowledge repository's translation drafts already use; this change writes nothing there):
 
 ```
 publication-catalog.json            optional key: "renditions": "publication-renditions.json"
-publication-renditions.json         the sidecar (schema below)
-renditions/<language>/<work-slug>/<MAIN-FILENAME>.md      e.g. renditions/ru/revision-and-governance/PAPER.md
+publication-renditions.json         the sidecar (schema below), next to the catalogue
+translations/<language>/<source-relative path>
+                                    e.g. translations/ru/papers/revision-and-governance/PAPER.md
+                                         translations/ru/engineering/specifications/book-package/SPECIFICATION.md
 ```
+
+**The rendition path must equal `translations/<language>/` followed by the source path, exactly.** Any other path (the earlier `renditions/<language>/<slug>/<FILE>`, another language directory, a renamed file, an extra directory) is refused with `RENDITION_LAYOUT` when the sidecar is validated, before any file is read. A source document cannot itself live under `translations/`. The sidecar keeps its name and location: the K8 source decision (`K8-RENDITION-SOURCE-DECISION.md`) leaves "the particular path and versioned wire schema" to KC-SWE's reviewed choice and forbids only ad hoc fields in book-package/2, KC2 and KCAO, which this sidecar does not touch.
 
 The site declares nothing about renditions in `publication-manifest.json`. The sidecar is found only through the pinned catalogue.
 
@@ -50,7 +54,7 @@ Unknown fields at any level are refused (`RENDITION_SIDECAR_SCHEMA`).
       "script": "Cyrl | Hans",
       "counts_as_independent_source": false,
       "source":    { "path": "<catalogue path>", "sha256": "<64 hex>", "revision": "<40 hex>", "language": "en" },
-      "rendition": { "path": "renditions/<language>/<slug>/<FILE>.md", "sha256": "<64 hex>", "revision": "<40 hex>" },
+      "rendition": { "path": "translations/<language>/<source path>", "sha256": "<64 hex>", "revision": "<40 hex>" },
       "review": {
         "status": "reviewed | unreviewed",
         "scope": "full | sections",
@@ -85,7 +89,24 @@ The sidecar lives in the publication commit, so it cannot contain that commit's 
 - The rendition bytes in the publication commit must equal the pinned bytes (`RENDITION_DIGEST`).
 - The source's current bytes at the publication commit are compared with the pinned source hash. A difference is **not** a build failure; it is the computed state `stale` (§4).
 
-This is stricter than comparing a commit string for equality: a pin to an unrelated history with identical bytes is refused.
+This is stricter than comparing a commit string for equality: a pin to an unrelated history with identical bytes is refused. Tests cover both pins: a `source.revision` and a `rendition.revision` that hold exactly the pinned bytes on a commit that is not an ancestor of the publication commit are refused (`RENDITION_SOURCE_PIN`, `RENDITION_REVISION_PIN`, "not an ancestor").
+
+**Why the in-repo sidecar cannot name its own commit.** A Git commit hash is a hash of the tree, and the tree contains the sidecar. A sidecar that carried the hash of the commit that contains it would have to contain a value that depends on its own bytes: there is no such fixed point to compute, and any later edit of the sidecar changes the commit. The sidecar therefore names only commits that already exist when it is written (the commit that authored the source bytes and the commit that authored the rendition bytes). The commit that contains the sidecar is named from outside, by `publication-manifest.json` in this repository, and that is the "manifest commit" against which every pin is checked for ancestry. A pin that is not an ancestor of the manifest commit, or whose blob at the pinned path differs from the pinned SHA-256, is refused.
+
+### Links inside a rendition (fail closed)
+
+A rendition mirrors its source's directory depth, and its authors copy the source's link strings. A relative link such as `../../../schemas/book-package.schema.json` is correct from `engineering/specifications/book-package/` but, read literally from `translations/ru/engineering/specifications/book-package/`, points to `translations/ru/schemas/…`, which does not exist. The compiler therefore never resolves a rendition's links from the rendition's own directory. **Every relative link is resolved against the directory of the SOURCE file in the canonical tree**, and the same source-based form is used on both sides of the reference comparison in §6. Each link then falls into exactly one class:
+
+| Class | What it is | Result |
+| --- | --- | --- |
+| invariant | any file or directory that is not a catalogue document (schema, example, code, data, image, `ATTRIBUTION.md`) and exists at the pinned commit | resolved from the source directory to the root artifact: a pinned GitHub blob URL, or, for an image, the copied asset. The target is identical to the English page's |
+| document | another catalogue document | the route of that document in **the same interface language** (`/ru/…` from a Russian rendition). If its rendition is shown (`reviewed`, `partially-reviewed`, `unreviewed`) the link says so; if it is `stale` or `missing` the link carries `hreflang="en"`, `data-target-state`, `data-fallback="en"`, the interface-language state label as its title and a `[en]` mark, so the English fallback is explicit before the click. The fragment is kept: a shown rendition keeps the source anchors resolvable (§6) |
+| fragment | `#anchor` in the same document | must be a mapped section anchor of the rendition (mapped to the source anchor through `sections`, the title included) or an identifier that the source and the rendition both carry; the link stays as written |
+| external | `http(s):` or `mailto:` outside the repository | unchanged |
+
+Anything else is a typed refusal, and nothing is guessed: `RENDITION_LINK_DANGLING` (the resolved path does not exist at the pinned source commit, checked against the commit's tree), `RENDITION_LINK_ESCAPES` (the path leaves the repository root, which is also what a depth-adjusted link `../../../../schemas/x` from a two-level source becomes), `RENDITION_LINK_TRANSLATION` (the path names a file under `translations/`: a link never targets a rendition, the route follows the language), `RENDITION_LINK_SCHEME` (any scheme other than `http`, `https`, `mailto`) and `RENDITION_LINK_FRAGMENT` (a same-document fragment that is not a mapped section or a shared identifier). Links are checked after the section and structure checks and before the reference comparison, so a bad link is reported as itself and not as a dropped reference.
+
+**Decision for document links: same-language route, not the English route.** The earlier rule (always the English route) is not required by the K8 source decision, which allows "an explicitly labelled English fallback where product rules allow" and requires only that the fallback be marked and never counted as a translation. Linking to the same-language route keeps the reader in the chosen interface language; the target page already states its rendition state or its explicit fallback (§4), and the link carries the same state in advance. Linking straight to `/en/` would leave the interface language silently, and a link to a shown rendition would hide that it exists.
 
 ## 4. States and what the reader sees
 
@@ -133,7 +154,7 @@ For every non-stale rendition, before anything is written (the checks are struct
 - **Structure**: per section, the same number of tables, lists, quotations, code blocks and rules (`RENDITION_STRUCTURE_MISMATCH`).
 - **Formulas**: the exact LaTeX of every formula and its inline/display mode, in order (`RENDITION_FORMULA_CHANGED`).
 - **Code and identifiers**: exact text of every code block and inline code span, in order (`RENDITION_CODE_CHANGED`).
-- **References**: the multiset of link, image and citation targets (relative links resolved against each file's own directory; same-document fragments mapped through the section mapping) and the footnote count (`RENDITION_REFERENCE_DROPPED`, `RENDITION_REFERENCE_CHANGED`). A same-document link to a guessed fragment is refused.
+- **References**: the multiset of link, image and citation targets (relative links resolved against the SOURCE file's directory on both sides, see "Links inside a rendition"; same-document fragments mapped through the section mapping) and the footnote count (`RENDITION_REFERENCE_DROPPED`, `RENDITION_REFERENCE_CHANGED`). A same-document link to a guessed fragment is refused (`RENDITION_LINK_FRAGMENT`).
 - **Rendering**: the rendition is rendered by the same Pandoc/MathML pipeline as the source with the same raw-HTML and link checks, and the formula count of the HTML is verified.
 - **Anchors**: each mapped rendition heading is emitted with `data-source-section="<source anchor>"`; when the ids differ, an alias anchor with the source id is emitted before it, so a source fragment still resolves on the rendition page.
 
@@ -169,16 +190,21 @@ A rendition is a rendering of one exact source edition. The sidecar field `count
 | ML05 | Implemented for review-state promotion; semantic part KC-Brain-owned | An unreviewed rendition cannot carry reviewed status or label; translating NOT_MEASURED as passed is a semantic review matter |
 | ML06 | Not applicable to this change | No execution, tool, scope or digest handling is touched. NOT_MEASURED |
 | ML07 | Implemented | Stale detection, visible stale label, historical text withheld; a later source edit cannot keep an older translation current |
-| ML08 | Partly implemented | Provenance and section mapping in the compiled records and the page; cross-language retrieval is design only (§8): NOT_MEASURED |
+| ML08 | Partly implemented | Provenance, section mapping and deterministic link resolution (invariant, sibling, fragment; typed refusals) in the compiled records and the page; cross-language retrieval is design only (§8): NOT_MEASURED |
 | ML09 | Not applicable here | No access control exists on this public static site; NOT_MEASURED for the API and cache layers owned by Agent-SWE |
 | ML10 | Out of compiler scope | Original quotations and labelled translations are authored content; the compiler preserves quotation text only through the exact link, code and structure checks. KC-Brain-owned |
 | ML11 | Implemented | Reproducible compile; exact pins; silent fallback, mixed pins and wrong language metadata refused; complete text in prerendered HTML |
 | ML12 | NOT_MEASURED | Needs a deployed build and retained desktop/mobile browser evidence per locale. CI is not that evidence |
 
-## 11. Limits
+## 11. Read-only audit of a checkout
+
+`scripts/renditions_dry_run.py --source-dir CHECKOUT --source-revision COMMIT` runs the layout, pin, digest, language, link and parity stages over a clean checkout's `translations/` directory with every file treated as an unreviewed draft (a positional section mapping is derived for the audit only; a real sidecar declares it). It prints counts per language: files found, path matches, link classes, links whose literal reading from the rendition's directory would not exist, unresolved links and parity failures. It writes nothing and its output is not a publication; it never marks anything reviewed, deployed or indexed.
+
+## 12. Limits
 
 - No real translation exists; every rendition in the tests is synthetic placeholder data. Nothing was deployed, indexed or admitted.
 - The client script `renditions.js` re-applies the state on client-side navigation through a `MutationObserver`; it was exercised through the build-time prerender (same script, a string-based DOM stub), not in a real browser. Desktop and mobile browser inspection is NOT_MEASURED.
 - The browser-side replacement matches the page markup by regular expression and fails loudly (`RENDITION_SILENT_FALLBACK`) if the reading-page structure changes, rather than leaving an unlabelled English body.
-- Cross-document links inside a rendition resolve to the English route of the target work, even when that work has its own rendition.
-- Sidecar and rendition-file additions to the knowledge repository, and the catalogue key that activates them, are a later step reviewed by KC-Brain. Until then the site builds with no renditions.
+- Fragments of cross-document links are not checked against the target's anchors; only the target file is checked to exist at the pinned commit.
+- The state of a link target is the state of the compiled sidecar. A target that is shown but only `unreviewed` is linked as `unreviewed`; the link does not make it reviewed.
+- Sidecar additions to the knowledge repository and the catalogue key that activates them are a later step reviewed by KC-Brain. Author drafts under `translations/` do not render anything until a sidecar names them, and a draft is never `reviewed` without review evidence. Until then the site builds with no renditions.

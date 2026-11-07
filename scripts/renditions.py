@@ -7,6 +7,10 @@ linked, versioned sidecar ``publication-renditions.json`` that the knowledge rep
 may declare through the optional ``renditions`` key of ``publication-catalog.json``, and compiles the renditions it
 describes. Nothing here writes or translates text. With no sidecar the compiler output is unchanged.
 
+Layout: the text of a rendition lives in the knowledge repository at ``translations/<language>/<source-relative path>``,
+the same relative path as its English source. Links inside a rendition are mirrored verbatim from the source, so they
+are resolved against the SOURCE file's directory in the canonical tree, never against ``translations/<language>/``.
+
 Every refusal is a RenditionError whose message starts with a stable code (see CODES). The design is in
 docs/versioned-renditions.md.
 """
@@ -18,6 +22,7 @@ import json
 from pathlib import Path, PurePosixPath
 import posixpath
 import re
+import subprocess
 from urllib.parse import unquote, urlsplit
 
 SIDECAR_KIND = "arcanada-publication-renditions"
@@ -34,7 +39,10 @@ CODES = (
     "RENDITION_STRUCTURE_MISMATCH", "RENDITION_FORMULA_CHANGED", "RENDITION_CODE_CHANGED",
     "RENDITION_REFERENCE_DROPPED", "RENDITION_REFERENCE_CHANGED", "RENDITION_FIXTURE_ONLY",
     "RENDITION_SILENT_FALLBACK", "RENDITION_STATE_LABEL", "RENDITION_SOURCE_AUTHORITY",
+    "RENDITION_LAYOUT", "RENDITION_LINK_SCHEME", "RENDITION_LINK_ESCAPES", "RENDITION_LINK_DANGLING",
+    "RENDITION_LINK_TRANSLATION", "RENDITION_LINK_FRAGMENT",
 )
+TRANSLATIONS_ROOT = "translations"
 HEX40, HEX64 = re.compile(r"[0-9a-f]{40}"), re.compile(r"[0-9a-f]{64}")
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 ANCHOR = re.compile(r"[^\s\"'<>&#/?]+")
@@ -98,6 +106,11 @@ def commit(value: object, where: str) -> str:
     return value
 
 
+def rendition_path_for(language: str, source_path: str) -> str:
+    """The only admitted location of a rendition: translations/<language>/ followed by the source-relative path."""
+    return f"{TRANSLATIONS_ROOT}/{language}/{source_path}"
+
+
 def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
     """Closed-schema validation of the sidecar document; returns its entries. No file is read here."""
     closed(sidecar, TOP_KEYS, "sidecar")
@@ -137,6 +150,11 @@ def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
         rendition = closed(entry["rendition"], RENDITION_KEYS, f"{where}.rendition")
         safe_path(rendition["path"], f"{where}.rendition.path"), sha(rendition["sha256"], f"{where}.rendition.sha256")
         commit(rendition["revision"], f"{where}.rendition.revision")
+        if source["path"] == TRANSLATIONS_ROOT or source["path"].startswith(TRANSLATIONS_ROOT + "/"):
+            fail("RENDITION_LAYOUT", f"{where}: a source document cannot live under {TRANSLATIONS_ROOT}/: {source['path']}")
+        expected = rendition_path_for(language, source["path"])
+        if rendition["path"] != expected:
+            fail("RENDITION_LAYOUT", f"{where}: the rendition path must be exactly {expected} (translations/<language>/<source path>), found {rendition['path']}")
         review = closed(entry["review"], REVIEW_KEYS, f"{where}.review", REVIEW_KEYS - {"reviewed_sections"})
         if review["status"] not in {"reviewed", "unreviewed"}:
             fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.status must be reviewed or unreviewed")
@@ -177,9 +195,16 @@ def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
 
 
 def git_bytes(source: Path, *args: str) -> bytes | None:
-    import subprocess
     result = subprocess.run(["git", *args], cwd=source, capture_output=True)
     return result.stdout if result.returncode == 0 else None
+
+
+def tree_paths(source: Path, revision: str) -> frozenset[str]:
+    """Every file and directory path of the pinned commit (plus "." for the root): what a link can resolve to."""
+    listing = git_bytes(source, "ls-tree", "-r", "-t", "--name-only", "-z", revision)
+    if listing is None:
+        fail("RENDITION_SOURCE_PIN", f"cannot list the tree of {revision}")
+    return frozenset(["."] + [p.decode("utf-8") for p in listing.split(b"\0") if p])
 
 
 def verify_pin(source: Path, manifest: dict, label: str, pin: dict, code: str) -> None:
@@ -202,14 +227,96 @@ def walk(node: object, visit) -> None:
             walk(value, visit)
 
 
-def normalize_target(target: str, doc_path: str, fragment_map: dict[str, str]) -> str:
+def classify_link(target: str, base_path: str, tree: frozenset[str], by_path: dict) -> tuple[str, str | None]:
+    """Deterministic class of one link of a rendition, resolved against the SOURCE document at ``base_path``.
+
+    A rendition mirrors the source's link strings, so every relative target is resolved from the directory of the source
+    file in the canonical tree. It is never resolved from ``translations/<language>/``. Returns (class, path):
+    external, fragment (same document), document (a catalogue document) or invariant (any other file or directory that
+    exists at the pinned commit). Anything else is a typed refusal; nothing is guessed."""
+    from build_publication import GITHUB
+    parts = urlsplit(target)
+    if parts.scheme in {"https", "http", "mailto"} or target.startswith("//"):
+        prefix = GITHUB + "/blob/"
+        if target.startswith(prefix):
+            tail = unquote(parts.path).split("/blob/", 1)[1].split("/", 1)
+            if len(tail) == 2 and tail[1] in by_path:
+                return "document", tail[1]
+        return "external", None
+    if parts.scheme:
+        fail("RENDITION_LINK_SCHEME", f"{base_path}: unsupported link scheme in {target!r}")
+    if not parts.path:
+        return "fragment", None
+    raw = unquote(parts.path)
+    relative = posixpath.normpath(raw.lstrip("/") if raw.startswith("/") else str(PurePosixPath(base_path).parent / raw))
+    if relative == ".." or relative.startswith("../"):
+        fail("RENDITION_LINK_ESCAPES", f"{base_path}: {target!r} leaves the repository root")
+    if relative == TRANSLATIONS_ROOT or relative.startswith(TRANSLATIONS_ROOT + "/"):
+        fail("RENDITION_LINK_TRANSLATION", f"{base_path}: {target!r} resolves to {relative}; a link never targets a translation file (use the source path, the route follows the language)")
+    if relative not in tree:
+        fail("RENDITION_LINK_DANGLING", f"{base_path}: {target!r} resolves to {relative}, which does not exist at the pinned source commit")
+    return ("document" if relative in by_path else "invariant"), relative
+
+
+def anchors_of(ast: dict) -> set[str]:
+    """Every explicit or generated identifier that a same-document fragment can name."""
+    found: set[str] = set()
+
+    def visit(node: dict) -> None:
+        kind = node.get("t")
+        if kind == "Header":
+            found.add(node["c"][1][0])
+        elif kind in {"Div", "Span", "CodeBlock", "Code", "Link", "Image"}:
+            found.add(node["c"][0][0])
+    walk(ast["blocks"], visit)
+    found.discard("")
+    return found
+
+
+def title_id(ast: dict) -> str | None:
+    for block in ast["blocks"]:
+        if block["t"] == "Header" and block["c"][0] == 1:
+            return block["c"][1][0] or None
+    return None
+
+
+def analyse_links(ast: dict, base_path: str, tree: frozenset[str], by_path: dict, fragment_map: dict[str, str],
+                  own_anchors: set[str], source_anchors: set[str], errors: list | None = None) -> list[tuple[str, str | None, str]]:
+    """Classify every link and image of a rendition (see classify_link). A same-document fragment must be a mapped section
+    anchor of the rendition or an identifier that the source and the rendition both carry; a guessed fragment is refused.
+    Returns (class, path, target) per link. With ``errors`` given, refusals are collected there instead of raised."""
+    results: list[tuple[str, str | None, str]] = []
+
+    def visit(node: dict) -> None:
+        if node.get("t") not in {"Link", "Image"}:
+            return
+        target = node["c"][2][0]
+        try:
+            kind, path = classify_link(target, base_path, tree, by_path)
+            if kind == "fragment":
+                fragment = unquote(urlsplit(target).fragment)
+                if fragment and fragment not in fragment_map and not (fragment in own_anchors and fragment in source_anchors):
+                    fail("RENDITION_LINK_FRAGMENT", f"{base_path}: same-document fragment #{fragment} is not a mapped section anchor and not an anchor of both texts")
+        except RenditionError as error:
+            if errors is None:
+                raise
+            errors.append(error)
+            return
+        results.append((kind, path, target))
+    walk(ast["blocks"], visit)
+    return results
+
+
+def normalize_target(target: str, base_path: str, fragment_map: dict[str, str]) -> str:
+    """Comparable form of a link target; relative paths are resolved against the SOURCE document ``base_path``."""
     parts = urlsplit(target)
     if parts.scheme or target.startswith("//"):
         return target
     fragment = unquote(parts.fragment)
     if not parts.path:
         return "#" + fragment_map.get(fragment, "\0unmapped:" + fragment)
-    relative = posixpath.normpath(str(PurePosixPath(doc_path).parent / unquote(parts.path)))
+    raw = unquote(parts.path)
+    relative = posixpath.normpath(raw.lstrip("/") if raw.startswith("/") else str(PurePosixPath(base_path).parent / raw))
     return relative + ("#" + fragment if fragment else "")
 
 
@@ -286,8 +393,10 @@ def meta_value(ast: dict, key: str) -> str | None:
     return None
 
 
-def check_parity(entry: dict, source_ast: dict, rendition_ast: dict) -> dict[str, str]:
-    """Structural parity between a source and its rendition. Returns the rendition-to-source anchor map."""
+def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_references=None) -> dict[str, str]:
+    """Structural parity between a source and its rendition. Returns the rendition-to-source anchor map.
+    ``before_references`` runs after the section and structure checks and before formulas, code and references are
+    compared, so that a link that cannot be resolved is reported as such and not as a dropped reference."""
     work, language = entry["work"], entry["language"]
     pairs = [(p["source"], p["rendition"]) for p in entry["sections"]]
     src_heads, src_structure = sections_of(source_ast)
@@ -326,9 +435,15 @@ def check_parity(entry: dict, source_ast: dict, rendition_ast: dict) -> dict[str
             fail("RENDITION_SECTION_MISSING", f"{work}/{language}: section {s or '(preamble)'} has text in the source but none in the rendition")
         if {k: v for k, v in a.items() if k != "text"} != {k: v for k, v in b.items() if k != "text"}:
             fail("RENDITION_STRUCTURE_MISMATCH", f"{work}/{language}: tables, lists, quotations or code blocks of section {s or '(preamble)'} differ from the source")
+    if before_references is not None:
+        before_references()
     reverse = {r: s for s, r in pairs}
-    source_facts = facts(source_ast, entry["source"]["path"], {i: i for i in src_ids})
-    rendition_facts = facts(rendition_ast, entry["rendition"]["path"], reverse)
+    base = entry["source"]["path"]  # mirrored links resolve from the source file's directory on both sides
+    source_title, rendition_title = title_id(source_ast), title_id(rendition_ast)
+    if source_title and rendition_title:
+        reverse[rendition_title] = source_title
+    source_facts = facts(source_ast, base, {**{i: i for i in src_ids}, **({source_title: source_title} if source_title else {})})
+    rendition_facts = facts(rendition_ast, base, reverse)
     if [f for f in source_facts["formulas"]] != rendition_facts["formulas"]:
         fail("RENDITION_FORMULA_CHANGED", f"{work}/{language}: formulas differ from the source (exact LaTeX and display mode must be identical, in order)")
     if source_facts["code"] != rendition_facts["code"]:
@@ -390,9 +505,138 @@ class Compiled:
         }
 
 
+def link_hooks(language: str, states: dict, by_path: dict, tree: frozenset[str], base_path: str) -> dict:
+    """Renderer hooks for one rendition: links resolve from the SOURCE directory, and a link to another catalogue document
+    goes to that document's route in the same interface language. The target's state is explicit on the link: a shown
+    rendition is linked as such; a stale or missing one is linked with an explicit English-fallback state."""
+    from publication_checks import RENDITION_FALLBACK, RENDITION_LABELS
+
+    def route(relative: str) -> str:
+        return by_path[relative]["route"].replace("/en/", f"/{language}/", 1)
+
+    def note(node: dict, original: str) -> None:
+        kind, path = classify_link(original, base_path, tree, by_path)
+        if kind != "document":
+            return
+        state = states.get((by_path[path]["slug"], language), "missing")
+        shown = state in STATES_RENDERED
+        attrs = node["c"][0][2]
+        attrs.extend([["hreflang", language if shown else SOURCE_LANGUAGE], ["data-target-state", state]])
+        if not shown:
+            attrs.append(["data-fallback", SOURCE_LANGUAGE])
+            if not node["c"][2][1]:
+                node["c"][2][1] = f"{RENDITION_LABELS[state][language]} {RENDITION_FALLBACK[language]}"
+    return {"link_base": base_path, "link_route": route, "link_note": note}
+
+
+def link_class_counts(links: list[tuple[str, str | None, str]], language: str, states: dict, by_path: dict) -> dict:
+    counts = Counter(kind for kind, _, _ in links)
+    counts.update(
+        "document_shown" if states.get((by_path[path]["slug"], language), "missing") in STATES_RENDERED else "document_fallback"
+        for kind, path, _ in links if kind == "document")
+    return dict(sorted(counts.items()))
+
+
+def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: dict, ctx: dict, report: dict | None = None) -> tuple[dict, dict]:
+    """Verify and compile one rendition. Raises RenditionError at the first failure, or, when ``report`` is given (the
+    read-only dry run), records every failing stage in report["failures"] and carries on."""
+    from build_publication import inside, parse_markdown
+    renderer, by_path, tree = ctx["renderer"], ctx["by_path"], ctx["tree"]
+    work, language = entry["work"], entry["language"]
+    label = f"{work}/{language}"
+    rendition_path = entry["rendition"]["path"]
+
+    def attempt(stage: str, function):
+        if report is None:
+            return function()
+        try:
+            return function()
+        except RenditionError as error:
+            report["failures"].append((stage, error.code, str(error)))
+            return None
+
+    def pins() -> None:
+        if entry["source"]["path"] != doc["path"]:
+            fail("RENDITION_SOURCE_PIN", f"{label}: source path {entry['source']['path']} is not the catalogued {doc['path']}")
+        verify_pin(source, manifest, label + " source", entry["source"], "RENDITION_SOURCE_PIN")
+        verify_pin(source, manifest, label + " rendition", entry["rendition"], "RENDITION_REVISION_PIN")
+        if git_bytes(source, "merge-base", "--is-ancestor", entry["source"]["revision"], entry["rendition"]["revision"]) is None:
+            fail("RENDITION_REVISION_PIN", f"{label}: the rendition revision predates the source revision it claims to render (mixed source/rendition pins)")
+        if rendition_path in by_path or rendition_path == doc["path"]:
+            fail("RENDITION_SOURCE_PIN", f"{label}: a rendition cannot be a catalogued source document")
+    attempt("pins", pins)
+    file = inside(source, rendition_path)
+
+    def digest() -> None:
+        if not file.is_file():
+            fail("RENDITION_DIGEST", f"{label}: rendition file is missing: {rendition_path}")
+        found = sha256(file.read_bytes()).hexdigest()
+        if found != entry["rendition"]["sha256"]:
+            fail("RENDITION_DIGEST", f"{label}: rendition bytes {found} differ from the pinned {entry['rendition']['sha256']}")
+    attempt("digest", digest)
+    state = states[(work, language)]
+    record = {
+        "language": language, "script": entry["script"], "state": state,
+        "source": dict(entry["source"], url=renderer.source_url(doc["path"])),
+        "current_source_sha256": doc["sha256"],
+        "rendition": dict(entry["rendition"], url=renderer.source_url(rendition_path), history=renderer.source_url(rendition_path, True)),
+        "review": entry["review"], "sections": entry["sections"], "counts_as_independent_source": False,
+    }
+    if state != "stale" and file.is_file():
+        source_ast, rendition_ast = parse_markdown(inside(source, doc["path"])), parse_markdown(file)
+
+        def language_checks() -> None:
+            declared_language = meta_value(rendition_ast, "language")
+            if declared_language != language:
+                fail("RENDITION_LANGUAGE", f"{label}: the rendition's own front matter declares language {declared_language!r}")
+            if not script_matches(language, body_text(rendition_ast)):
+                fail("RENDITION_LANGUAGE", f"{label}: the rendition text is not in the declared script {entry['script']}")
+        attempt("language", language_checks)
+        pairs = [(p["source"], p["rendition"]) for p in entry["sections"]]
+        fragment_map = {r: s for s, r in pairs}
+        source_title, rendition_title = title_id(source_ast), title_id(rendition_ast)
+        if source_title and rendition_title:
+            fragment_map[rendition_title] = source_title
+        found: dict = {}
+
+        def links(errors: list | None) -> None:
+            found["links"] = analyse_links(rendition_ast, doc["path"], tree, by_path, fragment_map, anchors_of(rendition_ast), anchors_of(source_ast), errors)
+        if report is None:
+            check_parity(entry, source_ast, rendition_ast, before_references=lambda: links(None))
+        else:
+            link_errors: list = []
+            links(link_errors)
+            report["failures"].extend(("links", error.code, str(error)) for error in link_errors)
+            report["links"] = found["links"]
+            attempt("parity", lambda: check_parity(entry, source_ast, rendition_ast))
+        record["link_classes"] = link_class_counts(found["links"], language, states, by_path)
+
+        def render() -> None:
+            hooks = link_hooks(language, states, by_path, tree, doc["path"])
+            fragment = renderer.document(dict({"path": rendition_path, "slug": work}, **hooks))
+            title = next((plain_title(block) for block in rendition_ast["blocks"] if block["t"] == "Header" and block["c"][0] == 1), None)
+            if not title:
+                fail("RENDITION_SECTION_MISSING", f"{label}: the rendition has no title heading")
+            record.update({
+                "title": title, "title_id": fragment["title_id"], "html": annotate_sections(fragment["html"], pairs),
+                "toc": fragment["toc"], "math_count": fragment["math_count"],
+            })
+        if report is None or not report["failures"]:
+            attempt("render", render)
+    provenance = {
+        "work": work, "language": language, "state": state, "script": entry["script"],
+        "source_path": doc["path"], "source_sha256": entry["source"]["sha256"], "current_source_sha256": doc["sha256"],
+        "source_revision": entry["source"]["revision"], "rendition_path": rendition_path,
+        "rendition_sha256": entry["rendition"]["sha256"], "rendition_revision": entry["rendition"]["revision"],
+        "review_status": entry["review"]["status"], "review_scope": entry["review"]["scope"],
+        "counts_as_independent_source": False,
+    }
+    return record, provenance
+
+
 def compile_renditions(source: Path, manifest: dict, documents: list[dict], renderer, run, fixture_file: Path | None = None) -> Compiled | None:
     """Validate and compile the declared renditions. Returns None when none are declared (output stays unchanged)."""
-    from build_publication import inside, parse_markdown, read_json
+    from build_publication import inside, read_json
     catalog = read_json(inside(source, manifest.get("catalog", "publication-catalog.json")))
     declared = sidecar_reference(source, catalog)
     if declared is not None and fixture_file is not None:
@@ -415,71 +659,25 @@ def compile_renditions(source: Path, manifest: dict, documents: list[dict], rend
     by_path = {doc["path"]: doc for doc in documents}
     by_slug = {doc["slug"]: doc for doc in documents}
     declared_pairs = {(e["work"], e["language"]): e for e in entries}
+    for entry in entries:
+        if entry["work"] not in by_slug:
+            fail("RENDITION_UNKNOWN_WORK", f"{entry['work']} is not in the publication catalogue")
+    # First pass: the state of every work/language pair. A link from one rendition to another document depends on it.
+    states = {(e["work"], e["language"]): state_of(e, by_slug[e["work"]]["sha256"]) for e in entries}
+    ctx = {"renderer": renderer, "by_path": by_path, "tree": tree_paths(source, manifest["commit"])}
     result: dict[str, dict] = {}
     provenance_entries = []
     for doc in documents:
         result[doc["slug"]] = {}
         for language in RENDITION_LANGUAGES:
-            entry = declared_pairs.get((doc["slug"], language))
-            pin = {"path": doc["path"], "sha256": doc["sha256"], "revision": manifest["commit"], "language": SOURCE_LANGUAGE}
-            if entry is None:
+            if (doc["slug"], language) not in declared_pairs:
+                pin = {"path": doc["path"], "sha256": doc["sha256"], "revision": manifest["commit"], "language": SOURCE_LANGUAGE}
                 result[doc["slug"]][language] = {"language": language, "script": RENDITION_LANGUAGES[language], "state": "missing", "source": pin}
                 provenance_entries.append({"work": doc["slug"], "language": language, "state": "missing", "source_sha256": doc["sha256"]})
     for entry in entries:
-        work, language = entry["work"], entry["language"]
-        doc = by_slug.get(work)
-        if doc is None:
-            fail("RENDITION_UNKNOWN_WORK", f"{work} is not in the publication catalogue")
-        if entry["source"]["path"] != doc["path"]:
-            fail("RENDITION_SOURCE_PIN", f"{work}/{language}: source path {entry['source']['path']} is not the catalogued {doc['path']}")
-        rendition_path = entry["rendition"]["path"]
-        label = f"{work}/{language}"
-        verify_pin(source, manifest, label + " source", entry["source"], "RENDITION_SOURCE_PIN")
-        verify_pin(source, manifest, label + " rendition", entry["rendition"], "RENDITION_REVISION_PIN")
-        if git_bytes(source, "merge-base", "--is-ancestor", entry["source"]["revision"], entry["rendition"]["revision"]) is None:
-            fail("RENDITION_REVISION_PIN", f"{label}: the rendition revision predates the source revision it claims to render (mixed source/rendition pins)")
-        if rendition_path in by_path or rendition_path == doc["path"]:
-            fail("RENDITION_SOURCE_PIN", f"{work}/{language}: a rendition cannot be a catalogued source document")
-        file = inside(source, rendition_path)
-        if not file.is_file():
-            fail("RENDITION_DIGEST", f"{work}/{language}: rendition file is missing: {rendition_path}")
-        digest = sha256(file.read_bytes()).hexdigest()
-        if digest != entry["rendition"]["sha256"]:
-            fail("RENDITION_DIGEST", f"{work}/{language}: rendition bytes {digest} differ from the pinned {entry['rendition']['sha256']}")
-        state = state_of(entry, doc["sha256"])
-        record = {
-            "language": language, "script": entry["script"], "state": state,
-            "source": dict(entry["source"], url=renderer.source_url(doc["path"])),
-            "current_source_sha256": doc["sha256"],
-            "rendition": dict(entry["rendition"], url=renderer.source_url(rendition_path), history=renderer.source_url(rendition_path, True)),
-            "review": entry["review"], "sections": entry["sections"], "counts_as_independent_source": False,
-        }
-        if state != "stale":
-            source_ast, rendition_ast = parse_markdown(inside(source, doc["path"])), parse_markdown(file)
-            declared_language = meta_value(rendition_ast, "language")
-            if declared_language != language:
-                fail("RENDITION_LANGUAGE", f"{work}/{language}: the rendition's own front matter declares language {declared_language!r}")
-            if not script_matches(language, body_text(rendition_ast)):
-                fail("RENDITION_LANGUAGE", f"{work}/{language}: the rendition text is not in the declared script {entry['script']}")
-            check_parity(entry, source_ast, rendition_ast)
-            fragment = renderer.document({"path": rendition_path, "slug": work})
-            title = next((plain_title(block) for block in rendition_ast["blocks"] if block["t"] == "Header" and block["c"][0] == 1), None)
-            if not title:
-                fail("RENDITION_SECTION_MISSING", f"{work}/{language}: the rendition has no title heading")
-            pairs = [(p["source"], p["rendition"]) for p in entry["sections"]]
-            record.update({
-                "title": title, "title_id": fragment["title_id"], "html": annotate_sections(fragment["html"], pairs),
-                "toc": fragment["toc"], "math_count": fragment["math_count"],
-            })
-        result[work][language] = record
-        provenance_entries.append({
-            "work": work, "language": language, "state": state, "script": entry["script"],
-            "source_path": doc["path"], "source_sha256": entry["source"]["sha256"], "current_source_sha256": doc["sha256"],
-            "source_revision": entry["source"]["revision"], "rendition_path": rendition_path,
-            "rendition_sha256": entry["rendition"]["sha256"], "rendition_revision": entry["rendition"]["revision"],
-            "review_status": entry["review"]["status"], "review_scope": entry["review"]["scope"],
-            "counts_as_independent_source": False,
-        })
+        record, provenance = compile_entry(source, manifest, by_slug[entry["work"]], entry, states, ctx)
+        result[entry["work"]][entry["language"]] = record
+        provenance_entries.append(provenance)
     provenance_entries.sort(key=lambda e: (e["work"], e["language"]))
     return Compiled(kind, sidecar_path, sha256(raw).hexdigest(), result, provenance_entries)
 
