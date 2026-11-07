@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
+  "commit": "a0450428704fcd41b411203f2fc88c06c779610b",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -91,7 +91,7 @@
       "summary": "Separate identities for content, assessment and normative adoption, with explicit revision and publication decisions.",
       "language": "en",
       "route": "/en/science/revision-and-governance/",
-      "sha256": "e221151a7c6778ef4c6843074a881efead94bad2f0b95e21c697f122c67f58dc",
+      "sha256": "20079132357dc2e4e651cde78d528b37712ecdef030af3934ebd2e8048e3f78a",
       "math_count": 11
     },
     {
