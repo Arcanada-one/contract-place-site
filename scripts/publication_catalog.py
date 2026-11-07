@@ -43,7 +43,7 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
     return aliases
 
 
-def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict) -> None:
+def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None) -> None:
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
     aliases = legacy_aliases(source, previous, documents)
@@ -81,6 +81,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         })
         if 'status' in doc:
             records[-1]['status'] = doc['status']
+        if renditions:
+            records[-1]['renditions'] = renditions.for_work(doc['slug'])
     payload = {
         'publication': manifest,
         'records': records, 'articles': previous['articles'], 'aliases': aliases,
@@ -88,6 +90,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         'source': 'https://contract.place/', 'license': 'CC-BY-4.0',
         'author': 'Pavel Valentov', 'retrieved': '2026-11-04',
     }
+    if renditions:
+        payload['renditions_source'] = renditions.source_kind
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
     old_provenance = json.loads((site / 'src/site/content-provenance.json').read_text())
     provenance = {
@@ -98,4 +102,6 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         'site_integration_base': '91da6a35b4234d409de4c0a0777ff9c469bc8400',
         'license': 'CC-BY-4.0', 'author': 'Pavel Valentov',
     }
+    if renditions:
+        provenance['renditions'] = renditions.provenance()
     (site / 'src/site/content-provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')

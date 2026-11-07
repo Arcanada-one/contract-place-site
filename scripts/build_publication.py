@@ -260,6 +260,9 @@ def main() -> None:
     parser.add_argument('--roadmap-source-dir', type=Path, required=True,
                         help='clean checkout of the commit pinned in roadmap-manifest.json (independent of the manuscript pin)')
     parser.add_argument('--roadmap-manifest', type=Path, default=ROOT / 'roadmap-manifest.json')
+    parser.add_argument('--renditions-file', type=Path, default=None,
+                        help='TEST/FIXTURE ONLY: read the renditions sidecar from this file instead of the catalogue-declared one. '
+                             'The output is marked renditions_source=fixture and check_publication.py refuses it; never use it for a production build.')
     args = parser.parse_args()
     source = args.source_dir.resolve()
     version = run(['pandoc', '--version']).splitlines()[0].split()[1]
@@ -275,7 +278,10 @@ def main() -> None:
     # Generate from the source before the JS build copies the current site assets.
     from publication_catalog import write_catalog
     renderer = Renderer(source, ROOT / 'src/site', manifest, documents)
-    write_catalog(source, ROOT, manifest, documents, renderer, roadmap)
+    # Language renditions (optional, versioned sidecar in the knowledge repository): validated before any file is written.
+    from renditions import compile_renditions
+    renditions = compile_renditions(source, manifest, documents, renderer, run, args.renditions_file.resolve() if args.renditions_file else None)
+    write_catalog(source, ROOT, manifest, documents, renderer, roadmap, renditions)
     print(run(['node', 'build.mjs'], cwd=ROOT).strip())
     from publication_checks import check_site
     count = check_site(ROOT / 'public')
@@ -283,6 +289,8 @@ def main() -> None:
     check_status_labels(ROOT / 'public', json.loads((ROOT / 'src/content/catalog.json').read_text())['records'])
     load_inputs(source, args.manifest)
     compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
+    if renditions:
+        print(f'Renditions: {len(renditions.entries)} work/language pairs from the {renditions.source_kind} sidecar {renditions.sidecar_path}.')
     print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}; roadmap of {len(roadmap["tasks"])} planned tasks at {roadmap["pin"]["commit"]}.')
 
 

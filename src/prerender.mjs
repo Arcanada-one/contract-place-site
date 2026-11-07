@@ -9,6 +9,8 @@ const routes=['','science','engineering','engineering/specifications','engineeri
 const content=fs.readFileSync(path.join(root,'content.js'),'utf8');
 const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
 const LANGS=['en','ru','zh-Hans'];
+// Present only when the build compiled language renditions (see build.mjs); absent otherwise.
+const renditionSource=fs.existsSync(path.join(root,'renditions.js'))?fs.readFileSync(path.join(root,'renditions.js'),'utf8'):null;
 // Indexing decision per route. Everything not listed here is canonical, in the sitemap and indexable.
 // noindex: pages that duplicate a paper/article under another URL (aliases) or are design-brief references, not project content.
 const NOINDEX=new Set(['wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','journal/building-a-place','docs/model','references','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase']);
@@ -28,12 +30,15 @@ function generate(route,lang){
  const location={pathname:route,search:'',hash:''};
  const context={document,location,URLSearchParams,Intl,Date,console,setTimeout,history:{replaceState(){}},localStorage:{getItem(){return null}},window:{addEventListener(){}}};
  vm.createContext(context);vm.runInContext(content,context);vm.runInContext(source,context);
+ if(renditionSource)vm.runInContext(renditionSource,context);
  const html=template.replace('<html lang="en">',`<html lang="${lang}">`).replace(/<meta name="description" content="[^"]*">/,()=>`<meta name="description" content="${String(els['meta[name="description"]'].content||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${seo(route,lang)}`).replace(/<title>.*?<\/title>/,`<title>${document.title}</title>`).replace('<header id="header"></header>',`<header id="header">${els['#header'].innerHTML}</header>`).replace('<main id="main" tabindex="-1"></main>',`<main id="main" tabindex="-1">${els['#main'].innerHTML}</main>`).replace('<footer id="footer"></footer>',`<footer id="footer">${els['#footer'].innerHTML}</footer>`);
  const bare=route.replace(/^\/(?:en|ru|zh-Hans)\/?/,'').replace(/\/$/,'');
  const record=data.records.find(r=>r.route==='/en/'+bare+'/');
  if(record){
    const author={'@type':'Person',name:'Pavel Valentov',sameAs:'https://orcid.org/0009-0001-2567-4584'};
-   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source,...(record.status?{creativeWorkStatus:record.status}:{})};
+   const rd=record.renditions&&record.renditions[lang];
+   const shown=!!rd&&['reviewed','partially-reviewed','unreviewed'].includes(rd.state);
+   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:shown?rd.title:record.title,url:ORIGIN+record.route,inLanguage:shown?lang:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source,...(record.status?{creativeWorkStatus:record.status}:{}),...(shown?{translationOfWork:{'@type':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en'}}:{})};
    const block='<script type="application/ld+json">'+JSON.stringify(ld).replaceAll('<','\\u003c')+'</script>';
    return html.replace('</head>',block+'</head>');
  }

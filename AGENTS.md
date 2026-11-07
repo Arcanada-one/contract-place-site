@@ -10,7 +10,7 @@ The roadmap (`/{en,ru,zh-Hans}/roadmap/`) is planned work with its own pin in `r
 
 ## Preserve the interface
 
-Retain the current design, English/Russian/Chinese navigation, local fonts, illustrations and licences. Manuscript bodies remain English unless an actual reviewed translation is supplied. Preserve the notice that Chinese interface text lacks native editorial review.
+Retain the current design, English/Russian/Chinese navigation, local fonts, illustrations and licences. Manuscript bodies remain English unless an actual reviewed translation is supplied. Translations enter only as versioned renditions declared by the knowledge repository's sidecar (see [docs/versioned-renditions.md](docs/versioned-renditions.md)): exact source and rendition pins, a visible state (reviewed, unreviewed, stale, missing) and an explicit, never silent, English fallback. A rendition is not an independent source. Never write or machine-translate manuscript text here, and never use `--renditions-file` outside tests. Preserve the notice that Chinese interface text lacks native editorial review.
 
 Keep complete text in prerendered HTML, accessible navigation and keyboard focus, narrow-screen reading, native MathML, bounded table/formula scrolling, citations and working fragments. Do not introduce inline executable code or private Drive links into the public surface.
 
@@ -27,6 +27,7 @@ python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
 python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
 ```
