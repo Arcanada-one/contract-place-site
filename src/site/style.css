@@ -80,3 +80,47 @@ col.table-width-1{width:1%}col.table-width-2{width:2%}col.table-width-3{width:3%
 .lab-input input{max-width:100%}.lab-input input:disabled,.lab-input button:disabled{cursor:not-allowed;opacity:.65}
 .lab-panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.lab-reading-link{margin-top:28px}
 @media(max-width:900px){.lab-panels{grid-template-columns:minmax(0,1fr)}}
+
+/* Roadmap: planned work, cards and dependency tables. */
+.roadmap-notice{max-width:850px;margin-top:20px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:5px;background:var(--surface);font-size:16px;color:var(--ink)}
+.roadmap-body section{margin-bottom:56px}
+.roadmap-body h2{font-size:30px;margin-top:0;scroll-margin-top:90px}
+.roadmap-table table{min-width:880px;margin-bottom:0}
+.roadmap-table caption{text-align:start;padding:12px 18px;font-weight:600;color:var(--ink);caption-side:top}
+.roadmap-table th[scope=row]{min-width:260px;font-weight:600;text-align:start}
+.roadmap-table td{min-width:90px}
+.roadmap-table a,.roadmap-card a,.roadmap-band a{color:var(--teal)}
+.roadmap-table code.hash{white-space:normal;overflow-wrap:anywhere;word-break:break-all}
+.roadmap-bands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.roadmap-band{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:var(--surface);min-width:0}
+.roadmap-band h3{font-size:22px;margin:0 0 8px}
+.roadmap-band ul{margin:0;padding-inline-start:20px}
+.roadmap-band li{font-size:15px;line-height:1.5;padding-block:4px;overflow-wrap:anywhere}
+.roadmap-card{border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin-bottom:24px;background:var(--surface);min-width:0;scroll-margin-top:90px}
+.roadmap-card h3{font-size:24px;line-height:1.3;margin:0 0 6px;overflow-wrap:anywhere}
+.roadmap-card .rm-id{font-weight:700;color:var(--teal);margin-inline-end:6px;white-space:nowrap}
+.roadmap-card .metadata{padding-block:10px;margin-top:0;border-top:0}
+.roadmap-card .rm-status{font-weight:600;color:var(--ink)}
+.roadmap-relations{display:flex;flex-wrap:wrap;gap:6px 28px;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line);font-size:15px}
+.roadmap-relations dt{display:inline;font-weight:600;color:var(--ink)}
+.roadmap-relations dd{display:inline;margin:0 0 0 6px;color:var(--secondary)}
+.roadmap-fields{margin:0}
+.roadmap-fields>div{margin-bottom:14px}
+.roadmap-fields dt{font-weight:700;color:var(--ink);font-size:15px;text-transform:none}
+.roadmap-fields dd{margin:2px 0 0}
+.roadmap-fields dd p{font-size:17px;line-height:1.65;color:var(--secondary);margin:0 0 8px;overflow-wrap:anywhere}
+.roadmap-page .article-aside{overflow-x:hidden}
+.roadmap-page .article-aside nav a{overflow-wrap:anywhere}
+.roadmap-page .toc-task{display:inline-block;padding:4px 8px 4px 0;font-size:13px}
+.roadmap-body .source-body pre{background:var(--subtle);padding:14px 16px;border-radius:5px}
+@media(max-width:767px){
+  .roadmap-bands{grid-template-columns:minmax(0,1fr)}
+  .roadmap-card{padding:18px 16px}
+  .roadmap-card h3{font-size:21px}
+  .roadmap-table table{min-width:760px}
+}
+
+/* Catalogue status (e.g. research draft): visible on every page and listing that shows the document. */
+.status-badge{display:inline-block;padding:1px 9px;border:1px solid var(--teal);border-radius:999px;font-weight:600;font-size:12px;line-height:1.5;color:var(--teal);background:var(--teal-soft)}
+.draft-notice{margin:18px 0 0;padding:12px 16px;border-inline-start:4px solid var(--teal);background:var(--teal-soft);color:var(--ink);font-size:16px;max-width:760px}
+.article-aside a .status-badge{margin-inline-start:6px;font-size:11px}

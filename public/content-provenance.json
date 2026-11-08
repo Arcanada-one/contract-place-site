@@ -3,241 +3,249 @@
     "schema_version": 1,
     "edition": "1.1",
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+    "commit": "a0450428704fcd41b411203f2fc88c06c779610b",
     "catalog": "publication-catalog.json"
   },
   "records": [
     {
+      "id": "human-meaning-and-computable-knowledge",
+      "type": "paper",
+      "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source_sha256": "f5cdf5856b230cd8d406fc3aea584d33e81f06ef14a36ebabd238825b3526af7",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
+    },
+    {
       "id": "semantic-objects-and-context",
       "type": "paper",
       "path": "papers/semantic-objects-and-context/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/semantic-objects-and-context/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/semantic-objects-and-context/PAPER.md",
       "source_sha256": "6e466fed142538a5b147568e3a9e3aa017018083af0a1c3ac33afa48758c4c84",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "constrained-transformations",
       "type": "paper",
       "path": "papers/constrained-transformations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/constrained-transformations/PAPER.md",
-      "source_sha256": "b9ec18c1ee93c869bd31a0e097014338605ba2937979db827bf8cde5f63d4050",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/constrained-transformations/PAPER.md",
+      "source_sha256": "6377a15c2d46ba82472342da4d77267c47aae5b1be1d7964f8edd373fa3b0eea",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "retrieval-and-context-composition",
       "type": "paper",
       "path": "papers/retrieval-and-context-composition/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/retrieval-and-context-composition/PAPER.md",
-      "source_sha256": "6ebbb43bcdd09ba44b60d6b0e4fce9ec05dcd1550f1d8c43bf451379508b6773",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/retrieval-and-context-composition/PAPER.md",
+      "source_sha256": "e457fadcb17424e15083504a2babb2646aedc8aec7370048cd77854a8c7af64f",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "interaction-and-memory",
       "type": "paper",
       "path": "papers/interaction-and-memory/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/interaction-and-memory/PAPER.md",
-      "source_sha256": "8dacee80ed050c3013c7de092da2c17fbfaafd5fb3b45939dc8fdae3611df656",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/interaction-and-memory/PAPER.md",
+      "source_sha256": "6bf13bff5230129c4f077515015f2926c65f6fb2d97f3e1d61e5eaa6b584a2c8",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "evidence-and-falsification",
       "type": "paper",
       "path": "papers/evidence-and-falsification/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/evidence-and-falsification/PAPER.md",
-      "source_sha256": "95acb937c5aa68572eb60ec723d17c628bcd28a778490c09ef6b434ef0f63494",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/evidence-and-falsification/PAPER.md",
+      "source_sha256": "926b29d227f9c576bc69834ae6f8a72d514fc3b5916bf66c966df5aee5a2ce28",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "revision-and-governance",
       "type": "paper",
       "path": "papers/revision-and-governance/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/revision-and-governance/PAPER.md",
-      "source_sha256": "e221151a7c6778ef4c6843074a881efead94bad2f0b95e21c697f122c67f58dc",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/revision-and-governance/PAPER.md",
+      "source_sha256": "20079132357dc2e4e651cde78d528b37712ecdef030af3934ebd2e8048e3f78a",
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "controlled-knowledge-reuse",
       "type": "paper",
       "path": "papers/controlled-knowledge-reuse/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/controlled-knowledge-reuse/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/controlled-knowledge-reuse/PAPER.md",
       "source_sha256": "aadd6e7ecfb43e5fa912ec81adb5f367ee167397b5ce603d2fd0848d89d21ea4",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "knowledge-utility",
       "type": "paper",
       "path": "papers/knowledge-utility/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/papers/knowledge-utility/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/papers/knowledge-utility/PAPER.md",
       "source_sha256": "e807eacfe0c69620457232e00a1f09edb1e9753493e5f5478f8bdfa7e05c73e1",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "knowledge-contract-core",
       "type": "specification",
       "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
       "source_sha256": "81cb01a8326eaeb0c14e929609c52cc85e5a344c61f3744d2e0def228cdc60d5",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "contract-family",
       "type": "specification",
       "path": "engineering/specifications/contract-family/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/contract-family/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/contract-family/SPECIFICATION.md",
       "source_sha256": "310cd3f151275739a2391d2c8d8b7c23ad64b46f4c1a56717f7f0975866f60c8",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "semantic-types",
       "type": "specification",
       "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/semantic-types/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/semantic-types/SPECIFICATION.md",
       "source_sha256": "4428c3cdacfe5e8bcf00b8d9100a79f5ce9691edecd914063698bfb3f97e8f6f",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "context-package",
       "type": "specification",
       "path": "engineering/specifications/context-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/context-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/context-package/SPECIFICATION.md",
       "source_sha256": "5bba82777b44dc0cf6b1b0c218292c1476c0271806acef195db6c3b8a9448e41",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "compiled-artifact-contract",
       "type": "specification",
       "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
       "source_sha256": "2cc5e781565136b5ad9fdbb2facae47d58564b1e300173d0a91a2c6cf16d5a82",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "artifact-registry",
       "type": "specification",
       "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/artifact-registry/SPECIFICATION.md",
       "source_sha256": "ec6584f97c5160fd3c8b17a5036aaeb8d302bf86dd61e567f2c5d858e9159470",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "status-model",
       "type": "specification",
       "path": "engineering/specifications/status-model/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/status-model/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/status-model/SPECIFICATION.md",
       "source_sha256": "2f66342472fc4198eba573d7d1eda5d58d5bae9de904f901f5094037dd628d0a",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "cache-identity-and-invalidation",
       "type": "specification",
       "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
       "source_sha256": "742982eabd0d797ccc5bba4c8472d25a4236c84baed21281f13a7601a4ce2f39",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "reuse-policy",
       "type": "specification",
       "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/reuse-policy/SPECIFICATION.md",
       "source_sha256": "be75f0191414c07a113dafb0c983cd1d1e73834be0b670e0d610b4354f37ecd2",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "knowledge-evolution",
       "type": "specification",
       "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
       "source_sha256": "4662bdd76c5716cb7d9b55c1b99e00dda626b34c3565e2f03ceecb61fe15685a",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "book-package",
       "type": "specification",
       "path": "engineering/specifications/book-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/specifications/book-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/specifications/book-package/SPECIFICATION.md",
       "source_sha256": "1ce2ce4fa9e0e2647b3472f1da0a250fa3abae00c78b7518d3497f106c09722c",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "contract-profile-conformance",
       "type": "study",
       "path": "engineering/studies/contract-profile-conformance/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/contract-profile-conformance/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/contract-profile-conformance/STUDY.md",
       "source_sha256": "788c09269946b294420024f28656ef616e2df056e4d8246bfdf67c69ca4434a9",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "dependency-closure-and-package-delivery",
       "type": "study",
       "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
       "source_sha256": "0012f1506d1c9e95b29e7f8916952d2278e791bc2a7f7153e8c3c5980928f66a",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "source-transcription-and-uncertainty",
       "type": "study",
       "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
       "source_sha256": "6119790ada666b76782c0952e12e47799c51893a85f71a7e36f72d9ac44f3fe0",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "executable-projections-and-revision",
       "type": "study",
       "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/executable-projections-and-revision/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/executable-projections-and-revision/STUDY.md",
       "source_sha256": "6242027572df695e1907e77d55588ea3b3a64741407b6922b87f0612de956ed8",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "reuse-admission-and-cost-controls",
       "type": "study",
       "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
       "source_sha256": "fa5494d6609d15a61ce071eb39c3a87fa0b982c61f756f3308276c127ae8484a",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "editorial-skill-pilot",
       "type": "study",
       "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/engineering/studies/editorial-skill-pilot/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/engineering/studies/editorial-skill-pilot/STUDY.md",
       "source_sha256": "59066d54a219c13214a113037b0f3257378d77c83105b755bc80251db51ae0d5",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "glossary",
       "type": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/reference/glossary/GLOSSARY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/reference/glossary/GLOSSARY.md",
       "source_sha256": "5147262a4739b194cd1712d04f3b205ad701c77f7c214ba7cfb68094d12ddabb",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "bibliography",
       "type": "bibliography",
       "path": "reference/bibliography/BIBLIOGRAPHY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/reference/bibliography/BIBLIOGRAPHY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/reference/bibliography/BIBLIOGRAPHY.md",
       "source_sha256": "bbfc162fcb52b74abefad92d0cda0f72cacc77ff1a697dfc685d5380b8cf457d",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "source-map",
       "type": "appendix",
       "path": "appendices/source-map/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/appendices/source-map/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/appendices/source-map/APPENDIX.md",
       "source_sha256": "eca6631650eb303aa5451eb3f173ce82cd06d73c2184ed460abe65188c61f25c",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     },
     {
       "id": "api-integration",
       "type": "appendix",
       "path": "appendices/api-integration/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/ea0c30575d56e793fb2875df47126ab3f6dc30ad/appendices/api-integration/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/a0450428704fcd41b411203f2fc88c06c779610b/appendices/api-integration/APPENDIX.md",
       "source_sha256": "2e1c800cf2bb1c61696e34d516b23db1f3f65fa7c58f983bf3124c17854cefe3",
-      "revision": "ea0c30575d56e793fb2875df47126ab3f6dc30ad"
+      "revision": "a0450428704fcd41b411203f2fc88c06c779610b"
     }
   ],
   "articles": [
@@ -260,6 +268,316 @@
       "id": "knowledge-contract-v2"
     }
   ],
+  "roadmap": {
+    "pin": {
+      "repository": "Arcanada-one/knowledge-contract",
+      "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
+      "files": [
+        {
+          "path": "ROADMAP.md",
+          "role": "rendered",
+          "sha256": "c84f38452b481db776a282d512172a78ca1534f335edc51c29395ea04f004f02",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/ROADMAP.md"
+        },
+        {
+          "path": "roadmap/TASKS.md",
+          "role": "rendered",
+          "sha256": "f5208ed8fd91fe30ffaf00b37c27e8d0ceba89f30f7f46045cac676da057ec79",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/TASKS.md"
+        },
+        {
+          "path": "roadmap/dependencies.json",
+          "role": "rendered",
+          "sha256": "b894c7135f129ee207f684ab60f62cf3694cff87613e44475ab085648c3629dd",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/dependencies.json"
+        },
+        {
+          "path": "roadmap/EXPERIMENTS.md",
+          "role": "linked",
+          "sha256": "f9da63b7aaf2bc0e5c3054f9b256828018e76d80a8f247180f175ad010c030b5",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/EXPERIMENTS.md"
+        },
+        {
+          "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
+          "role": "linked",
+          "sha256": "368b62ada0a31eebc9504b47adcbbbe9566e9a58287792064b090e06a52120d1",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
+        },
+        {
+          "path": "roadmap/SITE_DELIVERY.md",
+          "role": "introduction",
+          "sha256": "3247bee17344104c3cf1fae4cac5fc7468115022c46f501d8d72c4055f3114bd",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/SITE_DELIVERY.md"
+        }
+      ]
+    },
+    "revision": "2026-11-06.1",
+    "baseline_commit": "717c43deb514adc5b40f76837e7ee0fb2da37102",
+    "tasks": [
+      {
+        "id": "RM-01",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": []
+      },
+      {
+        "id": "RM-02",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": []
+      },
+      {
+        "id": "RM-03",
+        "priority": "P0",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": []
+      },
+      {
+        "id": "RM-04",
+        "priority": "P0",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": []
+      },
+      {
+        "id": "RM-05",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06"
+        ]
+      },
+      {
+        "id": "RM-06",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ]
+      },
+      {
+        "id": "RM-07",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-05"
+        ]
+      },
+      {
+        "id": "RM-08",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06",
+          "RM-07"
+        ]
+      },
+      {
+        "id": "RM-09",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-08",
+          "RM-10"
+        ]
+      },
+      {
+        "id": "RM-10",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ]
+      },
+      {
+        "id": "RM-11",
+        "priority": "P1",
+        "owner": "KC-SWE",
+        "status": "planned",
+        "requires": [
+          "RM-02",
+          "RM-09",
+          "RM-10"
+        ]
+      },
+      {
+        "id": "RM-12",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-06",
+          "RM-07"
+        ]
+      },
+      {
+        "id": "RM-13",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-09",
+          "RM-10",
+          "RM-12"
+        ]
+      },
+      {
+        "id": "RM-14",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-12",
+          "RM-13"
+        ]
+      },
+      {
+        "id": "RM-15",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-10"
+        ]
+      },
+      {
+        "id": "RM-16",
+        "priority": "P1",
+        "owner": "Agent-SWE",
+        "status": "planned",
+        "requires": [
+          "RM-11",
+          "RM-15"
+        ]
+      },
+      {
+        "id": "RM-17",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-07",
+          "RM-09",
+          "RM-10"
+        ]
+      },
+      {
+        "id": "RM-18",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-14",
+          "RM-15",
+          "RM-17"
+        ]
+      },
+      {
+        "id": "RM-19",
+        "priority": "P1",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-10",
+          "RM-15"
+        ]
+      },
+      {
+        "id": "RM-20",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-16",
+          "RM-18",
+          "RM-19"
+        ]
+      },
+      {
+        "id": "RM-21",
+        "priority": "P2",
+        "owner": "Agent-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-12",
+          "RM-17"
+        ]
+      },
+      {
+        "id": "RM-22",
+        "priority": "P1",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01"
+        ]
+      },
+      {
+        "id": "RM-23",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-02"
+        ]
+      },
+      {
+        "id": "RM-24",
+        "priority": "P2",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": [
+          "RM-01",
+          "RM-10"
+        ]
+      },
+      {
+        "id": "RM-25",
+        "priority": "P0",
+        "owner": "KC-Brain",
+        "status": "planned",
+        "requires": []
+      }
+    ],
+    "advisory": [
+      {
+        "from": "RM-23",
+        "to": "RM-25",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-20",
+        "to": "RM-24",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-22",
+        "to": "RM-02",
+        "kind": "informs_not_blocks"
+      },
+      {
+        "from": "RM-08",
+        "to": "RM-12",
+        "kind": "informs_not_blocks"
+      }
+    ]
+  },
   "site_integration_base": "91da6a35b4234d409de4c0a0777ff9c469bc8400",
   "license": "CC-BY-4.0",
   "author": "Pavel Valentov"

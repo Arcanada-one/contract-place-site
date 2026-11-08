@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+  "commit": "a0450428704fcd41b411203f2fc88c06c779610b",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -16,6 +16,18 @@
   ],
   "document_language": "en",
   "documents": [
+    {
+      "type": "paper",
+      "slug": "human-meaning-and-computable-knowledge",
+      "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "title": "From Human Meaning to Contract-Governed Knowledge",
+      "summary": "A bounded foundation for preserving task-relevant distinctions between human expressions, formal representations, knowledge artifacts and authorized agent use.",
+      "language": "en",
+      "route": "/en/science/human-meaning-and-computable-knowledge/",
+      "sha256": "f5cdf5856b230cd8d406fc3aea584d33e81f06ef14a36ebabd238825b3526af7",
+      "math_count": 40,
+      "status": "research-draft"
+    },
     {
       "type": "paper",
       "slug": "semantic-objects-and-context",
@@ -35,8 +47,8 @@
       "summary": "Conditional preservation, composition and reconstruction of knowledge under explicit observations and losses.",
       "language": "en",
       "route": "/en/science/constrained-transformations/",
-      "sha256": "b9ec18c1ee93c869bd31a0e097014338605ba2937979db827bf8cde5f63d4050",
-      "math_count": 76
+      "sha256": "6377a15c2d46ba82472342da4d77267c47aae5b1be1d7964f8edd373fa3b0eea",
+      "math_count": 84
     },
     {
       "type": "paper",
@@ -46,8 +58,8 @@
       "summary": "Search coverage, finite context selection, dependency closure and the limits of greedy composition.",
       "language": "en",
       "route": "/en/science/retrieval-and-context-composition/",
-      "sha256": "6ebbb43bcdd09ba44b60d6b0e4fce9ec05dcd1550f1d8c43bf451379508b6773",
-      "math_count": 47
+      "sha256": "e457fadcb17424e15083504a2babb2646aedc8aec7370048cd77854a8c7af64f",
+      "math_count": 48
     },
     {
       "type": "paper",
@@ -57,7 +69,7 @@
       "summary": "Versioned requirements, dialogue branches, memory and evidence of learning in agent interaction.",
       "language": "en",
       "route": "/en/science/interaction-and-memory/",
-      "sha256": "8dacee80ed050c3013c7de092da2c17fbfaafd5fb3b45939dc8fdae3611df656",
+      "sha256": "6bf13bff5230129c4f077515015f2926c65f6fb2d97f3e1d61e5eaa6b584a2c8",
       "math_count": 9
     },
     {
@@ -68,7 +80,7 @@
       "summary": "How claims, proofs, finite tests, counterexamples and comparative evaluations support different conclusions.",
       "language": "en",
       "route": "/en/science/evidence-and-falsification/",
-      "sha256": "95acb937c5aa68572eb60ec723d17c628bcd28a778490c09ef6b434ef0f63494",
+      "sha256": "926b29d227f9c576bc69834ae6f8a72d514fc3b5916bf66c966df5aee5a2ce28",
       "math_count": 15
     },
     {
@@ -79,7 +91,7 @@
       "summary": "Separate identities for content, assessment and normative adoption, with explicit revision and publication decisions.",
       "language": "en",
       "route": "/en/science/revision-and-governance/",
-      "sha256": "e221151a7c6778ef4c6843074a881efead94bad2f0b95e21c697f122c67f58dc",
+      "sha256": "20079132357dc2e4e651cde78d528b37712ecdef030af3934ebd2e8048e3f78a",
       "math_count": 11
     },
     {
