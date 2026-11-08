@@ -308,11 +308,11 @@ function knowledgeJourney(){
   </section>
   <section class="lab-input" aria-labelledby="lab-input-title">
    <h2 id="lab-input-title">${t('labInput')}</h2>
-   <fieldset disabled aria-describedby="lab-unavailable">
+   <fieldset disabled aria-disabled="true" aria-describedby="lab-unavailable">
     <legend class="sr-only">${t('labInput')}</legend>
     <label for="lab-source">${t('labFile')}</label>
-    <input id="lab-source" type="file" accept=".pdf,.md,.markdown,application/pdf,text/markdown" disabled>
-    <button class="button" type="button" disabled>${t('labStart')}</button>
+    <input id="lab-source" type="file" accept=".pdf,.md,.markdown,application/pdf,text/markdown" disabled aria-disabled="true">
+    <button class="button" type="button" disabled aria-disabled="true">${t('labStart')}</button>
    </fieldset>
   </section>
   <div class="lab-panels">
