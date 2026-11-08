@@ -60,6 +60,11 @@ Closed field names (for Agent-Brain agreement):
 | `sections[]` | `source`, `rendition` |
 | digest label | `sha256` on pins; blob ids on reviewed/evidence |
 
+**Work identity (`document_id`, R3-G1-id).** The sidecar has no separate `document_id` field. For API G1 and every consumer, `document_id` is the work identity: the entry's `work` catalogue slug together with the English canonical source path in `source.path`. Those name one logical English work; a rendition does not invent a second document id.
+
+**Offsets are out of scope for sidecar schema v2 (R3-G2, KC-SWE).** `sections[]` maps by **section identity only** (`source` ↔ `rendition` anchors). No offset, span, unit, byte range or code-point range is defined on the wire, and no schema field is added for them in v2. A consumer such as the search/API layer must **refuse** offset-based citations into renditions rather than guess a unit or invent a span. A future optional extension `source_span {start, end, unit: "code_point"}` is named only as future work, tied to the separate API G2 child; it is not part of this schema version.
+
+
 ```json
 {
   "schema_version": 2,
@@ -162,6 +167,7 @@ These are interface labels, not manuscript text. The zh-Hans text carries the sa
 - The rendition file's own front matter `language` must equal the sidecar language, and its text must be predominantly in the declared script.
 - JSON-LD (C9): a shown rendition uses the **localized** URL as `url`, `inLanguage` of its language, and `translationOfWork` pointing at the English route only. A fallback page keeps `url` and `inLanguage: "en"` on the English work.
 - **Fallback indexing (C5):** once any sidecar exists, a locale counts as translated indexed content only for `reviewed` / `partially-reviewed`. An English body under `/ru` or `/zh-Hans`, and an unreviewed rendition, get `robots noindex`, no hreflang alternate, no canonical claiming a translation, and no translation entry in the sitemap. The no-sidecar build stays byte-identical (`APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false`).
+- **Known caveat (no sidecar):** with no sidecar and `APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false`, `/ru` and `/zh-Hans` reading pages keep English bodies and remain indexable with `hreflang`, exactly as `main` does today. The honest fallback-indexing rule above applies only once a sidecar exists (or if that switch is set true).
 - Publication output reports state from the compiler (never a stale "reviewed" claim): `publication.json` carries state, pins, `review_status` / `review_scope` / `review_issue`, and `counts_as_independent_source: false`.
 
 ## 6. Structural preservation checked by the compiler

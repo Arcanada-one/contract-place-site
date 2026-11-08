@@ -51,6 +51,10 @@ HEX40, HEX64 = re.compile(r"[0-9a-f]{40}"), re.compile(r"[0-9a-f]{64}")
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 ANCHOR = re.compile(r"[^\s\"'<>&#/?]+")
 TOP_KEYS = {"schema_version", "kind", "edition", "renditions"}
+# Sidecar schema v2 identity notes (docs/versioned-renditions.md §3):
+# - document_id (R3-G1-id) is the work identity: entry work + English canonical source.path; no separate document_id field.
+# - Offsets are out of scope (R3-G2): sections map by anchor identity only; no source_span/unit/offset field in v2.
+#   Consumers must refuse offset-based citations into renditions. Optional source_span {start,end,unit:"code_point"} is future API-G2 work.
 ENTRY_KEYS = {"work", "language", "script", "source", "rendition", "review", "sections", "counts_as_independent_source", "author"}
 ENTRY_REQUIRED = ENTRY_KEYS - {"review", "author"}
 AUTHOR_KEYS = {"identity"}
