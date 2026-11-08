@@ -43,7 +43,7 @@ function setTheme(){const theme=document.documentElement.dataset.theme==='dark'?
 function navigate(href,replace=false){closeDialogs();document.querySelectorAll('details[open]').forEach(d=>d.open=false);history[replace?'replaceState':'pushState']({},'',href);render();if(location.hash){document.getElementById(location.hash.slice(1))?.scrollIntoView()}else{window.scrollTo(0,0);document.querySelector('#main').focus({preventScroll:true})}}
 function bindFilters(){const input=document.querySelector('#reference-search');input?.addEventListener('input',e=>{if(!e.isComposing)applyFilter(undefined,e.target.value)});input?.addEventListener('compositionend',e=>applyFilter(undefined,e.target.value));document.querySelector('#page-search-form')?.addEventListener('submit',e=>{e.preventDefault();navigate(url('search')+'?q='+encodeURIComponent(new FormData(e.target).get('q')))})}
 function applyFilter(type,query){const params=new URLSearchParams(location.search);if(type!==undefined){if(type==='all')params.delete('type');else params.set('type',type)}if(query!==undefined){if(query)params.set('q',query);else params.delete('q')}history.replaceState({},'',location.pathname+(params.size?'?'+params:''));const current=params.get('type')||'all';document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===current)));document.querySelector('#reference-results').innerHTML=referenceResults(current,params.get('q')||'')}
-document.addEventListener('click',async e=>{const localeChoice=e.target.closest('[data-locale]');if(localeChoice){changeLocale(localeChoice.dataset.locale);return}if(!e.target.closest('.language-picker'))document.querySelectorAll('.language-picker[open]').forEach(d=>d.open=false);const search=e.target.closest('[data-search]');if(search){openSearch();return}if(e.target.closest('[data-menu]')){openMenu();return}if(e.target.closest('[data-close]')){e.target.closest('dialog').close();return}if(e.target.closest('.theme-btn')){setTheme();return}const copy=e.target.closest('[data-copy]');if(copy){try{await navigator.clipboard.writeText(JSON.stringify(example,null,2));copy.innerHTML=icon('check');copy.setAttribute('aria-label',t('copied'));document.querySelector('#announcement').textContent=t('copied');setTimeout(()=>{copy.innerHTML=icon('copy');copy.setAttribute('aria-label',t('copy'))},1600)}catch{document.querySelector('#announcement').textContent=t('copyFailed');const note=copy.closest('.code-window').querySelector('.code-note');note.textContent=t('copyFailed')}return}const filter=e.target.closest('[data-filter]');if(filter){applyFilter(filter.dataset.filter);return}if(e.target.closest('[data-clear]')){navigate(url('research'));return}const a=e.target.closest('a');if(a&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&a.target!=='_blank'&&a.origin===location.origin&&a.pathname!==location.pathname){e.preventDefault();navigate(a.href)}if(!e.target.closest('.nav-group'))document.querySelectorAll('.nav-group').forEach(d=>d.open=false)});
+document.addEventListener('click',async e=>{const localeChoice=e.target.closest('[data-locale]');if(localeChoice){changeLocale(localeChoice.dataset.locale);return}if(!e.target.closest('.language-picker'))document.querySelectorAll('.language-picker[open]').forEach(d=>d.open=false);const search=e.target.closest('[data-search]');if(search){openSearch();return}if(e.target.closest('[data-menu]')){openMenu();return}if(e.target.closest('[data-close]')){e.target.closest('dialog').close();return}if(e.target.closest('.theme-btn')){setTheme();return}const copy=e.target.closest('[data-copy]');if(copy){try{await navigator.clipboard.writeText(JSON.stringify(example,null,2));copy.innerHTML=icon('check');copy.setAttribute('aria-label',t('copied'));document.querySelector('#announcement').textContent=t('copied');setTimeout(()=>{copy.innerHTML=icon('copy');copy.setAttribute('aria-label',t('copy'))},1600)}catch{document.querySelector('#announcement').textContent=t('copyFailed');const note=copy.closest('.code-window').querySelector('.code-note');note.textContent=t('copyFailed')}return}const filter=e.target.closest('[data-filter]');if(filter){applyFilter(filter.dataset.filter);return}if(e.target.closest('[data-clear]')){navigate(url('research'));return}const a=e.target.closest('a');if(a&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&a.target!=='_blank'&&a.origin===location.origin&&a.pathname!==location.pathname){if(isLabPath(a.pathname)||isLabPath(location.pathname))return;e.preventDefault();navigate(a.href)}if(!e.target.closest('.nav-group'))document.querySelectorAll('.nav-group').forEach(d=>d.open=false)});
 document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'&&!e.target.matches('input,textarea,[contenteditable=true]')){e.preventDefault();openSearch()}if(e.key==='Escape'){document.querySelectorAll('.nav-group[open],.language-picker[open]').forEach(d=>{d.open=false;d.querySelector('summary').focus()})}});
 document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('close',()=>{if(lastTrigger?.isConnected)lastTrigger.focus()});d.addEventListener('click',e=>{const r=d.getBoundingClientRect();if(e.target===d&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))d.close()})});
 window.addEventListener('popstate',()=>{closeDialogs();render()});
@@ -57,7 +57,7 @@ function journal(){return `<div class="container">${pageHead(t('journal'),t('jou
 function publication(a){const coverName=a.id.includes('architecture')?'knowledge-prism.webp':'knowledge-dialogue.webp';return `<div class="container source-record"><div class="page-head"><div class="breadcrumb">${link('journal',t('journal'),'','')}<span>/</span><span>Arcanada</span></div><span class="tag">${t('publishedMaterial')}</span><h1 lang="en">${esc(a.title)}</h1><p class="lead" lang="en">${esc(a.description)}</p><div class="provenance metadata"><span>Pavel Valentov</span><span>Knowledge Contract Arcana</span><span>CC BY 4.0</span></div><a class="button" href="${a.source}" target="_blank" rel="noopener">${t('fullArticle')}${icon('external')}</a></div><figure class="article-cover"><img src="/assets/${coverName}" width="1200" height="800" alt="" decoding="async"><figcaption>${t('coverNote')}</figcaption></figure><article class="publication-body"><section class="publication-status"><h2>${t('sourceStatus')}</h2><div lang="en">${a.status.split('\n\n').slice(1).map(p=>`<p>${esc(p)}</p>`).join('')}</div></section><h2>${t('articleAbstract')}</h2><div lang="en">${a.abstract.split('\n\n').map(p=>`<p>${esc(p)}</p>`).join('')}</div><figure class="scientific-figure"><a href="${a.source}" target="_blank" rel="noopener"><img src="/assets/${a.image}" alt="${esc(a.id.includes('architecture')?'Original schematic of knowledge sources, the Resolver, Knowledge Contract and execution':'Original illustration of typed knowledge blocks and a receiving agent schema')}" loading="lazy"></a><figcaption>${t('articleFigure')}</figcaption></figure><p class="attribution">${t('sourceCredit')}</p><a class="button" href="${a.source}" target="_blank" rel="noopener">${t('fullArticle')}${icon('external')}</a></article></div>`}
 function docs(path){if(path==='docs/availability')return `<div class="container"><div class="reading">${pageHead(t('availability'),t('integrationDesc'))}<div class="status-row"><div><strong>${t('publicAPI')}</strong><p>${t('apiDesc')}</p><a class="text-link" href="https://api.contract.place/health" target="_blank" rel="noopener">api.contract.place/health ${icon('external')}</a></div><span class="tag">${t('available')}</span></div><pre class="endpoint-code"><code>GET https://api.contract.place/v1/search?q=knowledge&limit=10\nGET https://api.contract.place/v1/related\nGET https://api.contract.place/v1/fetch</code></pre><p class="intro-note">${translated(['Only the search request above is complete. Related and fetch require their documented parameters. The API accepts browser requests only from contract.place; this site’s document search uses it, other origins should use an HTTP client.','Только запрос search выше приведён полностью. Для related и fetch нужны параметры из документации. API принимает запросы из браузера только с contract.place; поиск по документам на этом сайте использует его, с других источников обращайтесь HTTP-клиентом.','上方仅 search 请求为完整示例。related 和 fetch 需要其文档中的参数。API 仅接受来自 contract.place 的浏览器请求；本站文档搜索使用该接口，其他来源请使用 HTTP 客户端。'])}</p><a class="button" href="${url('search')}#document-search">${t('openDocumentSearch')}${icon('arrow')}</a><div class="status-row"><div><strong>MCP</strong><p>${t('mcpDesc')}</p><code>https://api.contract.place/mcp</code></div></div><div class="status-row"><div><strong>${t('account')}</strong><p>${t('accountDesc')}</p></div><span class="status">${t('notConnected')}</span></div></div></div>`;return `<div class="container">${pageHead(t('specs'),t('specIntro'))}<div class="docs-banner"><div><h2>${t('knowledgeModel')}</h2><p>${t('integrationDesc')}</p>${link('docs/availability',t('availability'))}</div><img src="/assets/knowledge-landscape.webp" alt="" width="500" height="280" loading="lazy"></div><p class="intro-note">${t('statusNote')}</p><div class="spec-list">${corpus.records.filter(r=>r.kind==='spec').map(r=>`<a class="spec-row" href="${url(recordPath(r))}"><div class="card-icon">${icon('file')}</div><div><h2>${esc(recordTitle(r))}</h2><div class="metadata"><span>${r.artifact}</span><span>${t('scientificDraft')}</span></div></div>${icon('arrow')}</a>`).join('')}</div></div>`}
 function about(){return `<article class="container reading">${pageHead(t('licensing'),t('licenseText'))}<h2>Knowledge Contract Arcana</h2><p>${t('purposeText')}</p><h2>CC BY 4.0</h2><p lang="en">Text by Pavel Valentov, Knowledge Contract Arcana, <a href="https://contract.place/" target="_blank" rel="noopener">contract.place</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. The canonical publication texts are compiled from the pinned source revision. The interface language does not change the English source text. Original editorial cover illustrations were generated for this website and are not scientific diagrams. Original scientific figures retain their source attribution.</p><h2>Apache-2.0</h2><p lang="en">Published source code is available in the <a href="https://github.com/Arcanada-one/knowledge-contract" target="_blank" rel="noopener">knowledge-contract repository</a>. Retain its NOTICE, licence and upstream credits when reusing it.</p><ul class="source-list"><li><a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution guidance ${icon('external')}</a></li><li><a href="https://arcanada.ai/en/ecosystem/contract-place" target="_blank" rel="noopener">Arcanada project page ${icon('external')}</a></li></ul><h2>${t('privacy')}</h2><p>${t('localSearchDesc')}</p></article>`}
-function footer(){return `<div class="container"><div class="footer-grid"><div class="footer-brand">${brand()}<p>${t('tagline')}</p><p class="ecosystem-note">${translated(['Knowledge Contract Arcana is part of the Arcanada ecosystem.','Knowledge Contract Arcana — часть экосистемы Arcanada.','Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。'])}</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada ${icon('external')}</a></div><div class="footer-group"><strong>${t('research')}</strong>${link('research',t('papers'),'','')}${link('roadmap',t('roadmap'),'','')}${link('journal',t('journal'),'','')}${link('reference',t('reference'),'','')}${link('appendices',t('appendices'),'','')}</div><div class="footer-group"><strong>${t('developers')}</strong>${link('engineering/specifications',t('specs'),'','')}${link('engineering/studies',t('studies'),'','')}${link('repository',t('repository'),'','')}${link('docs/availability',t('availability'),'','')}</div><div class="footer-group"><strong>contract.place</strong>${link('about',t('licensing'),'','')}<a href="${url('search')}#document-search">${t('publicSearch')}</a>${link('references',t('references'),'','')}</div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · ${t('footerNote')}</span><span>${translated(['Content CC BY 4.0, code Apache-2.0.','Контент CC BY 4.0, код Apache-2.0.','内容 CC BY 4.0，代码 Apache-2.0。'])}</span></div>${locale==='zh-Hans'?'<p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p>':''}<p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div>`}
+function footer(){return `<div class="container"><div class="footer-grid"><div class="footer-brand">${brand()}<p>${t('tagline')}</p><p class="ecosystem-note">${translated(['Knowledge Contract Arcana is part of the Arcanada ecosystem.','Knowledge Contract Arcana — часть экосистемы Arcanada.','Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。'])}</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada ${icon('external')}</a></div><div class="footer-group"><strong>${t('research')}</strong>${link('research',t('papers'),'','')}${link('roadmap',t('roadmap'),'','')}${link('journal',t('journal'),'','')}${link('reference',t('reference'),'','')}${link('appendices',t('appendices'),'','')}</div><div class="footer-group"><strong>${t('developers')}</strong>${link('engineering/specifications',t('specs'),'','')}${link('engineering/studies',t('studies'),'','')}${link('repository',t('repository'),'','')}${link('docs/availability',t('availability'),'','')}${link('lab/knowledge-journey',t('labTitle'),'','')}</div><div class="footer-group"><strong>contract.place</strong>${link('about',t('licensing'),'','')}<a href="${url('search')}#document-search">${t('publicSearch')}</a>${link('references',t('references'),'','')}</div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · ${t('footerNote')}</span><span>${translated(['Content CC BY 4.0, code Apache-2.0.','Контент CC BY 4.0, код Apache-2.0.','内容 CC BY 4.0，代码 Apache-2.0。'])}</span></div>${locale==='zh-Hans'?'<p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p>':''}<p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div>`}
 function referencesPage(){return `<div class="container">${pageHead(t('references'),translated(['The six visual and structural references from the original design brief.','Шесть визуальных и структурных референсов исходного задания.','原始设计简报中的六个视觉与结构参考。']))}<div class="records">${refs.map(r=>`<a class="record" href="${r.source}" target="_blank" rel="noopener"><div><h2>${r.name}</h2><p>${translated(r.desc)}</p></div>${icon('external')}</a>`).join('')}</div></div>`}
 
 // The publication body remains English; locale selection changes only the interface.
@@ -219,6 +219,132 @@ function readerAlias(path,target){
  return '<article class="container reading">'+pageHead(t('chooseLanguage'),t('chooseLanguageText'))+'<h2 lang="en">'+esc(record?record.title:'Knowledge Contract publication')+'</h2><a class="button" href="'+target+'">'+t('readPaper')+icon('arrow')+'</a></article>';
 }
 
+// Public laboratory shell. Operational adapters mount here only after their
+// current capability and authorization checks; this shell starts no run.
+Object.assign(words, {
+  "labTitle": [
+    "Knowledge Journey",
+    "Путь знания",
+    "知识之旅"
+  ],
+  "labDescription": [
+    "Follow a source through processing, knowledge artifacts and evidence. Source processing is not connected on this page yet.",
+    "Проследите путь источника через обработку, артефакты знаний и свидетельства. Обработка источников на этой странице пока не подключена.",
+    "追踪来源的处理过程、知识制品与证据。此页面尚未连接来源处理服务。"
+  ],
+  "labUnavailable": [
+    "Not connected",
+    "Не подключено",
+    "尚未连接"
+  ],
+  "labUnavailableText": [
+    "Source processing is not connected. Upload and run creation are unavailable here.",
+    "Обработка источников не подключена. Загрузка файлов и создание запусков пока недоступны.",
+    "尚未连接来源处理服务。目前无法上传文件或创建运行。"
+  ],
+  "labInput": [
+    "Source",
+    "Источник",
+    "来源"
+  ],
+  "labFile": [
+    "Source file (PDF or Markdown)",
+    "Файл источника (PDF или Markdown)",
+    "来源文件（PDF 或 Markdown）"
+  ],
+  "labStart": [
+    "Start processing",
+    "Начать обработку",
+    "开始处理"
+  ],
+  "labGraph": [
+    "Processing graph",
+    "Граф обработки",
+    "处理图"
+  ],
+  "labGraphEmpty": [
+    "No processing steps have been observed.",
+    "Нет наблюдений о выполненных шагах обработки.",
+    "尚未观测到处理步骤。"
+  ],
+  "labEvents": [
+    "Events",
+    "События",
+    "事件"
+  ],
+  "labEventsEmpty": [
+    "No runtime events are available.",
+    "События выполнения пока недоступны.",
+    "暂无运行事件。"
+  ],
+  "labArtifacts": [
+    "Artifacts and evidence",
+    "Артефакты и свидетельства",
+    "制品与证据"
+  ],
+  "labArtifactsEmpty": [
+    "Files and their provenance will appear here when a connected run produces them.",
+    "Здесь появятся файлы и сведения об их происхождении, когда подключённый конвейер их создаст.",
+    "连接后的运行产生文件时，此处将显示文件及其来源记录。"
+  ],
+  "labModes": [
+    "Live follows current runtime events. Replay uses a saved trace. This page is not connected to either mode.",
+    "Live показывает текущие события выполнения. Replay воспроизводит сохранённую трассу. Эта страница пока не подключена ни к одному из режимов.",
+    "Live 显示当前运行事件，Replay 回放已保存的轨迹。此页面尚未连接任何模式。"
+  ],
+  "labContinue": [
+    "Explore the engineering specifications",
+    "Изучить инженерные спецификации",
+    "查看工程规范"
+  ]
+});
+function knowledgeJourney(){
+ return `<div class="container live-lab" data-live-lab="knowledge-journey" data-live-lab-state="unconnected">
+  ${pageHead(t('labTitle'),t('labDescription'))}
+  <section class="lab-status" aria-labelledby="lab-status-title" role="status" aria-live="polite">
+   <h2 id="lab-status-title">${t('labUnavailable')}</h2>
+   <p id="lab-unavailable">${t('labUnavailableText')}</p>
+   <p>${t('labModes')}</p>
+  </section>
+  <section class="lab-input" aria-labelledby="lab-input-title">
+   <h2 id="lab-input-title">${t('labInput')}</h2>
+   <fieldset disabled aria-disabled="true" aria-describedby="lab-unavailable">
+    <legend class="sr-only">${t('labInput')}</legend>
+    <label for="lab-source">${t('labFile')}</label>
+    <input id="lab-source" type="file" accept=".pdf,.md,.markdown,application/pdf,text/markdown" disabled aria-disabled="true">
+    <button class="button" type="button" disabled aria-disabled="true">${t('labStart')}</button>
+   </fieldset>
+  </section>
+  <div class="lab-panels">
+   <section aria-labelledby="lab-graph-title" data-live-lab-region="graph">
+    <h2 id="lab-graph-title">${t('labGraph')}</h2><p>${t('labGraphEmpty')}</p>
+   </section>
+   <section aria-labelledby="lab-events-title" data-live-lab-region="timeline">
+    <h2 id="lab-events-title">${t('labEvents')}</h2><p>${t('labEventsEmpty')}</p>
+   </section>
+   <section aria-labelledby="lab-artifacts-title" data-live-lab-region="inspector">
+    <h2 id="lab-artifacts-title">${t('labArtifacts')}</h2><p>${t('labArtifactsEmpty')}</p>
+   </section>
+  </div>
+  <p class="lab-reading-link">${link('engineering/specifications',t('labContinue'))}</p>
+ </div>`;
+}
+
+// A selection is an opaque view identifier, never a capability. Unknown,
+// repeated or malformed query values and fragments do not cross locale changes.
+// The operational adapter must authorize any eventual run/node lookup.
+function isLabPath(path){return /^\/(en|ru|zh-Hans)\/lab\/knowledge-journey\/?$/.test(path)}
+function labViewQuery(search){
+ const source=new URLSearchParams(search),target=new URLSearchParams();
+ for(const key of ['run','node']){
+  const values=source.getAll(key);
+  if(values.length===1&&/^[A-Za-z0-9][A-Za-z0-9._:~-]{0,127}$/.test(values[0]))target.set(key,values[0]);
+ }
+ if(!target.has('run'))target.delete('node');
+ return target.size?'?'+target.toString():'';
+}
+
+
 function render(){
 closeDialogs();const parts=location.pathname.split('/').filter(Boolean);const localized=langs.includes(parts[0]);locale=localized?parts.shift():'en';const path=parts.join('/');
 document.documentElement.lang=locale;document.querySelector('.skip').textContent=t('skip');document.querySelector('#header').innerHTML=header(path);document.querySelector('#footer').innerHTML=footer();
@@ -243,14 +369,15 @@ else if(path==='docs/availability'){html=docs(path);title=t('availability')}
 else if(path==='search'){html=searchPage();title=t('search')}
 else if(path==='about'){html=about();title=t('licensing')}
 else if(path==='references'){html=referencesPage();title=t('references')}
+else if(path==='lab/knowledge-journey'){html=knowledgeJourney();title=t('labTitle')}
 else if(path.startsWith('research/')&&refs.find(r=>r.id===parts[1])){const r=refs.find(r=>r.id===parts[1]);html=researchDetail(r);title=r.name}
 else{html=`<div class="container">${pageHead('404',t('notFound'))}${link('',t('backHome'),'button')}</div>`;title='404'}
-document.querySelector('#main').innerHTML=html;document.title=title+' — contract.place';document.querySelector('meta[name="description"]').content=record?record.summary:path==='roadmap'?t('roadmapDesc'):t('heroDesc');
+document.querySelector('#main').innerHTML=html;document.title=title+' — contract.place';document.querySelector('meta[name="description"]').content=record?record.summary:path==='lab/knowledge-journey'?t('labDescription'):path==='roadmap'?t('roadmapDesc'):t('heroDesc');
 bindFilters();bindLanguagePickers();if(path==='search'&&window.KcpSearch&&window.KcpSearch.mount)window.KcpSearch.mount(document);
 document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('href')===url(path.split('/')[0]))n.setAttribute('aria-current','page')});
 }
 
 
-function changeLocale(next){if(!langs.includes(next))return;const parts=location.pathname.split('/').filter(Boolean);if(langs.includes(parts[0]))parts.shift();try{localStorage.setItem('cp-locale',next)}catch{}navigate('/'+next+'/'+(parts.length?parts.join('/')+'/':'')+location.search+location.hash)}
+function changeLocale(next){if(!langs.includes(next))return;const parts=location.pathname.split('/').filter(Boolean);if(langs.includes(parts[0]))parts.shift();try{localStorage.setItem('cp-locale',next)}catch{}const isLab=parts.join('/')==='lab/knowledge-journey';const href='/'+next+'/'+(parts.length?parts.join('/')+'/':'')+(isLab?labViewQuery(location.search):location.search+location.hash);if(isLab){location.assign(href);return}navigate(href)}
 function bindLanguagePickers(scope=document){scope.querySelectorAll('.language-picker').forEach(picker=>{picker.addEventListener('toggle',()=>{if(picker.open)document.querySelectorAll('details[open]').forEach(other=>{if(other!==picker)other.open=false})});picker.addEventListener('focusout',()=>setTimeout(()=>{if(!picker.contains(document.activeElement))picker.open=false},0));picker.addEventListener('keydown',e=>{const options=[...picker.querySelectorAll('.locale-option')];const active=options.indexOf(document.activeElement);if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();picker.open=true;let index=e.key==='Home'?0:e.key==='End'?options.length-1:active<0?(e.key==='ArrowUp'?options.length-1:0):(active+(e.key==='ArrowUp'?-1:1)+options.length)%options.length;options[index].focus()}})});scope.querySelectorAll('.nav-group').forEach(group=>group.addEventListener('toggle',()=>{if(group.open)document.querySelectorAll('.language-picker[open]').forEach(p=>p.open=false)}))}
 if(location.pathname==='/'){let saved='en';try{saved=localStorage.getItem('cp-locale')||'en'}catch{}history.replaceState({},'','/'+(langs.includes(saved)?saved:'en')+'/'+location.search+location.hash)}render();

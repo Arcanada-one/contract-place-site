@@ -71,6 +71,7 @@ jobs:
           python3 -B scripts/test_renditions.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
           node scripts/test_search.js
+          node scripts/test_lab.js
       - name: Verify committed inputs and output are reproducible
         run: |
           python3 - <<'PY'

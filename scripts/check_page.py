@@ -9,6 +9,7 @@ CC_DEED = "https://creativecommons.org/licenses/by/4.0/"
 APACHE = "https://www.apache.org/licenses/LICENSE-2.0"
 ATTR = "https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md"
 LOCALES = ("en", "ru", "zh-Hans")
+LAB_ROUTES = ("lab/knowledge-journey",)
 
 
 def read(root: Path, rel: str) -> str:
@@ -104,7 +105,10 @@ def check_urls(root: Path) -> None:
         assert urls, rel + ": no canonical/hreflang"
         for u in urls:
             assert url_target(root, u).is_file(), rel + ": canonical/hreflang does not map to a built file: " + u
-        if rel != "index.html":
+        if bare in LAB_ROUTES:
+            assert 'name="robots" content="noindex,follow"' in head, rel + ": lab must be noindex"
+            assert ("https://contract.place/" + route + "/") not in listed, rel + ": lab must be absent from sitemap"
+        elif rel != "index.html":
             assert ("https://contract.place/" + route + "/") in listed, rel + ": indexable page missing from sitemap.xml"
 
 
@@ -116,7 +120,33 @@ def check_zh_notice(root: Path) -> None:
         assert "中文界面尚未经过母语编辑审校" not in read(root, rel)
 
 
+def check_laboratory(root: Path) -> None:
+    """Public shells must not look like an executing or authorized run."""
+    for locale in LOCALES:
+        where = locale + "/lab/knowledge-journey/index.html"
+        page = read(root, where)
+        check_head_and_scripts(page, where)
+        main = re.search(r'<main\b[^>]*>(.*?)</main>', page, re.S).group(1)
+        assert 'data-live-lab-state="unconnected"' in main, where + ": unconnected state missing"
+        assert re.search(r'<fieldset\b[^>]*\bdisabled\b', main), where + ": controls must be disabled"
+        assert re.search(r'<button\b[^>]*type="button"[^>]*\bdisabled\b', main), where + ": start must be disabled"
+        assert re.search(r'<input\b[^>]*type="file"[^>]*\bdisabled\b', main), where + ": upload must be disabled"
+        assert '<form' not in main, where + ": unconnected shell must not submit"
+        for region in ("graph", "timeline", "inspector"):
+            assert 'data-live-lab-region="' + region + '"' in main, where + ": missing region " + region
+        assert 'role="status"' in main and 'aria-live="polite"' in main, where + ": accessible state missing"
+        footer = re.search(r'<footer\b[^>]*>(.*?)</footer>', page, re.S).group(1)
+        assert 'href="/' + locale + '/lab/knowledge-journey/"' in footer, where + ": footer link missing"
+        header = re.search(r'<header\b[^>]*>(.*?)</header>', page, re.S).group(1)
+        assert '/lab/knowledge-journey' not in header, where + ": lab must not enter primary navigation"
+        assert '<meta name="robots" content="noindex,follow">' in page, where + ": lab must be noindex"
+        assert '<meta name="referrer" content="no-referrer">' in page, where + ": lab selection must not be a referrer"
+        for other in LOCALES:
+            assert 'hreflang="' + other + '" href="https://contract.place/' + other + '/lab/knowledge-journey/"' in page, where + ": reciprocal locale metadata missing"
+
+
 def check_site(root: Path) -> None:
+    check_laboratory(root)
     pages = ["index.html"] + ["%s/index.html" % l for l in LOCALES] + ["en/research/index.html", "en/science/controlled-knowledge-reuse/index.html", "en/search/index.html", "en/about/index.html"]
     for rel in pages:
         page = read(root, rel)

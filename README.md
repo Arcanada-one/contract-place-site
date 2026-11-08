@@ -47,6 +47,7 @@ python3 -B scripts/test_build.py
 python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
+node scripts/test_lab.js
 python3 -m http.server 8000 --directory public
 ```
 
