@@ -181,6 +181,10 @@ class Renderer:
     def source_url(self, path: str, history: bool = False) -> str:
         return f"{GITHUB}/{'commits' if history else 'blob'}/{self.manifest['commit']}/{quote(path, safe='/')}"
 
+    def document_route(self, path: str, doc: dict) -> str:
+        route = doc.get("link_route")
+        return route(path) if route else self.by_path[path]["route"]
+
     def resolve_link(self, target: str, doc: dict, image: bool = False) -> str:
         parts = urlsplit(target)
         if parts.scheme in {"https", "http", "mailto"} or target.startswith("//"):
@@ -188,7 +192,7 @@ class Renderer:
             if not image and target.startswith(prefix):
                 tail = unquote(parts.path).split("/blob/", 1)[1].split("/", 1)
                 if len(tail) == 2 and tail[0] in {"main", self.manifest["commit"]} and tail[1] in self.by_path:
-                    return self.by_path[tail[1]]["route"] + ("#" + parts.fragment if parts.fragment else "")
+                    return self.document_route(tail[1], doc) + ("#" + parts.fragment if parts.fragment else "")
                 if len(tail) == 2 and tail[0] == "main" and inside(self.source, tail[1]).exists():
                     return self.source_url(tail[1]) + ("#" + parts.fragment if parts.fragment else "")
             if image:
@@ -200,12 +204,15 @@ class Renderer:
             return target
         raw_path = unquote(parts.path)
         relative = posixpath.normpath(raw_path.lstrip("/") if raw_path.startswith("/") else str(PurePosixPath(doc["path"]).parent / raw_path))
+        fragment = parts.fragment
+        if doc.get("link_resolve"):  # a language rendition: a translated peer is the document at its source path
+            relative, fragment = doc["link_resolve"](relative, fragment)
         source_path = inside(self.source, relative)
         if not source_path.exists():
             raise ValueError(f"Missing link target in {doc['path']}: {target} -> {relative}")
-        suffix = ("?" + parts.query if parts.query else "") + ("#" + parts.fragment if parts.fragment else "")
+        suffix = ("?" + parts.query if parts.query else "") + ("#" + fragment if fragment else "")
         if relative in self.by_path:
-            return self.by_path[relative]["route"] + suffix
+            return self.document_route(relative, doc) + suffix
         if image:
             asset_path = Path("assets/documents") / relative
             destination = self.output / asset_path
@@ -220,7 +227,10 @@ class Renderer:
                 self.transform(item, doc)
         elif isinstance(node, dict):
             if node.get("t") in {"Link", "Image"}:
-                node["c"][2][0] = self.resolve_link(node["c"][2][0], doc, node["t"] == "Image")
+                original = node["c"][2][0]
+                node["c"][2][0] = self.resolve_link(original, doc, node["t"] == "Image")
+                if node["t"] == "Link" and doc.get("link_note"):
+                    doc["link_note"](node, original)
             if node.get("t") in {"RawBlock", "RawInline"} and node["c"][0] in {"html", "html5"}:
                 # Reader input is Markdown, not an executable HTML application.
                 if re.search(r"<(?:script|iframe|object|embed)\b|\son\w+\s*=", node["c"][1], re.I):
@@ -260,6 +270,9 @@ def main() -> None:
     parser.add_argument('--roadmap-source-dir', type=Path, required=True,
                         help='clean checkout of the commit pinned in roadmap-manifest.json (independent of the manuscript pin)')
     parser.add_argument('--roadmap-manifest', type=Path, default=ROOT / 'roadmap-manifest.json')
+    parser.add_argument('--renditions-file', type=Path, default=None,
+                        help='TEST/FIXTURE ONLY: read the renditions sidecar from this file instead of the catalogue-declared one. '
+                             'The output is marked renditions_source=fixture and check_publication.py refuses it; never use it for a production build.')
     args = parser.parse_args()
     source = args.source_dir.resolve()
     version = run(['pandoc', '--version']).splitlines()[0].split()[1]
@@ -275,7 +288,10 @@ def main() -> None:
     # Generate from the source before the JS build copies the current site assets.
     from publication_catalog import write_catalog
     renderer = Renderer(source, ROOT / 'src/site', manifest, documents)
-    write_catalog(source, ROOT, manifest, documents, renderer, roadmap)
+    # Language renditions (optional, versioned sidecar in the knowledge repository): validated before any file is written.
+    from renditions import compile_renditions
+    renditions = compile_renditions(source, manifest, documents, renderer, run, args.renditions_file.resolve() if args.renditions_file else None)
+    write_catalog(source, ROOT, manifest, documents, renderer, roadmap, renditions)
     print(run(['node', 'build.mjs'], cwd=ROOT).strip())
     from publication_checks import check_site
     count = check_site(ROOT / 'public')
@@ -283,6 +299,8 @@ def main() -> None:
     check_status_labels(ROOT / 'public', json.loads((ROOT / 'src/content/catalog.json').read_text())['records'])
     load_inputs(source, args.manifest)
     compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
+    if renditions:
+        print(f'Renditions: {len(renditions.entries)} work/language pairs from the {renditions.source_kind} sidecar {renditions.sidecar_path}.')
     print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}; roadmap of {len(roadmap["tasks"])} planned tasks at {roadmap["pin"]["commit"]}.')
 
 

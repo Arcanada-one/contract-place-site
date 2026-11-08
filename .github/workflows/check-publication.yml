@@ -68,6 +68,7 @@ jobs:
       - name: Renderer and search boundaries
         run: |
           python3 -B scripts/test_build.py
+          python3 -B scripts/test_renditions.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
           node scripts/test_search.js
           node scripts/test_lab.js

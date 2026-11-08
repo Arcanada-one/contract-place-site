@@ -4,14 +4,14 @@ SPDX-PackageDownloadLocation = "https://github.com/Arcanada-one/contract-place-s
 
 # Text, catalog data, figures and generated pages: CC BY 4.0.
 [[annotations]]
-path = ["README.md", "AGENTS.md", "publication-manifest.json", "roadmap-manifest.json", "public/publication.json", "public/roadmap.json", "SECURITY.md", "NOTICE", "src/DESIGN.md", "src/content/**", "src/site/*.md", "src/site/*.txt", "src/site/*.json", "src/site/assets/*.webp", "src/site/assets/*.jpg", "src/site/assets/*.svg", "public/**/*.html", "public/llms.txt", "public/content.js", "public/content-provenance.json", "public/ATTRIBUTION-source.md", "public/LICENSE-content.txt", "public/NOTICE-content.txt", "public/assets/*.webp", "public/assets/*.jpg", "public/assets/*.svg", "public/favicon.svg"]
+path = ["README.md", "AGENTS.md", "publication-manifest.json", "roadmap-manifest.json", "public/publication.json", "public/roadmap.json", "SECURITY.md", "NOTICE", "src/DESIGN.md", "docs/*.md", "src/content/**", "src/site/*.md", "src/site/*.txt", "src/site/*.json", "src/site/assets/*.webp", "src/site/assets/*.jpg", "src/site/assets/*.svg", "public/**/*.html", "public/llms.txt", "public/content.js", "public/content-provenance.json", "public/ATTRIBUTION-source.md", "public/LICENSE-content.txt", "public/NOTICE-content.txt", "public/assets/*.webp", "public/assets/*.jpg", "public/assets/*.svg", "public/favicon.svg"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 # Site code, build and CI: Apache-2.0.
 [[annotations]]
-path = ["src/site/app.js", "src/site/search.js", "src/site/theme.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "build.mjs", "public/app.js", "public/search.js", "public/theme.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
+path = ["src/site/app.js", "src/site/search.js", "src/site/theme.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "src/renditions/*", "build.mjs", "public/app.js", "public/renditions.js", "public/renditions.css", "public/search.js", "public/theme.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"

@@ -15,7 +15,7 @@ The interface retains the project's design, local fonts and illustrations in Eng
 | `reference/bibliography/BIBLIOGRAPHY.md` | `/en/reference/bibliography/` |
 | `appendices/<slug>/APPENDIX.md` | `/en/appendices/<slug>/` |
 
-The corresponding `/ru/` and `/zh-Hans/` pages provide localized navigation around the same English text. Previously published numbered addresses and unprefixed publication addresses are compatibility entries leading to the canonical documents.
+The corresponding `/ru/` and `/zh-Hans/` pages provide localized navigation around the same English text. Versioned language renditions (exact source and rendition pins, review state, explicit English fallback; none exist yet) are described in [docs/versioned-renditions.md](docs/versioned-renditions.md). Previously published numbered addresses and unprefixed publication addresses are compatibility entries leading to the canonical documents.
 
 Full manuscripts are present in built HTML. Pandoc preserves equations as MathML, tables, footnotes and document structure. Each reading page provides a table of contents, source attribution, a citation and links to its source revision.
 
@@ -44,6 +44,7 @@ python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
 python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
 node scripts/test_lab.js
