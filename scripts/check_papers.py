@@ -90,6 +90,10 @@ def parse(path: Path, lang: str):
     for l in p.links:
         t = l["text"].strip()
         label = l["attrs"].get("aria-label", "").strip()
+        # Compatibility fragment destinations (<a id="..."></a> with no href) are
+        # not navigational links; the corpus preserves prior heading anchors after title renames.
+        if not l["href"] and l["attrs"].get("id") and not t and not label:
+            continue
         if not t and not label:
             errs.append("%s: link without text or aria-label: %s" % (path, l["href"]))
         if t.lower() in generic:
