@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit a0450428704fcd41b411203f2fc88c06c779610b.
+Publication edition 1.1. Source commit 644c83dffbd97d9563d131b388a44c9ddf27b185.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
@@ -18,36 +18,36 @@ Complete English documents with an English, Russian and Chinese interface. The C
 
 ## Publication documents
 
-- [From Human Meaning to Contract-Governed Knowledge](https://contract.place/en/science/human-meaning-and-computable-knowledge/): paper (research draft, not an accepted paper).
-- [Semantic Objects, Context, and Conditions of Applicability](https://contract.place/en/science/semantic-objects-and-context/): paper.
-- [Constrained Transformations and the Limits of Knowledge Transfer](https://contract.place/en/science/constrained-transformations/): paper.
-- [Retrieval, Coverage, and Context Composition under Resource Limits](https://contract.place/en/science/retrieval-and-context-composition/): paper.
-- [Interaction, Documents, and Memory with Explicit Revision Boundaries](https://contract.place/en/science/interaction-and-memory/): paper.
-- [Evidence, Reasoning, and Falsification in Knowledge Systems](https://contract.place/en/science/evidence-and-falsification/): paper.
-- [Knowledge Revision, Version Identity, and the Adoption of Norms](https://contract.place/en/science/revision-and-governance/): paper.
-- [Knowledge Contracts and the Admission of Prepared Knowledge](https://contract.place/en/science/controlled-knowledge-reuse/): paper.
-- [Knowledge Utility, Resource Accounting, and Lifecycle Decisions](https://contract.place/en/science/knowledge-utility/): paper.
-- [Knowledge Contract: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
-- [Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
-- [Semantic Types, Attribution, and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
-- [Context Packages: Coverage, Dependencies, and Delivery](https://contract.place/en/engineering/specifications/context-package/): specification.
-- [Compiled Knowledge Artifacts and Reproducible Derivation](https://contract.place/en/engineering/specifications/compiled-artifact-contract/): specification.
-- [Artifact Registry, Readable Names, and Document Formats](https://contract.place/en/engineering/specifications/artifact-registry/): specification.
-- [Assessment, Execution, and Publication States](https://contract.place/en/engineering/specifications/status-model/): specification.
-- [Cache Identity, Dependency Tracking, and Invalidation](https://contract.place/en/engineering/specifications/cache-identity-and-invalidation/): specification.
+- [Meaning Bridge: From Human Meaning to Contract-Governed Knowledge](https://contract.place/en/science/human-meaning-and-computable-knowledge/): paper (research draft, not an accepted paper).
+- [Meaning in Context: Semantic Objects, Context, and Conditions of Applicability](https://contract.place/en/science/semantic-objects-and-context/): paper.
+- [Knowledge Transformations: Constrained Transformations and the Limits of Knowledge Transfer](https://contract.place/en/science/constrained-transformations/): paper.
+- [Context Assembly: Retrieval, Coverage, and Context Composition under Resource Limits](https://contract.place/en/science/retrieval-and-context-composition/): paper.
+- [Interaction and Memory: Interaction, Documents, and Memory with Explicit Revision Boundaries](https://contract.place/en/science/interaction-and-memory/): paper.
+- [Evidence and Falsification: Evidence, Reasoning, and Falsification in Knowledge Systems](https://contract.place/en/science/evidence-and-falsification/): paper.
+- [Knowledge Revision: Version Identity and the Adoption of Norms](https://contract.place/en/science/revision-and-governance/): paper.
+- [Knowledge Reuse: Knowledge Contracts and the Admission of Prepared Knowledge](https://contract.place/en/science/controlled-knowledge-reuse/): paper.
+- [Knowledge Utility: Resource Accounting and Lifecycle Decisions](https://contract.place/en/science/knowledge-utility/): paper.
+- [Contract Core: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
+- [Knowledge Operations: Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
+- [Semantic Types: Attribution and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
+- [Context Package: Coverage, Dependencies, and Delivery](https://contract.place/en/engineering/specifications/context-package/): specification.
+- [Compiled Knowledge: Artifacts and Reproducible Derivation](https://contract.place/en/engineering/specifications/compiled-artifact-contract/): specification.
+- [Artifact Registry: Readable Names and Document Formats](https://contract.place/en/engineering/specifications/artifact-registry/): specification.
+- [Status Model: Assessment, Execution, and Publication States](https://contract.place/en/engineering/specifications/status-model/): specification.
+- [Cache Validity: Cache Identity, Dependency Tracking, and Invalidation](https://contract.place/en/engineering/specifications/cache-identity-and-invalidation/): specification.
 - [Reuse Policy: Time, Authorization, and Decision Outcomes](https://contract.place/en/engineering/specifications/reuse-policy/): specification.
-- [Knowledge Evolution and Versioned Rules](https://contract.place/en/engineering/specifications/knowledge-evolution/): specification.
+- [Knowledge Evolution: Versioned Rules](https://contract.place/en/engineering/specifications/knowledge-evolution/): specification.
 - [Book Packages: Source Identity, Semantic Layers, and Validation](https://contract.place/en/engineering/specifications/book-package/): specification.
-- [Contract profiles: finite conformance, trust boundaries, and a strong simple comparator](https://contract.place/en/engineering/studies/contract-profile-conformance/): study.
-- [Dependency closure, readable artifact layouts, and a pinned package replay](https://contract.place/en/engineering/studies/dependency-closure-and-package-delivery/): study.
-- [Reproducible transcription is not preservation of uncertainty](https://contract.place/en/engineering/studies/source-transcription-and-uncertainty/): study.
-- [Executable projections, addressable revisions, and the limits of graph minimality](https://contract.place/en/engineering/studies/executable-projections-and-revision/): study.
-- [Controlled reuse: admission counterexamples and the cost of a cache hit](https://contract.place/en/engineering/studies/reuse-admission-and-cost-controls/): study.
-- [Editing a scientific section with a knowledge toolkit: a masked single-section comparison](https://contract.place/en/engineering/studies/editorial-skill-pilot/): study.
-- [Knowledge Contract Glossary](https://contract.place/en/reference/glossary/): glossary.
-- [Primary Sources and Research Foundations](https://contract.place/en/reference/bibliography/): bibliography.
-- [Source Map, Earlier Editions, and Protocol Compatibility](https://contract.place/en/appendices/source-map/): appendix.
-- [API Integration and Publication Consistency](https://contract.place/en/appendices/api-integration/): appendix.
+- [Contract Checks: Finite conformance, trust boundaries, and a strong simple comparator](https://contract.place/en/engineering/studies/contract-profile-conformance/): study.
+- [Dependency Closure: Readable artifact layouts and a pinned package replay](https://contract.place/en/engineering/studies/dependency-closure-and-package-delivery/): study.
+- [Uncertainty Preservation: Reproducible transcription is not preservation of uncertainty](https://contract.place/en/engineering/studies/source-transcription-and-uncertainty/): study.
+- [Executable Projections: Addressable revisions and the limits of graph minimality](https://contract.place/en/engineering/studies/executable-projections-and-revision/): study.
+- [Reuse Economics: Controlled reuse: admission counterexamples and the cost of a cache hit](https://contract.place/en/engineering/studies/reuse-admission-and-cost-controls/): study.
+- [Editorial Pilot: Editing a scientific section with a knowledge toolkit: a masked single-section comparison](https://contract.place/en/engineering/studies/editorial-skill-pilot/): study.
+- [Shared Vocabulary: Knowledge Contract Glossary](https://contract.place/en/reference/glossary/): glossary.
+- [Research Foundations: Primary Sources and Research Foundations](https://contract.place/en/reference/bibliography/): bibliography.
+- [Source History: Source Map, Earlier Editions, and Protocol Compatibility](https://contract.place/en/appendices/source-map/): appendix.
+- [Publication Interfaces: API Integration and Publication Consistency](https://contract.place/en/appendices/api-integration/): appendix.
 
 ## Scope and access
 
