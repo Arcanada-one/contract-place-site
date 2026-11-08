@@ -8,8 +8,8 @@ may declare through the optional ``renditions`` key of ``publication-catalog.jso
 describes. Nothing here writes or translates text. With no sidecar the compiler output is unchanged.
 
 Layout: the text of a rendition lives in the knowledge repository at ``translations/<language>/<source-relative path>``,
-the same relative path as its English source. Links inside a rendition are mirrored verbatim from the source, so they
-are resolved against the SOURCE file's directory in the canonical tree, never against ``translations/<language>/``.
+the same relative path as its English source. Links inside a rendition are ordinary relative Markdown: they are resolved
+literally from the rendition file's own directory, as GitHub renders them (see classify_link for the rules).
 
 Every refusal is a RenditionError whose message starts with a stable code (see CODES). The design is in
 docs/versioned-renditions.md.
@@ -17,6 +17,7 @@ docs/versioned-renditions.md.
 from __future__ import annotations
 
 from collections import Counter
+from datetime import datetime
 from hashlib import sha256
 import json
 from pathlib import Path, PurePosixPath
@@ -40,18 +41,30 @@ CODES = (
     "RENDITION_REFERENCE_DROPPED", "RENDITION_REFERENCE_CHANGED", "RENDITION_FIXTURE_ONLY",
     "RENDITION_SILENT_FALLBACK", "RENDITION_STATE_LABEL", "RENDITION_SOURCE_AUTHORITY",
     "RENDITION_LAYOUT", "RENDITION_LINK_SCHEME", "RENDITION_LINK_ESCAPES", "RENDITION_LINK_DANGLING",
-    "RENDITION_LINK_TRANSLATION", "RENDITION_LINK_FRAGMENT",
+    "RENDITION_LINK_TRANSLATION", "RENDITION_LINK_FRAGMENT", "RENDITION_REVIEW_UNBOUND", "RENDITION_REVIEW_NOT_INDEPENDENT", "RENDITION_LINK_UNPINNED",
 )
+# Review claims that fail to bind do not refuse the build: the page is shown as unreviewed and the typed reason is recorded.
+REVIEW_ISSUES = ("RENDITION_REVIEW_UNBOUND", "RENDITION_REVIEW_NOT_INDEPENDENT")
+SIDECAR_SCHEMA_VERSION = 2
 TRANSLATIONS_ROOT = "translations"
 HEX40, HEX64 = re.compile(r"[0-9a-f]{40}"), re.compile(r"[0-9a-f]{64}")
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 ANCHOR = re.compile(r"[^\s\"'<>&#/?]+")
 TOP_KEYS = {"schema_version", "kind", "edition", "renditions"}
-ENTRY_KEYS = {"work", "language", "script", "source", "rendition", "review", "sections", "counts_as_independent_source"}
+ENTRY_KEYS = {"work", "language", "script", "source", "rendition", "review", "sections", "counts_as_independent_source", "author"}
+ENTRY_REQUIRED = ENTRY_KEYS - {"review", "author"}
+AUTHOR_KEYS = {"identity"}
 SOURCE_KEYS = {"path", "sha256", "revision", "language"}
 RENDITION_KEYS = {"path", "sha256", "revision"}
-REVIEW_KEYS = {"status", "scope", "reviewed_sections", "method", "reviewers", "evidence", "limits"}
-REVIEWER_KEYS = {"kind", "ref"}
+# A review is one closed object; an entry without it is an unreviewed author draft.
+REVIEW_KEYS = {"reviewer", "method", "reviewed", "scope", "corrections", "reviewed_at", "limitations", "evidence"}
+REVIEWER_KEYS = {"identity", "kind", "independent_of_author", "independence_basis"}
+REVIEWED_KEYS = {"source_blob", "rendition_blob"}
+SCOPE_KEYS = {"coverage", "sections", "claims", "proofs"}
+CORRECTION_KEYS = {"section", "description"}
+EVIDENCE_KEYS = {"path", "blob"}
+TIME_UTC = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
+REVIEWER_KINDS = ("agent",)  # KC-Brain has worded only the internal agent review; a human review needs its own label first
 SECTION_KEYS = {"source", "rendition"}
 FIXTURE_SOURCE, REPOSITORY_SOURCE = "fixture", "knowledge-repository"
 STRUCTURAL_BLOCKS = ("Table", "BulletList", "OrderedList", "DefinitionList", "BlockQuote", "CodeBlock", "HorizontalRule", "Figure", "RawBlock")
@@ -114,8 +127,8 @@ def rendition_path_for(language: str, source_path: str) -> str:
 def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
     """Closed-schema validation of the sidecar document; returns its entries. No file is read here."""
     closed(sidecar, TOP_KEYS, "sidecar")
-    if sidecar["schema_version"] != 1 or isinstance(sidecar["schema_version"], bool):
-        fail("RENDITION_SIDECAR_SCHEMA", "unsupported sidecar schema_version")
+    if sidecar["schema_version"] != SIDECAR_SCHEMA_VERSION or isinstance(sidecar["schema_version"], bool):
+        fail("RENDITION_SIDECAR_SCHEMA", f"unsupported sidecar schema_version (expected {SIDECAR_SCHEMA_VERSION})")
     if sidecar["kind"] != SIDECAR_KIND:
         fail("RENDITION_SIDECAR_SCHEMA", f"kind must be {SIDECAR_KIND!r}")
     if sidecar["edition"] != manifest["edition"]:
@@ -126,7 +139,7 @@ def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
     entries = []
     for index, entry in enumerate(sidecar["renditions"]):
         where = f"renditions[{index}]"
-        closed(entry, ENTRY_KEYS, where)
+        closed(entry, ENTRY_KEYS, where, ENTRY_REQUIRED)
         work = entry["work"]
         if not isinstance(work, str) or not SLUG.fullmatch(work):
             fail("RENDITION_SIDECAR_SCHEMA", f"{where}.work must be a catalogue slug")
@@ -155,34 +168,8 @@ def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
         expected = rendition_path_for(language, source["path"])
         if rendition["path"] != expected:
             fail("RENDITION_LAYOUT", f"{where}: the rendition path must be exactly {expected} (translations/<language>/<source path>), found {rendition['path']}")
-        review = closed(entry["review"], REVIEW_KEYS, f"{where}.review", REVIEW_KEYS - {"reviewed_sections"})
-        if review["status"] not in {"reviewed", "unreviewed"}:
-            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.status must be reviewed or unreviewed")
-        if review["scope"] not in {"full", "sections"}:
-            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.scope must be full or sections")
-        if (review["scope"] == "sections") != ("reviewed_sections" in review):
-            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review: reviewed_sections is required exactly when scope is sections")
-        if not isinstance(review["method"], str) or not isinstance(review["limits"], str):
-            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.method and limits must be strings")
-        if not isinstance(review["reviewers"], list) or not isinstance(review["evidence"], list):
-            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewers and evidence must be lists")
-        for reviewer in review["reviewers"]:
-            closed(reviewer, REVIEWER_KEYS, f"{where}.review.reviewers[]")
-            if reviewer["kind"] not in {"agent", "human"}:
-                fail("RENDITION_SIDECAR_SCHEMA", f"{where}: reviewer kind must be agent or human")
-            text(reviewer["ref"], f"{where}.review.reviewers[].ref")
-        for item in review["evidence"]:
-            text(item, f"{where}.review.evidence[]")
-        if "reviewed_sections" in review:
-            if not isinstance(review["reviewed_sections"], list) or not review["reviewed_sections"]:
-                fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewed_sections must be a non-empty list")
-            for item in review["reviewed_sections"]:
-                if not isinstance(item, str) or not ANCHOR.fullmatch(item):
-                    fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewed_sections holds an invalid anchor")
-        if review["status"] == "reviewed" and not (review["method"].strip() and review["reviewers"] and review["evidence"] and review["limits"].strip()):
-            fail("RENDITION_REVIEW_UNEVIDENCED", f"{where}: status reviewed requires method, reviewers, evidence references and declared limits")
-        if review["status"] == "unreviewed" and (review["reviewers"] or review["evidence"] or review["scope"] != "full"):
-            fail("RENDITION_REVIEW_UNEVIDENCED", f"{where}: an unreviewed rendition cannot carry reviewers, evidence or a partial scope")
+        if "review" in entry:
+            validate_review(entry, where)
         if not isinstance(entry["sections"], list) or not entry["sections"]:
             fail("RENDITION_SIDECAR_SCHEMA", f"{where}.sections must be a non-empty list")
         for pair in entry["sections"]:
@@ -192,6 +179,73 @@ def validate_sidecar(sidecar: object, manifest: dict) -> list[dict]:
                     fail("RENDITION_SIDECAR_SCHEMA", f"{where}.sections[] holds an invalid anchor")
         entries.append(entry)
     return entries
+
+
+def blob40(value: object, where: str) -> str:
+    if not isinstance(value, str) or not HEX40.fullmatch(value):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where} must be a full 40-character git blob id")
+    return value
+
+
+def text_list(value: object, where: str, allow_empty: bool) -> list:
+    if not isinstance(value, list) or (not value and not allow_empty):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where} must be {'a' if allow_empty else 'a non-empty'} list")
+    for item in value:
+        text(item, f"{where}[]")
+    return value
+
+
+def validate_review(entry: dict, where: str) -> None:
+    """Shape of a review object. A review without every fact is a refusal (RENDITION_REVIEW_UNEVIDENCED), never a reviewed
+    state; whether a complete review binds to the pinned bytes is decided later and degrades to unreviewed."""
+    if "author" not in entry:
+        fail("RENDITION_REVIEW_UNEVIDENCED", f"{where}: a review requires the rendition's author identity to test independence")
+    closed(entry["author"], AUTHOR_KEYS, f"{where}.author")
+    text(entry["author"]["identity"], f"{where}.author.identity")
+    review = entry["review"]
+    if not isinstance(review, dict):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review must be an object")
+    missing = sorted(REVIEW_KEYS - set(review))
+    if missing and set(review) <= REVIEW_KEYS:
+        fail("RENDITION_REVIEW_UNEVIDENCED", f"{where}.review lacks {missing}")
+    closed(review, REVIEW_KEYS, f"{where}.review")
+    reviewer = closed(review["reviewer"], REVIEWER_KEYS, f"{where}.review.reviewer")
+    text(reviewer["identity"], f"{where}.review.reviewer.identity")
+    if reviewer["kind"] not in REVIEWER_KINDS:
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewer.kind must be one of {REVIEWER_KINDS}")
+    if not isinstance(reviewer["independent_of_author"], bool):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewer.independent_of_author must be true or false")
+    text(reviewer["independence_basis"], f"{where}.review.reviewer.independence_basis")
+    text(review["method"], f"{where}.review.method")
+    text(review["limitations"], f"{where}.review.limitations")
+    reviewed = closed(review["reviewed"], REVIEWED_KEYS, f"{where}.review.reviewed")
+    blob40(reviewed["source_blob"], f"{where}.review.reviewed.source_blob"), blob40(reviewed["rendition_blob"], f"{where}.review.reviewed.rendition_blob")
+    scope = closed(review["scope"], SCOPE_KEYS, f"{where}.review.scope")
+    if scope["coverage"] not in {"full", "partial"}:
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.scope.coverage must be full or partial")
+    for anchor in text_list(scope["sections"], f"{where}.review.scope.sections", False):
+        if not ANCHOR.fullmatch(anchor):
+            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.scope.sections holds an invalid anchor")
+    text_list(scope["claims"], f"{where}.review.scope.claims", True), text_list(scope["proofs"], f"{where}.review.scope.proofs", True)
+    if not isinstance(review["corrections"], list):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.corrections must be a list (empty when none were made)")
+    for correction in review["corrections"]:
+        closed(correction, CORRECTION_KEYS, f"{where}.review.corrections[]")
+        if not ANCHOR.fullmatch(text(correction["section"], f"{where}.review.corrections[].section")):
+            fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.corrections[].section holds an invalid anchor")
+        text(correction["description"], f"{where}.review.corrections[].description")
+    stamp = text(review["reviewed_at"], f"{where}.review.reviewed_at")
+    try:
+        if not TIME_UTC.fullmatch(stamp):
+            raise ValueError(stamp)
+        datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ")
+    except ValueError:
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.reviewed_at must be a UTC time like 2026-01-31T12:00:00Z")
+    evidence = closed(review["evidence"], EVIDENCE_KEYS, f"{where}.review.evidence")
+    path = text(evidence["path"], f"{where}.review.evidence.path")
+    if path.startswith("/") or ".." in PurePosixPath(path).parts or "\\" in path or urlsplit(path).scheme or path.endswith("/"):
+        fail("RENDITION_SIDECAR_SCHEMA", f"{where}.review.evidence.path must be a repository path, not a URL or a name: {path}")
+    blob40(evidence["blob"], f"{where}.review.evidence.blob")
 
 
 def git_bytes(source: Path, *args: str) -> bytes | None:
@@ -227,13 +281,24 @@ def walk(node: object, visit) -> None:
             walk(value, visit)
 
 
-def classify_link(target: str, base_path: str, tree: frozenset[str], by_path: dict) -> tuple[str, str | None]:
-    """Deterministic class of one link of a rendition, resolved against the SOURCE document at ``base_path``.
+def classify_link(target: str, rendition_path: str, language: str, tree: frozenset[str], by_path: dict,
+                  pinned: frozenset[str]) -> tuple[str, str | None]:
+    """Deterministic class of one link of a rendition. Relative targets are resolved LITERALLY from the directory of the
+    rendition file (ordinary Markdown semantics, as GitHub renders it). Returns (class, canonical path):
 
-    A rendition mirrors the source's link strings, so every relative target is resolved from the directory of the source
-    file in the canonical tree. It is never resolved from ``translations/<language>/``. Returns (class, path):
-    external, fragment (same document), document (a catalogue document) or invariant (any other file or directory that
-    exists at the pinned commit). Anything else is a typed refusal; nothing is guessed."""
+    * external: http(s) or mailto outside the repository, unchanged;
+    * fragment: a same-document ``#anchor``;
+    * peer: a path under ``translations/<this language>/`` that is the rendition of a catalogue document AND is itself a
+      pinned entry of the sidecar; the canonical path is the document's source path (the link goes to the document's
+      route in the same interface language, carrying its state);
+    * document: a catalogue document at its canonical (English) path; same route rule, the state of the target decides
+      whether the English fallback is explicit;
+    * invariant: any other file or directory that exists at the pinned commit (schema, example, code, data, image).
+
+    Refused, nothing guessed: a target that leaves the repository root, a target under ``translations/`` that is not a
+    pinned rendition of this language (another language, the coverage file, an uncatalogued path), a same-language
+    translation that is not a pinned sidecar entry, an unsupported scheme, and a path that does not exist at the pinned
+    commit (which is what catches links written from the source's directory depth)."""
     from build_publication import GITHUB
     parts = urlsplit(target)
     if parts.scheme in {"https", "http", "mailto"} or target.startswith("//"):
@@ -244,17 +309,25 @@ def classify_link(target: str, base_path: str, tree: frozenset[str], by_path: di
                 return "document", tail[1]
         return "external", None
     if parts.scheme:
-        fail("RENDITION_LINK_SCHEME", f"{base_path}: unsupported link scheme in {target!r}")
+        fail("RENDITION_LINK_SCHEME", f"{rendition_path}: unsupported link scheme in {target!r}")
     if not parts.path:
         return "fragment", None
     raw = unquote(parts.path)
-    relative = posixpath.normpath(raw.lstrip("/") if raw.startswith("/") else str(PurePosixPath(base_path).parent / raw))
+    relative = posixpath.normpath(raw.lstrip("/") if raw.startswith("/") else str(PurePosixPath(rendition_path).parent / raw))
     if relative == ".." or relative.startswith("../"):
-        fail("RENDITION_LINK_ESCAPES", f"{base_path}: {target!r} leaves the repository root")
+        fail("RENDITION_LINK_ESCAPES", f"{rendition_path}: {target!r} leaves the repository root")
     if relative == TRANSLATIONS_ROOT or relative.startswith(TRANSLATIONS_ROOT + "/"):
-        fail("RENDITION_LINK_TRANSLATION", f"{base_path}: {target!r} resolves to {relative}; a link never targets a translation file (use the source path, the route follows the language)")
+        own = f"{TRANSLATIONS_ROOT}/{language}/"
+        source_path = relative[len(own):] if relative.startswith(own) else None
+        if source_path is None or source_path not in by_path:
+            fail("RENDITION_LINK_TRANSLATION", f"{rendition_path}: {target!r} resolves to {relative}, which is not a {language} rendition of a catalogue document")
+        if source_path not in pinned:
+            fail("RENDITION_LINK_UNPINNED", f"{rendition_path}: {target!r} links to {relative}, which is not a pinned entry of the sidecar (no link to an unpinned draft)")
+        if relative not in tree:
+            fail("RENDITION_LINK_DANGLING", f"{rendition_path}: {target!r} resolves to {relative}, which does not exist at the pinned commit")
+        return "peer", source_path
     if relative not in tree:
-        fail("RENDITION_LINK_DANGLING", f"{base_path}: {target!r} resolves to {relative}, which does not exist at the pinned source commit")
+        fail("RENDITION_LINK_DANGLING", f"{rendition_path}: {target!r} resolves to {relative}, which does not exist at the pinned commit")
     return ("document" if relative in by_path else "invariant"), relative
 
 
@@ -280,8 +353,8 @@ def title_id(ast: dict) -> str | None:
     return None
 
 
-def analyse_links(ast: dict, base_path: str, tree: frozenset[str], by_path: dict, fragment_map: dict[str, str],
-                  own_anchors: set[str], source_anchors: set[str], errors: list | None = None) -> list[tuple[str, str | None, str]]:
+def analyse_links(ast: dict, rendition_path: str, language: str, tree: frozenset[str], by_path: dict, pinned: frozenset[str],
+                  fragment_map: dict[str, str], own_anchors: set[str], source_anchors: set[str], errors: list | None = None) -> list[tuple[str, str | None, str]]:
     """Classify every link and image of a rendition (see classify_link). A same-document fragment must be a mapped section
     anchor of the rendition or an identifier that the source and the rendition both carry; a guessed fragment is refused.
     Returns (class, path, target) per link. With ``errors`` given, refusals are collected there instead of raised."""
@@ -292,11 +365,11 @@ def analyse_links(ast: dict, base_path: str, tree: frozenset[str], by_path: dict
             return
         target = node["c"][2][0]
         try:
-            kind, path = classify_link(target, base_path, tree, by_path)
+            kind, path = classify_link(target, rendition_path, language, tree, by_path, pinned)
             if kind == "fragment":
                 fragment = unquote(urlsplit(target).fragment)
                 if fragment and fragment not in fragment_map and not (fragment in own_anchors and fragment in source_anchors):
-                    fail("RENDITION_LINK_FRAGMENT", f"{base_path}: same-document fragment #{fragment} is not a mapped section anchor and not an anchor of both texts")
+                    fail("RENDITION_LINK_FRAGMENT", f"{rendition_path}: same-document fragment #{fragment} is not a mapped section anchor and not an anchor of both texts")
         except RenditionError as error:
             if errors is None:
                 raise
@@ -307,8 +380,12 @@ def analyse_links(ast: dict, base_path: str, tree: frozenset[str], by_path: dict
     return results
 
 
-def normalize_target(target: str, base_path: str, fragment_map: dict[str, str]) -> str:
-    """Comparable form of a link target; relative paths are resolved against the SOURCE document ``base_path``."""
+def normalize_target(target: str, base_path: str, fragment_map: dict[str, str], language: str | None = None,
+                     peer_maps: dict | None = None) -> str:
+    """Comparable identity of a link target: the canonical repository path (plus fragment). Relative paths are resolved
+    literally from ``base_path`` (the source document for the source, the rendition file for a rendition); a target under
+    ``translations/<language>/`` is the same target as the document at the remaining (source) path, and a fragment into
+    such a peer is mapped through that peer's section mapping to the source anchor."""
     parts = urlsplit(target)
     if parts.scheme or target.startswith("//"):
         return target
@@ -317,10 +394,14 @@ def normalize_target(target: str, base_path: str, fragment_map: dict[str, str]) 
         return "#" + fragment_map.get(fragment, "\0unmapped:" + fragment)
     raw = unquote(parts.path)
     relative = posixpath.normpath(raw.lstrip("/") if raw.startswith("/") else str(PurePosixPath(base_path).parent / raw))
+    own = f"{TRANSLATIONS_ROOT}/{language}/"
+    if language and relative.startswith(own):
+        relative = relative[len(own):]
+        fragment = (peer_maps or {}).get((language, relative), {}).get(fragment, fragment)
     return relative + ("#" + fragment if fragment else "")
 
 
-def facts(ast: dict, doc_path: str, fragment_map: dict[str, str]) -> dict:
+def facts(ast: dict, doc_path: str, fragment_map: dict[str, str], language: str | None = None, peer_maps: dict | None = None) -> dict:
     formulas, code, references, notes = [], [], Counter(), [0]
 
     def visit(node: dict) -> None:
@@ -332,7 +413,7 @@ def facts(ast: dict, doc_path: str, fragment_map: dict[str, str]) -> dict:
         elif kind == "Code":
             code.append(("inline", tuple(node["c"][0][1]), node["c"][1]))
         elif kind in {"Link", "Image"}:
-            references[(kind, normalize_target(node["c"][2][0], doc_path, fragment_map))] += 1
+            references[(kind, normalize_target(node["c"][2][0], doc_path, fragment_map, language, peer_maps))] += 1
         elif kind == "Cite":
             for citation in node["c"][0]:
                 references[("Cite", citation["citationId"])] += 1
@@ -393,7 +474,7 @@ def meta_value(ast: dict, key: str) -> str | None:
     return None
 
 
-def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_references=None) -> dict[str, str]:
+def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_references=None, peer_maps: dict | None = None) -> dict[str, str]:
     """Structural parity between a source and its rendition. Returns the rendition-to-source anchor map.
     ``before_references`` runs after the section and structure checks and before formulas, code and references are
     compared, so that a link that cannot be resolved is reported as such and not as a dropped reference."""
@@ -425,9 +506,6 @@ def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_refe
     for s, r in pairs:
         if levels_src[s] != levels_rnd[r]:
             fail("RENDITION_SECTION_DRIFT", f"{work}/{language}: heading level of {s} differs from {r}")
-    reviewed = entry["review"].get("reviewed_sections")
-    if reviewed is not None and any(s not in src_ids for s in reviewed):
-        fail("RENDITION_SECTION_DRIFT", f"{work}/{language}: reviewed_sections names a section that is not in the source")
     structure_pairs = [("", "")] + pairs
     for s, r in structure_pairs:
         a, b = src_structure[s], rnd_structure[r]
@@ -438,12 +516,12 @@ def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_refe
     if before_references is not None:
         before_references()
     reverse = {r: s for s, r in pairs}
-    base = entry["source"]["path"]  # mirrored links resolve from the source file's directory on both sides
+    base = entry["source"]["path"]  # links resolve literally from each file's own directory; the targets are compared canonically
     source_title, rendition_title = title_id(source_ast), title_id(rendition_ast)
     if source_title and rendition_title:
         reverse[rendition_title] = source_title
     source_facts = facts(source_ast, base, {**{i: i for i in src_ids}, **({source_title: source_title} if source_title else {})})
-    rendition_facts = facts(rendition_ast, base, reverse)
+    rendition_facts = facts(rendition_ast, entry["rendition"]["path"], reverse, language, peer_maps)
     if [f for f in source_facts["formulas"]] != rendition_facts["formulas"]:
         fail("RENDITION_FORMULA_CHANGED", f"{work}/{language}: formulas differ from the source (exact LaTeX and display mode must be identical, in order)")
     if source_facts["code"] != rendition_facts["code"]:
@@ -456,13 +534,60 @@ def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_refe
     return reverse
 
 
-def state_of(entry: dict, current_source_sha: str) -> str:
-    if entry["source"]["sha256"] != current_source_sha:
-        return "stale"
-    review = entry["review"]
-    if review["status"] == "unreviewed":
-        return "unreviewed"
-    return "reviewed" if review["scope"] == "full" else "partially-reviewed"
+def normalized_identity(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip().casefold()
+
+
+def blob_id(source: Path, revision: str, path: str) -> str | None:
+    found = git_bytes(source, "rev-parse", "--verify", "--quiet", f"{revision}:{path}")
+    return found.decode().strip() if found else None
+
+
+def evaluate_review(source: Path, manifest: dict, doc: dict, entry: dict) -> tuple[str, dict | None]:
+    """The review state of a rendition whose source is current: ("reviewed" | "partially-reviewed" | "unreviewed", issue).
+
+    No review object: an unreviewed author draft, no issue. A review object counts only when it is independently
+    inspectable and bound to exactly what is published: the reviewer is independent of the author (stated, with a basis,
+    and not the same identity), the reviewed source and rendition blobs equal the pinned ones, the evidence file exists
+    at its pinned blob in the publication commit, and the scope names real sections of the source (full coverage names
+    all of them). Anything else leaves the rendition unreviewed with a typed issue; the build is not refused."""
+    review = entry.get("review")
+    if review is None:
+        return "unreviewed", None
+
+    def degraded(code: str, detail: str) -> tuple[str, dict]:
+        return "unreviewed", {"code": code, "detail": detail}
+    reviewer = review["reviewer"]
+    if reviewer["independent_of_author"] is not True:
+        return degraded("RENDITION_REVIEW_NOT_INDEPENDENT", "the reviewer states that the review is not independent of the author")
+    if normalized_identity(reviewer["identity"]) == normalized_identity(entry["author"]["identity"]):
+        return degraded("RENDITION_REVIEW_NOT_INDEPENDENT", "the reviewer identity equals the author identity")
+    for name, pin in (("source", entry["source"]), ("rendition", entry["rendition"])):
+        pinned = blob_id(source, pin["revision"], pin["path"])
+        if pinned is None or review["reviewed"][name + "_blob"] != pinned:
+            return degraded("RENDITION_REVIEW_UNBOUND", f"the reviewed {name} blob {review['reviewed'][name + '_blob']} is not the pinned {name} blob {pinned}")
+    evidence = review["evidence"]
+    found = blob_id(source, manifest["commit"], evidence["path"])
+    if found is None or found != evidence["blob"]:
+        return degraded("RENDITION_REVIEW_UNBOUND", f"the evidence {evidence['path']} is not at the pinned blob {evidence['blob']} in the publication commit")
+    from build_publication import inside, parse_markdown
+    headings = [anchor for _, anchor in sections_of(parse_markdown(inside(source, doc["path"])))[0]]
+    scope = review["scope"]
+    unknown = [a for a in scope["sections"] + [c["section"] for c in review["corrections"]] if a not in headings]
+    if unknown:
+        return degraded("RENDITION_REVIEW_UNBOUND", f"the review names sections that are not in the source: {sorted(set(unknown))}")
+    if len(set(scope["sections"])) != len(scope["sections"]):
+        return degraded("RENDITION_REVIEW_UNBOUND", "the review scope repeats a section")
+    if scope["coverage"] == "full" and set(scope["sections"]) != set(headings):
+        return degraded("RENDITION_REVIEW_UNBOUND", f"full coverage is claimed but the scope omits {sorted(set(headings) - set(scope['sections']))}")
+    return ("reviewed" if scope["coverage"] == "full" else "partially-reviewed"), None
+
+
+def resolve_state(source: Path, manifest: dict, doc: dict, entry: dict) -> tuple[str, dict | None]:
+    """(state, review issue). A source that changed after the pin is stale whatever the review says."""
+    if entry["source"]["sha256"] != doc["sha256"]:
+        return "stale", None
+    return evaluate_review(source, manifest, doc, entry)
 
 
 def annotate_sections(html: str, pairs: list[tuple[str, str]]) -> str:
@@ -505,18 +630,46 @@ class Compiled:
         }
 
 
-def link_hooks(language: str, states: dict, by_path: dict, tree: frozenset[str], base_path: str) -> dict:
-    """Renderer hooks for one rendition: links resolve from the SOURCE directory, and a link to another catalogue document
-    goes to that document's route in the same interface language. The target's state is explicit on the link: a shown
-    rendition is linked as such; a stale or missing one is linked with an explicit English-fallback state."""
+def review_for_page(renderer, entry: dict) -> dict:
+    """The review exactly as the sidecar states it, plus the author and the pinned link to the evidence file."""
+    review = json.loads(json.dumps(entry["review"]))
+    review["evidence"]["url"] = renderer.source_url(review["evidence"]["path"])
+    review["author"] = entry["author"]["identity"]
+    return review
+
+
+def link_context(entries: list[dict]) -> tuple[dict, dict]:
+    """(pinned, peer_maps): for each language the source paths that are pinned sidecar entries (the only translated peers a
+    rendition may link to), and for each (language, source path) the rendition-anchor to source-anchor section mapping."""
+    pinned: dict[str, set] = {language: set() for language in RENDITION_LANGUAGES}
+    peer_maps: dict[tuple, dict] = {}
+    for entry in entries:
+        pinned[entry["language"]].add(entry["source"]["path"])
+        peer_maps[(entry["language"], entry["source"]["path"])] = {p["rendition"]: p["source"] for p in entry["sections"]}
+    return {language: frozenset(paths) for language, paths in pinned.items()}, peer_maps
+
+
+def link_hooks(language: str, states: dict, by_path: dict, tree: frozenset[str], rendition_path: str, pinned: frozenset[str], peer_maps: dict) -> dict:
+    """Renderer hooks for one rendition. Relative links resolve literally from the rendition file's directory (the renderer's
+    default for a document whose path is the rendition path); a translated peer is mapped to its source document, and a
+    fragment into it to the source anchor, which the rendered page keeps resolvable. A link to a catalogue document goes to
+    that document's route in the same interface language. The target's state is explicit on the link: a shown rendition is
+    linked as such; a stale or missing one is linked with an explicit English-fallback state."""
     from publication_checks import RENDITION_FALLBACK, RENDITION_LABELS
+    own = f"{TRANSLATIONS_ROOT}/{language}/"
 
     def route(relative: str) -> str:
         return by_path[relative]["route"].replace("/en/", f"/{language}/", 1)
 
+    def resolve(relative: str, fragment: str) -> tuple[str, str]:
+        if relative.startswith(own):
+            canonical = relative[len(own):]
+            return canonical, peer_maps.get((language, canonical), {}).get(unquote(fragment), fragment) if fragment else fragment
+        return relative, fragment
+
     def note(node: dict, original: str) -> None:
-        kind, path = classify_link(original, base_path, tree, by_path)
-        if kind != "document":
+        kind, path = classify_link(original, rendition_path, language, tree, by_path, pinned)
+        if kind not in {"document", "peer"}:
             return
         state = states.get((by_path[path]["slug"], language), "missing")
         shown = state in STATES_RENDERED
@@ -526,14 +679,14 @@ def link_hooks(language: str, states: dict, by_path: dict, tree: frozenset[str],
             attrs.append(["data-fallback", SOURCE_LANGUAGE])
             if not node["c"][2][1]:
                 node["c"][2][1] = f"{RENDITION_LABELS[state][language]} {RENDITION_FALLBACK[language]}"
-    return {"link_base": base_path, "link_route": route, "link_note": note}
+    return {"link_resolve": resolve, "link_route": route, "link_note": note}
 
 
 def link_class_counts(links: list[tuple[str, str | None, str]], language: str, states: dict, by_path: dict) -> dict:
     counts = Counter(kind for kind, _, _ in links)
     counts.update(
         "document_shown" if states.get((by_path[path]["slug"], language), "missing") in STATES_RENDERED else "document_fallback"
-        for kind, path, _ in links if kind == "document")
+        for kind, path, _ in links if kind in {"document", "peer"})
     return dict(sorted(counts.items()))
 
 
@@ -575,12 +728,14 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
             fail("RENDITION_DIGEST", f"{label}: rendition bytes {found} differ from the pinned {entry['rendition']['sha256']}")
     attempt("digest", digest)
     state = states[(work, language)]
+    issue = ctx["issues"].get((work, language))
     record = {
         "language": language, "script": entry["script"], "state": state,
         "source": dict(entry["source"], url=renderer.source_url(doc["path"])),
         "current_source_sha256": doc["sha256"],
         "rendition": dict(entry["rendition"], url=renderer.source_url(rendition_path), history=renderer.source_url(rendition_path, True)),
-        "review": entry["review"], "sections": entry["sections"], "counts_as_independent_source": False,
+        "review": review_for_page(renderer, entry) if state in ("reviewed", "partially-reviewed") else None,
+        "review_issue": issue, "sections": entry["sections"], "counts_as_independent_source": False,
     }
     if state != "stale" and file.is_file():
         source_ast, rendition_ast = parse_markdown(inside(source, doc["path"])), parse_markdown(file)
@@ -600,19 +755,19 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
         found: dict = {}
 
         def links(errors: list | None) -> None:
-            found["links"] = analyse_links(rendition_ast, doc["path"], tree, by_path, fragment_map, anchors_of(rendition_ast), anchors_of(source_ast), errors)
+            found["links"] = analyse_links(rendition_ast, rendition_path, language, tree, by_path, ctx["pinned"][language], fragment_map, anchors_of(rendition_ast), anchors_of(source_ast), errors)
         if report is None:
-            check_parity(entry, source_ast, rendition_ast, before_references=lambda: links(None))
+            check_parity(entry, source_ast, rendition_ast, before_references=lambda: links(None), peer_maps=ctx["peer_maps"])
         else:
             link_errors: list = []
             links(link_errors)
             report["failures"].extend(("links", error.code, str(error)) for error in link_errors)
             report["links"] = found["links"]
-            attempt("parity", lambda: check_parity(entry, source_ast, rendition_ast))
+            attempt("parity", lambda: check_parity(entry, source_ast, rendition_ast, peer_maps=ctx["peer_maps"]))
         record["link_classes"] = link_class_counts(found["links"], language, states, by_path)
 
         def render() -> None:
-            hooks = link_hooks(language, states, by_path, tree, doc["path"])
+            hooks = link_hooks(language, states, by_path, tree, rendition_path, ctx["pinned"][language], ctx["peer_maps"])
             fragment = renderer.document(dict({"path": rendition_path, "slug": work}, **hooks))
             title = next((plain_title(block) for block in rendition_ast["blocks"] if block["t"] == "Header" and block["c"][0] == 1), None)
             if not title:
@@ -628,7 +783,9 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
         "source_path": doc["path"], "source_sha256": entry["source"]["sha256"], "current_source_sha256": doc["sha256"],
         "source_revision": entry["source"]["revision"], "rendition_path": rendition_path,
         "rendition_sha256": entry["rendition"]["sha256"], "rendition_revision": entry["rendition"]["revision"],
-        "review_status": entry["review"]["status"], "review_scope": entry["review"]["scope"],
+        "review_status": "internal-agent-review" if state in ("reviewed", "partially-reviewed") else "unreviewed",
+        "review_scope": {"reviewed": "full", "partially-reviewed": "partial"}.get(state, "none"),
+        "review_issue": issue["code"] if issue else None,
         "counts_as_independent_source": False,
     }
     return record, provenance
@@ -663,15 +820,20 @@ def compile_renditions(source: Path, manifest: dict, documents: list[dict], rend
         if entry["work"] not in by_slug:
             fail("RENDITION_UNKNOWN_WORK", f"{entry['work']} is not in the publication catalogue")
     # First pass: the state of every work/language pair. A link from one rendition to another document depends on it.
-    states = {(e["work"], e["language"]): state_of(e, by_slug[e["work"]]["sha256"]) for e in entries}
-    ctx = {"renderer": renderer, "by_path": by_path, "tree": tree_paths(source, manifest["commit"])}
+    resolved = {(e["work"], e["language"]): resolve_state(source, manifest, by_slug[e["work"]], e) for e in entries}
+    states = {key: state for key, (state, _) in resolved.items()}
+    issues = {key: issue for key, (_, issue) in resolved.items() if issue}
+    pinned, peer_maps = link_context(entries)
+    ctx = {"renderer": renderer, "by_path": by_path, "tree": tree_paths(source, manifest["commit"]), "issues": issues, "pinned": pinned, "peer_maps": peer_maps}
     result: dict[str, dict] = {}
     provenance_entries = []
     for doc in documents:
         result[doc["slug"]] = {}
         for language in RENDITION_LANGUAGES:
             if (doc["slug"], language) not in declared_pairs:
-                pin = {"path": doc["path"], "sha256": doc["sha256"], "revision": manifest["commit"], "language": SOURCE_LANGUAGE}
+                # C6: a missing page must still carry a resolvable source URL (never href="undefined").
+                pin = {"path": doc["path"], "sha256": doc["sha256"], "revision": manifest["commit"], "language": SOURCE_LANGUAGE,
+                       "url": renderer.source_url(doc["path"])}
                 result[doc["slug"]][language] = {"language": language, "script": RENDITION_LANGUAGES[language], "state": "missing", "source": pin}
                 provenance_entries.append({"work": doc["slug"], "language": language, "state": "missing", "source_sha256": doc["sha256"]})
     for entry in entries:

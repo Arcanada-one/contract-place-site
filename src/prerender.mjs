@@ -14,6 +14,16 @@ const renditionSource=fs.existsSync(path.join(root,'renditions.js'))?fs.readFile
 // Indexing decision per route. Everything not listed here is canonical, in the sitemap and indexable.
 // noindex: pages that duplicate a paper/article under another URL (aliases) or are design-brief references, not project content.
 const NOINDEX=new Set(['wiki/knowledge-contract','wiki/provenance','wiki/versioned-knowledge','journal/building-a-place','docs/model','references','research/anthropic','research/deepmind','research/hugging-face','research/mcp','research/stripe','research/supabase']);
+// Fallback-indexing rule for the localized pages of a work (K8, docs/versioned-renditions.md section 5). ONE switch. It applies to
+// builds that compiled renditions (a sidecar exists). Whether it also applies to a build without renditions, where every
+// /ru/ and /zh-Hans/ reading page has an English body, is an open decision of KC-Brain; set this to true to apply it there
+// (every translation is then "missing", so those pages are noindex, carry no hreflang alternate and leave the sitemap).
+const APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false;
+const fallbackIndexing=()=>APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS||!!renditionSource;
+// A locale counts as translated, indexed content only with a bound internal agent review in its stated scope. English always counts.
+const TRANSLATED=['reviewed','partially-reviewed'];
+const workOf=rest=>data.records.find(r=>r.route==='/en/'+rest.replace(/\/+$/,'')+'/');
+const counts=(record,l)=>l==='en'||TRANSLATED.includes(((record.renditions||{})[l]||{state:'missing'}).state);
 function seo(route,lang){
  if(!/^\/(?:en|ru|zh-Hans)(?:\/|$)/.test(route)&&data.reader_aliases[route.replace(/^\/|\/$/g,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url='+data.reader_aliases[route.replace(/^\/|\/$/g,'')]+'">';
  const m=route.match(/^\/(?:en|ru|zh-Hans)(?:\/(.*))?$/);const rest=m&&m[1]?m[1]:'';
@@ -21,7 +31,13 @@ function seo(route,lang){
  if(data.aliases[rest.replace(/\/+$/,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/'+lang+'/'+data.aliases[rest.replace(/\/+$/,'')]+'/">';
  const at=l=>ORIGIN+'/'+l+'/'+(rest?rest.replace(/\/+$/,'')+'/':'');
  if(NOINDEX.has(rest.replace(/\/+$/,'')))return '<meta name="robots" content="noindex,follow">';
- return `<link rel="canonical" href="${at(lang)}">`+LANGS.map(l=>`<link rel="alternate" hreflang="${l}" href="${at(l)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${at('en')}"><meta property="og:url" content="${at(lang)}"><meta property="og:site_name" content="Knowledge Contract Arcana">`;
+ let alternates=LANGS;
+ if(fallbackIndexing()&&rest){const record=workOf(rest);
+  if(record){
+   if(!counts(record,lang))return '<meta name="robots" content="noindex,follow">';
+   alternates=LANGS.filter(l=>counts(record,l));
+  }}
+ return `<link rel="canonical" href="${at(lang)}">`+alternates.map(l=>`<link rel="alternate" hreflang="${l}" href="${at(l)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${at('en')}"><meta property="og:url" content="${at(lang)}"><meta property="og:site_name" content="Knowledge Contract Arcana">`;
 }
 function generate(route,lang){
  const element=()=>({innerHTML:'',textContent:'',content:'',querySelector:()=>null,addEventListener(){},focus(){}});
@@ -38,7 +54,9 @@ function generate(route,lang){
    const author={'@type':'Person',name:'Pavel Valentov',sameAs:'https://orcid.org/0009-0001-2567-4584'};
    const rd=record.renditions&&record.renditions[lang];
    const shown=!!rd&&['reviewed','partially-reviewed','unreviewed'].includes(rd.state);
-   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:shown?rd.title:record.title,url:ORIGIN+record.route,inLanguage:shown?lang:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source,...(record.status?{creativeWorkStatus:record.status}:{}),...(shown?{translationOfWork:{'@type':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en'}}:{})};
+   // C9: the language-tagged object uses the localized URL; the English route lives only on translationOfWork.
+   const pageUrl=ORIGIN+(shown?record.route.replace('/en/',`/${lang}/`):record.route);
+   const ld={'@context':'https://schema.org','@type':record.kind==='paper'?'ScholarlyArticle':'CreativeWork',name:shown?rd.title:record.title,url:pageUrl,inLanguage:shown?lang:'en',version:data.publication.edition,license:'https://creativecommons.org/licenses/by/4.0/',author,copyrightHolder:author,isBasedOn:record.source,...(record.status?{creativeWorkStatus:record.status}:{}),...(shown?{translationOfWork:{'@type':'CreativeWork',name:record.title,url:ORIGIN+record.route,inLanguage:'en'}}:{})};
    const block='<script type="application/ld+json">'+JSON.stringify(ld).replaceAll('<','\\u003c')+'</script>';
    return html.replace('</head>',block+'</head>');
  }
@@ -52,7 +70,8 @@ routes.push('about','references');
 const uniqueRoutes=[...new Set(routes)];
 const urls=[ORIGIN+'/'];
 for(const lang of LANGS)for(const route of uniqueRoutes){const dir=path.join(root,lang,route);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),generate(`/${lang}/${route}`,lang));
- const indexable=!NOINDEX.has(route);
+ const record=fallbackIndexing()&&route?workOf(route):null;
+ const indexable=!NOINDEX.has(route)&&!(record&&!counts(record,lang));
  if(indexable)urls.push(`${ORIGIN}/${lang}/${route?route+'/':''}`);}
 for(const alias of Object.keys(data.reader_aliases)){const dir=path.join(root,alias);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),generate('/'+alias,'en'));}
 fs.writeFileSync(path.join(root,'index.html'),generate('/en','en').replace('<link rel="canonical" href="'+ORIGIN+'/en/">','<link rel="canonical" href="'+ORIGIN+'/">').replace('<meta property="og:url" content="'+ORIGIN+'/en/">','<meta property="og:url" content="'+ORIGIN+'/">'));

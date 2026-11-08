@@ -107,15 +107,25 @@ def check_status_labels(output: Path, records: list[dict]) -> int:
 
 
 # Expected public state labels for language renditions, independent of the site code that renders them (K8).
+# All five state labels are KC-Brain-proposed wording (unreviewed/reviewed from letter 7b4d2cc6 (5); the rest brought to the
+# same register). The review labels say "internal agent review" and never imply external peer review.
 RENDITION_LABELS = {
-    "reviewed": {"en": "Reviewed translation", "ru": "Рецензированный перевод", "zh-Hans": "已审校译文"},
-    "partially-reviewed": {"en": "Partially reviewed translation", "ru": "Частично рецензированный перевод", "zh-Hans": "部分审校译文"},
-    "unreviewed": {"en": "Unreviewed translation", "ru": "Перевод без рецензирования", "zh-Hans": "未审校译文"},
+    "reviewed": {"en": "Translation reviewed within the stated scope (internal agent review)", "ru": "Перевод проверен в указанном объёме (внутренняя агентная рецензия)", "zh-Hans": "译文已按所述范围完成内部代理审查"},
+    "partially-reviewed": {"en": "Translation partly reviewed within the stated scope (internal agent review)", "ru": "Перевод проверен частично, в указанном объёме (внутренняя агентная рецензия)", "zh-Hans": "译文已按所述范围完成部分内部代理审查"},
+    "unreviewed": {"en": "Translation without semantic review", "ru": "Перевод без смысловой рецензии", "zh-Hans": "尚未经语义审校的译文"},
     "stale": {"en": "Translation out of date: the English source has changed.", "ru": "Перевод устарел: английский источник изменился.", "zh-Hans": "译文已过期：英文源文已更改。"},
     "missing": {"en": "No translation of this document is available.", "ru": "Перевода этого документа нет.", "zh-Hans": "本文档暂无译文。"},
 }
 RENDITION_FALLBACK = {"en": "The pinned English source text is shown instead.", "ru": "Вместо него показан закреплённый английский исходный текст.", "zh-Hans": "此处改为显示固定版本的英文源文。"}
 RENDITION_RENDERED = ("reviewed", "partially-reviewed", "unreviewed")
+# States that count as translated content for indexing: a bound internal agent review in its stated scope. An unreviewed
+# rendition and an English fallback never do (K8 round 3 rule, docs/versioned-renditions.md section 5).
+RENDITION_INDEXED = ("reviewed", "partially-reviewed")
+RENDITION_ISSUES = {
+    "RENDITION_REVIEW_UNBOUND": {"en": "A review is claimed but it is not bound to the pinned source, translation or evidence file. It is not counted.", "ru": "Заявлена рецензия, но она не привязана к закреплённым источнику, переводу или файлу свидетельств. Она не учитывается.", "zh-Hans": "已声明审校，但未绑定到固定版本的源文、译文或依据文件，不予计入。"},
+    "RENDITION_REVIEW_NOT_INDEPENDENT": {"en": "A review is claimed but the reviewer is not independent of the author. It is not counted.", "ru": "Заявлена рецензия, но рецензент не независим от автора. Она не учитывается.", "zh-Hans": "已声明审校，但审校者并非独立于译者，不予计入。"},
+}
+ORIGIN = "https://contract.place"
 RENDITION_LOCALES = ("ru", "zh-Hans")
 
 
@@ -168,6 +178,26 @@ def check_renditions(output: Path, records: list[dict], renditions_source: str |
             for other, label in RENDITION_LABELS.items():
                 if other != rd["state"] and f"<strong>{escape(label[locale])}</strong>" in inner:
                     errors.append(f"RENDITION_STATE_LABEL: {rel} carries the label of state {other!r} but the rendition is {rd['state']!r}")
+            issue = rd.get("review_issue")
+            if issue:
+                if rd["state"] != "unreviewed":
+                    errors.append(f"RENDITION_STATE_LABEL: {rel} has a review issue {issue['code']} but the state is {rd['state']!r}")
+                if f'data-review-issue="{issue["code"]}"' not in inner or escape(RENDITION_ISSUES[issue["code"]][locale]) not in inner:
+                    errors.append(f"RENDITION_STATE_LABEL: {rel} does not state the typed review issue {issue['code']} in {locale}")
+            elif 'data-review-issue=' in inner:
+                errors.append(f"RENDITION_STATE_LABEL: {rel} states a review issue that the compiled record does not have")
+            if rd["state"] in RENDITION_INDEXED:
+                review = rd.get("review") or {}
+                reviewer = review.get("reviewer") or {}
+                if reviewer.get("independent_of_author") is not True or not review.get("author") or " ".join(reviewer.get("identity", "").split()).casefold() == " ".join(review["author"].split()).casefold():
+                    errors.append(f"RENDITION_REVIEW_NOT_INDEPENDENT: {rel} shows a reviewed state without an independent reviewer")
+                for fact in (reviewer.get("identity"), reviewer.get("independence_basis"), review.get("method"), review.get("limitations"), review.get("reviewed_at"), (review.get("evidence") or {}).get("path")):
+                    if not fact or escape(fact) not in inner:
+                        errors.append(f"RENDITION_REVIEW_UNBOUND: {rel} does not show every fact of the review ({fact!r} missing)")
+                if "internal" not in inner.lower() and not any(word in inner for word in ("внутренн", "内部")):
+                    errors.append(f"RENDITION_STATE_LABEL: {rel} does not say that the review is internal")
+            elif rd.get("review") is not None:
+                errors.append(f"RENDITION_STATE_LABEL: {rel} compiled review details for the {rd['state']} state")
             body = re.search(r'<div class="source-body prose" lang="([^"]*)">', html)
             ld = re.search(r'"inLanguage":"([^"]*)"', html)
             if not body or not ld:
@@ -197,6 +227,52 @@ def check_renditions(output: Path, records: list[dict], renditions_source: str |
                     errors.append(f"RENDITION_SILENT_FALLBACK: {rel} shows English text without the explicit fallback statement")
                 if "html" in rd:
                     errors.append(f"RENDITION_SILENT_FALLBACK: {rel} compiled a rendition body for the {rd['state']} state")
+    errors += check_indexing(output, with_renditions)
     if errors:
         raise ValueError("\n".join(errors))
     return pages
+
+
+def check_indexing(output: Path, records: list[dict]) -> list[str]:
+    """The fallback-indexing rule for the pages of works in a build that has renditions (docs/versioned-renditions.md section 5).
+
+    A locale counts as translated, indexed content of a work only when its rendition is shown with a bound internal agent
+    review (reviewed, partially-reviewed). English always counts. For a page of a locale that counts: no noindex, a
+    canonical to itself, hreflang alternates for exactly the counting locales plus x-default, and a sitemap entry. For a
+    page of a locale that does not count (unreviewed rendition, stale or missing, i.e. English fallback): noindex, no
+    canonical and no hreflang alternate at all, and no sitemap entry. No page of the work may claim a translation in
+    hreflang for a locale that does not count."""
+    import re
+    sitemap_file = output / "sitemap.xml"
+    if not sitemap_file.is_file():
+        return ["RENDITION_INDEXING: sitemap.xml is missing from the output"]
+    listed = set(re.findall(r"<loc>([^<]*)</loc>", sitemap_file.read_text(encoding="utf-8")))
+    errors = []
+    for record in records:
+        bare = record["route"].replace("/en/", "", 1).strip("/")
+        counting = ["en"] + [l for l in RENDITION_LOCALES if record["renditions"][l]["state"] in RENDITION_INDEXED]
+        for locale in ("en", *RENDITION_LOCALES):
+            rel = f"{locale}/{bare}/index.html"
+            html = (output / rel).read_text(encoding="utf-8")
+            url = f"{ORIGIN}/{locale}/{bare}/"
+            robots = re.search(r'<meta name="robots" content="([^"]*)"', html)
+            alternates = dict(re.findall(r'<link rel="alternate" hreflang="([^"]*)" href="([^"]*)"', html))
+            canonical = re.search(r'<link rel="canonical" href="([^"]*)"', html)
+            if locale in counting:
+                if robots and "noindex" in robots[1]:
+                    errors.append(f"RENDITION_INDEXING: {rel} is noindex although it is {'the English source' if locale == 'en' else 'a bound internal-agent-reviewed rendition'}")
+                if not canonical or canonical[1] != url:
+                    errors.append(f"RENDITION_INDEXING: {rel} lacks its own canonical {url}")
+                expected = {**{l: f"{ORIGIN}/{l}/{bare}/" for l in counting}, "x-default": f"{ORIGIN}/en/{bare}/"}
+                if alternates != expected:
+                    errors.append(f"RENDITION_INDEXING: {rel} hreflang alternates {sorted(alternates)} differ from the translations that count {sorted(expected)}")
+                if url not in listed:
+                    errors.append(f"RENDITION_INDEXING: {url} is missing from sitemap.xml")
+            else:
+                if not robots or "noindex" not in robots[1]:
+                    errors.append(f"RENDITION_INDEXING: {rel} shows an English fallback or an unreviewed rendition and is not noindex")
+                if alternates or canonical:
+                    errors.append(f"RENDITION_INDEXING: {rel} presents itself as translated indexed content (canonical or hreflang alternates present)")
+                if url in listed:
+                    errors.append(f"RENDITION_INDEXING: {url} is listed in sitemap.xml as a translation")
+    return errors

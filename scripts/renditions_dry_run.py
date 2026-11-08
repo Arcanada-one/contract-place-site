@@ -5,7 +5,7 @@
 
 It reads ``translations/<language>/...`` of a clean checkout, treats EVERY file as an unreviewed author draft, derives a
 positional section mapping (a real sidecar declares it explicitly) and runs the same stages as the compiler: layout,
-pins, digest, language, link resolution and structural parity. It prints counts per language. It writes nothing into the
+pins, digest, language, literal link resolution from the rendition's directory and structural parity. It prints counts per language. It writes nothing into the
 checkout or the site, nothing it prints is a publication, and it never marks anything reviewed, deployed or indexed.
 
 Usage: renditions_dry_run.py --source-dir CHECKOUT --source-revision PINNED_SOURCE_COMMIT
@@ -17,14 +17,11 @@ from collections import Counter
 from hashlib import sha256
 import json
 from pathlib import Path
-import posixpath
 import tempfile
 
 from build_publication import Renderer, inside, load_inputs, parse_markdown, read_json, run
-from renditions import (RENDITION_LANGUAGES, TRANSLATIONS_ROOT, RenditionError, compile_entry, git_bytes, meta_value,
-                        rendition_path_for, sections_of, state_of, tree_paths, validate_sidecar)
-
-UNREVIEWED = {"status": "unreviewed", "scope": "full", "method": "", "reviewers": [], "evidence": [], "limits": ""}
+from renditions import (RENDITION_LANGUAGES, SIDECAR_SCHEMA_VERSION, TRANSLATIONS_ROOT, RenditionError, compile_entry, git_bytes, link_context, meta_value,
+                        rendition_path_for, resolve_state, sections_of, tree_paths, validate_sidecar)
 
 
 def audit(source: Path, source_revision: str) -> dict:
@@ -37,7 +34,7 @@ def audit(source: Path, source_revision: str) -> dict:
         manifest, documents = load_inputs(source, manifest_file)  # also refuses an unclean checkout
         renderer = Renderer(source, Path(temp) / "out", manifest, documents)
         tree = tree_paths(source, head)
-        ctx = {"renderer": renderer, "by_path": {d["path"]: d for d in documents}, "tree": tree}
+        ctx = {"renderer": renderer, "by_path": {d["path"]: d for d in documents}, "tree": tree, "issues": {}}
         report: dict = {"source_revision": source_revision, "publication_commit": head, "documents": len(documents), "languages": {}, "files": []}
         for language in RENDITION_LANGUAGES:
             prefix = f"{TRANSLATIONS_ROOT}/{language}/"
@@ -46,7 +43,7 @@ def audit(source: Path, source_revision: str) -> dict:
             matched = [p for p in found if p in expected]
             summary = {"files_found": len(found), "path_matches": len(matched), "unmatched_paths": [p for p in found if p not in expected],
                        "absent_documents": len(expected) - len(matched), "states": Counter(), "front_matter_pin_agrees": 0,
-                       "link_classes": Counter(), "literal_resolution_missing": Counter(), "unresolved_links": Counter(),
+                       "link_classes": Counter(), "unresolved_links": Counter(),
                        "parity_failures": Counter(), "other_failures": Counter(), "files_with_a_failure": 0, "files_clean": 0}
             entries = []
             for path in matched:
@@ -59,13 +56,15 @@ def audit(source: Path, source_revision: str) -> dict:
                     "work": doc["slug"], "language": language, "script": RENDITION_LANGUAGES[language], "counts_as_independent_source": False,
                     "source": {"path": doc["path"], "sha256": sha256(original).hexdigest(), "revision": source_revision, "language": "en"},
                     "rendition": {"path": path, "sha256": sha256((source / path).read_bytes()).hexdigest(), "revision": latest},
-                    "review": dict(UNREVIEWED), "sections": positional_sections(source, doc, path)}))
-            validate_sidecar({"schema_version": 1, "kind": "arcanada-publication-renditions", "edition": manifest["edition"],
+                    "sections": positional_sections(source, doc, path)}))
+            validate_sidecar({"schema_version": SIDECAR_SCHEMA_VERSION, "kind": "arcanada-publication-renditions", "edition": manifest["edition"],
                               "renditions": [e for _, e in entries]}, manifest)  # a layout violation cannot get past this
-            states = {(e["work"], e["language"]): state_of(e, d["sha256"]) for d, e in entries}
+            states = {(e["work"], e["language"]): resolve_state(source, manifest, d, e)[0] for d, e in entries}
+            pinned, peer_maps = link_context([e for _, e in entries])
+            language_ctx = dict(ctx, pinned=pinned, peer_maps=peer_maps)  # a translated peer must be a pinned entry of this audit
             for doc, entry in entries:
                 file_report: dict = {"failures": []}
-                compile_entry(source, manifest, doc, entry, states, ctx, file_report)
+                compile_entry(source, manifest, doc, entry, states, language_ctx, file_report)
                 state = states[(entry["work"], language)]
                 summary["states"][state] += 1
                 ast = parse_markdown(source / entry["rendition"]["path"])
@@ -74,13 +73,9 @@ def audit(source: Path, source_revision: str) -> dict:
                     summary["front_matter_pin_agrees"] += 1
                 for kind, path_, target in file_report.get("links", []):
                     summary["link_classes"][kind] += 1
-                    if kind == "document":
+                    if kind in {"document", "peer"}:
                         shown = states.get((doc_slug(ctx, path_), language), "missing") in ("reviewed", "partially-reviewed", "unreviewed")
                         summary["link_classes"]["document_shown" if shown else "document_fallback"] += 1
-                    if kind in {"invariant", "document"} and not target.startswith(("http:", "https:")):
-                        literal = posixpath.normpath(posixpath.join(posixpath.dirname(entry["rendition"]["path"]), target.split("#")[0].split("?")[0]))
-                        if literal not in tree:
-                            summary["literal_resolution_missing"][kind] += 1
                 for stage, code, _ in file_report["failures"]:
                     bucket = "unresolved_links" if code.startswith("RENDITION_LINK_") else "parity_failures" if stage == "parity" else "other_failures"
                     summary[bucket][code] += 1

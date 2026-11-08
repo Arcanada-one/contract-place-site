@@ -203,13 +203,14 @@ class Renderer:
         if not parts.path:
             return target
         raw_path = unquote(parts.path)
-        # A language rendition mirrors its source's link strings; it sets "link_base" to the SOURCE path so that they resolve
-        # from the canonical directory, never from translations/<language>/.
-        relative = posixpath.normpath(raw_path.lstrip("/") if raw_path.startswith("/") else str(PurePosixPath(doc.get("link_base", doc["path"])).parent / raw_path))
+        relative = posixpath.normpath(raw_path.lstrip("/") if raw_path.startswith("/") else str(PurePosixPath(doc["path"]).parent / raw_path))
+        fragment = parts.fragment
+        if doc.get("link_resolve"):  # a language rendition: a translated peer is the document at its source path
+            relative, fragment = doc["link_resolve"](relative, fragment)
         source_path = inside(self.source, relative)
         if not source_path.exists():
             raise ValueError(f"Missing link target in {doc['path']}: {target} -> {relative}")
-        suffix = ("?" + parts.query if parts.query else "") + ("#" + parts.fragment if parts.fragment else "")
+        suffix = ("?" + parts.query if parts.query else "") + ("#" + fragment if fragment else "")
         if relative in self.by_path:
             return self.document_route(relative, doc) + suffix
         if image:
