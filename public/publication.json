@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition": "1.1",
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "644c83dffbd97d9563d131b388a44c9ddf27b185",
+  "commit": "0b284c6cd971566e7fe38d572c86b164c28b27c5",
   "catalog": "publication-catalog.json",
   "renderer": {
     "name": "pandoc",
@@ -308,10 +308,10 @@
       "slug": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
       "title": "Shared Vocabulary: Knowledge Contract Glossary",
-      "summary": "Shared English definitions, Russian equivalents, technical spellings and distinctions between related concepts.",
+      "summary": "Shared English definitions, Russian and Simplified Chinese equivalents, technical spellings and distinctions between related concepts.",
       "language": "en",
       "route": "/en/reference/glossary/",
-      "sha256": "264bbd7258e4203598a27d53ce1c64b34d8d96d43631f505b20b7500677993ab",
+      "sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
       "math_count": 17
     },
     {
