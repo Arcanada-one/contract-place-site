@@ -42,6 +42,9 @@ jobs:
           repository: ${{ steps.source.outputs.repository }}
           ref: ${{ steps.source.outputs.commit }}
           path: _knowledge-source
+          # Rendition source/rendition revision pins require ancestry against the
+          # publication commit; a depth-1 checkout cannot resolve those ancestors.
+          fetch-depth: 0
           persist-credentials: false
       - name: Check out the pinned roadmap source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
