@@ -1163,6 +1163,10 @@ class PrerenderedSite(unittest.TestCase):
         real = json.loads((ROOT / "src/content/catalog.json").read_text())
         real_pin = real["publication"]["commit"]
         shared = json.loads(json.dumps(real["records"]).replace(real_pin, manifest["commit"]))
+        # Listing pages need the real works; strip their rendition records so this fixture's
+        # check_renditions surface stays limited to the synthetic pages copied in setUp.
+        for record in shared:
+            record.pop("renditions", None)
         catalog["records"] = shared + catalog["records"]
         catalog["aliases"] = {key: value for key, value in real["aliases"].items()}
         catalog_path.write_text(json.dumps(catalog, ensure_ascii=False))
@@ -1513,10 +1517,23 @@ class PrerenderedSite(unittest.TestCase):
                 shutil.copytree(ROOT / "src", site / "src", ignore=shutil.ignore_patterns("node_modules"))
                 for name in ("build.mjs", "roadmap-manifest.json", "publication-manifest.json"):
                     shutil.copy(ROOT / name, site / name)
+                # This switch is defined for a build without a sidecar; strip committed first-admission
+                # renditions so the no-sidecar baseline remains observable.
+                catalog_path = site / "src/content/catalog.json"
+                catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+                catalog.pop("renditions_source", None)
+                for record in catalog.get("records", []):
+                    record.pop("renditions", None)
+                catalog_path.write_text(json.dumps(catalog, ensure_ascii=False), encoding="utf-8")
+                provenance_path = site / "src/site/content-provenance.json"
+                provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+                provenance.pop("renditions", None)
+                provenance_path.write_text(json.dumps(provenance, ensure_ascii=False), encoding="utf-8")
                 prerender = site / "src/prerender.mjs"
                 prerender.write_text(script.replace("const APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false;", f"const APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS={value};"), encoding="utf-8")
                 done = subprocess.run(["node", "build.mjs"], cwd=site, capture_output=True, text=True, timeout=900)
                 self.assertEqual(done.returncode, 0, done.stderr)
+                self.assertFalse((site / "public/renditions.js").exists())
                 page = (site / "public/ru/science/constrained-transformations/index.html").read_text(encoding="utf-8")
                 sitemap = (site / "public/sitemap.xml").read_text(encoding="utf-8")
                 self.assertEqual('<meta name="robots" content="noindex,follow">' in page, expect_noindex)
@@ -1524,9 +1541,6 @@ class PrerenderedSite(unittest.TestCase):
                 self.assertEqual('<link rel="canonical" href="https://contract.place/ru/science/constrained-transformations/">' in page, not expect_noindex)
                 self.assertEqual("https://contract.place/ru/science/constrained-transformations/" in sitemap, not expect_noindex)
                 self.assertEqual("https://contract.place/en/science/constrained-transformations/" in sitemap, True)
-                if not expect_noindex:  # the switch off reproduces the committed build byte for byte
-                    for name in ("sitemap.xml", "ru/science/constrained-transformations/index.html", "zh-Hans/index.html", "en/science/constrained-transformations/index.html", "index.html"):
-                        self.assertEqual((site / "public" / name).read_bytes(), (ROOT / "public" / name).read_bytes(), name)
 
     def test_assets_shipped_only_with_renditions(self):
         index = (self.site / "public/index.html").read_text(encoding="utf-8")
@@ -1534,17 +1548,32 @@ class PrerenderedSite(unittest.TestCase):
         self.assertRegex(index, r'<link rel="stylesheet" href="/renditions\.css\?v=[0-9a-f]{64}">')
 
 
-class OutputWithoutRenditions(unittest.TestCase):
-    """The committed site (no renditions) carries no rendition markup, assets or records."""
+class OutputWithFirstRenditions(unittest.TestCase):
+    """The committed site admits the first four reviewed renditions from the knowledge-repository sidecar."""
 
-    def test_committed_public_tree_has_no_rendition_surface(self):
+    FIRST_REVIEWED = {
+        ("dependency-closure-and-package-delivery", "ru"),
+        ("dependency-closure-and-package-delivery", "zh-Hans"),
+        ("executable-projections-and-revision", "ru"),
+        ("executable-projections-and-revision", "zh-Hans"),
+    }
+
+    def test_committed_public_tree_has_the_first_reviewed_rendition_surface(self):
         catalog = json.loads((ROOT / "src/content/catalog.json").read_text())
-        self.assertNotIn("renditions_source", catalog)
-        self.assertFalse(any("renditions" in r for r in catalog["records"]))
+        self.assertEqual(catalog.get("renditions_source"), "knowledge-repository")
+        reviewed = {
+            (record["id"], locale)
+            for record in catalog["records"]
+            if record.get("renditions")
+            for locale, rendition in record["renditions"].items()
+            if rendition.get("state") == "reviewed"
+        }
+        self.assertEqual(reviewed, self.FIRST_REVIEWED)
         provenance = json.loads((ROOT / "src/site/content-provenance.json").read_text())
-        self.assertNotIn("renditions", provenance)
-        self.assertFalse((ROOT / "public/renditions.js").exists() or (ROOT / "public/renditions.css").exists())
-        self.assertEqual(check_renditions(ROOT / "public", catalog["records"], None), 0)
+        self.assertEqual(provenance.get("renditions", {}).get("renditions_source"), "knowledge-repository")
+        self.assertTrue((ROOT / "public/renditions.js").is_file())
+        self.assertTrue((ROOT / "public/renditions.css").is_file())
+        self.assertGreater(check_renditions(ROOT / "public", catalog["records"], "knowledge-repository"), 0)
 
     def test_check_publication_refuses_fixture_built_output(self):
         """End to end: the real check_publication.py exits non-zero on a tree whose provenance says fixture."""
@@ -1555,7 +1584,6 @@ class OutputWithoutRenditions(unittest.TestCase):
             (copy / "src/content").mkdir(parents=True)
             (copy / "src/site").mkdir(parents=True)
             shutil.copy(ROOT / "publication-manifest.json", copy)
-            control = subprocess.run([sys.executable, "-B", "scripts/check_publication.py"], cwd=copy, capture_output=True, text=True)
             catalog = json.loads((ROOT / "src/content/catalog.json").read_text())
             provenance = json.loads((ROOT / "src/site/content-provenance.json").read_text())
             published = json.loads((copy / "public/publication.json").read_text())

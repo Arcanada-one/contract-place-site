@@ -2,8 +2,8 @@
 
 1. No private or preview hosts anywhere in public/ and src/ (Google Drive/Docs/accounts, Sites preview domains).
 2. The production Content-Security-Policy is `script-src 'self'; style-src 'self'`: nothing inline may run or style.
-   No inline <script> without src (JSON-LD data blocks are not executable), no style= attributes, no on*= handlers,
-   in public/**/*.html and in the HTML templates inside app.js / search.js.
+   No inline <script> without src (JSON-LD and application/json rendition-facts data blocks are not executable),
+   no style= attributes, no on*= handlers, in public/**/*.html and in the HTML templates inside app.js / search.js.
 """
 import re
 import sys
@@ -29,7 +29,8 @@ HANDLER = re.compile(r"""\son[a-z]+\s*=""", re.I)
 for f in sorted((ROOT / "public").rglob("*.html")):
     text = f.read_text(encoding="utf-8")
     for attrs in INLINE_SCRIPT.findall(text):
-        if "src=" not in attrs and "application/ld+json" not in attrs:
+        # JSON-LD and rendition-facts are data blocks, not executable script (CSP script-src 'self').
+        if "src=" not in attrs and "application/ld+json" not in attrs and "application/json" not in attrs:
             errs.append("%s: inline <script> (blocked by script-src 'self')" % f.relative_to(ROOT))
     if "<style" in text.lower():
         errs.append("%s: <style> element (blocked by style-src 'self')" % f.relative_to(ROOT))
@@ -47,7 +48,7 @@ for rel in ("src/site/app.js", "src/site/search.js", "src/site/index.html", "src
             errs.append("%s: %s" % (rel, what))
     if rel.endswith(".html"):
         for attrs in INLINE_SCRIPT.findall(text):
-            if "src=" not in attrs and "application/ld+json" not in attrs:
+            if "src=" not in attrs and "application/ld+json" not in attrs and "application/json" not in attrs:
                 errs.append("%s: inline <script>" % rel)
 
 if errs:

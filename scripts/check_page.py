@@ -36,16 +36,24 @@ def check_search(page: str, script: str) -> None:
     assert re.search(r"var inflight = null;[^\n]*\n\s*var serial = 0;\n\n\s*function mount", script), "inflight/serial must be shared by all mounts"
 
 
+def expected_script_sources(page: str) -> list[str]:
+    """Base reader scripts; renditions.js is present only when the build compiled a sidecar."""
+    sources = ["/theme.js", "/content.js", "/search.js", "/app.js"]
+    if re.search(r'<script\b[^>]*\bsrc="/renditions\.js', page):
+        sources.append("/renditions.js")
+    return sources
+
+
 def check_head_and_scripts(page: str, where: str) -> None:
     head = re.search(r"<head>(.*?)</head>", page, re.S)
     assert head, where + ": no <head>"
     assert re.search(r'<link rel="license" href="' + re.escape(CC_DEED) + r'">', head.group(1)), where + ": head license link missing"
     assert re.search(r'<link rel="canonical" href="https://contract\.place/', head.group(1)), where + ": canonical link on https://contract.place missing"
     srcs = re.findall(r"<script\b[^>]*\bsrc=\"([^\"]*)\"", page)
-    assert [s.split("?")[0] for s in srcs] == ["/theme.js", "/content.js", "/search.js", "/app.js"], where + ": unexpected script sources: %r" % srcs
+    assert [s.split("?")[0] for s in srcs] == expected_script_sources(page), where + ": unexpected script sources: %r" % srcs
     # theme.js is synchronous (no defer/async) and comes before the stylesheet so the saved theme is applied before first paint
     assert re.search(r'<script src="/theme\.js[^"]*"></script><link rel="stylesheet"', head.group(1)), where + ": theme.js must be a synchronous script before the stylesheet"
-    inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if "src=" not in m and "application/ld+json" not in m]
+    inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if "src=" not in m and "application/ld+json" not in m and "application/json" not in m]
     assert not inline, where + ": inline scripts are blocked by the production CSP (script-src 'self')"
     assert not re.search(r"\son[a-z]+\s*=", page, re.I), where + ": inline event handler attributes are not allowed"
 
@@ -81,6 +89,22 @@ def url_target(root: Path, url: str) -> Path:
     return root / path / "index.html" if (path == "" or path.endswith("/")) else root / path
 
 
+RENDITION_INDEXED = ("reviewed", "partially-reviewed")
+
+
+def locale_counts_for_indexing(catalog: dict, locale: str, bare: str) -> bool:
+    """English always counts; a translation counts only with a bound reviewed/partially-reviewed state (C5)."""
+    if locale == "en" or not bare:
+        return True
+    if not catalog.get("renditions_source") and not any(r.get("renditions") for r in catalog.get("records", [])):
+        return True
+    record = next((r for r in catalog.get("records", []) if r.get("route") == "/en/" + bare + "/"), None)
+    if not record or not record.get("renditions"):
+        return True
+    state = (record["renditions"].get(locale) or {}).get("state", "missing")
+    return state in RENDITION_INDEXED
+
+
 def check_urls(root: Path) -> None:
     """Every sitemap URL, canonical and hreflang URL ends with / (or a file name) and maps to a built file; indexing decisions hold."""
     locs = re.findall(r"<loc>([^<]+)</loc>", read(root, "sitemap.xml"))
@@ -96,8 +120,10 @@ def check_urls(root: Path) -> None:
         urls = re.findall(r'<link rel="(?:canonical|alternate)"[^>]*\bhref="(https://contract\.place/[^"]*)"', head)
         route = rel[:-len("index.html")].strip("/")
         parts = route.split("/", 1)
+        locale = parts[0] if parts and parts[0] in LOCALES else ""
         bare = parts[1] if len(parts) == 2 and parts[0] in LOCALES else ""
-        if rel == "404.html" or bare in NOINDEX_ROUTES or bare in aliases or route in catalog.get("reader_aliases", {}):
+        fallback_noindex = bool(locale and bare and not locale_counts_for_indexing(catalog, locale, bare))
+        if rel == "404.html" or bare in NOINDEX_ROUTES or bare in aliases or route in catalog.get("reader_aliases", {}) or fallback_noindex:
             assert 'name="robots" content="noindex' in head, rel + ": must be noindex"
             assert not urls, rel + ": noindex page must not carry canonical/hreflang"
             assert ("https://contract.place/" + route + "/") not in listed, rel + ": noindex page is in the sitemap"
@@ -165,9 +191,13 @@ def check_site(root: Path) -> None:
     sitemap = read(root, "sitemap.xml")
     locs = set(re.findall(r"<loc>([^<]+)</loc>", sitemap))
     for needed in ("https://contract.place/", "https://contract.place/en/", "https://contract.place/ru/", "https://contract.place/zh-Hans/",
-                   "https://contract.place/en/research/", "https://contract.place/en/science/controlled-knowledge-reuse/", "https://contract.place/ru/science/controlled-knowledge-reuse/",
+                   "https://contract.place/en/research/", "https://contract.place/en/science/controlled-knowledge-reuse/",
+                   "https://contract.place/ru/engineering/studies/dependency-closure-and-package-delivery/",
+                   "https://contract.place/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/",
                    "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
         assert needed in locs, "sitemap.xml missing " + needed
+    # C5: English-fallback locales of works without a counting review stay out of the sitemap.
+    assert "https://contract.place/ru/science/controlled-knowledge-reuse/" not in locs, "unreviewed/missing locale must not be sitemap-listed"
     assert all(u.startswith("https://contract.place/") for u in locs), "sitemap.xml has a foreign host"
 
     llms = read(root, "llms.txt")
