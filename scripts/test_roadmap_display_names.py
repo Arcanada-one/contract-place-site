@@ -4,7 +4,8 @@
 import copy
 import unittest
 from roadmap import check_graph, EXECUTION_BINDINGS
-from roadmap_names import validate_display_names, check_card_display_name
+from roadmap_names import (validate_display_names, check_card_display_name,
+                           EDITORIAL_METADATA, validate_editorial_metadata)
 
 
 def fixture(named=True):
@@ -100,6 +101,36 @@ class DisplayNameTests(unittest.TestCase):
 
     def test_legacy_card_title_not_reinterpreted(self):
         check_card_display_name({'title':'Original old title'},{'id':'RM-01'})
+
+    def test_exact_historical_metadata_preserves_input_and_nodes(self):
+        graph=fixture(); graph.update(EDITORIAL_METADATA); original=copy.deepcopy(graph)
+        self.assertEqual(len(check_graph(graph)),25)
+        self.assertEqual(graph,original)
+        self.assertNotIn('execution_pause',check_graph(graph)['RM-01'])
+
+    def test_partial_historical_metadata_refused(self):
+        for key,value in EDITORIAL_METADATA.items():
+            graph=fixture(); graph[key]=value
+            with self.subTest(key=key),self.assertRaises(ValueError):check_graph(graph)
+
+    def test_modified_historical_metadata_refused(self):
+        for key in EDITORIAL_METADATA:
+            for value in (None,{},'', 'done', '2026-11-09', '<script>x</script>'):
+                graph=fixture();graph.update(EDITORIAL_METADATA);graph[key]=value
+                with self.subTest(key=key,value=value),self.assertRaises(ValueError):check_graph(graph)
+
+    def test_historical_metadata_on_legacy_graph_refused(self):
+        graph=fixture(False);graph.update(EDITORIAL_METADATA)
+        with self.assertRaises(ValueError):check_graph(graph)
+
+    def test_valid_history_does_not_admit_live_status(self):
+        for key in ('status','state','completed','eta'):
+            graph=fixture();graph.update(EDITORIAL_METADATA);graph[key]='done'
+            with self.subTest(key=key),self.assertRaises(ValueError):check_graph(graph)
+
+    def test_valid_history_does_not_admit_unknown_field(self):
+        graph=fixture();graph.update(EDITORIAL_METADATA);graph['runtime_override']=True
+        with self.assertRaises(ValueError):check_graph(graph)
 
 
 if __name__ == '__main__':

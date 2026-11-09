@@ -21,7 +21,8 @@ import subprocess
 from urllib.parse import quote, unquote, urlsplit
 
 from roadmap_names import (normalize_tasks, strip_editorial_markers, DISPLAY_NAME_KEYS,
-                           validate_display_names, check_card_display_name)
+                           validate_display_names, check_card_display_name,
+                           EDITORIAL_METADATA, validate_editorial_metadata)
 
 REPOSITORY = "Arcanada-one/knowledge-contract"
 GITHUB = "https://github.com/" + REPOSITORY
@@ -60,7 +61,7 @@ PRIVATE = [
 # Known value of the only free-text execution field; anything else could publish a task state.
 EXECUTION_BINDINGS = "unverified; RM labels are not work-item IDs"
 TOP_LEVEL_KEYS = {"kind", "revision", "baseline_commit", "execution_authority", "execution_bindings", "target_dates",
-                  "edge_semantics", "preparation_sequence_policy", "nodes", "advisory_links"}
+                  "edge_semantics", "preparation_sequence_policy", "nodes", "advisory_links"} | set(EDITORIAL_METADATA)
 CARD_LABEL = re.compile(r"(?m)^\*\*([^*\n]+?)(?:[.:]\*\*|\*\*\s*[.:])")
 
 
@@ -146,6 +147,7 @@ def check_graph(deps: dict) -> dict[str, dict]:
         raise ValueError("The roadmap defines no target dates; a dated promise cannot be published without accepted estimates")
     if set(deps) & STATUS_KEYS:
         raise ValueError("dependencies.json carries execution state; this delivery publishes planned work only")
+    validate_editorial_metadata(deps)
     unknown_keys = set(deps) - TOP_LEVEL_KEYS
     if unknown_keys:
         raise ValueError(f"dependencies.json has unexpected top-level key(s) {sorted(unknown_keys)}; only planned-work fields are published")

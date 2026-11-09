@@ -24,10 +24,10 @@ _GAP = re.compile(r'\A\s*\*\*Original gap \(([^\n()*]+)\)\.\*\* ')
 def strip_editorial_markers(text: str) -> str:
     """Remove only known, inert whole-line source maintenance comments.
 
-Other raw HTML, including unknown comments, is retained for the existing
-Pandoc/HTML refusal. This does not create an HTML allowlist or accept anchors
-in arbitrary prose.
-"""
+    Other raw HTML, including unknown comments, is retained for the existing
+    Pandoc/HTML refusal. This does not create an HTML allowlist or accept anchors
+    in arbitrary prose.
+    """
     allowed = {_MARKER, '<!-- WORKSTREAM_TABLE -->', '<!-- /WORKSTREAM_TABLE -->'}
     return ''.join(line for line in text.splitlines(keepends=True)
                    if line.rstrip('\r\n') not in allowed)
@@ -36,10 +36,10 @@ in arbitrary prose.
 def normalize_tasks(text: str) -> str:
     """Return the old card syntax for strictly recognized readable source.
 
-Legacy source is returned byte-for-byte. For readable cards, unique explicit
-compatibility anchors establish identity; unique short names resolve named
-dependencies. There is no positional assignment of an RM identifier.
-"""
+    Legacy source is returned byte-for-byte. For readable cards, unique explicit
+    compatibility anchors establish identity; unique short names resolve named
+    dependencies. There is no positional assignment of an RM identifier.
+    """
     if not isinstance(text, str):
         raise ValueError('TASKS.md must be text')
     starts = list(_CARD.finditer(text))
@@ -119,10 +119,10 @@ _NAME = re.compile(r"[^\W\d_]+(?:[-’'][^\W\d_]+)*(?: [^\W\d_]+(?:[-’'][^\W\d
 def validate_display_names(nodes: list[dict]) -> None:
     """Validate the two optional presentation fields without changing the graph.
 
-Legacy nodes have neither field. A readable graph has both fields on every node,
-with unique, plain-text, one-to-three-word labels in each language. Unknown
-fields and execution-state assertions remain subject to the original validator.
-"""
+    Legacy nodes have neither field. A readable graph has both fields on every node,
+    with unique, plain-text, one-to-three-word labels in each language. Unknown
+    fields and execution-state assertions remain subject to the original validator.
+    """
     modes = set()
     seen = {key: set() for key in DISPLAY_NAME_KEYS}
     for node in nodes:
@@ -151,3 +151,29 @@ def check_card_display_name(card: dict, node: dict) -> None:
     short, separator, subtitle = card.get('title', '').partition(': ')
     if not separator or not subtitle.strip() or short != node['display_name']:
         raise ValueError(str(node.get('id')) + ': card title differs from dependency display_name')
+
+
+# This exact pair belongs to the accepted 8 November source snapshot, not to
+# current execution. It is validated but never emitted as a live task state.
+# Changed values require another explicit compatibility review.
+EDITORIAL_METADATA = {
+    "display_revision": "2026-11-08",
+    "execution_pause": "Engineering paused by operator; analytical authorship continues; not a Muneral state update",
+}
+
+
+def validate_editorial_metadata(deps: dict) -> None:
+    """Recognize only the accepted historical note, without applying its policy.
+
+    Neither field authorizes stopping or restarting anything. The actual source
+    bytes remain pinned, and every emitted task still has the planned-only state.
+    Unknown, partial, altered or mixed legacy/current declarations are refused.
+    """
+    present = set(deps) & set(EDITORIAL_METADATA)
+    if not present:
+        return
+    if present != set(EDITORIAL_METADATA) or any(
+            deps[key] != expected for key, expected in EDITORIAL_METADATA.items()):
+        raise ValueError('Unrecognized historical roadmap display metadata')
+    if not deps.get('nodes') or any('display_name' not in node for node in deps['nodes']):
+        raise ValueError('Historical display metadata requires the readable node schema')
