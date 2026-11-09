@@ -73,12 +73,19 @@ const renditionSummary=r=>Object.fromEntries(Object.entries(r.renditions).map(([
 const documents=data.records.map(r=>({type:r.type,slug:r.id,path:r.path,title:r.title,summary:r.summary,language:'en',route:r.route,sha256:r.source_sha256,math_count:r.math_count,...(r.status?{status:r.status}:{}),...(r.renditions?{renditions:renditionSummary(r)}:{})}));
 fs.writeFileSync(path.join(out,'publication.json'),JSON.stringify({...manifest,renderer:{name:'pandoc',version:'3.1.3',math:'MathML'},interface_languages:['en','ru','zh-Hans'],document_language:'en',...(hasRenditions?{renditions:{schema_version:1,source:data.renditions_source}}:{}),documents},null,2)+'\n');
 fs.writeFileSync(path.join(out,'roadmap.json'),JSON.stringify({kind:'roadmap-provenance',status:'planned work; no execution state is published',roadmap_pin:{repository:road.pin.repository,commit:road.pin.commit,files:road.pin.files.map(({path:p,role,sha256})=>({path:p,role,sha256}))},manuscript_pin:{repository:manifest.repository,commit:manifest.commit,edition:manifest.edition},same_commit:road.pin.commit===manifest.commit,definition_revision:road.revision,tasks:road.tasks.map(k=>({id:k.id,priority:k.priority,owner:k.owner,status:k.status,requires:k.requires,informs:k.informs})),advisory_links:road.advisory},null,2)+'\n');
+if(data.programme){
+  const prog=data.programme;
+  if(prog.pin.commit!==manifest.commit||prog.pin.repository!==manifest.repository)throw new Error('Programme pin must match the publication pin');
+  if(!prog.pages||!['en','ru','zh-Hans'].every(l=>prog.pages[l]&&prog.pages[l].route===`/${l}/programme/`))throw new Error('Programme pages must exist for en, ru and zh-Hans');
+  fs.writeFileSync(path.join(out,'programme.json'),JSON.stringify({kind:'programme-provenance',pin:prog.pin,routes:prog.routes,foundation_card_rule:prog.foundation_card_rule,pages:Object.fromEntries(Object.entries(prog.pages).map(([l,p])=>[l,{path:p.path,title:p.title,source_sha256:p.source_sha256,blob:p.blob,foundations:p.foundations}]))},null,2)+'\n');
+}
 const base='https://contract.place';
 const lines=['# Knowledge Contract Arcana','',
 'Publication edition '+manifest.edition+'. Source commit '+manifest.commit+'.',
 'Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.','',
 '- Home: '+base+'/',
 '- Science: '+base+'/en/research/',
+'- Meaning programme (reading map): '+base+'/en/programme/ ; '+base+'/ru/programme/ ; '+base+'/zh-Hans/programme/',
 '- Research roadmap (planned work, not results): '+base+'/en/roadmap/ ; provenance '+base+'/roadmap.json',
 '- Engineering specifications: '+base+'/en/engineering/specifications/',
 '- Engineering studies: '+base+'/en/engineering/studies/',

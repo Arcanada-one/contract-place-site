@@ -3,46 +3,46 @@
   "status": "planned work; no execution state is published",
   "roadmap_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
+    "commit": "46af0f06218e590e047a585ac74820f3c6336604",
     "files": [
       {
         "path": "ROADMAP.md",
         "role": "rendered",
-        "sha256": "c84f38452b481db776a282d512172a78ca1534f335edc51c29395ea04f004f02"
+        "sha256": "98675d9de57de6cbcdad44ba35f1c8960f1cf1a87e04359297c1c8268d62bd78"
       },
       {
         "path": "roadmap/TASKS.md",
         "role": "rendered",
-        "sha256": "f5208ed8fd91fe30ffaf00b37c27e8d0ceba89f30f7f46045cac676da057ec79"
+        "sha256": "a15c17c438ac9aedca7e40896eff6d3a69e4b8f1e0e7789207549da8aaf8761c"
       },
       {
         "path": "roadmap/dependencies.json",
         "role": "rendered",
-        "sha256": "b894c7135f129ee207f684ab60f62cf3694cff87613e44475ab085648c3629dd"
+        "sha256": "c3ffc8f3ba72bd5872adb3b34c265e56152375760f4e565a539bb4c1d912d913"
       },
       {
         "path": "roadmap/EXPERIMENTS.md",
         "role": "linked",
-        "sha256": "f9da63b7aaf2bc0e5c3054f9b256828018e76d80a8f247180f175ad010c030b5"
+        "sha256": "b338e7f9547d3af9dc8c872fa731755d98d7c2718b53828545724e014c7a976c"
       },
       {
         "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
         "role": "linked",
-        "sha256": "368b62ada0a31eebc9504b47adcbbbe9566e9a58287792064b090e06a52120d1"
+        "sha256": "3f07b70002fd8856c9238fef9ac2ea283d50bc3434d67718f2b9313d6c4d0b98"
       },
       {
         "path": "roadmap/SITE_DELIVERY.md",
         "role": "introduction",
-        "sha256": "3247bee17344104c3cf1fae4cac5fc7468115022c46f501d8d72c4055f3114bd"
+        "sha256": "a3c97044e3490d3b5cbc9447650b8d7e8eeab005b702d2123a6c395efaf37069"
       }
     ]
   },
   "manuscript_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "0b284c6cd971566e7fe38d572c86b164c28b27c5",
+    "commit": "46af0f06218e590e047a585ac74820f3c6336604",
     "edition": "1.1"
   },
-  "same_commit": false,
+  "same_commit": true,
   "definition_revision": "2026-11-06.1",
   "tasks": [
     {

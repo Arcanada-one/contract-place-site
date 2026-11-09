@@ -20,6 +20,10 @@ import re
 import subprocess
 from urllib.parse import quote, unquote, urlsplit
 
+from roadmap_names import (normalize_tasks, strip_editorial_markers, DISPLAY_NAME_KEYS,
+                           validate_display_names, check_card_display_name,
+                           EDITORIAL_METADATA, validate_editorial_metadata)
+
 REPOSITORY = "Arcanada-one/knowledge-contract"
 GITHUB = "https://github.com/" + REPOSITORY
 SCHEMA = 1
@@ -35,7 +39,9 @@ FILES = {
 }
 TASK_IDS = ["RM-%02d" % n for n in range(1, 26)]
 PRIORITIES = ("P0", "P1", "P2")
-NODE_KEYS = {"id", "priority", "content_owner", "requires"}
+# Reader-facing priority bands for the accepted readable source (Immediate/Next/Expansion).
+PRIORITY_LABELS = {"P0": "Immediate", "P1": "Next", "P2": "Expansion"}
+NODE_KEYS = {"id", "priority", "content_owner", "requires"} | DISPLAY_NAME_KEYS
 STATUS_KEYS = {"status", "state", "progress", "completed", "started", "execution_status", "percent", "due", "date", "eta"}
 FIELDS = [
     ("gap", "Gap"), ("work", "Work"), ("deliverables", "Deliverables"),
@@ -57,7 +63,7 @@ PRIVATE = [
 # Known value of the only free-text execution field; anything else could publish a task state.
 EXECUTION_BINDINGS = "unverified; RM labels are not work-item IDs"
 TOP_LEVEL_KEYS = {"kind", "revision", "baseline_commit", "execution_authority", "execution_bindings", "target_dates",
-                  "edge_semantics", "preparation_sequence_policy", "nodes", "advisory_links"}
+                  "edge_semantics", "preparation_sequence_policy", "nodes", "advisory_links"} | set(EDITORIAL_METADATA)
 CARD_LABEL = re.compile(r"(?m)^\*\*([^*\n]+?)(?:[.:]\*\*|\*\*\s*[.:])")
 
 
@@ -114,6 +120,7 @@ def check_graph(deps: dict) -> dict[str, dict]:
     nodes = deps.get("nodes")
     if not isinstance(nodes, list):
         raise ValueError("dependencies.json has no node list")
+    validate_display_names(nodes)
     by_id: dict[str, dict] = {}
     for node in nodes:
         if not isinstance(node, dict) or not isinstance(node.get("id"), str):
@@ -142,6 +149,7 @@ def check_graph(deps: dict) -> dict[str, dict]:
         raise ValueError("The roadmap defines no target dates; a dated promise cannot be published without accepted estimates")
     if set(deps) & STATUS_KEYS:
         raise ValueError("dependencies.json carries execution state; this delivery publishes planned work only")
+    validate_editorial_metadata(deps)
     unknown_keys = set(deps) - TOP_LEVEL_KEYS
     if unknown_keys:
         raise ValueError(f"dependencies.json has unexpected top-level key(s) {sorted(unknown_keys)}; only planned-work fields are published")
@@ -192,6 +200,7 @@ def check_advisory(deps: dict, by_id: dict[str, dict]) -> list[dict]:
 
 def split_cards(text: str) -> dict[str, dict]:
     """Parse TASKS.md strictly: one `## RM-nn` section per card with a fixed field set."""
+    text = normalize_tasks(text)
     sections = re.split(r"(?m)^## (?=RM-)", text)[1:]
     cards: dict[str, dict] = {}
     for section in sections:
@@ -229,6 +238,7 @@ def split_cards(text: str) -> dict[str, dict]:
 
 def tasks_preamble(text: str) -> str:
     """The TASKS.md text before the first card (front matter and the H1 title removed); it is rendered, never dropped."""
+    text = normalize_tasks(text)
     head = re.split(r"(?m)^## (?=RM-)", text, maxsplit=1)[0]
     return re.sub(r"\A---\n.*?\n---\n", "", head, count=1, flags=re.S).strip()
 
@@ -272,6 +282,7 @@ class Roadmap:
         return self.blob(relative, fragment)
 
     def markdown(self, text: str, origin: str, shift: int = 0, prefix: str = "", drop_title: bool = False) -> tuple[str, list[dict]]:
+        text = strip_editorial_markers(text)
         ast = json.loads(run(["pandoc", "--from=" + PANDOC_FROM, "--to=json"], text))
         toc: list[dict] = []
         blocks = []
@@ -345,6 +356,7 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         raise ValueError(f"TASKS.md must define exactly RM-01..RM-25 once each (missing {sorted(set(TASK_IDS) - set(cards))}, unexpected {sorted(set(cards) - set(TASK_IDS))})")
     for ident in TASK_IDS:
         card, node = cards[ident], nodes[ident]
+        check_card_display_name(card, node)
         if card["priority"] != node["priority"]:
             raise ValueError(f"{ident}: card priority {card['priority']} differs from dependencies.json {node['priority']}")
         if card["owner"] != node["content_owner"]:
@@ -376,11 +388,20 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
                 continue
             html, _ = roadmap.markdown(card["fields"][key], "roadmap/TASKS.md")
             fields.append({"key": key, "label": label, "html": html})
+        node = nodes[ident]
+        short, separator, subtitle = card["title"].partition(": ")
+        display_name = node.get("display_name") or (short if separator else card["title"])
+        display_name_ru = node.get("display_name_ru") or display_name
         tasks.append({
-            "id": ident, "anchor": ident.lower(), "title": card["title"], "priority": card["priority"], "owner": card["owner"],
-            "status": "planned", "requires": sorted(nodes[ident]["requires"]), "needed_by": sorted(needed_by[ident]),
+            "id": ident, "anchor": ident.lower(), "title": card["title"],
+            "display_name": display_name, "display_name_ru": display_name_ru,
+            "subtitle": subtitle if separator else "",
+            "priority": card["priority"], "priority_label": PRIORITY_LABELS[card["priority"]],
+            "owner": card["owner"],
+            "status": "planned", "requires": sorted(node["requires"]), "needed_by": sorted(needed_by[ident]),
             "informs": sorted(informs[ident]), "informed_by": sorted(informed_by[ident]), "fields": fields,
         })
+    names = {t["id"]: t["display_name"] for t in tasks}
     record = {
         "pin": {"repository": pin["repository"], "commit": pin["commit"], "files": [
             {"path": f["path"], "role": f["role"], "sha256": f["sha256"], "url": roadmap.blob(f["path"])} for f in pin["files"]]},
@@ -388,7 +409,8 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         "execution_authority": deps.get("execution_authority"), "execution_bindings": deps.get("execution_bindings"),
         "edge_semantics": deps.get("edge_semantics"),
         "introduction": introduction, "tasks_intro": preamble, "tasks_intro_html": preamble_html, "overview_html": overview_html, "overview_toc": overview_toc,
-        "tasks": tasks, "advisory": advisory,
+        "tasks": tasks, "advisory": advisory, "names": names,
+        "priority_labels": PRIORITY_LABELS,
         "required_edges": sum(len(n["requires"]) for n in nodes.values()),
     }
     scan_private("roadmap", json.dumps(record, ensure_ascii=False))
@@ -401,6 +423,7 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
 def provenance(record: dict) -> dict:
     return {
         "pin": record["pin"], "revision": record["revision"], "baseline_commit": record["baseline_commit"],
-        "tasks": [{k: t[k] for k in ("id", "priority", "owner", "status", "requires")} for t in record["tasks"]],
+        "tasks": [{k: t[k] for k in ("id", "display_name", "display_name_ru", "priority", "priority_label", "owner", "status", "requires") if k in t} for t in record["tasks"]],
         "advisory": record["advisory"],
+        "names": record.get("names", {}),
     }
