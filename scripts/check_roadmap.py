@@ -121,6 +121,8 @@ def main() -> None:
     intro = roadmap.extract_introduction((source / "roadmap/SITE_DELIVERY.md").read_text())
     overview = (source / "ROADMAP.md").read_text()
     overview = re.sub(r"\A---\n.*?\n---\n", "", overview, count=1, flags=re.S)
+    # Inert editorial markers are stripped by the compiler before rendering.
+    overview = roadmap.strip_editorial_markers(overview)
     if sorted(cards) != roadmap.TASK_IDS or sorted(nodes) != roadmap.TASK_IDS:
         raise SystemExit("Source does not define exactly RM-01..RM-25")
 
@@ -144,8 +146,14 @@ def main() -> None:
                     continue
                 if not contains(stream, tokens(markdown_plain(card["fields"][key]))):
                     errors.append(where + f"{ident} {label}: source text missing from the built page")
-            if not contains(stream, tokens(card["title"])):
-                errors.append(where + f"{ident}: title missing")
+            short, sep, subtitle = card["title"].partition(": ")
+            display = nodes[ident].get("display_name") or (short if sep else card["title"])
+            display_ru = nodes[ident].get("display_name_ru") or display
+            expected_name = display_ru if locale == "ru" else display
+            if not contains(stream, tokens(expected_name)):
+                errors.append(where + f"{ident}: display name missing")
+            if sep and subtitle and not contains(stream, tokens(subtitle)):
+                errors.append(where + f"{ident}: title subtitle missing")
         # The TASKS.md preamble (authorship and scope statements) is rendered above the cards.
         for block in re.split(r"\n\s*\n", roadmap.tasks_preamble((source / "roadmap/TASKS.md").read_text(encoding="utf-8"))):
             block = block.strip()
@@ -168,17 +176,52 @@ def main() -> None:
             errors.append(where + "dependency table missing or incomplete")
         else:
             needed = {i: sorted(n["id"] for n in nodes.values() if i in n["requires"]) for i in nodes}
+            names = {n["id"]: n.get("display_name") or n["id"] for n in nodes.values()}
+            names_ru = {n["id"]: n.get("display_name_ru") or names[n["id"]] for n in nodes.values()}
+            name_to_id = {names[i]: i for i in names}
+            name_to_id.update({names_ru[i]: i for i in names_ru})
+            def resolve_names(cell):
+                if cell in {"none", "нет", "无"}:
+                    return []
+                out = []
+                for part in [x.strip() for x in cell.split(",")]:
+                    if part in name_to_id:
+                        out.append(name_to_id[part])
+                    elif re.fullmatch(r"RM-\d\d", part):
+                        out.append(part)
+                    else:
+                        raise ValueError(part)
+                return out
             for row in deptable[1:]:
-                ident = row[0].split()[0]
-                got = [] if row[4] in {"none", "нет", "无"} else [x.strip() for x in row[4].split(",")]
-                got_needed = [] if row[5] in {"none", "нет", "无"} else [x.strip() for x in row[5].split(",")]
+                label = row[0].strip()
+                ident = name_to_id.get(label) or (label.split()[0] if re.match(r"RM-\d\d", label) else None)
+                if ident not in nodes:
+                    errors.append(where + f"unknown dependency-table task label: {label!r}")
+                    continue
+                try:
+                    got = resolve_names(row[4])
+                    got_needed = resolve_names(row[5])
+                except ValueError as err:
+                    errors.append(where + f"{ident}: unresolved dependency name {err}")
+                    continue
                 if sorted(got) != sorted(nodes[ident]["requires"]) or sorted(got_needed) != needed[ident]:
                     errors.append(where + f"{ident}: dependency row differs from dependencies.json")
-                if row[1] != nodes[ident]["priority"] or row[2] != nodes[ident]["content_owner"]:
+                expected_priority = roadmap.PRIORITY_LABELS.get(nodes[ident]["priority"], nodes[ident]["priority"])
+                if row[1] not in {nodes[ident]["priority"], expected_priority} or row[2] != nodes[ident]["content_owner"]:
                     errors.append(where + f"{ident}: priority or owner differs from dependencies.json")
         advisory = [t for t in page.tables if t and t[0] and t[0][-1] in {"Relation", "Связь", "关系"}]
-        if len(advisory) != 1 or sorted((r[0], r[1]) for r in advisory[0][1:]) != sorted((a["from"], a["to"]) for a in deps["advisory_links"]):
+        if len(advisory) != 1:
             errors.append(where + "advisory link table differs from dependencies.json")
+        else:
+            names = {n["id"]: n.get("display_name") or n["id"] for n in nodes.values()}
+            names_ru = {n["id"]: n.get("display_name_ru") or names[n["id"]] for n in nodes.values()}
+            name_to_id = {names[i]: i for i in names}
+            name_to_id.update({names_ru[i]: i for i in names_ru})
+            def adv_id(label):
+                return name_to_id.get(label) or (label if re.fullmatch(r"RM-\d\d", label) else None)
+            got_adv = sorted((adv_id(r[0]), adv_id(r[1])) for r in advisory[0][1:])
+            if got_adv != sorted((a["from"], a["to"]) for a in deps["advisory_links"]):
+                errors.append(where + "advisory link table differs from dependencies.json")
         for needle in (pin["commit"], manuscript["commit"], NOTICE[locale]):
             if needle not in html:
                 errors.append(where + f"missing {needle[:40]}")

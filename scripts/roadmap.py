@@ -39,6 +39,8 @@ FILES = {
 }
 TASK_IDS = ["RM-%02d" % n for n in range(1, 26)]
 PRIORITIES = ("P0", "P1", "P2")
+# Reader-facing priority bands for the accepted readable source (Immediate/Next/Expansion).
+PRIORITY_LABELS = {"P0": "Immediate", "P1": "Next", "P2": "Expansion"}
 NODE_KEYS = {"id", "priority", "content_owner", "requires"} | DISPLAY_NAME_KEYS
 STATUS_KEYS = {"status", "state", "progress", "completed", "started", "execution_status", "percent", "due", "date", "eta"}
 FIELDS = [
@@ -386,11 +388,20 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
                 continue
             html, _ = roadmap.markdown(card["fields"][key], "roadmap/TASKS.md")
             fields.append({"key": key, "label": label, "html": html})
+        node = nodes[ident]
+        short, separator, subtitle = card["title"].partition(": ")
+        display_name = node.get("display_name") or (short if separator else card["title"])
+        display_name_ru = node.get("display_name_ru") or display_name
         tasks.append({
-            "id": ident, "anchor": ident.lower(), "title": card["title"], "priority": card["priority"], "owner": card["owner"],
-            "status": "planned", "requires": sorted(nodes[ident]["requires"]), "needed_by": sorted(needed_by[ident]),
+            "id": ident, "anchor": ident.lower(), "title": card["title"],
+            "display_name": display_name, "display_name_ru": display_name_ru,
+            "subtitle": subtitle if separator else "",
+            "priority": card["priority"], "priority_label": PRIORITY_LABELS[card["priority"]],
+            "owner": card["owner"],
+            "status": "planned", "requires": sorted(node["requires"]), "needed_by": sorted(needed_by[ident]),
             "informs": sorted(informs[ident]), "informed_by": sorted(informed_by[ident]), "fields": fields,
         })
+    names = {t["id"]: t["display_name"] for t in tasks}
     record = {
         "pin": {"repository": pin["repository"], "commit": pin["commit"], "files": [
             {"path": f["path"], "role": f["role"], "sha256": f["sha256"], "url": roadmap.blob(f["path"])} for f in pin["files"]]},
@@ -398,7 +409,8 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         "execution_authority": deps.get("execution_authority"), "execution_bindings": deps.get("execution_bindings"),
         "edge_semantics": deps.get("edge_semantics"),
         "introduction": introduction, "tasks_intro": preamble, "tasks_intro_html": preamble_html, "overview_html": overview_html, "overview_toc": overview_toc,
-        "tasks": tasks, "advisory": advisory,
+        "tasks": tasks, "advisory": advisory, "names": names,
+        "priority_labels": PRIORITY_LABELS,
         "required_edges": sum(len(n["requires"]) for n in nodes.values()),
     }
     scan_private("roadmap", json.dumps(record, ensure_ascii=False))
@@ -411,6 +423,7 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
 def provenance(record: dict) -> dict:
     return {
         "pin": record["pin"], "revision": record["revision"], "baseline_commit": record["baseline_commit"],
-        "tasks": [{k: t[k] for k in ("id", "priority", "owner", "status", "requires")} for t in record["tasks"]],
+        "tasks": [{k: t[k] for k in ("id", "display_name", "display_name_ru", "priority", "priority_label", "owner", "status", "requires") if k in t} for t in record["tasks"]],
         "advisory": record["advisory"],
+        "names": record.get("names", {}),
     }

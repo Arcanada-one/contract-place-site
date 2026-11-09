@@ -3,7 +3,7 @@
     "schema_version": 1,
     "edition": "1.1",
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "0b284c6cd971566e7fe38d572c86b164c28b27c5",
+    "commit": "46af0f06218e590e047a585ac74820f3c6336604",
     "catalog": "publication-catalog.json"
   },
   "records": [
@@ -11,241 +11,241 @@
       "id": "human-meaning-and-computable-knowledge",
       "type": "paper",
       "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/human-meaning-and-computable-knowledge/PAPER.md",
       "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "semantic-objects-and-context",
       "type": "paper",
       "path": "papers/semantic-objects-and-context/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/semantic-objects-and-context/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/semantic-objects-and-context/PAPER.md",
       "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "constrained-transformations",
       "type": "paper",
       "path": "papers/constrained-transformations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/constrained-transformations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/constrained-transformations/PAPER.md",
       "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "retrieval-and-context-composition",
       "type": "paper",
       "path": "papers/retrieval-and-context-composition/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/retrieval-and-context-composition/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/retrieval-and-context-composition/PAPER.md",
       "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "interaction-and-memory",
       "type": "paper",
       "path": "papers/interaction-and-memory/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/interaction-and-memory/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/interaction-and-memory/PAPER.md",
       "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "evidence-and-falsification",
       "type": "paper",
       "path": "papers/evidence-and-falsification/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/evidence-and-falsification/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/evidence-and-falsification/PAPER.md",
       "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "revision-and-governance",
       "type": "paper",
       "path": "papers/revision-and-governance/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/revision-and-governance/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/revision-and-governance/PAPER.md",
       "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "controlled-knowledge-reuse",
       "type": "paper",
       "path": "papers/controlled-knowledge-reuse/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/controlled-knowledge-reuse/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/controlled-knowledge-reuse/PAPER.md",
       "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "knowledge-utility",
       "type": "paper",
       "path": "papers/knowledge-utility/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/papers/knowledge-utility/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/papers/knowledge-utility/PAPER.md",
       "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "knowledge-contract-core",
       "type": "specification",
       "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
       "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "contract-family",
       "type": "specification",
       "path": "engineering/specifications/contract-family/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/contract-family/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/contract-family/SPECIFICATION.md",
       "source_sha256": "27b14129d1e62ccfb4f9a7cade10ccf9537cd7178d8f6ef1f4a5830d7a8ec35f",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "semantic-types",
       "type": "specification",
       "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/semantic-types/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/semantic-types/SPECIFICATION.md",
       "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "context-package",
       "type": "specification",
       "path": "engineering/specifications/context-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/context-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/context-package/SPECIFICATION.md",
       "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "compiled-artifact-contract",
       "type": "specification",
       "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
       "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "artifact-registry",
       "type": "specification",
       "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/artifact-registry/SPECIFICATION.md",
       "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "status-model",
       "type": "specification",
       "path": "engineering/specifications/status-model/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/status-model/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/status-model/SPECIFICATION.md",
       "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "cache-identity-and-invalidation",
       "type": "specification",
       "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
       "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "reuse-policy",
       "type": "specification",
       "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/reuse-policy/SPECIFICATION.md",
       "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "knowledge-evolution",
       "type": "specification",
       "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
       "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "book-package",
       "type": "specification",
       "path": "engineering/specifications/book-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/specifications/book-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/specifications/book-package/SPECIFICATION.md",
       "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "contract-profile-conformance",
       "type": "study",
       "path": "engineering/studies/contract-profile-conformance/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/contract-profile-conformance/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/contract-profile-conformance/STUDY.md",
       "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "dependency-closure-and-package-delivery",
       "type": "study",
       "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
       "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "source-transcription-and-uncertainty",
       "type": "study",
       "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
       "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "executable-projections-and-revision",
       "type": "study",
       "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/executable-projections-and-revision/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/executable-projections-and-revision/STUDY.md",
       "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "reuse-admission-and-cost-controls",
       "type": "study",
       "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
       "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "editorial-skill-pilot",
       "type": "study",
       "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/engineering/studies/editorial-skill-pilot/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/engineering/studies/editorial-skill-pilot/STUDY.md",
       "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "glossary",
       "type": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/reference/glossary/GLOSSARY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/reference/glossary/GLOSSARY.md",
       "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "bibliography",
       "type": "bibliography",
       "path": "reference/bibliography/BIBLIOGRAPHY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/reference/bibliography/BIBLIOGRAPHY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/reference/bibliography/BIBLIOGRAPHY.md",
       "source_sha256": "7807268f1e3699a189dc533490cbb32469eafa3f6fdae258ac1d7623ba8a202a",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "source-map",
       "type": "appendix",
       "path": "appendices/source-map/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/appendices/source-map/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/appendices/source-map/APPENDIX.md",
       "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     },
     {
       "id": "api-integration",
       "type": "appendix",
       "path": "appendices/api-integration/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0b284c6cd971566e7fe38d572c86b164c28b27c5/appendices/api-integration/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/appendices/api-integration/APPENDIX.md",
       "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
-      "revision": "0b284c6cd971566e7fe38d572c86b164c28b27c5"
+      "revision": "46af0f06218e590e047a585ac74820f3c6336604"
     }
   ],
   "articles": [
@@ -271,43 +271,43 @@
   "roadmap": {
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "f6d42ca1d1d1e09d678332d4fec2311aa847d695",
+      "commit": "46af0f06218e590e047a585ac74820f3c6336604",
       "files": [
         {
           "path": "ROADMAP.md",
           "role": "rendered",
-          "sha256": "c84f38452b481db776a282d512172a78ca1534f335edc51c29395ea04f004f02",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/ROADMAP.md"
+          "sha256": "98675d9de57de6cbcdad44ba35f1c8960f1cf1a87e04359297c1c8268d62bd78",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/ROADMAP.md"
         },
         {
           "path": "roadmap/TASKS.md",
           "role": "rendered",
-          "sha256": "f5208ed8fd91fe30ffaf00b37c27e8d0ceba89f30f7f46045cac676da057ec79",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/TASKS.md"
+          "sha256": "a15c17c438ac9aedca7e40896eff6d3a69e4b8f1e0e7789207549da8aaf8761c",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/TASKS.md"
         },
         {
           "path": "roadmap/dependencies.json",
           "role": "rendered",
-          "sha256": "b894c7135f129ee207f684ab60f62cf3694cff87613e44475ab085648c3629dd",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/dependencies.json"
+          "sha256": "c3ffc8f3ba72bd5872adb3b34c265e56152375760f4e565a539bb4c1d912d913",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/dependencies.json"
         },
         {
           "path": "roadmap/EXPERIMENTS.md",
           "role": "linked",
-          "sha256": "f9da63b7aaf2bc0e5c3054f9b256828018e76d80a8f247180f175ad010c030b5",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/EXPERIMENTS.md"
+          "sha256": "b338e7f9547d3af9dc8c872fa731755d98d7c2718b53828545724e014c7a976c",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/EXPERIMENTS.md"
         },
         {
           "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
           "role": "linked",
-          "sha256": "368b62ada0a31eebc9504b47adcbbbe9566e9a58287792064b090e06a52120d1",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
+          "sha256": "3f07b70002fd8856c9238fef9ac2ea283d50bc3434d67718f2b9313d6c4d0b98",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
         },
         {
           "path": "roadmap/SITE_DELIVERY.md",
           "role": "introduction",
-          "sha256": "3247bee17344104c3cf1fae4cac5fc7468115022c46f501d8d72c4055f3114bd",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/f6d42ca1d1d1e09d678332d4fec2311aa847d695/roadmap/SITE_DELIVERY.md"
+          "sha256": "a3c97044e3490d3b5cbc9447650b8d7e8eeab005b702d2123a6c395efaf37069",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/SITE_DELIVERY.md"
         }
       ]
     },
@@ -316,35 +316,50 @@
     "tasks": [
       {
         "id": "RM-01",
+        "display_name": "Claim Atlas",
+        "display_name_ru": "Карта утверждений",
         "priority": "P0",
+        "priority_label": "Immediate",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": []
       },
       {
         "id": "RM-02",
+        "display_name": "Verification Records",
+        "display_name_ru": "Паспорта проверок",
         "priority": "P0",
+        "priority_label": "Immediate",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": []
       },
       {
         "id": "RM-03",
+        "display_name": "Roadmap Publication",
+        "display_name_ru": "Публикация планов",
         "priority": "P0",
+        "priority_label": "Immediate",
         "owner": "KC-SWE",
         "status": "planned",
         "requires": []
       },
       {
         "id": "RM-04",
+        "display_name": "Workgraph Reconciliation",
+        "display_name_ru": "Сверка задач",
         "priority": "P0",
+        "priority_label": "Immediate",
         "owner": "KC-SWE",
         "status": "planned",
         "requires": []
       },
       {
         "id": "RM-05",
+        "display_name": "Meaning Bridge",
+        "display_name_ru": "Мост смысла",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -354,7 +369,10 @@
       },
       {
         "id": "RM-06",
+        "display_name": "Source Audit",
+        "display_name_ru": "Проверка источников",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -363,7 +381,10 @@
       },
       {
         "id": "RM-07",
+        "display_name": "Semantic Bridge",
+        "display_name_ru": "Семантический мост",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -372,7 +393,10 @@
       },
       {
         "id": "RM-08",
+        "display_name": "Transformation Algebra",
+        "display_name_ru": "Алгебра преобразований",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -383,7 +407,10 @@
       },
       {
         "id": "RM-09",
+        "display_name": "Meaning Cases",
+        "display_name_ru": "Смысловые примеры",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -394,7 +421,10 @@
       },
       {
         "id": "RM-10",
+        "display_name": "Falsification Register",
+        "display_name_ru": "Реестр опровержений",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -403,7 +433,10 @@
       },
       {
         "id": "RM-11",
+        "display_name": "Scaled Checks",
+        "display_name_ru": "Масштабирование проверок",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-SWE",
         "status": "planned",
         "requires": [
@@ -414,7 +447,10 @@
       },
       {
         "id": "RM-12",
+        "display_name": "Semantic Geometry",
+        "display_name_ru": "Геометрия смысла",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -425,7 +461,10 @@
       },
       {
         "id": "RM-13",
+        "display_name": "Geometry Evaluation",
+        "display_name_ru": "Проверка геометрии",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -436,7 +475,10 @@
       },
       {
         "id": "RM-14",
+        "display_name": "Hybrid Retrieval",
+        "display_name_ru": "Гибридный поиск",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -447,7 +489,10 @@
       },
       {
         "id": "RM-15",
+        "display_name": "Theory Traceability",
+        "display_name_ru": "Связь с реализацией",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -457,7 +502,10 @@
       },
       {
         "id": "RM-16",
+        "display_name": "Runtime Conformance",
+        "display_name_ru": "Проверка реализации",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-SWE",
         "status": "planned",
         "requires": [
@@ -467,7 +515,10 @@
       },
       {
         "id": "RM-17",
+        "display_name": "Extraction Fidelity",
+        "display_name_ru": "Точность извлечения",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -478,7 +529,10 @@
       },
       {
         "id": "RM-18",
+        "display_name": "Agent Application",
+        "display_name_ru": "Применение агентами",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -489,7 +543,10 @@
       },
       {
         "id": "RM-19",
+        "display_name": "Current Authority",
+        "display_name_ru": "Действующие полномочия",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -499,7 +556,10 @@
       },
       {
         "id": "RM-20",
+        "display_name": "Practical Utility",
+        "display_name_ru": "Практическая польза",
         "priority": "P2",
+        "priority_label": "Expansion",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -510,7 +570,10 @@
       },
       {
         "id": "RM-21",
+        "display_name": "Cross-Language Meaning",
+        "display_name_ru": "Межъязыковой смысл",
         "priority": "P2",
+        "priority_label": "Expansion",
         "owner": "Agent-Brain",
         "status": "planned",
         "requires": [
@@ -520,7 +583,10 @@
       },
       {
         "id": "RM-22",
+        "display_name": "Evidence Recovery",
+        "display_name_ru": "Восстановление свидетельств",
         "priority": "P1",
+        "priority_label": "Next",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -529,7 +595,10 @@
       },
       {
         "id": "RM-23",
+        "display_name": "Editorial Evaluation",
+        "display_name_ru": "Проверка редактуры",
         "priority": "P2",
+        "priority_label": "Expansion",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -539,7 +608,10 @@
       },
       {
         "id": "RM-24",
+        "display_name": "Corpus Integration",
+        "display_name_ru": "Согласование корпуса",
         "priority": "P2",
+        "priority_label": "Expansion",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": [
@@ -549,7 +621,10 @@
       },
       {
         "id": "RM-25",
+        "display_name": "Editorial Release",
+        "display_name_ru": "Редакторский выпуск",
         "priority": "P0",
+        "priority_label": "Immediate",
         "owner": "KC-Brain",
         "status": "planned",
         "requires": []
@@ -576,9 +651,140 @@
         "to": "RM-12",
         "kind": "informs_not_blocks"
       }
-    ]
+    ],
+    "names": {
+      "RM-01": "Claim Atlas",
+      "RM-02": "Verification Records",
+      "RM-03": "Roadmap Publication",
+      "RM-04": "Workgraph Reconciliation",
+      "RM-05": "Meaning Bridge",
+      "RM-06": "Source Audit",
+      "RM-07": "Semantic Bridge",
+      "RM-08": "Transformation Algebra",
+      "RM-09": "Meaning Cases",
+      "RM-10": "Falsification Register",
+      "RM-11": "Scaled Checks",
+      "RM-12": "Semantic Geometry",
+      "RM-13": "Geometry Evaluation",
+      "RM-14": "Hybrid Retrieval",
+      "RM-15": "Theory Traceability",
+      "RM-16": "Runtime Conformance",
+      "RM-17": "Extraction Fidelity",
+      "RM-18": "Agent Application",
+      "RM-19": "Current Authority",
+      "RM-20": "Practical Utility",
+      "RM-21": "Cross-Language Meaning",
+      "RM-22": "Evidence Recovery",
+      "RM-23": "Editorial Evaluation",
+      "RM-24": "Corpus Integration",
+      "RM-25": "Editorial Release"
+    }
   },
   "site_integration_base": "91da6a35b4234d409de4c0a0777ff9c469bc8400",
   "license": "CC-BY-4.0",
-  "author": "Pavel Valentov"
+  "author": "Pavel Valentov",
+  "programme": {
+    "kind": "programme-guide",
+    "pin": {
+      "repository": "Arcanada-one/knowledge-contract",
+      "commit": "46af0f06218e590e047a585ac74820f3c6336604",
+      "files": [
+        {
+          "path": "PROGRAMME.md",
+          "sha256": "ec5fa19c94d584d7e804d6d683a9f179e7865914727f441638b9f97b0b926d7a",
+          "blob": "bd74b311b76cd7da1e81dff8f5d42c584d9d4b71",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/PROGRAMME.md"
+        },
+        {
+          "path": "guides/programme.ru.md",
+          "sha256": "d8f17d2ecc6dcb3f9f4328c4e9ae3143d6940898a56ebdfeb1e3b16fb8cff644",
+          "blob": "6a7325665da20f8e728dae8637ac499981ead2b7",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/guides/programme.ru.md"
+        },
+        {
+          "path": "guides/programme.zh-Hans.md",
+          "sha256": "ab66e12570c4af7e05a36d37851cd059fffe0aafe8f2d3eb8198707d7fd2e4a5",
+          "blob": "f191fc4b4bf32f51b5b4a9bb6dab44e64d54c99b",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/guides/programme.zh-Hans.md"
+        }
+      ]
+    },
+    "routes": {
+      "en": "/en/programme/",
+      "ru": "/ru/programme/",
+      "zh-Hans": "/zh-Hans/programme/"
+    },
+    "foundation_card_rule": "Card title is the bold lead title of each foundation paragraph under the foundations section; card text is the remainder of that same paragraph, verbatim from the guide.",
+    "pages": {
+      "en": {
+        "path": "PROGRAMME.md",
+        "source_sha256": "ec5fa19c94d584d7e804d6d683a9f179e7865914727f441638b9f97b0b926d7a",
+        "blob": "bd74b311b76cd7da1e81dff8f5d42c584d9d4b71",
+        "title": "Knowledge Contract: Meaning, Knowledge and Their Responsible Use",
+        "foundations": [
+          {
+            "title": "Meaning Theory: Representation, Interpretation and Conditions of Use",
+            "text": "Develop the existing [Meaning Bridge](papers/human-meaning-and-computable-knowledge/PAPER.md) into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. [Meaning in Context](papers/semantic-objects-and-context/PAPER.md) remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory.",
+            "visible": "Develop the existing Meaning Bridge into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. Meaning in Context remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory."
+          },
+          {
+            "title": "Meaning Algebra: Typed Operations, Composition and Preserved Distinctions",
+            "text": "Extend [Knowledge Transformations](papers/constrained-transformations/PAPER.md) on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper.",
+            "visible": "Extend Knowledge Transformations on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper."
+          },
+          {
+            "title": "Meaning Geometry: Representation Spaces, Distinguishability and the Limits of Similarity",
+            "text": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here.",
+            "visible": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here."
+          }
+        ]
+      },
+      "ru": {
+        "path": "guides/programme.ru.md",
+        "source_sha256": "d8f17d2ecc6dcb3f9f4328c4e9ae3143d6940898a56ebdfeb1e3b16fb8cff644",
+        "blob": "6a7325665da20f8e728dae8637ac499981ead2b7",
+        "title": "Контракт знаний: Смыслы, знания и условия их применения",
+        "foundations": [
+          {
+            "title": "Теория смыслов: Представление, интерпретация и условия применения",
+            "text": "Содержательное развитие [«Моста смысла»](../papers/human-meaning-and-computable-knowledge/PAPER.md) в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. [«Смысл и контекст»](../papers/semantic-objects-and-context/PAPER.md) остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания.",
+            "visible": "Содержательное развитие «Моста смысла» в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. «Смысл и контекст» остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания."
+          },
+          {
+            "title": "Алгебра смыслов: Типизированные операции, композиция и сохранение различий",
+            "text": "Существенное расширение [«Преобразований знаний»](../papers/constrained-transformations/PAPER.md) на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу.",
+            "visible": "Существенное расширение «Преобразований знаний» на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу."
+          },
+          {
+            "title": "Геометрия смыслов: Пространства представлений, различимость и границы сходства",
+            "text": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются.",
+            "visible": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются."
+          }
+        ]
+      },
+      "zh-Hans": {
+        "path": "guides/programme.zh-Hans.md",
+        "source_sha256": "ab66e12570c4af7e05a36d37851cd059fffe0aafe8f2d3eb8198707d7fd2e4a5",
+        "blob": "f191fc4b4bf32f51b5b4a9bb6dab44e64d54c99b",
+        "title": "知识契约：意义、知识与使用条件",
+        "foundations": [
+          {
+            "title": "意义理论：表示、解释与使用条件。",
+            "text": "从[《意义桥接》](../papers/human-meaning-and-computable-knowledge/PAPER.md)发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。[《意义与语境》](../papers/semantic-objects-and-context/PAPER.md)继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。",
+            "visible": "从《意义桥接》发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。《意义与语境》继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。"
+          },
+          {
+            "title": "意义代数：类型化操作、复合与区别的保留。",
+            "text": "在[《知识变换》](../papers/constrained-transformations/PAPER.md)的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。",
+            "visible": "在《知识变换》的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。"
+          },
+          {
+            "title": "意义几何：表示空间、可区分性与相似性的边界。",
+            "text": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。",
+            "visible": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。"
+          }
+        ]
+      }
+    }
+  }
 }

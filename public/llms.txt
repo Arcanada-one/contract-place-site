@@ -1,10 +1,11 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit 0b284c6cd971566e7fe38d572c86b164c28b27c5.
+Publication edition 1.1. Source commit 46af0f06218e590e047a585ac74820f3c6336604.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
 - Science: https://contract.place/en/research/
+- Meaning programme (reading map): https://contract.place/en/programme/ ; https://contract.place/ru/programme/ ; https://contract.place/zh-Hans/programme/
 - Research roadmap (planned work, not results): https://contract.place/en/roadmap/ ; provenance https://contract.place/roadmap.json
 - Engineering specifications: https://contract.place/en/engineering/specifications/
 - Engineering studies: https://contract.place/en/engineering/studies/
