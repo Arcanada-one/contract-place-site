@@ -8,7 +8,8 @@ from pathlib import Path
 import unittest
 
 from roadmap import check_graph, split_cards, tasks_preamble, EXECUTION_BINDINGS
-from roadmap_names import normalize_tasks, strip_editorial_markers
+from roadmap_names import normalize_tasks, strip_editorial_markers, check_card_display_name
+from test_roadmap_display_names import DisplayNameTests  # include focused controls in the existing CI command
 
 
 def named(ident='01', title='Claim Atlas', requires='none', priority='Immediate'):
@@ -192,6 +193,7 @@ class PinnedPublicationRoadmapTests(unittest.TestCase):
                 self.assertEqual(card['priority'], graph[ident]['priority'])
                 self.assertEqual(card['owner'], graph[ident]['content_owner'])
                 self.assertEqual(sorted(card['requires']), sorted(graph[ident]['requires']))
+                check_card_display_name(card, graph[ident])
                 self.assertIn(': ', card['title'])
                 self.assertIn('Artifact observation', card['fields']['gap'])
 

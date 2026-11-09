@@ -110,3 +110,44 @@ dependencies. There is no positional assignment of an RM identifier.
         output.append(f'## {ident}\n\n### {title}\n\n**Priority:** {_PRIORITY[priority]} · '
                       f'**Owner:** {owner} · **Required outputs:** {identifiers}.' + rest.rstrip() + '\n\n')
     return ''.join(output)
+
+
+DISPLAY_NAME_KEYS = frozenset({'display_name', 'display_name_ru'})
+_NAME = re.compile(r"[^\W\d_]+(?:[-’'][^\W\d_]+)*(?: [^\W\d_]+(?:[-’'][^\W\d_]+)*){0,2}\Z")
+
+
+def validate_display_names(nodes: list[dict]) -> None:
+    """Validate the two optional presentation fields without changing the graph.
+
+Legacy nodes have neither field. A readable graph has both fields on every node,
+with unique, plain-text, one-to-three-word labels in each language. Unknown
+fields and execution-state assertions remain subject to the original validator.
+"""
+    modes = set()
+    seen = {key: set() for key in DISPLAY_NAME_KEYS}
+    for node in nodes:
+        if not isinstance(node, dict):
+            raise ValueError('Malformed dependency node')
+        present = set(node) & DISPLAY_NAME_KEYS
+        if present and present != DISPLAY_NAME_KEYS:
+            raise ValueError('Both roadmap display names are required together')
+        modes.add(bool(present))
+        for key in present:
+            value = node[key]
+            if not isinstance(value, str) or len(value) > 120 or not _NAME.fullmatch(value):
+                raise ValueError('Invalid plain-text roadmap display name: ' + key)
+            normalized = value.casefold()
+            if normalized in seen[key]:
+                raise ValueError('Duplicate roadmap display name: ' + value)
+            seen[key].add(normalized)
+    if len(modes) > 1:
+        raise ValueError('Mixed legacy and readable dependency node names')
+
+
+def check_card_display_name(card: dict, node: dict) -> None:
+    """The named graph and parsed English card must name the same stable id."""
+    if 'display_name' not in node:
+        return
+    short, separator, subtitle = card.get('title', '').partition(': ')
+    if not separator or not subtitle.strip() or short != node['display_name']:
+        raise ValueError(str(node.get('id')) + ': card title differs from dependency display_name')

@@ -20,7 +20,8 @@ import re
 import subprocess
 from urllib.parse import quote, unquote, urlsplit
 
-from roadmap_names import normalize_tasks, strip_editorial_markers
+from roadmap_names import (normalize_tasks, strip_editorial_markers, DISPLAY_NAME_KEYS,
+                           validate_display_names, check_card_display_name)
 
 REPOSITORY = "Arcanada-one/knowledge-contract"
 GITHUB = "https://github.com/" + REPOSITORY
@@ -37,7 +38,7 @@ FILES = {
 }
 TASK_IDS = ["RM-%02d" % n for n in range(1, 26)]
 PRIORITIES = ("P0", "P1", "P2")
-NODE_KEYS = {"id", "priority", "content_owner", "requires"}
+NODE_KEYS = {"id", "priority", "content_owner", "requires"} | DISPLAY_NAME_KEYS
 STATUS_KEYS = {"status", "state", "progress", "completed", "started", "execution_status", "percent", "due", "date", "eta"}
 FIELDS = [
     ("gap", "Gap"), ("work", "Work"), ("deliverables", "Deliverables"),
@@ -116,6 +117,7 @@ def check_graph(deps: dict) -> dict[str, dict]:
     nodes = deps.get("nodes")
     if not isinstance(nodes, list):
         raise ValueError("dependencies.json has no node list")
+    validate_display_names(nodes)
     by_id: dict[str, dict] = {}
     for node in nodes:
         if not isinstance(node, dict) or not isinstance(node.get("id"), str):
@@ -350,6 +352,7 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         raise ValueError(f"TASKS.md must define exactly RM-01..RM-25 once each (missing {sorted(set(TASK_IDS) - set(cards))}, unexpected {sorted(set(cards) - set(TASK_IDS))})")
     for ident in TASK_IDS:
         card, node = cards[ident], nodes[ident]
+        check_card_display_name(card, node)
         if card["priority"] != node["priority"]:
             raise ValueError(f"{ident}: card priority {card['priority']} differs from dependencies.json {node['priority']}")
         if card["owner"] != node["content_owner"]:
