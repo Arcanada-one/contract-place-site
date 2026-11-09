@@ -20,6 +20,8 @@ import re
 import subprocess
 from urllib.parse import quote, unquote, urlsplit
 
+from roadmap_names import normalize_tasks, strip_editorial_markers
+
 REPOSITORY = "Arcanada-one/knowledge-contract"
 GITHUB = "https://github.com/" + REPOSITORY
 SCHEMA = 1
@@ -192,6 +194,7 @@ def check_advisory(deps: dict, by_id: dict[str, dict]) -> list[dict]:
 
 def split_cards(text: str) -> dict[str, dict]:
     """Parse TASKS.md strictly: one `## RM-nn` section per card with a fixed field set."""
+    text = normalize_tasks(text)
     sections = re.split(r"(?m)^## (?=RM-)", text)[1:]
     cards: dict[str, dict] = {}
     for section in sections:
@@ -229,6 +232,7 @@ def split_cards(text: str) -> dict[str, dict]:
 
 def tasks_preamble(text: str) -> str:
     """The TASKS.md text before the first card (front matter and the H1 title removed); it is rendered, never dropped."""
+    text = normalize_tasks(text)
     head = re.split(r"(?m)^## (?=RM-)", text, maxsplit=1)[0]
     return re.sub(r"\A---\n.*?\n---\n", "", head, count=1, flags=re.S).strip()
 
@@ -272,6 +276,7 @@ class Roadmap:
         return self.blob(relative, fragment)
 
     def markdown(self, text: str, origin: str, shift: int = 0, prefix: str = "", drop_title: bool = False) -> tuple[str, list[dict]]:
+        text = strip_editorial_markers(text)
         ast = json.loads(run(["pandoc", "--from=" + PANDOC_FROM, "--to=json"], text))
         toc: list[dict] = []
         blocks = []
