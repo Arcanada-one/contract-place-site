@@ -4,6 +4,8 @@ import re
 import sys
 from pathlib import Path
 
+from check_hygiene import is_inline_script_violation
+
 ORCID = "0009-0001-2567-4584"
 CC_DEED = "https://creativecommons.org/licenses/by/4.0/"
 APACHE = "https://www.apache.org/licenses/LICENSE-2.0"
@@ -53,7 +55,7 @@ def check_head_and_scripts(page: str, where: str) -> None:
     assert [s.split("?")[0] for s in srcs] == expected_script_sources(page), where + ": unexpected script sources: %r" % srcs
     # theme.js is synchronous (no defer/async) and comes before the stylesheet so the saved theme is applied before first paint
     assert re.search(r'<script src="/theme\.js[^"]*"></script><link rel="stylesheet"', head.group(1)), where + ": theme.js must be a synchronous script before the stylesheet"
-    inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if "src=" not in m and "application/ld+json" not in m and "application/json" not in m]
+    inline = [m for m in re.findall(r"<script\b([^>]*)>", page) if is_inline_script_violation(m)]
     assert not inline, where + ": inline scripts are blocked by the production CSP (script-src 'self')"
     assert not re.search(r"\son[a-z]+\s*=", page, re.I), where + ": inline event handler attributes are not allowed"
 

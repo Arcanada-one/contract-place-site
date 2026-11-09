@@ -1508,7 +1508,34 @@ class PrerenderedSite(unittest.TestCase):
         self.assertEqual(listed, indexed)
 
     def test_the_whole_rule_is_one_switch_that_leaves_a_build_without_renditions_alone(self):
-        """APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false keeps the no-sidecar build as it is; true applies the same rule to it."""
+        """APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false keeps the no-sidecar build as it is; true applies the same rule to it.
+
+        With first-admission renditions committed, every public HTML page ships renditions.js/css, so no
+        committed page is byte-independent of the sidecar. The binding guarantee is therefore:
+        (a) two stripped no-sidecar builds reproduce the five named files byte for byte; and
+        (b) for pages that carry no rendition aside/facts (English reading page and locale homes), the
+            committed tree differs from the stripped switch-off build ONLY in the two rendition asset lines.
+        """
+        named = (
+            "sitemap.xml",
+            "ru/science/constrained-transformations/index.html",
+            "zh-Hans/index.html",
+            "en/science/constrained-transformations/index.html",
+            "index.html",
+        )
+        # Exact tags the compiler inserts when a sidecar is present (build.mjs).
+        rendition_asset = re.compile(
+            r'<script src="/renditions\.js\?v=[0-9a-f]{64}" defer></script>'
+            r'|<link rel="stylesheet" href="/renditions\.css\?v=[0-9a-f]{64}">'
+        )
+        # No committed HTML is free of renditions.js/css once a sidecar exists. Reading pages that carry
+        # rendition records also change hreflang under C5, so they are not asset-only. Locale homes and
+        # non-work shells differ from the stripped switch-off build ONLY in the two asset tags.
+        asset_only_pages = (
+            "index.html",
+            "zh-Hans/index.html",
+            "en/about/index.html",
+        )
         script = (ROOT / "src/prerender.mjs").read_text(encoding="utf-8")
         self.assertEqual(script.count("const APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false;"), 1)
         for value, expect_noindex in (("false", False), ("true", True)):
@@ -1541,6 +1568,33 @@ class PrerenderedSite(unittest.TestCase):
                 self.assertEqual('<link rel="canonical" href="https://contract.place/ru/science/constrained-transformations/">' in page, not expect_noindex)
                 self.assertEqual("https://contract.place/ru/science/constrained-transformations/" in sitemap, not expect_noindex)
                 self.assertEqual("https://contract.place/en/science/constrained-transformations/" in sitemap, True)
+                if not expect_noindex:
+                    first = {name: (site / "public" / name).read_bytes() for name in named}
+                    # (a) Rebuild from the same stripped inputs; every named file is byte-identical.
+                    again = subprocess.run(["node", "build.mjs"], cwd=site, capture_output=True, text=True, timeout=900)
+                    self.assertEqual(again.returncode, 0, again.stderr)
+                    for name in named:
+                        self.assertEqual((site / "public" / name).read_bytes(), first[name], name)
+                    # (b) No committed HTML page is free of rendition assets once a sidecar exists.
+                    # Asset-only pages must match the stripped build after removing those two tags.
+                    for name in asset_only_pages:
+                        committed = (ROOT / "public" / name).read_text(encoding="utf-8")
+                        self.assertIn("renditions.js", committed, name)
+                        self.assertNotIn("rendition-state", committed, name)
+                        self.assertNotIn("rendition-facts", committed, name)
+                        built = (site / "public" / name).read_text(encoding="utf-8")
+                        self.assertNotIn("renditions.js", built, name)
+                        self.assertEqual(rendition_asset.sub("", committed), built, name)
+                    # Injecting one unrelated byte into a named file breaks the reproduction assertion.
+                    victim = site / "public/index.html"
+                    victim.write_bytes(first["index.html"] + b"X")
+                    with self.assertRaises(AssertionError):
+                        self.assertEqual(victim.read_bytes(), first["index.html"], "index.html")
+                    # Same for the asset-only committed comparison: one extra byte is not an asset-line diff.
+                    corrupted_committed = rendition_asset.sub("", (ROOT / "public/index.html").read_text(encoding="utf-8")) + "X"
+                    with self.assertRaises(AssertionError):
+                        self.assertEqual(corrupted_committed, first["index.html"].decode("utf-8"), "index.html")
+
 
     def test_assets_shipped_only_with_renditions(self):
         index = (self.site / "public/index.html").read_text(encoding="utf-8")
@@ -1600,6 +1654,69 @@ class OutputWithFirstRenditions(unittest.TestCase):
             refused = subprocess.run([sys.executable, "-B", "scripts/check_publication.py"], cwd=copy, capture_output=True, text=True)
             self.assertNotEqual(refused.returncode, 0)
             self.assertIn("RENDITION_FIXTURE_ONLY", refused.stdout + refused.stderr)
+
+
+class InlineScriptExemption(unittest.TestCase):
+    """CSP inline-script exemption is exact type=/class= parsing, not a substring of attribute text."""
+
+    REAL_FACTS = '<script type="application/json" class="rendition-facts">{"state":"reviewed"}</script>'
+    NEGATIVES = (
+        '<script data-x="application/json">alert(1)</script>',
+        '<script type="application/json+x">alert(1)</script>',
+        '<script type="application/json">{"no":"marker"}</script>',
+    )
+
+    def test_helpers_accept_only_exact_rendition_facts_and_json_ld(self):
+        from check_hygiene import is_allowed_data_script, is_inline_script_violation, script_attr_map
+
+        self.assertEqual(script_attr_map(' type="application/json" class="rendition-facts"'),
+                         {"type": "application/json", "class": "rendition-facts"})
+        self.assertTrue(is_allowed_data_script(' type="application/json" class="rendition-facts"'))
+        self.assertTrue(is_allowed_data_script(' type="application/ld+json"'))
+        self.assertFalse(is_inline_script_violation(' type="application/json" class="rendition-facts"'))
+        for raw in self.NEGATIVES:
+            attrs = re.search(r"<script\b([^>]*)>", raw, re.I).group(1)
+            self.assertTrue(is_inline_script_violation(attrs), raw)
+            self.assertFalse(is_allowed_data_script(attrs), raw)
+
+    def test_check_hygiene_and_check_page_refuse_weak_json_lookalikes(self):
+        from check_page import check_head_and_scripts
+
+        real_page = (ROOT / "public/ru/engineering/studies/dependency-closure-and-package-delivery/index.html").read_text(encoding="utf-8")
+        self.assertIn(self.REAL_FACTS[: len('<script type="application/json" class="rendition-facts">')], real_page)
+        check_head_and_scripts(real_page, "real-rendition-facts")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "public").mkdir()
+            (root / "src/site").mkdir(parents=True)
+            for name in ("app.js", "search.js", "theme.js"):
+                (root / "src/site" / name).write_text("// ok\n", encoding="utf-8")
+            # Baseline with only the real facts block must pass hygiene.
+            (root / "src/site/index.html").write_text("<!doctype html><html><head></head><body></body></html>\n", encoding="utf-8")
+            (root / "public/ok.html").write_text(
+                '<!doctype html><html><head></head><body>' + self.REAL_FACTS + "</body></html>\n",
+                encoding="utf-8",
+            )
+            ok = subprocess.run([sys.executable, "-B", str(ROOT / "scripts/check_hygiene.py"), str(root)], capture_output=True, text=True)
+            self.assertEqual(ok.returncode, 0, ok.stdout + ok.stderr)
+            for raw in self.NEGATIVES:
+                (root / "public/bad.html").write_text(
+                    '<!doctype html><html><head></head><body>' + raw + "</body></html>\n",
+                    encoding="utf-8",
+                )
+                bad = subprocess.run([sys.executable, "-B", str(ROOT / "scripts/check_hygiene.py"), str(root)], capture_output=True, text=True)
+                self.assertNotEqual(bad.returncode, 0, raw)
+                self.assertIn("inline <script>", bad.stdout + bad.stderr, raw)
+                with self.assertRaises(AssertionError):
+                    check_head_and_scripts(
+                        '<head><link rel="license" href="https://creativecommons.org/licenses/by/4.0/">'
+                        '<link rel="canonical" href="https://contract.place/en/">'
+                        '<script src="/theme.js"></script><link rel="stylesheet" href="/style.css">'
+                        "</head>"
+                        '<script src="/content.js"></script><script src="/search.js"></script>'
+                        '<script src="/app.js"></script>' + raw,
+                        "neg",
+                    )
 
 
 if __name__ == "__main__":
