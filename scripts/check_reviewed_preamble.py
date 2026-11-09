@@ -25,9 +25,11 @@ from renditions import RenditionError, check_parity, sections_of
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE_BLOB = "764227c70a6f1c02fd20ed083c54e1cbaa8e9fe1"
 SOURCE_PIN = "46af0f06218e590e047a585ac74820f3c6336604"
-# Bytes-import commit on Phase-A that still carries all four STUDY paths (including
-# Reuse ru held as a predeclared CODE_CHANGED refusal, not sidecar-admitted).
-RENDITION_PIN = "64aa36781f92b1b1a376613f847c82e098720b1d"
+# Phase-A bytes-import commit that carries all four current STUDY paths, including
+# corrected Reuse ru f7d53ee8 (sidecar admission is a separate later pin).
+RENDITION_PIN = "cad15f92f1821cf5ffe9c3d257bdbac8beba23ba"
+# Prior bytes-import commit that still carries Reuse ru 7376c330 as CODE_CHANGED fixture.
+CODE_REFUSAL_PIN = "64aa36781f92b1b1a376613f847c82e098720b1d"
 # Prior PR76 tip that still carries the three formula-order-failing blobs.
 OLD_RENDITION_PIN = "151dc8927547d27a88d0d5082b8abd1f98bd7b33"
 PASS_CASES = (
@@ -35,9 +37,10 @@ PASS_CASES = (
      {"ru": "8aaa8dae18a2014be6495c479e85a3e114538420",
       "zh-Hans": "9a94c63085287f59f42df75014844801f1ffca1e"}),
     ("reuse-admission-and-cost-controls", "aff97b3cda92bbb8067b1db47ce7c16ddd98c5ac",
-     {"zh-Hans": "f07227366731e2fb946285ec696c7199ae48565f"}),
+     {"ru": "f7d53ee85bea6966c7068a0835b19ba4593a8e19",
+      "zh-Hans": "f07227366731e2fb946285ec696c7199ae48565f"}),
 )
-# Predeclared refusal: formula order fixed, but two extra inline code spans remain.
+# Predeclared refusal: earlier Reuse ru after formula-order fix, still two extra code spans.
 EXPECTED_CODE_REFUSALS = (
     ("reuse-admission-and-cost-controls", "ru", "aff97b3cda92bbb8067b1db47ce7c16ddd98c5ac",
      "7376c33010abde5a67c9fca6c40408a8056a2500"),
@@ -112,6 +115,30 @@ def swap_first_two_math(ast: dict) -> bool:
     return True
 
 
+def readd_one_fail_code_span(ast: dict) -> bool:
+    """Mutant: wrap the bare fail token of a fail/unknown Str as one inline Code span."""
+
+    def visit(node) -> bool:
+        if isinstance(node, list):
+            for index, item in enumerate(node):
+                if isinstance(item, dict) and item.get("t") == "Str" and item.get("c") == "fail/unknown":
+                    node[index:index + 1] = [
+                        {"t": "Code", "c": [["", [], []], "fail"]},
+                        {"t": "Str", "c": "/unknown"},
+                    ]
+                    return True
+                if visit(item):
+                    return True
+            return False
+        if isinstance(node, dict):
+            for value in node.values():
+                if visit(value):
+                    return True
+        return False
+
+    return visit(ast["blocks"])
+
+
 def refuse_with_code(entry, source_ast, target_ast, expected_code: str) -> str:
     try:
         check_parity(entry, source_ast, target_ast)
@@ -127,6 +154,8 @@ def main() -> None:
     # which advances independently of this exact-file regression.
     source_root = checkout("PREAMBLE_SOURCE_DIR", "_preamble-english-source", SOURCE_PIN)
     target_root = checkout("PREAMBLE_RENDITION_DIR", "_rendition-review-source", RENDITION_PIN)
+    code_refusal_root = checkout("PREAMBLE_CODE_REFUSAL_DIR", "_rendition-code-refusal-source",
+                                 CODE_REFUSAL_PIN)
     old_root = checkout("PREAMBLE_OLD_RENDITION_DIR", "_rendition-old-review-source", OLD_RENDITION_PIN)
     # Compare to the actual earlier implementation, not a reconstructed oracle.
     baseline_root = checkout("PREAMBLE_BASELINE_DIR", "_preamble-site-baseline",
@@ -137,6 +166,7 @@ def main() -> None:
     exec(compile(baseline_bytes, "pinned-baseline/renditions.py", "exec"), baseline.__dict__)
     results = []
     reorder_refusals = []
+    code_span_mutant_refusals = []
     for work, source_blob, targets in PASS_CASES:
         source_path = f"engineering/studies/{work}/STUDY.md"
         raw_source = (source_root / source_path).read_bytes()
@@ -179,6 +209,15 @@ def main() -> None:
             require(swap_first_two_math(mutated), f"need two math tokens to reorder: {work}/{language}")
             code = refuse_with_code(entry, deepcopy(source_ast), mutated, "RENDITION_FORMULA_CHANGED")
             reorder_refusals.append({"work": work, "language": language, "reason": code})
+            if work == "reuse-admission-and-cost-controls" and language == "ru":
+                code_mutant = deepcopy(target_ast)
+                require(readd_one_fail_code_span(code_mutant),
+                        "need bare fail/unknown Str to re-add one code span")
+                code = refuse_with_code(entry, deepcopy(source_ast), code_mutant, "RENDITION_CODE_CHANGED")
+                code_span_mutant_refusals.append({
+                    "work": work, "language": language, "rendition_blob": target_blob, "reason": code,
+                    "mutation": "re-add one inline code span around fail",
+                })
             rendered = subprocess.run(
                 ["pandoc", "--from=json", "--to=html5", "--mathml", "--wrap=none"],
                 input=json.dumps(target_ast), text=True, check=True, capture_output=True).stdout
@@ -198,16 +237,16 @@ def main() -> None:
         target_path = f"translations/{language}/{source_path}"
         raw_source = (source_root / source_path).read_bytes()
         require(blob(raw_source) == source_blob, f"source bytes changed: {work}")
-        raw_target = (target_root / target_path).read_bytes()
+        raw_target = (code_refusal_root / target_path).read_bytes()
         require(blob(raw_target) == target_blob, f"code-refusal fixture bytes changed: {work}/{language}")
         source_ast = parse_markdown(source_root / source_path)
-        target_ast = parse_markdown(target_root / target_path)
+        target_ast = parse_markdown(code_refusal_root / target_path)
         source_heads, _ = sections_of(source_ast)
         entry = entry_for(work, language, source_path, target_path, source_heads)
         code = refuse_with_code(entry, source_ast, target_ast, "RENDITION_CODE_CHANGED")
         code_refusals.append({
             "work": work, "language": language, "rendition_blob": target_blob, "reason": code,
-            "disposition": "refused: code span parity, awaiting author revision",
+            "disposition": "refused: predeclared code-span parity negative for 7376c330",
         })
 
     old_refusals = []
@@ -228,9 +267,11 @@ def main() -> None:
         "baseline_blob": BASELINE_BLOB,
         "source_commit": SOURCE_PIN,
         "rendition_commit": RENDITION_PIN,
+        "code_refusal_commit": CODE_REFUSAL_PIN,
         "old_rendition_commit": OLD_RENDITION_PIN,
         "cases": results,
         "expected_code_refusals": code_refusals,
+        "code_span_mutant_refusals": code_span_mutant_refusals,
         "old_formula_refusals": old_refusals,
         "reorder_mutation_refusals": reorder_refusals,
     }, ensure_ascii=False, indent=2))

@@ -22,13 +22,15 @@ Python 3.13.5 and Pandoc 3.1.11.1: all 22 tests in `scripts/test_rendition_pream
 The workflow also invokes `scripts/check_reviewed_preamble.py` against read-only pinned checkouts. It compares the actual earlier compiler with the new compiler on the four exact reviewed files below, checks the source/target Git blobs, whole-document structural/formula/code/reference parity, refusal of inserted-prose and missing-anchor mutations, and unique ids in raw Pandoc-rendered fragments. Missing test inputs fail rather than silently skipping. Hosted CI uses its normal Pandoc 3.1.3; its results must be read from the actual run, not inferred from the local synthetic tests.
 
 English source checkout: `46af0f06218e590e047a585ac74820f3c6336604`.
-Reviewed rendition checkout (Phase-A bytes-import commit): `64aa36781f92b1b1a376613f847c82e098720b1d`.
+Reviewed rendition checkout (Phase-A bytes-import commit with corrected Reuse ru): `cad15f92f1821cf5ffe9c3d257bdbac8beba23ba`.
+Code-span refusal fixture checkout: `64aa36781f92b1b1a376613f847c82e098720b1d` (Reuse ru `7376c330` must still raise `RENDITION_CODE_CHANGED`).
 Prior refusal-fixture checkout: `151dc8927547d27a88d0d5082b8abd1f98bd7b33` (old zh-Hans Uncertainty and both Reuse blobs must still raise `RENDITION_FORMULA_CHANGED`).
+An in-memory mutant that re-adds one inline code span to Reuse ru `f7d53ee8` must also raise `RENDITION_CODE_CHANGED`.
 
 | Study | English source Git blob | Russian Git blob | Simplified Chinese Git blob | Exact-file outcome |
 | --- | --- | --- | --- | --- |
 | Uncertainty Preservation | `8ca885fc3f144d89e95e4813868fd953450f1f71` | `8aaa8dae18a2014be6495c479e85a3e114538420` | `9a94c63085287f59f42df75014844801f1ffca1e` | expected parity-pass |
-| Reuse Economics | `aff97b3cda92bbb8067b1db47ce7c16ddd98c5ac` | `7376c33010abde5a67c9fca6c40408a8056a2500` | `f07227366731e2fb946285ec696c7199ae48565f` | zh-Hans parity-pass; ru predeclared `RENDITION_CODE_CHANGED` (awaiting author revision) |
+| Reuse Economics | `aff97b3cda92bbb8067b1db47ce7c16ddd98c5ac` | `f7d53ee85bea6966c7068a0835b19ba4593a8e19` | `f07227366731e2fb946285ec696c7199ae48565f` | expected parity-pass; prior `7376c330` remains a predeclared `RENDITION_CODE_CHANGED` negative |
 
 The existing composite fidelity evidence is in knowledge-contract at `791d23c3c2e44c17c0f6d123f0d9d9e0af4aceec`, path `reviews/renditions/k8-composite-exact-blob-evidence-20261109.md`, blob `eb689d2b5eaf40cd124fdec27d4fe312867d2d73`. This note does not replace those Agent-Brain findings or claim new human/native-speaker review.
 

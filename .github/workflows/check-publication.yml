@@ -90,8 +90,15 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Arcanada-one/knowledge-contract
-          ref: 64aa36781f92b1b1a376613f847c82e098720b1d
+          ref: cad15f92f1821cf5ffe9c3d257bdbac8beba23ba
           path: _rendition-review-source
+          persist-credentials: false
+      - name: Check out the predeclared code-span refusal fixture
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 64aa36781f92b1b1a376613f847c82e098720b1d
+          path: _rendition-code-refusal-source
           persist-credentials: false
       - name: Check out the prior formula-order refusal fixtures
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
