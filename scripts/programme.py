@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import re
 
-from build_publication import Renderer, inside, plain, run
+from build_publication import Renderer, csp_table_classes, inside, plain, run
 
 REPOSITORY = "Arcanada-one/knowledge-contract"
 GITHUB = "https://github.com/" + REPOSITORY
@@ -35,6 +35,8 @@ FOUNDATION_SECTIONS = {
 # same paragraph under the foundations section (verbatim from the guide).
 FOUNDATION_CARD = re.compile(r"(?m)^\*\*(.+?)\*\*\s+(\S.*)$")
 FRONT_MATTER = re.compile(r"\A---\n.*?\n---\n", re.S)
+MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\(([^)]*)\)")
+OUTER_PARAGRAPH = re.compile(r"\A<p>(.*)</p>\s*\Z", re.S)
 PANDOC_FROM = "markdown+gfm_auto_identifiers+pipe_tables+tex_math_dollars+tex_math_single_backslash+autolink_bare_uris"
 
 
@@ -71,13 +73,45 @@ def extract_foundations(text: str, section_title: str) -> list[dict]:
         title, paragraph = card[1].strip(), card[2].strip()
         if title.endswith("."):
             title = title[:-1].rstrip()
-        # Verbatim source line for checks; card body shows the same words with Markdown
-        # link targets reduced to their visible labels (full linked body is in the guide).
-        visible = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", paragraph)
+        # Verbatim source remainder for checks. Rendered card HTML is produced later
+        # through the same Markdown/link path as the guide body (never raw syntax).
+        visible = MARKDOWN_LINK.sub(r"\1", paragraph)
         cards.append({"title": title, "text": paragraph, "visible": visible})
     if len(cards) != 3:
         raise ValueError(f"Expected exactly three foundation cards under {section_title!r}, found {len(cards)}")
     return cards
+
+
+def unwrap_single_paragraph(html: str) -> str:
+    """Return the inner HTML of a single pandoc paragraph, or the original fragment."""
+    match = OUTER_PARAGRAPH.fullmatch(html.strip())
+    if match and "<p>" not in match.group(1):
+        return match.group(1)
+    return html.strip()
+
+
+def render_foundation_html(
+    paragraph: str,
+    doc: dict,
+    renderer: Renderer,
+    documents: list[dict],
+    locale: str,
+    commit: str,
+    metas: list[dict],
+) -> str:
+    """Render one foundation card body with the same link rules as the guide body."""
+    ast = parse_markdown_text(paragraph)
+    renderer.transform(ast, doc)
+    html = run(
+        ["pandoc", "--from=json", "--to=html5", "--mathml", "--no-highlight", "--wrap=none", "--fail-if-warnings"],
+        json.dumps(ast),
+    )
+    html = csp_table_classes(html)
+    for other in metas:
+        blob_url = f"{GITHUB}/blob/{commit}/{other['path']}"
+        html = html.replace(f'href="{blob_url}"', f'href="{other["route"]}"')
+    html = localize_and_badge_links(html, documents, locale)
+    return unwrap_single_paragraph(html)
 
 
 def verify_guide_bytes(source: Path, relative: str, commit: str) -> tuple[str, str]:
@@ -154,6 +188,10 @@ def compile_programme(source: Path, commit: str, renderer: Renderer) -> dict:
             "type": "glossary",
             "sha256": meta["sha256"],
         }
+        for card in foundations:
+            card["html"] = render_foundation_html(
+                card["text"], temp, programme_renderer, renderer.documents, locale, commit, metas
+            )
         ast = parse_markdown_text(body)
         programme_renderer.transform(ast, temp)
         toc, blocks = [], []
@@ -175,7 +213,6 @@ def compile_programme(source: Path, commit: str, renderer: Renderer) -> dict:
             raise ValueError(f"Programme guide has no H1 title: {meta['path']}")
         ast["blocks"] = blocks
         html = run(["pandoc", "--from=json", "--to=html5", "--mathml", "--no-highlight", "--wrap=none", "--fail-if-warnings"], json.dumps(ast))
-        from build_publication import csp_table_classes
         html = csp_table_classes(html)
         for other in metas:
             blob_url = f"{GITHUB}/blob/{commit}/{other['path']}"
@@ -218,7 +255,7 @@ def compile_programme(source: Path, commit: str, renderer: Renderer) -> dict:
         "foundation_card_rule": (
             "Card title is the bold lead title of each foundation paragraph under the "
             "foundations section; card text is the remainder of that same paragraph, "
-            "verbatim from the guide."
+            "verbatim from the guide, rendered through the same Markdown/link path as the body."
         ),
     }
 

@@ -29,7 +29,7 @@
     "ru": "/ru/programme/",
     "zh-Hans": "/zh-Hans/programme/"
   },
-  "foundation_card_rule": "Card title is the bold lead title of each foundation paragraph under the foundations section; card text is the remainder of that same paragraph, verbatim from the guide.",
+  "foundation_card_rule": "Card title is the bold lead title of each foundation paragraph under the foundations section; card text is the remainder of that same paragraph, verbatim from the guide, rendered through the same Markdown/link path as the body.",
   "pages": {
     "en": {
       "path": "PROGRAMME.md",
@@ -40,17 +40,20 @@
         {
           "title": "Meaning Theory: Representation, Interpretation and Conditions of Use",
           "text": "Develop the existing [Meaning Bridge](papers/human-meaning-and-computable-knowledge/PAPER.md) into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. [Meaning in Context](papers/semantic-objects-and-context/PAPER.md) remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory.",
-          "visible": "Develop the existing Meaning Bridge into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. Meaning in Context remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory."
+          "visible": "Develop the existing Meaning Bridge into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. Meaning in Context remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory.",
+          "html": "Develop the existing <a href=\"/en/science/human-meaning-and-computable-knowledge/\">Meaning Bridge</a> <span class=\"status-badge\">Research draft</span> into the common framework. It defines the distinctions among expression, interpretation, semantic object, context, evidence, knowledge and use. <a href=\"/en/science/semantic-objects-and-context/\">Meaning in Context</a> remains the detailed treatment of context and applicability rather than a duplicate general introduction. Status: substantive extension of an existing research draft, not a newly accepted general theory."
         },
         {
           "title": "Meaning Algebra: Typed Operations, Composition and Preserved Distinctions",
           "text": "Extend [Knowledge Transformations](papers/constrained-transformations/PAPER.md) on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper.",
-          "visible": "Extend Knowledge Transformations on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper."
+          "visible": "Extend Knowledge Transformations on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper.",
+          "html": "Extend <a href=\"/en/science/constrained-transformations/\">Knowledge Transformations</a> on its existing canonical path. The work develops carriers, partial domains, operation semantics and the conditions under which composition, projection, residual information, reconstruction and transfer are justified. Laws belong to specified profiles; they are not silently transferred to arbitrary language operations. Status: substantive extension, not a title-only upgrade or a second algebra paper."
         },
         {
           "title": "Meaning Geometry: Representation Spaces, Distinguishability and the Limits of Similarity",
           "text": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here.",
-          "visible": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here."
+          "visible": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here.",
+          "html": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here."
         }
       ]
     },
@@ -63,17 +66,20 @@
         {
           "title": "Теория смыслов: Представление, интерпретация и условия применения",
           "text": "Содержательное развитие [«Моста смысла»](../papers/human-meaning-and-computable-knowledge/PAPER.md) в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. [«Смысл и контекст»](../papers/semantic-objects-and-context/PAPER.md) остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания.",
-          "visible": "Содержательное развитие «Моста смысла» в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. «Смысл и контекст» остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания."
+          "visible": "Содержательное развитие «Моста смысла» в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. «Смысл и контекст» остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания.",
+          "html": "Содержательное развитие <a href=\"/ru/science/human-meaning-and-computable-knowledge/\">«Моста смысла»</a> <span class=\"status-badge\">Исследовательский черновик</span> в общую систему различений: выражение, интерпретация, смысловой объект, контекст, свидетельства, знание и применение. <a href=\"/ru/science/semantic-objects-and-context/\">«Смысл и контекст»</a> остаётся подробной разработкой контекстной модели. Это развитие исследовательского черновика, а не уже принятая всеобщая теория человеческого понимания."
         },
         {
           "title": "Алгебра смыслов: Типизированные операции, композиция и сохранение различий",
           "text": "Существенное расширение [«Преобразований знаний»](../papers/constrained-transformations/PAPER.md) на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу.",
-          "visible": "Существенное расширение «Преобразований знаний» на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу."
+          "visible": "Существенное расширение «Преобразований знаний» на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу.",
+          "html": "Существенное расширение <a href=\"/ru/science/constrained-transformations/\">«Преобразований знаний»</a> на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу."
         },
         {
           "title": "Геометрия смыслов: Пространства представлений, различимость и границы сходства",
           "text": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются.",
-          "visible": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются."
+          "visible": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются.",
+          "html": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются."
         }
       ]
     },
@@ -86,17 +92,20 @@
         {
           "title": "意义理论：表示、解释与使用条件。",
           "text": "从[《意义桥接》](../papers/human-meaning-and-computable-knowledge/PAPER.md)发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。[《意义与语境》](../papers/semantic-objects-and-context/PAPER.md)继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。",
-          "visible": "从《意义桥接》发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。《意义与语境》继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。"
+          "visible": "从《意义桥接》发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。《意义与语境》继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。",
+          "html": "从<a href=\"/zh-Hans/science/human-meaning-and-computable-knowledge/\">《意义桥接》</a> <span class=\"status-badge\">研究草稿</span>发展共同框架，区分表达、解释、语义对象、语境、证据、知识和使用。<a href=\"/zh-Hans/science/semantic-objects-and-context/\">《意义与语境》</a>继续详细研究语境及适用性，而不是重复总论。目前是既有研究草稿的实质扩展，不是已经完成的人类理解普遍理论。"
         },
         {
           "title": "意义代数：类型化操作、复合与区别的保留。",
           "text": "在[《知识变换》](../papers/constrained-transformations/PAPER.md)的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。",
-          "visible": "在《知识变换》的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。"
+          "visible": "在《知识变换》的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。",
+          "html": "在<a href=\"/zh-Hans/science/constrained-transformations/\">《知识变换》</a>的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。"
         },
         {
           "title": "意义几何：表示空间、可区分性与相似性的边界。",
           "text": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。",
-          "visible": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。"
+          "visible": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。",
+          "html": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。"
         }
       ]
     }
