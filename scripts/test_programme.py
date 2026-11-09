@@ -30,7 +30,7 @@ CATALOG = ROOT / "src/content/catalog.json"
 SOURCE_ROOT = Path(os.environ.get("PROGRAMME_SOURCE_DIR", str(ROOT / "_knowledge-source"))).resolve()
 LOCALES = ("en", "ru", "zh-Hans")
 NAV = {"en": "Programme", "ru": "Программа", "zh-Hans": "计划"}
-PIN = "899564575085e2eb69c43c2bc4f4164e5dd39a7e"
+PIN = "1208dfbc2a5651a9ff6085a5b454f8511048d629"
 BLOBS = {
     "en": "bd74b311b76cd7da1e81dff8f5d42c584d9d4b71",
     "ru": "6a7325665da20f8e728dae8637ac499981ead2b7",

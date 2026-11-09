@@ -1603,13 +1603,17 @@ class PrerenderedSite(unittest.TestCase):
 
 
 class OutputWithFirstRenditions(unittest.TestCase):
-    """The committed site admits the first four reviewed renditions from the knowledge-repository sidecar."""
+    """The committed site admits the eight reviewed renditions from the knowledge-repository sidecar."""
 
     FIRST_REVIEWED = {
         ("dependency-closure-and-package-delivery", "ru"),
         ("dependency-closure-and-package-delivery", "zh-Hans"),
         ("executable-projections-and-revision", "ru"),
         ("executable-projections-and-revision", "zh-Hans"),
+        ("source-transcription-and-uncertainty", "ru"),
+        ("source-transcription-and-uncertainty", "zh-Hans"),
+        ("reuse-admission-and-cost-controls", "ru"),
+        ("reuse-admission-and-cost-controls", "zh-Hans"),
     }
 
     def test_committed_public_tree_has_the_first_reviewed_rendition_surface(self):
