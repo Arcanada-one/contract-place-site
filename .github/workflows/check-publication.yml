@@ -71,6 +71,8 @@ jobs:
           python3 -B scripts/test_renditions.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
           READABLE_ROADMAP_SOURCE_DIR=_knowledge-source python3 -B scripts/test_roadmap_names.py
+          python3 -B scripts/test_roadmap_display_names.py
+          PROGRAMME_SOURCE_DIR=_knowledge-source python3 -B scripts/test_programme.py
           node scripts/test_search.js
           node scripts/test_lab.js
       - name: Verify committed inputs and output are reproducible
@@ -112,6 +114,9 @@ jobs:
                   ('/en/reference/glossary/', 'Work Item'),
                   ('/en/appendices/api-integration/', 'Pavel Valentov'),
                   ('/en/search/', 'document-search'),
+                  ('/en/programme/', 'Meaning Geometry'),
+                  ('/ru/programme/', 'Геометрия смыслов'),
+                  ('/zh-Hans/programme/', '意义几何'),
                   ('/en/roadmap/', 'id="rm-25"'),
                   ('/ru/roadmap/', 'Дорожная карта'),
                   ('/zh-Hans/roadmap/', '路线图'),
@@ -122,7 +127,7 @@ jobs:
                       assert needle in response.read().decode('utf-8'), (path, needle)
               for path in ('/style.css', '/app.js', '/content.js', '/search.js',
                            '/theme.js', '/favicon.svg', '/robots.txt', '/llms.txt',
-                           '/sitemap.xml', '/publication.json', '/roadmap.json', '/404.html'):
+                           '/sitemap.xml', '/publication.json', '/roadmap.json', '/programme.json', '/404.html'):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert response.read(), path

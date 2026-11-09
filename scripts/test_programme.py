@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
 import posixpath
 import re
@@ -26,7 +27,7 @@ from programme import (
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 CATALOG = ROOT / "src/content/catalog.json"
-SOURCE_ROOT = Path("/home/dev/aup/claude-work/kcswe-site-k8/knowledge-contract")
+SOURCE_ROOT = Path(os.environ.get("PROGRAMME_SOURCE_DIR", str(ROOT / "_knowledge-source"))).resolve()
 LOCALES = ("en", "ru", "zh-Hans")
 NAV = {"en": "Programme", "ru": "Программа", "zh-Hans": "计划"}
 PIN = "46af0f06218e590e047a585ac74820f3c6336604"
@@ -48,7 +49,13 @@ class ProgrammePageTests(unittest.TestCase):
         cls.catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
         cls.programme = cls.catalog.get("programme")
         if not cls.programme:
-            raise unittest.SkipTest("catalogue has no programme block; rebuild first")
+            raise AssertionError("catalogue has no programme block; rebuild first")
+        if not SOURCE_ROOT.is_dir():
+            raise AssertionError("pinned knowledge-contract checkout required; set PROGRAMME_SOURCE_DIR")
+        for locale, relative in SOURCES.items():
+            digest, blob = verify_guide_bytes(SOURCE_ROOT, relative, PIN)
+            if blob != BLOBS[locale] or digest != cls.programme["pages"][locale]["source_sha256"]:
+                raise AssertionError(f"programme source identity mismatch: {relative}")
 
     def test_three_programme_pages_exist_with_pin(self):
         self.assertEqual(self.programme["pin"]["commit"], PIN)
@@ -97,14 +104,13 @@ class ProgrammePageTests(unittest.TestCase):
                 self.assertEqual(card["visible"], MARKDOWN_LINK.sub(r"\1", card["text"]))
                 # Card HTML is the Markdown path, not escaped source syntax.
                 self.assertNotRegex(card["html"], RAW_MARKDOWN)
-            if SOURCE_ROOT.is_dir():
-                raw = (SOURCE_ROOT / SOURCES[locale]).read_text(encoding="utf-8")
-                expected = extract_foundations(raw, FOUNDATION_SECTIONS[locale])
-                for got, want in zip(page["foundations"], expected, strict=True):
-                    self.assertEqual(got["title"], want["title"])
-                    self.assertEqual(got["text"], want["text"])
-                    self.assertEqual(got["visible"], want["visible"])
-                    self.assertTrue(got["html"])
+            raw = (SOURCE_ROOT / SOURCES[locale]).read_text(encoding="utf-8")
+            expected = extract_foundations(raw, FOUNDATION_SECTIONS[locale])
+            for got, want in zip(page["foundations"], expected, strict=True):
+                self.assertEqual(got["title"], want["title"])
+                self.assertEqual(got["text"], want["text"])
+                self.assertEqual(got["visible"], want["visible"])
+                self.assertTrue(got["html"])
 
     def test_rendered_programme_has_no_raw_markdown_and_card_links_resolve(self):
         """Fails on ad6adce: cards showed labels only / or raw Markdown, without resolved anchors."""
