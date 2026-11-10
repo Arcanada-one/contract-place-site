@@ -42,9 +42,9 @@ fs.cpSync(path.join(src,'site'),out,{recursive:true});
 let template=fs.readFileSync(path.join(out,'index.html'),'utf8');
 template=template.replace(/src="\/content\.js(?:\?[^"]*)?"/g,'src="/content.js?v='+manifest.commit+'"');
 // Changed runtime code or styles must not reuse an earlier edition's browser cache entry.
-const assetHashes=Object.fromEntries(['theme.js','style.css','search.js','app.js'].map(name=>
+const assetHashes=Object.fromEntries(['theme.js','style.css','search.js','analytics.js','app.js'].map(name=>
   [name,createHash('sha256').update(fs.readFileSync(path.join(out,name))).digest('hex')]));
-template=template.replace(/(src|href)="\/(theme\.js|style\.css|search\.js|app\.js)(?:\?[^"]*)?"/g,
+template=template.replace(/(src|href)="\/(theme\.js|style\.css|search\.js|analytics\.js|app\.js)(?:\?[^"]*)?"/g,
   (_,attribute,name)=>attribute+'="/'+name+'?v='+assetHashes[name]+'"');
 // Language renditions: their script and stylesheet are shipped only when the compiled catalogue contains renditions,
 // so a build without renditions is byte-identical to one made before this support existed.

@@ -1,7 +1,8 @@
 """Public-surface and CSP hygiene of the source and the built site. Usage: check_hygiene.py <repo-root>
 
 1. No private or preview hosts anywhere in public/ and src/ (Google Drive/Docs/accounts, Sites preview domains).
-2. The production Content-Security-Policy is `script-src 'self'; style-src 'self'`: nothing inline may run or style.
+2. The production Content-Security-Policy is `script-src 'self' https://www.googletagmanager.com; style-src 'self'`:
+   nothing inline may run or style; the Google tag host is the only remote script source.
    No inline <script> without src (JSON-LD and the compiler's rendition-facts data block are not executable),
    no style= attributes, no on*= handlers, in public/**/*.html and in the HTML templates inside app.js / search.js.
 """
@@ -79,7 +80,7 @@ if __name__ == "__main__":
         if HANDLER.search(text):
             errs.append("%s: inline event handler attribute" % f.relative_to(ROOT))
 
-    for rel in ("src/site/app.js", "src/site/search.js", "src/site/index.html", "src/site/theme.js"):
+    for rel in ("src/site/app.js", "src/site/search.js", "src/site/analytics.js", "src/site/index.html", "src/site/theme.js"):
         text = (ROOT / rel).read_text(encoding="utf-8")
         for pat, what in ((STYLE_ATTR, "style= attribute in a template"), (HANDLER, "inline event handler in a template"),
                           (re.compile(r"setAttribute\(\s*['\"]style['\"]"), "setAttribute('style')"), (re.compile(r"\.cssText\b"), "style.cssText"),
@@ -94,4 +95,4 @@ if __name__ == "__main__":
     if errs:
         print("\n".join(sorted(set(errs))[:60]))
         sys.exit(1)
-    print("hygiene OK (no private hosts; no inline script/style/handlers under script-src 'self'; style-src 'self')")
+    print("hygiene OK (no private hosts; no inline script/style/handlers under script-src 'self' https://www.googletagmanager.com; style-src 'self')")

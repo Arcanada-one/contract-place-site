@@ -1693,7 +1693,7 @@ class InlineScriptExemption(unittest.TestCase):
             root = Path(temp)
             (root / "public").mkdir()
             (root / "src/site").mkdir(parents=True)
-            for name in ("app.js", "search.js", "theme.js"):
+            for name in ("app.js", "search.js", "analytics.js", "theme.js"):
                 (root / "src/site" / name).write_text("// ok\n", encoding="utf-8")
             # Baseline with only the real facts block must pass hygiene.
             (root / "src/site/index.html").write_text("<!doctype html><html><head></head><body></body></html>\n", encoding="utf-8")
@@ -1718,7 +1718,7 @@ class InlineScriptExemption(unittest.TestCase):
                         '<script src="/theme.js"></script><link rel="stylesheet" href="/style.css">'
                         "</head>"
                         '<script src="/content.js"></script><script src="/search.js"></script>'
-                        '<script src="/app.js"></script>' + raw,
+                        '<script src="/analytics.js"></script><script src="/app.js"></script>' + raw,
                         "neg",
                     )
 

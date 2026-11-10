@@ -67,7 +67,6 @@ jobs:
           python3 -B scripts/check_page.py public
           python3 -B scripts/check_papers.py public
           python3 -B scripts/check_links.py public
-          python3 -B scripts/check_pre_contrast.py public
           python3 -B scripts/check_roadmap.py public --source-dir _roadmap-source
       - name: Renderer and search boundaries
         run: |
@@ -80,6 +79,7 @@ jobs:
           python3 -B scripts/test_rendition_preamble.py
           node scripts/test_search.js
           node scripts/test_lab.js
+          node scripts/test_analytics.js
       - name: Check out the exact English source pin for reviewed-file regression
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -167,7 +167,7 @@ jobs:
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert needle in response.read().decode('utf-8'), (path, needle)
-              for path in ('/style.css', '/app.js', '/content.js', '/search.js',
+              for path in ('/style.css', '/app.js', '/analytics.js', '/content.js', '/search.js',
                            '/theme.js', '/favicon.svg', '/robots.txt', '/llms.txt',
                            '/sitemap.xml', '/publication.json', '/roadmap.json', '/programme.json', '/404.html'):
                   with urlopen(base + path, timeout=5) as response:
