@@ -107,8 +107,8 @@ def main(argv):
     root = Path(argv[1])
     catalog = json.loads((root / 'content.js').read_text().split('=', 1)[1].strip().rstrip(';'))
     records = catalog['records']
-    if len(records) != 30:
-        raise SystemExit('Expected the 30 canonical documents of edition 1.1')
+    if len(records) != 31:
+        raise SystemExit('Expected the 31 canonical documents of edition 1.1')
     # Primary references are approved by the canonical source. A rendered page
     # must preserve those exact URLs; it may not invent a different external host.
     approved = set()
