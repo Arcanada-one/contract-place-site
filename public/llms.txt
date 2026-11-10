@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit 1208dfbc2a5651a9ff6085a5b454f8511048d629.
+Publication edition 1.1. Source commit 0892eeb150acae9df5e5d498902c7b5e04ce1871.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
@@ -28,6 +28,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 - [Knowledge Revision: Version Identity and the Adoption of Norms](https://contract.place/en/science/revision-and-governance/): paper.
 - [Knowledge Reuse: Knowledge Contracts and the Admission of Prepared Knowledge](https://contract.place/en/science/controlled-knowledge-reuse/): paper.
 - [Knowledge Utility: Resource Accounting and Lifecycle Decisions](https://contract.place/en/science/knowledge-utility/): paper.
+- [Meaning Geometry: Representation Spaces, Distinguishability, and the Limits of Similarity](https://contract.place/en/science/geometry-of-semantic-representations/): paper (research draft, not an accepted paper).
 - [Contract Core: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
 - [Knowledge Operations: Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
 - [Semantic Types: Attribution and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
