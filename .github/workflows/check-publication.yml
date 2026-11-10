@@ -67,6 +67,7 @@ jobs:
           python3 -B scripts/check_page.py public
           python3 -B scripts/check_papers.py public
           python3 -B scripts/check_links.py public
+          python3 -B scripts/check_pre_contrast.py public
           python3 -B scripts/check_roadmap.py public --source-dir _roadmap-source
       - name: Renderer and search boundaries
         run: |
