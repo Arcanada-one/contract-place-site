@@ -2,25 +2,25 @@
   "kind": "programme-provenance",
   "pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "1208dfbc2a5651a9ff6085a5b454f8511048d629",
+    "commit": "0892eeb150acae9df5e5d498902c7b5e04ce1871",
     "files": [
       {
         "path": "PROGRAMME.md",
-        "sha256": "ec5fa19c94d584d7e804d6d683a9f179e7865914727f441638b9f97b0b926d7a",
-        "blob": "bd74b311b76cd7da1e81dff8f5d42c584d9d4b71",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1208dfbc2a5651a9ff6085a5b454f8511048d629/PROGRAMME.md"
+        "sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
+        "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/PROGRAMME.md"
       },
       {
         "path": "guides/programme.ru.md",
-        "sha256": "d8f17d2ecc6dcb3f9f4328c4e9ae3143d6940898a56ebdfeb1e3b16fb8cff644",
-        "blob": "6a7325665da20f8e728dae8637ac499981ead2b7",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1208dfbc2a5651a9ff6085a5b454f8511048d629/guides/programme.ru.md"
+        "sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
+        "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.ru.md"
       },
       {
         "path": "guides/programme.zh-Hans.md",
-        "sha256": "ab66e12570c4af7e05a36d37851cd059fffe0aafe8f2d3eb8198707d7fd2e4a5",
-        "blob": "f191fc4b4bf32f51b5b4a9bb6dab44e64d54c99b",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1208dfbc2a5651a9ff6085a5b454f8511048d629/guides/programme.zh-Hans.md"
+        "sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
+        "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.zh-Hans.md"
       }
     ]
   },
@@ -34,8 +34,8 @@
     "en": {
       "path": "PROGRAMME.md",
       "title": "Knowledge Contract: Meaning, Knowledge and Their Responsible Use",
-      "source_sha256": "ec5fa19c94d584d7e804d6d683a9f179e7865914727f441638b9f97b0b926d7a",
-      "blob": "bd74b311b76cd7da1e81dff8f5d42c584d9d4b71",
+      "source_sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
+      "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
       "foundations": [
         {
           "title": "Meaning Theory: Representation, Interpretation and Conditions of Use",
@@ -51,17 +51,17 @@
         },
         {
           "title": "Meaning Geometry: Representation Spaces, Distinguishability and the Limits of Similarity",
-          "text": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here.",
-          "visible": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here.",
-          "html": "Prepare the separately planned paper on spaces, representation maps, distances, context-dependent comparison and information loss. Geometric similarity may generate candidates; it does not by itself establish entailment, applicability or permission. Status: planned manuscript; no completed geometry paper or benchmark is claimed here."
+          "text": "The [complete research draft](papers/geometry-of-semantic-representations/PAPER.md) treats spaces, representation maps, distances, context-dependent comparison and information loss. Agent-Brain reviewed its exact mathematical manuscript with a limited SCOPED PASS; this is not external peer review, an accepted source, deployment or a measured benchmark. Geometric similarity may generate candidates but cannot itself establish entailment, applicability or permission.",
+          "visible": "The complete research draft treats spaces, representation maps, distances, context-dependent comparison and information loss. Agent-Brain reviewed its exact mathematical manuscript with a limited SCOPED PASS; this is not external peer review, an accepted source, deployment or a measured benchmark. Geometric similarity may generate candidates but cannot itself establish entailment, applicability or permission.",
+          "html": "The <a href=\"/en/science/geometry-of-semantic-representations/\">complete research draft</a> <span class=\"status-badge\">Research draft</span> treats spaces, representation maps, distances, context-dependent comparison and information loss. Agent-Brain reviewed its exact mathematical manuscript with a limited SCOPED PASS; this is not external peer review, an accepted source, deployment or a measured benchmark. Geometric similarity may generate candidates but cannot itself establish entailment, applicability or permission."
         }
       ]
     },
     "ru": {
       "path": "guides/programme.ru.md",
       "title": "Контракт знаний: Смыслы, знания и условия их применения",
-      "source_sha256": "d8f17d2ecc6dcb3f9f4328c4e9ae3143d6940898a56ebdfeb1e3b16fb8cff644",
-      "blob": "6a7325665da20f8e728dae8637ac499981ead2b7",
+      "source_sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
+      "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
       "foundations": [
         {
           "title": "Теория смыслов: Представление, интерпретация и условия применения",
@@ -76,18 +76,18 @@
           "html": "Существенное расширение <a href=\"/ru/science/constrained-transformations/\">«Преобразований знаний»</a> на прежнем каноническом пути: типы объектов, частичные области операций, композиция, проекция, остаточная информация, восстановление и перенос. Каждый закон относится к явно заданному профилю. Смена названия сама по себе не завершает эту работу."
         },
         {
-          "title": "Геометрия смыслов: Пространства представлений, различимость и границы сходства",
-          "text": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются.",
-          "visible": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются.",
-          "html": "Отдельная запланированная рукопись о пространствах, отображениях, расстояниях и контекстных границах сравнения. Близость помогает находить кандидатов, но не заменяет логическое следование, применимость и полномочия. Завершённая рукопись или измеренный геометрический бенчмарк здесь не заявляются."
+          "title": "Геометрия смысла: Пространства представлений, различимость и пределы сходства",
+          "text": "[Полная исследовательская рукопись](../papers/geometry-of-semantic-representations/PAPER.md) описывает пространства, отображения, расстояния и контекстные границы сравнения. Её точные математические положения получили ограниченную независимую рецензию Agent-Brain; это не внешняя рецензия, не публикационная приёмка и не бенчмарк. Близость не заменяет логическое следование, применимость и полномочия.",
+          "visible": "Полная исследовательская рукопись описывает пространства, отображения, расстояния и контекстные границы сравнения. Её точные математические положения получили ограниченную независимую рецензию Agent-Brain; это не внешняя рецензия, не публикационная приёмка и не бенчмарк. Близость не заменяет логическое следование, применимость и полномочия.",
+          "html": "<a href=\"/ru/science/geometry-of-semantic-representations/\">Полная исследовательская рукопись</a> <span class=\"status-badge\">Исследовательский черновик</span> описывает пространства, отображения, расстояния и контекстные границы сравнения. Её точные математические положения получили ограниченную независимую рецензию Agent-Brain; это не внешняя рецензия, не публикационная приёмка и не бенчмарк. Близость не заменяет логическое следование, применимость и полномочия."
         }
       ]
     },
     "zh-Hans": {
       "path": "guides/programme.zh-Hans.md",
       "title": "知识契约：意义、知识与使用条件",
-      "source_sha256": "ab66e12570c4af7e05a36d37851cd059fffe0aafe8f2d3eb8198707d7fd2e4a5",
-      "blob": "f191fc4b4bf32f51b5b4a9bb6dab44e64d54c99b",
+      "source_sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
+      "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
       "foundations": [
         {
           "title": "意义理论：表示、解释与使用条件。",
@@ -102,10 +102,10 @@
           "html": "在<a href=\"/zh-Hans/science/constrained-transformations/\">《知识变换》</a>的原规范路径上扩展载体、部分定义域、操作语义、复合、投影、残余、重建和迁移。定律属于明确配置，不能默默推广到任意自然语言操作。更名不代表扩展已完成。"
         },
         {
-          "title": "意义几何：表示空间、可区分性与相似性的边界。",
-          "text": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。",
-          "visible": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。",
-          "html": "准备独立计划稿件，研究空间、表示映射、距离、语境相关比较与信息损失。几何接近可以生成候选项，但自身不能确立逻辑蕴涵、适用性或权限。这里不宣称已完成几何论文或实测基准。"
+          "title": "意义几何：表示空间、可区分性与相似性的局限。",
+          "text": "[完整研究草稿](../papers/geometry-of-semantic-representations/PAPER.md)研究空间、表示映射、距离、语境相关比较与信息损失。Agent-Brain对该精确版本的有限数学结论给出了有范围的独立审查，但这不是外部同行评审、来源接纳或实测基准。几何接近不能自动确立逻辑蕴涵、适用性或权限。",
+          "visible": "完整研究草稿研究空间、表示映射、距离、语境相关比较与信息损失。Agent-Brain对该精确版本的有限数学结论给出了有范围的独立审查，但这不是外部同行评审、来源接纳或实测基准。几何接近不能自动确立逻辑蕴涵、适用性或权限。",
+          "html": "<a href=\"/zh-Hans/science/geometry-of-semantic-representations/\">完整研究草稿</a> <span class=\"status-badge\">研究草稿</span>研究空间、表示映射、距离、语境相关比较与信息损失。Agent-Brain对该精确版本的有限数学结论给出了有范围的独立审查，但这不是外部同行评审、来源接纳或实测基准。几何接近不能自动确立逻辑蕴涵、适用性或权限。"
         }
       ]
     }
