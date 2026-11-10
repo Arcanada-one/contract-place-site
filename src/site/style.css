@@ -44,7 +44,7 @@ html[data-theme=dark] .hero-art-bg{background-image:linear-gradient(90deg,#111c2
 .source-body{min-width:0}
 .source-body table{display:block;max-width:100%;overflow-x:auto;margin-block:24px}
 .source-body th,.source-body td{min-width:115px}
-.source-body pre{overflow-x:auto;max-width:100%;white-space:pre}
+.source-body pre{overflow-x:auto;max-width:100%;white-space:pre;color:var(--ink)}
 .source-body math[display=block]{display:block;max-width:100%;overflow-x:auto;margin-block:22px;padding-block:6px}
 .source-body math{font-size:1em}
 .source-body math:not([display=block]){display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle}
