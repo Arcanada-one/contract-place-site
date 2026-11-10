@@ -76,8 +76,46 @@ jobs:
           READABLE_ROADMAP_SOURCE_DIR=_knowledge-source python3 -B scripts/test_roadmap_names.py
           python3 -B scripts/test_roadmap_display_names.py
           PROGRAMME_SOURCE_DIR=_knowledge-source python3 -B scripts/test_programme.py
+          python3 -B scripts/test_rendition_preamble.py
           node scripts/test_search.js
           node scripts/test_lab.js
+      - name: Check out the exact English source pin for reviewed-file regression
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 46af0f06218e590e047a585ac74820f3c6336604
+          path: _preamble-english-source
+          persist-credentials: false
+      - name: Check out the exact reviewed rendition regression inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: cad15f92f1821cf5ffe9c3d257bdbac8beba23ba
+          path: _rendition-review-source
+          persist-credentials: false
+      - name: Check out the predeclared code-span refusal fixture
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 64aa36781f92b1b1a376613f847c82e098720b1d
+          path: _rendition-code-refusal-source
+          persist-credentials: false
+      - name: Check out the prior formula-order refusal fixtures
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 151dc8927547d27a88d0d5082b8abd1f98bd7b33
+          path: _rendition-old-review-source
+          persist-credentials: false
+      - name: Check out the exact earlier compiler for before-and-after comparison
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/contract-place-site
+          ref: b1a2cb006077eea52fd09ad0b7a6fdbe5f538c65
+          path: _preamble-site-baseline
+          persist-credentials: false
+      - name: Four reviewed-file regressions without changing publication admission
+        run: python3 -B scripts/check_reviewed_preamble.py
       - name: Verify committed inputs and output are reproducible
         run: |
           python3 - <<'PY'

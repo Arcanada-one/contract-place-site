@@ -482,6 +482,8 @@ def check_parity(entry: dict, source_ast: dict, rendition_ast: dict, before_refe
     """Structural parity between a source and its rendition. Returns the rendition-to-source anchor map.
     ``before_references`` runs after the section and structure checks and before formulas, code and references are
     compared, so that a link that cannot be resolved is reported as such and not as a dropped reference."""
+    from rendition_preamble import source_for_anchor_parity
+    source_ast = source_for_anchor_parity(source_ast, rendition_ast)
     work, language = entry["work"], entry["language"]
     pairs = [(p["source"], p["rendition"]) for p in entry["sections"]]
     src_heads, src_structure = sections_of(source_ast)
