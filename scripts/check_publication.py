@@ -17,7 +17,7 @@ assert not published.get('preview')
 for key in ('schema_version', 'commit', 'edition', 'repository', 'catalog'):
     assert published[key] == manifest[key] == catalog['publication'][key], key
 assert Counter(d['type'] for d in published['documents']) == {
-    'paper': 9, 'specification': 11, 'study': 6, 'glossary': 1,
+    'paper': 10, 'specification': 11, 'study': 6, 'glossary': 1,
     'bibliography': 1, 'appendix': 2,
 }, 'Publication inventory is incomplete'
 provenance = json.loads((ROOT / 'src/site/content-provenance.json').read_text())
@@ -26,7 +26,7 @@ renditions_source = (provenance.get('renditions') or {}).get('renditions_source'
 assert catalog.get('renditions_source') == renditions_source, 'catalogue and provenance disagree on the renditions source'
 assert (published.get('renditions') or {}).get('source') == renditions_source, 'publication.json and provenance disagree on the renditions source'
 records = {r['route']: r for r in catalog['records']}
-assert len(records) == 30
+assert len(records) == 31
 equations = 0
 for doc in published['documents']:
     record = records[doc['route']]
@@ -69,4 +69,4 @@ count = check_site(public)
 labelled = check_status_labels(public, catalog['records'])
 rendition_pages = check_renditions(public, catalog['records'], renditions_source)
 assert all(d.get('status') == records[d['route']].get('status') for d in published['documents']), 'publication.json status differs from the catalogue'
-print(f'Publication checks OK: 30 full documents / 90 localized reading pages, {equations} original MathML expressions, {count} pages, {labelled} pages carry a catalogue-status label; {rendition_pages} rendition pages checked; exact body and source bindings.')
+print(f'Publication checks OK: 31 full documents / 93 localized reading pages, {equations} original MathML expressions, {count} pages, {labelled} pages carry a catalogue-status label; {rendition_pages} rendition pages checked; exact body and source bindings.')
