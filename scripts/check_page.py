@@ -40,7 +40,7 @@ def check_search(page: str, script: str) -> None:
 
 def expected_script_sources(page: str) -> list[str]:
     """Base reader scripts; renditions.js is present only when the build compiled a sidecar."""
-    sources = ["/theme.js", "/content.js", "/search.js", "/app.js"]
+    sources = ["/theme.js", "/content.js", "/search.js", "/analytics.js", "/app.js"]
     if re.search(r'<script\b[^>]*\bsrc="/renditions\.js', page):
         sources.append("/renditions.js")
     return sources
