@@ -37,6 +37,7 @@ class Fixture:
         self.counts = {}
         self.queries = []
         self.agents = []
+        self.accepts = []
         outer = self
 
         class Handler(BaseHTTPRequestHandler):
@@ -47,6 +48,7 @@ class Fixture:
                 path, _, query = self.path.partition("?")
                 outer.queries.append(query)
                 outer.agents.append(self.headers.get("User-Agent"))
+                outer.accepts.append(self.headers.get("Accept"))
                 outer.counts[path] = outer.counts.get(path, 0) + 1
                 result = outer.behaviours[path](outer.counts[path])
                 if result == "hang":
@@ -202,6 +204,29 @@ class ReadbackTests(unittest.TestCase):
                 os.environ.pop(k, None)
             os.environ.update(keep)
 
+    def assert_received(self, received, expected, printed):
+        self.assertTrue(received, "server received no requests")
+        self.assertEqual(set(received), {expected}, f"received {received!r}")
+        self.assertEqual(printed, expected)
+
+    def test_received_header_assertion_is_not_vacuous(self):
+        # Accept changed to */* in the script: server receives it, helper must reject it.
+        real = rb.ACCEPT
+        rb.ACCEPT = "*/*"
+        try:
+            self.go_env({})
+        finally:
+            rb.ACCEPT = real
+        self.assertEqual(set(self.fx.accepts), {"*/*"})
+        with self.assertRaises(AssertionError):
+            self.assert_received(self.fx.accepts, "text/html", self.witness()["request_accept"])
+        # Accept absent / User-Agent altered as recorded by the server: helper must reject too.
+        for bad in ([None, None], ["text/html", None]):
+            with self.assertRaises(AssertionError):
+                self.assert_received(bad, "text/html", "text/html")
+        with self.assertRaises(AssertionError):
+            self.assert_received(["other/1.0"], rb.USER_AGENT, rb.USER_AGENT)
+
     def test_header_has_every_key_before_routes(self):
         self.go_env({}, build_revision="abc123")
         w = self.witness()
@@ -211,6 +236,9 @@ class ReadbackTests(unittest.TestCase):
         self.assertEqual((w["request_method"], w["request_accept"], w["redirects"], w["cache_token"]),
                          ("GET", "text/html", "refused", "t1"))
         self.assertEqual(w["request_user_agent"], rb.USER_AGENT)
+        # printed value = value the server actually received, on every request
+        self.assert_received(self.fx.accepts, "text/html", w["request_accept"])
+        self.assert_received(self.fx.agents, rb.USER_AGENT, w["request_user_agent"])
         self.assertEqual(w["origin"], self.fx.url)
         self.assertEqual(w["probe_region"], "UNKNOWN")
         self.assertTrue(w["started_utc"].endswith("Z") and w["finished_utc"].endswith("Z"))
