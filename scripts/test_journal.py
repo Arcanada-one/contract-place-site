@@ -7,10 +7,12 @@ from __future__ import annotations
 from hashlib import sha256
 from html.parser import HTMLParser
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,9 +22,9 @@ SLUG = "lesson-without-evidence-2026-11-11"
 FOLDER = "2026-11-11-lesson-without-evidence"
 LANGS = ("en", "ru", "zh-Hans")
 EXPECTED = {
-    "en": "0ceb36b39e2ae5f16c92b81b27b98bd6ade9f3feb7d724a5ee05bb0e9abbe3e9",
-    "ru": "34e68420285319ca847d516cf6eec8e75cdc9d2852f441b15b49a2fd60ed96ff",
-    "zh-Hans": "70743391332427237afd8fe11810764283d6e9cc9b3cfa6d1fd0a1106377074c",
+    "en": "9a187e6e9d2b20c190e07e03d623555fe40b5f359e35b6eab5935ea0bd7bc6a0",
+    "ru": "dd8b8ac301b637744a4f5a7df3dc80a6c0f48e556825df48fa2d522b841f4d43",
+    "zh-Hans": "8279bb01980bd0cd53c8d132cc365d3f4fb387c26675158d16c56ffb6bb7ca9a",
 }
 
 
@@ -221,6 +223,37 @@ def run_mutants() -> int:
             print("MUTANT d OK: noindex article refused")
     finally:
         en_page.write_text(original_en, encoding="utf-8")
+
+    # (e) fake issue on a temp copy of the manifest must make check_page fail
+    # without editing check_page.py (proves sitemap/indexability derives from the manifest).
+    mutated_manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    mutated_manifest["issues"].append(
+        {
+            "slug": "mutant-missing-issue-2099-01-01",
+            "date": "2099-01-01",
+            "folder": "2099-01-01-mutant-missing-issue",
+            "languages": {
+                "en": {"file": "en.md", "sha256": "0" * 64},
+                "ru": {"file": "ru.md", "sha256": "0" * 64},
+                "zh-Hans": {"file": "zh-Hans.md", "sha256": "0" * 64},
+            },
+        }
+    )
+    with tempfile.TemporaryDirectory() as tmp:
+        temp_manifest = Path(tmp) / "manifest.json"
+        temp_manifest.write_text(json.dumps(mutated_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        result = subprocess.run(
+            ["python3", "-B", "scripts/check_page.py", "public"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            env={**os.environ, "JOURNAL_MANIFEST": str(temp_manifest)},
+        )
+        if result.returncode == 0:
+            print("MUTANT e FAILED TO FAIL: check_page accepted a missing manifest issue")
+            failures += 1
+        else:
+            print("MUTANT e OK: check_page refused missing manifest issue page")
 
     return failures
 

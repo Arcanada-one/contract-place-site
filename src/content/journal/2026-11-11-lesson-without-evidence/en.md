@@ -5,10 +5,10 @@ slug: lesson-without-evidence-2026-11-11
 date: 2026-11-11
 lang: en
 title: "A lesson without its evidence ages first"
-excerpt: "Two new papers on agent memory and reuse of experience, one corrected theorem, and one rule we drew from our own mistake. The Knowledge Contract week in review."
+excerpt: "Two new papers on agent memory and reuse of experience, one theorem tested by removing its first premise, and one rule we drew from our own mistake. The Knowledge Contract week in review."
 ---
 
-Knowledge Contract answers one question: what is an agent entitled to rely on, and why. This week two independent research groups asked the same question, and we ourselves answered it wrongly twice and corrected course. Below: both papers, one refined theorem and one new rule.
+Knowledge Contract answers one question: what is an agent entitled to rely on, and why. This week two independent research groups asked the same question, and we found two flaws in our own checks. Below: both papers, one audit of a theorem and one new rule.
 
 ## Memory helps as long as you can go back to the source
 
@@ -32,13 +32,13 @@ The third line is the one that matters. The cheapest option costs a third as muc
 
 Adoption is on hold until we have a stable, repeated procedure with a measured cost.
 
-## A theorem that was missing its first premise
+## What a theorem loses without its first premise
 
-A scientific audit of our corpus found a gap in the chain observation theorem: it silently relied on a property of the initial state. A counterexample was built and the premise was restored to the statement. The correction is published as an open proposal and is under independent review; it is not yet accepted.
+A scientific audit of our corpus examined the chain observation theorem. The theorem states its first premise explicitly: the chain begins in a state that satisfies the precondition of the first step. The audit asked what happens if a reader drops that premise, which is a tempting shortcut. It built a finite countermodel: without the premise the stronger conclusion is false. The theorem itself is neither refuted nor amended. The audit is published as an open proposal and is under separate scientific review; it is not yet accepted.
 
-The instructive part was checking the check. The first counterexample had a single step. With one step, the junction conditions between steps hold trivially: there are no junctions. The tests passed and said nothing about either junction premise. The suite now includes two-step models in which a junction premise actually fires, and for each premise a case where violating it breaks the result.
+The instructive part was checking the check. The first countermodel had a single step. With one step, the junction conditions between steps hold trivially: there are no junctions. The tests passed and said nothing about either junction premise. The suite now includes two-step models in which a junction premise actually fires, and for each premise a case where violating it breaks the result.
 
-The second finding is simpler and more embarrassing. Six tests sat in the repository, the build was green, and the build never ran them. A dedicated build job runs them now, and we read its log: which command, how many tests, how many skipped.
+The second finding is simpler and more embarrassing. Six tests sat in the repository, the build was green, and the build never ran them. A dedicated build job runs them now, ten cases in all, and we read its log: which command, how many tests, how many skipped.
 
 ## One fact, seven places
 

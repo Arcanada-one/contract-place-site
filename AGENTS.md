@@ -43,9 +43,11 @@ Daily journal issues are authored in this repository, not in the knowledge pin. 
 
 1. Add `src/content/journal/<YYYY-MM-DD>-<slug>/{en,ru,zh-Hans}.md` with YAML front matter (`site`, `section`, `slug`, `date`, `lang`, `title`, `excerpt`) and the Markdown body. Do not edit, shorten, translate or augment the manuscript here beyond the supplied files.
 2. Append an entry to `src/content/journal/manifest.json` with `slug`, `date`, `folder` and each language's `file` plus `sha256`.
-3. Rebuild (`scripts/build_publication.py` … or at least `node build.mjs` after catalogue compile). Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route.
+3. Rebuild (`scripts/build_publication.py` … or at least `node build.mjs` after catalogue compile).
 
-`scripts/test_journal.py` checks the recorded digests, locale-specific bodies, index membership and indexability.
+That is the full checklist: folder + manifest entry + build. Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route. `scripts/check_page.py` derives every manifest issue × locale from `manifest.json` and requires each page to be present and indexable; do not hand-edit journal article URLs into the checker.
+
+`scripts/test_journal.py` checks the recorded digests, locale-specific bodies, index membership and indexability, and kills a mutant that adds a fake manifest issue without a built page.
 
 ## Search and release boundaries
 
