@@ -81,6 +81,47 @@ class ReadableRoadmapTests(unittest.TestCase):
                       '6 November 2026', 'A concrete gap remains.']:
             self.assertIn(value, gap)
 
+    def test_optional_current_source_observation_is_preserved(self):
+        text = named().replace(
+            '**Artifact observation (8 November 2026).** An artifact exists; execution is not established.',
+            '**Artifact observation (8 November 2026).** An artifact exists; execution is not established.\n\n'
+            '**Current source observation (11 November 2026).** The [Meaning Geometry manuscript]'
+            '(../papers/geometry-of-semantic-representations/PAPER.md) is now present.',
+        )
+        gap = split_cards(text)['RM-01']['fields']['gap']
+        self.assertIn('*Artifact observation (8 November 2026).* An artifact exists; execution is not established.', gap)
+        self.assertIn(
+            '*Current source observation (11 November 2026).* The [Meaning Geometry manuscript]'
+            '(../papers/geometry-of-semantic-representations/PAPER.md) is now present.',
+            gap,
+        )
+        self.assertIn('*Original gap (6 November 2026).* A concrete gap remains.', gap)
+        artifact_at = gap.index('*Artifact observation')
+        current_at = gap.index('*Current source observation')
+        original_at = gap.index('*Original gap')
+        self.assertLess(artifact_at, current_at)
+        self.assertLess(current_at, original_at)
+
+    def test_two_current_source_observations_refused(self):
+        text = named().replace(
+            '**Artifact observation (8 November 2026).** An artifact exists; execution is not established.',
+            '**Artifact observation (8 November 2026).** An artifact exists; execution is not established.\n\n'
+            '**Current source observation (11 November 2026).** First note.\n\n'
+            '**Current source observation (12 November 2026).** Second note.',
+        )
+        with self.assertRaises(ValueError) as raised:
+            split_cards(text)
+        self.assertIn('dated artifact observation missing or unexpected header prose', str(raised.exception))
+
+    def test_current_source_observation_without_artifact_observation_refused(self):
+        text = named().replace(
+            '**Artifact observation (8 November 2026).** An artifact exists; execution is not established.',
+            '**Current source observation (11 November 2026).** A note without a preceding artifact observation.',
+        )
+        with self.assertRaises(ValueError) as raised:
+            split_cards(text)
+        self.assertIn('dated artifact observation missing or unexpected header prose', str(raised.exception))
+
     def test_named_forward_dependencies_resolve_by_identity_not_order(self):
         text = named('05', 'Meaning Bridge', 'Source Audit', 'Next') + named('06', 'Source Audit')
         self.assertEqual(split_cards(text)['RM-05']['requires'], ['RM-06'])

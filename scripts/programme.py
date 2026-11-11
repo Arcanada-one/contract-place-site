@@ -260,13 +260,68 @@ def compile_programme(source: Path, commit: str, renderer: Renderer) -> dict:
     }
 
 
-def localize_and_badge_links(html: str, documents: list[dict], locale: str) -> str:
-    """Point manuscript links at the current UI locale and badge catalogue drafts."""
+def localize_catalogue_links(html: str, documents: list[dict], locale: str) -> str:
+    """Rewrite catalogue hrefs to the page locale without inserting status badges."""
     for doc in documents:
         en_route = doc["route"]
         local_route = en_route.replace("/en/", f"/{locale}/", 1)
         if locale != "en":
             html = html.replace(f'href="{en_route}"', f'href="{local_route}"')
+    return html
+
+
+def catalogue_title_for_locale(doc: dict, locale: str) -> str:
+    """Return a catalogue title for the UI locale, or empty when none is declared."""
+    if locale == "en":
+        return doc.get("title") or ""
+    if locale == "ru":
+        return doc.get("titleRu") or doc.get("title_ru") or ""
+    return doc.get("titleZhHans") or doc.get("title_zh_Hans") or ""
+
+
+def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
+    """Sibling line after a roadmap field: catalogue link + badge per draft linked in that field.
+
+    Mirrors src/site/app.js roadmapLinkedStatus. Source-order; one entry per record.
+    """
+    from html import escape
+
+    localized = localize_catalogue_links(html, documents, locale)
+    by_href: dict[str, dict] = {}
+    for doc in documents:
+        by_href[doc["route"]] = doc
+        by_href[doc["route"].replace("/en/", f"/{locale}/", 1)] = doc
+    items: list[str] = []
+    seen: set[str] = set()
+    for match in re.finditer(r'<a\b[^>]*\bhref="([^"]+)"[^>]*>(.*?)</a>', localized, re.S):
+        doc = by_href.get(match.group(1))
+        if not doc:
+            continue
+        status = doc.get("status")
+        if not status or status not in STATUS_LABELS:
+            continue
+        doc_id = doc.get("id") or match.group(1)
+        if doc_id in seen:
+            continue
+        seen.add(doc_id)
+        label = STATUS_LABELS[status][locale]
+        link_text = re.sub(r"<[^>]+>", "", match.group(2))
+        text = catalogue_title_for_locale(doc, locale) or link_text
+        local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
+        items.append(
+            f'<a href="{local_route}">{escape(text)}</a> '
+            f'<span class="status-badge">{label}</span>'
+        )
+    if not items:
+        return ""
+    return f'<p class="rm-linked-status">{" ".join(items)}</p>'
+
+
+def localize_and_badge_links(html: str, documents: list[dict], locale: str) -> str:
+    """Point manuscript links at the current UI locale and badge catalogue drafts (programme pages)."""
+    html = localize_catalogue_links(html, documents, locale)
+    for doc in documents:
+        local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
         status = doc.get("status")
         if not status or status not in STATUS_LABELS:
             continue

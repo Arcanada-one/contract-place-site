@@ -146,6 +146,42 @@ function statusOf(r){if(!r.status)return '';if(!statusLabels[r.status])throw new
 function statusLabel(r){const s=statusOf(r);return s?statusLabels[s][langs.indexOf(locale)]:'';}
 function statusBadge(r){const l=statusLabel(r);return l?`<span class="status-badge">${esc(l)}</span>`:'';}
 function statusNote(r){const s=statusOf(r);return s?`<p class="draft-notice" role="note"><strong>${esc(statusLabel(r))}${locale==='zh-Hans'?'。':'.'}</strong>${locale==='zh-Hans'?'':' '}${esc(statusNotes[s][langs.indexOf(locale)])}</p>`:'';}
+/* Page-locale catalogue hrefs only — roadmap Gap prose must stay a contiguous source-token match. */
+function localizeCatalogueLinks(html){
+  for(const r of corpus.records){
+    const enRoute=r.route,localRoute=enRoute.replace('/en/',`/${locale}/`);
+    if(locale!=='en')html=html.split(`href="${enRoute}"`).join(`href="${localRoute}"`);
+  }
+  return html;
+}
+function catalogueTitleForLocale(r){
+  if(locale==='en')return r.title||'';
+  if(locale==='ru')return r.titleRu||'';
+  return r.titleZhHans||r.title_zh_Hans||'';
+}
+/* Sibling after a roadmap field: one catalogue link + badge per draft linked in that field (source order). */
+function roadmapLinkedStatus(html){
+  const localized=localizeCatalogueLinks(html);
+  const byHref=new Map();
+  for(const r of corpus.records){
+    byHref.set(r.route,r);
+    byHref.set(r.route.replace('/en/',`/${locale}/`),r);
+  }
+  const items=[],seen=new Set();
+  const re=/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
+  let m;
+  while((m=re.exec(localized))){
+    const r=byHref.get(m[1]);if(!r)continue;
+    const label=statusLabel(r);if(!label||seen.has(r.id))continue;
+    seen.add(r.id);
+    const linkText=m[2].replace(/<[^>]+>/g,'');
+    const title=catalogueTitleForLocale(r);
+    const text=title||linkText;
+    const localRoute=r.route.replace('/en/',`/${locale}/`);
+    items.push(`<a href="${localRoute}">${esc(text)}</a> <span class="status-badge">${esc(label)}</span>`);
+  }
+  return items.length?`<p class="rm-linked-status">${items.join(' ')}</p>`:'';
+}
 function paperCategory(r){return r.category;}
 function paperCard(r){
 return `<article class="paper-card"><a href="${url(recordPath(r))}" class="paper-cover" aria-label="${esc(r.title)}">${cover(r)}<span class="cover-id">${recordLabel(r)}</span></a><div class="paper-content"><div class="metadata"><span>${t('publicationEdition')} ${esc(corpus.publication.edition)}</span><span>${t('englishText')}</span>${statusBadge(r)}</div><h3><a href="${url(recordPath(r))}">${esc(r.title)}</a></h3><p lang="en">${esc(r.summary)}</p>${link(recordPath(r),t('readPaper'))}</div></article>`;
@@ -198,7 +234,7 @@ function roadmapCard(k){
 const rel=[['roadmapRequires',k.requires],['roadmapNeededBy',k.needed_by],['roadmapInforms',k.informs],['roadmapInformedBy',k.informed_by]].filter(([,v],i)=>i<2||v.length).map(([key,v])=>`<div><dt>${t(key)}${key==='roadmapInforms'||key==='roadmapInformedBy'?` <small>(${t('roadmapInformsNoBlock')})</small>`:''}</dt><dd>${roadmapIds(v)}</dd></div>`).join('');
 const name=roadmapName(k.id);
 const subtitle=k.subtitle?` <span class="rm-subtitle" lang="en">${esc(k.subtitle)}</span>`:'';
-return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${f.html}</dd></div>`).join('')}</dl></article>`;
+return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${localizeCatalogueLinks(f.html)}</dd>${roadmapLinkedStatus(f.html)}</div>`).join('')}</dl></article>`;
 }
 function roadmapPage(){
 const road=corpus.roadmap,pin=road.pin,ms=corpus.publication.commit,same=pin.commit===ms;

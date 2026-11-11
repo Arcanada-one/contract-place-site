@@ -2,25 +2,25 @@
   "kind": "programme-provenance",
   "pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "0892eeb150acae9df5e5d498902c7b5e04ce1871",
+    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
     "files": [
       {
         "path": "PROGRAMME.md",
-        "sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
-        "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/PROGRAMME.md"
+        "sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
+        "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/PROGRAMME.md"
       },
       {
         "path": "guides/programme.ru.md",
-        "sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
-        "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.ru.md"
+        "sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
+        "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.ru.md"
       },
       {
         "path": "guides/programme.zh-Hans.md",
-        "sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
-        "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.zh-Hans.md"
+        "sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
+        "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.zh-Hans.md"
       }
     ]
   },
@@ -34,8 +34,8 @@
     "en": {
       "path": "PROGRAMME.md",
       "title": "Knowledge Contract: Meaning, Knowledge and Their Responsible Use",
-      "source_sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
-      "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
+      "source_sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
+      "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
       "foundations": [
         {
           "title": "Meaning Theory: Representation, Interpretation and Conditions of Use",
@@ -60,8 +60,8 @@
     "ru": {
       "path": "guides/programme.ru.md",
       "title": "Контракт знаний: Смыслы, знания и условия их применения",
-      "source_sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
-      "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
+      "source_sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
+      "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
       "foundations": [
         {
           "title": "Теория смыслов: Представление, интерпретация и условия применения",
@@ -86,8 +86,8 @@
     "zh-Hans": {
       "path": "guides/programme.zh-Hans.md",
       "title": "知识契约：意义、知识与使用条件",
-      "source_sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
-      "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
+      "source_sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
+      "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
       "foundations": [
         {
           "title": "意义理论：表示、解释与使用条件。",

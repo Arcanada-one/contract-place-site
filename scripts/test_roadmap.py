@@ -298,6 +298,87 @@ class RoadmapCompiler(unittest.TestCase):
         other = roadmap.compile_roadmap(self.source, self.path, {"papers/p.md": {"route": "/en/science/p/", "source_sha256": "0" * 64}})
         self.assertIn(f"/blob/{self.commit}/papers/p.md", other["overview_html"])
 
+    def test_card_prose_draft_link_gets_status_badge_in_each_locale(self):
+        """Badge sits in a sibling after the field; Gap prose stays contiguous for check_roadmap."""
+        from programme import (
+            localize_catalogue_links,
+            roadmap_linked_status,
+            STATUS_LABELS,
+            LOCALES,
+        )
+        from publication_checks import check_status_labels
+        import check_roadmap as cr
+
+        (self.source / "papers").mkdir()
+        (self.source / "papers/draft.md").write_text("# Draft\n")
+        digest = sha256((self.source / "papers/draft.md").read_bytes()).hexdigest()
+        gap = "See the [draft manuscript](../papers/draft.md) in source."
+        tasks = "# Tasks\n\n" + "".join(
+            card_text(n).replace(f"Gap sentence number {n} of the fixture.", gap, 1) if n == 1 else card_text(n)
+            for n in range(1, 26)
+        )
+        self.write(tasks=tasks)
+        manuscripts = {"papers/draft.md": {"route": "/en/science/draft/", "source_sha256": digest}}
+        record = roadmap.compile_roadmap(self.source, self.path, manuscripts)
+        field_html = record["tasks"][0]["fields"][0]["html"]
+        self.assertIn('href="/en/science/draft/"', field_html)
+        documents = [{
+            "id": "draft",
+            "route": "/en/science/draft/",
+            "status": "research-draft",
+            "title": "Draft Catalogue Title",
+            "titleRu": "Черновик каталога",
+        }]
+        public = self.root / "public"
+        gap_source = gap  # markdown form of the replaced Gap sentence
+        for locale in LOCALES:
+            body = localize_catalogue_links(field_html, documents, locale)
+            sibling = roadmap_linked_status(field_html, documents, locale)
+            label = STATUS_LABELS["research-draft"][locale]
+            self.assertIn(f'href="/{locale}/science/draft/"', body)
+            self.assertNotIn("status-badge", body)
+            self.assertIn('class="rm-linked-status"', sibling)
+            self.assertIn(f'<span class="status-badge">{label}</span>', sibling)
+            if locale == "zh-Hans":
+                self.assertIn(">draft manuscript</a>", sibling)
+            elif locale == "ru":
+                self.assertIn(">Черновик каталога</a>", sibling)
+            else:
+                self.assertIn(">Draft Catalogue Title</a>", sibling)
+            fragment = f'<dd class="source-body prose">{body}</dd>{sibling}'
+            stream = cr.tokens(" ".join(cr.Page(f"<main>{fragment}</main>").text))
+            self.assertTrue(
+                cr.contains(stream, cr.tokens(cr.markdown_plain(gap_source))),
+                f"{locale}: Gap source tokens must stay contiguous despite the sibling badge",
+            )
+            page = public / locale / "roadmap" / "index.html"
+            page.parent.mkdir(parents=True, exist_ok=True)
+            page.write_text(f"<main>{fragment}</main>", encoding="utf-8")
+        self.assertGreaterEqual(check_status_labels(public, documents), 3)
+
+    def test_card_prose_link_without_status_has_no_badge(self):
+        from programme import localize_catalogue_links, roadmap_linked_status, LOCALES
+
+        (self.source / "papers").mkdir()
+        (self.source / "papers/accepted.md").write_text("# Accepted\n")
+        digest = sha256((self.source / "papers/accepted.md").read_bytes()).hexdigest()
+        gap = "See the [accepted manuscript](../papers/accepted.md) in source."
+        tasks = "# Tasks\n\n" + "".join(
+            card_text(n).replace(f"Gap sentence number {n} of the fixture.", gap, 1) if n == 1 else card_text(n)
+            for n in range(1, 26)
+        )
+        self.write(tasks=tasks)
+        manuscripts = {"papers/accepted.md": {"route": "/en/science/accepted/", "source_sha256": digest}}
+        record = roadmap.compile_roadmap(self.source, self.path, manuscripts)
+        field_html = record["tasks"][0]["fields"][0]["html"]
+        documents = [{"id": "accepted", "route": "/en/science/accepted/", "title": "Accepted"}]
+        for locale in LOCALES:
+            body = localize_catalogue_links(field_html, documents, locale)
+            sibling = roadmap_linked_status(field_html, documents, locale)
+            self.assertIn(f'href="/{locale}/science/accepted/"', body)
+            self.assertNotIn("status-badge", body)
+            self.assertEqual(sibling, "")
+
 
 @unittest.skipUnless(os.environ.get("ROADMAP_SOURCE_DIR"), "ROADMAP_SOURCE_DIR not set")
 class RealSource(unittest.TestCase):

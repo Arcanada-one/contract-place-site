@@ -1,37 +1,37 @@
 {
   "schema_version": 1,
   "repository": "Arcanada-one/knowledge-contract",
-  "commit": "46af0f06218e590e047a585ac74820f3c6336604",
+  "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
   "files": [
     {
       "path": "ROADMAP.md",
       "role": "rendered",
-      "sha256": "98675d9de57de6cbcdad44ba35f1c8960f1cf1a87e04359297c1c8268d62bd78"
+      "sha256": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760"
     },
     {
       "path": "roadmap/TASKS.md",
       "role": "rendered",
-      "sha256": "a15c17c438ac9aedca7e40896eff6d3a69e4b8f1e0e7789207549da8aaf8761c"
+      "sha256": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7"
     },
     {
       "path": "roadmap/dependencies.json",
       "role": "rendered",
-      "sha256": "c3ffc8f3ba72bd5872adb3b34c265e56152375760f4e565a539bb4c1d912d913"
+      "sha256": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9"
     },
     {
       "path": "roadmap/EXPERIMENTS.md",
       "role": "linked",
-      "sha256": "b338e7f9547d3af9dc8c872fa731755d98d7c2718b53828545724e014c7a976c"
+      "sha256": "b3b7a80ea3b4a11ab05d12e8f07a30badba3fb6e9aa87991548508343055f07d"
     },
     {
       "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
       "role": "linked",
-      "sha256": "3f07b70002fd8856c9238fef9ac2ea283d50bc3434d67718f2b9313d6c4d0b98"
+      "sha256": "442ba32cadcf9464e95c2d20f7e3857d0b1be679f41eb9a6282fb56dde00679d"
     },
     {
       "path": "roadmap/SITE_DELIVERY.md",
       "role": "introduction",
-      "sha256": "a3c97044e3490d3b5cbc9447650b8d7e8eeab005b702d2123a6c395efaf37069"
+      "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246"
     }
   ]
 }

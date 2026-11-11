@@ -5,7 +5,8 @@ import copy
 import unittest
 from roadmap import check_graph, EXECUTION_BINDINGS
 from roadmap_names import (validate_display_names, check_card_display_name,
-                           EDITORIAL_METADATA, validate_editorial_metadata)
+                           EDITORIAL_METADATA, EDITORIAL_METADATA_PAIR_A,
+                           EDITORIAL_METADATA_PAIR_B, validate_editorial_metadata)
 
 
 def fixture(named=True):
@@ -103,33 +104,59 @@ class DisplayNameTests(unittest.TestCase):
         check_card_display_name({'title':'Original old title'},{'id':'RM-01'})
 
     def test_exact_historical_metadata_preserves_input_and_nodes(self):
-        graph=fixture(); graph.update(EDITORIAL_METADATA); original=copy.deepcopy(graph)
+        graph=fixture(); graph.update(EDITORIAL_METADATA_PAIR_A); original=copy.deepcopy(graph)
         self.assertEqual(len(check_graph(graph)),25)
         self.assertEqual(graph,original)
         self.assertNotIn('execution_pause',check_graph(graph)['RM-01'])
 
+    def test_pair_a_historical_metadata_accepted(self):
+        graph=fixture(); graph.update(EDITORIAL_METADATA_PAIR_A)
+        validate_editorial_metadata(graph)
+        self.assertEqual(len(check_graph(graph)),25)
+
+    def test_pair_b_historical_metadata_accepted(self):
+        graph=fixture(); graph.update(EDITORIAL_METADATA_PAIR_B)
+        validate_editorial_metadata(graph)
+        self.assertEqual(len(check_graph(graph)),25)
+        self.assertNotIn('execution_pause',check_graph(graph)['RM-01'])
+
+    def test_mixed_historical_metadata_pair_refused(self):
+        graph=fixture()
+        graph['display_revision']=EDITORIAL_METADATA_PAIR_A['display_revision']
+        graph['execution_pause']=EDITORIAL_METADATA_PAIR_B['execution_pause']
+        with self.assertRaises(ValueError) as ctx:
+            validate_editorial_metadata(graph)
+        self.assertEqual(str(ctx.exception),'Unrecognized historical roadmap display metadata')
+
+    def test_altered_pair_b_pause_text_refused(self):
+        graph=fixture(); graph.update(EDITORIAL_METADATA_PAIR_B)
+        graph['execution_pause']=EDITORIAL_METADATA_PAIR_B['execution_pause']+' '
+        with self.assertRaises(ValueError) as ctx:
+            validate_editorial_metadata(graph)
+        self.assertEqual(str(ctx.exception),'Unrecognized historical roadmap display metadata')
+
     def test_partial_historical_metadata_refused(self):
-        for key,value in EDITORIAL_METADATA.items():
+        for key,value in EDITORIAL_METADATA_PAIR_A.items():
             graph=fixture(); graph[key]=value
             with self.subTest(key=key),self.assertRaises(ValueError):check_graph(graph)
 
     def test_modified_historical_metadata_refused(self):
         for key in EDITORIAL_METADATA:
             for value in (None,{},'', 'done', '2026-11-09', '<script>x</script>'):
-                graph=fixture();graph.update(EDITORIAL_METADATA);graph[key]=value
+                graph=fixture();graph.update(EDITORIAL_METADATA_PAIR_A);graph[key]=value
                 with self.subTest(key=key,value=value),self.assertRaises(ValueError):check_graph(graph)
 
     def test_historical_metadata_on_legacy_graph_refused(self):
-        graph=fixture(False);graph.update(EDITORIAL_METADATA)
+        graph=fixture(False);graph.update(EDITORIAL_METADATA_PAIR_A)
         with self.assertRaises(ValueError):check_graph(graph)
 
     def test_valid_history_does_not_admit_live_status(self):
         for key in ('status','state','completed','eta'):
-            graph=fixture();graph.update(EDITORIAL_METADATA);graph[key]='done'
+            graph=fixture();graph.update(EDITORIAL_METADATA_PAIR_A);graph[key]='done'
             with self.subTest(key=key),self.assertRaises(ValueError):check_graph(graph)
 
     def test_valid_history_does_not_admit_unknown_field(self):
-        graph=fixture();graph.update(EDITORIAL_METADATA);graph['runtime_override']=True
+        graph=fixture();graph.update(EDITORIAL_METADATA_PAIR_A);graph['runtime_override']=True
         with self.assertRaises(ValueError):check_graph(graph)
 
 
