@@ -2,3 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 __pycache__/
 *.pyc
+.tmp-journal-mutants/
+_knowledge-source/
+_roadmap-source/
