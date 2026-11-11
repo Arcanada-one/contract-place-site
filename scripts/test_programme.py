@@ -30,11 +30,11 @@ CATALOG = ROOT / "src/content/catalog.json"
 SOURCE_ROOT = Path(os.environ.get("PROGRAMME_SOURCE_DIR", str(ROOT / "_knowledge-source"))).resolve()
 LOCALES = ("en", "ru", "zh-Hans")
 NAV = {"en": "Programme", "ru": "Программа", "zh-Hans": "计划"}
-PIN = "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+PIN = "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
 BLOBS = {
-    "en": "711924ea4c532bd2170a0b3a71c1009c863dd745",
-    "ru": "f02b992c2fd66f9519741412343c48c4dfca43c7",
-    "zh-Hans": "2b3d6358d34294307aeafe5da450f114f7ace324",
+    "en": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
+    "ru": "00000f6995932bef5111b8fc31b82c3140eafdd8",
+    "zh-Hans": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
 }
 # Raw Markdown tokens that must never appear in rendered programme surfaces.
 RAW_MARKDOWN = re.compile(r"\]\(|\*\*|`")
