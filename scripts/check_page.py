@@ -1,5 +1,6 @@
 """Licensing, SEO and search checks for the built site. Usage: check_page.py <public-dir>"""
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -12,6 +13,25 @@ APACHE = "https://www.apache.org/licenses/LICENSE-2.0"
 ATTR = "https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md"
 LOCALES = ("en", "ru", "zh-Hans")
 LAB_ROUTES = ("lab/knowledge-journey",)
+DEFAULT_JOURNAL_MANIFEST = Path(__file__).resolve().parent.parent / "src" / "content" / "journal" / "manifest.json"
+
+
+def journal_manifest_path() -> Path:
+    override = os.environ.get("JOURNAL_MANIFEST")
+    return Path(override) if override else DEFAULT_JOURNAL_MANIFEST
+
+
+def journal_issue_urls(manifest_path: Path | None = None) -> list[str]:
+    """Every daily journal issue × every locale must be indexable and sitemap-listed."""
+    path = journal_manifest_path() if manifest_path is None else manifest_path
+    data = json.loads(path.read_text(encoding="utf-8"))
+    urls: list[str] = []
+    for issue in data["issues"]:
+        slug = issue["slug"]
+        for locale in LOCALES:
+            assert locale in issue["languages"], "journal manifest missing language %s for %s" % (locale, slug)
+            urls.append("https://contract.place/%s/journal/%s/" % (locale, slug))
+    return urls
 
 
 def read(root: Path, rel: str) -> str:
@@ -198,6 +218,11 @@ def check_site(root: Path) -> None:
                    "https://contract.place/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/",
                    "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
         assert needed in locs, "sitemap.xml missing " + needed
+    for needed in journal_issue_urls():
+        assert needed in locs, "sitemap.xml missing journal issue " + needed
+        assert url_target(root, needed).is_file(), "journal issue page missing for " + needed
+        page = url_target(root, needed).read_text(encoding="utf-8")
+        assert 'name="robots" content="noindex' not in page, needed + " must be indexable"
     # C5: English-fallback locales of works without a counting review stay out of the sitemap.
     assert "https://contract.place/ru/science/controlled-knowledge-reuse/" not in locs, "unreviewed/missing locale must not be sitemap-listed"
     assert all(u.startswith("https://contract.place/") for u in locs), "sitemap.xml has a foreign host"

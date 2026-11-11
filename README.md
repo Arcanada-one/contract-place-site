@@ -23,6 +23,8 @@ Full manuscripts are present in built HTML. Pandoc preserves equations as MathML
 
 `publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 30 canonical documents. The compiler generates their text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
 
+Daily journal issues live under `src/content/journal/`: three language Markdown files per issue plus `manifest.json` digests. After rebuild they appear at `/{en,ru,zh-Hans}/journal/<slug>/` and on the journal index (newest first). The legacy `/journal/building-a-place/` route stays noindex. See AGENTS.md “Daily journal issue”.
+
 `public/` is the complete deployment tree. Its `publication.json` records the source identity and document hashes. The catalogue also drives section indexes, sitemap and `llms.txt`. Do not edit generated HTML or replace manuscript paragraphs in generated data: change the canonical Markdown and rebuild.
 
 Runtime script and stylesheet URLs include their file-content hashes, so changed interface code does not reuse an earlier edition's browser cache entry. The compiled catalogue URL retains the full publication source pin.
@@ -44,6 +46,7 @@ python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
 python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+python3 -B scripts/test_journal.py
 python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
