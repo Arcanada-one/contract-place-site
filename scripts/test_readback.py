@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
+import os
 from pathlib import Path
 import tempfile
 import threading
@@ -36,6 +37,7 @@ class Fixture:
         self.counts = {}
         self.queries = []
         self.agents = []
+        self.accepts = []
         outer = self
 
         class Handler(BaseHTTPRequestHandler):
@@ -46,6 +48,7 @@ class Fixture:
                 path, _, query = self.path.partition("?")
                 outer.queries.append(query)
                 outer.agents.append(self.headers.get("User-Agent"))
+                outer.accepts.append(self.headers.get("Accept"))
                 outer.counts[path] = outer.counts.get(path, 0) + 1
                 result = outer.behaviours[path](outer.counts[path])
                 if result == "hang":
@@ -108,7 +111,8 @@ class ReadbackTests(unittest.TestCase):
         self.assertEqual(self.go(), 1)
         diff = [l for l in self.lines if l.startswith("DIFF /")][0]
         self.assertIn("first-differing-offset=", diff)
-        self.assertEqual(diff.count("sha256="), 2)
+        self.assertEqual(diff.count("served-sha256="), 1)
+        self.assertEqual(diff.count("build-sha256="), 1)
 
     def test_analytics_only_difference_passes(self):
         self.serve(lambda n: (200, PAGE.replace(b"</body>", TAG + b"\n</body>")))
@@ -153,12 +157,14 @@ class ReadbackTests(unittest.TestCase):
         self.serve(lambda n: (200, PAGE))
         self.fx.behaviours["/en/x/"] = lambda n: (302, b"", "/")
         self.assertEqual(self.go(attempts=1), 1)
-        self.assertIn("ERROR /en/x/ HTTP 302 Location=/", self.lines)
+        self.assertTrue(any(l.startswith("ERROR /en/x/ status=302 ") and l.endswith("HTTP 302 Location=/")
+                            for l in self.lines), self.lines)
 
     def test_404_fails(self):
         self.serve(lambda n: (404, b"nope"))
         self.assertEqual(self.go(), 1)
-        self.assertIn("ERROR / HTTP 404", self.lines)
+        self.assertTrue(any(l.startswith("ERROR / status=404 ") and l.endswith("HTTP 404") for l in self.lines),
+                        self.lines)
 
     def test_timeout_fails(self):
         self.serve(lambda n: "hang")
@@ -176,6 +182,137 @@ class ReadbackTests(unittest.TestCase):
         self.assertEqual(self.go(attempts=4), 1)
         self.assertEqual(self.fx.counts["/"], 4)
         self.assertEqual(len(self.sleeps), 3)
+
+    # --- witness ---
+    KEYS = ("build_revision", "origin", "request_method", "request_accept", "request_user_agent", "redirects",
+            "cache_token", "probe", "probe_region", "started_utc", "finished_utc", "normaliser")
+
+    def witness(self):
+        return {l[len("witness: "):].split(": ", 1)[0]: l.split(": ", 2)[2]
+                for l in self.lines if l.startswith("witness: ") and ": " in l[9:]}
+
+    def go_env(self, env, **kw):
+        keep = {k: os.environ.pop(k) for k in ("GITHUB_SHA", "RUNNER_NAME", "RUNNER_OS", "RUNNER_ENVIRONMENT")
+                if k in os.environ}
+        os.environ.update(env)
+        try:
+            self.serve(lambda n: (200, PAGE))
+            rb.run(self.pub, self.fx.url, rb.default_routes(self.pub), "t1", 1, 1.0, 5.0,
+                   sleep=lambda s: None, out=self.lines.append, **kw)
+        finally:
+            for k in ("GITHUB_SHA", "RUNNER_NAME", "RUNNER_OS", "RUNNER_ENVIRONMENT"):
+                os.environ.pop(k, None)
+            os.environ.update(keep)
+
+    def assert_received(self, received, expected, printed):
+        self.assertTrue(received, "server received no requests")
+        self.assertEqual(set(received), {expected}, f"received {received!r}")
+        self.assertEqual(printed, expected)
+
+    def test_received_header_assertion_is_not_vacuous(self):
+        # Accept changed to */* in the script: server receives it, helper must reject it.
+        real = rb.ACCEPT
+        rb.ACCEPT = "*/*"
+        try:
+            self.go_env({})
+        finally:
+            rb.ACCEPT = real
+        self.assertEqual(set(self.fx.accepts), {"*/*"})
+        with self.assertRaises(AssertionError):
+            self.assert_received(self.fx.accepts, "text/html", self.witness()["request_accept"])
+        # Accept absent / User-Agent altered as recorded by the server: helper must reject too.
+        for bad in ([None, None], ["text/html", None]):
+            with self.assertRaises(AssertionError):
+                self.assert_received(bad, "text/html", "text/html")
+        with self.assertRaises(AssertionError):
+            self.assert_received(["other/1.0"], rb.USER_AGENT, rb.USER_AGENT)
+
+    def test_header_has_every_key_before_routes(self):
+        self.go_env({}, build_revision="abc123")
+        w = self.witness()
+        for key in self.KEYS:
+            self.assertIn(key, w)
+        self.assertEqual(w["build_revision"], "abc123")
+        self.assertEqual((w["request_method"], w["request_accept"], w["redirects"], w["cache_token"]),
+                         ("GET", "text/html", "refused", "t1"))
+        self.assertEqual(w["request_user_agent"], rb.USER_AGENT)
+        # printed value = value the server actually received, on every request
+        self.assert_received(self.fx.accepts, "text/html", w["request_accept"])
+        self.assert_received(self.fx.agents, rb.USER_AGENT, w["request_user_agent"])
+        self.assertEqual(w["origin"], self.fx.url)
+        self.assertEqual(w["probe_region"], "UNKNOWN")
+        self.assertTrue(w["started_utc"].endswith("Z") and w["finished_utc"].endswith("Z"))
+        first_route = next(i for i, l in enumerate(self.lines) if l.startswith("IDENTICAL"))
+        self.assertTrue(all(any(l.startswith(f"witness: {k}:") for l in self.lines[:first_route]) for k in self.KEYS))
+
+    def test_probe_region_and_runner_env(self):
+        self.go_env({"RUNNER_NAME": "GitHub Actions 7", "RUNNER_OS": "Linux", "RUNNER_ENVIRONMENT": "github-hosted"},
+                    probe_region="eu-test")
+        w = self.witness()
+        self.assertEqual(w["probe_region"], "eu-test")
+        self.assertEqual(w["probe"], "RUNNER_NAME=GitHub Actions 7 RUNNER_OS=Linux RUNNER_ENVIRONMENT=github-hosted")
+
+    def test_build_revision_from_github_sha(self):
+        self.go_env({"GITHUB_SHA": "deadbeef"})
+        self.assertEqual(self.witness()["build_revision"], "deadbeef")
+
+    def test_build_revision_falls_back_to_unknown(self):
+        real = rb.subprocess.run
+        rb.subprocess.run = lambda *a, **k: (_ for _ in ()).throw(FileNotFoundError("git"))
+        try:
+            self.go_env({})
+        finally:
+            rb.subprocess.run = real
+        self.assertEqual(self.witness()["build_revision"], "UNKNOWN")
+
+    def test_no_hostname_when_runner_unset(self):
+        import socket
+        self.go_env({})
+        self.assertEqual(self.witness()["probe"], "local")
+        host = socket.gethostname()
+        if len(host) > 3 and host not in ("localhost", "local"):
+            self.assertFalse(any(host in l for l in self.lines))
+
+    def test_normaliser_identity_changes_with_pattern(self):
+        before = rb.normaliser_identity()
+        real = rb.ANALYTICS
+        rb.ANALYTICS = rb.re.compile(real.pattern + b"x")
+        try:
+            after = rb.normaliser_identity()
+        finally:
+            rb.ANALYTICS = real
+        self.assertNotEqual(before, after)
+        self.assertIn("sha256=" + rb.sha256(real.pattern).hexdigest(), before)
+
+    def test_stripped_and_injected_pages_counted(self):
+        injected = lambda n: (200, PAGE.replace(b"</body>", TAG + b"\n</body>"))
+        self.serve(injected, injected)
+        self.assertEqual(self.go(), 0)
+        root = [l for l in self.lines if l.startswith("IDENTICAL / ")][0]
+        other = [l for l in self.lines if l.startswith("IDENTICAL /en/x/ ")][0]
+        self.assertIn("status=200", root)
+        self.assertIn("stripped=1", root)
+        self.assertIn("stripped=1", other)
+        self.assertIn("norm_sha256=" + rb.sha256(PAGE).hexdigest(), root)
+        self.assertNotIn("raw_sha256=" + rb.sha256(PAGE).hexdigest(), root)
+        self.assertIn("witness: injected_pages=2", self.lines)
+        self.assertEqual(self.lines[-2][:9], "readback:")
+
+    def test_plain_pages_not_counted_as_injected(self):
+        self.serve(lambda n: (200, PAGE))
+        self.assertEqual(self.go(), 0)
+        self.assertTrue(all("stripped=0" in l for l in self.lines if l.startswith("IDENTICAL")))
+        self.assertIn("witness: injected_pages=0", self.lines)
+        self.assertIn("readback: 2/2 IDENTICAL, 0 not identical", self.lines)
+
+    def test_error_line_carries_status(self):
+        self.serve(lambda n: (404, b"nope"))
+        self.go(attempts=1)
+        self.assertTrue(any(l.startswith("ERROR / status=404 raw_sha256=none") for l in self.lines))
+        self.serve(lambda n: "hang")
+        self.lines.clear()
+        self.go(attempts=1, timeout=0.3)
+        self.assertTrue(any(l.startswith("ERROR / status=none ") for l in self.lines), self.lines)
 
 
 if __name__ == "__main__":
