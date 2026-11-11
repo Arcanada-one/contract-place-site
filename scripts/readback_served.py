@@ -27,14 +27,16 @@ USER_AGENT = "contract-place-readback/1.0 (+https://contract.place)"
 # The only normalisation: the one Web Analytics tag Cloudflare injects at the edge
 # (only for requests that send Accept: text/html). Anchored full-tag permitlist: same
 # attributes in the same order, fixed origin and path prefix, empty body. Version and
-# token vary, so only their character classes are fixed.
+# token vary, so only their character classes are fixed. The edge adds the tag and one
+# newline immediately before </body>; both are removed, nothing else is.
 ANALYTICS = re.compile(
     rb'<script type="module" '
     rb'src="https://static\.cloudflareinsights\.com/beacon\.min\.js/v[0-9a-f]+" '
     rb'integrity="sha512-[A-Za-z0-9+/]+={0,2}" '
     rb"data-cf-beacon='\{\"version\":\"[0-9A-Za-z.\-]+\",\"token\":\"[0-9a-f]{32}\","
     rb"\"r\":[0-9]+,\"spa\":[0-9]+\}' "
-    rb'crossorigin="anonymous"></script>')
+    rb'crossorigin="anonymous"></script>'
+    rb"\n(?=</body>)")  # the edge inserts the tag plus one newline directly before </body>
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):

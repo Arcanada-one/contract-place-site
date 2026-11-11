@@ -111,8 +111,19 @@ class ReadbackTests(unittest.TestCase):
         self.assertEqual(diff.count("sha256="), 2)
 
     def test_analytics_only_difference_passes(self):
-        self.serve(lambda n: (200, PAGE.replace(b"</body>", TAG + b"</body>")))
+        self.serve(lambda n: (200, PAGE.replace(b"</body>", TAG + b"\n</body>")))
         self.assertEqual(self.go(), 0)
+
+    def test_beacon_without_newline_not_stripped(self):
+        self.served_with(TAG)
+
+    def test_beacon_with_newline_in_head_not_stripped(self):
+        self.serve(lambda n: (200, PAGE.replace(b"<body>", TAG + b"\n<body>")))
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertTrue(any(l.startswith("DIFF /") for l in self.lines), self.lines)
+
+    def test_beacon_with_newline_not_before_body_end_not_stripped(self):
+        self.served_with(TAG + b"\n<p>x</p>")
 
     def test_other_script_tag_not_stripped(self):
         self.serve(lambda n: (200, PAGE.replace(b"</body>", OTHER + b"</body>")))
@@ -136,7 +147,7 @@ class ReadbackTests(unittest.TestCase):
         self.served_with(beacon(body=b"alert(1)"))
 
     def test_two_beacons_when_build_has_none_fail(self):
-        self.served_with(TAG + TAG)
+        self.served_with(TAG + b"\n" + TAG)
 
     def test_redirect_to_identical_route_fails(self):
         self.serve(lambda n: (200, PAGE))
