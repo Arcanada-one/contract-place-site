@@ -22,6 +22,8 @@ What this means for Knowledge Contract. We already keep the chain of statement, 
 
 We have put a separate system on hold until the first measured regression caused by a lesson.
 
+Source: Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. [arXiv:2611.14320v1](https://arxiv.org/abs/2611.14320v1), 10 November 2026.
+
 ## A procedure can be turned into code. Whether it should be is the question
 
 Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang and Francesco Carbone propose ReTrace: conditions are extracted from a procedure description and agent traces, ordinary code is generated from them, and an unknown state halts execution.
@@ -32,6 +34,8 @@ The third line is the one that matters. The cheapest option costs a third as muc
 
 Adoption is on hold until we have a stable, repeated procedure with a measured cost.
 
+Source: Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. [arXiv:2611.14492v1](https://arxiv.org/abs/2611.14492v1), 10 November 2026.
+
 ## What a theorem loses without its first premise
 
 A scientific audit of our corpus examined the chain observation theorem. The theorem states its first premise explicitly: the chain begins in a state that satisfies the precondition of the first step. The audit asked what happens if a reader drops that premise, which is a tempting shortcut. It built a finite countermodel: without the premise the stronger conclusion is false. The theorem itself is neither refuted nor amended. The audit is published as an open proposal and is under separate scientific review; it is not yet accepted.
@@ -40,19 +44,16 @@ The instructive part was checking the check. The first countermodel had a single
 
 The second finding is simpler and more embarrassing. Six tests sat in the repository, the build was green, and the build never ran them. A dedicated build job runs them now, ten cases in all, and we read its log: which command, how many tests, how many skipped.
 
+Source: Knowledge Contract, proposal "C03 scientific audit: preserve initial-state premise in chain observation theorem" — [knowledge-contract #98](https://github.com/Arcanada-one/knowledge-contract/pull/98)
+
 ## One fact, seven places
 
 The engineering week began with something small: the inventory of translations did not match reality. Fixing it took four rounds of review. The cause was the same each time: one fact was written in several places and they were edited one at a time. The inventory now distinguishes 31 current files, 30 historical and 34 planned.
 
 A rule grew out of this. It is written into the new revision of the scientific role's working procedure, which is under review. Before changing a fact, list every place where it is stated or consumed: source, register, catalogue, heading, translation, checking script, site. Change them together, or record explicitly who changes the rest and when. Historical records are not rewritten.
 
+Source: Knowledge Contract, correction of the translation inventory — [knowledge-contract #97](https://github.com/Arcanada-one/knowledge-contract/pull/97)
+
 ## What comes next
 
 The updated materials will appear on the site once the build has been verified. We reproduced none of the external results; all figures belong to their authors. These briefings will appear every morning.
-
-## Sources
-
-- Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. arXiv:2611.14320v1, 10 November 2026.
-- Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. arXiv:2611.14492v1, 10 November 2026.
-- Knowledge Contract, proposal "C03 scientific audit: preserve initial-state premise in chain observation theorem": https://github.com/Arcanada-one/knowledge-contract/pull/98
-- Knowledge Contract, correction of the translation inventory: https://github.com/Arcanada-one/knowledge-contract/pull/97

@@ -22,6 +22,8 @@ Yukyeong Lee、Yumin Choi、Jinheon Baek 和 Sung Ju Hwang 研究智能体记忆
 
 是否引入独立系统，我们暂缓决定，直到出现第一个由经验导致的、可度量的退步。
 
+来源：Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. [arXiv:2611.14320v1](https://arxiv.org/abs/2611.14320v1)，2026 年 11 月 10 日。
+
 ## 流程可以变成代码。问题是值不值得
 
 Kaiyuan Hou、Yang Ping Kuo、Indranil Bhattacharya、Rohith Nama、Arushi Gupta、Carlos D. Castillo、Prathap Ramachandra、Xiaofan Jiang 和 Francesco Carbone 提出了 ReTrace：从流程描述和智能体轨迹中提取条件，据此生成普通代码，遇到未知状态即停止执行。
@@ -32,6 +34,8 @@ Kaiyuan Hou、Yang Ping Kuo、Indranil Bhattacharya、Rohith Nama、Arushi Gupta
 
 在出现成本可度量的、稳定重复的流程之前，暂缓采用。
 
+来源：Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. [arXiv:2611.14492v1](https://arxiv.org/abs/2611.14492v1)，2026 年 11 月 10 日。
+
 ## 定理去掉第一个前提会失去什么
 
 对我们语料的科学审计考察了链式观察定理。定理明确写出了第一个前提：链从一个满足第一步前置条件的状态开始。审计提出的问题是：如果读者省略这个前提会怎样，这是一种很容易想到的简化。审计构造了一个有限反模型：没有这个前提，更强的结论不成立。定理本身既没有被推翻，也没有被修改。这项审计已作为公开提案发布，正在接受单独的科学评审，目前尚未被接受。
@@ -40,19 +44,16 @@ Kaiyuan Hou、Yang Ping Kuo、Indranil Bhattacharya、Rohith Nama、Arushi Gupta
 
 第二个发现更简单，也更让人难堪。六个测试放在仓库里，构建是绿色的，而构建从未运行它们。现在由一个专门的构建任务来运行，共十个用例，我们还会读它的日志：执行了哪条命令，多少个测试，跳过了多少。
 
+来源：Knowledge Contract，提案“C03 scientific audit: preserve initial-state premise in chain observation theorem” — [knowledge-contract #98](https://github.com/Arcanada-one/knowledge-contract/pull/98)
+
 ## 一个事实，七处地方
 
 本周的工程工作从一件小事开始：译文清单与实际情况不符。修正它用了四轮评审。每次的原因都一样：同一个事实写在好几处，却是一处一处地改。现在清单区分了 31 个现行文件、30 个历史文件和 34 个计划中的文件。
 
 由此得出一条规则，它已写入科学角色工作程序的新修订稿，该修订稿正在评审中。修改一个事实之前，先列出所有陈述或使用它的地方：来源、登记册、目录、标题、译文、检查脚本、网站。要么一起改，要么明确记录由谁在何时修改其余部分。历史记录不改写。
 
+来源：Knowledge Contract，译文清单的修正 — [knowledge-contract #97](https://github.com/Arcanada-one/knowledge-contract/pull/97)
+
 ## 接下来
 
 更新后的材料将在构建验证通过后出现在网站上。外部论文的结果我们没有复现，所有数字均属于作者。这样的简报今后每天早晨发布。
-
-## 参考文献
-
-- Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. arXiv:2611.14320v1，2026 年 11 月 10 日。
-- Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. arXiv:2611.14492v1，2026 年 11 月 10 日。
-- Knowledge Contract，提案“C03 scientific audit: preserve initial-state premise in chain observation theorem”：https://github.com/Arcanada-one/knowledge-contract/pull/98
-- Knowledge Contract，译文清单的修正：https://github.com/Arcanada-one/knowledge-contract/pull/97

@@ -8,15 +8,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "9a187e6e9d2b20c190e07e03d623555fe40b5f359e35b6eab5935ea0bd7bc6a0"
+          "sha256": "9d06b73cee3f73ce61ba76a7c21559efd0e0898494fa284227f7a44994e11fe7"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "dd8b8ac301b637744a4f5a7df3dc80a6c0f48e556825df48fa2d522b841f4d43"
+          "sha256": "d6175cfe21aa5a1a1390c8cb7b1ae12ec25a5125f99cc8339b838a0a0897e887"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "8279bb01980bd0cd53c8d132cc365d3f4fb387c26675158d16c56ffb6bb7ca9a"
+          "sha256": "f93ebf48def73bc0a60623cb365a6ffe6bf3c64c0539d6a4f437d1cc28c7c448"
         }
       }
     }

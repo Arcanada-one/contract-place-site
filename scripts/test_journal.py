@@ -33,10 +33,13 @@ PIN_SLUG = "lesson-without-evidence-2026-11-11"
 PIN_FOLDER = "2026-11-11-lesson-without-evidence"
 PIN_DATE = "2026-11-11"
 PIN_EXPECTED = {
-    "en": "9a187e6e9d2b20c190e07e03d623555fe40b5f359e35b6eab5935ea0bd7bc6a0",
-    "ru": "dd8b8ac301b637744a4f5a7df3dc80a6c0f48e556825df48fa2d522b841f4d43",
-    "zh-Hans": "8279bb01980bd0cd53c8d132cc365d3f4fb387c26675158d16c56ffb6bb7ca9a",
+    "en": "9d06b73cee3f73ce61ba76a7c21559efd0e0898494fa284227f7a44994e11fe7",
+    "ru": "d6175cfe21aa5a1a1390c8cb7b1ae12ec25a5125f99cc8339b838a0a0897e887",
+    "zh-Hans": "f93ebf48def73bc0a60623cb365a6ffe6bf3c64c0539d6a4f437d1cc28c7c448",
 }
+MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+FORBIDDEN_SOURCE_HEADINGS = {"sources", "источники", "参考文献", "来源"}
+HEADING_TAG = re.compile(r"<h([2-4])\b[^>]*>(.*?)</h\1>", re.I | re.S)
 SYNTH_SLUG = "synthetic-probe-2099-06-01"
 SYNTH_FOLDER = "2099-06-01-synthetic-probe"
 SYNTH_DATE = "2099-06-01"
@@ -90,6 +93,26 @@ def split_markdown(path: Path) -> tuple[dict[str, str], str]:
     return meta, match.group(2)
 
 
+def visible_markdown(text: str) -> str:
+    """Replace https Markdown links with their visible labels for text comparisons."""
+
+    def repl(match: re.Match[str]) -> str:
+        label, url = match.group(1), match.group(2)
+        if url.startswith("https://"):
+            return label
+        return match.group(0)
+
+    return MD_LINK.sub(repl, text)
+
+
+def manuscript_https_links(body: str) -> list[tuple[str, str]]:
+    return [
+        (match.group(1), match.group(2))
+        for match in MD_LINK.finditer(body)
+        if match.group(2).startswith("https://")
+    ]
+
+
 def manuscript_blocks(body: str) -> list[str]:
     blocks: list[str] = []
     for raw in re.split(r"\n\s*\n", body.strip()):
@@ -97,13 +120,43 @@ def manuscript_blocks(body: str) -> list[str]:
         if not line:
             continue
         if line.startswith("## "):
-            blocks.append(normalize_ws(line[3:]))
+            blocks.append(normalize_ws(visible_markdown(line[3:])))
         elif line.startswith("- "):
             for item in line.splitlines():
-                blocks.append(normalize_ws(item[2:] if item.startswith("- ") else item))
+                text = item[2:] if item.startswith("- ") else item
+                blocks.append(normalize_ws(visible_markdown(text)))
         else:
-            blocks.append(normalize_ws(line))
+            blocks.append(normalize_ws(visible_markdown(line)))
     return blocks
+
+
+def heading_text(html: str) -> str:
+    return normalize_ws(re.sub(r"<[^>]+>", "", html))
+
+
+class AnchorCollector(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.links: list[tuple[str, str]] = []
+        self._href: str | None = None
+        self._parts: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            href = dict(attrs).get("href")
+            if href is not None:
+                self._href = href
+                self._parts = []
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._href is not None:
+            self.links.append((self._href, normalize_ws("".join(self._parts))))
+            self._href = None
+            self._parts = []
+
+    def handle_data(self, data):
+        if self._href is not None:
+            self._parts.append(data)
 
 
 def body_marker(body: str) -> str:
@@ -149,6 +202,18 @@ def assert_locale_page(
     assert marker in rendered, f"{label}: missing body marker from manuscript"
     for block in manuscript_blocks(body):
         assert normalize_ws(block) in rendered, f"{label}: missing {block[:100]}"
+    anchors = AnchorCollector()
+    anchors.feed(page)
+    rendered_links = {(href, text) for href, text in anchors.links}
+    for link_text, href in manuscript_https_links(body):
+        assert (href, normalize_ws(link_text)) in rendered_links, (
+            f"{label}: missing rendered link {href}"
+        )
+    for match in HEADING_TAG.finditer(page):
+        title = heading_text(match.group(2))
+        assert title.casefold() not in FORBIDDEN_SOURCE_HEADINGS, (
+            f"{label}: forbidden sources heading"
+        )
     index = (public_root / lang / "journal" / "index.html").read_text(encoding="utf-8")
     assert f"/journal/{slug}/" in index, f"{label}: missing from journal index"
     assert "/journal/building-a-place/" in index, f"{label}: index missing building-a-place"
@@ -739,6 +804,63 @@ def run_mutants() -> int:
         if tmp_site.exists():
             shutil.rmtree(tmp_site, ignore_errors=True)
 
+    # --- (h) one manuscript https link rendered as plain text ---
+    page_h = ROOT / "public/en/journal" / PIN_SLUG / "index.html"
+    original_h = page_h.read_text(encoding="utf-8")
+    _, pin_body_en = split_markdown(JOURNAL / PIN_FOLDER / "en.md")
+    pin_links = manuscript_https_links(pin_body_en)
+    assert pin_links, "pin English manuscript must declare https source links"
+    link_text_h, href_h = pin_links[0]
+    expected_h = f"{PIN_SLUG}/en: missing rendered link {href_h}"
+
+    def mutate_h() -> None:
+        pattern = re.compile(
+            rf'<a href="{re.escape(href_h)}"[^>]*>{re.escape(link_text_h)}</a>'
+        )
+        mutated, count = pattern.subn(link_text_h, original_h, count=1)
+        if count != 1 or mutated == original_h:
+            raise RuntimeError(f"failed to flatten source link {href_h}")
+        page_h.write_text(mutated, encoding="utf-8")
+
+    outcomes.append(
+        run_assertion_mutant(
+            "h",
+            expected_h,
+            baseline=lambda: assert_locale_page(pin_issue, "en"),
+            mutate=mutate_h,
+            probe=lambda: assert_locale_page(pin_issue, "en"),
+            restore=lambda: page_h.write_text(original_h, encoding="utf-8"),
+            mutation_target=page_h,
+        )
+    )
+
+    # --- (i) closing Sources heading reintroduced on a built page ---
+    page_i = ROOT / "public/en/journal" / PIN_SLUG / "index.html"
+    original_i = page_i.read_text(encoding="utf-8")
+    expected_i = f"{PIN_SLUG}/en: forbidden sources heading"
+
+    def mutate_i() -> None:
+        needle = f'<div lang="en" class="journal-body">'
+        insertion = needle + "<h2>Sources</h2>"
+        if needle not in original_i:
+            raise RuntimeError("journal body marker missing for sources-heading mutant")
+        mutated = original_i.replace(needle, insertion, 1)
+        if mutated == original_i:
+            raise RuntimeError("sources-heading mutation did not change bytes")
+        page_i.write_text(mutated, encoding="utf-8")
+
+    outcomes.append(
+        run_assertion_mutant(
+            "i",
+            expected_i,
+            baseline=lambda: assert_locale_page(pin_issue, "en"),
+            mutate=mutate_i,
+            probe=lambda: assert_locale_page(pin_issue, "en"),
+            restore=lambda: page_i.write_text(original_i, encoding="utf-8"),
+            mutation_target=page_i,
+        )
+    )
+
     outcomes.append(run_infra_self_test())
 
     killed = [o for o in outcomes if o.verdict == "KILLED"]
@@ -749,9 +871,9 @@ def run_mutants() -> int:
         f"infra_error={len(infra)} total={len(outcomes)}"
     )
 
-    required = {o.name: o for o in outcomes if o.name in list("abcdefg")}
+    required = {o.name: o for o in outcomes if o.name in list("abcdefghi")}
     failures = 0
-    for name in "abcdefg":
+    for name in "abcdefghi":
         outcome = required.get(name)
         if outcome is None:
             print(f"MUTANT {name}: missing from harness")

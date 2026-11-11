@@ -22,6 +22,8 @@ excerpt: "Две новые работы о памяти агентов и по�
 
 Внедрение отдельной системы мы отложили до первой измеренной регрессии, вызванной уроком.
 
+Источник: Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. [arXiv:2611.14320v1](https://arxiv.org/abs/2611.14320v1), 10 ноября 2026.
+
 ## Процедуру можно превратить в код. Вопрос, стоит ли
 
 Кайюань Хоу, Ян Пин Го, Индранил Бхаттачарья, Рохит Нама, Аруши Гупта, Карлос Кастильо, Пратхап Рамачандра, Сяофань Цзян и Франческо Карбоне предлагают ReTrace: из описания процедуры и трасс агента извлекаются условия, по ним генерируется обычный код, а неизвестное состояние останавливает исполнение.
@@ -32,6 +34,8 @@ excerpt: "Две новые работы о памяти агентов и по�
 
 Внедрение отложено до появления стабильной повторяемой процедуры с измеренной стоимостью.
 
+Источник: Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. [arXiv:2611.14492v1](https://arxiv.org/abs/2611.14492v1), 10 ноября 2026.
+
 ## Что теряет теорема без первой посылки
 
 Научный аудит нашего корпуса разобрал теорему о наблюдении цепочки. Первая посылка в ней записана явно: цепочка начинается в состоянии, которое удовлетворяет предусловию первого шага. Аудит задал вопрос, что будет, если читатель эту посылку опустит: такое упрощение напрашивается. Построена конечная контрмодель: без посылки более сильный вывод неверен. Сама теорема не опровергнута и не изменена. Аудит открыто опубликован как предложение и проходит отдельную научную рецензию; принятым он пока не считается.
@@ -40,19 +44,16 @@ excerpt: "Две новые работы о памяти агентов и по�
 
 Вторая находка проще и обиднее. Шесть тестов лежали в репозитории, сборка была зелёной, а тесты в ней не запускались. Теперь их исполняет отдельная задача сборки, всего десять случаев, и мы читаем её журнал: какая команда, сколько тестов, сколько пропущено.
 
+Источник: Knowledge Contract, предложение «C03 scientific audit: preserve initial-state premise in chain observation theorem» — [knowledge-contract #98](https://github.com/Arcanada-one/knowledge-contract/pull/98)
+
 ## Один факт, семь мест
 
 Инженерная часть недели началась с мелочи: перечень переводов расходился с действительностью. Исправление заняло четыре круга рецензии. Причина каждый раз была одна: факт записан в нескольких местах, а правили по одному. Сейчас перечень различает 31 действующий файл, 30 исторических и 34 будущих.
 
 Из этого выросло правило. Оно записано в новую редакцию рабочего порядка научной роли, которая сейчас проходит рецензию. Перед изменением факта нужно перечислить все места, где он записан или используется: источник, реестр, каталог, заголовок, перевод, проверяющий скрипт, сайт. Менять их вместе либо явно записать, кто и когда изменит остальное. Исторические записи не переписывать.
 
+Источник: Knowledge Contract, исправление перечня переводов — [knowledge-contract #97](https://github.com/Arcanada-one/knowledge-contract/pull/97)
+
 ## Что дальше
 
 Обновлённые материалы появятся на сайте после проверки сборки. Результаты внешних работ мы не воспроизводили: все цифры принадлежат их авторам. Сводки будут выходить каждое утро.
-
-## Источники
-
-- Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. arXiv:2611.14320v1, 10 ноября 2026.
-- Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. arXiv:2611.14492v1, 10 ноября 2026.
-- Knowledge Contract, предложение «C03 scientific audit: preserve initial-state premise in chain observation theorem»: https://github.com/Arcanada-one/knowledge-contract/pull/98
-- Knowledge Contract, исправление перечня переводов: https://github.com/Arcanada-one/knowledge-contract/pull/97
