@@ -6,6 +6,17 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 const root=import.meta.dirname,src=path.join(root,'src'),out=path.join(root,'public');
 const data=JSON.parse(fs.readFileSync(path.join(src,'content/catalog.json'),'utf8'));
+// Daily journal issues live in this repository. Prefer a fresh compile when the compiler is present;
+// fixture copies used by renderer tests may ship only the already-compiled catalogue entries.
+const journalScript=path.join(root,'scripts','build_journal.py');
+const journalManifest=path.join(src,'content','journal','manifest.json');
+if(fs.existsSync(journalScript)&&fs.existsSync(journalManifest)){
+  const journalChild=spawnSync('python3',['-B',journalScript],{cwd:root,encoding:'utf8'});
+  if(journalChild.status)throw new Error(journalChild.stderr||journalChild.stdout||'journal compile failed');
+  data.journal_issues=JSON.parse(journalChild.stdout);
+}else if(!Array.isArray(data.journal_issues)){
+  data.journal_issues=[];
+}
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'publication-manifest.json'),'utf8'));
 for(const key of ['schema_version','repository','commit','edition','catalog'])
   if(data.publication?.[key]!==manifest[key])throw new Error('Compiled publication pin mismatch: '+key);

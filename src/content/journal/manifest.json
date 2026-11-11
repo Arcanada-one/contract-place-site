@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "issues": [
+    {
+      "slug": "lesson-without-evidence-2026-11-11",
+      "date": "2026-11-11",
+      "folder": "2026-11-11-lesson-without-evidence",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "0ceb36b39e2ae5f16c92b81b27b98bd6ade9f3feb7d724a5ee05bb0e9abbe3e9"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "34e68420285319ca847d516cf6eec8e75cdc9d2852f441b15b49a2fd60ed96ff"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "70743391332427237afd8fe11810764283d6e9cc9b3cfa6d1fd0a1106377074c"
+        }
+      }
+    }
+  ]
+}

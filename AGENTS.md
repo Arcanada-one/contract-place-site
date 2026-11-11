@@ -27,6 +27,7 @@ python3 -B scripts/check_papers.py public
 python3 -B scripts/check_links.py public
 python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
+python3 -B scripts/test_journal.py
 python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
@@ -35,6 +36,16 @@ node scripts/test_search.js
 Commit generated `src/content/catalog.json`, `src/site/content-provenance.json` and `public/` with their pin. The full build must reproduce these files. `node build.mjs` uses compiled data and does not substitute for compiling a changed knowledge revision.
 
 Run relevant existing CI and REUSE checks. Inspect changed reading/layout behavior in a real browser on desktop and mobile. Record whether API/browser tests use fixtures or the deployed service.
+
+## Daily journal issue
+
+Daily journal issues are authored in this repository, not in the knowledge pin. To publish a new morning issue:
+
+1. Add `src/content/journal/<YYYY-MM-DD>-<slug>/{en,ru,zh-Hans}.md` with YAML front matter (`site`, `section`, `slug`, `date`, `lang`, `title`, `excerpt`) and the Markdown body. Do not edit, shorten, translate or augment the manuscript here beyond the supplied files.
+2. Append an entry to `src/content/journal/manifest.json` with `slug`, `date`, `folder` and each language's `file` plus `sha256`.
+3. Rebuild (`scripts/build_publication.py` … or at least `node build.mjs` after catalogue compile). Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route.
+
+`scripts/test_journal.py` checks the recorded digests, locale-specific bodies, index membership and indexability.
 
 ## Search and release boundaries
 

@@ -71,6 +71,7 @@ const data=JSON.parse(content.slice(content.indexOf('=')+1).trim().replace(/;$/,
 for(const r of data.records)routes.push(r.route.replace(/^\/en\//,'').replace(/\/$/,''));
 for(const alias of Object.keys(data.aliases)){routes.push(alias);NOINDEX.add(alias);}
 for(const a of data.articles)routes.push('journal/'+a.id);
+for(const issue of data.journal_issues||[])routes.push(issue.route);
 if(data.programme)routes.push('programme');
 routes.push('about','references');
 const uniqueRoutes=[...new Set(routes)];

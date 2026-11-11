@@ -196,7 +196,10 @@ def check_site(root: Path) -> None:
                    "https://contract.place/en/research/", "https://contract.place/en/science/controlled-knowledge-reuse/",
                    "https://contract.place/ru/engineering/studies/dependency-closure-and-package-delivery/",
                    "https://contract.place/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/",
-                   "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
+                   "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/",
+                   "https://contract.place/en/journal/lesson-without-evidence-2026-11-11/",
+                   "https://contract.place/ru/journal/lesson-without-evidence-2026-11-11/",
+                   "https://contract.place/zh-Hans/journal/lesson-without-evidence-2026-11-11/"):
         assert needed in locs, "sitemap.xml missing " + needed
     # C5: English-fallback locales of works without a counting review stay out of the sitemap.
     assert "https://contract.place/ru/science/controlled-knowledge-reuse/" not in locs, "unreviewed/missing locale must not be sitemap-listed"

@@ -48,6 +48,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
     aliases = legacy_aliases(source, previous, documents)
+    from build_journal import compile_journal
+    journal_issues = compile_journal(site)
     records = []
     images = ('knowledge-prism.webp', 'knowledge-landscape.webp', 'knowledge-dialogue.webp')
     categories = {
@@ -87,6 +89,7 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
     payload = {
         'publication': manifest,
         'records': records, 'articles': previous['articles'], 'aliases': aliases,
+        'journal_issues': journal_issues,
         'roadmap': roadmap,
         'source': 'https://contract.place/', 'license': 'CC-BY-4.0',
         'author': 'Pavel Valentov', 'retrieved': '2026-11-04',
