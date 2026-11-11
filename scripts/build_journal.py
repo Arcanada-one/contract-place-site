@@ -11,6 +11,7 @@ language files, appending a manifest entry, and rebuilding.
 from __future__ import annotations
 
 from hashlib import sha256
+from html import escape, unescape
 import json
 from pathlib import Path
 import re
@@ -23,6 +24,7 @@ MANIFEST_PATH = JOURNAL_ROOT / "manifest.json"
 LANGS = ("en", "ru", "zh-Hans")
 PANDOC_VERSION = "3.1.3"
 FRONT_MATTER = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n(.*)\Z", re.S)
+ANCHOR_TAG = re.compile(r"<a\s+([^>]*?)>(.*?)</a>", re.I | re.S)
 
 
 def run(command: list[str], text: str | None = None) -> str:
@@ -57,9 +59,32 @@ def digest(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
 
 
+def decorate_inline_links(html: str) -> str:
+    """Keep https Markdown/autolink anchors clickable; leave other schemes as plain text.
+
+    https targets become <a href="...">…</a> with rel="noopener noreferrer".
+    Any other scheme is flattened to an HTML-escaped [text](url) literal so the
+    brackets stay visible and are never executable.
+    """
+
+    def replace(match: re.Match[str]) -> str:
+        attrs = match.group(1)
+        inner = match.group(2)
+        href_match = re.search(r'\bhref="([^"]*)"', attrs)
+        if not href_match:
+            return match.group(0)
+        href = href_match.group(1)
+        if href.startswith("https://"):
+            return f'<a href="{escape(href, quote=True)}" rel="noopener noreferrer">{inner}</a>'
+        text = unescape(re.sub(r"<[^>]+>", "", inner))
+        return escape(f"[{text}]({href})")
+
+    return ANCHOR_TAG.sub(replace, html)
+
+
 def render_body(body: str) -> str:
     # Match the publication renderer: GFM identifiers and bare URLs become ordinary links.
-    return run(
+    html = run(
         [
             "pandoc",
             # Disable smart typography so manuscript apostrophes and dashes stay literal.
@@ -71,6 +96,7 @@ def render_body(body: str) -> str:
         ],
         body,
     ).strip()
+    return decorate_inline_links(html)
 
 
 def compile_journal(site: Path | None = None) -> list[dict]:

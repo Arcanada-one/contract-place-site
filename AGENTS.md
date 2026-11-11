@@ -41,13 +41,13 @@ Run relevant existing CI and REUSE checks. Inspect changed reading/layout behavi
 
 Daily journal issues are authored in this repository, not in the knowledge pin. To publish a new morning issue:
 
-1. Add `src/content/journal/<YYYY-MM-DD>-<slug>/{en,ru,zh-Hans}.md` with YAML front matter (`site`, `section`, `slug`, `date`, `lang`, `title`, `excerpt`) and the Markdown body. Do not edit, shorten, translate or augment the manuscript here beyond the supplied files.
+1. Add `src/content/journal/<YYYY-MM-DD>-<slug>/{en,ru,zh-Hans}.md` with YAML front matter (`site`, `section`, `slug`, `date`, `lang`, `title`, `excerpt`) and the Markdown body. Do not edit, shorten, translate or augment the manuscript here beyond the supplied files. Put each work's source inline at the end of its section (`Source:` / `Источник:` / `来源:` with a clickable Markdown link); do not add a closing Sources / Источники / 参考文献 / 来源 block.
 2. Append an entry to `src/content/journal/manifest.json` with `slug`, `date`, `folder` and each language's `file` plus `sha256`.
 3. Rebuild (`scripts/build_publication.py` … or at least `node build.mjs` after catalogue compile).
 
 That is the full checklist: folder + manifest entry + build. Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route. `scripts/check_page.py` derives every manifest issue × locale from `manifest.json` and requires each page to be present and indexable; do not hand-edit journal article URLs into the checker.
 
-`scripts/test_journal.py` checks every manifest issue × locale (body, title, index membership, indexability), keeps the 2026-11-11 digests as a separate regression pin, and `--mutants` runs an honest harness (a)–(g) that requires a green baseline, proof of mutation, an exact refusal, restore, and INFRA_ERROR (never KILLED) when the environment is broken.
+`scripts/test_journal.py` checks every manifest issue × locale (body, title, index membership, indexability, inline https links rendered as anchors, no closing sources heading), keeps the 2026-11-11 digests as a separate regression pin, and `--mutants` runs an honest harness (a)–(i) that requires a green baseline, proof of mutation, an exact refusal, restore, and INFRA_ERROR (never KILLED) when the environment is broken.
 
 ## Search and release boundaries
 
