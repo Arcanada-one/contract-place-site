@@ -285,8 +285,18 @@ def linked_status_label(doc: dict, locale: str) -> str:
 
 
 def linked_status_title_lang(doc: dict, locale: str) -> str:
-    """Language of the catalogue title actually shown: page locale when declared, else English."""
-    return locale if catalogue_title_for_locale(doc, locale) else "en"
+    """Language of the catalogue title actually shown.
+
+    Page locale only when a page-locale title exists and differs from the English
+    title; English pages and English-copy fallbacks keep lang="en".
+    """
+    if locale == "en":
+        return "en"
+    localized = catalogue_title_for_locale(doc, locale)
+    english = catalogue_title_for_locale(doc, "en")
+    if localized and localized != english:
+        return locale
+    return "en"
 
 
 def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:

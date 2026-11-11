@@ -164,8 +164,11 @@ function linkedStatusLabel(r){
   return catalogueTitleForLocale(r)||catalogueTitleForLocale(r,'en')||'';
 }
 function linkedStatusTitleLang(r){
-  /* Language of the catalogue title actually shown: page locale when declared, else English. */
-  return catalogueTitleForLocale(r)?locale:'en';
+  /* Page locale only when a distinct page-locale title exists; else English. */
+  if(locale==='en')return 'en';
+  const localized=catalogueTitleForLocale(r);
+  const english=catalogueTitleForLocale(r,'en');
+  return (localized&&localized!==english)?locale:'en';
 }
 /* Last child inside a roadmap field <dd>: one catalogue link + badge per draft linked in that field (source order). */
 function roadmapLinkedStatus(html){

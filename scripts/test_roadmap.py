@@ -433,6 +433,7 @@ class RoadmapCompiler(unittest.TestCase):
         from html.parser import HTMLParser
         from programme import (
             catalogue_title_for_locale,
+            linked_status_title_lang,
             localize_catalogue_links,
             roadmap_linked_status,
             STATUS_LABELS,
@@ -494,11 +495,25 @@ class RoadmapCompiler(unittest.TestCase):
             "ru": "Черновик каталога",
             "zh-Hans": "Draft Catalogue Title",
         }
-        # Fixture declares en + ru catalogue titles; zh-Hans falls back to English.
-        localized_title_locales = [
-            locale for locale in LOCALES if catalogue_title_for_locale(documents[0], locale)
-        ]
-        self.assertEqual(localized_title_locales, ["en", "ru"])
+        # Fixture declares a distinct Russian catalogue title; zh-Hans falls back to English.
+        self.assertTrue(catalogue_title_for_locale(documents[0], "ru"))
+        self.assertNotEqual(
+            catalogue_title_for_locale(documents[0], "ru"),
+            catalogue_title_for_locale(documents[0], "en"),
+        )
+        self.assertFalse(catalogue_title_for_locale(documents[0], "zh-Hans"))
+        # Distinct page-locale title => page-locale lang; missing/identical => en.
+        self.assertEqual(linked_status_title_lang(documents[0], "en"), "en")
+        self.assertEqual(linked_status_title_lang(documents[0], "ru"), "ru")
+        self.assertEqual(linked_status_title_lang(documents[0], "zh-Hans"), "en")
+        english_copy = {
+            "id": "english-copy",
+            "route": "/en/science/copy/",
+            "status": "research-draft",
+            "title": "Same English Title",
+            "titleRu": "Same English Title",
+        }
+        self.assertEqual(linked_status_title_lang(english_copy, "ru"), "en")
         for locale in LOCALES:
             body = localize_catalogue_links(field_html, documents, locale)
             status_line = roadmap_linked_status(field_html, documents, locale)
@@ -507,7 +522,7 @@ class RoadmapCompiler(unittest.TestCase):
             self.assertNotIn("status-badge", body)
             self.assertIn('class="rm-linked-status"', status_line)
             self.assertIn(f'<span lang="{locale}"><span class="status-badge">{label}</span></span>', status_line)
-            title_lang = locale if locale in localized_title_locales else "en"
+            title_lang = linked_status_title_lang(documents[0], locale)
             self.assertIn(
                 f'<a href="/{locale}/science/draft/" lang="{title_lang}">{expected_titles[locale]}</a>',
                 status_line,
@@ -581,8 +596,9 @@ class RenderControl(unittest.TestCase):
     """Bounded checks over actual prerendered HTML and the JS roadmapCard renderer."""
 
     LOCALES = ("en", "ru", "zh-Hans")
-    # geometry-of-semantic-representations: titleRu declared (same English string); titleZhHans absent.
-    TITLE_LANG = {"en": "en", "ru": "ru", "zh-Hans": "en"}
+    # geometry-of-semantic-representations: titleRu is an English copy (byte-equal to title);
+    # titleZhHans absent. English fallback title keeps lang="en" on every locale.
+    TITLE_LANG = {"en": "en", "ru": "en", "zh-Hans": "en"}
     ABSENT_CARD = "rm-01"
 
     @classmethod
