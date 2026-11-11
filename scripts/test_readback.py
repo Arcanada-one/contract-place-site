@@ -17,7 +17,14 @@ rb = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(rb)
 
 PAGE = b"<!doctype html><html><body><p>Hello</p></body></html>\n"
-TAG = b'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"x":1}\'></script>'
+def beacon(src=b"https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+           extra=b"", body=b""):
+    return (b'<script type="module" src="' + src + b'" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/'
+            b'BikHawapSCaiD2XCmp+Bw==" data-cf-beacon=\'{"version":"2024.11.0","token":"0123456789abcdef0123456789abcdef",'
+            b'"r":1,"spa":2}\'' + extra + b' crossorigin="anonymous">' + body + b'</script>')
+
+
+TAG = beacon()
 OTHER = b'<script defer src="https://example.test/other.js"></script>'
 
 
@@ -44,8 +51,10 @@ class Fixture:
                 if result == "hang":
                     time.sleep(1.5)
                     return
-                status, body = result
+                status, body = result[0], result[1]
                 self.send_response(status)
+                if len(result) > 2:
+                    self.send_header("Location", result[2])
                 self.send_header("Content-Length", str(len(body)))
                 self.end_headers()
                 self.wfile.write(body)
@@ -108,6 +117,32 @@ class ReadbackTests(unittest.TestCase):
     def test_other_script_tag_not_stripped(self):
         self.serve(lambda n: (200, PAGE.replace(b"</body>", OTHER + b"</body>")))
         self.assertEqual(self.go(), 1)
+
+    def served_with(self, extra):
+        self.serve(lambda n: (200, PAGE.replace(b"</body>", extra + b"</body>")))
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertTrue(any(l.startswith("DIFF /") for l in self.lines), self.lines)
+
+    def test_foreign_script_mentioning_cloudflareinsights_not_stripped(self):
+        self.served_with(b'<script src="https://example.test/evil.js" data-note="cloudflareinsights"></script>')
+
+    def test_beacon_shape_on_other_host_not_stripped(self):
+        self.served_with(beacon(src=b"https://example.test/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"))
+
+    def test_beacon_with_extra_attribute_not_stripped(self):
+        self.served_with(beacon(extra=b' data-extra="1"'))
+
+    def test_beacon_with_body_not_stripped(self):
+        self.served_with(beacon(body=b"alert(1)"))
+
+    def test_two_beacons_when_build_has_none_fail(self):
+        self.served_with(TAG + TAG)
+
+    def test_redirect_to_identical_route_fails(self):
+        self.serve(lambda n: (200, PAGE))
+        self.fx.behaviours["/en/x/"] = lambda n: (302, b"", "/")
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertIn("ERROR /en/x/ HTTP 302 Location=/", self.lines)
 
     def test_404_fails(self):
         self.serve(lambda n: (404, b"nope"))

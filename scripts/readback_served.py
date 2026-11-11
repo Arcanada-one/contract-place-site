@@ -24,8 +24,27 @@ import urllib.parse
 import urllib.request
 
 USER_AGENT = "contract-place-readback/1.0 (+https://contract.place)"
-# The only normalisation: the analytics tag Cloudflare injects at the edge.
-ANALYTICS = re.compile(rb"<script[^>]*cloudflareinsights[^>]*></script>")
+# The only normalisation: the one Web Analytics tag Cloudflare injects at the edge
+# (only for requests that send Accept: text/html). Anchored full-tag permitlist: same
+# attributes in the same order, fixed origin and path prefix, empty body. Version and
+# token vary, so only their character classes are fixed.
+ANALYTICS = re.compile(
+    rb'<script type="module" '
+    rb'src="https://static\.cloudflareinsights\.com/beacon\.min\.js/v[0-9a-f]+" '
+    rb'integrity="sha512-[A-Za-z0-9+/]+={0,2}" '
+    rb"data-cf-beacon='\{\"version\":\"[0-9A-Za-z.\-]+\",\"token\":\"[0-9a-f]{32}\","
+    rb"\"r\":[0-9]+,\"spa\":[0-9]+\}' "
+    rb'crossorigin="anonymous"></script>')
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Never follow a redirect: the requested route itself must serve the bytes."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+OPENER = urllib.request.build_opener(NoRedirect)
 
 
 def route_for(publish_dir: Path, file: Path) -> str:
@@ -47,13 +66,13 @@ def local_file(publish_dir: Path, route: str) -> Path:
 
 
 def normalise(body: bytes) -> bytes:
-    return ANALYTICS.sub(b"", body)
+    return ANALYTICS.sub(b"", body, count=1)  # at most one tag per page
 
 
 def fetch(base_url: str, route: str, run_id: str, timeout: float) -> bytes:
     url = base_url.rstrip("/") + urllib.parse.quote(route, safe="/%") + "?readback=" + run_id
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
+    with OPENER.open(request, timeout=timeout) as response:
         if response.status != 200:
             raise RuntimeError(f"HTTP {response.status}")
         return response.read()
@@ -65,6 +84,8 @@ def check_route(publish_dir: Path, base_url: str, route: str, run_id: str, timeo
     try:
         served = normalise(fetch(base_url, route, run_id, timeout))
     except urllib.error.HTTPError as error:
+        if 300 <= error.code < 400:
+            return f"ERROR {route} HTTP {error.code} Location={error.headers.get('Location')}"
         return f"ERROR {route} HTTP {error.code}"
     except Exception as error:  # timeouts, DNS, TLS, connection resets: never skipped
         return f"ERROR {route} {type(error).__name__}: {error}"
