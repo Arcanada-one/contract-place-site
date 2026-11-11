@@ -47,7 +47,7 @@ Daily journal issues are authored in this repository, not in the knowledge pin. 
 
 That is the full checklist: folder + manifest entry + build. Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route. `scripts/check_page.py` derives every manifest issue × locale from `manifest.json` and requires each page to be present and indexable; do not hand-edit journal article URLs into the checker.
 
-`scripts/test_journal.py` checks the recorded digests, locale-specific bodies, index membership and indexability, and kills a mutant that adds a fake manifest issue without a built page.
+`scripts/test_journal.py` checks every manifest issue × locale (body, title, index membership, indexability), keeps the 2026-11-11 digests as a separate regression pin, and `--mutants` runs an honest harness (a)–(g) that requires a green baseline, proof of mutation, an exact refusal, restore, and INFRA_ERROR (never KILLED) when the environment is broken.
 
 ## Search and release boundaries
 
