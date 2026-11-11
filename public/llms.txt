@@ -1,6 +1,6 @@
 # Knowledge Contract Arcana
 
-Publication edition 1.1. Source commit 0892eeb150acae9df5e5d498902c7b5e04ce1871.
+Publication edition 1.1. Source commit 161a01afb1b756adf059ea2e1cbdd0dca29d83a2.
 Complete English documents with an English, Russian and Chinese interface. The Chinese interface has not received native editorial review.
 
 - Home: https://contract.place/
@@ -30,7 +30,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 - [Knowledge Utility: Resource Accounting and Lifecycle Decisions](https://contract.place/en/science/knowledge-utility/): paper.
 - [Meaning Geometry: Representation Spaces, Distinguishability, and the Limits of Similarity](https://contract.place/en/science/geometry-of-semantic-representations/): paper (research draft, not an accepted paper).
 - [Contract Core: Core Model and Admission Requirements](https://contract.place/en/engineering/specifications/knowledge-contract-core/): specification.
-- [Knowledge Operations: Contracts for Knowledge Operations](https://contract.place/en/engineering/specifications/contract-family/): specification.
+- [Knowledge Operations: Preconditions, Results and Transformation Obligations](https://contract.place/en/engineering/specifications/contract-family/): specification.
 - [Semantic Types: Attribution and Representations](https://contract.place/en/engineering/specifications/semantic-types/): specification.
 - [Context Package: Coverage, Dependencies, and Delivery](https://contract.place/en/engineering/specifications/context-package/): specification.
 - [Compiled Knowledge: Artifacts and Reproducible Derivation](https://contract.place/en/engineering/specifications/compiled-artifact-contract/): specification.
@@ -47,7 +47,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 - [Reuse Economics: Controlled reuse: admission counterexamples and the cost of a cache hit](https://contract.place/en/engineering/studies/reuse-admission-and-cost-controls/): study.
 - [Editorial Pilot: Editing a scientific section with a knowledge toolkit: a masked single-section comparison](https://contract.place/en/engineering/studies/editorial-skill-pilot/): study.
 - [Shared Vocabulary: Knowledge Contract Glossary](https://contract.place/en/reference/glossary/): glossary.
-- [Research Foundations: Primary Sources and Research Foundations](https://contract.place/en/reference/bibliography/): bibliography.
+- [Research Foundations: Primary Literature and Related Work](https://contract.place/en/reference/bibliography/): bibliography.
 - [Source History: Source Map, Earlier Editions, and Protocol Compatibility](https://contract.place/en/appendices/source-map/): appendix.
 - [Publication Interfaces: API Integration and Publication Consistency](https://contract.place/en/appendices/api-integration/): appendix.
 

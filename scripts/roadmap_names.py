@@ -17,7 +17,14 @@ _HEADER = re.compile(
     r'\*\*Owner:\*\* ([^·\n]+?) · \*\*Required outputs:\*\* (.+?)\.[ \t]*$'
 )
 _PRIORITY = {'Immediate': 'P0', 'Next': 'P1', 'Expansion': 'P2'}
-_OBSERVATION = re.compile(r'\A\s*\*\*Artifact observation \(([^\n()*]+)\)\.\*\* ([^\n]+)\s*\Z')
+# Exactly one Artifact observation before the priority header; optionally one
+# Current source observation after it. Same date/text character classes; any
+# other header prose still raises the existing unexpected-prose error.
+_OBSERVATION = re.compile(
+    r'\A\s*\*\*Artifact observation \(([^\n()*]+)\)\.\*\* ([^\n]+)'
+    r'(?:\s*\*\*Current source observation \(([^\n()*]+)\)\.\*\* ([^\n]+))?'
+    r'\s*\Z'
+)
 _GAP = re.compile(r'\A\s*\*\*Original gap \(([^\n()*]+)\)\.\*\* ')
 
 
@@ -93,10 +100,20 @@ def normalize_tasks(text: str) -> str:
         gap = _GAP.match(rest)
         if not gap:
             raise ValueError(ident + ': dated original gap missing')
-        # Preserve both dated observations as prose within the old Gap field.
-        rest = ('\n\n**Gap.** *Artifact observation (' + observation[1] + ').* '
-                + observation[2] + '\n\n*Original gap (' + gap[1] + ').* '
-                + rest[gap.end():])
+        # Preserve dated observations as verbatim history within the old Gap field.
+        gap_parts = [
+            '\n\n**Gap.** *Artifact observation (' + observation[1] + ').* '
+            + observation[2]
+        ]
+        if observation[3] is not None:
+            gap_parts.append(
+                '\n\n*Current source observation (' + observation[3] + ').* '
+                + observation[4]
+            )
+        gap_parts.append(
+            '\n\n*Original gap (' + gap[1] + ').* ' + rest[gap.end():]
+        )
+        rest = ''.join(gap_parts)
         if rest.count('**Preparation boundary.**') != 1:
             raise ValueError(ident + ': exactly one preparation boundary required')
         rest = rest.replace('**Preparation boundary.**', '**Start boundary.**')
@@ -153,17 +170,66 @@ def check_card_display_name(card: dict, node: dict) -> None:
         raise ValueError(str(node.get('id')) + ': card title differs from dependency display_name')
 
 
-# This exact pair belongs to the accepted 8 November source snapshot, not to
-# current execution. It is validated but never emitted as a live task state.
-# Changed values require another explicit compatibility review.
-EDITORIAL_METADATA = {
-    "display_revision": "2026-11-08",
-    "execution_pause": "Engineering paused by operator; analytical authorship continues; not a Muneral state update",
-}
+# Closed set of exact historical (display_revision, execution_pause) pairs from
+# accepted source snapshots, not current execution. Validated but never emitted
+# as a live task state. Changed values require another explicit compatibility
+# review.
+# (a) 2026-11-08 accepted snapshot
+# (b) 2026-11-11 from KC-A1 (knowledge-contract 161a01af)
+_EDITORIAL_KEYS = ("display_revision", "execution_pause")
+_EDITORIAL_PAIRS = (
+    {
+        "display_revision": "2026-11-08",
+        "execution_pause": (
+            "Engineering paused by operator; analytical authorship continues; "
+            "not a Muneral state update"
+        ),
+    },
+    {
+        "display_revision": "2026-11-11",
+        "execution_pause": (
+            "rescinded_by_operator_2026-11-11; see roadmap/EXECUTION_STATUS.md; "
+            "not a Muneral state update"
+        ),
+    },
+)
+
+
+class _EditorialMetadata:
+    """Closed set of historical pairs; iterates as field names for TOP_LEVEL_KEYS."""
+
+    __slots__ = ("_pairs",)
+
+    def __init__(self, pairs: tuple[dict[str, str], ...]) -> None:
+        normalized = []
+        for pair in pairs:
+            if tuple(pair) != _EDITORIAL_KEYS or set(pair) != set(_EDITORIAL_KEYS):
+                raise ValueError("internal: editorial pair keys must be exact")
+            normalized.append(frozenset(pair.items()))
+        self._pairs = frozenset(normalized)
+
+    def __iter__(self):
+        return iter(_EDITORIAL_KEYS)
+
+    def __len__(self) -> int:
+        return len(_EDITORIAL_KEYS)
+
+    def recognizes(self, deps: dict) -> bool:
+        try:
+            observed = frozenset((key, deps[key]) for key in _EDITORIAL_KEYS)
+        except TypeError:
+            return False
+        return observed in self._pairs
+
+
+EDITORIAL_METADATA = _EditorialMetadata(_EDITORIAL_PAIRS)
+# Named copies of the two accepted snapshots for tests and byte checks.
+EDITORIAL_METADATA_PAIR_A = dict(_EDITORIAL_PAIRS[0])
+EDITORIAL_METADATA_PAIR_B = dict(_EDITORIAL_PAIRS[1])
 
 
 def validate_editorial_metadata(deps: dict) -> None:
-    """Recognize only the accepted historical note, without applying its policy.
+    """Recognize only accepted historical notes, without applying their policy.
 
     Neither field authorizes stopping or restarting anything. The actual source
     bytes remain pinned, and every emitted task still has the planned-only state.
@@ -172,8 +238,7 @@ def validate_editorial_metadata(deps: dict) -> None:
     present = set(deps) & set(EDITORIAL_METADATA)
     if not present:
         return
-    if present != set(EDITORIAL_METADATA) or any(
-            deps[key] != expected for key, expected in EDITORIAL_METADATA.items()):
+    if present != set(EDITORIAL_METADATA) or not EDITORIAL_METADATA.recognizes(deps):
         raise ValueError('Unrecognized historical roadmap display metadata')
     if not deps.get('nodes') or any('display_name' not in node for node in deps['nodes']):
         raise ValueError('Historical display metadata requires the readable node schema')

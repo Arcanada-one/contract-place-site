@@ -260,13 +260,90 @@ def compile_programme(source: Path, commit: str, renderer: Renderer) -> dict:
     }
 
 
-def localize_and_badge_links(html: str, documents: list[dict], locale: str) -> str:
-    """Point manuscript links at the current UI locale and badge catalogue drafts."""
+def localize_catalogue_links(html: str, documents: list[dict], locale: str) -> str:
+    """Rewrite catalogue hrefs to the page locale without inserting status badges."""
     for doc in documents:
         en_route = doc["route"]
         local_route = en_route.replace("/en/", f"/{locale}/", 1)
         if locale != "en":
             html = html.replace(f'href="{en_route}"', f'href="{local_route}"')
+    return html
+
+
+def catalogue_title_for_locale(doc: dict, locale: str) -> str:
+    """Return a catalogue title for the UI locale, or empty when none is declared."""
+    if locale == "en":
+        return doc.get("title") or ""
+    if locale == "ru":
+        return doc.get("titleRu") or doc.get("title_ru") or ""
+    return doc.get("titleZhHans") or doc.get("title_zh_Hans") or ""
+
+
+def linked_status_label(doc: dict, locale: str) -> str:
+    """Catalogue title for the page locale, else the English catalogue title. Never link text."""
+    return catalogue_title_for_locale(doc, locale) or catalogue_title_for_locale(doc, "en") or ""
+
+
+def linked_status_title_lang(doc: dict, locale: str) -> str:
+    """Language of the catalogue title actually shown.
+
+    Page locale only when a page-locale title exists and differs from the English
+    title; English pages and English-copy fallbacks keep lang="en".
+    """
+    if locale == "en":
+        return "en"
+    localized = catalogue_title_for_locale(doc, locale)
+    english = catalogue_title_for_locale(doc, "en")
+    if localized and localized != english:
+        return locale
+    return "en"
+
+
+def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
+    """Last child inside a roadmap field <dd>: catalogue link + badge per draft linked in that field.
+
+    Mirrors src/site/app.js roadmapLinkedStatus. Source-order; one entry per record.
+    Badge carries the page-locale lang; title carries the language of the text shown.
+    """
+    from html import escape
+
+    localized = localize_catalogue_links(html, documents, locale)
+    by_href: dict[str, dict] = {}
+    for doc in documents:
+        by_href[doc["route"]] = doc
+        by_href[doc["route"].replace("/en/", f"/{locale}/", 1)] = doc
+    items: list[str] = []
+    seen: set[str] = set()
+    for match in re.finditer(r'<a\b[^>]*\bhref="([^"]+)"[^>]*>(.*?)</a>', localized, re.S):
+        doc = by_href.get(match.group(1))
+        if not doc:
+            continue
+        status = doc.get("status")
+        if not status or status not in STATUS_LABELS:
+            continue
+        doc_id = doc.get("id") or match.group(1)
+        if doc_id in seen:
+            continue
+        seen.add(doc_id)
+        label = STATUS_LABELS[status][locale]
+        text = linked_status_label(doc, locale)
+        title_lang = linked_status_title_lang(doc, locale)
+        local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
+        # lang on a wrapper keeps <span class="status-badge">{label}</span> intact for check_status_labels.
+        items.append(
+            f'<a href="{local_route}" lang="{title_lang}">{escape(text)}</a> '
+            f'<span lang="{locale}"><span class="status-badge">{label}</span></span>'
+        )
+    if not items:
+        return ""
+    return f'<p class="rm-linked-status">{" ".join(items)}</p>'
+
+
+def localize_and_badge_links(html: str, documents: list[dict], locale: str) -> str:
+    """Point manuscript links at the current UI locale and badge catalogue drafts (programme pages)."""
+    html = localize_catalogue_links(html, documents, locale)
+    for doc in documents:
+        local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
         status = doc.get("status")
         if not status or status not in STATUS_LABELS:
             continue

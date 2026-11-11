@@ -3,7 +3,7 @@
     "schema_version": 1,
     "edition": "1.1",
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "0892eeb150acae9df5e5d498902c7b5e04ce1871",
+    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
     "catalog": "publication-catalog.json"
   },
   "records": [
@@ -11,249 +11,249 @@
       "id": "human-meaning-and-computable-knowledge",
       "type": "paper",
       "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/human-meaning-and-computable-knowledge/PAPER.md",
       "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "semantic-objects-and-context",
       "type": "paper",
       "path": "papers/semantic-objects-and-context/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/semantic-objects-and-context/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/semantic-objects-and-context/PAPER.md",
       "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "constrained-transformations",
       "type": "paper",
       "path": "papers/constrained-transformations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/constrained-transformations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/constrained-transformations/PAPER.md",
       "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "retrieval-and-context-composition",
       "type": "paper",
       "path": "papers/retrieval-and-context-composition/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/retrieval-and-context-composition/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/retrieval-and-context-composition/PAPER.md",
       "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "interaction-and-memory",
       "type": "paper",
       "path": "papers/interaction-and-memory/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/interaction-and-memory/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/interaction-and-memory/PAPER.md",
       "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "evidence-and-falsification",
       "type": "paper",
       "path": "papers/evidence-and-falsification/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/evidence-and-falsification/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/evidence-and-falsification/PAPER.md",
       "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "revision-and-governance",
       "type": "paper",
       "path": "papers/revision-and-governance/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/revision-and-governance/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/revision-and-governance/PAPER.md",
       "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "controlled-knowledge-reuse",
       "type": "paper",
       "path": "papers/controlled-knowledge-reuse/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/controlled-knowledge-reuse/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/controlled-knowledge-reuse/PAPER.md",
       "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "knowledge-utility",
       "type": "paper",
       "path": "papers/knowledge-utility/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/knowledge-utility/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/knowledge-utility/PAPER.md",
       "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "geometry-of-semantic-representations",
       "type": "paper",
       "path": "papers/geometry-of-semantic-representations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/papers/geometry-of-semantic-representations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/geometry-of-semantic-representations/PAPER.md",
       "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "knowledge-contract-core",
       "type": "specification",
       "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
       "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "contract-family",
       "type": "specification",
       "path": "engineering/specifications/contract-family/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/contract-family/SPECIFICATION.md",
-      "source_sha256": "27b14129d1e62ccfb4f9a7cade10ccf9537cd7178d8f6ef1f4a5830d7a8ec35f",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/contract-family/SPECIFICATION.md",
+      "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "semantic-types",
       "type": "specification",
       "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/semantic-types/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/semantic-types/SPECIFICATION.md",
       "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "context-package",
       "type": "specification",
       "path": "engineering/specifications/context-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/context-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/context-package/SPECIFICATION.md",
       "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "compiled-artifact-contract",
       "type": "specification",
       "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
       "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "artifact-registry",
       "type": "specification",
       "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/artifact-registry/SPECIFICATION.md",
       "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "status-model",
       "type": "specification",
       "path": "engineering/specifications/status-model/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/status-model/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/status-model/SPECIFICATION.md",
       "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "cache-identity-and-invalidation",
       "type": "specification",
       "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
       "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "reuse-policy",
       "type": "specification",
       "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/reuse-policy/SPECIFICATION.md",
       "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "knowledge-evolution",
       "type": "specification",
       "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
       "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "book-package",
       "type": "specification",
       "path": "engineering/specifications/book-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/specifications/book-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md",
       "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "contract-profile-conformance",
       "type": "study",
       "path": "engineering/studies/contract-profile-conformance/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/contract-profile-conformance/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/contract-profile-conformance/STUDY.md",
       "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "dependency-closure-and-package-delivery",
       "type": "study",
       "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
       "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "source-transcription-and-uncertainty",
       "type": "study",
       "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
       "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "executable-projections-and-revision",
       "type": "study",
       "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/executable-projections-and-revision/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/executable-projections-and-revision/STUDY.md",
       "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "reuse-admission-and-cost-controls",
       "type": "study",
       "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
       "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "editorial-skill-pilot",
       "type": "study",
       "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/engineering/studies/editorial-skill-pilot/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/editorial-skill-pilot/STUDY.md",
       "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "glossary",
       "type": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/reference/glossary/GLOSSARY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/reference/glossary/GLOSSARY.md",
       "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "bibliography",
       "type": "bibliography",
       "path": "reference/bibliography/BIBLIOGRAPHY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/reference/bibliography/BIBLIOGRAPHY.md",
-      "source_sha256": "7807268f1e3699a189dc533490cbb32469eafa3f6fdae258ac1d7623ba8a202a",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/reference/bibliography/BIBLIOGRAPHY.md",
+      "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "source-map",
       "type": "appendix",
       "path": "appendices/source-map/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/appendices/source-map/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/appendices/source-map/APPENDIX.md",
       "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     },
     {
       "id": "api-integration",
       "type": "appendix",
       "path": "appendices/api-integration/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/appendices/api-integration/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/appendices/api-integration/APPENDIX.md",
       "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
-      "revision": "0892eeb150acae9df5e5d498902c7b5e04ce1871"
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
     }
   ],
   "articles": [
@@ -279,43 +279,43 @@
   "roadmap": {
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "46af0f06218e590e047a585ac74820f3c6336604",
+      "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
       "files": [
         {
           "path": "ROADMAP.md",
           "role": "rendered",
-          "sha256": "98675d9de57de6cbcdad44ba35f1c8960f1cf1a87e04359297c1c8268d62bd78",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/ROADMAP.md"
+          "sha256": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/ROADMAP.md"
         },
         {
           "path": "roadmap/TASKS.md",
           "role": "rendered",
-          "sha256": "a15c17c438ac9aedca7e40896eff6d3a69e4b8f1e0e7789207549da8aaf8761c",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/TASKS.md"
+          "sha256": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/TASKS.md"
         },
         {
           "path": "roadmap/dependencies.json",
           "role": "rendered",
-          "sha256": "c3ffc8f3ba72bd5872adb3b34c265e56152375760f4e565a539bb4c1d912d913",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/dependencies.json"
+          "sha256": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/dependencies.json"
         },
         {
           "path": "roadmap/EXPERIMENTS.md",
           "role": "linked",
-          "sha256": "b338e7f9547d3af9dc8c872fa731755d98d7c2718b53828545724e014c7a976c",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/EXPERIMENTS.md"
+          "sha256": "b3b7a80ea3b4a11ab05d12e8f07a30badba3fb6e9aa87991548508343055f07d",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/EXPERIMENTS.md"
         },
         {
           "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
           "role": "linked",
-          "sha256": "3f07b70002fd8856c9238fef9ac2ea283d50bc3434d67718f2b9313d6c4d0b98",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
+          "sha256": "442ba32cadcf9464e95c2d20f7e3857d0b1be679f41eb9a6282fb56dde00679d",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
         },
         {
           "path": "roadmap/SITE_DELIVERY.md",
           "role": "introduction",
-          "sha256": "a3c97044e3490d3b5cbc9447650b8d7e8eeab005b702d2123a6c395efaf37069",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/46af0f06218e590e047a585ac74820f3c6336604/roadmap/SITE_DELIVERY.md"
+          "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/SITE_DELIVERY.md"
         }
       ]
     },
@@ -695,25 +695,25 @@
     "kind": "programme-guide",
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "0892eeb150acae9df5e5d498902c7b5e04ce1871",
+      "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
       "files": [
         {
           "path": "PROGRAMME.md",
-          "sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
-          "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/PROGRAMME.md"
+          "sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
+          "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/PROGRAMME.md"
         },
         {
           "path": "guides/programme.ru.md",
-          "sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
-          "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.ru.md"
+          "sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
+          "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.ru.md"
         },
         {
           "path": "guides/programme.zh-Hans.md",
-          "sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
-          "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/0892eeb150acae9df5e5d498902c7b5e04ce1871/guides/programme.zh-Hans.md"
+          "sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
+          "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.zh-Hans.md"
         }
       ]
     },
@@ -726,8 +726,8 @@
     "pages": {
       "en": {
         "path": "PROGRAMME.md",
-        "source_sha256": "94c47a378f750bc090c39baa8bc4f46e83a1a4ad3c7676f78cddca8381fbbbb4",
-        "blob": "711924ea4c532bd2170a0b3a71c1009c863dd745",
+        "source_sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
+        "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
         "title": "Knowledge Contract: Meaning, Knowledge and Their Responsible Use",
         "foundations": [
           {
@@ -752,8 +752,8 @@
       },
       "ru": {
         "path": "guides/programme.ru.md",
-        "source_sha256": "af64f9d7bed10d366ebe3092302165c48560119ca46f58a48d56c7c521585350",
-        "blob": "f02b992c2fd66f9519741412343c48c4dfca43c7",
+        "source_sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
+        "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
         "title": "Контракт знаний: Смыслы, знания и условия их применения",
         "foundations": [
           {
@@ -778,8 +778,8 @@
       },
       "zh-Hans": {
         "path": "guides/programme.zh-Hans.md",
-        "source_sha256": "a2520faa93e0efa6d7093940a6e7c23632b8ce8637b2d3458c90442c4b0b9d7a",
-        "blob": "2b3d6358d34294307aeafe5da450f114f7ace324",
+        "source_sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
+        "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
         "title": "知识契约：意义、知识与使用条件",
         "foundations": [
           {
@@ -839,13 +839,13 @@
         "work": "bibliography",
         "language": "ru",
         "state": "missing",
-        "source_sha256": "7807268f1e3699a189dc533490cbb32469eafa3f6fdae258ac1d7623ba8a202a"
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337"
       },
       {
         "work": "bibliography",
         "language": "zh-Hans",
         "state": "missing",
-        "source_sha256": "7807268f1e3699a189dc533490cbb32469eafa3f6fdae258ac1d7623ba8a202a"
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337"
       },
       {
         "work": "book-package",
@@ -911,13 +911,13 @@
         "work": "contract-family",
         "language": "ru",
         "state": "missing",
-        "source_sha256": "27b14129d1e62ccfb4f9a7cade10ccf9537cd7178d8f6ef1f4a5830d7a8ec35f"
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628"
       },
       {
         "work": "contract-family",
         "language": "zh-Hans",
         "state": "missing",
-        "source_sha256": "27b14129d1e62ccfb4f9a7cade10ccf9537cd7178d8f6ef1f4a5830d7a8ec35f"
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628"
       },
       {
         "work": "contract-profile-conformance",

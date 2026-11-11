@@ -146,6 +146,53 @@ function statusOf(r){if(!r.status)return '';if(!statusLabels[r.status])throw new
 function statusLabel(r){const s=statusOf(r);return s?statusLabels[s][langs.indexOf(locale)]:'';}
 function statusBadge(r){const l=statusLabel(r);return l?`<span class="status-badge">${esc(l)}</span>`:'';}
 function statusNote(r){const s=statusOf(r);return s?`<p class="draft-notice" role="note"><strong>${esc(statusLabel(r))}${locale==='zh-Hans'?'。':'.'}</strong>${locale==='zh-Hans'?'':' '}${esc(statusNotes[s][langs.indexOf(locale)])}</p>`:'';}
+/* Page-locale catalogue hrefs only — roadmap Gap prose must stay a contiguous source-token match. */
+function localizeCatalogueLinks(html){
+  for(const r of corpus.records){
+    const enRoute=r.route,localRoute=enRoute.replace('/en/',`/${locale}/`);
+    if(locale!=='en')html=html.split(`href="${enRoute}"`).join(`href="${localRoute}"`);
+  }
+  return html;
+}
+function catalogueTitleForLocale(r,loc=locale){
+  if(loc==='en')return r.title||'';
+  if(loc==='ru')return r.titleRu||'';
+  return r.titleZhHans||r.title_zh_Hans||'';
+}
+function linkedStatusLabel(r){
+  /* Catalogue title for the page locale, else English catalogue title. Never source link text. */
+  return catalogueTitleForLocale(r)||catalogueTitleForLocale(r,'en')||'';
+}
+function linkedStatusTitleLang(r){
+  /* Page locale only when a distinct page-locale title exists; else English. */
+  if(locale==='en')return 'en';
+  const localized=catalogueTitleForLocale(r);
+  const english=catalogueTitleForLocale(r,'en');
+  return (localized&&localized!==english)?locale:'en';
+}
+/* Last child inside a roadmap field <dd>: one catalogue link + badge per draft linked in that field (source order). */
+function roadmapLinkedStatus(html){
+  const localized=localizeCatalogueLinks(html);
+  const byHref=new Map();
+  for(const r of corpus.records){
+    byHref.set(r.route,r);
+    byHref.set(r.route.replace('/en/',`/${locale}/`),r);
+  }
+  const items=[],seen=new Set();
+  const re=/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
+  let m;
+  while((m=re.exec(localized))){
+    const r=byHref.get(m[1]);if(!r)continue;
+    const label=statusLabel(r);if(!label||seen.has(r.id))continue;
+    seen.add(r.id);
+    const text=linkedStatusLabel(r);
+    const titleLang=linkedStatusTitleLang(r);
+    const localRoute=r.route.replace('/en/',`/${locale}/`);
+    /* lang wrapper keeps <span class="status-badge">{label}</span> intact for check_status_labels. */
+    items.push(`<a href="${localRoute}" lang="${titleLang}">${esc(text)}</a> <span lang="${locale}"><span class="status-badge">${esc(label)}</span></span>`);
+  }
+  return items.length?`<p class="rm-linked-status">${items.join(' ')}</p>`:'';
+}
 function paperCategory(r){return r.category;}
 function paperCard(r){
 return `<article class="paper-card"><a href="${url(recordPath(r))}" class="paper-cover" aria-label="${esc(r.title)}">${cover(r)}<span class="cover-id">${recordLabel(r)}</span></a><div class="paper-content"><div class="metadata"><span>${t('publicationEdition')} ${esc(corpus.publication.edition)}</span><span>${t('englishText')}</span>${statusBadge(r)}</div><h3><a href="${url(recordPath(r))}">${esc(r.title)}</a></h3><p lang="en">${esc(r.summary)}</p>${link(recordPath(r),t('readPaper'))}</div></article>`;
@@ -198,7 +245,7 @@ function roadmapCard(k){
 const rel=[['roadmapRequires',k.requires],['roadmapNeededBy',k.needed_by],['roadmapInforms',k.informs],['roadmapInformedBy',k.informed_by]].filter(([,v],i)=>i<2||v.length).map(([key,v])=>`<div><dt>${t(key)}${key==='roadmapInforms'||key==='roadmapInformedBy'?` <small>(${t('roadmapInformsNoBlock')})</small>`:''}</dt><dd>${roadmapIds(v)}</dd></div>`).join('');
 const name=roadmapName(k.id);
 const subtitle=k.subtitle?` <span class="rm-subtitle" lang="en">${esc(k.subtitle)}</span>`:'';
-return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${f.html}</dd></div>`).join('')}</dl></article>`;
+return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${localizeCatalogueLinks(f.html)}${roadmapLinkedStatus(f.html)}</dd></div>`).join('')}</dl></article>`;
 }
 function roadmapPage(){
 const road=corpus.roadmap,pin=road.pin,ms=corpus.publication.commit,same=pin.commit===ms;
@@ -400,4 +447,8 @@ document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('href')===u
 
 function changeLocale(next){if(!langs.includes(next))return;const parts=location.pathname.split('/').filter(Boolean);if(langs.includes(parts[0]))parts.shift();try{localStorage.setItem('cp-locale',next)}catch{}const isLab=parts.join('/')==='lab/knowledge-journey';const href='/'+next+'/'+(parts.length?parts.join('/')+'/':'')+(isLab?labViewQuery(location.search):location.search+location.hash);if(isLab){location.assign(href);return}navigate(href)}
 function bindLanguagePickers(scope=document){scope.querySelectorAll('.language-picker').forEach(picker=>{picker.addEventListener('toggle',()=>{if(picker.open)document.querySelectorAll('details[open]').forEach(other=>{if(other!==picker)other.open=false})});picker.addEventListener('focusout',()=>setTimeout(()=>{if(!picker.contains(document.activeElement))picker.open=false},0));picker.addEventListener('keydown',e=>{const options=[...picker.querySelectorAll('.locale-option')];const active=options.indexOf(document.activeElement);if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();picker.open=true;let index=e.key==='Home'?0:e.key==='End'?options.length-1:active<0?(e.key==='ArrowUp'?options.length-1:0):(active+(e.key==='ArrowUp'?-1:1)+options.length)%options.length;options[index].focus()}})});scope.querySelectorAll('.nav-group').forEach(group=>group.addEventListener('toggle',()=>{if(group.open)document.querySelectorAll('.language-picker[open]').forEach(p=>p.open=false)}))}
-if(location.pathname==='/'){let saved='en';try{saved=localStorage.getItem('cp-locale')||'en'}catch{}history.replaceState({},'','/'+(langs.includes(saved)?saved:'en')+'/'+location.search+location.hash)}render();
+if(typeof module!=='undefined'&&module.exports){
+  module.exports={roadmapCard,setTestLocale(next){if(langs.includes(next))locale=next}};
+}else{
+  if(location.pathname==='/'){let saved='en';try{saved=localStorage.getItem('cp-locale')||'en'}catch{}history.replaceState({},'','/'+(langs.includes(saved)?saved:'en')+'/'+location.search+location.hash)}render();
+}
