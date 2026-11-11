@@ -9,8 +9,8 @@
 <p>来源：Yukyeong Lee, Yumin Choi, Jinheon Baek, Sung Ju Hwang. Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents. <a href="https://arxiv.org/abs/2611.14320v1" rel="noopener noreferrer">arXiv:2611.14320v1</a>，2026 年 11 月 10 日。</p>
 <h2 id="流程可以变成代码问题是值不值得">流程可以变成代码。问题是值不值得</h2>
 <p>Kaiyuan Hou、Yang Ping Kuo、Indranil Bhattacharya、Rohith Nama、Arushi Gupta、Carlos D. Castillo、Prathap Ramachandra、Xiaofan Jiang 和 Francesco Carbone 提出了 ReTrace：从流程描述和智能体轨迹中提取条件，据此生成普通代码，遇到未知状态即停止执行。</p>
-<p>在作者内部的 79 个流程上，这样的代码完成了 93.8% 的任务，每次运行花费 0.096 美元。带规划的智能体完成 96.8%，花费 0.127 美元。仅凭几个示例直接生成代码，完成 88.6%，花费 0.033 美元。</p>
-<p>关键在第三行。最便宜的方案成本只有三分之一，只落后五个百分点。任何复杂的方案都必须先在同等条件下胜过它，才值得讨论。对我们来说，这成了对今后规格说明的一项要求：流程的每个分支都要有可观察的前置条件、输入数据的来源、一个测试，以及处理未知状态的路径。模型生成的解释始终只是假设，不授予任何权限。</p>
+<p>作者使用了 79 个内部流程，但每种方法只在它能运行的流程上计分：ReTrace 为 77 个，带规划的智能体为 76 个，仅凭几个示例生成代码的方法为 70 个。按流程取平均，平台把 ReTrace 93.8% 的执行标记为完成，每个任务花费 0.096 美元；智能体为 96.8%，花费 0.127 美元；示例生成为 88.6%，花费 0.033 美元。作者提醒：平台可能把失败的执行也标记为完成，因此这些是完成标记，而不是经过核实的结果。</p>
+<p>关键在第三行。最便宜的方案成本约为三分之一，完成标记低 5.2 个百分点。两种方法是在不同的流程集合上计分的，所以这个差值只是对已发表数字的描述，并不是同条件下的直接比较。任何复杂的方案都必须先在同等条件下胜过它，才值得讨论。对我们来说，这成了对今后规格说明的一项要求：流程的每个分支都要有可观察的前置条件、输入数据的来源、一个测试，以及处理未知状态的路径。模型生成的解释始终只是假设，不授予任何权限。</p>
 <p>在出现成本可度量的、稳定重复的流程之前，暂缓采用。</p>
 <p>来源：Kaiyuan Hou, Yang Ping Kuo, Indranil Bhattacharya, Rohith Nama, Arushi Gupta, Carlos D. Castillo, Prathap Ramachandra, Xiaofan Jiang, Francesco Carbone. ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows. <a href="https://arxiv.org/abs/2611.14492v1" rel="noopener noreferrer">arXiv:2611.14492v1</a>，2026 年 11 月 10 日。</p>
 <h2 id="定理去掉第一个前提会失去什么">定理去掉第一个前提会失去什么</h2>

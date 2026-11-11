@@ -33,9 +33,9 @@ PIN_SLUG = "lesson-without-evidence-2026-11-11"
 PIN_FOLDER = "2026-11-11-lesson-without-evidence"
 PIN_DATE = "2026-11-11"
 PIN_EXPECTED = {
-    "en": "9d06b73cee3f73ce61ba76a7c21559efd0e0898494fa284227f7a44994e11fe7",
-    "ru": "d6175cfe21aa5a1a1390c8cb7b1ae12ec25a5125f99cc8339b838a0a0897e887",
-    "zh-Hans": "f93ebf48def73bc0a60623cb365a6ffe6bf3c64c0539d6a4f437d1cc28c7c448",
+    "en": "93bb988845e15bbf6f708b435975afbee7353bbeec2f0fbd5137508072f3dccd",
+    "ru": "8987f7313dd5f15639fbe9583b0a6d3028b386c092917cbe8063a14a3807d029",
+    "zh-Hans": "6ce4154acbf3f900732f2eb0772d307c421b22e46d74dcfbcc341bb4aefc2d83",
 }
 MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 FORBIDDEN_SOURCE_HEADINGS = {"sources", "источники", "参考文献", "来源"}
