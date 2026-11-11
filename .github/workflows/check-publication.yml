@@ -76,6 +76,7 @@ jobs:
           python3 -B scripts/test_build.py
           python3 -B scripts/test_journal.py
           python3 -B scripts/test_journal.py --mutants
+          python3 -B scripts/test_readback.py
           python3 -B scripts/test_renditions.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
           READABLE_ROADMAP_SOURCE_DIR=_knowledge-source python3 -B scripts/test_roadmap_names.py

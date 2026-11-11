@@ -80,6 +80,10 @@ Regular CI preserves upstream REUSE, framework security and network-exposure job
 
 The pinned knowledge commit must first exist in the public knowledge repository. After the authorized source contribution is merged, use its actual SHA, rebuild, commit and run CI. Local review snapshots do not substitute for the contributor's DCO attestation.
 
+### Served-page readback
+
+After the `publish` job, Deploy runs a `readback` job (`scripts/readback_served.py`). It fetches every `public/**/index.html` route from `https://contract.place` anonymously with a cache-busting query and compares the bytes with the committed build. Only the Cloudflare Web Analytics script tag is removed before comparing; any other difference counts. Mismatching routes are retried for up to 10 attempts, 30 s apart, to absorb edge propagation. HTTP errors and timeouts are failures. "Readback failed" means the publish step finished but the served bytes still differ from `public/`; the site is not yet serving this build, so do not report it as deployed. `scripts/test_readback.py` covers the script offline.
+
 After deployment, read the served homepage, a paper, a specification, a study and `publication.json`; compare revisions and document hashes. Check desktop and mobile reading in a real browser. Admission and API indexing require their own controlled process and readback.
 
 ## Licensing and contributions
