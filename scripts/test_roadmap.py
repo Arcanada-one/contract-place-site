@@ -5,15 +5,145 @@
 Set ROADMAP_SOURCE_DIR to a clean checkout of the pin to run the same assertions on the real source.
 """
 from hashlib import sha256
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
+import re
 import shutil
+import subprocess
 import tempfile
 import unittest
 
 import roadmap
 from build_publication import run
+
+ROOT = Path(__file__).resolve().parents[1]
+VOID_TAGS = frozenset({
+    "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr",
+})
+
+
+class DomTree(HTMLParser):
+    """Minimal HTML tree for placement/lang assertions (not a whole-page regex)."""
+
+    def __init__(self):
+        super().__init__()
+        self.root = {"tag": "#doc", "attrs": {}, "children": []}
+        self.stack = [self.root]
+
+    def handle_starttag(self, tag, attrs):
+        node = {"tag": tag, "attrs": dict(attrs), "children": []}
+        self.stack[-1]["children"].append(node)
+        if tag not in VOID_TAGS:
+            self.stack.append(node)
+
+    def handle_endtag(self, tag):
+        if tag in VOID_TAGS:
+            return
+        for i in range(len(self.stack) - 1, 0, -1):
+            if self.stack[i]["tag"] == tag:
+                del self.stack[i:]
+                return
+
+    def handle_data(self, data):
+        self.stack[-1].setdefault("text_parts", []).append(data)
+
+
+def walk(node):
+    yield node
+    for child in node.get("children", []):
+        yield from walk(child)
+
+
+def class_of(node):
+    return (node.get("attrs") or {}).get("class", "")
+
+
+def extract_article(html: str, anchor: str) -> str:
+    marker = f'id="{anchor}"'
+    start = html.find(marker)
+    if start < 0:
+        raise AssertionError(f"missing article {anchor}")
+    start = html.rfind("<article", 0, start)
+    if start < 0:
+        raise AssertionError(f"article open missing for {anchor}")
+    depth = 0
+    i = start
+    while i < len(html):
+        if html.startswith("<article", i):
+            depth += 1
+            i = html.find(">", i) + 1
+            continue
+        if html.startswith("</article>", i):
+            depth -= 1
+            i += len("</article>")
+            if depth == 0:
+                return html[start:i]
+            continue
+        i += 1
+    raise AssertionError(f"unclosed article {anchor}")
+
+
+def assert_linked_status_card(
+    test,
+    html,
+    *,
+    locale,
+    expected_prose,
+    expect_status,
+    title_lang=None,
+    badge_lang=None,
+):
+    tree = DomTree()
+    tree.feed(html)
+    status_nodes = [n for n in walk(tree.root) if "rm-linked-status" in class_of(n).split()]
+    if not expect_status:
+        test.assertEqual(status_nodes, [], "unexpected rm-linked-status line")
+        return
+    test.assertEqual(len(status_nodes), 1, "exactly one status line per linked draft target expected on this card")
+    status = status_nodes[0]
+    parent = None
+    for node in walk(tree.root):
+        if status in node.get("children", []):
+            parent = node
+            break
+    test.assertIsNotNone(parent)
+    test.assertEqual(parent["tag"], "dd", "rm-linked-status must have <dd> as direct parent")
+    test.assertIs(parent["children"][-1], status, "rm-linked-status must be the last child of its <dd>")
+    # Badge lang may sit on a wrapper around <span class="status-badge"> (keeps check_status_labels exact).
+    badge_hosts = []
+    for child in status["children"]:
+        if child["tag"] == "span" and "status-badge" in class_of(child).split():
+            badge_hosts.append(child)
+        elif child["tag"] == "span":
+            nested = [c for c in child.get("children", []) if c["tag"] == "span" and "status-badge" in class_of(c).split()]
+            if nested:
+                badge_hosts.append(child)
+    test.assertEqual(len(badge_hosts), 1)
+    test.assertEqual(badge_hosts[0]["attrs"].get("lang"), badge_lang or locale)
+    titles = [c for c in status["children"] if c["tag"] == "a"]
+    test.assertEqual(len(titles), 1)
+    test.assertEqual(titles[0]["attrs"].get("lang"), title_lang)
+    # Contiguous source prose bytes before the status line (parser found placement; compare bytes via slice).
+    open_dd = html.find('<dd class="source-body prose">')
+    test.assertGreaterEqual(open_dd, 0)
+    # Prefer the Gap field dd that contains the status line.
+    pos = 0
+    prose = None
+    while True:
+        open_dd = html.find('<dd class="source-body prose">', pos)
+        if open_dd < 0:
+            break
+        inner_start = open_dd + len('<dd class="source-body prose">')
+        status_at = html.find('<p class="rm-linked-status">', inner_start)
+        close_dd = html.find("</dd>", inner_start)
+        if status_at >= 0 and (close_dd < 0 or status_at < close_dd):
+            prose = html[inner_start:status_at]
+            break
+        pos = inner_start
+    test.assertIsNotNone(prose, "status line must follow prose inside the same dd")
+    test.assertEqual(prose, expected_prose)
 
 IDS = roadmap.TASK_IDS
 INTRO = "Knowledge Contract publishes bounded results while maintaining a transparent research programme. This fixture introduction is long enough to be accepted by the compiler."
@@ -376,8 +506,12 @@ class RoadmapCompiler(unittest.TestCase):
             self.assertIn(f'href="/{locale}/science/draft/"', body)
             self.assertNotIn("status-badge", body)
             self.assertIn('class="rm-linked-status"', status_line)
-            self.assertIn(f'<span class="status-badge">{label}</span>', status_line)
-            self.assertIn(f">{expected_titles[locale]}</a>", status_line)
+            self.assertIn(f'<span lang="{locale}"><span class="status-badge">{label}</span></span>', status_line)
+            title_lang = locale if locale in localized_title_locales else "en"
+            self.assertIn(
+                f'<a href="/{locale}/science/draft/" lang="{title_lang}">{expected_titles[locale]}</a>',
+                status_line,
+            )
             self.assertNotIn(">draft manuscript</a>", status_line)
             # Mirror prerender placement: linked-status is last child inside the same <dd>.
             fragment = (
@@ -441,6 +575,97 @@ class RealSource(unittest.TestCase):
         deps = json.loads((Path(os.environ["ROADMAP_SOURCE_DIR"]) / "roadmap/dependencies.json").read_text())
         for node, task in zip(deps["nodes"], record["tasks"]):
             self.assertEqual((node["id"], node["priority"], node["content_owner"], sorted(node["requires"])), (task["id"], task["priority"], task["owner"], task["requires"]))
+
+
+class RenderControl(unittest.TestCase):
+    """Bounded checks over actual prerendered HTML and the JS roadmapCard renderer."""
+
+    LOCALES = ("en", "ru", "zh-Hans")
+    # geometry-of-semantic-representations: titleRu declared (same English string); titleZhHans absent.
+    TITLE_LANG = {"en": "en", "ru": "ru", "zh-Hans": "en"}
+    ABSENT_CARD = "rm-01"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.public = ROOT / "public"
+        cls.content_js = cls.public / "content.js"
+        cls.app_js = ROOT / "src/site/app.js"
+        cls.harness = ROOT / "scripts/render_roadmap_card.js"
+        if not cls.content_js.is_file():
+            raise unittest.SkipTest("public/content.js missing; run a publication build first")
+        raw = cls.content_js.read_text(encoding="utf-8")
+        cls.corpus = json.loads(re.sub(r"^window\.CP_CONTENT\s*=\s*", "", raw).rstrip().rstrip(";"))
+        cls.rm12 = next(t for t in cls.corpus["roadmap"]["tasks"] if t["id"] == "RM-12")
+        cls.gap_html = next(f["html"] for f in cls.rm12["fields"] if f["label"] == "Gap")
+        cls.geometry = next(
+            r for r in cls.corpus["records"] if r.get("id") == "geometry-of-semantic-representations"
+        )
+
+    def expected_prose(self, locale):
+        from programme import localize_catalogue_links
+
+        return localize_catalogue_links(self.gap_html, self.corpus["records"], locale)
+
+    def render_js_card(self, locale, app_path=None):
+        cmd = ["node", str(self.harness), locale, "RM-12"]
+        if app_path:
+            cmd.append(str(app_path))
+        proc = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        return proc.stdout
+
+    def test_prerendered_rm12_status_line_placement_and_lang(self):
+        for locale in self.LOCALES:
+            page = self.public / locale / "roadmap" / "index.html"
+            self.assertTrue(page.is_file(), f"missing {page}")
+            card = extract_article(page.read_text(encoding="utf-8"), "rm-12")
+            assert_linked_status_card(
+                self,
+                card,
+                locale=locale,
+                expected_prose=self.expected_prose(locale),
+                expect_status=True,
+                title_lang=self.TITLE_LANG[locale],
+                badge_lang=locale,
+            )
+            absent = extract_article(page.read_text(encoding="utf-8"), self.ABSENT_CARD)
+            assert_linked_status_card(
+                self,
+                absent,
+                locale=locale,
+                expected_prose="",
+                expect_status=False,
+            )
+
+    def test_js_roadmap_card_status_line_placement_and_lang(self):
+        self.assertTrue(self.app_js.is_file())
+        self.assertTrue(self.harness.is_file())
+        for locale in self.LOCALES:
+            card = self.render_js_card(locale)
+            assert_linked_status_card(
+                self,
+                card,
+                locale=locale,
+                expected_prose=self.expected_prose(locale),
+                expect_status=True,
+                title_lang=self.TITLE_LANG[locale],
+                badge_lang=locale,
+            )
+            # Absence: a card whose Gap prose links no draft-status page.
+            proc = subprocess.run(
+                ["node", str(self.harness), locale, "RM-01"],
+                cwd=str(ROOT),
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            assert_linked_status_card(
+                self,
+                proc.stdout,
+                locale=locale,
+                expected_prose="",
+                expect_status=False,
+            )
 
 
 if __name__ == "__main__":

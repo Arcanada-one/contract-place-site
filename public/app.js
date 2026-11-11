@@ -163,6 +163,10 @@ function linkedStatusLabel(r){
   /* Catalogue title for the page locale, else English catalogue title. Never source link text. */
   return catalogueTitleForLocale(r)||catalogueTitleForLocale(r,'en')||'';
 }
+function linkedStatusTitleLang(r){
+  /* Language of the catalogue title actually shown: page locale when declared, else English. */
+  return catalogueTitleForLocale(r)?locale:'en';
+}
 /* Last child inside a roadmap field <dd>: one catalogue link + badge per draft linked in that field (source order). */
 function roadmapLinkedStatus(html){
   const localized=localizeCatalogueLinks(html);
@@ -179,8 +183,10 @@ function roadmapLinkedStatus(html){
     const label=statusLabel(r);if(!label||seen.has(r.id))continue;
     seen.add(r.id);
     const text=linkedStatusLabel(r);
+    const titleLang=linkedStatusTitleLang(r);
     const localRoute=r.route.replace('/en/',`/${locale}/`);
-    items.push(`<a href="${localRoute}">${esc(text)}</a> <span class="status-badge">${esc(label)}</span>`);
+    /* lang wrapper keeps <span class="status-badge">{label}</span> intact for check_status_labels. */
+    items.push(`<a href="${localRoute}" lang="${titleLang}">${esc(text)}</a> <span lang="${locale}"><span class="status-badge">${esc(label)}</span></span>`);
   }
   return items.length?`<p class="rm-linked-status">${items.join(' ')}</p>`:'';
 }
@@ -438,4 +444,8 @@ document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('href')===u
 
 function changeLocale(next){if(!langs.includes(next))return;const parts=location.pathname.split('/').filter(Boolean);if(langs.includes(parts[0]))parts.shift();try{localStorage.setItem('cp-locale',next)}catch{}const isLab=parts.join('/')==='lab/knowledge-journey';const href='/'+next+'/'+(parts.length?parts.join('/')+'/':'')+(isLab?labViewQuery(location.search):location.search+location.hash);if(isLab){location.assign(href);return}navigate(href)}
 function bindLanguagePickers(scope=document){scope.querySelectorAll('.language-picker').forEach(picker=>{picker.addEventListener('toggle',()=>{if(picker.open)document.querySelectorAll('details[open]').forEach(other=>{if(other!==picker)other.open=false})});picker.addEventListener('focusout',()=>setTimeout(()=>{if(!picker.contains(document.activeElement))picker.open=false},0));picker.addEventListener('keydown',e=>{const options=[...picker.querySelectorAll('.locale-option')];const active=options.indexOf(document.activeElement);if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();picker.open=true;let index=e.key==='Home'?0:e.key==='End'?options.length-1:active<0?(e.key==='ArrowUp'?options.length-1:0):(active+(e.key==='ArrowUp'?-1:1)+options.length)%options.length;options[index].focus()}})});scope.querySelectorAll('.nav-group').forEach(group=>group.addEventListener('toggle',()=>{if(group.open)document.querySelectorAll('.language-picker[open]').forEach(p=>p.open=false)}))}
-if(location.pathname==='/'){let saved='en';try{saved=localStorage.getItem('cp-locale')||'en'}catch{}history.replaceState({},'','/'+(langs.includes(saved)?saved:'en')+'/'+location.search+location.hash)}render();
+if(typeof module!=='undefined'&&module.exports){
+  module.exports={roadmapCard,setTestLocale(next){if(langs.includes(next))locale=next}};
+}else{
+  if(location.pathname==='/'){let saved='en';try{saved=localStorage.getItem('cp-locale')||'en'}catch{}history.replaceState({},'','/'+(langs.includes(saved)?saved:'en')+'/'+location.search+location.hash)}render();
+}

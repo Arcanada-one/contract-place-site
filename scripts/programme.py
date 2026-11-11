@@ -284,10 +284,16 @@ def linked_status_label(doc: dict, locale: str) -> str:
     return catalogue_title_for_locale(doc, locale) or catalogue_title_for_locale(doc, "en") or ""
 
 
+def linked_status_title_lang(doc: dict, locale: str) -> str:
+    """Language of the catalogue title actually shown: page locale when declared, else English."""
+    return locale if catalogue_title_for_locale(doc, locale) else "en"
+
+
 def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
     """Last child inside a roadmap field <dd>: catalogue link + badge per draft linked in that field.
 
     Mirrors src/site/app.js roadmapLinkedStatus. Source-order; one entry per record.
+    Badge carries the page-locale lang; title carries the language of the text shown.
     """
     from html import escape
 
@@ -311,10 +317,12 @@ def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
         seen.add(doc_id)
         label = STATUS_LABELS[status][locale]
         text = linked_status_label(doc, locale)
+        title_lang = linked_status_title_lang(doc, locale)
         local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
+        # lang on a wrapper keeps <span class="status-badge">{label}</span> intact for check_status_labels.
         items.append(
-            f'<a href="{local_route}">{escape(text)}</a> '
-            f'<span class="status-badge">{label}</span>'
+            f'<a href="{local_route}" lang="{title_lang}">{escape(text)}</a> '
+            f'<span lang="{locale}"><span class="status-badge">{label}</span></span>'
         )
     if not items:
         return ""
