@@ -299,8 +299,10 @@ class RoadmapCompiler(unittest.TestCase):
         self.assertIn(f"/blob/{self.commit}/papers/p.md", other["overview_html"])
 
     def test_card_prose_draft_link_gets_status_badge_in_each_locale(self):
-        """Badge sits in a sibling after the field; Gap prose stays contiguous for check_roadmap."""
+        """Linked-status line is last child inside the field <dd>; Gap prose stays contiguous for check_roadmap."""
+        from html.parser import HTMLParser
         from programme import (
+            catalogue_title_for_locale,
             localize_catalogue_links,
             roadmap_linked_status,
             STATUS_LABELS,
@@ -308,6 +310,31 @@ class RoadmapCompiler(unittest.TestCase):
         )
         from publication_checks import check_status_labels
         import check_roadmap as cr
+
+        class DlChildCheck(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.stack = []
+                self.bad = []
+                self.status_parents = []
+
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                parent = self.stack[-1] if self.stack else None
+                if tag == "p" and parent == "dl":
+                    self.bad.append("p-under-dl")
+                if attrs.get("class") == "rm-linked-status":
+                    self.status_parents.append(parent)
+                self.stack.append(tag)
+
+            def handle_endtag(self, tag):
+                if self.stack and self.stack[-1] == tag:
+                    self.stack.pop()
+                elif tag in self.stack:
+                    while self.stack and self.stack[-1] != tag:
+                        self.stack.pop()
+                    if self.stack:
+                        self.stack.pop()
 
         (self.source / "papers").mkdir()
         (self.source / "papers/draft.md").write_text("# Draft\n")
@@ -328,32 +355,54 @@ class RoadmapCompiler(unittest.TestCase):
             "status": "research-draft",
             "title": "Draft Catalogue Title",
             "titleRu": "Черновик каталога",
+            # no titleZhHans: zh-Hans must fall back to English catalogue title, never link text
         }]
         public = self.root / "public"
         gap_source = gap  # markdown form of the replaced Gap sentence
+        expected_titles = {
+            "en": "Draft Catalogue Title",
+            "ru": "Черновик каталога",
+            "zh-Hans": "Draft Catalogue Title",
+        }
+        # Fixture declares en + ru catalogue titles; zh-Hans falls back to English.
+        localized_title_locales = [
+            locale for locale in LOCALES if catalogue_title_for_locale(documents[0], locale)
+        ]
+        self.assertEqual(localized_title_locales, ["en", "ru"])
         for locale in LOCALES:
             body = localize_catalogue_links(field_html, documents, locale)
-            sibling = roadmap_linked_status(field_html, documents, locale)
+            status_line = roadmap_linked_status(field_html, documents, locale)
             label = STATUS_LABELS["research-draft"][locale]
             self.assertIn(f'href="/{locale}/science/draft/"', body)
             self.assertNotIn("status-badge", body)
-            self.assertIn('class="rm-linked-status"', sibling)
-            self.assertIn(f'<span class="status-badge">{label}</span>', sibling)
-            if locale == "zh-Hans":
-                self.assertIn(">draft manuscript</a>", sibling)
-            elif locale == "ru":
-                self.assertIn(">Черновик каталога</a>", sibling)
-            else:
-                self.assertIn(">Draft Catalogue Title</a>", sibling)
-            fragment = f'<dd class="source-body prose">{body}</dd>{sibling}'
+            self.assertIn('class="rm-linked-status"', status_line)
+            self.assertIn(f'<span class="status-badge">{label}</span>', status_line)
+            self.assertIn(f">{expected_titles[locale]}</a>", status_line)
+            self.assertNotIn(">draft manuscript</a>", status_line)
+            # Mirror prerender placement: linked-status is last child inside the same <dd>.
+            fragment = (
+                f'<dl class="roadmap-fields"><div><dt>Gap</dt>'
+                f'<dd class="source-body prose">{body}{status_line}</dd></div></dl>'
+            )
+            checker = DlChildCheck()
+            checker.feed(f"<main>{fragment}</main>")
+            self.assertEqual(checker.bad, [], f"{locale}: <p> must not be a direct child of <dl>")
+            self.assertEqual(checker.status_parents, ["dd"], f"{locale}: rm-linked-status must sit inside <dd>")
             stream = cr.tokens(" ".join(cr.Page(f"<main>{fragment}</main>").text))
             self.assertTrue(
                 cr.contains(stream, cr.tokens(cr.markdown_plain(gap_source))),
-                f"{locale}: Gap source tokens must stay contiguous despite the sibling badge",
+                f"{locale}: Gap source tokens must stay contiguous; badge tokens follow field text",
             )
             page = public / locale / "roadmap" / "index.html"
             page.parent.mkdir(parents=True, exist_ok=True)
             page.write_text(f"<main>{fragment}</main>", encoding="utf-8")
+        # Parse every written roadmap page: no <p> direct child of <dl>.
+        for locale in LOCALES:
+            page_html = (public / locale / "roadmap" / "index.html").read_text(encoding="utf-8")
+            checker = DlChildCheck()
+            checker.feed(page_html)
+            self.assertEqual(checker.bad, [], f"{locale} roadmap page has <p> under <dl>")
+            self.assertEqual(checker.status_parents, ["dd"])
         self.assertGreaterEqual(check_status_labels(public, documents), 3)
 
     def test_card_prose_link_without_status_has_no_badge(self):

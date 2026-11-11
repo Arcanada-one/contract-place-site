@@ -154,12 +154,16 @@ function localizeCatalogueLinks(html){
   }
   return html;
 }
-function catalogueTitleForLocale(r){
-  if(locale==='en')return r.title||'';
-  if(locale==='ru')return r.titleRu||'';
+function catalogueTitleForLocale(r,loc=locale){
+  if(loc==='en')return r.title||'';
+  if(loc==='ru')return r.titleRu||'';
   return r.titleZhHans||r.title_zh_Hans||'';
 }
-/* Sibling after a roadmap field: one catalogue link + badge per draft linked in that field (source order). */
+function linkedStatusLabel(r){
+  /* Catalogue title for the page locale, else English catalogue title. Never source link text. */
+  return catalogueTitleForLocale(r)||catalogueTitleForLocale(r,'en')||'';
+}
+/* Last child inside a roadmap field <dd>: one catalogue link + badge per draft linked in that field (source order). */
 function roadmapLinkedStatus(html){
   const localized=localizeCatalogueLinks(html);
   const byHref=new Map();
@@ -174,9 +178,7 @@ function roadmapLinkedStatus(html){
     const r=byHref.get(m[1]);if(!r)continue;
     const label=statusLabel(r);if(!label||seen.has(r.id))continue;
     seen.add(r.id);
-    const linkText=m[2].replace(/<[^>]+>/g,'');
-    const title=catalogueTitleForLocale(r);
-    const text=title||linkText;
+    const text=linkedStatusLabel(r);
     const localRoute=r.route.replace('/en/',`/${locale}/`);
     items.push(`<a href="${localRoute}">${esc(text)}</a> <span class="status-badge">${esc(label)}</span>`);
   }
@@ -234,7 +236,7 @@ function roadmapCard(k){
 const rel=[['roadmapRequires',k.requires],['roadmapNeededBy',k.needed_by],['roadmapInforms',k.informs],['roadmapInformedBy',k.informed_by]].filter(([,v],i)=>i<2||v.length).map(([key,v])=>`<div><dt>${t(key)}${key==='roadmapInforms'||key==='roadmapInformedBy'?` <small>(${t('roadmapInformsNoBlock')})</small>`:''}</dt><dd>${roadmapIds(v)}</dd></div>`).join('');
 const name=roadmapName(k.id);
 const subtitle=k.subtitle?` <span class="rm-subtitle" lang="en">${esc(k.subtitle)}</span>`:'';
-return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${localizeCatalogueLinks(f.html)}</dd>${roadmapLinkedStatus(f.html)}</div>`).join('')}</dl></article>`;
+return `<article class="roadmap-card" id="${k.anchor}" data-task-id="${k.id}" aria-labelledby="${k.anchor}-title"><h3 id="${k.anchor}-title"><a class="rm-name" href="#${k.anchor}" lang="${locale==='ru'?'ru':'en'}">${esc(name)}</a>${subtitle}</h3><div class="metadata"><span>${t('roadmapPriority')}: ${esc(k.priority_label||k.priority)}</span><span>${t('roadmapOwner')}: <span lang="en">${esc(k.owner)}</span></span><span class="rm-status">${t('roadmapStatus')}: ${t('roadmapPlannedStatus')}</span></div><dl class="roadmap-relations">${rel}</dl><dl class="roadmap-fields" lang="en">${k.fields.map(f=>`<div><dt>${esc(f.label)}</dt><dd class="source-body prose">${localizeCatalogueLinks(f.html)}${roadmapLinkedStatus(f.html)}</dd></div>`).join('')}</dl></article>`;
 }
 function roadmapPage(){
 const road=corpus.roadmap,pin=road.pin,ms=corpus.publication.commit,same=pin.commit===ms;

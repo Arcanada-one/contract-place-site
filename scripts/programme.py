@@ -279,8 +279,13 @@ def catalogue_title_for_locale(doc: dict, locale: str) -> str:
     return doc.get("titleZhHans") or doc.get("title_zh_Hans") or ""
 
 
+def linked_status_label(doc: dict, locale: str) -> str:
+    """Catalogue title for the page locale, else the English catalogue title. Never link text."""
+    return catalogue_title_for_locale(doc, locale) or catalogue_title_for_locale(doc, "en") or ""
+
+
 def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
-    """Sibling line after a roadmap field: catalogue link + badge per draft linked in that field.
+    """Last child inside a roadmap field <dd>: catalogue link + badge per draft linked in that field.
 
     Mirrors src/site/app.js roadmapLinkedStatus. Source-order; one entry per record.
     """
@@ -305,8 +310,7 @@ def roadmap_linked_status(html: str, documents: list[dict], locale: str) -> str:
             continue
         seen.add(doc_id)
         label = STATUS_LABELS[status][locale]
-        link_text = re.sub(r"<[^>]+>", "", match.group(2))
-        text = catalogue_title_for_locale(doc, locale) or link_text
+        text = linked_status_label(doc, locale)
         local_route = doc["route"].replace("/en/", f"/{locale}/", 1)
         items.append(
             f'<a href="{local_route}">{escape(text)}</a> '
