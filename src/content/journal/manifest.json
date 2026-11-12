@@ -19,6 +19,25 @@
           "sha256": "6ce4154acbf3f900732f2eb0772d307c421b22e46d74dcfbcc341bb4aefc2d83"
         }
       }
+    },
+    {
+      "slug": "control-for-topic-2026-11-12",
+      "date": "2026-11-12",
+      "folder": "2026-11-12-control-for-topic",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "590d21cb2c9345da8ae2193a14183de5fac8b7dd35bd9af7dcc00dac47d55611"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "d3bee4a921faaf996d73c08ee92478875cadee2375779b98e1db6c9289dd0547"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "bb0c1c3419c2f0e209553f92082b96d017de9986e276f4312e2f51a57aaf15f2"
+        }
+      }
     }
   ]
 }
