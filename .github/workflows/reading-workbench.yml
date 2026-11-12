@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: Apache-2.0
+# Temporary, read-only workbench for Pavel's 2026-11-12 site repair.
+name: Reading workbench
+on:
+  push:
+    branches: [fix/reader-localization-20261112]
+    paths: [.github/workflows/reading-workbench.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 6a6f202f7f70be2ad3aea3369e45409761708596
+          path: _knowledge
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export public Git objects without credentials or configuration
+        run: |
+          mkdir -p "$RUNNER_TEMP/reading-inputs"
+          git bundle create "$RUNNER_TEMP/reading-inputs/site.bundle" HEAD
+          git -C _knowledge fetch origin 9d20e72b7bf06c936718c80cff34c7d9307020cc:refs/heads/translation-review-source
+          git -C _knowledge bundle create "$RUNNER_TEMP/reading-inputs/knowledge.bundle" HEAD refs/heads/translation-review-source
+          printf '%s\n' "site=$GITHUB_SHA" 'knowledge=6a6f202f7f70be2ad3aea3369e45409761708596' 'translation-review-source=9d20e72b7bf06c936718c80cff34c7d9307020cc' > "$RUNNER_TEMP/reading-inputs/versions.txt"
+          cd "$RUNNER_TEMP/reading-inputs"
+          sha256sum *.bundle > SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reading-inputs
+          path: ${{ runner.temp }}/reading-inputs/
+          retention-days: 3
+          if-no-files-found: error
