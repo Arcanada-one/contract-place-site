@@ -1,0 +1,37 @@
+name: Reader refresh workbench
+on:
+  push:
+    branches: [kc-brain/reader-refresh-20261112]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: site
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 6a6f202f7f70be2ad3aea3369e45409761708596
+          path: knowledge
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: refs/pull/76/head
+          path: renditions-proposal
+          persist-credentials: false
+      - name: Archive public sources without Git credentials or metadata
+        run: |
+          tar --exclude=.git --exclude=node_modules -czf reader-sources.tar.gz site knowledge renditions-proposal
+          sha256sum reader-sources.tar.gz
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reader-sources
+          path: reader-sources.tar.gz
+          retention-days: 3
+          if-no-files-found: error
