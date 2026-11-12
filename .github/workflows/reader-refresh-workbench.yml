@@ -12,26 +12,29 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           path: site
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           repository: Arcanada-one/knowledge-contract
           ref: 6a6f202f7f70be2ad3aea3369e45409761708596
           path: knowledge
+          fetch-depth: 0
           persist-credentials: false
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          repository: Arcanada-one/knowledge-contract
-          ref: refs/pull/76/head
-          path: renditions-proposal
-          persist-credentials: false
-      - name: Archive public sources without Git credentials or metadata
+      - name: Preserve public Git objects, not checkout credentials
         run: |
-          tar --exclude=.git --exclude=node_modules -czf reader-sources.tar.gz site knowledge renditions-proposal
-          sha256sum reader-sources.tar.gz
+          git -C site bundle create ../site.bundle --all
+          git -C knowledge fetch origin refs/pull/76/head:refs/heads/renditions-proposal
+          git -C knowledge bundle create ../knowledge.bundle --all
+          curl --fail --retry 3 --location --output pandoc.deb https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-amd64.deb
+          echo 'caa7e0410f9e2cb1da2eb8db13cc97b5548fe455985e2c944e3929d22f99bcdc  pandoc.deb' | sha256sum -c -
+          sha256sum site.bundle knowledge.bundle
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: reader-sources
-          path: reader-sources.tar.gz
+          name: reader-build-inputs
+          path: |
+            site.bundle
+            knowledge.bundle
+            pandoc.deb
           retention-days: 3
           if-no-files-found: error
