@@ -38,6 +38,25 @@
           "sha256": "bb0c1c3419c2f0e209553f92082b96d017de9986e276f4312e2f51a57aaf15f2"
         }
       }
+    },
+    {
+      "slug": "verdict-is-not-a-test-2026-11-13",
+      "date": "2026-11-13",
+      "folder": "2026-11-13-verdict-is-not-a-test",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "cc060d822ca28e39e61638289243f9e1d5c8f4234313194b4df0a549fd070a38"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "cb090bbdc6d986c3e3bef0e8cf0c7418f489ed6a15bb9457203798a865ba5194"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "ed360172e1882fd30a2c4a3c1a4d287496045233f91c882a11f3cd078ff5ef3a"
+        }
+      }
     }
   ]
 }
