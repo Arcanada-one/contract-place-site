@@ -15,6 +15,27 @@ for(let i=1;i<=20;i++) {
   const id = 'CTX-R'+String(i).padStart(3,'0');
   for(const language of ['en','ru','zh-Hans']) t('localized '+id+' '+language,!!api.kcReadableRequirementLabel(id,language).includes(' — '));
 }
+// Clause-scoped editorial acceptance: these are labels, not substitute clauses.
+// Source: knowledge-contract@161a01af, engineering/specifications/context-package/SPECIFICATION.md,
+// exact EN blob 30ca8d2e. Assert what was actually missing in review 6857239243.
+const clauseCaptions = {
+  'CTX-R009': {en:'Reports bound to stage and subject revision',ru:'Привязка отчёта к этапу и редакции объекта оценки'},
+  'CTX-R010': {en:'Empty top-k does not prove global absence',ru:'Пустая выдача top-k не доказывает глобальное отсутствие'},
+  'CTX-R017': {ru:'Формат доставки и возможности читателя','zh-Hans':'交付格式与读者能力'},
+  'CTX-R018': {en:'Assessment names delivered package and requirements revision',ru:'Оценка указывает доставленный пакет и редакцию требований'},
+};
+for(const [id,localized] of Object.entries(clauseCaptions)) {
+  for(const [language,expected] of Object.entries(localized)) {
+    t('source-scoped '+id+' '+language,api.kcReadableRequirementLabel(id,language).endsWith(' — '+expected));
+  }
+}
+// A semantic mutant restores the prior, overbroad R010 English caption. It must
+// demonstrably violate the exact-source fixture, while structural tests stay green.
+const oldR010 = '"Empty search is not absence"';
+const exactR010 = '"Empty top-k does not prove global absence"';
+t('semantic mutant has unique target',cut.split(exactR010).length===2);
+const semanticMutant = vm.runInNewContext(cut.replace(exactR010,oldR010)+'\\n({kcReadableRequirementLabel})');
+t('semantic mutant is detected',!semanticMutant.kcReadableRequirementLabel('CTX-R010','en').endsWith(' — '+clauseCaptions['CTX-R010'].en));
 for(const bad of [null,17,'CTX-R000','CTX-R13','CTX-R013<script>','ctx-r013','CTX-R013.'])
  t('refuse bad '+String(bad),api.kcReadableRequirementLabel(bad,'ru')===null);
 t('unmapped BPK title remains canonical',api.kcReadableRequirementLabel('BPK-R001','ru')===null);
