@@ -5,7 +5,7 @@ slug: verdict-is-not-a-test-2026-11-13
 date: 2026-11-13
 lang: en
 title: "A research agent's verdict is not a test of known size"
-excerpt: "A study plants the truth in simulated data and scores what language-model research agents conclude. In worlds with nothing to find, they still reported a finding in 16% to 63% of cases, and one sentence in the brief moved the verdict."
+excerpt: "A study plants the truth in simulated data and scores what language-model research agents conclude. In simulated worlds with nothing to find, built without the repeated-value flaw of the earlier runs, three commercial research agents still claimed a finding in 34%, 16% and 44% of cases. A sentence about earlier research also changed verdicts on identical data."
 ---
 
 When an agent analyses data and reports that it found something, who decided that the finding is real? Usually the agent itself. A new study measures how often that decision is wrong when the right answer is known in advance. We have not reproduced it. Below is what it shows and why it matters for any rule about reusing a result.
