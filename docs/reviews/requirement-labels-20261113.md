@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Pavel Valentov and Knowledge Contract Arcana contributors
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Requirement labels: repair and build evidence, 13 November 2026
 
 ## Baseline and scope
