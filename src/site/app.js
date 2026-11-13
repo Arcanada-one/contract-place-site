@@ -228,6 +228,60 @@ function engineering(){
 return `<div class="container">${pageHead(t('docs'),t('engineeringIntro'))}<div class="publication-sections"><a class="record" href="${url('engineering/specifications')}"><div><h2>${t('specs')}</h2><p>${t('specIntro')}</p></div>${icon('arrow')}</a><a class="record" href="${url('engineering/studies')}"><div><h2>${t('studies')}</h2><p>${t('studyIntro')}</p></div>${icon('arrow')}</a></div><p class="intro-note">${t('integrationDesc')} ${link('appendices/api-integration',t('availability'))}</p></div>`;
 }
 function wiki(){return publicationList(['glossary','bibliography'],'reference','referenceIntro');}
+/* KC-READER-LABELS-BEGIN — source text, normative IDs and citations remain unchanged. */
+const kcRequirementTitles = {
+  'CTX-R001': ["Package contents and identity","Состав и идентичность пакета","上下文包内容与身份"],
+  'CTX-R002': ["Required subject and conditions","Предмет и условия требования","要求的对象与条件"],
+  'CTX-R003': ["Consistency of joint requirements","Согласованность совместных требований","联合要求的一致性"],
+  'CTX-R004': ["Omissions and unresolved dependencies","Пропуски и нерешённые зависимости","遗漏与未解决的依赖"],
+  'CTX-R005': ["Dependency closure with cycles","Замыкание зависимостей и циклы","依赖闭包与环"],
+  'CTX-R006': ["Verification of graph restrictions","Проверка ограничений графа","图约束的验证"],
+  'CTX-R007': ["Recalculation after changes","Пересчёт после изменений","变更后的重新计算"],
+  'CTX-R008': ["Limits of adding more context","Ограничения расширения контекста","增加上下文的限制"],
+  'CTX-R009': ["Linking reports to stages and versions","Привязка отчёта к этапу и версии","报告与阶段版本的绑定"],
+  'CTX-R010': ["Empty search is not absence","Пустой поиск не доказывает отсутствие","空搜索不代表不存在"],
+  'CTX-R011': ["Budget for the delivery context","Бюджет передаваемого контекста","交付上下文的预算"],
+  'CTX-R012': ["Measurement versus estimation","Оценка и измерение затрат","估算与测量的区别"],
+  'CTX-R013': ["Preserving protected units and uncertainty","Сохранение защищённых единиц и неопределённости","保留受保护单元与不确定性"],
+  'CTX-R014': ["Declared exclusions and losses","Указание исключений и потерь","说明排除项与损失"],
+  'CTX-R015': ["Handling an oversized dependency closure","Обработка превышения бюджета зависимостей","处理依赖闭包超出预算"],
+  'CTX-R016': ["No silent loss of mandatory conditions","Запрет скрытого удаления обязательных условий","禁止静默删除强制条件"],
+  'CTX-R017': ["Delivery format and reader capability","Формат выдачи и возможности получателя","交付格式与接收者能力"],
+  'CTX-R018': ["Binding assessment to the delivered version","Привязка оценки к выданной версии","评估与交付版本的绑定"],
+  'CTX-R019': ["Required negative acceptance scenarios","Обязательные отрицательные сценарии","必需的反向验收场景"],
+  'CTX-R020': ["Package construction versus downstream use","Сборка пакета и последующее применение","包构建与后续使用的区别"],
+};
+function kcReadableRequirementLabel(code, lang) {
+  if (typeof code !== 'string') return null;
+  const match = /^([A-Z][A-Z0-9-]{1,15}-R)([0-9]{3})$/.exec(code);
+  if (!match || Number(match[2]) === 0) return null;
+  const index = lang === 'ru' ? 1 : lang === 'zh-Hans' ? 2 : 0;
+  const generic = ['Requirement', 'Требование', '要求'][index];
+  const title = kcRequirementTitles[code]?.[index];
+  return generic + ' ' + Number(match[2]) + (title ? ' — ' + title : '');
+}
+function kcDecorateRequirementMarkers(root, lang) {
+  if (!root || typeof root.querySelectorAll !== 'function') return 0;
+  let transformed = 0;
+  for (const element of root.querySelectorAll('.source-body strong')) {
+    if (!element || !element.textContent || element.dataset?.requirementId) continue;
+    const original = element.textContent.trim();
+    if (!original.endsWith('.')) continue;
+    const code = original.slice(0, -1);
+    const label = kcReadableRequirementLabel(code, lang);
+    if (!label) continue;
+    element.setAttribute('data-requirement-id', code);
+    element.setAttribute('lang', lang);
+    element.setAttribute('title', code);
+    element.setAttribute('aria-label', label + ' (' + code + ')');
+    element.textContent = label + '.';
+    element.classList.add('kc-readable-requirement');
+    transformed++;
+  }
+  return transformed;
+}
+/* KC-READER-LABELS-END */
+
 function sourceRecord(r){
 const family=recordPath(r).split('/').slice(0,-1).join('/'),familyLabel=recordLabel(r),siblings=corpus.records.filter(s=>s.kind===r.kind);
 const cited='Pavel Valentov. '+r.title+'. Knowledge Contract Arcana, edition '+corpus.publication.edition+'.';
@@ -447,6 +501,8 @@ else if(path.startsWith('research/')&&refs.find(r=>r.id===parts[1])){const r=ref
 else{html=`<div class="container">${pageHead('404',t('notFound'))}${link('',t('backHome'),'button')}</div>`;title='404'}
 document.querySelector('#main').innerHTML=html;document.title=title+' — contract.place';document.querySelector('meta[name="description"]').content=description||t('heroDesc');
 bindFilters();bindLanguagePickers();if(path==='search'&&window.KcpSearch&&window.KcpSearch.mount)window.KcpSearch.mount(document);
+// Browser-only progressive enhancement: prerender keeps the exact canonical body.
+if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>kcDecorateRequirementMarkers(document.querySelector('#main'),locale));
 document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('href')===url(path.split('/')[0]))n.setAttribute('aria-current','page')});
 }
 

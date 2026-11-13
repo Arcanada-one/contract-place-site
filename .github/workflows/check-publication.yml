@@ -84,6 +84,7 @@ jobs:
           PROGRAMME_SOURCE_DIR=_knowledge-source python3 -B scripts/test_programme.py
           python3 -B scripts/test_rendition_preamble.py
           node scripts/test_search.js
+          node scripts/test_reader_labels.js
           node scripts/test_lab.js
           node scripts/test_analytics.js
       - name: Check out the exact English source pin for reviewed-file regression
