@@ -209,3 +209,7 @@ html[data-theme=dark] {--reader-link:#83dce3;--reader-hover:#b5f4f6;--reader-vis
  .header-inner .locale-flags{grid-column:1/-1;grid-row:2;justify-self:end}
 }
 @media(forced-colors:active) {.locale-chip[aria-current=page]{border-color:CanvasText}:is(a,button,input,select,summary):focus-visible{outline-color:Highlight}}
+
+/* Accessible reader label, with source requirement ID preserved in data-requirement-id. */
+.source-body .kc-readable-requirement{display:inline;padding:.08em .32em;border-radius:.25rem;background:var(--subtle);color:var(--ink);font:600 .91em/1.5 var(--sans);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.source-body .kc-readable-requirement:hover{background:var(--teal-soft)}

@@ -238,8 +238,8 @@ const kcRequirementTitles = {
   'CTX-R006': ["Verification of graph restrictions","Проверка ограничений графа","图约束的验证"],
   'CTX-R007': ["Recalculation after changes","Пересчёт после изменений","变更后的重新计算"],
   'CTX-R008': ["Limits of adding more context","Ограничения расширения контекста","增加上下文的限制"],
-  'CTX-R009': ["Linking reports to stages and versions","Привязка отчёта к этапу и версии","报告与阶段版本的绑定"],
-  'CTX-R010': ["Empty search is not absence","Пустой поиск не доказывает отсутствие","空搜索不代表不存在"],
+  'CTX-R009': ["Linking reports to stages and versions","Привязка отчёта к этапу и версии","报告绑定阶段与对象修订版"],
+  'CTX-R010': ["Empty search is not absence","Пустой поиск не доказывает отсутствие","空的 top-k 结果不证明全局不存在"],
   'CTX-R011': ["Budget for the delivery context","Бюджет передаваемого контекста","交付上下文的预算"],
   'CTX-R012': ["Measurement versus estimation","Оценка и измерение затрат","估算与测量的区别"],
   'CTX-R013': ["Preserving protected units and uncertainty","Сохранение защищённых единиц и неопределённости","保留受保护单元与不确定性"],
@@ -247,8 +247,8 @@ const kcRequirementTitles = {
   'CTX-R015': ["Handling an oversized dependency closure","Обработка превышения бюджета зависимостей","处理依赖闭包超出预算"],
   'CTX-R016': ["No silent loss of mandatory conditions","Запрет скрытого удаления обязательных условий","禁止静默删除强制条件"],
   'CTX-R017': ["Delivery format and reader capability","Формат выдачи и возможности получателя","交付格式与接收者能力"],
-  'CTX-R018': ["Binding assessment to the delivered version","Привязка оценки к выданной версии","评估与交付版本的绑定"],
-  'CTX-R019': ["Required negative acceptance scenarios","Обязательные отрицательные сценарии","必需的反向验收场景"],
+  'CTX-R018': ["Binding assessment to the delivered version","Привязка оценки к выданной версии","评估绑定交付包与要求修订版"],
+  'CTX-R019': ["Required negative acceptance scenarios","Обязательные отрицательные сценарии","必需的验收情形"],
   'CTX-R020': ["Package construction versus downstream use","Сборка пакета и последующее применение","包构建与后续使用的区别"],
 };
 function kcReadableRequirementLabel(code, lang) {
@@ -273,8 +273,13 @@ function kcDecorateRequirementMarkers(root, lang) {
     element.setAttribute('data-requirement-id', code);
     element.setAttribute('lang', lang);
     element.setAttribute('title', code);
-    element.setAttribute('aria-label', label + ' (' + code + ')');
     element.textContent = label + '.';
+    // The implicit strong role prohibits aria-label. Keep the source ID in
+    // ordinary accessible text, using the existing visually-hidden utility.
+    const sourceId = element.ownerDocument.createElement('span');
+    sourceId.className = 'sr-only';
+    sourceId.textContent = ' (' + code + ')';
+    element.appendChild(sourceId);
     element.classList.add('kc-readable-requirement');
     transformed++;
   }
