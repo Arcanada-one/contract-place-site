@@ -258,7 +258,10 @@ function kcReadableRequirementLabel(code, lang) {
   const index = lang === 'ru' ? 1 : lang === 'zh-Hans' ? 2 : 0;
   const generic = ['Requirement', 'Требование', '要求'][index];
   const title = kcRequirementTitles[code]?.[index];
-  return generic + ' ' + Number(match[2]) + (title ? ' — ' + title : '');
+  // Presentation captions are reviewed only for the 20 mapped CTX codes.
+  // Other requirement families must retain their visible, citable source IDs.
+  if (!title) return null;
+  return generic + ' ' + Number(match[2]) + ' — ' + title;
 }
 function kcDecorateRequirementMarkers(root, lang) {
   if (!root || typeof root.querySelectorAll !== 'function') return 0;
