@@ -34,7 +34,7 @@ for(const [id,localized] of Object.entries(clauseCaptions)) {
 const oldR010 = '"Empty search is not absence"';
 const exactR010 = '"Empty top-k does not prove global absence"';
 t('semantic mutant has unique target',cut.split(exactR010).length===2);
-const semanticMutant = vm.runInNewContext(cut.replace(exactR010,oldR010)+'\\n({kcReadableRequirementLabel})');
+const semanticMutant = vm.runInNewContext(cut.replace(exactR010,oldR010)+'\n({kcReadableRequirementLabel})');
 t('semantic mutant is detected',!semanticMutant.kcReadableRequirementLabel('CTX-R010','en').endsWith(' — '+clauseCaptions['CTX-R010'].en));
 for(const bad of [null,17,'CTX-R000','CTX-R13','CTX-R013<script>','ctx-r013','CTX-R013.'])
  t('refuse bad '+String(bad),api.kcReadableRequirementLabel(bad,'ru')===null);
