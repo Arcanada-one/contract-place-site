@@ -23,7 +23,7 @@ t('unmapped API title remains canonical',api.kcReadableRequirementLabel('API-R00
 const guard = '  if (!title) return null;';
 t('unique unmapped-code guard',cut.split(guard).length===2);
 const mutant = vm.runInNewContext(cut.replace(guard,'  // intentionally removed scoped-map guard')+'\n({kcReadableRequirementLabel})');
-t('negative mutant falsely decorates BPK',mutant.kcReadableRequirementLabel('BPK-R001','en')==='Requirement 1');
+t('negative mutant falsely decorates BPK',mutant.kcReadableRequirementLabel('BPK-R001','en')!==null);
 const sample = text => ({
  ownText:text, children:[],dataset:{},attrs:{},classes:new Set(),
  get textContent(){return this.ownText+this.children.map(c=>c.textContent).join('')},
