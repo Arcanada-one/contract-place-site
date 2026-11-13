@@ -1,0 +1,16 @@
+# Reader-facing requirement identifiers
+
+Date: 13 November 2026. Reader-interface proposal against site commit `98b3f6ab365b29571dc0ded0b8db0a8eeb9cac82`.
+
+The canonical specification **must retain** stable requirement identifiers (e.g., `CTX-R013`) for machine use, references, citations, review, and exact source verification. But human readers should not see a line starting only with an opaque identifier.
+
+This change adds a browser-side *presentation-only* layer. The stable prefix/numeric identifier is kept in `data-requirement-id`, hover title, and ordinary accessible text in a visually-hidden span. The visible text becomes `Требование 13 — Сохранение защищённых единиц и неопределённости` in Russian, with English and Simplified Chinese equivalents. All 20 context-package requirements have short interpretive labels derived from the exact source at publication commit `161a01afb1b756adf059ea2e1cbdd0dca29d83a2`. **Only the 20 reviewed `CTX-R001`–`CTX-R020` codes are decorated.** Other requirement families (`BPK-R001`, `API-R001`, etc.) retain their original visible identifiers and are never replaced by a bare generic ordinal. This prevents a sighted reader on a touch device from losing the citation key. The CTX IDs remain ordinary accessible text inside the source-ID span; their visual discoverability without hover remains a separate usability limitation requiring browser review.
+
+The printed source paragraph is not changed in `r.html` or the generated HTML source. This intentionally preserves the project's source-bound publication check and keeps scientific claims unmodified. The browser-only enhancement executes after render if `requestAnimationFrame` exists, and on SPA rerenders. Without JavaScript the canonical identifier remains visible. The requirement number remains metadata, not a link or permission.
+
+This **does not translate the English manuscript**. RU/ZH renderings are still English fallbacks unless a pinned, reviewed rendition is published. Translation drafts already exist in Knowledge Contract `main`, but those have `translation_status: author-draft` and must be reconciled with the pinned English source and independently reviewed before an edition is promoted. A separate canonical rendition proposal is necessary.
+
+The unit harness tests 20 × 3 localized labels, invalid IDs, exact original-ID retention, preservation of unmodified text, reentrant idempotency, and browser-only invocation. Original identifiers remain text in the accessibility tree through the existing `sr-only` utility; the `<strong>` element receives no prohibited `aria-label` or `aria-labelledby` name. The harness checks accessible text retention, absence of these prohibited attributes, no duplicate identifier after repeated decoration, and a new localized SPA body. Full browser/manual visual testing and release are separate gates.
+
+The accessibility correction follows [WAI-ARIA 1.2: strong role](https://www.w3.org/TR/wai-aria-1.2/#strong) and [ARIA in HTML](https://www.w3.org/TR/html-aria/#el-strong). The simplified Chinese captions for requirements 9, 10, 18 and 19 explicitly retain the subject revision, top-k/global scope, delivered package and requirements revision, and required acceptance cases. These remain concise editorial descriptions of the unchanged source clauses.
+
