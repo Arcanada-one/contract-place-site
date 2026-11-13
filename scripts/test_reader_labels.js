@@ -17,7 +17,13 @@ for(let i=1;i<=20;i++) {
 }
 for(const bad of [null,17,'CTX-R000','CTX-R13','CTX-R013<script>','ctx-r013','CTX-R013.'])
  t('refuse bad '+String(bad),api.kcReadableRequirementLabel(bad,'ru')===null);
-t('generic unknown requirement',api.kcReadableRequirementLabel('ABC-R021','ru')==='Требование 21');
+t('unmapped BPK title remains canonical',api.kcReadableRequirementLabel('BPK-R001','ru')===null);
+t('unmapped API title remains canonical',api.kcReadableRequirementLabel('API-R001','zh-Hans')===null);
+// A guard-removal mutant must expose a generic fallback, which is unacceptable.
+const guard = '  if (!title) return null;';
+t('unique unmapped-code guard',cut.split(guard).length===2);
+const mutant = vm.runInNewContext(cut.replace(guard,'  // intentionally removed scoped-map guard')+'\n({kcReadableRequirementLabel})');
+t('negative mutant falsely decorates BPK',mutant.kcReadableRequirementLabel('BPK-R001','en')==='Requirement 1');
 const sample = text => ({
  ownText:text, children:[],dataset:{},attrs:{},classes:new Set(),
  get textContent(){return this.ownText+this.children.map(c=>c.textContent).join('')},
@@ -29,7 +35,9 @@ const sample = text => ({
 });
 const node = sample('CTX-R013.');
 const invalid = sample('CTX-R013<script>.');
-const root={querySelectorAll(selector){assert.equal(selector,'.source-body strong');return [node,invalid]}};
+const unmappedBpk = sample('BPK-R001.');
+const unmappedApi = sample('API-R001.');
+const root={querySelectorAll(selector){assert.equal(selector,'.source-body strong');return [node,invalid,unmappedBpk,unmappedApi]}};
 t('first pass modifies only valid marker',api.kcDecorateRequirementMarkers(root,'ru')===1);
 t('readable science-specific label',node.textContent.includes('Сохранение защищённых единиц'));
 t('original ID kept',node.attrs['data-requirement-id']==='CTX-R013' && node.attrs.title==='CTX-R013');
@@ -37,6 +45,8 @@ t('source ID retained as accessible text',node.children.length===1 && node.child
 t('strong is not given prohibited ARIA names',!Object.hasOwn(node.attrs,'aria-label') && !Object.hasOwn(node.attrs,'aria-labelledby'));
 t('language attribute',node.attrs.lang==='ru');
 t('original invalid untouched',invalid.textContent==='CTX-R013<script>.');
+t('visible BPK source ID untouched',unmappedBpk.textContent==='BPK-R001.' && unmappedBpk.children.length===0 && !Object.hasOwn(unmappedBpk.attrs,'data-requirement-id'));
+t('visible API source ID untouched',unmappedApi.textContent==='API-R001.' && unmappedApi.children.length===0 && !Object.hasOwn(unmappedApi.attrs,'data-requirement-id'));
 t('second pass idempotent',api.kcDecorateRequirementMarkers(root,'ru')===0);
 t('repeated decoration does not duplicate accessible source ID',node.children.length===1 && node.textContent.split('CTX-R013').length===2);
 const rerendered=sample('CTX-R013.');
