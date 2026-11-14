@@ -315,7 +315,7 @@ const WORDS = {
 export function mountRetainedObjectReader({ document: doc, root, transport = null, locale = doc.documentElement?.lang || 'en', ...options }) {
   if (!root || root.getAttribute('data-live-lab') !== 'knowledge-journey') throw failure('READER_ROOT_UNAVAILABLE');
   mounts.get(root)?.destroy();
-  const words = WORDS[locale] || WORDS.en;
+  const words = typeof locale === 'string' && Object.hasOwn(WORDS, locale) ? WORDS[locale] : WORDS.en;
   const node = (tag, text, attrs = {}) => {
     const value = doc.createElement(tag);
     for (const [key, attribute] of Object.entries(attrs)) value.setAttribute(key, attribute);

@@ -303,3 +303,23 @@ test('explicit mount renders only inert text and clears on hiding, replacement a
   assert.equal(root.all(node => node.getAttribute('data-lab-retained-reader') !== null).length, 0);
   assert.equal(root.firstChild, start);
 });
+
+test('retained viewer locales reject inherited keys and do not coerce non-string values', () => {
+  // Never consult Object.prototype for locale strings such as "__proto__".
+  // A hostile object must not be string-coerced during an explicit mount.
+  const hostileLocale = { toString() { throw new Error('locale must not be coerced'); } };
+  for (const [locale, title] of [
+    ['__proto__', 'Retained source files'],
+    ['constructor', 'Retained source files'],
+    ['toString', 'Retained source files'],
+    [hostileLocale, 'Retained source files'],
+    ['ru', 'Сохранённые файлы источника'],
+    ['zh-Hans', '保留的来源文件'],
+  ]) {
+    const { doc, root } = documentDouble(locale);
+    const mount = mountRetainedObjectReader({ document: doc, root });
+    assert.ok(root.textContent.includes(title), 'title resolves only from owned locale keys');
+    assert.equal(root.all(node => node.getAttribute('data-lab-retained-reader') !== null).length, 1);
+    mount.destroy();
+  }
+});
