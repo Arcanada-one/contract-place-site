@@ -186,6 +186,28 @@ test('changed byte content, representation headers and failed identity recheck a
   }
 });
 
+test('retained reads refuse missing, inline or parameterized Content-Disposition', async () => {
+  // The private byte endpoint is an attachment only; a matching digest or
+  // otherwise valid response does not relax its exact representation contract.
+  for (const disposition of [null, 'inline', 'attachment; filename="source.md"']) {
+    const view = controller(transport({
+      read: async () => {
+        const response = bytes();
+        if (disposition === null) response.headers.delete('content-disposition');
+        else response.headers.set('content-disposition', disposition);
+        return response;
+      },
+    }));
+    assert.equal((await view.refresh()).status, 'listed');
+    const refused = await view.open(object.id);
+    assert.equal(refused.status, 'unavailable', String(disposition));
+    assert.equal(refused.reason, 'OBJECT_CHANGED', String(disposition));
+    assert.equal(refused.inspection, null);
+    assert.deepEqual(refused.objects, []);
+    view.destroy();
+  }
+});
+
 test('unlisted ids and non-private replies are not used as a byte-reading authority', async () => {
   let reads = 0;
   const view = controller(transport({ read: async () => { reads += 1; return bytes(); } }));
