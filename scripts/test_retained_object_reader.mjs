@@ -147,7 +147,7 @@ test('lists and reads exact native representations with identity checks before a
   view.destroy();
 });
 
-test('identity without a grant never exposes list bytes or old private details', async () => {
+test('denied object reads clear old private details even with a valid identity', async () => {
   let deny = false;
   const view = controller(transport({
     read: async () => deny
