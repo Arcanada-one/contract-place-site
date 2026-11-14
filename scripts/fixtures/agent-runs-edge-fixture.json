@@ -1,0 +1,628 @@
+{
+ "profile": "knowledge-collective-observation/v1",
+ "data_class": "fixture",
+ "note": "SYNTHETIC TEST FIXTURE ONLY. Not a task, not a run, not producer data. Shared compatibility records plus one added work node and one typed edge so the edge rendering branch is exercised.",
+ "derived_from": {
+  "repo": "Arcanada-one/arcanada-shared",
+  "pull_request": 120,
+  "sha": "46ab74e636993c6fca3ff31b9f030534f5e64876",
+  "records": [
+   "run",
+   "snapshot-colliding-ids"
+  ],
+  "additions": [
+   "work node-2",
+   "work edge synthetic-edge-1 (depends_on node-1 -> node-2, evidence fixture:evidence-edge)",
+   "source-asserted PASS on work node-1"
+  ]
+ },
+ "mode": "replay",
+ "extensions": [
+  "lossless-decimal-counters/v1"
+ ],
+ "view_context": {
+  "project_id": "fixture-project",
+  "run_id": "fixture-lab-run",
+  "authorized_view_scope": "opaque-view-A",
+  "stream_epoch": "epoch-A"
+ },
+ "records": [
+  {
+   "profile": "knowledge-collective-observation/v1",
+   "record_type": "run",
+   "record_id": "run",
+   "mode": "fixture",
+   "view_context": {
+    "project_id": "fixture-project",
+    "run_id": "fixture-lab-run",
+    "authorized_view_scope": "opaque-view-A",
+    "stream_epoch": "epoch-A"
+   },
+   "producer": {
+    "service": "lab",
+    "instance_id": "fixture-lab-instance",
+    "build": {
+     "repository": "Arcanada-one/arcanada-workspace",
+     "commit": "df8756868c6fb0c322f917d00d0612b3eca8e887",
+     "adapter_revision": "PROPOSED-v1-FIXTURE"
+    }
+   },
+   "observed_at": "2000-01-01T00:00:00Z",
+   "recorded_at": "2000-01-01T00:00:00Z",
+   "evidence_basis": "fixture",
+   "data": {
+    "kind": "agent",
+    "root_task": {
+     "graph_kind": "work",
+     "authority": "muneral",
+     "namespace": "fixture-project",
+     "local_id": "task-1",
+     "revision": null
+    },
+    "owner_subject_id": "fixture-subject-A",
+    "environment": "fixture-only",
+    "selected_profile": "knowledge-collective-observation/v1",
+    "source_pins": [
+     {
+      "repository": "Arcanada-one/muneral",
+      "commit": "6d786dca224c4dfcf13ca14693a032c9ab53343f",
+      "path": "apps/api/prisma/schema.prisma"
+     }
+    ],
+    "budgets": {
+     "policy_ref": "fixture:budget-policy",
+     "max_attempts": "2"
+    },
+    "retention": {
+     "policy_ref": "fixture:retention",
+     "expires_at": null
+    },
+    "current_cursor": "9007199254740992",
+    "connection": "connected",
+    "freshness": {
+     "state": "awaiting_snapshot",
+     "as_of": null,
+     "reason": "Initial snapshot is required."
+    },
+    "native_state": null,
+    "acceptance": {
+     "verdict": "NOT_MEASURED",
+     "claim_ids": [
+      "CL12",
+      "CL17"
+     ],
+     "scope_ref": "fixture:case-scope",
+     "checks": [],
+     "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+     "observation": {
+      "subject_ref": null,
+      "subject_revision": null,
+      "assessed_property": "independent-result-acceptance",
+      "criterion_revision": null,
+      "method_ref": null,
+      "observer_id": null,
+      "observed_at": null,
+      "grounds": [],
+      "limits": [
+       "Fixture preparation only; no actual source/runtime assessment is present."
+      ],
+      "source_unknowns": [
+       "subject_ref",
+       "subject_revision",
+       "criterion_revision",
+       "method_ref",
+       "observer_id",
+       "observed_at",
+       "grounds"
+      ],
+      "upstream_status": {
+       "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+       "assessment": "unknown",
+       "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+      },
+      "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+     },
+     "decision_evidence_ref": null,
+     "decision_policy_ref": null
+    }
+   },
+   "required_extensions": [
+    "lossless-decimal-counters/v1"
+   ]
+  },
+  {
+   "profile": "knowledge-collective-observation/v1",
+   "record_type": "snapshot",
+   "record_id": "snapshot-colliding-ids",
+   "mode": "fixture",
+   "view_context": {
+    "project_id": "fixture-project",
+    "run_id": "fixture-lab-run",
+    "authorized_view_scope": "opaque-view-A",
+    "stream_epoch": "epoch-A"
+   },
+   "producer": {
+    "service": "lab",
+    "instance_id": "fixture-lab-instance",
+    "build": {
+     "repository": "Arcanada-one/arcanada-workspace",
+     "commit": "df8756868c6fb0c322f917d00d0612b3eca8e887",
+     "adapter_revision": "PROPOSED-v1-FIXTURE"
+    }
+   },
+   "observed_at": "2000-01-01T00:00:00Z",
+   "recorded_at": "2000-01-01T00:00:00Z",
+   "evidence_basis": "fixture",
+   "data": {
+    "watermark": "9007199254740992",
+    "snapshot_kind": "full",
+    "trusted_snapshot_ref": "fixture:trusted-snapshot",
+    "plan_revision": "plan-A",
+    "source_revisions": [
+     {
+      "authority": "muneral",
+      "scope_ref": "fixture-project",
+      "versions": {
+       "revision": "7",
+       "aggregateVersion": "9007199254740992"
+      },
+      "observed_at": "2000-01-01T00:00:00Z",
+      "evidence_ref": "fixture:authoritative-read"
+     }
+    ],
+    "coverage": {
+     "extent": "declared_authorized_projection",
+     "declared_graph_kinds": [
+      "processing_execution",
+      "contract_receipt_chain",
+      "knowledge",
+      "work"
+     ],
+     "complete": true,
+     "next_page_token": null
+    },
+    "source_atomicity": "not_established",
+    "atomicity_evidence_ref": null,
+    "graphs": [
+     {
+      "graph_kind": "processing_execution",
+      "authority": "doclab",
+      "graph_revision": "fixture-graph-1",
+      "nodes": [
+       {
+        "ref": {
+         "graph_kind": "processing_execution",
+         "authority": "doclab",
+         "namespace": "fixture-project",
+         "local_id": "node-1",
+         "revision": null
+        },
+        "node_type": "run",
+        "native_state": {
+         "authority": "doclab",
+         "value": "QUEUED",
+         "reason": null
+        },
+        "native_versions": {},
+        "acceptance": {
+         "verdict": "NOT_MEASURED",
+         "claim_ids": [
+          "CL09"
+         ],
+         "scope_ref": "fixture:case-scope",
+         "checks": [],
+         "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+         "observation": {
+          "subject_ref": null,
+          "subject_revision": null,
+          "assessed_property": "independent-result-acceptance",
+          "criterion_revision": null,
+          "method_ref": null,
+          "observer_id": null,
+          "observed_at": null,
+          "grounds": [],
+          "limits": [
+           "Fixture preparation only; no actual source/runtime assessment is present."
+          ],
+          "source_unknowns": [
+           "subject_ref",
+           "subject_revision",
+           "criterion_revision",
+           "method_ref",
+           "observer_id",
+           "observed_at",
+           "grounds"
+          ],
+          "upstream_status": {
+           "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+           "assessment": "unknown",
+           "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+          },
+          "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+         },
+         "decision_evidence_ref": null,
+         "decision_policy_ref": null
+        },
+        "evidence_refs": [
+         "fixture:evidence-node"
+        ],
+        "attributes": {}
+       }
+      ],
+      "edges": []
+     },
+     {
+      "graph_kind": "contract_receipt_chain",
+      "authority": "pipeline_receipts",
+      "graph_revision": "fixture-graph-1",
+      "nodes": [
+       {
+        "ref": {
+         "graph_kind": "contract_receipt_chain",
+         "authority": "pipeline_receipts",
+         "namespace": "fixture-project",
+         "local_id": "node-1",
+         "revision": null
+        },
+        "node_type": "receipt_chain",
+        "native_state": null,
+        "native_versions": {},
+        "acceptance": {
+         "verdict": "NOT_MEASURED",
+         "claim_ids": [
+          "CL09"
+         ],
+         "scope_ref": "fixture:case-scope",
+         "checks": [],
+         "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+         "observation": {
+          "subject_ref": null,
+          "subject_revision": null,
+          "assessed_property": "independent-result-acceptance",
+          "criterion_revision": null,
+          "method_ref": null,
+          "observer_id": null,
+          "observed_at": null,
+          "grounds": [],
+          "limits": [
+           "Fixture preparation only; no actual source/runtime assessment is present."
+          ],
+          "source_unknowns": [
+           "subject_ref",
+           "subject_revision",
+           "criterion_revision",
+           "method_ref",
+           "observer_id",
+           "observed_at",
+           "grounds"
+          ],
+          "upstream_status": {
+           "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+           "assessment": "unknown",
+           "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+          },
+          "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+         },
+         "decision_evidence_ref": null,
+         "decision_policy_ref": null
+        },
+        "evidence_refs": [
+         "fixture:evidence-node"
+        ],
+        "attributes": {}
+       }
+      ],
+      "edges": []
+     },
+     {
+      "graph_kind": "knowledge",
+      "authority": "kc",
+      "graph_revision": "fixture-graph-1",
+      "nodes": [
+       {
+        "ref": {
+         "graph_kind": "knowledge",
+         "authority": "kc",
+         "namespace": "fixture-project",
+         "local_id": "node-1",
+         "revision": null
+        },
+        "node_type": "candidate",
+        "native_state": null,
+        "native_versions": {},
+        "acceptance": {
+         "verdict": "NOT_MEASURED",
+         "claim_ids": [
+          "CL09"
+         ],
+         "scope_ref": "fixture:case-scope",
+         "checks": [],
+         "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+         "observation": {
+          "subject_ref": null,
+          "subject_revision": null,
+          "assessed_property": "independent-result-acceptance",
+          "criterion_revision": null,
+          "method_ref": null,
+          "observer_id": null,
+          "observed_at": null,
+          "grounds": [],
+          "limits": [
+           "Fixture preparation only; no actual source/runtime assessment is present."
+          ],
+          "source_unknowns": [
+           "subject_ref",
+           "subject_revision",
+           "criterion_revision",
+           "method_ref",
+           "observer_id",
+           "observed_at",
+           "grounds"
+          ],
+          "upstream_status": {
+           "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+           "assessment": "unknown",
+           "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+          },
+          "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+         },
+         "decision_evidence_ref": null,
+         "decision_policy_ref": null
+        },
+        "evidence_refs": [
+         "fixture:evidence-node"
+        ],
+        "attributes": {}
+       }
+      ],
+      "edges": []
+     },
+     {
+      "graph_kind": "work",
+      "authority": "muneral",
+      "graph_revision": "fixture-graph-1",
+      "nodes": [
+       {
+        "ref": {
+         "graph_kind": "work",
+         "authority": "muneral",
+         "namespace": "fixture-project",
+         "local_id": "node-1",
+         "revision": null
+        },
+        "node_type": "task",
+        "native_state": {
+         "authority": "muneral",
+         "value": "todo",
+         "reason": null
+        },
+        "native_versions": {},
+        "acceptance": {
+         "verdict": "PASS",
+         "claim_ids": [
+          "CL09"
+         ],
+         "scope_ref": "fixture:case-scope",
+         "checks": [
+          {
+           "checker_id": "checker-1",
+           "checker_revision": "rev-1",
+           "method_ref": "fixture:method",
+           "verdict": "PASS",
+           "subject_refs": [
+            {
+             "graph_kind": "work",
+             "authority": "muneral",
+             "namespace": "fixture-project",
+             "local_id": "node-1",
+             "revision": null
+            }
+           ],
+           "evidence_refs": [
+            "fixture:check-evidence"
+           ],
+           "observed_at": "2000-01-01T00:00:00Z",
+           "reason": null,
+           "inapplicability_rule_ref": null
+          }
+         ],
+         "reason": null,
+         "observation": {
+          "subject_ref": {
+           "graph_kind": "work",
+           "authority": "muneral",
+           "namespace": "fixture-project",
+           "local_id": "node-1",
+           "revision": null
+          },
+          "subject_revision": "rev-1",
+          "assessed_property": "independent-result-acceptance",
+          "criterion_revision": "criterion-1",
+          "method_ref": "fixture:method",
+          "observer_id": "fixture-observer",
+          "observed_at": "2000-01-01T00:00:00Z",
+          "grounds": [
+           "fixture:ground"
+          ],
+          "limits": [
+           "Fixture preparation only; no actual source/runtime assessment is present."
+          ],
+          "source_unknowns": [],
+          "upstream_status": {
+           "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+           "assessment": "unknown",
+           "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+          },
+          "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+         },
+         "decision_evidence_ref": "fixture:decision-evidence",
+         "decision_policy_ref": "fixture:decision-policy"
+        },
+        "evidence_refs": [
+         "fixture:evidence-node"
+        ],
+        "attributes": {}
+       },
+       {
+        "ref": {
+         "graph_kind": "work",
+         "authority": "muneral",
+         "namespace": "fixture-project",
+         "local_id": "node-2",
+         "revision": null
+        },
+        "node_type": "task",
+        "native_state": {
+         "authority": "muneral",
+         "value": "todo",
+         "reason": null
+        },
+        "native_versions": {},
+        "acceptance": {
+         "verdict": "NOT_MEASURED",
+         "claim_ids": [
+          "CL09"
+         ],
+         "scope_ref": "fixture:case-scope",
+         "checks": [],
+         "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+         "observation": {
+          "subject_ref": null,
+          "subject_revision": null,
+          "assessed_property": "independent-result-acceptance",
+          "criterion_revision": null,
+          "method_ref": null,
+          "observer_id": null,
+          "observed_at": null,
+          "grounds": [],
+          "limits": [
+           "Fixture preparation only; no actual source/runtime assessment is present."
+          ],
+          "source_unknowns": [
+           "subject_ref",
+           "subject_revision",
+           "criterion_revision",
+           "method_ref",
+           "observer_id",
+           "observed_at",
+           "grounds"
+          ],
+          "upstream_status": {
+           "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+           "assessment": "unknown",
+           "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+          },
+          "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+         },
+         "decision_evidence_ref": null,
+         "decision_policy_ref": null
+        },
+        "evidence_refs": [
+         "fixture:evidence-node-2"
+        ],
+        "attributes": {}
+       }
+      ],
+      "edges": [
+       {
+        "edge_id": "synthetic-edge-1",
+        "kind": "depends_on",
+        "from": {
+         "graph_kind": "work",
+         "authority": "muneral",
+         "namespace": "fixture-project",
+         "local_id": "node-1",
+         "revision": null
+        },
+        "to": {
+         "graph_kind": "work",
+         "authority": "muneral",
+         "namespace": "fixture-project",
+         "local_id": "node-2",
+         "revision": null
+        },
+        "evidence_refs": [
+         "fixture:evidence-edge"
+        ]
+       }
+      ]
+     }
+    ],
+    "crosslinks": [
+     {
+      "link_id": "fixture-link-1",
+      "kind": "uses",
+      "from": {
+       "graph_kind": "work",
+       "authority": "muneral",
+       "namespace": "fixture-project",
+       "local_id": "node-1",
+       "revision": null
+      },
+      "to": {
+       "graph_kind": "knowledge",
+       "authority": "kc",
+       "namespace": "fixture-project",
+       "local_id": "node-1",
+       "revision": null
+      },
+      "association_ref": "fixture:explicit-use",
+      "evidence_refs": [
+       "fixture:explicit-use"
+      ]
+     }
+    ],
+    "allowed_actions_observation": [],
+    "reset": null,
+    "native_state": {
+     "authority": "muneral",
+     "value": "todo",
+     "reason": null
+    },
+    "acceptance": {
+     "verdict": "NOT_MEASURED",
+     "claim_ids": [
+      "CL12",
+      "CL09"
+     ],
+     "scope_ref": "fixture:case-scope",
+     "checks": [],
+     "reason": "No runtime or independent checker measurement is asserted by this fixture.",
+     "observation": {
+      "subject_ref": null,
+      "subject_revision": null,
+      "assessed_property": "independent-result-acceptance",
+      "criterion_revision": null,
+      "method_ref": null,
+      "observer_id": null,
+      "observed_at": null,
+      "grounds": [],
+      "limits": [
+       "Fixture preparation only; no actual source/runtime assessment is present."
+      ],
+      "source_unknowns": [
+       "subject_ref",
+       "subject_revision",
+       "criterion_revision",
+       "method_ref",
+       "observer_id",
+       "observed_at",
+       "grounds"
+      ],
+      "upstream_status": {
+       "profile_ref": "knowledge-contract/status-model@ea0c30575d56e793fb2875df47126ab3f6dc30ad",
+       "assessment": "unknown",
+       "reason": "No observation; NOT_MEASURED is the local case-reporting verdict, not a canonical KC assessment token."
+      },
+      "aggregation_policy_ref": "observation-v1:no-cross-dimension-aggregation"
+     },
+     "decision_evidence_ref": null,
+     "decision_policy_ref": null
+    }
+   },
+   "required_extensions": [
+    "lossless-decimal-counters/v1"
+   ]
+  }
+ ]
+}

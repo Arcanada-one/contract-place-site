@@ -86,6 +86,7 @@ jobs:
           node scripts/test_search.js
           node scripts/test_reader_labels.js
           node scripts/test_lab.js
+          node --test scripts/test_lab_observation.mjs
           node scripts/test_analytics.js
       - name: Check out the exact English source pin for reviewed-file regression
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

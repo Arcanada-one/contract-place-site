@@ -1,0 +1,7 @@
+/* Shared read-only observation inspector; no execution controls are enabled. */
+.live-lab .lab-observation-fields{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin-block:16px}
+.live-lab .lab-observation-fields dt{font-weight:600}.live-lab .lab-observation-fields dd{margin:0 0 10px;overflow-wrap:anywhere}
+.live-lab .lab-observation-select{display:block;max-width:100%;margin-block:8px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);text-align:start;overflow-wrap:anywhere;cursor:pointer}
+.live-lab .lab-observation-select[aria-pressed=true]{border-color:var(--teal)}
+.live-lab .lab-observation-select:focus-visible,.live-lab [id=knowledge-journey-observation-detail]:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.live-lab .lab-observation bdi,.live-lab [data-lab-observation-graph] bdi{overflow-wrap:anywhere}
