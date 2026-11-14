@@ -8,12 +8,12 @@ explicitly supplies a state. This change installs no reader or execution service
 
 ## One implementation of observations
 
-`src/site/lab/observation-inspector.b35b9e7e.js` is the unchanged browser inspector
+`src/site/lab/observation-inspector.87457463.js` is the unchanged browser inspector
 from `Arcanada-one/arcanada-shared` commit
-`3ae9a8649a63b545dc2385264d8ce8c4264c1f3c`, source path
+`99029fde7751c4496a54048265abee5c261d5f71`, source path
 `packages/access-contracts/browser/observation-inspector.js`.
 Its SHA-256 is
-`b35b9e7e30ee08c870434bfada3f77a596aac3d9d687e2017775f6cb31084b97`.
+`87457463074ec4d95c4fb0f424761809ddf0f616d9a4c1478485ceaf50174176`.
 The same bytes are used by Arcanada Agent Runs. A source pin is an identity; it is
 not independent acceptance of a new consumer or evidence of a deployment.
 
@@ -32,7 +32,7 @@ An integration includes the pinned stylesheet and imports the module from an ext
 ```
 
 ```js
-import { mountKnowledgeJourneyObservation } from '/lab/knowledge-journey-observation.js?v=a6b33aeec81c2c5b5287795c7ffa8d563519951fd659842c21cbe1c42e538f33';
+import { mountKnowledgeJourneyObservation } from '/lab/knowledge-journey-observation.js?v=c9ac4fcc276eef64e44d2939cd9c921c92e1383ffda2a786a351af548b4dfaf6';
 
 const root = document.querySelector('[data-live-lab="knowledge-journey"]');
 const surface = mountKnowledgeJourneyObservation({ document, root });
@@ -114,3 +114,12 @@ This candidate has not run a build, tests or a browser in its preparation
 environment. The ordinary build/CI and the real protected-reader integration must
 be measured separately. Current user-delegation and execution gaps are not solved
 by adding the inspector.
+
+The revised inspector reserves its exact detail ID and all three regions until
+disposal. A conflicting host element is preserved and the consumer displays an
+unavailable state; it can retry after the conflict is removed. The adapter and
+inspector both accept only their own string locale keys, so inherited property
+names fall back to English. The DOM double has document-wide ID lookup and loud
+HTML-sink refusal. Added integration cases cover conflict recovery and locale
+fallback on both successful projection and failure display. They remain pending
+the normal CI execution; they do not establish browser or native-run acceptance.

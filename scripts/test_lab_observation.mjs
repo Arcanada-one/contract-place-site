@@ -41,15 +41,20 @@ function edgeState() {
 }
 
 class Element {
-  constructor(tag, doc, text = '') { this.tag = tag; this.doc = doc; this.text = text; this.children = []; this.parent = null; this.attrs = {}; this.handlers = new Map(); }
+  constructor(tag, doc, text = '') { this.tag = tag; this.doc = doc; this.text = text; this.children = []; this.parent = null; this.attrs = Object.create(null); this.handlers = new Map(); }
   setAttribute(key, value) { this.attrs[key] = String(value); }
   getAttribute(key) { return this.attrs[key] ?? null; }
-  hasAttribute(key) { return key in this.attrs; }
+  hasAttribute(key) { return Object.hasOwn(this.attrs, key); }
   removeAttribute(key) { delete this.attrs[key]; }
   get id() { return this.getAttribute('id'); }
+  get ownerDocument() { return this.doc; }
   get tagName() { return this.tag.toUpperCase(); }
   get firstChild() { return this.children[0] || null; }
   get textContent() { return this.text + this.children.map(c => c.textContent).join(''); }
+  set textContent(value) { for (const child of this.children) child.parent = null; this.children = []; this.text = String(value); }
+  set innerHTML(_value) { throw new Error('executable-html-sink-in-inspector-double'); }
+  set outerHTML(_value) { throw new Error('executable-html-sink-in-inspector-double'); }
+  insertAdjacentHTML() { throw new Error('executable-html-sink-in-inspector-double'); }
   append(...nodes) { for (const node of nodes) { node.remove(); node.parent = this; this.children.push(node); } }
   removeChild(node) { const i = this.children.indexOf(node); if (i >= 0) this.children.splice(i, 1); node.parent = null; return node; }
   remove() { if (this.parent) this.parent.removeChild(this); }
@@ -72,7 +77,11 @@ function surface(locale = 'en') {
   const doc = { activeElement: null, documentElement: { lang: locale } };
   doc.createElement = tag => new Element(tag, doc);
   doc.createTextNode = text => new Element('#text', doc, String(text));
+  doc.body = doc.createElement('body');
+  doc.querySelectorAll = selector => doc.body.querySelectorAll(selector);
+  doc.getElementById = id => doc.querySelectorAll('[id]').find(node => node.id === id) || null;
   const node = doc.createElement('main');
+  doc.body.append(node);
   node.setAttribute('data-live-lab', 'knowledge-journey'); node.setAttribute('data-live-lab-state', 'unconnected');
   const input = doc.createElement('input'), start = doc.createElement('button');
   input.setAttribute('disabled', ''); start.setAttribute('disabled', ''); node.append(input, start);
@@ -270,4 +279,40 @@ test('raw records are not accepted as state and forbidden evidence references st
   assert.equal(controller.update(result.state).unconnected, true);
   assert.equal(s.root.querySelectorAll('[data-node-key]').length, 0);
   controller.destroy();
+});
+
+test('inherited and non-string locale keys fall back in both graph and failure labels', () => {
+  const state = edgeState();
+  for (const locale of ['__proto__', 'constructor', 'toString', ['ru']]) {
+    const s = surface(), controller = mountKnowledgeJourneyObservation({ ...s, state, locale });
+    assert.equal(s.root.getAttribute('data-lab-observation-state'), 'displayed');
+    assert.ok(s.regions.graph.textContent.includes('Observed view mode'));
+    assert.ok(buttons(s.regions.graph, 'node')[0].textContent.startsWith('Inspect'));
+    assert.deepEqual(controller.update({}), { unavailable: true });
+    assert.equal(s.regions.graph.querySelector('[data-lab-observation-failure]').textContent,
+      'Observation unavailable · NOT_MEASURED');
+    controller.destroy();
+  }
+});
+
+test('host-owned detail ID is preserved on conflict and the consumer recovers after removal', () => {
+  const s = surface(), state = edgeState();
+  const host = s.document.createElement('aside');
+  host.setAttribute('id', 'knowledge-journey-observation-detail'); host.textContent = 'host-owned detail';
+  s.document.body.append(host);
+  const controller = mountKnowledgeJourneyObservation({ ...s, state });
+  assert.equal(s.root.getAttribute('data-lab-observation-state'), 'unavailable');
+  assert.equal(s.document.getElementById('knowledge-journey-observation-detail'), host);
+  assert.equal(host.textContent, 'host-owned detail');
+  assert.equal(s.document.querySelectorAll('[id="knowledge-journey-observation-detail"]').length, 1);
+  assert.equal(s.root.querySelectorAll('[data-lab-observation-inspector]').length, 0);
+  assert.equal(s.root.querySelectorAll('[data-lab-observation-timeline]').length, 0);
+  assert.ok(s.placeholders.every(p => !p.hasAttribute('hidden') && !p.hasAttribute('data-lab-placeholder')));
+  host.remove();
+  assert.equal(controller.update(state).presentation.viewKind, 'fixture');
+  assert.equal(s.root.getAttribute('data-lab-observation-state'), 'displayed');
+  assert.equal(s.document.querySelectorAll('[id="knowledge-journey-observation-detail"]').length, 1);
+  assert.equal(s.regions.inspector.contains(s.document.getElementById('knowledge-journey-observation-detail')), true);
+  controller.destroy();
+  assert.equal(s.document.getElementById('knowledge-journey-observation-detail'), null);
 });

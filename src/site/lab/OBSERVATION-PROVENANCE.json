@@ -3,9 +3,9 @@
   "purpose": "Read-only rendering of an already decoded and scope-bound observation state; no reader or authority is installed.",
   "inspector": {
     "repository": "Arcanada-one/arcanada-shared",
-    "commit": "3ae9a8649a63b545dc2385264d8ce8c4264c1f3c",
+    "commit": "99029fde7751c4496a54048265abee5c261d5f71",
     "sourcePath": "packages/access-contracts/browser/observation-inspector.js",
-    "sha256": "b35b9e7e30ee08c870434bfada3f77a596aac3d9d687e2017775f6cb31084b97",
+    "sha256": "87457463074ec4d95c4fb0f424761809ddf0f616d9a4c1478485ceaf50174176",
     "review": "Shared PR143 source candidate; use the actual release decision, not this pin, for adoption."
   },
   "decoder_projectors": {
@@ -32,9 +32,9 @@
       "bytes": 198297
     },
     {
-      "path": "src/site/lab/observation-inspector.b35b9e7e.js",
-      "sha256": "b35b9e7e30ee08c870434bfada3f77a596aac3d9d687e2017775f6cb31084b97",
-      "bytes": 19887
+      "path": "src/site/lab/observation-inspector.87457463.js",
+      "sha256": "87457463074ec4d95c4fb0f424761809ddf0f616d9a4c1478485ceaf50174176",
+      "bytes": 21139
     },
     {
       "path": "src/site/lab/ACCESS-CONTRACTS-LICENSE",
@@ -53,8 +53,8 @@
     },
     {
       "path": "src/site/lab/knowledge-journey-observation.js",
-      "sha256": "a6b33aeec81c2c5b5287795c7ffa8d563519951fd659842c21cbe1c42e538f33",
-      "bytes": 8562
+      "sha256": "c9ac4fcc276eef64e44d2939cd9c921c92e1383ffda2a786a351af548b4dfaf6",
+      "bytes": 8621
     },
     {
       "path": "src/site/lab/knowledge-journey-observation.css",
