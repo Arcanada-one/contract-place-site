@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "purpose": "Read-only rendering of an already decoded and scope-bound observation state; no reader or authority is installed.",
+  "inspector": {
+    "repository": "Arcanada-one/arcanada-shared",
+    "commit": "3ae9a8649a63b545dc2385264d8ce8c4264c1f3c",
+    "sourcePath": "packages/access-contracts/browser/observation-inspector.js",
+    "sha256": "b35b9e7e30ee08c870434bfada3f77a596aac3d9d687e2017775f6cb31084b97",
+    "review": "Shared PR143 source candidate; use the actual release decision, not this pin, for adoption."
+  },
+  "decoder_projectors": {
+    "commit": "46ab74e636993c6fca3ff31b9f030534f5e64876",
+    "fromRepository": "Arcanada-one/arcanada-landing",
+    "fromCommit": "5dd57a2ac55f1c3319d6a0f427e79da8520bf917",
+    "fromPath": "js/lab/access-contracts.46ab74e.js",
+    "blob": "b0000c34016fe2d53e99358d7da02a5aba3aa9c9"
+  },
+  "test_fixtures": {
+    "status": "Synthetic existing fixtures used only in scripts; not included in public/",
+    "edge_fixture": {
+      "repository": "Arcanada-one/arcanada-landing",
+      "commit": "5dd57a2ac55f1c3319d6a0f427e79da8520bf917",
+      "path": "tests/fixtures/agent-runs-edge-fixture.json",
+      "blob": "03e522f7638ef542b4c2bacd7e08f127da1668f6"
+    },
+    "subset": "Seven unchanged existing shared records plus the default view context; upstream paths and blobs remain inside the subset file."
+  },
+  "files": [
+    {
+      "path": "src/site/lab/access-contracts.46ab74e.js",
+      "sha256": "5380a710a0f07cb2b996431b41a196079fcfd4e80c9a92744d44d6ec81fa93ac",
+      "bytes": 198297
+    },
+    {
+      "path": "src/site/lab/observation-inspector.b35b9e7e.js",
+      "sha256": "b35b9e7e30ee08c870434bfada3f77a596aac3d9d687e2017775f6cb31084b97",
+      "bytes": 19887
+    },
+    {
+      "path": "src/site/lab/ACCESS-CONTRACTS-LICENSE",
+      "sha256": "be74508501f0ea6bbb2537d71d53e40266ad3bcffbfdc75428ed5b67244f9fea",
+      "bytes": 1065
+    },
+    {
+      "path": "scripts/fixtures/knowledge-journey-observation.json",
+      "sha256": "066f2394a474cb161cc365b69300d37173e486bb0bae27ed8a55c66742a4c510",
+      "bytes": 38242
+    },
+    {
+      "path": "scripts/fixtures/agent-runs-edge-fixture.json",
+      "sha256": "6d1049cd3abc639aafbb757df90fb2c3c53fe9c951b498891b848fe5b8e97cb3",
+      "bytes": 18926
+    },
+    {
+      "path": "src/site/lab/knowledge-journey-observation.js",
+      "sha256": "a6b33aeec81c2c5b5287795c7ffa8d563519951fd659842c21cbe1c42e538f33",
+      "bytes": 8562
+    },
+    {
+      "path": "src/site/lab/knowledge-journey-observation.css",
+      "sha256": "34ce415ffbc8185eb6c59334a5c102cc9a6baecb49abe514031be8f35b350bf8",
+      "bytes": 905
+    }
+  ]
+}

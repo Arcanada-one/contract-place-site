@@ -28,3 +28,22 @@ path = ["src/site/assets/SourceSans3-*", "src/site/assets/SourceSerif4-*", "publ
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2010-2024 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'"
 SPDX-License-Identifier = "OFL-1.1"
+
+# Shared observation code and existing test fixtures keep their MIT licence.
+[[annotations]]
+path = ["src/site/lab/access-contracts.46ab74e.js", "src/site/lab/observation-inspector.b35b9e7e.js", "src/site/lab/ACCESS-CONTRACTS-LICENSE", "public/lab/access-contracts.46ab74e.js", "public/lab/observation-inspector.b35b9e7e.js", "public/lab/ACCESS-CONTRACTS-LICENSE", "scripts/fixtures/knowledge-journey-observation.json", "scripts/fixtures/agent-runs-edge-fixture.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Arcanada"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["src/site/lab/knowledge-journey-observation.js", "src/site/lab/knowledge-journey-observation.css", "src/site/lab/package.json", "public/lab/knowledge-journey-observation.js", "public/lab/knowledge-journey-observation.css", "public/lab/package.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["src/site/lab/OBSERVATION-PROVENANCE.json", "public/lab/OBSERVATION-PROVENANCE.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
