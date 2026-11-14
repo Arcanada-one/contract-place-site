@@ -84,15 +84,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "cfa46a34a39bfbaca49eb11594f7cd604cd7241046cbf71ccf079d61d4ea8fd6"
+          "sha256": "fc2ceabf8f89fed9cdbb4076c59ec268896b20cbfb16785dc14f61e8aeeb4a45"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "4657c055bdbd362587d169b50b085810537bbdeda4fedc2d12970ece69e0f267"
+          "sha256": "bcb54eda58e504e51dc5b285e2f1b9342e5ff2562ea9c32e640dea1c32036c6c"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "95d630693e3367b9120dafd4e8ff88b2256fb43c09da1081c65d355eaa5dbfd5"
+          "sha256": "798cf2ea0f0fd078310ef1d4786803c65abb03510bbca1ae385e63975b57b607"
         }
       }
     }
