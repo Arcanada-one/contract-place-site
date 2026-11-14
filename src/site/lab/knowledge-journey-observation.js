@@ -6,7 +6,7 @@ import {
   projectKnowledgeObservationGraph,
   projectKnowledgeObservation,
 } from './access-contracts.46ab74e.js';
-import { createObservationInspectorMount } from './observation-inspector.b35b9e7e.js';
+import { createObservationInspectorMount } from './observation-inspector.87457463.js';
 
 const mountInspector = createObservationInspectorMount({
   projectGraph: projectKnowledgeObservationGraph,
@@ -100,7 +100,7 @@ export function mountKnowledgeJourneyObservation({ document: doc, root, state, l
   const inspectorRoot = root.querySelector('[data-live-lab-region="inspector"]');
   if (!graphRoot || !timelineRoot || !inspectorRoot) throw new Error('knowledge-journey-regions-unavailable');
   mounts.get(root)?.destroy();
-  const words = TEXT[locale] || TEXT.en;
+  const words = typeof locale === 'string' && Object.hasOwn(TEXT, locale) ? TEXT[locale] : TEXT.en;
   // The current prerendered shell has one direct empty paragraph per region.
   // Mark it only while displaying observations; no template or HTML rewrite is
   // needed, and every original attribute is restored on clear/disposal.
