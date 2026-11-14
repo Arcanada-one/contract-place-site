@@ -30,12 +30,13 @@ OTHER = b'<script defer src="https://example.test/other.js"></script>'
 
 
 class Fixture:
-    """Serves behaviours[path] = callable(request_count) -> (status, body) or 'hang'."""
+    """Serves behaviours[path] or behaviours[(path, query)] for each request variant."""
 
     def __init__(self):
         self.behaviours = {}
         self.counts = {}
         self.queries = []
+        self.variant_counts = {}
         self.agents = []
         self.accepts = []
         outer = self
@@ -50,7 +51,10 @@ class Fixture:
                 outer.agents.append(self.headers.get("User-Agent"))
                 outer.accepts.append(self.headers.get("Accept"))
                 outer.counts[path] = outer.counts.get(path, 0) + 1
-                result = outer.behaviours[path](outer.counts[path])
+                variant = (path, query)
+                outer.variant_counts[variant] = outer.variant_counts.get(variant, 0) + 1
+                behaviour = outer.behaviours.get(variant, outer.behaviours.get(path))
+                result = behaviour(outer.variant_counts[variant])
                 if result == "hang":
                     time.sleep(1.5)
                     return
@@ -103,8 +107,40 @@ class ReadbackTests(unittest.TestCase):
         self.serve(lambda n: (200, PAGE))
         self.assertEqual(self.go(), 0)
         self.assertEqual(self.sleeps, [])
-        self.assertTrue(all(q == "readback=t1" for q in self.fx.queries))
+        self.assertEqual(self.fx.queries, ["", "readback=t1", "", "readback=t1"])
+        for route in rb.default_routes(self.pub):
+            for variant in ("bare", "readback_query"):
+                self.assertTrue(any(l.startswith(f"IDENTICAL {route} status=200 ") and
+                                    f"variant={variant}" in l for l in self.lines), self.lines)
         self.assertTrue(all(a and "Python-urllib" not in a for a in self.fx.agents))
+
+    def test_query_match_does_not_hide_bare_404(self):
+        self.serve(lambda n: (200, PAGE))
+        self.fx.behaviours[("/", "")] = lambda n: (404, b"nope")
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertTrue(any(l.startswith("ERROR / status=404 ") and "variant=bare" in l
+                            for l in self.lines), self.lines)
+        self.assertTrue(any(l.startswith("IDENTICAL / status=200 ") and "variant=readback_query" in l
+                            for l in self.lines), self.lines)
+        self.assertIn("readback: 1/2 IDENTICAL, 1 not identical", self.lines)
+
+    def test_query_match_does_not_hide_old_bare_body(self):
+        self.serve(lambda n: (200, PAGE))
+        self.fx.behaviours[("/", "")] = lambda n: (200, PAGE.replace(b"Hello", b"Old page"))
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertTrue(any(l.startswith("DIFF / status=200 ") and "variant=bare" in l
+                            for l in self.lines), self.lines)
+        self.assertTrue(any(l.startswith("IDENTICAL / status=200 ") and "variant=readback_query" in l
+                            for l in self.lines), self.lines)
+
+    def test_bare_match_does_not_hide_query_failure(self):
+        self.serve(lambda n: (200, PAGE))
+        self.fx.behaviours[("/", "readback=t1")] = lambda n: (404, b"nope")
+        self.assertEqual(self.go(attempts=1), 1)
+        self.assertTrue(any(l.startswith("IDENTICAL / status=200 ") and "variant=bare" in l
+                            for l in self.lines), self.lines)
+        self.assertTrue(any(l.startswith("ERROR / status=404 ") and "variant=readback_query" in l
+                            for l in self.lines), self.lines)
 
     def test_one_changed_byte_fails(self):
         self.serve(lambda n: (200, PAGE.replace(b"Hello", b"Hellp")))
@@ -175,16 +211,28 @@ class ReadbackTests(unittest.TestCase):
         self.serve(lambda n: (200, b"old" if n < 3 else PAGE))
         self.assertEqual(self.go(attempts=5), 0)
         self.assertEqual(self.sleeps, [7.0, 7.0])
-        self.assertEqual(self.fx.counts["/en/x/"], 1)  # identical routes are not refetched
+        self.assertEqual(self.fx.counts["/en/x/"], 2)  # identical route pairs are not refetched
+        self.assertEqual(self.fx.variant_counts[("/", "")], 3)
+        self.assertEqual(self.fx.variant_counts[("/", "readback=t1")], 3)
+
+    def test_variants_must_match_in_the_same_attempt(self):
+        self.serve(lambda n: (200, PAGE))
+        self.fx.behaviours[("/", "")] = lambda n: (200, PAGE if n == 1 else b"old")
+        self.fx.behaviours[("/", "readback=t1")] = lambda n: (200, b"old" if n == 1 else PAGE)
+        self.assertEqual(self.go(attempts=2), 1)
+        self.assertEqual(self.fx.variant_counts[("/", "")], 2)
+        self.assertEqual(self.fx.variant_counts[("/", "readback=t1")], 2)
+        self.assertEqual(self.fx.counts["/en/x/"], 2)
+        self.assertIn("readback: 1/2 IDENTICAL, 1 not identical", self.lines)
 
     def test_never_converging_fails_after_bounded_window(self):
         self.serve(lambda n: (200, b"old"))
         self.assertEqual(self.go(attempts=4), 1)
-        self.assertEqual(self.fx.counts["/"], 4)
+        self.assertEqual(self.fx.counts["/"], 8)
         self.assertEqual(len(self.sleeps), 3)
 
     # --- witness ---
-    KEYS = ("build_revision", "origin", "request_method", "request_accept", "request_user_agent", "redirects",
+    KEYS = ("build_revision", "origin", "request_method", "request_accept", "request_user_agent", "request_variants", "redirects",
             "cache_token", "probe", "probe_region", "started_utc", "finished_utc", "normaliser")
 
     def witness(self):
@@ -236,6 +284,7 @@ class ReadbackTests(unittest.TestCase):
         self.assertEqual((w["request_method"], w["request_accept"], w["redirects"], w["cache_token"]),
                          ("GET", "text/html", "refused", "t1"))
         self.assertEqual(w["request_user_agent"], rb.USER_AGENT)
+        self.assertEqual(w["request_variants"], "bare,readback_query")
         # printed value = value the server actually received, on every request
         self.assert_received(self.fx.accepts, "text/html", w["request_accept"])
         self.assert_received(self.fx.agents, rb.USER_AGENT, w["request_user_agent"])
