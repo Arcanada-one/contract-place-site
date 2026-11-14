@@ -37,7 +37,7 @@ SPDX-FileCopyrightText = "2026 Arcanada"
 SPDX-License-Identifier = "MIT"
 
 [[annotations]]
-path = ["src/site/lab/knowledge-journey-observation.js", "src/site/lab/knowledge-journey-observation.css", "src/site/lab/package.json", "public/lab/knowledge-journey-observation.js", "public/lab/knowledge-journey-observation.css", "public/lab/package.json"]
+path = ["src/site/lab/retained-object-reader.js", "public/lab/retained-object-reader.js", "src/site/lab/knowledge-journey-observation.js", "src/site/lab/knowledge-journey-observation.css", "src/site/lab/package.json", "public/lab/knowledge-journey-observation.js", "public/lab/knowledge-journey-observation.css", "public/lab/package.json"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"
