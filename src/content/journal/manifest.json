@@ -57,6 +57,25 @@
           "sha256": "ed360172e1882fd30a2c4a3c1a4d287496045233f91c882a11f3cd078ff5ef3a"
         }
       }
+    },
+    {
+      "slug": "agent-situation-2026-11-14",
+      "date": "2026-11-14",
+      "folder": "2026-11-14-agent-situation",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "39656e9a82bb27d54ab6459eae63b45e7479cce6e431aaa0005833a256923b14"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "445ef58850d528426e55951ffd21ffecedfe1f180d0207ce4f47130903e0f54f"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "47dd511376392241abced3e5f85bc371e3ddcb996e9683032b663ccfe17c3244"
+        }
+      }
     }
   ]
 }
