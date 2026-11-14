@@ -76,6 +76,25 @@
           "sha256": "808a1c07441404c3822057c2a83e386f1cab0e58c0af305d729d09e192d32d28"
         }
       }
+    },
+    {
+      "slug": "dora-gaps-agents-2026-11-14",
+      "date": "2026-11-14",
+      "folder": "2026-11-14-dora-gaps-agents",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "fc2ceabf8f89fed9cdbb4076c59ec268896b20cbfb16785dc14f61e8aeeb4a45"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "bcb54eda58e504e51dc5b285e2f1b9342e5ff2562ea9c32e640dea1c32036c6c"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "798cf2ea0f0fd078310ef1d4786803c65abb03510bbca1ae385e63975b57b607"
+        }
+      }
     }
   ]
 }
