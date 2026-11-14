@@ -65,15 +65,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "39656e9a82bb27d54ab6459eae63b45e7479cce6e431aaa0005833a256923b14"
+          "sha256": "7d834e2175c48ff6551302d625a717a6203eff84947afb9456f8325ece20246c"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "445ef58850d528426e55951ffd21ffecedfe1f180d0207ce4f47130903e0f54f"
+          "sha256": "d82abd2ec65fcdd43476be4b0221b435bc9ba9faa804bef8379926657f71a977"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "47dd511376392241abced3e5f85bc371e3ddcb996e9683032b663ccfe17c3244"
+          "sha256": "808a1c07441404c3822057c2a83e386f1cab0e58c0af305d729d09e192d32d28"
         }
       }
     }
