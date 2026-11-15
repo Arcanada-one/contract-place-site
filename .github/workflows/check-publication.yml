@@ -81,6 +81,9 @@ jobs:
           python3 -B scripts/test_journal.py --mutants
           python3 -B scripts/test_readback.py
           python3 -B scripts/test_renditions.py
+          python3 -B scripts/test_formula_localization.py
+          python3 -B scripts/test_review_localization.py
+          node scripts/test_review_localization.js
           python3 -B scripts/test_catalogue_localization.py
           python3 -B scripts/test_localization.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py

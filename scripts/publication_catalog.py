@@ -47,6 +47,8 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
 def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None, programme=None) -> None:
     from catalogue_localization import compile_localization, compile_article_localizations
     localization = compile_localization(source, manifest, documents)
+    formula_localizations = renderer.formula_localizations.provenance()
+    review_localizations = renderer.review_localizations.provenance()
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
     articles, article_localizations = compile_article_localizations(site, previous['articles'])
@@ -107,6 +109,10 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         payload['localization_source'] = {k: localization['provenance'][k] for k in ('path', 'sha256', 'source')}
     if article_localizations:
         payload['article_localizations_source'] = article_localizations
+    if formula_localizations:
+        payload['formula_localization_source'] = formula_localizations
+    if review_localizations:
+        payload['review_localization_source'] = review_localizations
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
     old_provenance = json.loads((site / 'src/site/content-provenance.json').read_text())
     provenance = {
@@ -125,4 +131,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         provenance['localizations'] = localization['provenance']
     if article_localizations:
         provenance['articles_localizations'] = article_localizations
+    if formula_localizations:
+        provenance['formula_localizations'] = formula_localizations
+    if review_localizations:
+        provenance['review_localizations'] = review_localizations
     (site / 'src/site/content-provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')

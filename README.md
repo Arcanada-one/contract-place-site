@@ -21,7 +21,7 @@ Full manuscripts are present in built HTML. Pandoc preserves equations as MathML
 
 ## Source identity and generated data
 
-`publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 31 catalogued works. The source repository's `publication-localization.json` binds localized titles and summaries separately from the body records in `publication-renditions.json`; see [catalogue localization](docs/catalogue-localization.md). The compiler generates text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
+`publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 31 catalogued works. The source repository's `publication-localization.json` binds localized titles and summaries separately from the body records in `publication-renditions.json`; see [catalogue localization](docs/catalogue-localization.md). Source-owned `publication-formula-localizations.json` separately binds visible prose inside formulas; the renderer retains canonical TeX and mathematical structure and records an unreviewed presentation scope. `publication-review-localizations.json` separately translates historical review explanations while preserving the original records and their scope. The compiler generates text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
 
 Daily journal issues live under `src/content/journal/`: three language Markdown files per issue plus `manifest.json` digests. The six dated issues provide 18 localized journal pages at `/{en,ru,zh-Hans}/journal/<slug>/` and appear on the journal index newest first. Local search includes these issues. The legacy `/journal/building-a-place/` route stays noindex; its retained project note is localized. See AGENTS.md “Daily journal issue”.
 
@@ -50,6 +50,9 @@ python3 -B scripts/test_build.py
 python3 -B scripts/test_journal.py
 python3 -B scripts/test_renditions.py
 python3 -B scripts/test_catalogue_localization.py
+python3 -B scripts/test_formula_localization.py
+python3 -B scripts/test_review_localization.py
+node scripts/test_review_localization.js
 python3 -B scripts/test_localization.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 python3 -B scripts/test_roadmap_localization.py

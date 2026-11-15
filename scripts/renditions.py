@@ -37,7 +37,7 @@ CODES = (
     "RENDITION_SIDECAR_SCHEMA", "RENDITION_LANGUAGE", "RENDITION_SOURCE_PIN", "RENDITION_REVISION_PIN",
     "RENDITION_DIGEST", "RENDITION_UNKNOWN_WORK", "RENDITION_DUPLICATE", "RENDITION_REVIEW_UNEVIDENCED",
     "RENDITION_SECTION_MISSING", "RENDITION_SECTION_DRIFT", "RENDITION_SECTION_UNRESOLVED",
-    "RENDITION_STRUCTURE_MISMATCH", "RENDITION_FORMULA_CHANGED", "RENDITION_CODE_CHANGED",
+    "RENDITION_STRUCTURE_MISMATCH", "RENDITION_FORMULA_CHANGED", "RENDITION_FORMULA_LOCALIZATION", "RENDITION_FORMULA_REVIEW", "RENDITION_CODE_CHANGED",
     "RENDITION_REFERENCE_DROPPED", "RENDITION_REFERENCE_CHANGED", "RENDITION_FIXTURE_ONLY",
     "RENDITION_SILENT_FALLBACK", "RENDITION_STATE_LABEL", "RENDITION_SOURCE_AUTHORITY",
     "RENDITION_LAYOUT", "RENDITION_LINK_SCHEME", "RENDITION_LINK_ESCAPES", "RENDITION_LINK_DANGLING",
@@ -743,6 +743,10 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
         "review": review_for_page(renderer, entry) if state in ("reviewed", "partially-reviewed") else None,
         "review_issue": issue, "sections": entry["sections"], "counts_as_independent_source": False,
     }
+    if state in ("reviewed", "partially-reviewed"):
+        review_text = renderer.review_localizations.for_review(work, language, entry["review"])
+        if review_text is not None:
+            record["review_localization"] = review_text
     if state != "stale" and file.is_file():
         source_ast, rendition_ast = parse_markdown(inside(source, doc["path"])), parse_markdown(file)
 
@@ -775,6 +779,16 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
         def render() -> None:
             hooks = link_hooks(language, states, by_path, tree, rendition_path, ctx["pinned"][language], ctx["peer_maps"])
             fragment = renderer.document(dict({"path": rendition_path, "slug": work}, **hooks))
+            # The original exact source/rendition Math AST parity has already
+            # passed. Formula prose is a separately pinned presentation only.
+            formula = renderer.formula_localizations
+            presentation = formula.for_document(doc["path"], language)
+            if presentation is not None and state != "unreviewed":
+                fail("RENDITION_FORMULA_REVIEW", f"{label}: an unreviewed formula presentation cannot inherit a manuscript review; a separately visible review scope is required")
+            try:
+                fragment["html"] = formula.localize(doc["path"], language, fragment["html"])
+            except ValueError as error:
+                fail("RENDITION_FORMULA_LOCALIZATION", f"{label}: {error}")
             title = next((plain_title(block) for block in rendition_ast["blocks"] if block["t"] == "Header" and block["c"][0] == 1), None)
             if not title:
                 fail("RENDITION_SECTION_MISSING", f"{label}: the rendition has no title heading")
@@ -782,6 +796,8 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
                 "title": title, "title_id": fragment["title_id"], "html": annotate_sections(fragment["html"], pairs),
                 "toc": fragment["toc"], "math_count": fragment["math_count"],
             })
+            if presentation is not None:
+                record["formula_localization"] = presentation
         if report is None or not report["failures"]:
             attempt("render", render)
     provenance = {
@@ -794,6 +810,10 @@ def compile_entry(source: Path, manifest: dict, doc: dict, entry: dict, states: 
         "review_issue": issue["code"] if issue else None,
         "counts_as_independent_source": False,
     }
+    if "formula_localization" in record:
+        provenance["formula_localization"] = record["formula_localization"]
+    if "review_localization" in record:
+        provenance["review_localization"] = record["review_localization"]
     return record, provenance
 
 
@@ -828,6 +848,9 @@ def compile_renditions(source: Path, manifest: dict, documents: list[dict], rend
     # First pass: the state of every work/language pair. A link from one rendition to another document depends on it.
     resolved = {(e["work"], e["language"]): resolve_state(source, manifest, by_slug[e["work"]], e) for e in entries}
     states = {key: state for key, (state, _) in resolved.items()}
+    renderer.review_localizations.validate_inventory({
+        key for key, state in states.items() if state in ("reviewed", "partially-reviewed")
+    })
     issues = {key: issue for key, (_, issue) in resolved.items() if issue}
     pinned, peer_maps = link_context(entries)
     ctx = {"renderer": renderer, "by_path": by_path, "tree": tree_paths(source, manifest["commit"]), "issues": issues, "pinned": pinned, "peer_maps": peer_maps}

@@ -3,7 +3,7 @@
     "schema_version": 1,
     "edition": "1.1",
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+    "commit": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
     "catalog": "publication-catalog.json"
   },
   "records": [
@@ -11,249 +11,249 @@
       "id": "human-meaning-and-computable-knowledge",
       "type": "paper",
       "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/human-meaning-and-computable-knowledge/PAPER.md",
       "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "semantic-objects-and-context",
       "type": "paper",
       "path": "papers/semantic-objects-and-context/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/semantic-objects-and-context/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/semantic-objects-and-context/PAPER.md",
       "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "constrained-transformations",
       "type": "paper",
       "path": "papers/constrained-transformations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/constrained-transformations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/constrained-transformations/PAPER.md",
       "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "retrieval-and-context-composition",
       "type": "paper",
       "path": "papers/retrieval-and-context-composition/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/retrieval-and-context-composition/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/retrieval-and-context-composition/PAPER.md",
       "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "interaction-and-memory",
       "type": "paper",
       "path": "papers/interaction-and-memory/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/interaction-and-memory/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/interaction-and-memory/PAPER.md",
       "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "evidence-and-falsification",
       "type": "paper",
       "path": "papers/evidence-and-falsification/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/evidence-and-falsification/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/evidence-and-falsification/PAPER.md",
       "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "revision-and-governance",
       "type": "paper",
       "path": "papers/revision-and-governance/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/revision-and-governance/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/revision-and-governance/PAPER.md",
       "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "controlled-knowledge-reuse",
       "type": "paper",
       "path": "papers/controlled-knowledge-reuse/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/controlled-knowledge-reuse/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/controlled-knowledge-reuse/PAPER.md",
       "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "knowledge-utility",
       "type": "paper",
       "path": "papers/knowledge-utility/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/knowledge-utility/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/knowledge-utility/PAPER.md",
       "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "geometry-of-semantic-representations",
       "type": "paper",
       "path": "papers/geometry-of-semantic-representations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/geometry-of-semantic-representations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/papers/geometry-of-semantic-representations/PAPER.md",
       "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "knowledge-contract-core",
       "type": "specification",
       "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
       "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "contract-family",
       "type": "specification",
       "path": "engineering/specifications/contract-family/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/contract-family/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/contract-family/SPECIFICATION.md",
       "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "semantic-types",
       "type": "specification",
       "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/semantic-types/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/semantic-types/SPECIFICATION.md",
       "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "context-package",
       "type": "specification",
       "path": "engineering/specifications/context-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/context-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/context-package/SPECIFICATION.md",
       "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "compiled-artifact-contract",
       "type": "specification",
       "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
       "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "artifact-registry",
       "type": "specification",
       "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/artifact-registry/SPECIFICATION.md",
       "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "status-model",
       "type": "specification",
       "path": "engineering/specifications/status-model/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/status-model/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/status-model/SPECIFICATION.md",
       "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "cache-identity-and-invalidation",
       "type": "specification",
       "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
       "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "reuse-policy",
       "type": "specification",
       "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/reuse-policy/SPECIFICATION.md",
       "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "knowledge-evolution",
       "type": "specification",
       "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
       "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "book-package",
       "type": "specification",
       "path": "engineering/specifications/book-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/specifications/book-package/SPECIFICATION.md",
       "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "contract-profile-conformance",
       "type": "study",
       "path": "engineering/studies/contract-profile-conformance/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/contract-profile-conformance/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/contract-profile-conformance/STUDY.md",
       "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "dependency-closure-and-package-delivery",
       "type": "study",
       "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
       "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "source-transcription-and-uncertainty",
       "type": "study",
       "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
       "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "executable-projections-and-revision",
       "type": "study",
       "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/executable-projections-and-revision/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/executable-projections-and-revision/STUDY.md",
       "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "reuse-admission-and-cost-controls",
       "type": "study",
       "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
       "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "editorial-skill-pilot",
       "type": "study",
       "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/editorial-skill-pilot/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/engineering/studies/editorial-skill-pilot/STUDY.md",
       "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "glossary",
       "type": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/reference/glossary/GLOSSARY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/reference/glossary/GLOSSARY.md",
       "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "bibliography",
       "type": "bibliography",
       "path": "reference/bibliography/BIBLIOGRAPHY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/reference/bibliography/BIBLIOGRAPHY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/reference/bibliography/BIBLIOGRAPHY.md",
       "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "source-map",
       "type": "appendix",
       "path": "appendices/source-map/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/appendices/source-map/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/appendices/source-map/APPENDIX.md",
       "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     },
     {
       "id": "api-integration",
       "type": "appendix",
       "path": "appendices/api-integration/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/appendices/api-integration/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/appendices/api-integration/APPENDIX.md",
       "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
-      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054"
     }
   ],
   "articles": [
@@ -765,25 +765,25 @@
     "kind": "programme-guide",
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+      "commit": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
       "files": [
         {
           "path": "PROGRAMME.md",
           "sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
           "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/PROGRAMME.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/PROGRAMME.md"
         },
         {
           "path": "guides/programme.ru.md",
           "sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
           "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.ru.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/guides/programme.ru.md"
         },
         {
           "path": "guides/programme.zh-Hans.md",
           "sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
           "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.zh-Hans.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/39e4054830d9cb05bc0432d25f7320cb8a97f054/guides/programme.zh-Hans.md"
         }
       ]
     },
@@ -1270,7 +1270,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "ru",
+          "fields": {
+            "independence_basis": "Pavel Valentov — научный автор и правообладатель; KC-Brain (ИИ) подготовил перевод; Agent-Brain (ИИ) рецензировал независимо; рецензии человека — носителя языка или внешней экспертной рецензии не было.",
+            "method": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода Agent-Brain 6735134008 относительно более раннего английского блоба; (2) проверка изменений заголовка и якорей текущего английского текста Agent-Brain 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF; (3) первая проверка изменений ссылок и закреплённых версий Agent-Brain 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479); (4) проверка изменений глубины ссылок и якорей Agent-Brain 6744010479 для именно этих восьми блобов переводов (146 изменённых href сохраняют прежнюю каноническую цель и фрагмент; остальной текст побайтно идентичен, кроме удаления четырёх дублирующихся вступительных блоков прежних якорей). Четыре рецензии зафиксированы в reviews/renditions/k8-composite-exact-blob-evidence-20261109.md (блоб eb689d2b5eaf40cd124fdec27d4fe312867d2d73); KC-Brain составил этот документ как запись происхождения, а не как подпись Agent-Brain. Допущены только эти четыре записи, компилируемые без ошибок; source-transcription и reuse-admission × ru/zh-Hans остаются за пределами PR86 после RENDITION_SECTION_MISSING во вступительном HTML-блоке исторических якорей (см. итерацию 3 в reviews/renditions/k8-first-admission-diagnostics-20261109.md).",
+            "limitations": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода 6735134008 относительно более раннего английского блоба, (2) проверка изменений заголовка и якорей текущего английского текста 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF, (3) первая проверка изменений ссылок и закреплённых версий 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479), (4) проверка изменений глубины ссылок и якорей 6744010479 для именно этих восьми блобов переводов; никто не проверял весь перевод повторно относительно более нового источника за один новый полный проход; это не подтверждение носителем языка, не внешняя сертификация и не удостоверение научной истинности. Допущены только эти четыре записи, компилируемые без ошибок; source-transcription и reuse-admission × ru/zh-Hans остаются за пределами PR86 после RENDITION_SECTION_MISSING во вступительном HTML-блоке исторических якорей (см. итерацию 3 в reviews/renditions/k8-first-admission-diagnostics-20261109.md)."
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "e95dcb5a2ede6c65e3f0d5fd7dc269a4f70cd867dae0dfc0dead46b53044be3b"
+          }
+        }
       },
       {
         "work": "dependency-closure-and-package-delivery",
@@ -1287,7 +1305,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "zh-Hans",
+          "fields": {
+            "independence_basis": "Pavel Valentov 是科学作者和权利人；KC-Brain（AI）起草了译文；Agent-Brain（AI）独立进行了审查；没有由母语者开展的人工审查，也没有外部同行评审。",
+            "method": "组合记录：(1) Agent-Brain 对照较早英文文件版本进行的全文保真审查 6735134008；(2) Agent-Brain 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同；(3) Agent-Brain 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖）；(4) Agent-Brain 对恰好这八个译文文件版本的链接深度及锚点变化进行的审查 6744010479（146 个变更后的 href 保持相同的规范目标及片段；除移除四个重复的旧锚点前置块外，其余文本逐字节相同）。这四次审查记录于 reviews/renditions/k8-composite-exact-blob-evidence-20261109.md（文件版本 eb689d2b5eaf40cd124fdec27d4fe312867d2d73）；该文件由 KC-Brain 撰写，作为溯源记录，并非 Agent-Brain 的签名。仅这四个可无误编译的条目获准纳入；source-transcription 和 reuse-admission × ru/zh-Hans 在历史锚点 HTML 前置块触发 RENDITION_SECTION_MISSING 后，仍未纳入 PR86（见 reviews/renditions/k8-first-admission-diagnostics-20261109.md 的第 3 次迭代）。",
+            "limitations": "组合记录：(1) 对照较早英文文件版本进行的全文保真审查 6735134008，(2) 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同，(3) 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖），(4) 对恰好这八个译文文件版本的链接深度及锚点变化进行的审查 6744010479；没有人以一次新的完整审查，对照较新来源重新审查全部译文；这不是母语者认证、外部认证或科学真实性认证。仅这四个可无误编译的条目获准纳入；source-transcription 和 reuse-admission × ru/zh-Hans 在历史锚点 HTML 前置块触发 RENDITION_SECTION_MISSING 后，仍未纳入 PR86（见 reviews/renditions/k8-first-admission-diagnostics-20261109.md 的第 3 次迭代）。"
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "5f72b6a55745935393866d08c895f543d813e9d4a7821b732e6170209e707dc8"
+          }
+        }
       },
       {
         "work": "editorial-skill-pilot",
@@ -1372,7 +1408,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "ru",
+          "fields": {
+            "independence_basis": "Pavel Valentov — научный автор и правообладатель; KC-Brain (ИИ) подготовил перевод; Agent-Brain (ИИ) рецензировал независимо; рецензии человека — носителя языка или внешней экспертной рецензии не было.",
+            "method": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода Agent-Brain 6735134008 относительно более раннего английского блоба; (2) проверка изменений заголовка и якорей текущего английского текста Agent-Brain 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF; (3) первая проверка изменений ссылок и закреплённых версий Agent-Brain 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479); (4) проверка изменений глубины ссылок и якорей Agent-Brain 6744010479 для именно этих восьми блобов переводов (146 изменённых href сохраняют прежнюю каноническую цель и фрагмент; остальной текст побайтно идентичен, кроме удаления четырёх дублирующихся вступительных блоков прежних якорей). Четыре рецензии зафиксированы в reviews/renditions/k8-composite-exact-blob-evidence-20261109.md (блоб eb689d2b5eaf40cd124fdec27d4fe312867d2d73); KC-Brain составил этот документ как запись происхождения, а не как подпись Agent-Brain. Допущены только эти четыре записи, компилируемые без ошибок; source-transcription и reuse-admission × ru/zh-Hans остаются за пределами PR86 после RENDITION_SECTION_MISSING во вступительном HTML-блоке исторических якорей (см. итерацию 3 в reviews/renditions/k8-first-admission-diagnostics-20261109.md).",
+            "limitations": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода 6735134008 относительно более раннего английского блоба, (2) проверка изменений заголовка и якорей текущего английского текста 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF, (3) первая проверка изменений ссылок и закреплённых версий 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479), (4) проверка изменений глубины ссылок и якорей 6744010479 для именно этих восьми блобов переводов; никто не проверял весь перевод повторно относительно более нового источника за один новый полный проход; это не подтверждение носителем языка, не внешняя сертификация и не удостоверение научной истинности. Допущены только эти четыре записи, компилируемые без ошибок; source-transcription и reuse-admission × ru/zh-Hans остаются за пределами PR86 после RENDITION_SECTION_MISSING во вступительном HTML-блоке исторических якорей (см. итерацию 3 в reviews/renditions/k8-first-admission-diagnostics-20261109.md)."
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "8808d4c89cc14f303b627a41ed7af4a0c5504f57a3b3326046414752493c691f"
+          }
+        }
       },
       {
         "work": "executable-projections-and-revision",
@@ -1389,7 +1443,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "zh-Hans",
+          "fields": {
+            "independence_basis": "Pavel Valentov 是科学作者和权利人；KC-Brain（AI）起草了译文；Agent-Brain（AI）独立进行了审查；没有由母语者开展的人工审查，也没有外部同行评审。",
+            "method": "组合记录：(1) Agent-Brain 对照较早英文文件版本进行的全文保真审查 6735134008；(2) Agent-Brain 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同；(3) Agent-Brain 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖）；(4) Agent-Brain 对恰好这八个译文文件版本的链接深度及锚点变化进行的审查 6744010479（146 个变更后的 href 保持相同的规范目标及片段；除移除四个重复的旧锚点前置块外，其余文本逐字节相同）。这四次审查记录于 reviews/renditions/k8-composite-exact-blob-evidence-20261109.md（文件版本 eb689d2b5eaf40cd124fdec27d4fe312867d2d73）；该文件由 KC-Brain 撰写，作为溯源记录，并非 Agent-Brain 的签名。仅这四个可无误编译的条目获准纳入；source-transcription 和 reuse-admission × ru/zh-Hans 在历史锚点 HTML 前置块触发 RENDITION_SECTION_MISSING 后，仍未纳入 PR86（见 reviews/renditions/k8-first-admission-diagnostics-20261109.md 的第 3 次迭代）。",
+            "limitations": "组合记录：(1) 对照较早英文文件版本进行的全文保真审查 6735134008，(2) 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同，(3) 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖），(4) 对恰好这八个译文文件版本的链接深度及锚点变化进行的审查 6744010479；没有人以一次新的完整审查，对照较新来源重新审查全部译文；这不是母语者认证、外部认证或科学真实性认证。仅这四个可无误编译的条目获准纳入；source-transcription 和 reuse-admission × ru/zh-Hans 在历史锚点 HTML 前置块触发 RENDITION_SECTION_MISSING 后，仍未纳入 PR86（见 reviews/renditions/k8-first-admission-diagnostics-20261109.md 的第 3 次迭代）。"
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "63693efab1cb380de0a640e8e25c7b1d744aa0ba4bb1e05a22e5756297ecd655"
+          }
+        }
       },
       {
         "work": "geometry-of-semantic-representations",
@@ -1406,7 +1478,38 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+          "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "ru",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 24,
+              "mtext_index": 1,
+              "tex_sha256": "b39dd30b2e3b7df85c130957f0c5848b1557053a60ceccde3cb8bc8d4fed27ff"
+            },
+            {
+              "math_index": 29,
+              "mtext_index": 1,
+              "tex_sha256": "e5b37e90a9a45157a0d4688d08ae51d87e92572fc4a47ddbab2afd2247537ac1"
+            },
+            {
+              "math_index": 30,
+              "mtext_index": 1,
+              "tex_sha256": "9de47ef2ded83abd3400ad8c0e15d52e5fb662539ec1b5afd77553b0ab3814ed"
+            },
+            {
+              "math_index": 64,
+              "mtext_index": 1,
+              "tex_sha256": "f62b107b955b9d8aa466ac4941520d4020f115d31d9896facd68b2ca4566957f"
+            }
+          ]
+        }
       },
       {
         "work": "geometry-of-semantic-representations",
@@ -1423,7 +1526,38 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+          "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "zh-Hans",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 24,
+              "mtext_index": 1,
+              "tex_sha256": "b39dd30b2e3b7df85c130957f0c5848b1557053a60ceccde3cb8bc8d4fed27ff"
+            },
+            {
+              "math_index": 29,
+              "mtext_index": 1,
+              "tex_sha256": "e5b37e90a9a45157a0d4688d08ae51d87e92572fc4a47ddbab2afd2247537ac1"
+            },
+            {
+              "math_index": 30,
+              "mtext_index": 1,
+              "tex_sha256": "9de47ef2ded83abd3400ad8c0e15d52e5fb662539ec1b5afd77553b0ab3814ed"
+            },
+            {
+              "math_index": 64,
+              "mtext_index": 1,
+              "tex_sha256": "f62b107b955b9d8aa466ac4941520d4020f115d31d9896facd68b2ca4566957f"
+            }
+          ]
+        }
       },
       {
         "work": "glossary",
@@ -1474,7 +1608,28 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+          "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "ru",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 15,
+              "mtext_index": 1,
+              "tex_sha256": "0424127ef69f8e4fcc7c13f6565d643530aa4c0aa1b305e75ed86afdd4752a35"
+            },
+            {
+              "math_index": 23,
+              "mtext_index": 1,
+              "tex_sha256": "0e6779e0d1aa6afc9add2118224c62f150e633908776733ddd17482b8eeb8fa6"
+            }
+          ]
+        }
       },
       {
         "work": "human-meaning-and-computable-knowledge",
@@ -1491,7 +1646,28 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+          "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "zh-Hans",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 15,
+              "mtext_index": 1,
+              "tex_sha256": "0424127ef69f8e4fcc7c13f6565d643530aa4c0aa1b305e75ed86afdd4752a35"
+            },
+            {
+              "math_index": 23,
+              "mtext_index": 1,
+              "tex_sha256": "0e6779e0d1aa6afc9add2118224c62f150e633908776733ddd17482b8eeb8fa6"
+            }
+          ]
+        }
       },
       {
         "work": "interaction-and-memory",
@@ -1610,7 +1786,23 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/knowledge-utility/PAPER.md",
+          "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "ru",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 40,
+              "mtext_index": 1,
+              "tex_sha256": "1f75905e2794e7379bdd78d48628c6e1ea8f2585029fc77c873c9b16025d0433"
+            }
+          ]
+        }
       },
       {
         "work": "knowledge-utility",
@@ -1627,7 +1819,23 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/knowledge-utility/PAPER.md",
+          "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "zh-Hans",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 40,
+              "mtext_index": 1,
+              "tex_sha256": "1f75905e2794e7379bdd78d48628c6e1ea8f2585029fc77c873c9b16025d0433"
+            }
+          ]
+        }
       },
       {
         "work": "retrieval-and-context-composition",
@@ -1678,7 +1886,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "ru",
+          "fields": {
+            "independence_basis": "Pavel Valentov — научный автор и правообладатель; KC-Brain (ИИ) подготовил перевод; Agent-Brain (ИИ) рецензировал независимо; рецензии человека — носителя языка или внешней экспертной рецензии не было.",
+            "method": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода Agent-Brain 6735134008 относительно более раннего английского блоба; (2) проверка изменений заголовка и якорей текущего английского текста Agent-Brain 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF; (3) первая проверка изменений ссылок и закреплённых версий Agent-Brain 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479); (4) проверка изменений глубины ссылок и якорей Agent-Brain 6744010479 для предшествующих версий тогдашних восьми кандидатов; (5) проверка изменений порядка формул в точном блобе Agent-Brain 6751312234 (SCOPED FIDELITY PASS) для прежнего исправленного автором русского блоба 7376c33010abde5a67c9fca6c40408a8056a2500 относительно английского снимка 2b5bcff544fea5d1752ff009933e4ce0305dad8b; (6) проверка точности кодовых фрагментов в указанном объёме Agent-Brain 6752818330 (SCOPED FIDELITY PASS) для именно этого исправленного автором блоба перевода f7d53ee85bea6966c7068a0835b19ba4593a8e19 в коммите PR76 8249e760061e987c3060c1850511129e83a9fbd6 относительно английского Git-блоба aff97b3cda92bbb8067b1db47ce7c16ddd98c5ac. Рецензии (1)-(4) зафиксированы в reviews/renditions/k8-composite-exact-blob-evidence-20261109.md (блоб eb689d2b5eaf40cd124fdec27d4fe312867d2d73); ведомость исправлений порядка формул — reviews/renditions/k8-ordered-math-author-delta-20261109.md (блоб c03b338155e4ff4e5300829f1a1bbb596357733e); авторская запись о совпадении кодовых фрагментов — reviews/renditions/k8-reuse-ru-code-parity-author-fix-20261109.md (блоб 0b914a5027c242dc78d5c16c7fc4ac80800ffead). KC-Brain составил авторские записи как свидетельства происхождения, а не как подпись Agent-Brain.",
+            "limitations": "СОСТАВНАЯ ЗАПИСЬ: (1)-(4) прежние полная проверка и проверки заголовков, ссылок и якорей, как в первой цепочке допуска K8, плюс (5) проверка изменений порядка формул в указанном объёме 6751312234 для прежнего исправленного блоба 7376c330, плюс (6) проверка изменений кодовых фрагментов в указанном объёме 6752818330 только для именно этого исправленного блоба f7d53ee8; 6752818330 не является новым полным подтверждением по всей рукописи, нативным запуском Pandoc для четырёх файлов или внешней сертификацией либо подтверждением носителем языка; это не удостоверение научной истинности."
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "4c67a0f0747a62fa5333855555155fa61948c3e898a8ef015d42f4d7ba27b15f"
+          }
+        }
       },
       {
         "work": "reuse-admission-and-cost-controls",
@@ -1695,7 +1921,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "zh-Hans",
+          "fields": {
+            "independence_basis": "Pavel Valentov 是科学作者和权利人；KC-Brain（AI）起草了译文；Agent-Brain（AI）独立进行了审查；没有由母语者开展的人工审查，也没有外部同行评审。",
+            "method": "组合记录：(1) Agent-Brain 对照较早英文文件版本进行的全文保真审查 6735134008；(2) Agent-Brain 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同；(3) Agent-Brain 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖）；(4) Agent-Brain 对当时八个候选项的先前版本进行的链接深度及锚点变化审查 6744010479；(5) Agent-Brain 对这一经作者修订的精确译文文件版本进行的公式顺序变化审查 6751312234（SCOPED FIDELITY PASS）：该版本位于 PR76 的分支头 fc9c8ddcd625afc87e2dd59660397f041d049e96，对照的英文快照为 2b5bcff544fea5d1752ff009933e4ce0305dad8b。审查 (1)-(4) 记录于 reviews/renditions/k8-composite-exact-blob-evidence-20261109.md（文件版本 eb689d2b5eaf40cd124fdec27d4fe312867d2d73）；作者编制的公式顺序更正台账为 reviews/renditions/k8-ordered-math-author-delta-20261109.md（文件版本 c03b338155e4ff4e5300829f1a1bbb596357733e）。两份记录均由 KC-Brain 撰写，作为溯源材料，并非 Agent-Brain 的签名。",
+            "limitations": "组合记录：(1)-(4) 与首个 K8 准入链相同的先前全文、标题、链接及锚点审查，加上 (5) 仅针对这一精确修订文件版本的公式顺序变化范围审查 6751312234；6751312234 不是对整篇手稿重新作出的完整证明，不是针对四个文件的原生 Pandoc 运行，也不是外部认证或母语者认证；它不是科学真实性认证。"
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "d9723d8b2466df0ce9d7ff9ca0e5070b07b04bb519e6f2df4a5b054a3e0eb20c"
+          }
+        }
       },
       {
         "work": "reuse-policy",
@@ -1780,7 +2024,23 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/semantic-objects-and-context/PAPER.md",
+          "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "ru",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 10,
+              "mtext_index": 1,
+              "tex_sha256": "c4d3245937bd4de05b796c3f47ecf19a797738fe7e08528235ae3f617f64dacc"
+            }
+          ]
+        }
       },
       {
         "work": "semantic-objects-and-context",
@@ -1797,7 +2057,23 @@
         "review_status": "unreviewed",
         "review_scope": "none",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "formula_localization": {
+          "path": "publication-formula-localizations.json",
+          "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+          "source_path": "papers/semantic-objects-and-context/PAPER.md",
+          "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+          "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+          "language": "zh-Hans",
+          "review_state": "unreviewed",
+          "annotations": [
+            {
+              "math_index": 10,
+              "mtext_index": 1,
+              "tex_sha256": "c4d3245937bd4de05b796c3f47ecf19a797738fe7e08528235ae3f617f64dacc"
+            }
+          ]
+        }
       },
       {
         "work": "semantic-types",
@@ -1882,7 +2158,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "ru",
+          "fields": {
+            "independence_basis": "Pavel Valentov — научный автор и правообладатель; KC-Brain (ИИ) подготовил перевод; Agent-Brain (ИИ) рецензировал независимо; рецензии человека — носителя языка или внешней экспертной рецензии не было.",
+            "method": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода Agent-Brain 6735134008 относительно более раннего английского блоба; (2) проверка изменений заголовка и якорей текущего английского текста Agent-Brain 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF; (3) первая проверка изменений ссылок и закреплённых версий Agent-Brain 6742099993 (четыре записи, получившие там CHANGES_REQUIRED, охвачены проверкой якорей 6744010479); (4) проверка изменений глубины ссылок и якорей Agent-Brain 6744010479 для тогдашнего набора из восьми кандидатов, включая именно этот русский блоб работы о неопределённости (Uncertainty ru) 8aaa8dae18a2014be6495c479e85a3e114538420 (146 изменённых href сохраняют прежнюю каноническую цель и фрагмент; остальной текст побайтно идентичен, кроме удаления четырёх дублирующихся вступительных блоков прежних якорей). Четыре рецензии зафиксированы в reviews/renditions/k8-composite-exact-blob-evidence-20261109.md (блоб eb689d2b5eaf40cd124fdec27d4fe312867d2d73); KC-Brain составил этот документ как запись происхождения, а не как подпись Agent-Brain. Порядок формул в Uncertainty ru уже соответствовал источнику; комментарий Agent-Brain 6751312234 явно оставил этот блоб без повторного рассмотрения.",
+            "limitations": "СОСТАВНАЯ ЗАПИСЬ: (1) полная проверка точности перевода 6735134008 относительно более раннего английского блоба, (2) проверка изменений заголовка и якорей текущего английского текста 6739674011 при побайтно неизменном основном тексте от ## Abstract до EOF, (3) первая проверка изменений ссылок и закреплённых версий 6742099993 (якоря позднее охвачены 6744010479), (4) проверка изменений глубины ссылок и якорей 6744010479, привязанная именно к этому русскому блобу работы о неопределённости (Uncertainty ru); никто не проверял весь перевод повторно относительно более нового источника за один новый полный проход; это не подтверждение носителем языка, не внешняя сертификация и не удостоверение научной истинности."
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "b492e92038c8d30c97be5c85e530fd1c88ee73b6960238d5ede79ae18e97925e"
+          }
+        }
       },
       {
         "work": "source-transcription-and-uncertainty",
@@ -1899,7 +2193,25 @@
         "review_status": "internal-agent-review",
         "review_scope": "full",
         "review_issue": null,
-        "counts_as_independent_source": false
+        "counts_as_independent_source": false,
+        "review_localization": {
+          "review_state": "unreviewed",
+          "language": "zh-Hans",
+          "fields": {
+            "independence_basis": "Pavel Valentov 是科学作者和权利人；KC-Brain（AI）起草了译文；Agent-Brain（AI）独立进行了审查；没有由母语者开展的人工审查，也没有外部同行评审。",
+            "method": "组合记录：(1) Agent-Brain 对照较早英文文件版本进行的全文保真审查 6735134008；(2) Agent-Brain 对当前英文标题及锚点变化进行的审查 6739674011，其中从 ## Abstract 到 EOF 的正文逐字节相同；(3) Agent-Brain 对链接及固定版本变化进行的首次审查 6742099993（其中收到 CHANGES_REQUIRED 的四项，其锚点由 6744010479 覆盖）；(4) Agent-Brain 对当时八个候选项的先前版本进行的链接深度及锚点变化审查 6744010479；(5) Agent-Brain 对这一经作者修订的精确译文文件版本进行的公式顺序变化审查 6751312234（SCOPED FIDELITY PASS）：该版本位于 PR76 的分支头 fc9c8ddcd625afc87e2dd59660397f041d049e96，对照的英文快照为 2b5bcff544fea5d1752ff009933e4ce0305dad8b。审查 (1)-(4) 记录于 reviews/renditions/k8-composite-exact-blob-evidence-20261109.md（文件版本 eb689d2b5eaf40cd124fdec27d4fe312867d2d73）；作者编制的公式顺序更正台账为 reviews/renditions/k8-ordered-math-author-delta-20261109.md（文件版本 c03b338155e4ff4e5300829f1a1bbb596357733e）。两份记录均由 KC-Brain 撰写，作为溯源材料，并非 Agent-Brain 的签名。",
+            "limitations": "组合记录：(1)-(4) 与首个 K8 准入链相同的先前全文、标题、链接及锚点审查，加上 (5) 仅针对这一精确修订文件版本的公式顺序变化范围审查 6751312234；6751312234 不是对整篇手稿重新作出的完整证明，不是针对四个文件的原生 Pandoc 运行，也不是外部认证或母语者认证；它不是科学真实性认证。"
+          },
+          "source": {
+            "path": "publication-review-localizations.json",
+            "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+            "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+            "sidecar_path": "publication-renditions.json",
+            "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+            "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+            "review_sha256": "88f54de96246eeb5f042760630223dd61e8303fb91b397bcbbdb51234474bf70"
+          }
+        }
       },
       {
         "work": "status-model",
@@ -2399,5 +2711,152 @@
       }
     ],
     "scope": "unreviewed translations of retained English excerpts; no recovered Russian v1 original, fresh empirical check or independent review"
+  },
+  "formula_localizations": {
+    "schema_version": 1,
+    "path": "publication-formula-localizations.json",
+    "sha256": "82b65daee9872602fb3fe9cab6c6eee2525ec22ed12345480d1d7db4e9c18d41",
+    "repository": "Arcanada-one/knowledge-contract",
+    "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+    "review_state": "unreviewed",
+    "documents": [
+      {
+        "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "annotations": [
+          {
+            "math_index": 15,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "for every ",
+            "tex_sha256": "0424127ef69f8e4fcc7c13f6565d643530aa4c0aa1b305e75ed86afdd4752a35"
+          },
+          {
+            "math_index": 23,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "for all ",
+            "tex_sha256": "0e6779e0d1aa6afc9add2118224c62f150e633908776733ddd17482b8eeb8fa6"
+          }
+        ]
+      },
+      {
+        "path": "papers/semantic-objects-and-context/PAPER.md",
+        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "annotations": [
+          {
+            "math_index": 10,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "and",
+            "tex_sha256": "c4d3245937bd4de05b796c3f47ecf19a797738fe7e08528235ae3f617f64dacc"
+          }
+        ]
+      },
+      {
+        "path": "papers/knowledge-utility/PAPER.md",
+        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "annotations": [
+          {
+            "math_index": 40,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "equivalently",
+            "tex_sha256": "1f75905e2794e7379bdd78d48628c6e1ea8f2585029fc77c873c9b16025d0433"
+          }
+        ]
+      },
+      {
+        "path": "papers/geometry-of-semantic-representations/PAPER.md",
+        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "annotations": [
+          {
+            "math_index": 24,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "for all ",
+            "tex_sha256": "b39dd30b2e3b7df85c130957f0c5848b1557053a60ceccde3cb8bc8d4fed27ff"
+          },
+          {
+            "math_index": 29,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "for every ",
+            "tex_sha256": "e5b37e90a9a45157a0d4688d08ae51d87e92572fc4a47ddbab2afd2247537ac1"
+          },
+          {
+            "math_index": 30,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "for ",
+            "tex_sha256": "9de47ef2ded83abd3400ad8c0e15d52e5fb662539ec1b5afd77553b0ab3814ed"
+          },
+          {
+            "math_index": 64,
+            "math_type": "DisplayMath",
+            "mtext_index": 1,
+            "source_text": "the two answer sets are not the same singleton",
+            "tex_sha256": "f62b107b955b9d8aa466ac4941520d4020f115d31d9896facd68b2ca4566957f"
+          }
+        ]
+      }
+    ],
+    "scope": "visible formula prose only; canonical TeX and source math parity unchanged; no independent review"
+  },
+  "review_localizations": {
+    "schema_version": 1,
+    "repository": "Arcanada-one/knowledge-contract",
+    "review_state": "unreviewed",
+    "source": {
+      "path": "publication-review-localizations.json",
+      "sha256": "fceb25eac9479df0920b1b58fa9c5220e1153326bc107084af6a04c9ae06757f",
+      "revision": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+      "sidecar_path": "publication-renditions.json",
+      "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
+      "sidecar_revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
+    },
+    "entries": [
+      {
+        "work": "dependency-closure-and-package-delivery",
+        "language": "ru",
+        "review_sha256": "e95dcb5a2ede6c65e3f0d5fd7dc269a4f70cd867dae0dfc0dead46b53044be3b"
+      },
+      {
+        "work": "dependency-closure-and-package-delivery",
+        "language": "zh-Hans",
+        "review_sha256": "5f72b6a55745935393866d08c895f543d813e9d4a7821b732e6170209e707dc8"
+      },
+      {
+        "work": "source-transcription-and-uncertainty",
+        "language": "ru",
+        "review_sha256": "b492e92038c8d30c97be5c85e530fd1c88ee73b6960238d5ede79ae18e97925e"
+      },
+      {
+        "work": "source-transcription-and-uncertainty",
+        "language": "zh-Hans",
+        "review_sha256": "88f54de96246eeb5f042760630223dd61e8303fb91b397bcbbdb51234474bf70"
+      },
+      {
+        "work": "executable-projections-and-revision",
+        "language": "ru",
+        "review_sha256": "8808d4c89cc14f303b627a41ed7af4a0c5504f57a3b3326046414752493c691f"
+      },
+      {
+        "work": "executable-projections-and-revision",
+        "language": "zh-Hans",
+        "review_sha256": "63693efab1cb380de0a640e8e25c7b1d744aa0ba4bb1e05a22e5756297ecd655"
+      },
+      {
+        "work": "reuse-admission-and-cost-controls",
+        "language": "ru",
+        "review_sha256": "4c67a0f0747a62fa5333855555155fa61948c3e898a8ef015d42f4d7ba27b15f"
+      },
+      {
+        "work": "reuse-admission-and-cost-controls",
+        "language": "zh-Hans",
+        "review_sha256": "d9723d8b2466df0ce9d7ff9ca0e5070b07b04bb519e6f2df4a5b054a3e0eb20c"
+      }
+    ],
+    "scope": "translated explanations only; original review, identity, scope and verdict unchanged; no new review"
   }
 }
