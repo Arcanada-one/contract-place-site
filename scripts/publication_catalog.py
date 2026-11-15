@@ -45,8 +45,11 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
 
 
 def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None, programme=None) -> None:
+    from catalogue_localization import compile_localization, compile_article_localizations
+    localization = compile_localization(source, manifest, documents)
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
+    articles, article_localizations = compile_article_localizations(site, previous['articles'])
     aliases = legacy_aliases(source, previous, documents)
     from build_journal import compile_journal
     journal_issues = compile_journal(site)
@@ -86,9 +89,11 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
             records[-1]['status'] = doc['status']
         if renditions:
             records[-1]['renditions'] = renditions.for_work(doc['slug'])
+        if localization:
+            records[-1]['localization'] = localization['records'][doc['slug']]
     payload = {
         'publication': manifest,
-        'records': records, 'articles': previous['articles'], 'aliases': aliases,
+        'records': records, 'articles': articles, 'aliases': aliases,
         'journal_issues': journal_issues,
         'roadmap': roadmap,
         'source': 'https://contract.place/', 'license': 'CC-BY-4.0',
@@ -98,6 +103,10 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         payload['programme'] = programme
     if renditions:
         payload['renditions_source'] = renditions.source_kind
+    if localization:
+        payload['localization_source'] = {k: localization['provenance'][k] for k in ('path', 'sha256', 'source')}
+    if article_localizations:
+        payload['article_localizations_source'] = article_localizations
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
     old_provenance = json.loads((site / 'src/site/content-provenance.json').read_text())
     provenance = {
@@ -112,4 +121,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         provenance['programme'] = programme_provenance(programme)
     if renditions:
         provenance['renditions'] = renditions.provenance()
+    if localization:
+        provenance['localizations'] = localization['provenance']
+    if article_localizations:
+        provenance['articles_localizations'] = article_localizations
     (site / 'src/site/content-provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')

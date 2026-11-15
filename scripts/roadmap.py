@@ -93,11 +93,15 @@ def load_pin(source: Path, manifest_path: Path) -> dict:
     if not isinstance(pin.get("commit"), str) or not re.fullmatch(r"[0-9a-f]{40}", pin["commit"]):
         raise ValueError("The roadmap manifest must pin a full 40-character commit")
     files = pin.get("files")
-    if not isinstance(files, list) or {f.get("path") for f in files if isinstance(f, dict)} != set(FILES) or len(files) != len(FILES):
-        raise ValueError("The roadmap manifest must list exactly: " + ", ".join(FILES))
+    from roadmap_localization import FILES as localized_files, INDEX as localization_index
+    expected_files = dict(FILES)
+    if (source / localization_index).exists():
+        expected_files.update(localized_files)
+    if not isinstance(files, list) or {f.get("path") for f in files if isinstance(f, dict)} != set(expected_files) or len(files) != len(expected_files):
+        raise ValueError("The roadmap manifest must list exactly: " + ", ".join(expected_files))
     for item in files:
-        if item.get("role") != FILES[item["path"]]:
-            raise ValueError(f"Roadmap file {item['path']} must have role {FILES[item['path']]}")
+        if item.get("role") != expected_files[item["path"]]:
+            raise ValueError(f"Roadmap file {item['path']} must have role {expected_files[item['path']]}")
         if not isinstance(item.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", item["sha256"]):
             raise ValueError(f"Roadmap file {item['path']} needs a SHA-256 digest")
     actual = run(["git", "rev-parse", "HEAD"], cwd=source).strip()
@@ -413,6 +417,10 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
         "priority_labels": PRIORITY_LABELS,
         "required_edges": sum(len(n["requires"]) for n in nodes.values()),
     }
+    from roadmap_localization import compile_translations
+    localized = compile_translations(source, pin, cards, roadmap, record)
+    if localized:
+        record["translations"], record["translation_provenance"] = localized
     scan_private("roadmap", json.dumps(record, ensure_ascii=False))
     for key in ("revision", "baseline_commit"):
         if not isinstance(record[key], str) or not record[key]:
@@ -421,9 +429,12 @@ def compile_roadmap(source: Path, manifest_path: Path, manuscripts: dict[str, di
 
 
 def provenance(record: dict) -> dict:
-    return {
+    result = {
         "pin": record["pin"], "revision": record["revision"], "baseline_commit": record["baseline_commit"],
         "tasks": [{k: t[k] for k in ("id", "display_name", "display_name_ru", "priority", "priority_label", "owner", "status", "requires") if k in t} for t in record["tasks"]],
         "advisory": record["advisory"],
         "names": record.get("names", {}),
     }
+    if "translation_provenance" in record:
+        result["translations"] = record["translation_provenance"]
+    return result

@@ -3,7 +3,7 @@
     "schema_version": 1,
     "edition": "1.1",
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
     "catalog": "publication-catalog.json"
   },
   "records": [
@@ -11,249 +11,249 @@
       "id": "human-meaning-and-computable-knowledge",
       "type": "paper",
       "path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/human-meaning-and-computable-knowledge/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/human-meaning-and-computable-knowledge/PAPER.md",
       "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "semantic-objects-and-context",
       "type": "paper",
       "path": "papers/semantic-objects-and-context/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/semantic-objects-and-context/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/semantic-objects-and-context/PAPER.md",
       "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "constrained-transformations",
       "type": "paper",
       "path": "papers/constrained-transformations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/constrained-transformations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/constrained-transformations/PAPER.md",
       "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "retrieval-and-context-composition",
       "type": "paper",
       "path": "papers/retrieval-and-context-composition/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/retrieval-and-context-composition/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/retrieval-and-context-composition/PAPER.md",
       "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "interaction-and-memory",
       "type": "paper",
       "path": "papers/interaction-and-memory/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/interaction-and-memory/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/interaction-and-memory/PAPER.md",
       "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "evidence-and-falsification",
       "type": "paper",
       "path": "papers/evidence-and-falsification/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/evidence-and-falsification/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/evidence-and-falsification/PAPER.md",
       "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "revision-and-governance",
       "type": "paper",
       "path": "papers/revision-and-governance/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/revision-and-governance/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/revision-and-governance/PAPER.md",
       "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "controlled-knowledge-reuse",
       "type": "paper",
       "path": "papers/controlled-knowledge-reuse/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/controlled-knowledge-reuse/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/controlled-knowledge-reuse/PAPER.md",
       "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "knowledge-utility",
       "type": "paper",
       "path": "papers/knowledge-utility/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/knowledge-utility/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/knowledge-utility/PAPER.md",
       "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "geometry-of-semantic-representations",
       "type": "paper",
       "path": "papers/geometry-of-semantic-representations/PAPER.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/papers/geometry-of-semantic-representations/PAPER.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/papers/geometry-of-semantic-representations/PAPER.md",
       "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "knowledge-contract-core",
       "type": "specification",
       "path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
       "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "contract-family",
       "type": "specification",
       "path": "engineering/specifications/contract-family/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/contract-family/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/contract-family/SPECIFICATION.md",
       "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "semantic-types",
       "type": "specification",
       "path": "engineering/specifications/semantic-types/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/semantic-types/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/semantic-types/SPECIFICATION.md",
       "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "context-package",
       "type": "specification",
       "path": "engineering/specifications/context-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/context-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/context-package/SPECIFICATION.md",
       "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "compiled-artifact-contract",
       "type": "specification",
       "path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
       "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "artifact-registry",
       "type": "specification",
       "path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/artifact-registry/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/artifact-registry/SPECIFICATION.md",
       "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "status-model",
       "type": "specification",
       "path": "engineering/specifications/status-model/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/status-model/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/status-model/SPECIFICATION.md",
       "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "cache-identity-and-invalidation",
       "type": "specification",
       "path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
       "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "reuse-policy",
       "type": "specification",
       "path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/reuse-policy/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/reuse-policy/SPECIFICATION.md",
       "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "knowledge-evolution",
       "type": "specification",
       "path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
       "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "book-package",
       "type": "specification",
       "path": "engineering/specifications/book-package/SPECIFICATION.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md",
       "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "contract-profile-conformance",
       "type": "study",
       "path": "engineering/studies/contract-profile-conformance/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/contract-profile-conformance/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/contract-profile-conformance/STUDY.md",
       "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "dependency-closure-and-package-delivery",
       "type": "study",
       "path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
       "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "source-transcription-and-uncertainty",
       "type": "study",
       "path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/source-transcription-and-uncertainty/STUDY.md",
       "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "executable-projections-and-revision",
       "type": "study",
       "path": "engineering/studies/executable-projections-and-revision/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/executable-projections-and-revision/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/executable-projections-and-revision/STUDY.md",
       "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "reuse-admission-and-cost-controls",
       "type": "study",
       "path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
       "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "editorial-skill-pilot",
       "type": "study",
       "path": "engineering/studies/editorial-skill-pilot/STUDY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/studies/editorial-skill-pilot/STUDY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/studies/editorial-skill-pilot/STUDY.md",
       "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "glossary",
       "type": "glossary",
       "path": "reference/glossary/GLOSSARY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/reference/glossary/GLOSSARY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/reference/glossary/GLOSSARY.md",
       "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "bibliography",
       "type": "bibliography",
       "path": "reference/bibliography/BIBLIOGRAPHY.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/reference/bibliography/BIBLIOGRAPHY.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/reference/bibliography/BIBLIOGRAPHY.md",
       "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "source-map",
       "type": "appendix",
       "path": "appendices/source-map/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/appendices/source-map/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/appendices/source-map/APPENDIX.md",
       "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     },
     {
       "id": "api-integration",
       "type": "appendix",
       "path": "appendices/api-integration/APPENDIX.md",
-      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/appendices/api-integration/APPENDIX.md",
+      "source": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/appendices/api-integration/APPENDIX.md",
       "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
-      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
+      "revision": "55e279c43dc9bcf8732467a32661c2ac4b7cf920"
     }
   ],
   "articles": [
@@ -279,43 +279,73 @@
   "roadmap": {
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+      "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
       "files": [
         {
           "path": "ROADMAP.md",
           "role": "rendered",
           "sha256": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/ROADMAP.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/ROADMAP.md"
         },
         {
           "path": "roadmap/TASKS.md",
           "role": "rendered",
           "sha256": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/TASKS.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/TASKS.md"
         },
         {
           "path": "roadmap/dependencies.json",
           "role": "rendered",
           "sha256": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/dependencies.json"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/dependencies.json"
         },
         {
           "path": "roadmap/EXPERIMENTS.md",
           "role": "linked",
           "sha256": "b3b7a80ea3b4a11ab05d12e8f07a30badba3fb6e9aa87991548508343055f07d",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/EXPERIMENTS.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/EXPERIMENTS.md"
         },
         {
           "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
           "role": "linked",
           "sha256": "442ba32cadcf9464e95c2d20f7e3857d0b1be679f41eb9a6282fb56dde00679d",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
         },
         {
           "path": "roadmap/SITE_DELIVERY.md",
           "role": "introduction",
           "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/roadmap/SITE_DELIVERY.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/SITE_DELIVERY.md"
+        },
+        {
+          "path": "roadmap/localizations.json",
+          "role": "rendition-manifest",
+          "sha256": "e6f11eb6e749aaf409f63f06b88d7e2277f458baa292ad1173940b9b13c0aabb",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/localizations.json"
+        },
+        {
+          "path": "roadmap/ROADMAP.full.ru.md",
+          "role": "rendition",
+          "sha256": "2840af6ae601d2085f97f9358c218e7782289cc94876c3fa242ed8d2a830f167",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/ROADMAP.full.ru.md"
+        },
+        {
+          "path": "roadmap/ROADMAP.full.zh-Hans.md",
+          "role": "rendition",
+          "sha256": "fffe4fa2a97c8fbc41e3f7c5c0e79f477d09bfcd998a534aaa4490ac542c7159",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/ROADMAP.full.zh-Hans.md"
+        },
+        {
+          "path": "roadmap/TASKS.ru.json",
+          "role": "rendition",
+          "sha256": "bf84e1f3517d5c3eeb43d4d90f4dd9861953df5b362a4064fb5984696b472f67",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/TASKS.ru.json"
+        },
+        {
+          "path": "roadmap/TASKS.zh-Hans.json",
+          "role": "rendition",
+          "sha256": "bbccd4330e5b416add6f8656eae12522bf37d2cdf58b35cf06ebba88eab464a8",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/roadmap/TASKS.zh-Hans.json"
         }
       ]
     },
@@ -686,6 +716,46 @@
       "RM-23": "Editorial Evaluation",
       "RM-24": "Corpus Integration",
       "RM-25": "Editorial Release"
+    },
+    "translations": {
+      "source": {
+        "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "files": {
+          "ROADMAP.md": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760",
+          "roadmap/TASKS.md": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7",
+          "roadmap/SITE_DELIVERY.md": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246",
+          "roadmap/dependencies.json": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9"
+        }
+      },
+      "status": "author-draft",
+      "semantic_review": "not_verified",
+      "files": [
+        {
+          "path": "roadmap/localizations.json",
+          "role": "rendition-manifest",
+          "sha256": "e6f11eb6e749aaf409f63f06b88d7e2277f458baa292ad1173940b9b13c0aabb"
+        },
+        {
+          "path": "roadmap/ROADMAP.full.ru.md",
+          "role": "rendition",
+          "sha256": "2840af6ae601d2085f97f9358c218e7782289cc94876c3fa242ed8d2a830f167"
+        },
+        {
+          "path": "roadmap/ROADMAP.full.zh-Hans.md",
+          "role": "rendition",
+          "sha256": "fffe4fa2a97c8fbc41e3f7c5c0e79f477d09bfcd998a534aaa4490ac542c7159"
+        },
+        {
+          "path": "roadmap/TASKS.ru.json",
+          "role": "rendition",
+          "sha256": "bf84e1f3517d5c3eeb43d4d90f4dd9861953df5b362a4064fb5984696b472f67"
+        },
+        {
+          "path": "roadmap/TASKS.zh-Hans.json",
+          "role": "rendition",
+          "sha256": "bbccd4330e5b416add6f8656eae12522bf37d2cdf58b35cf06ebba88eab464a8"
+        }
+      ]
     }
   },
   "site_integration_base": "91da6a35b4234d409de4c0a0777ff9c469bc8400",
@@ -695,25 +765,25 @@
     "kind": "programme-guide",
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+      "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
       "files": [
         {
           "path": "PROGRAMME.md",
           "sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
           "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/PROGRAMME.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/PROGRAMME.md"
         },
         {
           "path": "guides/programme.ru.md",
           "sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
           "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.ru.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.ru.md"
         },
         {
           "path": "guides/programme.zh-Hans.md",
           "sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
           "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.zh-Hans.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.zh-Hans.md"
         }
       ]
     },
@@ -809,139 +879,381 @@
     "kind": "arcanada-publication-renditions",
     "renditions_source": "knowledge-repository",
     "sidecar": "publication-renditions.json",
-    "sidecar_sha256": "7fdb45c652c12d5bffa8c18b8149237a7aafb34063778a0694ec1f48d34310a0",
+    "sidecar_sha256": "f16738d614d709a497a33952d757837008d7f78de411d420d041e97d3664f43f",
     "entries": [
       {
         "work": "api-integration",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "appendices/api-integration/APPENDIX.md",
+        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "current_source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/appendices/api-integration/APPENDIX.md",
+        "rendition_sha256": "cb29943f57b59d0312535e0664a5b911d66ea2bc65907283dd372f5ed2e97c8e",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "api-integration",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "appendices/api-integration/APPENDIX.md",
+        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "current_source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/appendices/api-integration/APPENDIX.md",
+        "rendition_sha256": "1ba3ad65bb10be1a4c099e1780e30095ff754accef8aa0a03e223696ac8c1b08",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "artifact-registry",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "current_source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "rendition_sha256": "25af4709a0acfad7148d60ff5679839c2fb08db99da8ab07b061b7b29656b982",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "artifact-registry",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "current_source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "rendition_sha256": "dd627a3159d560f4fe6a4467086169135d746c60542f7e1fa537c92ad3ed4f02",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "bibliography",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "reference/bibliography/BIBLIOGRAPHY.md",
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "current_source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/reference/bibliography/BIBLIOGRAPHY.md",
+        "rendition_sha256": "caaab4e2b747047f0a109923f7d3cb7e779aa50d3f0ba23dcb515cfcd576b071",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "bibliography",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "reference/bibliography/BIBLIOGRAPHY.md",
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "current_source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/reference/bibliography/BIBLIOGRAPHY.md",
+        "rendition_sha256": "3273b5fdfcec727b2380b632a95fdf0d9aa6196ace4ff9b32d87154daf3a9b9b",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "book-package",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/book-package/SPECIFICATION.md",
+        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "current_source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/book-package/SPECIFICATION.md",
+        "rendition_sha256": "dd0947ab564064d5c6b503b1b3bdbe8fb80dd08bf57bb206bcb02cff0f082b0b",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "book-package",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/book-package/SPECIFICATION.md",
+        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "current_source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/book-package/SPECIFICATION.md",
+        "rendition_sha256": "73e8bc72c9b7846a72cbb1ae1da920c7175f683e22c99fce089b823f9aa6abc5",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "cache-identity-and-invalidation",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "current_source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "rendition_sha256": "dcb764ae4143c3765fccabb97c342aea842bdafb2284f35b941d98558d61b7d3",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "cache-identity-and-invalidation",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "current_source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "rendition_sha256": "11f409cf1175282a65a92e938029770c1900c8ec1e19a981b8cb196f02cee6b9",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "compiled-artifact-contract",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "current_source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "rendition_sha256": "8531210d4a31fbd361b2363d6939cd8a9b4b96822510a274c124d93167d73974",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "compiled-artifact-contract",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "current_source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "rendition_sha256": "4573065bdd24c7c145c1b7564ab1cace00b7faabd30a08470d9ae77d0b9d65e0",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "constrained-transformations",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/constrained-transformations/PAPER.md",
+        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "current_source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/constrained-transformations/PAPER.md",
+        "rendition_sha256": "162e971b19e3d307e2f543e0902f820c54eb0e2c289841adf4e564694475bfb0",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "constrained-transformations",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/constrained-transformations/PAPER.md",
+        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "current_source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/constrained-transformations/PAPER.md",
+        "rendition_sha256": "b9faa06aba3b9b02aa1611841a27323107b110137136e87df45c62e6daa6d939",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "context-package",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/context-package/SPECIFICATION.md",
+        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "current_source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/context-package/SPECIFICATION.md",
+        "rendition_sha256": "b9c4cf8e9b365863ea25b81c40f255ce9461ab9fee66828c0263dcd4260b051d",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "context-package",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/context-package/SPECIFICATION.md",
+        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "current_source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/context-package/SPECIFICATION.md",
+        "rendition_sha256": "c3583b6dbba62e4b9b0a473e7cf7ebc5c092872bb61527ec1d2c3660692ff5d8",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "contract-family",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/contract-family/SPECIFICATION.md",
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "current_source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/contract-family/SPECIFICATION.md",
+        "rendition_sha256": "ab6f3d07a0dd6bd50592d283cca7e3b71afcf3232849127456ad574514991ede",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "contract-family",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/contract-family/SPECIFICATION.md",
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "current_source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/contract-family/SPECIFICATION.md",
+        "rendition_sha256": "75718399673bb0bb26a0b2cdd941049d3916080eb78eb96703c157f3e26b0db6",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "contract-profile-conformance",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/studies/contract-profile-conformance/STUDY.md",
+        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "current_source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/studies/contract-profile-conformance/STUDY.md",
+        "rendition_sha256": "3795a0ae36f227da630829deaa85e94c1831da12cb6fa132a99d5324fded7122",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "contract-profile-conformance",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/studies/contract-profile-conformance/STUDY.md",
+        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "current_source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/studies/contract-profile-conformance/STUDY.md",
+        "rendition_sha256": "55a51fd18b41f49e462d1f08c62cd52d4bc9e8461cd362178b37c4468f600f5f",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "controlled-knowledge-reuse",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/controlled-knowledge-reuse/PAPER.md",
+        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "current_source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/controlled-knowledge-reuse/PAPER.md",
+        "rendition_sha256": "d4c1b3236c5e9a5b81b6f830cf84c9cbc9b66612c9b89e87016528e47ab768e9",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "controlled-knowledge-reuse",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/controlled-knowledge-reuse/PAPER.md",
+        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "current_source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/controlled-knowledge-reuse/PAPER.md",
+        "rendition_sha256": "9ad69c8aa3aa0c28f9311c8fcc2e251c456c3c64143433d535a0258c647af887",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "dependency-closure-and-package-delivery",
@@ -980,26 +1292,70 @@
       {
         "work": "editorial-skill-pilot",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/studies/editorial-skill-pilot/STUDY.md",
+        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "current_source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/studies/editorial-skill-pilot/STUDY.md",
+        "rendition_sha256": "8ce70bb0b209769e6ad99162241454114b64c4b7120cd60e2ef6610fb8beedb9",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "editorial-skill-pilot",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/studies/editorial-skill-pilot/STUDY.md",
+        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "current_source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/studies/editorial-skill-pilot/STUDY.md",
+        "rendition_sha256": "ce36042029c8b7c24e057d13cb7f55be5e2061082e331595e03e04f516c7e1c5",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "evidence-and-falsification",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/evidence-and-falsification/PAPER.md",
+        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "current_source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/evidence-and-falsification/PAPER.md",
+        "rendition_sha256": "1c46244a4dc80444aa3f603e71d28c0ea6eab1177a9297d06d019b6ea734834c",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "evidence-and-falsification",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/evidence-and-falsification/PAPER.md",
+        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "current_source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/evidence-and-falsification/PAPER.md",
+        "rendition_sha256": "a9bf75fe28fad01f675ed3138acc3451967295b2e0812881b34e1e4c107deada",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "executable-projections-and-revision",
@@ -1038,98 +1394,274 @@
       {
         "work": "geometry-of-semantic-representations",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "current_source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/geometry-of-semantic-representations/PAPER.md",
+        "rendition_sha256": "78501e1cf0b2c11ee87355c2a13df6c3fb6040ccebeb8ada915b1e5597a86ee1",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "geometry-of-semantic-representations",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "current_source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/geometry-of-semantic-representations/PAPER.md",
+        "rendition_sha256": "cebe59eef118dcb4f474f2af06f4e1c862939ef88a24cad386cbb0bf2686c022",
+        "rendition_revision": "8bd12f48ca54f1215440437bfe11900ae156e29e",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "glossary",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "reference/glossary/GLOSSARY.md",
+        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "current_source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/reference/glossary/GLOSSARY.md",
+        "rendition_sha256": "c9cc321dd9e524e61bf5c12f543d94f2c56a4b6707f52ea9c2788d1caafac8ce",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "glossary",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "reference/glossary/GLOSSARY.md",
+        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "current_source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/reference/glossary/GLOSSARY.md",
+        "rendition_sha256": "8321c838e355047bf69a05b502d6fd532629c8d6f88d23dc18c7c2b8c480566f",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "human-meaning-and-computable-knowledge",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "current_source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "rendition_sha256": "0103fb835c974083a71af8a3a4ad14b77037550bd369aca07da6fa01aba68778",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "human-meaning-and-computable-knowledge",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "current_source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "rendition_sha256": "57a1d51bbb04a0b43812fdc77095207fd67ec09434cada314d35ddb82f81b45e",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "interaction-and-memory",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/interaction-and-memory/PAPER.md",
+        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "current_source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/interaction-and-memory/PAPER.md",
+        "rendition_sha256": "443f84127cb192cedec121e70e96e04bf28921deb6e9ca4d6a23fa57859b7f0b",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "interaction-and-memory",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/interaction-and-memory/PAPER.md",
+        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "current_source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/interaction-and-memory/PAPER.md",
+        "rendition_sha256": "42ea856ccc341a7d847f4bc7ca3d290e74785662bc6e2009cf56fed5ee0d62d3",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-contract-core",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "current_source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "rendition_sha256": "d42942b685ed3ea2ba21ac62a535e040a93a8a510a4fe890ad8dd2daecb40450",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-contract-core",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "current_source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "rendition_sha256": "4d73a08ee34ccb4610957f5a279c02bd21b26c4cb08217aa1a0d4ed637f05961",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-evolution",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "current_source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "rendition_sha256": "bb229053a6136aa8f0adf725486ecf98482670a6e1686de93813fbde569e55d8",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-evolution",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "current_source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "rendition_sha256": "000be00b5dd8c8dc15607325759433fa6a762c89ae84dec62102a575bc1c0e99",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-utility",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/knowledge-utility/PAPER.md",
+        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "current_source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/knowledge-utility/PAPER.md",
+        "rendition_sha256": "54e847650169f3d35d8d01fef104a46614ad3f6930ae41a3125d6220a8577bb2",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "knowledge-utility",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/knowledge-utility/PAPER.md",
+        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "current_source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/knowledge-utility/PAPER.md",
+        "rendition_sha256": "f2eea290e94e3d71f495ff3cabbf586bcfc3115c12904bba7843698d9ccfb051",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "retrieval-and-context-composition",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/retrieval-and-context-composition/PAPER.md",
+        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "current_source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/retrieval-and-context-composition/PAPER.md",
+        "rendition_sha256": "f1f60ecd6142f59f3a29a5fc4fa55e3e67bb06a1ade55ab2495412532243fe63",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "retrieval-and-context-composition",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/retrieval-and-context-composition/PAPER.md",
+        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "current_source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/retrieval-and-context-composition/PAPER.md",
+        "rendition_sha256": "39f5aa5ae1e1e16e80426866bc3262701d9ae2f2206563a41f1d7a3c1c3f3d01",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "reuse-admission-and-cost-controls",
@@ -1168,62 +1700,172 @@
       {
         "work": "reuse-policy",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "current_source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "rendition_sha256": "d75dd4416fa3c825058cc430f649c2634a800fa2990b8c37ce30f7e49651f548",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "reuse-policy",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "current_source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "rendition_sha256": "662be4f6082896dda71766b68fd46e0a88cf2f74b0f46c813cf9ba854263f5ea",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "revision-and-governance",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/revision-and-governance/PAPER.md",
+        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "current_source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/revision-and-governance/PAPER.md",
+        "rendition_sha256": "f663b198d46b6771a4b8c938e2af6558a5c285962ca30957c4d247386410be46",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "revision-and-governance",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/revision-and-governance/PAPER.md",
+        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "current_source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/revision-and-governance/PAPER.md",
+        "rendition_sha256": "1e1cc19e7923a43ca4d98af0afcd9e6499e921b137dd9821284fa471bc52c1b1",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "semantic-objects-and-context",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "papers/semantic-objects-and-context/PAPER.md",
+        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "current_source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/papers/semantic-objects-and-context/PAPER.md",
+        "rendition_sha256": "2dc5f1f3605db41be18a5c974e29aeb20d29850e7f9eafc53844c71a8a7fad8a",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "semantic-objects-and-context",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "papers/semantic-objects-and-context/PAPER.md",
+        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "current_source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/papers/semantic-objects-and-context/PAPER.md",
+        "rendition_sha256": "762c9efada28a33cff585874d6abeb7b90d1ddc167f88134b52770a984a88423",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "semantic-types",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/semantic-types/SPECIFICATION.md",
+        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "current_source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/semantic-types/SPECIFICATION.md",
+        "rendition_sha256": "52a2b1c16412c879055d83b77d093f02ed8bd86871e165bcce0cb1313b5bff3b",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "semantic-types",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/semantic-types/SPECIFICATION.md",
+        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "current_source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/semantic-types/SPECIFICATION.md",
+        "rendition_sha256": "032fdd1dd9aa21df51e90aad483a873d6147401245a8ef4d8e47c94a7d715a17",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "source-map",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "appendices/source-map/APPENDIX.md",
+        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "current_source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/appendices/source-map/APPENDIX.md",
+        "rendition_sha256": "4fc1d379262ab16bc5c94948e8643b1cf241072cd6d3aa823f2202bdef62a9c8",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "source-map",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "appendices/source-map/APPENDIX.md",
+        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "current_source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/appendices/source-map/APPENDIX.md",
+        "rendition_sha256": "bd5a11679f1de1ca9554ddb0d111ec518ed24c51633b6a95bff078efd1ab5827",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "source-transcription-and-uncertainty",
@@ -1262,15 +1904,500 @@
       {
         "work": "status-model",
         "language": "ru",
-        "state": "missing",
-        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3"
+        "state": "unreviewed",
+        "script": "Cyrl",
+        "source_path": "engineering/specifications/status-model/SPECIFICATION.md",
+        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "current_source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/ru/engineering/specifications/status-model/SPECIFICATION.md",
+        "rendition_sha256": "06d0b8c8551864719d3a25cb5738026277d1b36fbbabc8daa9f6874a52010817",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       },
       {
         "work": "status-model",
         "language": "zh-Hans",
-        "state": "missing",
-        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3"
+        "state": "unreviewed",
+        "script": "Hans",
+        "source_path": "engineering/specifications/status-model/SPECIFICATION.md",
+        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "current_source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "source_revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+        "rendition_path": "translations/zh-Hans/engineering/specifications/status-model/SPECIFICATION.md",
+        "rendition_sha256": "47ce4ea5db8de6dcfcf06bfa8411589520a03989b1950a9469a047e8735b21ba",
+        "rendition_revision": "101431f2cf0b141d317445fabd6b6122f9fe1dba",
+        "review_status": "unreviewed",
+        "review_scope": "none",
+        "review_issue": null,
+        "counts_as_independent_source": false
       }
     ]
+  },
+  "localizations": {
+    "schema_version": 1,
+    "path": "publication-localization.json",
+    "sha256": "7aa2a9d1b578cfaa3c251ef83b4a4219ad276261d93596c65992e51f9db3902d",
+    "source": {
+      "catalog": "publication-catalog.json",
+      "revision": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+      "sha256": "006f3c4a5a681a845e8084ad631ea648827c9ec7c64c7cf03d25358f83e6daa0"
+    },
+    "entries": [
+      {
+        "work": "human-meaning-and-computable-knowledge",
+        "language": "ru",
+        "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "human-meaning-and-computable-knowledge",
+        "language": "zh-Hans",
+        "source_path": "papers/human-meaning-and-computable-knowledge/PAPER.md",
+        "source_sha256": "56f19fd3af7c3020e8a444fd897c02a11bfc0be664cb3e12f863ee3cc988929b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "semantic-objects-and-context",
+        "language": "ru",
+        "source_path": "papers/semantic-objects-and-context/PAPER.md",
+        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "status": "unreviewed"
+      },
+      {
+        "work": "semantic-objects-and-context",
+        "language": "zh-Hans",
+        "source_path": "papers/semantic-objects-and-context/PAPER.md",
+        "source_sha256": "209c38501027c37abe73e264422c0e11c225fda8180c60fb2c6ae39cad1ce2f1",
+        "status": "unreviewed"
+      },
+      {
+        "work": "constrained-transformations",
+        "language": "ru",
+        "source_path": "papers/constrained-transformations/PAPER.md",
+        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "status": "unreviewed"
+      },
+      {
+        "work": "constrained-transformations",
+        "language": "zh-Hans",
+        "source_path": "papers/constrained-transformations/PAPER.md",
+        "source_sha256": "2768654f21960a5e4e4c46d3bdef8fcb75ad91309f745e29f0e2227af3a568af",
+        "status": "unreviewed"
+      },
+      {
+        "work": "retrieval-and-context-composition",
+        "language": "ru",
+        "source_path": "papers/retrieval-and-context-composition/PAPER.md",
+        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "status": "unreviewed"
+      },
+      {
+        "work": "retrieval-and-context-composition",
+        "language": "zh-Hans",
+        "source_path": "papers/retrieval-and-context-composition/PAPER.md",
+        "source_sha256": "a27a209c419480f2eb3c80e826c0da507fece1c1c66045d5c34d647656c3c2a9",
+        "status": "unreviewed"
+      },
+      {
+        "work": "interaction-and-memory",
+        "language": "ru",
+        "source_path": "papers/interaction-and-memory/PAPER.md",
+        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "status": "unreviewed"
+      },
+      {
+        "work": "interaction-and-memory",
+        "language": "zh-Hans",
+        "source_path": "papers/interaction-and-memory/PAPER.md",
+        "source_sha256": "0520e78d445bdf9b5febe0f8f8d218526c9352f8f9729219788b58beeb5dccdf",
+        "status": "unreviewed"
+      },
+      {
+        "work": "evidence-and-falsification",
+        "language": "ru",
+        "source_path": "papers/evidence-and-falsification/PAPER.md",
+        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "status": "unreviewed"
+      },
+      {
+        "work": "evidence-and-falsification",
+        "language": "zh-Hans",
+        "source_path": "papers/evidence-and-falsification/PAPER.md",
+        "source_sha256": "11001602b7af6761765c50c50092d576da0295361caf2c2ee5aa0f7ae746c6e5",
+        "status": "unreviewed"
+      },
+      {
+        "work": "revision-and-governance",
+        "language": "ru",
+        "source_path": "papers/revision-and-governance/PAPER.md",
+        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "status": "unreviewed"
+      },
+      {
+        "work": "revision-and-governance",
+        "language": "zh-Hans",
+        "source_path": "papers/revision-and-governance/PAPER.md",
+        "source_sha256": "65d5702b24da7ca93e9eb6c89bd26e3e23ff3e76dac0c847e1f6d21cc2bd924e",
+        "status": "unreviewed"
+      },
+      {
+        "work": "controlled-knowledge-reuse",
+        "language": "ru",
+        "source_path": "papers/controlled-knowledge-reuse/PAPER.md",
+        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "status": "unreviewed"
+      },
+      {
+        "work": "controlled-knowledge-reuse",
+        "language": "zh-Hans",
+        "source_path": "papers/controlled-knowledge-reuse/PAPER.md",
+        "source_sha256": "9a0cd4e2029534effa500286685a40f05ceaa781a27bd7b276697647474e83dc",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-utility",
+        "language": "ru",
+        "source_path": "papers/knowledge-utility/PAPER.md",
+        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-utility",
+        "language": "zh-Hans",
+        "source_path": "papers/knowledge-utility/PAPER.md",
+        "source_sha256": "51cf7e4e0005989fb8cc669bed699e72629644a02ea8bd06393fb0f588c148c7",
+        "status": "unreviewed"
+      },
+      {
+        "work": "geometry-of-semantic-representations",
+        "language": "ru",
+        "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "status": "unreviewed"
+      },
+      {
+        "work": "geometry-of-semantic-representations",
+        "language": "zh-Hans",
+        "source_path": "papers/geometry-of-semantic-representations/PAPER.md",
+        "source_sha256": "9462dc29258c66a907f6f2852c2d8f56fd59443658da8474f67bc52a78ee57aa",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-contract-core",
+        "language": "ru",
+        "source_path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-contract-core",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/knowledge-contract-core/SPECIFICATION.md",
+        "source_sha256": "c1d14c1dfdb9373e4fe3304baa3cde18c3b442180c5369be0c7a842db7d95e64",
+        "status": "unreviewed"
+      },
+      {
+        "work": "contract-family",
+        "language": "ru",
+        "source_path": "engineering/specifications/contract-family/SPECIFICATION.md",
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "status": "unreviewed"
+      },
+      {
+        "work": "contract-family",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/contract-family/SPECIFICATION.md",
+        "source_sha256": "be656317394ac3c934edace66395528ff72e84405618a0a4f2fd24c531a0b628",
+        "status": "unreviewed"
+      },
+      {
+        "work": "semantic-types",
+        "language": "ru",
+        "source_path": "engineering/specifications/semantic-types/SPECIFICATION.md",
+        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "status": "unreviewed"
+      },
+      {
+        "work": "semantic-types",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/semantic-types/SPECIFICATION.md",
+        "source_sha256": "11e66b5ae19f09cebb06a40616a180d19ecce6bb5166ab749e6b769a7594e206",
+        "status": "unreviewed"
+      },
+      {
+        "work": "context-package",
+        "language": "ru",
+        "source_path": "engineering/specifications/context-package/SPECIFICATION.md",
+        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "status": "unreviewed"
+      },
+      {
+        "work": "context-package",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/context-package/SPECIFICATION.md",
+        "source_sha256": "bda66c8c108f62bd266c79c7bda9272c8ddd5be8c940b4349cc77704a6dbd937",
+        "status": "unreviewed"
+      },
+      {
+        "work": "compiled-artifact-contract",
+        "language": "ru",
+        "source_path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "status": "unreviewed"
+      },
+      {
+        "work": "compiled-artifact-contract",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/compiled-artifact-contract/SPECIFICATION.md",
+        "source_sha256": "bc2e26c2af159eeee54892294157c383324ad17c0121826ab9c07bde11e7c6ec",
+        "status": "unreviewed"
+      },
+      {
+        "work": "artifact-registry",
+        "language": "ru",
+        "source_path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "status": "unreviewed"
+      },
+      {
+        "work": "artifact-registry",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/artifact-registry/SPECIFICATION.md",
+        "source_sha256": "fb929b4c35e1c2d270f989b137bb7dd47dbc108502eb75f7cf32eb529814dd85",
+        "status": "unreviewed"
+      },
+      {
+        "work": "status-model",
+        "language": "ru",
+        "source_path": "engineering/specifications/status-model/SPECIFICATION.md",
+        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "status": "unreviewed"
+      },
+      {
+        "work": "status-model",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/status-model/SPECIFICATION.md",
+        "source_sha256": "03d829245434011cc15eb92e2107a5334dde938ba2e701151da0f7244af7f5b3",
+        "status": "unreviewed"
+      },
+      {
+        "work": "cache-identity-and-invalidation",
+        "language": "ru",
+        "source_path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "status": "unreviewed"
+      },
+      {
+        "work": "cache-identity-and-invalidation",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/cache-identity-and-invalidation/SPECIFICATION.md",
+        "source_sha256": "23705ace38ebdfb295adf11f97ffc9168d8e2410a12046fc793536c282c9b01c",
+        "status": "unreviewed"
+      },
+      {
+        "work": "reuse-policy",
+        "language": "ru",
+        "source_path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "reuse-policy",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/reuse-policy/SPECIFICATION.md",
+        "source_sha256": "59e5e632074efcf2392fccfebf391d7c129c730049b398cd0c82463f4a8d677b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-evolution",
+        "language": "ru",
+        "source_path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "status": "unreviewed"
+      },
+      {
+        "work": "knowledge-evolution",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/knowledge-evolution/SPECIFICATION.md",
+        "source_sha256": "a9ee0fcdba6e4c99ed9b887f9c22d57d54089529d9d7bf294e67ea78e7f73bf9",
+        "status": "unreviewed"
+      },
+      {
+        "work": "book-package",
+        "language": "ru",
+        "source_path": "engineering/specifications/book-package/SPECIFICATION.md",
+        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "book-package",
+        "language": "zh-Hans",
+        "source_path": "engineering/specifications/book-package/SPECIFICATION.md",
+        "source_sha256": "8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b",
+        "status": "unreviewed"
+      },
+      {
+        "work": "contract-profile-conformance",
+        "language": "ru",
+        "source_path": "engineering/studies/contract-profile-conformance/STUDY.md",
+        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "status": "unreviewed"
+      },
+      {
+        "work": "contract-profile-conformance",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/contract-profile-conformance/STUDY.md",
+        "source_sha256": "4fe837348b21e730a191c276381647d31af51914a239bd47f2a27ddf7551cd5d",
+        "status": "unreviewed"
+      },
+      {
+        "work": "dependency-closure-and-package-delivery",
+        "language": "ru",
+        "source_path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+        "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
+        "status": "unreviewed"
+      },
+      {
+        "work": "dependency-closure-and-package-delivery",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/dependency-closure-and-package-delivery/STUDY.md",
+        "source_sha256": "5edb3262dc193a32fd2a577d8a887e939d80e9386e36afc542514446dd2672ce",
+        "status": "unreviewed"
+      },
+      {
+        "work": "source-transcription-and-uncertainty",
+        "language": "ru",
+        "source_path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+        "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
+        "status": "unreviewed"
+      },
+      {
+        "work": "source-transcription-and-uncertainty",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/source-transcription-and-uncertainty/STUDY.md",
+        "source_sha256": "3278cca0cdbb752dc70b73809c5218019584e0a0e832f4e170c339c7d327710a",
+        "status": "unreviewed"
+      },
+      {
+        "work": "executable-projections-and-revision",
+        "language": "ru",
+        "source_path": "engineering/studies/executable-projections-and-revision/STUDY.md",
+        "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
+        "status": "unreviewed"
+      },
+      {
+        "work": "executable-projections-and-revision",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/executable-projections-and-revision/STUDY.md",
+        "source_sha256": "77a4bcd95428f40ab0faa33fcda50ebb6c85ed10efa738ed30bb05fc66197255",
+        "status": "unreviewed"
+      },
+      {
+        "work": "reuse-admission-and-cost-controls",
+        "language": "ru",
+        "source_path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+        "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
+        "status": "unreviewed"
+      },
+      {
+        "work": "reuse-admission-and-cost-controls",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/reuse-admission-and-cost-controls/STUDY.md",
+        "source_sha256": "dc4bba37e36d4b6825131f4c8a9fca4bdf398e27c024e094a29cf66a21d80e13",
+        "status": "unreviewed"
+      },
+      {
+        "work": "editorial-skill-pilot",
+        "language": "ru",
+        "source_path": "engineering/studies/editorial-skill-pilot/STUDY.md",
+        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "status": "unreviewed"
+      },
+      {
+        "work": "editorial-skill-pilot",
+        "language": "zh-Hans",
+        "source_path": "engineering/studies/editorial-skill-pilot/STUDY.md",
+        "source_sha256": "55007345eee18a00662d94d9ed7b2515584c6c480d2386d9bd7b5148b34e95d6",
+        "status": "unreviewed"
+      },
+      {
+        "work": "glossary",
+        "language": "ru",
+        "source_path": "reference/glossary/GLOSSARY.md",
+        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "status": "unreviewed"
+      },
+      {
+        "work": "glossary",
+        "language": "zh-Hans",
+        "source_path": "reference/glossary/GLOSSARY.md",
+        "source_sha256": "e70b48641a6a64331827546627a874bf7ae28f7820c8c18e90b5aaf71108c3e4",
+        "status": "unreviewed"
+      },
+      {
+        "work": "bibliography",
+        "language": "ru",
+        "source_path": "reference/bibliography/BIBLIOGRAPHY.md",
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "status": "unreviewed"
+      },
+      {
+        "work": "bibliography",
+        "language": "zh-Hans",
+        "source_path": "reference/bibliography/BIBLIOGRAPHY.md",
+        "source_sha256": "736c06f1e8fcbde7c059159728aff47e94f9bcb5f6b1832fa76a72f817526337",
+        "status": "unreviewed"
+      },
+      {
+        "work": "source-map",
+        "language": "ru",
+        "source_path": "appendices/source-map/APPENDIX.md",
+        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "status": "unreviewed"
+      },
+      {
+        "work": "source-map",
+        "language": "zh-Hans",
+        "source_path": "appendices/source-map/APPENDIX.md",
+        "source_sha256": "69881f2d806097d66a308d4518c08016bf6ad62dd7bc2fe921bb293cca4a1949",
+        "status": "unreviewed"
+      },
+      {
+        "work": "api-integration",
+        "language": "ru",
+        "source_path": "appendices/api-integration/APPENDIX.md",
+        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "status": "unreviewed"
+      },
+      {
+        "work": "api-integration",
+        "language": "zh-Hans",
+        "source_path": "appendices/api-integration/APPENDIX.md",
+        "source_sha256": "7e0035ba7caeb56fca41d8442877e19ef8a2d557b1324e4d1d3a78e1d0440e7f",
+        "status": "unreviewed"
+      }
+    ],
+    "scope": "localized catalogue metadata; no manuscript review, independent source or runtime admission"
+  },
+  "articles_localizations": {
+    "schema_version": 1,
+    "path": "src/content/article-localizations.json",
+    "sha256": "5c5bb3e5bb71b447dc3dbf812f443d272848c7381dafb0802f10892972b5fa64",
+    "articles": [
+      {
+        "id": "knowledge-contract-architecture",
+        "source_sha256": "2afb93866ca40fc874a3ef4be59a0d83176e0844061376763620ad11d26a0f1a"
+      },
+      {
+        "id": "knowledge-contract-v2",
+        "source_sha256": "0a07bce128a9198ce37bf79116e1521da4d54135f7701a763902681f7f82ea86"
+      }
+    ],
+    "scope": "unreviewed translations of retained English excerpts; no recovered Russian v1 original, fresh empirical check or independent review"
   }
 }

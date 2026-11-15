@@ -28,7 +28,7 @@ for (const [query, expected] of [
   assert.equal(context.labViewQuery(query), expected);
 }
 assert.match(elements['#main'].innerHTML, /data-live-lab-state="unconnected"/);
-assert.doesNotMatch(elements['#header'].innerHTML, /lab\/knowledge-journey/);
+assert.match(elements['#header'].innerHTML, /href="\/ru\/lab\/knowledge-journey\/"/);
 assert.match(elements['#footer'].innerHTML, /lab\/knowledge-journey/);
 let assigned;
 context.location.assign = value => {assigned = value;};

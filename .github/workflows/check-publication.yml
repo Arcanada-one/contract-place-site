@@ -52,6 +52,8 @@ jobs:
           repository: ${{ steps.source.outputs.repository }}
           ref: ${{ steps.source.outputs.roadmap_commit }}
           path: _roadmap-source
+          # Roadmap translations bind their source to a verified ancestor.
+          fetch-depth: 0
           persist-credentials: false
       - name: Install the tested Markdown renderer
         run: |
@@ -71,6 +73,7 @@ jobs:
           python3 -B scripts/check_papers.py public
           python3 -B scripts/check_links.py public
           python3 -B scripts/check_roadmap.py public --source-dir _roadmap-source
+          python3 -B scripts/check_localization.py public --source-dir _knowledge-source --roadmap-source-dir _roadmap-source
       - name: Renderer and search boundaries
         run: |
           python3 -B scripts/test_build.py
@@ -78,13 +81,17 @@ jobs:
           python3 -B scripts/test_journal.py --mutants
           python3 -B scripts/test_readback.py
           python3 -B scripts/test_renditions.py
+          python3 -B scripts/test_catalogue_localization.py
+          python3 -B scripts/test_localization.py
           ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
+          python3 -B scripts/test_roadmap_localization.py
           READABLE_ROADMAP_SOURCE_DIR=_knowledge-source python3 -B scripts/test_roadmap_names.py
           python3 -B scripts/test_roadmap_display_names.py
           PROGRAMME_SOURCE_DIR=_knowledge-source python3 -B scripts/test_programme.py
           python3 -B scripts/test_rendition_preamble.py
           node scripts/test_search.js
           node scripts/test_reader_labels.js
+          node scripts/test_ui_localization.js
           node scripts/test_lab.js
           node --test scripts/test_lab_observation.mjs
           node --test scripts/test_retained_object_reader.mjs

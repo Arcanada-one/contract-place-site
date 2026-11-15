@@ -2,25 +2,25 @@
   "kind": "programme-provenance",
   "pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
     "files": [
       {
         "path": "PROGRAMME.md",
         "sha256": "eea5ba38bdc08e4b084de00dbe1ea60247d0339d5d530ff5b6a1b92f38c85403",
         "blob": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/PROGRAMME.md"
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/PROGRAMME.md"
       },
       {
         "path": "guides/programme.ru.md",
         "sha256": "12d3baac608ad3e8cd03bbda7f0192d64a1a32167c0881ae76219bf3d1177c19",
         "blob": "00000f6995932bef5111b8fc31b82c3140eafdd8",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.ru.md"
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.ru.md"
       },
       {
         "path": "guides/programme.zh-Hans.md",
         "sha256": "8f467807618da59b43172a3e5fa1b18bb3941160691d0ffba88d60ff3e93d7a5",
         "blob": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
-        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/guides/programme.zh-Hans.md"
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/guides/programme.zh-Hans.md"
       }
     ]
   },

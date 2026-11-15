@@ -77,7 +77,8 @@ if (!api || typeof api.roadmapCard !== 'function' || typeof api.setTestLocale !=
   process.exit(2);
 }
 api.setTestLocale(locale);
-const task = data.roadmap.tasks.find((t) => t.id === taskId);
+const view = locale === 'en' ? data.roadmap : (data.roadmap.translations?.[locale] || data.roadmap);
+const task = view.tasks.find((t) => t.id === taskId);
 if (!task) {
   console.error('missing task ' + taskId);
   process.exit(2);

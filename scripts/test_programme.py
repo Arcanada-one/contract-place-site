@@ -5,11 +5,13 @@
 from __future__ import annotations
 
 from hashlib import sha256
+from html import unescape
 import json
 import os
 from pathlib import Path
 import posixpath
 import re
+import subprocess
 import tempfile
 import unittest
 from pathlib import PurePosixPath
@@ -30,17 +32,51 @@ CATALOG = ROOT / "src/content/catalog.json"
 SOURCE_ROOT = Path(os.environ.get("PROGRAMME_SOURCE_DIR", str(ROOT / "_knowledge-source"))).resolve()
 LOCALES = ("en", "ru", "zh-Hans")
 NAV = {"en": "Programme", "ru": "Программа", "zh-Hans": "计划"}
-PIN = "161a01afb1b756adf059ea2e1cbdd0dca29d83a2"
-BLOBS = {
-    "en": "d83f5c6b136bcbe51fee557c0ff7ba30e3b32801",
-    "ru": "00000f6995932bef5111b8fc31b82c3140eafdd8",
-    "zh-Hans": "4f72ef0c5e718f8ad012709ee6d6ee69920550eb",
-}
+MANIFEST = ROOT / "publication-manifest.json"
 # Raw Markdown tokens that must never appear in rendered programme surfaces.
 RAW_MARKDOWN = re.compile(r"\]\(|\*\*|`")
 CARD_HTML = re.compile(r'<article class="foundation-card"[^>]*>(.*?)</article>', re.S)
 MAIN_HTML = re.compile(r"<main\b[^>]*>(.*?)</main>", re.S)
 HREF = re.compile(r'href="([^"]+)"')
+
+
+def checked_programme_source(catalog: dict, publication: dict, source: Path) -> tuple[str, dict]:
+    """Bind generated identities to the independently selected manifest and Git.
+
+    A legitimate repin may retain identical guide bytes. Taking the expected
+    commit from the generated programme itself would miss a stale projection.
+    """
+    pin = publication.get("commit")
+    if not isinstance(pin, str) or not re.fullmatch(r"[0-9a-f]{40}", pin):
+        raise AssertionError("publication manifest needs an exact commit")
+    if catalog.get("publication") != publication:
+        raise AssertionError("catalogue publication differs from selected manifest")
+    programme = catalog.get("programme", {})
+    if programme.get("pin", {}).get("commit") != pin:
+        raise AssertionError("programme commit differs from selected manifest")
+    if programme["pin"].get("repository") != publication.get("repository"):
+        raise AssertionError("programme repository differs from selected manifest")
+    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=source, capture_output=True,
+                          text=True, check=True).stdout.strip()
+    if head != pin:
+        raise AssertionError("source checkout differs from selected manifest")
+    listed = programme["pin"].get("files", [])
+    if len(listed) != len(SOURCES) or {f["path"] for f in listed} != set(SOURCES.values()):
+        raise AssertionError("programme pin has an incomplete or duplicate guide inventory")
+    by_path = {f["path"]: f for f in listed}
+    blobs = {}
+    for locale, relative in SOURCES.items():
+        digest, blob = verify_guide_bytes(source, relative, pin)
+        url = f"{GITHUB}/blob/{pin}/{relative}"
+        page = programme["pages"][locale]
+        expected = {"path": relative, "source_sha256": digest, "blob": blob,
+                    "revision": pin, "source": url, "history": f"{GITHUB}/commits/{pin}/{relative}"}
+        if any(page.get(key) != value for key, value in expected.items()):
+            raise AssertionError(f"programme source identity mismatch: {relative}")
+        if by_path[relative] != {"path": relative, "sha256": digest, "blob": blob, "url": url}:
+            raise AssertionError(f"programme pin file identity mismatch: {relative}")
+        blobs[locale] = blob
+    return pin, blobs
 
 
 class ProgrammePageTests(unittest.TestCase):
@@ -52,25 +88,38 @@ class ProgrammePageTests(unittest.TestCase):
             raise AssertionError("catalogue has no programme block; rebuild first")
         if not SOURCE_ROOT.is_dir():
             raise AssertionError("pinned knowledge-contract checkout required; set PROGRAMME_SOURCE_DIR")
-        for locale, relative in SOURCES.items():
-            digest, blob = verify_guide_bytes(SOURCE_ROOT, relative, PIN)
-            if blob != BLOBS[locale] or digest != cls.programme["pages"][locale]["source_sha256"]:
-                raise AssertionError(f"programme source identity mismatch: {relative}")
+        cls.manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        cls.pin, cls.blobs = checked_programme_source(cls.catalog, cls.manifest, SOURCE_ROOT)
 
     def test_three_programme_pages_exist_with_pin(self):
-        self.assertEqual(self.programme["pin"]["commit"], PIN)
-        self.assertEqual(self.catalogue_publication_commit(), PIN)
+        self.assertEqual(self.programme["pin"]["commit"], self.pin)
+        self.assertEqual(self.catalogue_publication_commit(), self.pin)
         for locale in LOCALES:
             rel = f"{locale}/programme/index.html"
             html = (PUBLIC / rel).read_text(encoding="utf-8")
             self.assertTrue((PUBLIC / rel).is_file(), rel)
-            self.assertIn(PIN, html)
-            self.assertIn(BLOBS[locale], html)
+            self.assertIn(self.pin, html)
+            self.assertIn(self.blobs[locale], html)
             self.assertIn(SOURCES[locale], html)
             self.assertIn(f'<html lang="{locale}">', html)
             page = self.programme["pages"][locale]
             self.assertIn(page["html"], html)
             self.assertIn(page["source_sha256"], html)
+
+    def test_generated_pin_or_guide_identity_cannot_replace_manifest_authority(self):
+        for defect, pattern in (("commit", "programme commit differs"),
+                                ("blob", "programme source identity mismatch"),
+                                ("digest", "programme pin file identity mismatch")):
+            with self.subTest(defect=defect):
+                candidate = json.loads(json.dumps(self.catalog))
+                if defect == "commit":
+                    candidate["programme"]["pin"]["commit"] = "0" * 40
+                elif defect == "blob":
+                    candidate["programme"]["pages"]["ru"]["blob"] = "0" * 40
+                else:
+                    candidate["programme"]["pin"]["files"][0]["sha256"] = "0" * 64
+                with self.assertRaisesRegex(AssertionError, pattern):
+                    checked_programme_source(candidate, self.manifest, SOURCE_ROOT)
 
     def catalogue_publication_commit(self):
         return self.catalog["publication"]["commit"]
@@ -173,7 +222,7 @@ class ProgrammePageTests(unittest.TestCase):
         for record in self.catalog.get("records", []):
             if record.get("path") == relative:
                 return record["route"].replace("/en/", f"/{locale}/", 1)
-        return f"{GITHUB}/blob/{PIN}/{relative}"
+        return f"{GITHUB}/blob/{self.pin}/{relative}"
 
     def assert_href_resolves(self, href: str, published_routes: set[str]) -> None:
         parts = urlsplit(href)
@@ -186,7 +235,7 @@ class ProgrammePageTests(unittest.TestCase):
                 f"site route missing for {href}",
             )
             return
-        prefix = f"{GITHUB}/blob/{PIN}/"
+        prefix = f"{GITHUB}/blob/{self.pin}/"
         self.assertTrue(href.startswith(prefix), f"unexpected external href {href}")
         rel = unquote(href[len(prefix):].split("#", 1)[0].split("?", 1)[0])
         self.assertTrue((SOURCE_ROOT / rel).exists(), f"GitHub blob target missing at pin: {rel}")
@@ -238,12 +287,20 @@ class ProgrammeSourceTests(unittest.TestCase):
 
 class RoadmapCompatAnchorTests(unittest.TestCase):
     def test_rm01_compatibility_anchor_resolves(self):
+        roadmap = json.loads(CATALOG.read_text(encoding="utf-8"))["roadmap"]
         for locale in LOCALES:
             html = (PUBLIC / locale / "roadmap/index.html").read_text(encoding="utf-8")
-            self.assertRegex(html, r'<article class="roadmap-card" id="rm-01"[^>]*data-task-id="RM-01"')
-            self.assertIn('href="#rm-01"', html)
-            # Names are shown; internal codes remain available as compatibility targets.
-            self.assertIn("Claim Atlas", html)
+            article = re.search(r'<article class="roadmap-card" id="rm-01"[^>]*data-task-id="RM-01"[^>]*>(.*?)</article>', html, re.S)
+            self.assertIsNotNone(article, locale)
+            name_link = re.search(r'<a class="rm-name" href="#rm-01" lang="([^"]+)">([^<]+)</a>', article[1])
+            self.assertIsNotNone(name_link, locale)
+            view = roadmap.get("translations", {}).get(locale, roadmap)
+            task = next(t for t in view["tasks"] if t["id"] == "RM-01")
+            expected_language = locale if locale == "en" or view is not roadmap else "en"
+            # The name belongs to this locale's RM-01 heading; the machine ID
+            # remains its compatibility target in every language.
+            self.assertEqual(name_link[1], expected_language)
+            self.assertEqual(unescape(name_link[2]), task["display_name"])
 
 
 if __name__ == "__main__":
