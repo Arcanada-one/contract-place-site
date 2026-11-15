@@ -30,7 +30,7 @@
       shown: function (n) { return n + ' passage' + (n === 1 ? '' : 's') + ' shown.'; },
       firstN: function (n) { return ' Showing the first ' + n + '.'; },
       flagged: 'The API flagged this passage and its text is hidden here.',
-      rank: 'API rank', revision: 'revision', status: 'status',
+      rank: 'API rank', revision: 'revision', status: 'status', untitled: 'Untitled passage',
       kc2: function (st) { return 'KC2 admission: ' + st + '; retrieval grants no action rights'; },
       uncertainty: 'uncertainty', missing: 'missing'
     },
@@ -49,7 +49,7 @@
       shown: function (n) { return 'Показано фрагментов: ' + n + '.'; },
       firstN: function (n) { return ' Показаны первые ' + n + '.'; },
       flagged: 'API пометил этот фрагмент, его текст скрыт.',
-      rank: 'место в ответе API', revision: 'ревизия', status: 'статус',
+      rank: 'место в ответе API', revision: 'ревизия', status: 'статус', untitled: 'Фрагмент без названия',
       kc2: function (st) { return 'допуск KC2: ' + st + '; извлечение не даёт прав на действия'; },
       uncertainty: 'неопределённость', missing: 'отсутствует'
     },
@@ -68,7 +68,7 @@
       shown: function (n) { return '已显示 ' + n + ' 个段落。'; },
       firstN: function (n) { return ' 仅显示前 ' + n + ' 个。'; },
       flagged: 'API 已标记此段落，其文本在此隐藏。',
-      rank: 'API 排序', revision: '修订', status: '状态',
+      rank: 'API 排序', revision: '修订', status: '状态', untitled: '无标题段落',
       kc2: function (st) { return 'KC2 准入：' + st + '；检索不授予任何操作权限'; },
       uncertainty: '不确定性', missing: '缺失'
     }
@@ -127,7 +127,7 @@
   }
 
   /** One API result -> the plain-text fields the page shows. Unknown or malformed fields become empty, never HTML. */
-  function toViewItem(r) {
+  function toViewItem(r, lang) {
     if (!r || typeof r !== 'object') return null;
     var c = r.citation && typeof r.citation === 'object' ? r.citation : {};
     var doc = r.document && typeof r.document === 'object' ? r.document : {};
@@ -135,7 +135,7 @@
     if (kc2 && typeof kc2 === 'object') kc2 = kc2.state;
     var flagged = r.injection_flag === true;
     return {
-      title: str(c.title, 200).replace(/^#+\s*/, '') || str(doc.path, 200) || 'Untitled passage',
+      title: str(c.title, 200).replace(/^#+\s*/, '') || str(doc.path, 200) || messages(lang).untitled,
       link: safeLink(c.canonical_url),
       path: str(doc.path, 200),
       revision: str(r.source_revision, 40).slice(0, 12),
@@ -206,7 +206,7 @@
         if (!body || typeof body !== 'object' || body.schema !== SCHEMA || !Array.isArray(body.results) || !body.page || typeof body.page !== 'object') {
           return failure('bad_response', M.badResponse);
         }
-        var items = body.results.map(toViewItem).filter(Boolean);
+        var items = body.results.map(function (r) { return toViewItem(r, deps.lang); }).filter(Boolean);
         var next = typeof body.page.next_cursor === 'string' && /^[A-Za-z0-9_-]{1,256}$/.test(body.page.next_cursor) ? body.page.next_cursor : null;
         var withheld = typeof body.withheld === 'number' && isFinite(body.withheld) ? body.withheld : 0;
         if (items.length === 0) return { state: 'empty', kind: 'no_results', message: M.noResults, items: [], nextCursor: null, withheld: withheld };

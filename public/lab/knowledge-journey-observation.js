@@ -15,21 +15,21 @@ const mountInspector = createObservationInspectorMount({
 const mounts = new WeakMap();
 const TEXT = {
   en: {
-    mode: 'Observed view mode', projection: 'Projection', stale: 'Stale observation',
+    yes: 'Yes', no: 'No', mode: 'Observed view mode', projection: 'Projection', stale: 'Stale observation',
     cursor: 'Cursor', plan: 'Plan revision', graphs: 'Observed graphs', nodes: 'Nodes',
     edges: 'Edges', links: 'Crosslinks', empty: 'No records retained in this group.',
     notice: 'This view displays received observations. It does not start a processing run or grant permission to open files.',
     unavailable: 'Observation unavailable · NOT_MEASURED',
   },
   ru: {
-    mode: 'Режим наблюдаемого представления', projection: 'Проекция', stale: 'Устаревшее наблюдение',
+    yes: 'Да', no: 'Нет', mode: 'Режим наблюдаемого представления', projection: 'Проекция', stale: 'Устаревшее наблюдение',
     cursor: 'Курсор', plan: 'Версия плана', graphs: 'Наблюдаемые графы', nodes: 'Узлы',
     edges: 'Связи', links: 'Межграфовые связи', empty: 'В этой группе нет сохранённых записей.',
     notice: 'Здесь показаны полученные наблюдения. Это представление не запускает обработку и не предоставляет разрешение на открытие файлов.',
     unavailable: 'Наблюдение недоступно · NOT_MEASURED',
   },
   'zh-Hans': {
-    mode: '观测视图模式', projection: '投影', stale: '过期观测',
+    yes: '是', no: '否', mode: '观测视图模式', projection: '投影', stale: '过期观测',
     cursor: '游标', plan: '计划版本', graphs: '观测图', nodes: '节点',
     edges: '边', links: '跨图关联', empty: '此组未保留记录。',
     notice: '此视图显示已接收的观测，不启动处理流程，也不授予打开文件的权限。',
@@ -56,7 +56,7 @@ function graphContent(doc, graph, words) {
   const metadata = element(doc, 'dl', { class: 'lab-observation-fields' });
   for (const [label, value] of [
     [words.mode, graph.viewKind], [words.projection, graph.projection],
-    [words.stale, graph.stale], [words.cursor, graph.appliedCursor], [words.plan, graph.currentPlan],
+    [words.stale, typeof graph.stale === 'boolean' ? words[graph.stale ? 'yes' : 'no'] : graph.stale], [words.cursor, graph.appliedCursor], [words.plan, graph.currentPlan],
   ]) {
     const detail = element(doc, 'dd'); detail.append(isolated(doc, value));
     metadata.append(element(doc, 'dt', {}, label), detail);

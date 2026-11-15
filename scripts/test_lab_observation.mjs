@@ -124,6 +124,9 @@ test('same decoded state supplies graph, edge evidence, timeline and localized i
     const s = surface(locale), state = edgeState(), graph = projectKnowledgeObservationGraph(state);
     const controller = mountKnowledgeJourneyObservation({ ...s, state });
     assert.ok(graph.edges.length > 0);
+    const labels = {en: {yes: 'Yes', no: 'No'}, ru: {yes: 'Да', no: 'Нет'}, 'zh-Hans': {yes: '是', no: '否'}}[locale];
+    const displayedFields = s.regions.graph.querySelector('[class="lab-observation-fields"]').children.filter(node => node.tagName === 'DD');
+    assert.equal(displayedFields[2].textContent, labels[graph.stale ? 'yes' : 'no']);
     assert.equal(s.regions.graph.querySelector('[data-lab-observation-graph]').getAttribute('data-lab-view-kind'), graph.viewKind);
     assert.equal(graph.viewKind, 'fixture');
     assert.equal(buttons(s.regions.graph, 'node').length, graph.nodes.length);

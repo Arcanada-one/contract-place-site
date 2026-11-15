@@ -94,6 +94,7 @@ def assert_linked_status_card(
     expect_status,
     title_lang=None,
     badge_lang=None,
+    title_text=None,
 ):
     tree = DomTree()
     tree.feed(html)
@@ -125,6 +126,8 @@ def assert_linked_status_card(
     titles = [c for c in status["children"] if c["tag"] == "a"]
     test.assertEqual(len(titles), 1)
     test.assertEqual(titles[0]["attrs"].get("lang"), title_lang)
+    if title_text is not None:
+        test.assertEqual("".join(titles[0].get("text_parts", [])), title_text)
     # Contiguous source prose bytes before the status line (parser found placement; compare bytes via slice).
     open_dd = html.find('<dd class="source-body prose">')
     test.assertGreaterEqual(open_dd, 0)
@@ -596,9 +599,6 @@ class RenderControl(unittest.TestCase):
     """Bounded checks over actual prerendered HTML and the JS roadmapCard renderer."""
 
     LOCALES = ("en", "ru", "zh-Hans")
-    # geometry-of-semantic-representations: titleRu is an English copy (byte-equal to title);
-    # titleZhHans absent. English fallback title keeps lang="en" on every locale.
-    TITLE_LANG = {"en": "en", "ru": "en", "zh-Hans": "en"}
     ABSENT_CARD = "rm-01"
 
     @classmethod
@@ -611,8 +611,6 @@ class RenderControl(unittest.TestCase):
             raise unittest.SkipTest("public/content.js missing; run a publication build first")
         raw = cls.content_js.read_text(encoding="utf-8")
         cls.corpus = json.loads(re.sub(r"^window\.CP_CONTENT\s*=\s*", "", raw).rstrip().rstrip(";"))
-        cls.rm12 = next(t for t in cls.corpus["roadmap"]["tasks"] if t["id"] == "RM-12")
-        cls.gap_html = next(f["html"] for f in cls.rm12["fields"] if f["label"] == "Gap")
         cls.geometry = next(
             r for r in cls.corpus["records"] if r.get("id") == "geometry-of-semantic-representations"
         )
@@ -620,7 +618,27 @@ class RenderControl(unittest.TestCase):
     def expected_prose(self, locale):
         from programme import localize_catalogue_links
 
-        return localize_catalogue_links(self.gap_html, self.corpus["records"], locale)
+        view = self.corpus["roadmap"].get("translations", {}).get(locale, self.corpus["roadmap"])
+        task = next(t for t in view["tasks"] if t["id"] == "RM-12")
+        gap_html = next(f["html"] for f in task["fields"] if f["key"] == "gap")
+        return localize_catalogue_links(gap_html, self.corpus["records"], locale)
+
+    def expected_title(self, locale):
+        if locale == "en":
+            return self.geometry["title"]
+        title = self.geometry.get("localization", {}).get(locale, {}).get("title")
+        if title:
+            return title
+        rendition = self.geometry.get("renditions", {}).get(locale, {})
+        if rendition.get("state") in {"reviewed", "partially-reviewed", "unreviewed"} and rendition.get("title"):
+            return rendition["title"]
+        return self.geometry["title"]
+
+    def expected_title_language(self, locale):
+        return locale if self.expected_title(locale) != self.geometry["title"] else "en"
+
+    def expected_body_language(self, locale):
+        return locale if locale in self.corpus["roadmap"].get("translations", {}) else "en"
 
     def render_js_card(self, locale, app_path=None):
         cmd = ["node", str(self.harness), locale, "RM-12"]
@@ -635,14 +653,16 @@ class RenderControl(unittest.TestCase):
             page = self.public / locale / "roadmap" / "index.html"
             self.assertTrue(page.is_file(), f"missing {page}")
             card = extract_article(page.read_text(encoding="utf-8"), "rm-12")
+            self.assertIn(f'<dl class="roadmap-fields" lang="{self.expected_body_language(locale)}">', card)
             assert_linked_status_card(
                 self,
                 card,
                 locale=locale,
                 expected_prose=self.expected_prose(locale),
                 expect_status=True,
-                title_lang=self.TITLE_LANG[locale],
+                title_lang=self.expected_title_language(locale),
                 badge_lang=locale,
+                title_text=self.expected_title(locale),
             )
             absent = extract_article(page.read_text(encoding="utf-8"), self.ABSENT_CARD)
             assert_linked_status_card(
@@ -658,14 +678,16 @@ class RenderControl(unittest.TestCase):
         self.assertTrue(self.harness.is_file())
         for locale in self.LOCALES:
             card = self.render_js_card(locale)
+            self.assertIn(f'<dl class="roadmap-fields" lang="{self.expected_body_language(locale)}">', card)
             assert_linked_status_card(
                 self,
                 card,
                 locale=locale,
                 expected_prose=self.expected_prose(locale),
                 expect_status=True,
-                title_lang=self.TITLE_LANG[locale],
+                title_lang=self.expected_title_language(locale),
                 badge_lang=locale,
+                title_text=self.expected_title(locale),
             )
             # Absence: a card whose Gap prose links no draft-status page.
             proc = subprocess.run(
@@ -682,6 +704,31 @@ class RenderControl(unittest.TestCase):
                 expected_prose="",
                 expect_status=False,
             )
+
+    def test_locale_aware_status_checks_still_reject_wrong_prose_title_and_language(self):
+        from html import escape
+
+        locale = "ru"
+        card = extract_article((self.public / locale / "roadmap/index.html").read_text(encoding="utf-8"), "rm-12")
+        prose = self.expected_prose(locale)
+        title = escape(self.expected_title(locale), quote=True)
+        title_lang = self.expected_title_language(locale)
+        route = self.geometry["route"].replace("/en/", f"/{locale}/", 1)
+        title_link = f'<a href="{route}" lang="{title_lang}">{title}</a>'
+        self.assertIn(title_link, card)
+        variants = {
+            "prose": card.replace(prose, "<p>Unexpected replacement prose.</p>\n", 1),
+            "title": card.replace(title_link, f'<a href="{route}" lang="{title_lang}">Incorrect catalogue title</a>', 1),
+            "title-language": card.replace(title_link, title_link.replace(f'lang="{title_lang}"', 'lang="invalid"'), 1),
+            "badge-language": card.replace(f'<span lang="{locale}"><span class="status-badge">', '<span lang="invalid"><span class="status-badge">', 1),
+        }
+        for defect, mutated in variants.items():
+            with self.subTest(defect=defect):
+                self.assertNotEqual(mutated, card, "negative control must change real output")
+                with self.assertRaises(AssertionError):
+                    assert_linked_status_card(self, mutated, locale=locale, expected_prose=prose,
+                                             expect_status=True, title_lang=title_lang, badge_lang=locale,
+                                             title_text=self.expected_title(locale))
 
 
 if __name__ == "__main__":

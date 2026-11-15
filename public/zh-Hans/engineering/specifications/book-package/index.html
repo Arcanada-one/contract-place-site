@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks."><meta name="robots" content="noindex,follow"><meta name="theme-color" content="#F7F6F1"><title>Book Packages: Source Identity, Semantic Layers, and Validation — contract.place</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="preload" href="/assets/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin><script src="/theme.js?v=fbf6f88c25b0a8e49ffc2d4b9012d76e3e1d631df97b5b6a11574b091a63f9ac"></script><link rel="stylesheet" href="/style.css?v=64ddf93b041ef30a5738dd0c599f3a6548a43fe27d0035733e9badc5c90093db"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Knowledge Contract Arcana","alternateName":"contract.place","url":"https://contract.place/","description":"Public research hub for scoped, evidenced knowledge reuse. Part of the Arcanada ecosystem.","license":"https://creativecommons.org/licenses/by/4.0/","inLanguage":["en","ru","zh-Hans"],"author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov"},"isPartOf":{"@type":"Organization","name":"Arcanada","url":"https://arcanada.ai"}}</script><script src="/content.js?v=161a01afb1b756adf059ea2e1cbdd0dca29d83a2" defer></script><script src="/search.js?v=538768dfd7c8e2d7e07811d64ae929bb0164f4527644299b4dcd5ce9d1f99437" defer></script><script src="/analytics.js?v=02e3d1270e7612fd65bc2f922dc6db3029c1f63fa956d5eedac1777e64ad5a96" defer></script><script src="/app.js?v=7ed5bb1b4fb8e27fb3925be15555736d573056e4082a1b50f2840703f444bd57" defer></script><script src="/renditions.js?v=9bb9504974e3521e04b7d226332c23ebb2c42e884709ba8c8c4ad2a10c0ce4d8" defer></script><link rel="stylesheet" href="/renditions.css?v=a35758b83bbde0b439381aef1d9f13d46f1f1e0c6a7acad51e1c40229ef9201a"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Book Packages: Source Identity, Semantic Layers, and Validation","url":"https://contract.place/en/engineering/specifications/book-package/","inLanguage":"en","version":"1.1","license":"https://creativecommons.org/licenses/by/4.0/","author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"isBasedOn":"https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md"}</script></head><body><a class="skip" href="#main">Skip to main content</a><header id="header"><div class="container header-inner"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><nav class="desktop-nav" aria-label="菜单"><details class="nav-group"><summary class="nav-item">知识<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/wiki/">参考<small>清晰的定义、相互关联的想法及其来源。</small></a><a class="" href="/zh-Hans/books/">图书<small>为长篇阅读、版本与章节留出安静的空间。</small></a><a class="" href="/zh-Hans/repository/">版本库<small>追溯变化的内容、时间与来源。</small></a></div></details><a class="nav-item" href="/zh-Hans/research/" >科学</a><a class="nav-item" href="/zh-Hans/programme/" >计划</a><a class="nav-item" href="/zh-Hans/roadmap/" >路线图</a><a class="nav-item" href="/zh-Hans/journal/" >专栏</a><details class="nav-group"><summary class="nav-item">开发者<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/docs/">工程</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div></details></nav><div class="utilities"><button class="search-trigger" data-search aria-label="搜索"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>搜索</span><kbd>⌘ K</kbd></button><nav class="locale-flags" aria-label="语言"><a class="locale-chip" data-locale="en" href="/en/engineering/specifications/book-package/" hreflang="en" lang="en" aria-label="English" ><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span class="locale-short" aria-hidden="true">EN</span><span class="locale-tooltip" aria-hidden="true">English</span></a><a class="locale-chip" data-locale="ru" href="/ru/engineering/specifications/book-package/" hreflang="ru" lang="ru" aria-label="Русский" ><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h30v20H0z"/><path fill="#2855a4" d="M0 6.667h30v6.667H0z"/><path fill="#c83e43" d="M0 13.333h30V20H0z"/></svg><span class="locale-short" aria-hidden="true">РУ</span><span class="locale-tooltip" aria-hidden="true">Русский</span></a><a class="locale-chip" data-locale="zh-Hans" href="/zh-Hans/engineering/specifications/book-package/" hreflang="zh-Hans" lang="zh-Hans" aria-label="简体中文" aria-current="page"><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span class="locale-short" aria-hidden="true">中</span><span class="locale-tooltip" aria-hidden="true">简体中文</span></a></nav><button class="icon-btn theme-btn" aria-label="切换为深色主题"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5Z"/></svg></button><button class="icon-btn mobile-menu" data-menu aria-label="菜单"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button></div></div></header><main id="main" tabindex="-1"><div class="container source-record publication-record"><div class="page-head"><nav class="breadcrumb" aria-label="Breadcrumb"><a class="" href="/zh-Hans/">首页</a><span>/</span><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a></nav><div class="metadata"><span>工程规范</span><span>出版版本 1.1</span></div><h1 id="book-packages-source-identity-semantic-layers-and-validation" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</h1><p class="lead" lang="en">A concrete book-package schema, reversible conversion ledger, semantic layers, rights boundaries and synthetic conformance checks.</p><div class="provenance metadata"><span>Pavel Valentov</span><span>CC BY 4.0</span><span>英文全文</span></div><div class="actions"><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">精确来源<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/commits/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">历史<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><aside class="rendition-state" data-state="missing" data-language="zh-Hans" data-body-language="en" data-independent-source="false" lang="zh-Hans" aria-label="译文状态" data-relation="rendition_of" data-work="book-package" data-source-sha256="8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b"><p class="rendition-state-label"><strong>本文档暂无译文。</strong> 此处改为显示固定版本的英文源文。</p><dl class="rendition-pins"><dt>源文</dt><dd><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md" lang="en">engineering/specifications/book-package/SPECIFICATION.md</a> <code>8c5bdb45f4a4</code> <code>161a01afb1b7</code></dd></dl><p><a href="/en/engineering/specifications/book-package/" hreflang="en" lang="en">英文源文</a></p><script type="application/json" class="rendition-facts">{"relation":"rendition_of","work":"book-package","state":"missing","independent_source":false,"source_language":"en","rendition_language":"zh-Hans","body_language":"en","source":{"path":"engineering/specifications/book-package/SPECIFICATION.md","sha256":"8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b","revision":"161a01afb1b756adf059ea2e1cbdd0dca29d83a2","language":"en","url":"https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/engineering/specifications/book-package/SPECIFICATION.md"},"digest_label":"sha256"}</script></aside><p class="reading-language-note">这是完整的英文出版物。语言选择器仅更改界面；历史俄文手稿链接见来源映射。</p></div>
-<div class="source-reading"><article><div class="source-body prose" lang="en"><p><strong>Author:</strong> Pavel Valentov · <strong>Publication edition:</strong> 1.1</p>
+<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="具体的书籍包模式、可逆转换账本、语义层、权利边界与合成一致性检查。"><meta name="robots" content="noindex,follow"><meta name="theme-color" content="#F7F6F1"><title>书籍包：来源身份、语义层与验证 — contract.place</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="preload" href="/assets/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin><script src="/theme.js?v=fbf6f88c25b0a8e49ffc2d4b9012d76e3e1d631df97b5b6a11574b091a63f9ac"></script><link rel="stylesheet" href="/style.css?v=64ddf93b041ef30a5738dd0c599f3a6548a43fe27d0035733e9badc5c90093db"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Knowledge Contract Arcana","alternateName":"contract.place","url":"https://contract.place/","description":"Public research hub for scoped, evidenced knowledge reuse. Part of the Arcanada ecosystem.","license":"https://creativecommons.org/licenses/by/4.0/","inLanguage":["en","ru","zh-Hans"],"author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov"},"isPartOf":{"@type":"Organization","name":"Arcanada","url":"https://arcanada.ai"}}</script><script src="/content.js?v=55e279c43dc9bcf8732467a32661c2ac4b7cf920" defer></script><script src="/search.js?v=dc4406ba8cff86d05f8ea4167c5c98ba6f0610c1d63851da020b335495527c56" defer></script><script src="/analytics.js?v=02e3d1270e7612fd65bc2f922dc6db3029c1f63fa956d5eedac1777e64ad5a96" defer></script><script src="/app.js?v=c56b42a739d09f2e491c0361eb6925ad638de9096e7574a947f08b4addee81ec" defer></script><script src="/renditions.js?v=9bb9504974e3521e04b7d226332c23ebb2c42e884709ba8c8c4ad2a10c0ce4d8" defer></script><link rel="stylesheet" href="/renditions.css?v=a35758b83bbde0b439381aef1d9f13d46f1f1e0c6a7acad51e1c40229ef9201a"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"书籍包：来源身份、语义层与验证","url":"https://contract.place/zh-Hans/engineering/specifications/book-package/","inLanguage":"zh-Hans","version":"1.1","license":"https://creativecommons.org/licenses/by/4.0/","author":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"copyrightHolder":{"@type":"Person","name":"Pavel Valentov","sameAs":"https://orcid.org/0009-0001-2567-4584"},"isBasedOn":"https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md","translationOfWork":{"@type":"CreativeWork","name":"Book Packages: Source Identity, Semantic Layers, and Validation","url":"https://contract.place/en/engineering/specifications/book-package/","inLanguage":"en"}}</script></head><body><a class="skip" href="#main">跳转至主要内容</a><header id="header"><div class="container header-inner"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><nav class="desktop-nav" aria-label="菜单"><details class="nav-group"><summary class="nav-item">知识<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/wiki/">参考<small>清晰的定义、相互关联的想法及其来源。</small></a><a class="" href="/zh-Hans/books/">图书<small>为长篇阅读、版本与章节留出安静的空间。</small></a><a class="" href="/zh-Hans/repository/">版本库<small>追溯变化的内容、时间与来源。</small></a></div></details><a class="nav-item" href="/zh-Hans/research/" >科学</a><a class="nav-item" href="/zh-Hans/programme/" >计划</a><a class="nav-item" href="/zh-Hans/roadmap/" >路线图</a><a class="nav-item" href="/zh-Hans/journal/" >专栏</a><details class="nav-group"><summary class="nav-item">开发者<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></summary><div class="popover"><a class="" href="/zh-Hans/docs/">工程</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a></div></details></nav><div class="utilities"><button class="search-trigger" data-search aria-label="搜索"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>搜索</span><kbd>⌘ K</kbd></button><nav class="locale-flags" aria-label="语言"><a class="locale-chip" data-locale="en" href="/en/engineering/specifications/book-package/" hreflang="en" lang="en" aria-label="English" ><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#214477" d="M0 0h30v20H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 30 20M30 0 0 20"/><path stroke="#c43c47" stroke-width="2" d="m0 0 30 20M30 0 0 20"/><path fill="#fff" d="M12 0h6v20h-6zM0 6h30v8H0z"/><path fill="#c43c47" d="M13 0h4v20h-4zM0 8h30v4H0z"/></svg><span class="locale-short" aria-hidden="true">EN</span><span class="locale-tooltip" aria-hidden="true">English</span></a><a class="locale-chip" data-locale="ru" href="/ru/engineering/specifications/book-package/" hreflang="ru" lang="ru" aria-label="Русский" ><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h30v20H0z"/><path fill="#2855a4" d="M0 6.667h30v6.667H0z"/><path fill="#c83e43" d="M0 13.333h30V20H0z"/></svg><span class="locale-short" aria-hidden="true">РУ</span><span class="locale-tooltip" aria-hidden="true">Русский</span></a><a class="locale-chip" data-locale="zh-Hans" href="/zh-Hans/engineering/specifications/book-package/" hreflang="zh-Hans" lang="zh-Hans" aria-label="简体中文" aria-current="page"><svg class="language-flag" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><path fill="#d73835" d="M0 0h30v20H0z"/><path fill="#ffe078" d="m7 3 1.1 3.3h3.5L8.8 8.4l1.1 3.3L7 9.7l-2.9 2 1.1-3.3-2.8-2.1h3.5z"/><g fill="#ffe078"><path d="m14 2 .4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 5l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM17 10l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2zM14 13l.4 1.1h1.2l-.9.7.3 1.2-1-.7-.9.7.3-1.2-.9-.7h1.2z"/></g></svg><span class="locale-short" aria-hidden="true">中</span><span class="locale-tooltip" aria-hidden="true">简体中文</span></a></nav><button class="icon-btn theme-btn" aria-label="切换为深色主题"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5Z"/></svg></button><button class="icon-btn mobile-menu" data-menu aria-label="菜单"><svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button></div></div></header><main id="main" tabindex="-1"><div class="container source-record publication-record"><div class="page-head"><nav class="breadcrumb" aria-label="导航路径"><a class="" href="/zh-Hans/">首页</a><span>/</span><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a></nav><div class="metadata"><span>工程规范</span><span>出版版本 1.1</span></div><h1 id="book-packages-source-identity-semantic-layers-and-validation" lang="zh-Hans">书籍包：来源身份、语义层与验证</h1><p class="lead" lang="zh-Hans">具体的书籍包模式、可逆转换账本、语义层、权利边界与合成一致性检查。</p><div class="provenance metadata"><span>Pavel Valentov</span><span>CC BY 4.0</span><span>中文全文</span></div><div class="actions"><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">精确来源<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a><a class="text-link" href="https://github.com/Arcanada-one/knowledge-contract/commits/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md" target="_blank" rel="noopener">历史<svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><aside class="rendition-state" data-state="unreviewed" data-language="zh-Hans" data-body-language="zh-Hans" data-independent-source="false" lang="zh-Hans" aria-label="译文状态" data-relation="rendition_of" data-work="book-package" data-source-sha256="8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b" data-rendition-sha256="73e8bc72c9b7846a72cbb1ae1da920c7175f683e22c99fce089b823f9aa6abc5"><p class="rendition-state-label"><strong>尚未经语义审校的译文</strong></p><p>本译文是固定版本英文源文的译本，不是独立来源。</p><dl class="rendition-pins"><dt>源文</dt><dd><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md" lang="en">engineering/specifications/book-package/SPECIFICATION.md</a> <code>8c5bdb45f4a4</code> <code>161a01afb1b7</code></dd><dt>译文</dt><dd><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/translations/zh-Hans/engineering/specifications/book-package/SPECIFICATION.md" lang="en">translations/zh-Hans/engineering/specifications/book-package/SPECIFICATION.md</a> <code>73e8bc72c9b7</code> <code>101431f2cf0b</code></dd></dl><p><a href="/en/engineering/specifications/book-package/" hreflang="en" lang="en">英文源文</a></p><script type="application/json" class="rendition-facts">{"relation":"rendition_of","work":"book-package","state":"unreviewed","independent_source":false,"source_language":"en","rendition_language":"zh-Hans","body_language":"zh-Hans","source":{"path":"engineering/specifications/book-package/SPECIFICATION.md","sha256":"8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b","revision":"161a01afb1b756adf059ea2e1cbdd0dca29d83a2","language":"en","url":"https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/engineering/specifications/book-package/SPECIFICATION.md"},"digest_label":"sha256","rendition":{"path":"translations/zh-Hans/engineering/specifications/book-package/SPECIFICATION.md","sha256":"73e8bc72c9b7846a72cbb1ae1da920c7175f683e22c99fce089b823f9aa6abc5","revision":"101431f2cf0b141d317445fabd6b6122f9fe1dba","url":"https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/translations/zh-Hans/engineering/specifications/book-package/SPECIFICATION.md"},"current_source_sha256":"8c5bdb45f4a47ed66e402dafac1b666da5849c0c78154934a5d868c1451f186b"}</script></aside></div>
+<div class="source-reading"><article><div class="source-body prose" lang="zh-Hans"><p><strong>作者：</strong>Pavel Valentov · <strong>出版版本：</strong>1.1</p>
 <table>
 <colgroup>
 <col class="table-width-50" />
@@ -8,42 +8,42 @@
 </colgroup>
 <thead>
 <tr class="header">
-<th>Implementation component</th>
-<th>Scope</th>
+<th>实现组件</th>
+<th>范围</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/schemas/book-package.schema.json">Schema</a></td>
-<td><code>book-package/2</code>, five <code>KCBook*/v2</code> record families</td>
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/schemas/book-package.schema.json">模式</a></td>
+<td><code>book-package/2</code>，五类 <code>KCBook*/v2</code> 记录</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/tools/check_book_package.py">Validator and projection</a></td>
-<td>Structural and cross-file checks, safe Markdown rendering, candidate rows</td>
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/tools/check_book_package.py">验证器与投影</a></td>
+<td>结构和跨文件检查、安全 Markdown 呈现、候选行</td>
 </tr>
 <tr class="odd">
-<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/tools/build_book_package.py">Builder</a></td>
-<td>Wraps source bytes and supplied conversion output; does not interpret a book</td>
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/tools/build_book_package.py">构建器</a></td>
+<td>封装来源字节和提供的转换输出；不解释书籍</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/schemas/fixtures/book-package">Synthetic fixtures</a></td>
-<td>Invented source and negative records; no third-party book text</td>
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/schemas/fixtures/book-package">合成测试夹具</a></td>
+<td>虚构来源和负向记录；不含第三方书籍文本</td>
 </tr>
 <tr class="odd">
-<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/tools/test_book_package.py">Conformance tests</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/tools/test_book_package_review.py">review regressions</a></td>
-<td>Validation, reversible edits, rights, scoped review, rendering and status derivation</td>
+<td><a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/tools/test_book_package.py">符合性测试</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/tools/test_book_package_review.py">审查回归测试</a></td>
+<td>验证、可逆修订、权利、有界审查、呈现与状态推导</td>
 </tr>
 </tbody>
 </table>
-<h2 id="1-purpose-and-validation-boundary">1. Purpose and validation boundary</h2>
-<p>A book package binds one source representation to its conversion, semantic records and review observations. This specification defines the implemented <code>book-package/2</code> profile. Capitalized requirements use <a href="/en/reference/bibliography/#requirement-language">BCP 14</a>. Record validation does not establish conversion fidelity, semantic truth, actual reviewer independence, publication rights or task-specific admission.</p>
-<p><strong>BPK-R001.</strong> The manifest MUST declare <code>validation_profile: book-package/2</code>, and every record MUST use its <code>KCBookPackageManifest/v2</code>, <code>KCBookObject/v2</code>, <code>KCBookRelation/v2</code>, <code>KCBookEdit/v2</code> or <code>KCBookQuality/v2</code> tag.</p>
-<p>Unknown versions are unsupported.</p>
-<p><strong>BPK-R002.</strong> A consumer MUST NOT silently reinterpret a version 1 record as version 2.</p>
-<p>The <strong>Knowledge Contract admission runtime</strong> decides use under the <a href="/en/engineering/specifications/knowledge-contract-core/">core contract</a>. The inherited literal field <code>kc2_admission</code> is not a protocol version.</p>
-<p><strong>BPK-R003.</strong> Its value in producer records MUST remain <code>not_measured</code>; the producer cannot grant admission.</p>
-<p><code>not_measured</code> maps to assessment <code>unknown</code> with reason “no observation,” never to <code>pass</code>.</p>
-<h2 id="2-layout-and-reversible-edits">2. Layout and reversible edits</h2>
+<h2 id="1-purpose-and-validation-boundary" data-source-section="1-purpose-and-validation-boundary">1. 目的与验证边界</h2>
+<p>书籍包将一个来源表示绑定到其转换结果、语义记录和审查观察。本规范定义已实现的 <code>book-package/2</code> 配置。大写要求用语遵循 <a href="/zh-Hans/reference/bibliography/#requirement-language" hreflang="zh-Hans" data-target-state="unreviewed">BCP 14</a>。记录验证不能确立转换保真度、语义真实性、实际审查独立性、出版权利或任务特定准入。</p>
+<p><strong>BPK-R001.</strong> 清单必须（MUST）声明 <code>validation_profile: book-package/2</code>，每条记录必须（MUST）使用对应的 <code>KCBookPackageManifest/v2</code>、<code>KCBookObject/v2</code>、<code>KCBookRelation/v2</code>、<code>KCBookEdit/v2</code> 或 <code>KCBookQuality/v2</code> 标签。</p>
+<p>未知版本不受支持。</p>
+<p><strong>BPK-R002.</strong> 消费者不得（MUST NOT）默默将版本 1 记录重新解释为版本 2。</p>
+<p><strong>知识契约准入运行时</strong>依据<a href="/zh-Hans/engineering/specifications/knowledge-contract-core/" hreflang="zh-Hans" data-target-state="unreviewed">核心契约</a>决定用途。沿用的字面字段 <code>kc2_admission</code> 不是协议版本。</p>
+<p><strong>BPK-R003.</strong> 生产者记录中的此值必须（MUST）保持为 <code>not_measured</code>；生产者不能授予准入。</p>
+<p><code>not_measured</code> 映射为评估 <code>unknown</code>，理由为“no observation”，绝不能映射为 <code>pass</code>。</p>
+<h2 id="2-layout-and-reversible-edits" data-source-section="2-layout-and-reversible-edits">2. 布局与可逆修订</h2>
 <pre class="text"><code>&lt;package_id&gt;/
   manifest.json
   document.md
@@ -53,55 +53,55 @@
   objects.jsonl
   relations.jsonl
   quality.json</code></pre>
-<p><strong>BPK-R004.</strong> The package identifier MUST be a readable lowercase hyphenated slug, 3–96 characters; a single letter followed by digits is forbidden.</p>
-<p><code>release_id</code> identifies the particular release separately.</p>
-<p><strong>BPK-R005.</strong> Component paths MUST remain relative and inside the package, with no parent traversal or symlinks.</p>
-<p><code>document.md</code> is the unchanged converter output.</p>
-<p><strong>BPK-R006.</strong> Accepted edits MUST target <code>readable_md</code>; <code>asset_text</code> has no supported digest-chain semantics and is rejected.</p>
-<p><strong>BPK-R007.</strong> A package without <code>document_md</code> and <code>readable_md</code> MUST NOT contain accepted edits or a built semantic layer.</p>
-<p><strong>BPK-R008.</strong> Each accepted edit MUST have a nonempty original and replacement, an anchor, basis, reason, actor, input digest and output digest.</p>
-<p><strong>BPK-R009.</strong> At its step, the original MUST occur exactly once, and the replacement MUST occur exactly once in the resulting text.</p>
-<p>Occurrences include overlaps: <code>aa</code> occurs twice in <code>xaaay</code>.</p>
-<p><strong>BPK-R010.</strong> Applying the accepted edits in ledger order MUST produce <code>readable.md</code>; undoing them in reverse order MUST reproduce <code>document.md</code> exactly.</p>
-<p>Insertions, deletions and ambiguous repeated-fragment edits are unsupported by this search-reversible profile.</p>
-<p><strong>BPK-R011.</strong> JSON readers MUST reject duplicate object member names at every depth, non-finite number tokens and a UTF-8 BOM, so independent readers cannot choose different rights or status values from the same record.</p>
-<p><strong>BPK-R012.</strong> All comparison and hashing MUST use exact bytes with strict UTF-8 decoding and no newline translation.</p>
-<p><code>\r\n</code>, <code>\r</code> and <code>\n</code> remain distinct. JSON Lines, <code>SHA256SUMS</code> and check lists split only on <code>\n</code>; one final newline is allowed, blank JSON Lines and lines ending in <code>\r</code> are rejected. U+2028, U+0085 and other control characters do not become additional record separators.</p>
-<p>The edit lifecycle is <code>pending</code> → <code>accepted</code> or <code>rejected</code>; <code>stale</code> means an obsolete proposal whose base no longer matches, and is never replayed. Accepted ledger entries are immutable: a later correction creates another entry or a new package release. A stale proposal’s declared or overlapping dependents remain unresolved until reassessed in a new valid record.</p>
-<h2 id="3-identity-and-integrity-observations">3. Identity and integrity observations</h2>
-<p><code>work_id</code> identifies the work, <code>edition_id</code> the edition and language, and <code>representation_id</code> one source file. Translations and editions retain separate identities and anchors, with explicit <code>related_works</code> relations. A representation records its source digest, size, format, integrity (<code>verified</code>, <code>mismatch</code>, <code>unverified</code>) and completeness (<code>full</code>, <code>partial</code>, <code>bibliography_only</code>).</p>
-<p><strong>BPK-R013.</strong> A <code>verified</code> or <code>mismatch</code> integrity declaration MUST include <code>integrity_check</code> with <code>method</code>, <code>observer</code>, <code>checked_at</code>, <code>expected_sha256</code> and <code>observed_sha256</code>.</p>
-<p><strong>BPK-R014.</strong> The observed digest MUST equal the representation digest.</p>
-<p>Verified integrity requires equal expected and observed digests; mismatch requires different digests.</p>
-<p><strong>BPK-R015.</strong> The expected digest MUST NOT be replaced to conceal a mismatch.</p>
-<p>This is an attributed producer observation. The validator checks its shape and internal consistency; it cannot authenticate the expected digest’s authority or reconstruct an unavailable source. The builder records whether its expected digest was supplied by the caller.</p>
-<p><strong>BPK-R016.</strong> A production consumer MUST authenticate the relevant observation at its declared trust boundary before treating it as evidence of source integrity.</p>
-<p><strong>BPK-R017.</strong> <code>document_md.input_sha256</code> MUST equal the representation digest and its component record MUST name the converter and version.</p>
-<p>With no supported converter output, the package remains <code>adapter_required</code>; no empty or invented document substitutes for conversion.</p>
-<h2 id="4-semantic-objects-and-facets">4. Semantic objects and facets</h2>
-<p>An object identifies a concept, claim, procedure, figure, table, formula, code block, example or other structure.</p>
-<p><strong>BPK-R018.</strong> Every object MUST retain its text, language, origin, at least one source anchor, status and all eight facet fields: <code>representation_modes</code>, <code>content_kinds</code>, <code>discourse_functions</code>, <code>aboutness</code>, <code>source_position</code>, <code>semantic_operators</code>, <code>assessment_refs</code>, and <code>governance_refs</code>.</p>
-<p>Qualifiers carry conditions and numeric units when present.</p>
-<p>The facets implement a bounded profile of <a href="/en/engineering/specifications/semantic-types/">semantic types</a>. Representation modes include <code>text</code>, <code>image</code>, <code>audio</code>, <code>video</code>, <code>structured_data</code> and their explicit combinations. Source positions are <code>asserts</code>, <code>hypothesizes</code>, <code>presumes</code>, <code>denies</code>, <code>asks</code>, <code>reports_other_position</code>: <code>presumes</code> denotes a presupposition and is not a synonym of hypothesis.</p>
-<p><strong>BPK-R019.</strong> Operators include epistemic and deontic modality, quantifier, negation, condition, exception and order; each operator MUST name its scope.</p>
-<p>A free-text qualifier condition applies to the whole object unless a scoped operator supplies the more precise binding.</p>
-<p>The nineteen content-kind tokens are <code>definition</code>, <code>state_description</code>, <code>observation_measurement</code>, <code>generalization</code>, <code>explanatory_model</code>, <code>formal_model</code>, <code>procedure</code>, <code>structure_configuration</code>, <code>constraint_norm</code>, <code>goal_intent</code>, <code>preference_evaluation</code>, <code>argument_evidence</code>, <code>example</code>, <code>counterexample</code>, <code>question_problem_gap</code>, <code>narrative_episode</code>, <code>analogy_metaphor</code>, <code>hypothesis_interpretation</code>, and <code>commitment_speech_act</code>. This vocabulary is not an exhaustive taxonomy.</p>
-<p><strong>BPK-R020.</strong> Each facet MUST be <code>known</code> with a value, or <code>unknown</code>, <code>not_applicable</code> or <code>withheld</code> with an explicit reason and no value.</p>
-<p>Known representation modes, content kinds, discourse functions and aboutness are nonempty by this profile’s cardinality rule. Known-empty operators, assessment references or governance references assert an established empty set and are allowed only with that meaning.</p>
-<p><strong>BPK-R021.</strong> An object named by a package review MUST include that review’s identifier in known <code>assessment_refs</code>; known-empty cannot deny the very review that cites it.</p>
-<p>Unknown references remain unknown rather than empty.</p>
-<p><strong>BPK-R022.</strong> A <code>benchmark</code> claim MUST additionally record corpus, device, tool version, settings, units and mode.</p>
-<p>Structural presence does not verify those declarations or establish task applicability.</p>
-<h2 id="5-relations">5. Relations</h2>
-<p>A relation connects two existing, different objects of the same package with one of <code>defines</code>, <code>uses</code>, <code>variant_of</code>, <code>requires</code>, <code>compared_with</code>, <code>contradicts</code>.</p>
-<p><strong>BPK-R023.</strong> Every relation MUST retain its conditions, origin, evidence, endpoints and status.</p>
-<p>Every relation has at least one evidence anchor tagged <code>from</code>, <code>to</code> or <code>both</code>.</p>
-<p><strong>BPK-R024.</strong> A <code>contradicts</code> relation MUST include separate <code>from</code> and <code>to</code> evidence, so one-sided attribution cannot masquerade as a two-sided finding.</p>
-<p><strong>BPK-R025.</strong> A relation touching a stale or rejected endpoint MUST itself be stale or rejected.</p>
-<p>Review of a relation does not silently rehabilitate its endpoint.</p>
-<h2 id="6-evidence-anchors-and-source-formats">6. Evidence anchors and source formats</h2>
-<p><strong>BPK-R026.</strong> Every anchor MUST bind the same representation identifier and source digest as its manifest.</p>
-<p>The implemented format-to-anchor mapping is exact:</p>
+<p><strong>BPK-R004.</strong> 包标识符必须（MUST）是可读的小写连字符短名，长度 3–96 个字符；禁止单个字母后紧跟数字的形式。</p>
+<p><code>release_id</code> 另行标识具体发行版。</p>
+<p><strong>BPK-R005.</strong> 组件路径必须（MUST）保持相对且位于包内，不得使用父目录穿越或符号链接。</p>
+<p><code>document.md</code> 是未修改的转换器输出。</p>
+<p><strong>BPK-R006.</strong> 接受的修订必须（MUST）以 <code>readable_md</code> 为目标；<code>asset_text</code> 没有受支持的摘要链语义，应被拒绝。</p>
+<p><strong>BPK-R007.</strong> 没有 <code>document_md</code> 和 <code>readable_md</code> 的包，不得（MUST NOT）包含已接受修订或已构建语义层。</p>
+<p><strong>BPK-R008.</strong> 每项已接受修订必须（MUST）具有非空原文和替换文本、锚点、依据、原因、行动主体、输入摘要和输出摘要。</p>
+<p><strong>BPK-R009.</strong> 在该步骤，原文必须（MUST）恰好出现一次，替换文本必须（MUST）在结果文本中恰好出现一次。</p>
+<p>计数包含重叠出现：<code>aa</code> 在 <code>xaaay</code> 中出现两次。</p>
+<p><strong>BPK-R010.</strong> 按日志顺序应用已接受修订，必须（MUST）产生 <code>readable.md</code>；反向撤销这些修订，必须（MUST）精确恢复 <code>document.md</code>。</p>
+<p>此基于搜索可逆性的配置不支持插入、删除或具有歧义的重复片段修订。</p>
+<p><strong>BPK-R011.</strong> JSON 读取器必须（MUST）拒绝任何深度上的重复对象成员名、非有限数字词元以及 UTF-8 BOM，使不同读取器不能从同一记录中选择不同权利或状态值。</p>
+<p><strong>BPK-R012.</strong> 所有比较和哈希必须（MUST）采用精确字节、严格 UTF-8 解码，并且不转换换行。</p>
+<p><code>\r\n</code>、<code>\r</code> 和 <code>\n</code> 保持不同。JSON Lines、<code>SHA256SUMS</code> 和检查列表只按 <code>\n</code> 分割；允许一个末尾换行，拒绝空 JSON Lines 和以 <code>\r</code> 结束的行。U+2028、U+0085 及其他控制字符不会成为额外记录分隔符。</p>
+<p>修订生命周期为 <code>pending</code> → <code>accepted</code> 或 <code>rejected</code>；<code>stale</code> 表示基准不再匹配的过时提案，永不重放。已接受的日志条目不可变：后续纠正创建另一个条目或新的包发行版。过时提案所声明或与之重叠的依赖对象，在新的有效记录中重新评估前保持未决。</p>
+<h2 id="3-identity-and-integrity-observations" data-source-section="3-identity-and-integrity-observations">3. 身份与完整性观察</h2>
+<p><code>work_id</code> 标识作品，<code>edition_id</code> 标识版次和语言，<code>representation_id</code> 标识一个来源文件。翻译与不同版次保留各自身份和锚点，并以明确的 <code>related_works</code> 关系关联。表示记录来源摘要、大小、格式、完整性（<code>verified</code>、<code>mismatch</code>、<code>unverified</code>）和覆盖完整程度（<code>full</code>、<code>partial</code>、<code>bibliography_only</code>）。</p>
+<p><strong>BPK-R013.</strong> <code>verified</code> 或 <code>mismatch</code> 完整性声明必须（MUST）包含 <code>integrity_check</code>，其中有 <code>method</code>、<code>observer</code>、<code>checked_at</code>、<code>expected_sha256</code> 和 <code>observed_sha256</code>。</p>
+<p><strong>BPK-R014.</strong> 观察摘要必须（MUST）等于表示摘要。</p>
+<p>已验证完整性要求预期与观察摘要相等；不匹配要求二者不同。</p>
+<p><strong>BPK-R015.</strong> 不得（MUST NOT）替换预期摘要来掩盖不匹配。</p>
+<p>这是带归属的生产者观察。验证器检查其形状和内部一致性，不能认证预期摘要的权限依据，也不能重建不可用来源。构建器记录预期摘要是否由调用者提供。</p>
+<p><strong>BPK-R016.</strong> 生产环境消费者必须（MUST）在其声明信任边界上认证相关观察，然后才能将其作为来源完整性的证据。</p>
+<p><strong>BPK-R017.</strong> <code>document_md.input_sha256</code> 必须（MUST）等于表示摘要，并且其组件记录必须（MUST）注明转换器和版本。</p>
+<p>没有受支持的转换器输出时，包保持 <code>adapter_required</code>；空文档或虚构文档不能替代转换。</p>
+<h2 id="4-semantic-objects-and-facets" data-source-section="4-semantic-objects-and-facets">4. 语义对象与侧面</h2>
+<p>对象标识概念、断言、过程、图、表格、公式、代码块、示例或其他结构。</p>
+<p><strong>BPK-R018.</strong> 每个对象必须（MUST）保留其文本、语言、来源类别、至少一个来源锚点、状态，以及全部八个侧面字段：<code>representation_modes</code>、<code>content_kinds</code>、<code>discourse_functions</code>、<code>aboutness</code>、<code>source_position</code>、<code>semantic_operators</code>、<code>assessment_refs</code> 和 <code>governance_refs</code>。</p>
+<p>限定信息在存在时承载条件和数值单位。</p>
+<p>这些侧面实现<a href="/zh-Hans/engineering/specifications/semantic-types/" hreflang="zh-Hans" data-target-state="unreviewed">语义类型</a>的一个有限配置。表示模式包括 <code>text</code>、<code>image</code>、<code>audio</code>、<code>video</code>、<code>structured_data</code> 及其明确组合。来源立场为 <code>asserts</code>、<code>hypothesizes</code>、<code>presumes</code>、<code>denies</code>、<code>asks</code>、<code>reports_other_position</code>；<code>presumes</code> 表示预设，而不是假说的同义词。</p>
+<p><strong>BPK-R019.</strong> 运算符包括认识模态和义务模态、量词、否定、条件、例外和顺序；每个运算符必须（MUST）指出其作用域。</p>
+<p>自由文本限定条件适用于整个对象，除非带作用域的运算符给出更精确的绑定。</p>
+<p>十九种内容类别词元为 <code>definition</code>、<code>state_description</code>、<code>observation_measurement</code>、<code>generalization</code>、<code>explanatory_model</code>、<code>formal_model</code>、<code>procedure</code>、<code>structure_configuration</code>、<code>constraint_norm</code>、<code>goal_intent</code>、<code>preference_evaluation</code>、<code>argument_evidence</code>、<code>example</code>、<code>counterexample</code>、<code>question_problem_gap</code>、<code>narrative_episode</code>、<code>analogy_metaphor</code>、<code>hypothesis_interpretation</code> 和 <code>commitment_speech_act</code>。该词汇不是穷尽分类。</p>
+<p><strong>BPK-R020.</strong> 每个侧面必须（MUST）是带值的 <code>known</code>，或者是无值但有明确理由的 <code>unknown</code>、<code>not_applicable</code> 或 <code>withheld</code>。</p>
+<p>按照该配置的基数规则，已知的表示模式、内容类别、话语功能和关于性不得为空。已知为空的运算符、评估引用或治理引用表示已经确立的空集合，只有在此含义下才被允许。</p>
+<p><strong>BPK-R021.</strong> 包审查中列出的对象必须（MUST）在已知的 <code>assessment_refs</code> 中包含该审查标识符；“已知为空”不能否认正在引用该对象的审查。</p>
+<p>未知引用应保持未知，而非空值。</p>
+<p><strong>BPK-R022.</strong> <code>benchmark</code> 断言还必须（MUST）记录语料、设备、工具版本、设置、单位和模式。</p>
+<p>结构上存在这些字段，不会验证其声明，也不会确立任务适用性。</p>
+<h2 id="5-relations" data-source-section="5-relations">5. 关系</h2>
+<p>关系连接同一包内两个存在且不同的对象，类别为 <code>defines</code>、<code>uses</code>、<code>variant_of</code>、<code>requires</code>、<code>compared_with</code> 或 <code>contradicts</code>。</p>
+<p><strong>BPK-R023.</strong> 每个关系必须（MUST）保留其条件、来源类别、证据、端点和状态。</p>
+<p>每个关系至少有一个标为 <code>from</code>、<code>to</code> 或 <code>both</code> 的证据锚点。</p>
+<p><strong>BPK-R024.</strong> <code>contradicts</code> 关系必须（MUST）包含单独的 <code>from</code> 和 <code>to</code> 证据，防止单方面归属伪装成双方面发现。</p>
+<p><strong>BPK-R025.</strong> 连接过时或被拒绝端点的关系本身必须（MUST）为过时或被拒绝状态。</p>
+<p>审查关系不会默默恢复其端点的有效性。</p>
+<h2 id="6-evidence-anchors-and-source-formats" data-source-section="6-evidence-anchors-and-source-formats">6. 证据锚点与来源格式</h2>
+<p><strong>BPK-R026.</strong> 每个锚点必须（MUST）绑定与其清单相同的表示标识符和来源摘要。</p>
+<p>已实现的格式到锚点映射是精确的：</p>
 <table>
 <colgroup>
 <col class="table-width-33" />
@@ -110,79 +110,79 @@
 </colgroup>
 <thead>
 <tr class="header">
-<th>Anchor kind</th>
-<th>Exact format tokens</th>
-<th>Coordinates</th>
+<th>锚点类别</th>
+<th>精确格式词元</th>
+<th>坐标</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>page_bbox</code></td>
 <td><code>pdf</code>, <code>djvu</code>, <code>ps</code></td>
-<td>page from 1; bounding box with positive area; origin and unit</td>
+<td>页码从 1 开始；具有正面积的边界框；原点和单位</td>
 </tr>
 <tr class="even">
 <td><code>spine_offset</code></td>
 <td><code>epub</code></td>
-<td>member <code>spine_item</code>, optional element path, start/end offsets</td>
+<td><code>spine_item</code> 成员、可选元素路径、起止偏移</td>
 </tr>
 <tr class="odd">
 <td><code>section_block</code></td>
 <td><code>html</code>, <code>md</code>, <code>txt</code>, <code>tex</code></td>
-<td>section and block identifiers</td>
+<td>章节和块标识符</td>
 </tr>
 <tr class="even">
 <td><code>sheet_range</code></td>
 <td><code>xlsx</code></td>
-<td>sheet, cell range, <code>formula</code> / <code>cached_value</code> / <code>literal</code> layer</td>
+<td>工作表、单元格范围、<code>formula</code> / <code>cached_value</code> / <code>literal</code> 层</td>
 </tr>
 <tr class="odd">
 <td><code>json_pointer</code></td>
 <td><code>json</code></td>
-<td>RFC 6901 pointer</td>
+<td>RFC 6901 指针</td>
 </tr>
 <tr class="even">
 <td><code>slide_block</code></td>
 <td><code>ppt</code>, <code>pptx</code></td>
-<td>slide number and block identifier</td>
+<td>幻灯片编号和块标识符</td>
 </tr>
 <tr class="odd">
-<td>none</td>
+<td>无</td>
 <td><code>zip</code>, <code>tar_gz</code>, <code>sevenz</code></td>
-<td>opaque source identity only; archive member addressing is unsupported</td>
+<td>仅保留不透明来源身份；不支持归档成员寻址</td>
 </tr>
 </tbody>
 </table>
-<p><strong>BPK-R027.</strong> Archives MAY be retained as an unavailable source requiring an adapter, but MUST NOT carry converter output, edits or semantic records under this profile.</p>
-<p>A member-path anchor requires a separately versioned extension. DocC is not a format token; a DocC JSON file uses <code>json</code>.</p>
-<p>The validator checks geometry, ordering and the declared mapping, not whether a cited source location exists or supports the text. Extracting a different representation creates a new binding; it does not justify reusing coordinates from the previous one.</p>
-<h2 id="7-attribution-and-safe-rendering">7. Attribution and safe rendering</h2>
-<p>Origins are <code>author_statement</code>, <code>editor_correction</code>, <code>generated_meaning</code>, <code>generated_description</code>, <code>our_experiment</code> and <code>model_inference</code>.</p>
-<p><strong>BPK-R028.</strong> A non-author origin MUST have a generation record and <code>presented_as_author: false</code>.</p>
-<p><strong>BPK-R029.</strong> An author statement MUST NOT carry a generation record.</p>
-<p>On an author statement, <code>presented_as_author: true</code> means an asserted verbatim quotation; <code>false</code> means an explicitly attributed paraphrase. This flag never establishes quotation fidelity by itself.</p>
-<p><strong>BPK-R030.</strong> The public Markdown renderer MUST preserve every object and relation field, including qualifiers, operator scopes, source position, conditions, anchors, generation and assessment references.</p>
-<p>It emits each complete record in a JSON literal block, with a fence longer than any backtick run in the payload. Origin labels and record headings are emitted outside that container from controlled fields.</p>
-<p><strong>BPK-R031.</strong> Payload headings, HTML or apparent origin labels MUST NOT create new rendered record structure.</p>
-<p>Every non-author block is visibly labelled “GENERATED, not the author’s statement.”</p>
-<p><code>document_md.contains_generated_text</code> is always false; generated meanings and image descriptions remain separate derivatives. A missing asset records <code>missing_asset</code> without a fabricated path or digest. The public renderer refuses non-<code>author_open</code> packages.</p>
-<h2 id="8-quality-observations-and-readiness">8. Quality observations and readiness</h2>
-<p>Extraction and semantic observations remain separate; there is no combined score. Extraction statuses are <code>pass</code>, <code>partial</code>, <code>adapter_required</code>, <code>failed</code>, <code>not_measured</code>. Check results use the <a href="/en/engineering/specifications/status-model/">status model</a>: <code>pass</code>, <code>fail</code>, <code>unknown</code>, <code>not_applicable</code>. Each check has a unique identifier and method.</p>
-<p><strong>BPK-R032.</strong> A <code>not_applicable</code> check MUST state the inapplicability reason in <code>detail</code>.</p>
-<p><strong>BPK-R033.</strong> Extraction <code>pass</code> MUST contain at least one applicable passing check, no failed or unknown check, and matching seen/expected unit counts when those counts are supplied.</p>
-<p>An empty checklist or an all-inapplicable checklist cannot prove successful extraction. <code>adapter_required</code> contradicts available converter output; <code>pass</code> or <code>partial</code> contradicts absent converter output.</p>
-<p>CER is either measured with a value, reference class and sample size, or <code>not_measured</code> with null. A null is not a measured zero. Semantic status is <code>not_built</code>, <code>not_measured</code>, <code>built_unreviewed</code> or <code>reviewed</code>; the first two require empty object and relation files.</p>
-<p><strong>BPK-R034.</strong> Every semantic review MUST identify <code>review_id</code>, <code>reviewer_id</code>, <code>producer_id</code>, reviewer type, independence basis, time, result, the exact object and relation identifiers examined, and the current object-file, relation-file and readable-file digests.</p>
-<p><strong>BPK-R035.</strong> <code>sample_size</code> counts distinct reviewed objects, not relations or checklist items, and MUST equal the object-ID list length.</p>
-<p>Reviews cannot name nonexistent records. A review of earlier bytes cannot be transferred to new bytes by changing only the timestamp.</p>
-<p><strong>BPK-R036.</strong> The <code>knowledge_ready</code> profile uses <strong>complete coverage</strong>, not a statistical sample: every object and relation MUST be included, every included record MUST be <code>reviewed</code>, the result MUST be <code>supported</code>, and the declared reviewer MUST be a human or blind agent distinct from the producer.</p>
-<p>Same-session review, partial support, unsupported results and omitted records cannot earn this status.</p>
-<p><strong>BPK-R052.</strong> There MUST be at least one object.</p>
-<p>A narrower review is retained honestly under <code>partial_pilot</code>.</p>
-<p>These checks verify declared scope, separation and byte bindings. They do not prove that a human review occurred or that identities are independent. The synthetic fixture uses explicitly invented reviewer identities for testing. Authenticating observations belongs to the consuming trust boundary.</p>
-<h3 id="total-package-status-decision-table">Total package-status decision table</h3>
-<p><strong>BPK-R037.</strong> The validator MUST compute the first matching row below and require equality with the submitted <code>package_status</code>.</p>
-<p>All well-formed combinations receive one result; contradictory component/check declarations are additionally rejected rather than assigned a success status.</p>
+<p><strong>BPK-R027.</strong> 归档可以（MAY）作为需要适配器的不可用来源保留，但在本配置下不得（MUST NOT）承载转换器输出、修订或语义记录。</p>
+<p>成员路径锚点需要单独版本化的扩展。DocC 不是格式词元；DocC JSON 文件使用 <code>json</code>。</p>
+<p>验证器检查几何、顺序和声明的映射，不检查引用的来源位置是否存在或支持文本。提取另一表示会创建新绑定，不能据此复用先前表示的坐标。</p>
+<h2 id="7-attribution-and-safe-rendering" data-source-section="7-attribution-and-safe-rendering">7. 归属与安全呈现</h2>
+<p>来源类别为 <code>author_statement</code>、<code>editor_correction</code>、<code>generated_meaning</code>、<code>generated_description</code>、<code>our_experiment</code> 和 <code>model_inference</code>。</p>
+<p><strong>BPK-R028.</strong> 非作者来源必须（MUST）具有生成记录和 <code>presented_as_author: false</code>。</p>
+<p><strong>BPK-R029.</strong> 作者陈述不得（MUST NOT）携带生成记录。</p>
+<p>对于作者陈述，<code>presented_as_author: true</code> 表示声称逐字引用；<code>false</code> 表示明确归属的转述。该标志本身从不确立引用保真度。</p>
+<p><strong>BPK-R030.</strong> 公共 Markdown 渲染器必须（MUST）保留每个对象和关系字段，包括限定信息、运算符作用域、来源立场、条件、锚点、生成和评估引用。</p>
+<p>渲染器将每条完整记录输出为 JSON 字面量代码块，其围栏长度大于载荷中任何连续反引号。来源标签和记录标题由受控字段生成，并置于该容器之外。</p>
+<p><strong>BPK-R031.</strong> 载荷中的标题、HTML 或貌似来源标签的内容不得（MUST NOT）创建新的渲染记录结构。</p>
+<p>每个非作者块都明确显示“GENERATED, not the author’s statement”（“生成内容，并非作者陈述”）。</p>
+<p><code>document_md.contains_generated_text</code> 始终为 false；生成的意义和图像描述保持为独立派生物。缺失资源记录为 <code>missing_asset</code>，不得虚构路径或摘要。公共渲染器拒绝非 <code>author_open</code> 包。</p>
+<h2 id="8-quality-observations-and-readiness" data-source-section="8-quality-observations-and-readiness">8. 质量观察与就绪状态</h2>
+<p>提取观察与语义观察保持分离，不存在合并评分。提取状态为 <code>pass</code>、<code>partial</code>、<code>adapter_required</code>、<code>failed</code>、<code>not_measured</code>。检查结果采用<a href="/zh-Hans/engineering/specifications/status-model/" hreflang="zh-Hans" data-target-state="unreviewed">状态模型</a>：<code>pass</code>、<code>fail</code>、<code>unknown</code>、<code>not_applicable</code>。每项检查都有唯一标识符和方法。</p>
+<p><strong>BPK-R032.</strong> <code>not_applicable</code> 检查必须（MUST）在 <code>detail</code> 中说明不适用原因。</p>
+<p><strong>BPK-R033.</strong> 提取 <code>pass</code> 必须（MUST）至少包含一项适用且通过的检查，没有失败或未知检查，并且在提供实际／预期单元数时，这两个数量相同。</p>
+<p>空检查列表或全部不适用的检查列表不能证明提取成功。<code>adapter_required</code> 与已有转换器输出矛盾；<code>pass</code> 或 <code>partial</code> 与没有转换器输出矛盾。</p>
+<p>CER 要么是已测量值，附带参照类别和样本量；要么为 <code>not_measured</code> 并取 null。Null 不是测得的零。语义状态为 <code>not_built</code>、<code>not_measured</code>、<code>built_unreviewed</code> 或 <code>reviewed</code>；前两者要求对象文件和关系文件为空。</p>
+<p><strong>BPK-R034.</strong> 每次语义审查必须（MUST）标识 <code>review_id</code>、<code>reviewer_id</code>、<code>producer_id</code>、审查者类型、独立性依据、时间、结果、已检查对象和关系的精确标识符，以及当前对象文件、关系文件和可读文件的摘要。</p>
+<p><strong>BPK-R035.</strong> <code>sample_size</code> 计数的是不同的已审查对象，而不是关系或检查列表条目，并且必须（MUST）等于对象 ID 列表长度。</p>
+<p>审查不能指称不存在的记录。不能仅通过修改时间戳，将对旧字节的审查转移到新字节。</p>
+<p><strong>BPK-R036.</strong> <code>knowledge_ready</code> 配置要求<strong>完整覆盖</strong>，而不是统计抽样：每个对象和关系都必须（MUST）纳入，每条纳入记录都必须（MUST）为 <code>reviewed</code>，结果必须（MUST）为 <code>supported</code>，并且声明的审查者必须（MUST）是与生产者不同的人类或盲评代理。</p>
+<p>同会话审查、部分支持、不支持结果以及遗漏记录，都不能获得此状态。</p>
+<p><strong>BPK-R052.</strong> 必须（MUST）至少存在一个对象。</p>
+<p>较窄审查应如实保留为 <code>partial_pilot</code>。</p>
+<p>这些检查验证声明范围、分离和字节绑定。它们不能证明人工审查实际发生，也不能证明身份独立。合成夹具使用明确虚构的审查者身份进行测试。观察认证属于消费方信任边界。</p>
+<h3 id="total-package-status-decision-table" data-source-section="total-package-status-decision-table">完整包状态决策表</h3>
+<p><strong>BPK-R037.</strong> 验证器必须（MUST）计算下表中第一个匹配行，并要求其结果等于提交的 <code>package_status</code>。</p>
+<p>所有格式良好的组合都有一个结果；相互矛盾的组件／检查声明还会另外被拒绝，而不是分配成功状态。</p>
 <table>
 <colgroup>
 <col class="table-width-33" />
@@ -191,111 +191,107 @@
 </colgroup>
 <thead>
 <tr class="header">
-<th>Priority</th>
-<th>Condition</th>
-<th>Derived status</th>
+<th>优先级</th>
+<th>条件</th>
+<th>推导状态</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>Source integrity is <code>mismatch</code>, even if completeness is bibliographic</td>
+<td>来源完整性为 <code>mismatch</code>，即使完整程度只是书目级</td>
 <td><code>blocked_integrity</code></td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>Completeness is <code>bibliography_only</code></td>
+<td>完整程度为 <code>bibliography_only</code></td>
 <td><code>bibliography_only</code></td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Converter output is absent</td>
+<td>缺少转换器输出</td>
 <td><code>adapter_required</code></td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>Semantic layer is <code>not_built</code> or <code>not_measured</code>, with zero objects and relations</td>
+<td>语义层为 <code>not_built</code> 或 <code>not_measured</code>，对象和关系均为零</td>
 <td><code>structure_only</code></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>Full, verified source; extraction passes; complete independent declared review supports all reviewed records</td>
+<td>完整且已验证的来源；提取通过；声明的完整独立审查支持所有已审查记录</td>
 <td><code>knowledge_ready</code></td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>Any remaining well-formed converted package</td>
+<td>其余任何格式良好的已转换包</td>
 <td><code>partial_pilot</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>BPK-R038.</strong> <code>blocked_integrity</code>, <code>bibliography_only</code> and <code>adapter_required</code> MUST omit both document and readable components.</p>
-<p><strong>BPK-R039.</strong> <code>structure_only</code>, <code>partial_pilot</code> and <code>knowledge_ready</code> MUST contain both.</p>
-<p>A reviewed package with unverified integrity or partial source coverage is therefore representable as <code>partial_pilot</code>. Extraction failure remains visible even when files are structurally present.</p>
-<h2 id="9-correction-impact-and-reassessment">9. Correction impact and reassessment</h2>
-<p><strong>BPK-R040.</strong> An accepted correction MUST invalidate every object explicitly named in <code>depends_on_objects</code> <strong>or</strong> whose source anchor overlaps the edit.</p>
-<p>The producer’s dependency list cannot suppress the overlap rule. Section/block and slide/block matches are exact; intervals and comparable page boxes use intersection; JSON pointers use equality or ancestor relationships. Sheet ranges conservatively invalidate the whole same-sheet scope; incomparable geometry is treated as potentially overlapping.</p>
-<p><strong>BPK-R041.</strong> An affected object MUST be stale or rejected until its <code>reviewed_edit_ids</code> explicitly names the accepted corrections and a supported, independent declared review covers that object and the current readable and semantic file digests.</p>
-<p>References to unknown or unaccepted edit identifiers are rejected. A stale proposal cannot be cleared by this accepted-edit mechanism. Dependent relations follow section 5. This is a declared reassessment record, not evidence that a producer’s semantic reasoning was correct.</p>
-<h2 id="10-rights-and-publication-layers">10. Rights and publication layers</h2>
-<p><code>rights.license_class</code> is <code>author_open</code>, <code>third_party_restricted</code> or <code>unknown</code>.</p>
-<p><strong>BPK-R042.</strong> Only <code>author_open</code> MAY declare the package publication <code>license</code> (<code>CC-BY-4.0</code> or <code>Apache-2.0</code>) and nonempty <code>publishable_layers</code>.</p>
-<p><strong>BPK-R043.</strong> Restricted or unknown works MUST omit that licence field and leave the publication layer list empty.</p>
-<p>This blocks book text carried through semantic chunks as well as through document files. No quotation budget or right to republish is inferred from extraction, review or a producer-supplied licence string.</p>
-<p>Private processing of an otherwise valid restricted package is outside public projection.</p>
-<p><strong>BPK-R044.</strong> The projection function MUST return no rows for such a package.</p>
-<p>This conservative producer rule implements the established exclusion of third-party book text from the repository; it is not a legal finding about possible uses elsewhere. Any separately authored derivative requires its own source/rights assessment and publication decision.</p>
-<h2 id="11-candidate-export-and-admission-runtime">11. Candidate export and admission runtime</h2>
-<p><strong>BPK-R045.</strong> <code>candidate_projection(package_directory)</code> MUST validate a private immutable byte snapshot and compute the rendering from that snapshot itself.</p>
-<p>It does not accept a raw manifest plus caller-selected Markdown.</p>
-<p><strong>BPK-R046.</strong> It MUST return no rows on validation failure or for <code>blocked_integrity</code>, <code>bibliography_only</code> or <code>adapter_required</code>, or without an allowed open publication licence.</p>
+<p><strong>BPK-R038.</strong> <code>blocked_integrity</code>、<code>bibliography_only</code> 和 <code>adapter_required</code> 必须（MUST）同时省略文档组件和可读组件。</p>
+<p><strong>BPK-R039.</strong> <code>structure_only</code>、<code>partial_pilot</code> 和 <code>knowledge_ready</code> 必须（MUST）同时包含这两个组件。</p>
+<p>因此，已审查但完整性未验证或来源覆盖不完整的包，可表示为 <code>partial_pilot</code>。即使文件在结构上存在，提取失败也必须保持可见。</p>
+<h2 id="9-correction-impact-and-reassessment" data-source-section="9-correction-impact-and-reassessment">9. 修订影响与重新评估</h2>
+<p><strong>BPK-R040.</strong> 已接受纠正必须（MUST）使以下每个对象失效：在 <code>depends_on_objects</code> 中明确列出的对象，<strong>或者</strong>来源锚点与该修订重叠的对象。</p>
+<p>生产者依赖列表不能覆盖重叠规则。章节／块和幻灯片／块采用精确匹配；区间与可比较页面框使用相交；JSON 指针使用相等或祖先关系。工作表范围保守地使同一工作表的整个范围失效；不可比较的几何被视为可能重叠。</p>
+<p><strong>BPK-R041.</strong> 受影响对象必须（MUST）保持过时或被拒绝，直到其 <code>reviewed_edit_ids</code> 明确列出已接受纠正，并且一项支持性的、声明独立的审查覆盖该对象以及当前可读和语义文件摘要。</p>
+<p>引用未知或未接受的修订标识符会被拒绝。过时提案不能通过此已接受修订机制清除。依赖关系遵循第5节。这是声明的重新评估记录，不是生产者语义推理正确的证据。</p>
+<h2 id="10-rights-and-publication-layers" data-source-section="10-rights-and-publication-layers">10. 权利与出版层</h2>
+<p><code>rights.license_class</code> 为 <code>author_open</code>、<code>third_party_restricted</code> 或 <code>unknown</code>。</p>
+<p><strong>BPK-R042.</strong> 只有 <code>author_open</code> 可以（MAY）声明包出版 <code>license</code>（<code>CC-BY-4.0</code> 或 <code>Apache-2.0</code>）和非空 <code>publishable_layers</code>。</p>
+<p><strong>BPK-R043.</strong> 权利受限或未知的作品必须（MUST）省略该许可证字段，并使出版层列表为空。</p>
+<p>这既阻止通过文档文件携带书籍文本，也阻止通过语义分块携带。不能从提取、审查或生产者提供的许可证字符串推断引用额度或再版权利。</p>
+<p>对其他方面有效的受限包进行私有处理，不属于公共投影范围。</p>
+<p><strong>BPK-R044.</strong> 投影函数必须（MUST）对此类包返回零行。</p>
+<p>这一保守生产者规则实施仓库中排除第三方书籍文本的既定边界；它不是对其他场合可能用途的法律结论。任何另行创作的派生物都需要自身的来源／权利评估和出版决定。</p>
+<h2 id="11-candidate-export-and-admission-runtime" data-source-section="11-candidate-export-and-admission-runtime">11. 候选导出与准入运行时</h2>
+<p><strong>BPK-R045.</strong> <code>candidate_projection(package_directory)</code> 必须（MUST）验证一个私有、不可变的字节快照，并从该快照本身计算渲染结果。</p>
+<p>它不接受原始清单加上调用者自行选择的 Markdown。</p>
+<p><strong>BPK-R046.</strong> 验证失败、状态为 <code>blocked_integrity</code>、<code>bibliography_only</code> 或 <code>adapter_required</code>，或缺少允许的开放出版许可证时，必须（MUST）返回零行。</p>
 <table>
-<colgroup>
-<col class="table-width-50" />
-<col class="table-width-50" />
-</colgroup>
 <thead>
 <tr class="header">
-<th>Package element</th>
-<th>Candidate projection</th>
+<th>包元素</th>
+<th>候选投影</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Allowed document/readable Markdown</td>
-<td>One proposed row for its exact bytes</td>
+<td>允许的文档／可读 Markdown</td>
+<td>对其精确字节提出一行候选记录</td>
 </tr>
 <tr class="even">
-<td>Allowed knowledge layer</td>
-<td>One proposed <code>knowledge.md</code> row for the full protected rendering</td>
+<td>允许的知识层</td>
+<td>对完整受保护渲染提出一行 <code>knowledge.md</code> 候选记录</td>
 </tr>
 <tr class="odd">
-<td>JSON records, assets and quality file</td>
-<td>Retained in the package; not separate Markdown export rows</td>
+<td>JSON 记录、资源和质量文件</td>
+<td>保留在包中，不作为独立 Markdown 导出行</td>
 </tr>
 <tr class="even">
-<td>Unlisted layer or prohibited status/rights class</td>
-<td>No row</td>
+<td>未列出层或禁止状态／权利类别</td>
+<td>不产生行</td>
 </tr>
 <tr class="odd">
-<td>Runtime admission</td>
-<td>Remains <code>not_measured</code></td>
+<td>运行时准入</td>
+<td>保持 <code>not_measured</code></td>
 </tr>
 </tbody>
 </table>
-<p>Rows identify <code>articles/book-packages/&lt;package_id&gt;/&lt;file&gt;</code>, digest, holder, licence, limits and <code>status: proposed</code>. These paths fit the exporter path syntax but are not automatically allowlisted. The existing <code>KnowledgeContractCandidateExport/v2</code> exporter still requires its own admitted scope, exact merged revision and reviewed publication decision.</p>
-<p><strong>BPK-R047.</strong> The producer MUST NOT widen that scope or treat a candidate row as publication or runtime admission.</p>
-<p>The <a href="/en/appendices/api-integration/">API integration appendix</a> distinguishes repository publication, index admission and actual service results. No live consumer acceptance of this new profile is claimed by local conformance tests.</p>
-<h2 id="12-validation-and-evidence-limits">12. Validation and evidence limits</h2>
-<p>The JSON Schema checks record shape, fixed vocabularies and conditional fields. The package validator adds digest and count checks; identity and endpoint consistency; anchor mapping and geometry; byte-exact reversible replay; correction impact; extraction conjunction; review scope and file bindings; complete status derivation; and publication rights boundaries.</p>
-<p><strong>BPK-R048.</strong> The conformance suite MUST retain each regression’s expected cause, including negative review, unknown extraction, restricted licence bypass, arbitrary rendering, Markdown structure injection, stale correction, rejected endpoint and obsolete profile.</p>
-<p>Its status-table test enumerates 3,240 input combinations; enumeration tests the decision table, not 3,240 historical book experiments. Structural incoherence is tested separately.</p>
-<p>The package does not establish source fidelity, truth, real reviewer independence, unseen source geometry, authentic licence ownership or downstream admission. Generated descriptions are separate from the media they describe. The linked <a href="/en/engineering/studies/source-transcription-and-uncertainty/">transcription study</a> reports historical evidence; it is not validation of the new wire profile.</p>
-<h2 id="13-compatibility-and-migration">13. Compatibility and migration</h2>
-<p>Version 1 is preserved at immutable <a href="https://github.com/Arcanada-one/knowledge-contract/tree/ed2e188c89a1a50a187f3d55bf32baab54c87f7e">source revision ed2e188c</a>. Version 2 is intentionally stricter and adds observations, scoped review, the readable package identifier, explicit validation profile and semantic vocabularies.</p>
-<p><strong>BPK-R049.</strong> Existing record tags MUST NOT simply be rewritten: missing observations remain missing, unsupported edits remain unsupported, and review of old bytes does not establish review of migrated bytes.</p>
-<p><strong>BPK-R050.</strong> A migration MUST create a new package release, retain the original revision, identify every mapping or dropped unsupported field, revalidate digests and edits, and obtain any newly required review.</p>
-<p><strong>BPK-R051.</strong> It MUST NOT invent integrity observations, reviewer identities or author attribution.</p>
-<p>V2 builders emit empty semantic layers until interpretation is actually performed. The publication edition, package profile, validator build and admission-runtime version remain distinct identities.</p>
-<p>Credit and licence: Knowledge Contract Arcana, <a href="https://contract.place" class="uri">https://contract.place</a> (CC BY 4.0). See <a href="https://github.com/Arcanada-one/knowledge-contract/blob/161a01afb1b756adf059ea2e1cbdd0dca29d83a2/ATTRIBUTION.md">attribution</a>.</p>
-</div><section class="document-citation" aria-label="Citation"><h2>引用本文档</h2><p lang="en">Pavel Valentov. Book Packages: Source Identity, Semantic Layers, and Validation. Knowledge Contract Arcana, edition 1.1. <a href="https://contract.place/en/engineering/specifications/book-package/">https://contract.place/en/engineering/specifications/book-package/</a>. Source revision <code>161a01afb1b756adf059ea2e1cbdd0dca29d83a2</code>.</p><p>Pavel Valentov · Knowledge Contract Arcana · CC BY 4.0。复用文字时请保留引用来源。</p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>本页目录</summary><nav aria-label="本页目录"><a class="toc-level-2" href="#1-purpose-and-validation-boundary" lang="en">1. Purpose and validation boundary</a><a class="toc-level-2" href="#2-layout-and-reversible-edits" lang="en">2. Layout and reversible edits</a><a class="toc-level-2" href="#3-identity-and-integrity-observations" lang="en">3. Identity and integrity observations</a><a class="toc-level-2" href="#4-semantic-objects-and-facets" lang="en">4. Semantic objects and facets</a><a class="toc-level-2" href="#5-relations" lang="en">5. Relations</a><a class="toc-level-2" href="#6-evidence-anchors-and-source-formats" lang="en">6. Evidence anchors and source formats</a><a class="toc-level-2" href="#7-attribution-and-safe-rendering" lang="en">7. Attribution and safe rendering</a><a class="toc-level-2" href="#8-quality-observations-and-readiness" lang="en">8. Quality observations and readiness</a><a class="toc-level-3" href="#total-package-status-decision-table" lang="en">Total package-status decision table</a><a class="toc-level-2" href="#9-correction-impact-and-reassessment" lang="en">9. Correction impact and reassessment</a><a class="toc-level-2" href="#10-rights-and-publication-layers" lang="en">10. Rights and publication layers</a><a class="toc-level-2" href="#11-candidate-export-and-admission-runtime" lang="en">11. Candidate export and admission runtime</a><a class="toc-level-2" href="#12-validation-and-evidence-limits" lang="en">12. Validation and evidence limits</a><a class="toc-level-2" href="#13-compatibility-and-migration" lang="en">13. Compatibility and migration</a></nav></details><hr><strong>工程规范</strong><a href="/zh-Hans/engineering/specifications/knowledge-contract-core/" lang="en">Contract Core: Core Model and Admission Requirements</a><a href="/zh-Hans/engineering/specifications/contract-family/" lang="en">Knowledge Operations: Preconditions, Results and Transformation Obligations</a><a href="/zh-Hans/engineering/specifications/semantic-types/" lang="en">Semantic Types: Attribution and Representations</a><a href="/zh-Hans/engineering/specifications/context-package/" lang="en">Context Package: Coverage, Dependencies, and Delivery</a><a href="/zh-Hans/engineering/specifications/compiled-artifact-contract/" lang="en">Compiled Knowledge: Artifacts and Reproducible Derivation</a><a href="/zh-Hans/engineering/specifications/artifact-registry/" lang="en">Artifact Registry: Readable Names and Document Formats</a><a href="/zh-Hans/engineering/specifications/status-model/" lang="en">Status Model: Assessment, Execution, and Publication States</a><a href="/zh-Hans/engineering/specifications/cache-identity-and-invalidation/" lang="en">Cache Validity: Cache Identity, Dependency Tracking, and Invalidation</a><a href="/zh-Hans/engineering/specifications/reuse-policy/" lang="en">Reuse Policy: Time, Authorization, and Decision Outcomes</a><a href="/zh-Hans/engineering/specifications/knowledge-evolution/" lang="en">Knowledge Evolution: Versioned Rules</a><a href="/zh-Hans/engineering/specifications/book-package/" aria-current="page" lang="en">Book Packages: Source Identity, Semantic Layers, and Validation</a><hr><a class="" href="/zh-Hans/reference/glossary/">参考资料</a><a class="" href="/zh-Hans/appendices/source-map/">来源映射与历史版本</a></aside></div></div></main><footer id="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><p>让知识连接其根基。</p><p class="ecosystem-note">Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada <svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><div class="footer-group"><strong>科学</strong><a class="" href="/zh-Hans/research/">科学论文</a><a class="" href="/zh-Hans/programme/">计划</a><a class="" href="/zh-Hans/roadmap/">路线图</a><a class="" href="/zh-Hans/journal/">专栏</a><a class="" href="/zh-Hans/reference/">参考资料</a><a class="" href="/zh-Hans/appendices/">附录</a></div><div class="footer-group"><strong>开发者</strong><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a><a class="" href="/zh-Hans/engineering/studies/">工程研究</a><a class="" href="/zh-Hans/repository/">版本库</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a><a class="" href="/zh-Hans/lab/knowledge-journey/">知识之旅</a></div><div class="footer-group"><strong>contract.place</strong><a class="" href="/zh-Hans/about/">使用与引用</a><a href="/zh-Hans/search/#document-search">搜索已发布文档</a><a class="" href="/zh-Hans/references/">设计参考</a><button type="button" class="footer-consent" data-consent-settings>Cookie 设置</button></div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · Knowledge Contract Arcana · Arcanada 生态系统</span><span>内容 CC BY 4.0，代码 Apache-2.0。</span></div><p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p><p class="footer-credit" lang="en">Credit: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">Attribution</a></p></div></footer><dialog id="search-dialog" aria-labelledby="search-title"></dialog><dialog id="menu-dialog" aria-label="Site menu"></dialog><div id="announcement" class="sr-only" aria-live="polite"></div></body></html>
+<p>各行标识 <code>articles/book-packages/&lt;package_id&gt;/&lt;file&gt;</code>、摘要、持有者、许可证、限制和 <code>status: proposed</code>。这些路径符合导出器路径语法，但不会自动加入允许列表。现有 <code>KnowledgeContractCandidateExport/v2</code> 导出器仍需要自身已经准入的范围、精确合并修订版和经过审查的出版决定。</p>
+<p><strong>BPK-R047.</strong> 生产者不得（MUST NOT）扩大该范围，也不得将候选行视为出版或运行时准入。</p>
+<p><a href="/zh-Hans/appendices/api-integration/" hreflang="zh-Hans" data-target-state="unreviewed">API 集成附录</a>区分仓库出版、索引准入和实际服务结果。本地符合性测试不声称实际消费者已经接受新配置。</p>
+<h2 id="12-validation-and-evidence-limits" data-source-section="12-validation-and-evidence-limits">12. 验证与证据限制</h2>
+<p>JSON Schema 检查记录形状、固定词汇和条件字段。包验证器额外检查摘要与数量、身份和端点一致性、锚点映射与几何、字节精确的可逆重放、纠正影响、提取检查的合取、审查范围与文件绑定、完整状态推导，以及出版权利边界。</p>
+<p><strong>BPK-R048.</strong> 符合性测试集必须（MUST）保留每项回归的预期原因，包括负向审查、提取未知、绕过受限许可证、任意渲染、Markdown 结构注入、过时纠正、被拒绝端点和旧配置。</p>
+<p>状态表测试枚举 3,240 种输入组合；枚举测试的是决策表，而不是 3,240 次历史书籍实验。结构不一致另行测试。</p>
+<p>包不能确立来源保真度、真实性、真实审查独立性、未见来源几何、真实许可证持有权或下游准入。生成描述与其描述的媒体分离。链接的<a href="/zh-Hans/engineering/studies/source-transcription-and-uncertainty/" hreflang="zh-Hans" data-target-state="reviewed">转录研究</a>报告历史证据，并非对新传输配置的验证。</p>
+<h2 id="13-compatibility-and-migration" data-source-section="13-compatibility-and-migration">13. 兼容性与迁移</h2>
+<p>版本 1 保留于不可变的<a href="https://github.com/Arcanada-one/knowledge-contract/tree/ed2e188c89a1a50a187f3d55bf32baab54c87f7e">来源修订版 ed2e188c</a>。版本 2 有意更严格，增加观察、有界审查、可读包标识符、明确验证配置和语义词汇。</p>
+<p><strong>BPK-R049.</strong> 不得（MUST NOT）仅重写现有记录标签：缺失观察仍然缺失，不支持的修订仍不受支持，对旧字节的审查不能确立对迁移后字节的审查。</p>
+<p><strong>BPK-R050.</strong> 迁移必须（MUST）创建新的包发行版、保留原始修订版、标识每项映射或丢弃的不支持字段、重新验证摘要和修订，并取得任何新增必需审查。</p>
+<p><strong>BPK-R051.</strong> 迁移不得（MUST NOT）虚构完整性观察、审查者身份或作者归属。</p>
+<p>V2 构建器在实际执行解释之前输出空语义层。出版版本、包配置、验证器构建和准入运行时版本保持为不同身份。</p>
+<p>署名与许可证：Knowledge Contract Arcana，<a href="https://contract.place" class="uri">https://contract.place</a>（CC BY 4.0）。参见<a href="https://github.com/Arcanada-one/knowledge-contract/blob/55e279c43dc9bcf8732467a32661c2ac4b7cf920/ATTRIBUTION.md">署名要求</a>。</p>
+</div><section class="document-citation" aria-label="引用本文档"><h2>引用本文档</h2><p><span lang="en">Pavel Valentov. Book Packages: Source Identity, Semantic Layers, and Validation. Knowledge Contract Arcana, edition 1.1.</span> <a href="https://contract.place/en/engineering/specifications/book-package/">https://contract.place/en/engineering/specifications/book-package/</a>. 来源修订 <code>55e279c43dc9bcf8732467a32661c2ac4b7cf920</code>.</p><p>Pavel Valentov · Knowledge Contract Arcana · CC BY 4.0。复用文字时请保留引用来源。</p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>本页目录</summary><nav aria-label="本页目录"><a class="toc-level-2" href="#1-purpose-and-validation-boundary" lang="zh-Hans">1. 目的与验证边界</a><a class="toc-level-2" href="#2-layout-and-reversible-edits" lang="zh-Hans">2. 布局与可逆修订</a><a class="toc-level-2" href="#3-identity-and-integrity-observations" lang="zh-Hans">3. 身份与完整性观察</a><a class="toc-level-2" href="#4-semantic-objects-and-facets" lang="zh-Hans">4. 语义对象与侧面</a><a class="toc-level-2" href="#5-relations" lang="zh-Hans">5. 关系</a><a class="toc-level-2" href="#6-evidence-anchors-and-source-formats" lang="zh-Hans">6. 证据锚点与来源格式</a><a class="toc-level-2" href="#7-attribution-and-safe-rendering" lang="zh-Hans">7. 归属与安全呈现</a><a class="toc-level-2" href="#8-quality-observations-and-readiness" lang="zh-Hans">8. 质量观察与就绪状态</a><a class="toc-level-3" href="#total-package-status-decision-table" lang="zh-Hans">完整包状态决策表</a><a class="toc-level-2" href="#9-correction-impact-and-reassessment" lang="zh-Hans">9. 修订影响与重新评估</a><a class="toc-level-2" href="#10-rights-and-publication-layers" lang="zh-Hans">10. 权利与出版层</a><a class="toc-level-2" href="#11-candidate-export-and-admission-runtime" lang="zh-Hans">11. 候选导出与准入运行时</a><a class="toc-level-2" href="#12-validation-and-evidence-limits" lang="zh-Hans">12. 验证与证据限制</a><a class="toc-level-2" href="#13-compatibility-and-migration" lang="zh-Hans">13. 兼容性与迁移</a></nav></details><hr><strong>工程规范</strong><a href="/zh-Hans/engineering/specifications/knowledge-contract-core/" lang="zh-Hans">契约核心：核心模型与准入要求</a><a href="/zh-Hans/engineering/specifications/contract-family/" lang="zh-Hans">知识操作：前置条件、结果与变换义务</a><a href="/zh-Hans/engineering/specifications/semantic-types/" lang="zh-Hans">语义类型：归属标注与表示</a><a href="/zh-Hans/engineering/specifications/context-package/" lang="zh-Hans">语境包：覆盖、依赖与交付</a><a href="/zh-Hans/engineering/specifications/compiled-artifact-contract/" lang="zh-Hans">编译知识：制品与可复现推导</a><a href="/zh-Hans/engineering/specifications/artifact-registry/" lang="zh-Hans">制品登记册：可读名称与文档格式</a><a href="/zh-Hans/engineering/specifications/status-model/" lang="zh-Hans">状态模型：评估、执行与发布状态</a><a href="/zh-Hans/engineering/specifications/cache-identity-and-invalidation/" lang="zh-Hans">缓存有效性：缓存身份、依赖跟踪与失效</a><a href="/zh-Hans/engineering/specifications/reuse-policy/" lang="zh-Hans">复用策略：时间、授权与决策结果</a><a href="/zh-Hans/engineering/specifications/knowledge-evolution/" lang="zh-Hans">知识演化：版本化规则</a><a href="/zh-Hans/engineering/specifications/book-package/" aria-current="page" lang="zh-Hans">书籍包：来源身份、语义层与验证</a><hr><a class="" href="/zh-Hans/reference/glossary/">参考资料</a><a class="" href="/zh-Hans/appendices/source-map/">来源映射与历史版本</a></aside></div></div></main><footer id="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-v2" href="/zh-Hans/" aria-label="contract.place"><svg class="brand-symbol" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M28.5 8C18-1 3 7 6.5 21.5 8.5 30 21 34 28.5 25" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"/><path d="M11.5 15C19 6 31.5 10 33.5 18.5 37 33 22 41 11.5 32" stroke="var(--teal)" stroke-width="4.4" stroke-linecap="round"/></svg><span class="wordmark">contract<span class="brand-period">.</span>place</span></a><p>让知识连接其根基。</p><p class="ecosystem-note">Knowledge Contract Arcana 是 Arcanada 生态系统的一部分。</p><a class="ecosystem-link" href="https://arcanada.ai" target="_blank" rel="noopener">Arcanada <svg class="icon " viewBox="0 0 20 20" aria-hidden="true"><path d="M12 3h5v5M17 3 8 12M8 4H4v13h13v-4"/></svg></a></div><div class="footer-group"><strong>科学</strong><a class="" href="/zh-Hans/research/">科学论文</a><a class="" href="/zh-Hans/programme/">计划</a><a class="" href="/zh-Hans/roadmap/">路线图</a><a class="" href="/zh-Hans/journal/">专栏</a><a class="" href="/zh-Hans/reference/">参考资料</a><a class="" href="/zh-Hans/appendices/">附录</a></div><div class="footer-group"><strong>开发者</strong><a class="" href="/zh-Hans/engineering/specifications/">工程规范</a><a class="" href="/zh-Hans/engineering/studies/">工程研究</a><a class="" href="/zh-Hans/repository/">版本库</a><a class="" href="/zh-Hans/docs/availability/">集成可用性</a><a class="" href="/zh-Hans/lab/knowledge-journey/">知识之旅</a></div><div class="footer-group"><strong>contract.place</strong><a class="" href="/zh-Hans/about/">使用与引用</a><a href="/zh-Hans/search/#document-search">搜索已发布文档</a><a class="" href="/zh-Hans/references/">设计参考</a><button type="button" class="footer-consent" data-consent-settings>Cookie 设置</button></div></div><div class="footer-bottom"><span>© 2026 Pavel Valentov · Knowledge Contract Arcana · Arcanada 生态系统</span><span>内容 CC BY 4.0，代码 Apache-2.0。</span></div><p class="footer-credit zh-notice" lang="zh-Hans">中文界面尚未经过母语编辑审校。</p><p class="footer-credit" lang="zh-Hans">署名: Knowledge Contract Arcana, <a href="https://contract.place">https://contract.place</a>. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> · <a href="https://github.com/Arcanada-one/knowledge-contract/blob/main/ATTRIBUTION.md" target="_blank" rel="noopener">署名说明</a></p></div></footer><dialog id="search-dialog" aria-labelledby="search-title"></dialog><dialog id="menu-dialog" aria-labelledby="menu-title"></dialog><div id="announcement" class="sr-only" aria-live="polite"></div></body></html>
