@@ -114,6 +114,25 @@
           "sha256": "162be0956b61ac29151634880dc07b4ef6f2a008af47b46be4a8975ea44299c1"
         }
       }
+    },
+    {
+      "slug": "rule-after-restart-2026-11-15",
+      "date": "2026-11-15",
+      "folder": "2026-11-15-rule-after-restart",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "4a3c1084ed1396d25958d2228e9285e6e47df7643ea684b7b9ac490dc4edb795"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "884f60cfced7f17e62af69964376159577186674f9b2679405de097fb7674bf3"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "217b6a354f89c61a741f2fa203538bebcbd0e318e5ef21f8da7e074f31180f8e"
+        }
+      }
     }
   ]
 }

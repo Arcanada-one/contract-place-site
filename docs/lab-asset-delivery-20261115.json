@@ -1,0 +1,101 @@
+{
+  "kind": "anonymous-public-asset-readback",
+  "observed_date": "2026-11-15",
+  "site_repository": "Arcanada-one/contract-place-site",
+  "site_revision": "050a4fef55f59f03a6e456e8e27c2bfd02d0a37d",
+  "deploy_run": "https://github.com/Arcanada-one/contract-place-site/actions/runs/43684264241",
+  "html_readback_job": "https://github.com/Arcanada-one/contract-place-site/actions/runs/43684264241/job/132721971892",
+  "asset_requests": [
+    {
+      "url": "https://contract.place/lab/knowledge-journey-observation.js",
+      "observed_utc": "2026-11-15T08:06:54.304192+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "application/javascript",
+      "status": 200,
+      "bytes": 8621,
+      "sha256": "c9ac4fcc276eef64e44d2939cd9c921c92e1383ffda2a786a351af548b4dfaf6",
+      "git_blob": "63dd3b94c87b8cc4da62331228a789376c375206",
+      "matches_site_revision_blob": true
+    },
+    {
+      "url": "https://contract.place/lab/retained-object-reader.js",
+      "observed_utc": "2026-11-15T08:06:54.308174+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "application/javascript",
+      "status": 200,
+      "bytes": 21158,
+      "sha256": "20867919f6858595221f42a116952e520d905a836c8e3b0e2e5071ff916ff9ca",
+      "git_blob": "86c1856ee030f420a74ca6ecbb40fbe5004f854b",
+      "matches_site_revision_blob": true
+    },
+    {
+      "url": "https://contract.place/app.js?v=7ed5bb1b4fb8e27fb3925be15555736d573056e4082a1b50f2840703f444bd57",
+      "observed_utc": "2026-11-15T08:06:54.419968+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "application/javascript",
+      "status": 200,
+      "bytes": 134519,
+      "sha256": "7ed5bb1b4fb8e27fb3925be15555736d573056e4082a1b50f2840703f444bd57",
+      "git_blob": "bab5584653f42f2eff918ec6f6ae5b150028374f",
+      "matches_site_revision_blob": true
+    }
+  ],
+  "html_requests": [
+    {
+      "url": "https://contract.place/en/lab/knowledge-journey/",
+      "observed_utc": "2026-11-15T08:06:47.407653+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "text/html",
+      "status": 200,
+      "bytes": 12594,
+      "sha256": "c2799f42adccb7149707d9f734af8dcc55d2ab2312796e55aa73763086738202",
+      "git_blob": "fbe04ba0334d66cd9a41ac73c4d81a914564b4e7",
+      "raw_hash_matches_deploy_readback": true,
+      "observed_state": "unconnected"
+    },
+    {
+      "url": "https://contract.place/ru/lab/knowledge-journey/",
+      "observed_utc": "2026-11-15T08:06:47.408788+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "text/html",
+      "status": 200,
+      "bytes": 13944,
+      "sha256": "2336626fc84a295697ce14b6aa12ba1b7e6fd7795cad6a2b835ed53473f5a29b",
+      "git_blob": "b3d4ddd2f52bcb805ee2f9bfc16a0a4dcb2c0d9e",
+      "raw_hash_matches_deploy_readback": true,
+      "observed_state": "unconnected"
+    },
+    {
+      "url": "https://contract.place/zh-Hans/lab/knowledge-journey/",
+      "observed_utc": "2026-11-15T08:06:47.409437+00:00",
+      "method": "GET",
+      "redirects": "refused",
+      "user_agent": "KnowledgeContractReadOnlyAudit/1",
+      "accept": "text/html",
+      "status": 200,
+      "bytes": 12608,
+      "sha256": "9419b2bda194542c5257f6641883ac53e7692ef83bd6ca378b59ea0a2684d42d",
+      "git_blob": "4f31f99bdb3b6dbe326e162556a064b890fb0b18",
+      "raw_hash_matches_deploy_readback": true,
+      "observed_state": "unconnected"
+    }
+  ],
+  "boundaries": {
+    "browser_executed": false,
+    "visual_acceptance": false,
+    "authenticated_session_probed": false,
+    "runtime_connected": false,
+    "independent_external_review": false
+  },
+  "provenance": "Metadata extraction from actual anonymous GET responses retained by the internal audit; no synthetic fixture responses."
+}
