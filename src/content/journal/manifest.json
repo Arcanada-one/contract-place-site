@@ -95,6 +95,25 @@
           "sha256": "798cf2ea0f0fd078310ef1d4786803c65abb03510bbca1ae385e63975b57b607"
         }
       }
+    },
+    {
+      "slug": "source-rule-checks-2026-11-15",
+      "date": "2026-11-15",
+      "folder": "2026-11-15-source-rule-checks",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "b1f5cadadb71f6c5857bd22e98a2571054830d3810f718a0209560cae1fcc82c"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "3d50d470291a408d83ff0c6d3bb11dcaf20b49ba5b391c6ffb5397d912a19e96"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "162be0956b61ac29151634880dc07b4ef6f2a008af47b46be4a8975ea44299c1"
+        }
+      }
     }
   ]
 }
