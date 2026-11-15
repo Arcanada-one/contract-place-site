@@ -28,6 +28,8 @@ Exit 0 means only that the bounded patterns did not match. It is not scientific 
 
 The scope is `"single-study"`: one issue built from one study with one author. Do not add an issue that draws on several studies unless a reviewed byline mapping (which statement belongs to which study and author) exists first. The checker has no such mapping.
 
+Coverage is limited to the issues listed in `attribution-scope.json`: at commit 345e594 that is 1 of 6 issue directories under `src/content/journal`. A green "Check publication" says nothing about the authorship wording of the 5 unlisted issues, which keep the human byline review.
+
 ## Add an issue
 
 1. Review the issue and its single source study by hand, including the byline.
