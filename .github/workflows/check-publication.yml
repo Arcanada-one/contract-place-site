@@ -124,6 +124,37 @@ jobs:
           ref: b1a2cb006077eea52fd09ad0b7a6fdbe5f538c65
           path: _preamble-site-baseline
           persist-credentials: false
+      - name: Read the pinned attribution study
+        id: attribution
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          scope = json.loads(Path('attribution-scope.json').read_text())
+          assert scope['schema_version'] == 1
+          assert len(scope['entries']) == 1, 'one single-study entry; add a source checkout per reviewed entry'
+          study = scope['entries'][0]['study']
+          assert study['repository'] == 'Arcanada-one/knowledge-contract'
+          assert re.fullmatch(r'[0-9a-f]{40}', study['commit'])
+          assert re.fullmatch(r'[A-Za-z0-9_./-]+', study['path']) and '..' not in study['path']
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('repository=' + study['repository'] + '\n')
+              output.write('commit=' + study['commit'] + '\n')
+              output.write('path=' + study['path'] + '\n')
+          PY
+      - name: Check out the pinned attribution study
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ steps.attribution.outputs.repository }}
+          ref: ${{ steps.attribution.outputs.commit }}
+          path: _attribution-source
+          sparse-checkout: ${{ steps.attribution.outputs.path }}
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Single-study attribution preflight
+        run: |
+          python3 -B scripts/check_attribution.py --source-dir _attribution-source
+          ATTRIBUTION_SOURCE_DIR=_attribution-source python3 -B scripts/test_check_attribution.py
       - name: Four reviewed-file regressions without changing publication admission
         run: python3 -B scripts/check_reviewed_preamble.py
       - name: Verify committed inputs and output are reproducible
