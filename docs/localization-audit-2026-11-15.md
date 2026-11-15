@@ -144,7 +144,7 @@ immutable run receipt remain pending.
 
 | Check | Observed local result | Scope |
 | --- | --- | --- |
-| `node scripts/test_ui_localization.js` | Complete 31-work catalogue: 487 cases PASS; earlier baseline: 325 cases PASS | Compiled UI, language navigation, anchors, labels and state handling; the count grows with the reader inventory |
+| `node scripts/test_ui_localization.js` | Complete 31-work catalogue: 491 cases PASS; earlier baseline: 325 cases PASS | Compiled UI, language navigation, anchors, labels and state handling; the count grows with the reader inventory |
 | `python3 -B scripts/test_catalogue_localization.py` | 13 methods PASS | Metadata and retained-excerpt bindings, complete inventories, harmless changes and targeted refusals |
 | `python3 -B scripts/test_localization.py` | 20 methods PASS | Source → compiled record → actual HTML coverage, language/state, route identity and field-omission controls |
 | `python3 -B scripts/test_roadmap_localization.py` | 16 methods PASS | Real temporary Git histories, historical/current bindings, before/after graph preservation, targeted refusals and calendar controls |
@@ -152,7 +152,7 @@ immutable run receipt remain pending.
 | Formatting-only rendition comparison | 48/48 complete AST comparisons PASS; 54-file lint PASS | Empty-line repair with exact content/code preservation |
 
 The final local run retained logs for the 20-method all-site suite and the
-487-case UI suite. The final source build also passed the local publication,
+491-case UI suite. The final source build also passed the local publication,
 page, paper, link, hygiene, localization, roadmap and programme checks. The
 hosted workflow will provide its own immutable execution receipt. The complete
 publication workflow remains pending on the final pinned revision; selected
@@ -193,3 +193,14 @@ The existing served-page check uses its explicit bare/query request shapes;
 asset/browser checks, API-index identity, access control and native execution
 have their own evidence boundaries. No source review, translated page or local
 Lab fixture authorizes private data access, corpus admission or a native task.
+
+
+## Final service-page repair and preserved hosted failure
+
+The first site CI run, [43742952907](https://github.com/Arcanada-one/contract-place-site/actions/runs/43742952907), failed the attribution preflight after compilation and renderer/localization controls passed. The changed Russian journal issue still had its old blob in `attribution-scope.json`. Review against the exact English issue confirmed only the three terminology repairs: attribution, nested attribution and native admission. The scope now explicitly names `d22e3e5de51e7300701c859da7d1da618ae9f264`; checker and study pins, authorship, numbers and refusal logic remain unchanged. The corrected preflight and all six wrapper tests pass locally. The old failure is not a successful run.
+
+A final audit of the other page types checked all 262 interface keys and actual RU/zh home, wiki/docs, about, books, references, repository, search and public Lab pages. It found two additional defects: the search's missing-title fallback was English in every locale, and the shared static 404 offered only English before JavaScript. The search now uses the selected language for its own fallback while preserving source titles, quotations and technical paths. The single shared 404 now contains three visible, language-labelled error sections and home links, one h1 and the same noindex policy; JavaScript still selects the requested locale for an unknown path.
+
+The rebuilt search passes 24 tests. The renderer/prerender suite passes 491 controls, including the shared error document and unknown routes in all three languages. Exact prior search and prerender modules each fail the new corresponding regression control in disposable copies. Thirty synthetic API error/empty/timeout cases also had localized feedback; this is not a live API-service claim. Official external titles, identifiers and 24 explicitly English historical review-provenance blocks remain source quotations.
+
+The initial 487-control result and site head `2ede2317909e82d6d6f88657c638d2ae83e44827` remain historical preparation evidence. [Site PR #55](https://github.com/Arcanada-one/contract-place-site/pull/55) records the replacement head, its CI and any subsequent delivery. These local results do not establish deployment or served/browser verification.

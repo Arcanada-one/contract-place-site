@@ -55,6 +55,16 @@ for (const lang of langs) {
     assert.match(elements['#main'].innerHTML, /fieldset disabled/);
     if (lang !== 'en') assert.doesNotMatch(elements['#main'].innerHTML, /Live|Replay/);
   });
+  route(lang, '__missing_route__'); context.render();
+  check('unknown routes retain their locale after JavaScript renders ' + lang, () => {
+    const expected = {en: ['This page could not be found.', 'Back to home'], ru: ['Страница не найдена.', 'На главную'], 'zh-Hans': ['未找到此页面。', '返回首页']}[lang];
+    assert.equal(context.document.documentElement.lang, lang);
+    assert.ok(elements['#main'].innerHTML.includes(expected[0]));
+    assert.ok(elements['#main'].innerHTML.includes(expected[1]));
+    assert.ok(elements['#main'].innerHTML.includes('href="/' + lang + '/"'));
+    assert.equal((elements['#main'].innerHTML.match(/<h1\b/g) || []).length, 1);
+    assert.doesNotMatch(elements['#main'].innerHTML, /data-shared-error/);
+  });
   route(lang, 'journal');
   for (const issue of data.journal_issues) check('daily issue searchable ' + lang + '/' + issue.slug, () => {
     assert.ok(context.searchItems(issue.languages[lang].title).some(i => i.path === issue.route));
@@ -174,17 +184,37 @@ for (const lang of ['ru', 'zh-Hans']) check('human roadmap file roles ' + lang, 
 });
 
 // Exercise the actual prerenderer in a disposable directory, never generated public/.
+let sharedErrorHtml;
 check('no-JavaScript skip links are localized in prerendered bytes', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'kc-ui-localization-'));
   try {
     for (const [source, target] of [['src/site/index.html', 'index.html'], ['src/site/app.js', 'app.js'], ['public/content.js', 'content.js'], ['src/renditions/renditions.js', 'renditions.js']]) fs.copyFileSync(path.join(root, source), path.join(temp, target));
     const result = spawnSync(process.execPath, [path.join(root, 'src/prerender.mjs'), temp], {encoding: 'utf8'});
     assert.equal(result.status, 0, result.stderr);
+    sharedErrorHtml = fs.readFileSync(path.join(temp, '404.html'), 'utf8');
+    for (const lang of langs) assert.equal(fs.existsSync(path.join(temp, lang, 'not-found/index.html')), false);
     for (const [lang, skip] of [['en', 'Skip to main content'], ['ru', 'Перейти к содержимому'], ['zh-Hans', '跳转至主要内容']]) {
       const html = fs.readFileSync(path.join(temp, lang, 'about/index.html'), 'utf8');
       assert.ok(html.includes('<a class="skip" href="#main">' + skip + '</a>'));
       assert.ok(html.includes('https://contract.place/' + lang + '/about/'));
     }
   } finally {fs.rmSync(temp, {recursive: true, force: true});}
+});
+check('the one shared static 404 contains three complete language sections without JavaScript', () => {
+  assert.equal((sharedErrorHtml.match(/<h1\b/g) || []).length, 1);
+  assert.match(sharedErrorHtml, /data-shared-error="404"/);
+  assert.match(sharedErrorHtml, /<meta name="robots" content="noindex">/);
+  assert.doesNotMatch(sharedErrorHtml, /<link rel="canonical"|<link rel="alternate"|http-equiv="refresh"/);
+  for (const [lang, label, text, home] of [
+    ['en', 'English', 'This page could not be found.', 'Back to home'],
+    ['ru', 'Русский', 'Страница не найдена.', 'На главную'],
+    ['zh-Hans', '简体中文', '未找到此页面。', '返回首页']
+  ]) {
+    const section = sharedErrorHtml.match(new RegExp('<section lang="' + lang + '" aria-labelledby="error-language-' + lang + '">([\\s\\S]*?)</section>'));
+    assert.ok(section, lang + ' language-labelled error section');
+    assert.ok(section[1].includes('<h2 id="error-language-' + lang + '">' + label + '</h2>'));
+    assert.ok(section[1].includes('<p class="lead">' + text + '</p>'));
+    assert.ok(section[1].includes('<a class="button" href="/' + lang + '/">' + home + '</a>'));
+  }
 });
 console.log(JSON.stringify({schema: 'kc-ui-localization/v1', scope: 'compiled UI and navigation; no native execution or translation acceptance', cases, journal_anchor_joins: journalJoins, programme_anchor_joins: programmeJoins, reader_title_joins: readerJoins, result: 'PASS'}));

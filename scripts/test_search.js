@@ -1,7 +1,8 @@
 // Unit tests for public/search.js (pure logic; no DOM, no network). Run: node scripts/test_search.js
+// Set SEARCH_MODULE to an absolute source-module path for a check before rebuilding public/.
 'use strict';
 const assert = require('node:assert/strict');
-const S = require('../public/search.js');
+const S = require(process.env.SEARCH_MODULE || '../public/search.js');
 
 let n = 0;
 async function t(name, fn) { await fn(); n += 1; console.log('ok ' + name); }
@@ -60,6 +61,21 @@ const ok = (results, extra = {}) => json(200, Object.assign({ schema: 'ContractP
     assert.deepEqual(S.toViewItem(item({ uncertainty: [1, 'ok', {}] })).uncertainty, ['ok']);
     assert.equal(S.toViewItem({}).title, 'Untitled passage');
   });
+  for (const [lang, expected] of [['en', 'Untitled passage'], ['ru', 'Фрагмент без названия'], ['zh-Hans', '无标题段落']]) {
+    await t('missing result title is localized without translating source text: ' + lang, async () => {
+      const malformed = [{}, {citation: {title: ''}, document: {path: ''}}, {citation: {title: 3}, document: {path: null}}];
+      for (const raw of malformed) assert.equal(S.toViewItem(raw, lang).title, expected);
+      const d = deps(() => ok(malformed.concat([
+        {citation: {title: 'Original English source title'}},
+        {document: {path: 'papers/original/PAPER.md'}}
+      ])));
+      d.lang = lang;
+      const result = await S.runSearch(d, 'q');
+      assert.equal(result.state, 'ok');
+      assert.deepEqual(result.items.map(i => i.title), [expected, expected, expected,
+        'Original English source title', 'papers/original/PAPER.md']);
+    });
+  }
   await t('runSearch: empty and over-long queries make no request', async () => {
     const d = deps(() => { throw new Error('must not be called'); });
     for (const q of ['', '   ', null]) assert.equal((await S.runSearch(d, q)).kind, 'invalid_query');
