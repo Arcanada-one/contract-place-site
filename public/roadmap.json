@@ -64,10 +64,10 @@
   },
   "manuscript_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+    "commit": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
     "edition": "1.1"
   },
-  "same_commit": true,
+  "same_commit": false,
   "definition_revision": "2026-11-06.1",
   "tasks": [
     {

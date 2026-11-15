@@ -263,7 +263,8 @@ class Audit:
         return element
 
     def source_body(self, markdown: str, compiled_html: str, where: str,
-                    drop_title: bool = True, journal: bool = False, ignore_status_badges: bool = False):
+                    drop_title: bool = True, journal: bool = False, ignore_status_badges: bool = False,
+                    formula_localizations=None, source_path: str | None = None, language: str | None = None):
         """Independent Markdown render, compared as text without rewritten URLs.
 
         Unlike a file-existence check this refuses a shortened compiled body.
@@ -276,7 +277,11 @@ class Audit:
                                  input=markdown, capture_output=True, text=True, check=False)
         if process.returncode:
             raise ValueError(where + ": source Markdown render failed: " + process.stderr.strip())
-        root = Document(process.stdout).root
+        source_html = process.stdout
+        if formula_localizations is not None:
+            source_html = formula_localizations.localize(source_path, language, source_html)
+            formula_localizations.validate_localized(source_path, language, compiled_html)
+        root = Document(source_html).root
         if drop_title:
             first = next((n for n in root.children if isinstance(n, Node) and n.tag == "h1"), None)
             if first:
@@ -327,10 +332,87 @@ class Audit:
             self.require(set(retained).issubset(actual), "CONTENT_LOST", label,
                          "baseline identities absent: " + repr(sorted(set(retained) - set(actual))))
 
+    def review_prose(self, page: Node, rendition: dict, expected: dict, original: dict,
+                     locale: str, where: str):
+        """Translated presentation and verbatim source review are separate."""
+        from review_localization import FIELDS, original_fields
+        self.require(rendition.get("review_localization") == expected, "REVIEW_PROVENANCE", where,
+                     "compiled review explanation differs from its source-bound descriptor")
+        actual_review = json.loads(json.dumps(rendition.get("review")))
+        if self.require(type(actual_review) is dict, "REVIEW_ORIGINAL", where, "original review object is absent"):
+            actual_review.pop("author", None)  # Added by the pre-existing compiler.
+            if type(actual_review.get("evidence")) is dict:
+                actual_review["evidence"].pop("url", None)
+            self.require(actual_review == original, "REVIEW_ORIGINAL", where,
+                         "original review facts changed under the localized presentation")
+        facts_nodes = page.all(lambda node: node.tag == "script" and node.has("rendition-facts"))
+        if self.require(len(facts_nodes) == 1, "REVIEW_FACTS", where, "expected exactly one rendition facts record"):
+            try:
+                facts = json.loads("".join(child for child in facts_nodes[0].children if isinstance(child, str)))
+            except (ValueError, TypeError):
+                facts = None
+            self.require(type(facts) is dict and facts.get("review") == rendition.get("review")
+                         and facts.get("review_localization") == {key: expected[key] for key in ("review_state", "language", "source")},
+                         "REVIEW_FACTS", where, "machine-readable original review or presentation state/pin differs from its bound record")
+
+        def shown(node):
+            parent = node
+            while parent is not None:
+                if parent.tag == "details" and "open" not in parent.attrs:
+                    return False
+                parent = parent.parent
+            return node.visible()
+
+        translated = page.all(lambda node: "data-review-localization-field" in node.attrs)
+        self.require(len(translated) == len(FIELDS)
+                     and {node.attrs["data-review-localization-field"] for node in translated} == set(FIELDS),
+                     "REVIEW_FIELDS", where, "expected exactly the three localized explanation fields")
+        for node in translated:
+            field = node.attrs["data-review-localization-field"]
+            if field in FIELDS:
+                self.require(normalized(node.text()) == normalized(expected["fields"][field])
+                             and node.language() == locale and shown(node),
+                             "REVIEW_FIELD_TEXT", where + "/" + field,
+                             "visible review prose differs from the exact locale text or language")
+        notices = page.all(lambda node: "data-review-localization-state" in node.attrs)
+        self.require(len(notices) == 1 and notices[0].attrs["data-review-localization-state"] == "unreviewed"
+                     and notices[0].language() == locale and shown(notices[0]) and bool(normalized(notices[0].text())),
+                     "REVIEW_PRESENTATION_STATE", where, "localized explanations need their own visible unreviewed state")
+        containers = page.all(lambda node: node.attrs.get("data-review-original") == "true")
+        if self.require(len(containers) == 1 and containers[0].tag == "details"
+                        and "open" not in containers[0].attrs and containers[0].language() == "en",
+                        "REVIEW_ORIGINAL_VIEW", where, "original review prose needs a separately labelled closed English details view"):
+            originals = containers[0].all(lambda node: "data-review-original-field" in node.attrs)
+            self.require(len(originals) == len(FIELDS)
+                         and {node.attrs["data-review-original-field"] for node in originals} == set(FIELDS),
+                         "REVIEW_ORIGINAL_VIEW", where, "original view must retain the three source prose fields")
+            values = original_fields(original)
+            for node in originals:
+                field = node.attrs["data-review-original-field"]
+                if field in FIELDS:
+                    self.require(normalized(node.text()) == normalized(values[field]) and node.language() == "en",
+                                 "REVIEW_ORIGINAL_TEXT", where + "/" + field, "historical English review prose changed or disappeared")
+
     def readers(self, catalog: dict, documents: list[dict], metadata: list[dict],
                 sidecar: list[dict], source: Path | None = None):
+        formula_localizations = None
+        review_localizations = None
+        if source:
+            from formula_localization import FormulaLocalizations
+            from review_localization import ReviewLocalizations
+            formula_localizations = FormulaLocalizations(source, catalog["publication"], documents)
+            review_localizations = ReviewLocalizations(source, catalog["publication"], documents)
+            self.require(catalog.get("formula_localization_source") == formula_localizations.provenance(),
+                         "FORMULA_PROVENANCE", "readers", "compiled formula presentation is not bound to its exact source descriptor")
+            self.require(catalog.get("review_localization_source") == review_localizations.provenance(),
+                         "REVIEW_PROVENANCE", "readers", "compiled review explanations are not bound to their exact source descriptor")
         docs = unique(documents, "slug", "knowledge catalogue")
         records = unique(catalog["records"], "id", "compiled records")
+        if review_localizations is not None:
+            review_localizations.validate_inventory({
+                (record["id"], language) for record in records.values()
+                for language, view in record.get("renditions", {}).items() if view.get("state") in INDEXED
+            })
         self.inventory(set(records), set(docs), "canonical works")
         metas, renditions = {}, {}
         for key, items, target in (("metadata", metadata, metas), ("renditions", sidecar, renditions)):
@@ -363,6 +445,14 @@ class Audit:
                     if not entry or not meta:
                         continue
                     title, summary, html, state = meta["title"], meta["summary"], rd.get("html", ""), rd["state"]
+                    # The historical compiler may render an older source
+                    # without this optional descriptor. A complete locale
+                    # release must not claim coverage for English review
+                    # explanations after the descriptor is removed/repinned.
+                    if state in INDEXED and rd.get("review"):
+                        self.require(type(rd.get("review_localization")) is dict,
+                                     "REVIEW_LOCALIZATION_MISSING", route,
+                                     "a displayed source review needs bound localized explanations in a complete locale release")
                     localized = record.get("localization", {}).get(locale, {})
                     self.require(localized.get("title") == title and localized.get("summary") == summary,
                                  "METADATA_SOURCE", route, "compiled title/summary differ from source localization JSON")
@@ -382,7 +472,10 @@ class Audit:
                         pin = entry["rendition"]
                         raw = self.hash(source, pin["path"], pin["sha256"], route)
                         self.require(rd.get("rendition", {}).get("sha256") == pin["sha256"], "RENDITION_BINDING", route, "compiled rendition digest differs from sidecar")
-                        self.source_body(raw, html, route)
+                        self.require(rd.get("formula_localization") == formula_localizations.for_document(doc["path"], locale),
+                                     "FORMULA_PROVENANCE", route, "rendition formula presentation binding differs from the source descriptor")
+                        self.source_body(raw, html, route, formula_localizations=formula_localizations,
+                                         source_path=doc["path"], language=locale)
                 page = self.page(route)
                 if not page:
                     continue
@@ -396,6 +489,13 @@ class Audit:
                 self.head(page, route, locale, title, summary, locale == "en" or state in INDEXED, allowed,
                           metadata_title=metadata_title)
                 self.body(page, by_class("source-body"), html, route, locale)
+                if source and locale != "en":
+                    projection = review_localizations.for_review(slug, locale, entry.get("review")) if state in INDEXED else None
+                    self.require(rd.get("review_localization") == projection, "REVIEW_PROVENANCE", route,
+                                 "review presentation is missing, stale or applied outside a verified review")
+                    if projection is not None:
+                        self.review_prose(page, rd, projection, entry["review"], locale, route)
+                        self.counts["localized_review_fields"] += len(projection["fields"])
                 lead = self.one(page, by_class("lead"), route, "reader summary")
                 if lead:
                     self.require(normalized(lead.text()) == normalized(summary), "VISIBLE_SUMMARY", route, "lead differs from source locale summary")

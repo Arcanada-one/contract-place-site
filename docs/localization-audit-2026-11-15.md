@@ -17,10 +17,12 @@ those additional entries are not silently included in this release.
 | --- | --- |
 | Audited site baseline | `69a15f5446029bac7b2f11f04b11d34aaf97b215` |
 | Canonical English content used for the translations | `161a01afb1b756adf059ea2e1cbdd0dca29d83a2` in knowledge-contract |
-| Existing source contribution | [knowledge-contract PR #122](https://github.com/Arcanada-one/knowledge-contract/pull/122), integration head `902924e35198061fcf5ccc3744e690649bb7cf72` |
+| Accepted main localization | Source PR #122 merged at `45730e337eaaaaac76e824118b2f34b1c6fa6008`; site PR #55 merged at `7e6b21ff48d3a31e0c68020c2cb7e7138c0d226b` |
+| Presentation completeness follow-up | [knowledge-contract PR #123](https://github.com/Arcanada-one/knowledge-contract/pull/123); final revision recorded in the manifest |
 | Pre-format source integration snapshot | `86c5654c3e3811891793655da345f5084b4eaf7f`; superseded for final publication by the formatting follow-up |
 | Formatting body commit | `101431f2cf0b141d317445fabd6b6122f9fe1dba` |
-| Final source pin after formatting and rendition repinning | [`55e279c43dc9bcf8732467a32661c2ac4b7cf920`](https://github.com/Arcanada-one/knowledge-contract/tree/55e279c43dc9bcf8732467a32661c2ac4b7cf920) |
+| Publication source pin including formula and review prose | [`39e4054830d9cb05bc0432d25f7320cb8a97f054`](https://github.com/Arcanada-one/knowledge-contract/tree/39e4054830d9cb05bc0432d25f7320cb8a97f054) |
+| Independent unchanged roadmap pin | `55e279c43dc9bcf8732467a32661c2ac4b7cf920` |
 | Final site build revision | **PENDING** |
 | Complete hosted CI on that final revision | **PENDING** |
 | Public deployment and exact served-byte readback | **PENDING** |
@@ -204,3 +206,96 @@ A final audit of the other page types checked all 262 interface keys and actual 
 The rebuilt search passes 24 tests. The renderer/prerender suite passes 491 controls, including the shared error document and unknown routes in all three languages. Exact prior search and prerender modules each fail the new corresponding regression control in disposable copies. Thirty synthetic API error/empty/timeout cases also had localized feedback; this is not a live API-service claim. Official external titles, identifiers and 24 explicitly English historical review-provenance blocks remain source quotations.
 
 The initial 487-control result and site head `2ede2317909e82d6d6f88657c638d2ae83e44827` remain historical preparation evidence. [Site PR #55](https://github.com/Arcanada-one/contract-place-site/pull/55) records the replacement head, its CI and any subsequent delivery. These local results do not establish deployment or served/browser verification.
+
+
+## Formula prose and real-browser follow-up
+
+The corrected earlier site head `fcc79d06c0cceffaa1f9574a5fc402cb22ca7133`
+passed all four hosted jobs in [CI 43745173854](https://github.com/Arcanada-one/contract-place-site/actions/runs/43745173854).
+Agent-Brain closed the stale Russian attribution-pin hold on that exact head;
+that bounded check did not accept the full source corpus or release. A later
+rendered-page audit found a gap the green suite had not covered: eight ordinary
+English MathML `mtext` labels in each target language, across four unreviewed
+papers. The earlier successful run does not verify the subsequent repair.
+
+The source-owned `publication-formula-localizations.json` registers these eight
+locations with complete manuscript digests, one-based Pandoc Math positions,
+display mode, exact TeX hashes, mtext positions and source wording, including
+boundary spaces. It supplies 16 Russian/Chinese translations. The source and
+rendition Math AST comparison still runs first. The presentation layer permits
+only the registered visible prose replacements; every other MathML node,
+attribute, symbol, order, display mode and canonical TeX annotation is retained.
+All eight historical reviewed rendition files remain byte-identical, and the
+new presentation translations remain explicitly unreviewed.
+
+The longest label retains the negation of “both answer sets are the same
+singleton”. It does not claim that both sets must be non-singletons. Positive
+cases include two different singletons and equal sets with multiple elements;
+removing the negation or requiring two non-singletons gives different results.
+These finite controls establish the bounded predicate distinction, not general
+semantic translation quality.
+
+A local real-browser comparison uses the unchanged generated pages in three
+390 × 844 CSS iframe viewports. With the observed scrollbar, each document's
+content viewport is 375 pixels wide; the EN/RU/zh reader pages have no root
+horizontal overflow. This is a browser layout check, not mobile-device hardware
+emulation or a public served-byte observation. It also exposed an obsolete
+reader notice claiming language selection changed only the interface. The
+notice now describes available full-body renditions and their review states.
+The release table remains pending until the corrected exact revision is tested,
+reviewed and delivered.
+
+
+## Preserved review records and localized presentation
+
+An additional visible-text pass found 24 ordinary English prose fields in the
+eight historical reviewed rendition records: reviewer independence basis,
+method and limitations. Localized field labels and an HTML `lang="en"`
+attribute did not provide a translated explanation. This is a separate coverage
+gap from the manuscripts themselves. The follow-up supplies complete localized
+presentation text, keeps the exact original review prose in clearly labelled
+English disclosure blocks, and labels the translation of the historical record
+as unreviewed. It does not change the original verdict, controller identity,
+reviewed blobs, date, evidence path, scope or manuscript-review state.
+
+Agent-Brain independently accepted the earlier source/site integration in
+[comment 6899417294](https://github.com/Arcanada-one/knowledge-contract/pull/122#issuecomment-6899417294)
+and [comment 6899417529](https://github.com/Arcanada-one/contract-place-site/pull/55#issuecomment-6899417529).
+Those accepted revisions merged on 15 November at 18:46:55 and 18:47:10 UTC.
+The follow-up requires its own head, execution and review evidence.
+
+The same review identified a stale AGENTS summary saying all bodies remained
+English unless reviewed. Its linked, already implemented rendition contract
+has long allowed visibly unreviewed reading while excluding it from translation
+indexing. The summary now faithfully describes those existing states. No new
+admission, indexing or release permission is introduced by that clarification.
+
+
+### Complete follow-up source and local execution
+
+The final source presentation snapshot is `39e4054830d9cb05bc0432d25f7320cb8a97f054`,
+retained by source PR #123 integration head `16fba6ed774fe06af342379c194dce36f5bd171f`.
+Its exact hosted CI runs 43749870207 and 43749870000 passed. Formula descriptor
+blob `5f0dc741b7ba80d88c560e24d338564b6a68b5c8` and review-prose descriptor blob
+`e05becc7fffd42ebafec692e24492eb75e25bc54` were read back in both Git trees.
+The source additions do not change the eight historical review objects or any
+canonical manuscript/body rendition.
+
+The complete local build retains 322 HTML files, 93 reader pages, 62 renditions
+and the separate roadmap pin. Fifteen local publication, hygiene, page, paper,
+link, roadmap, localization, renderer and regression commands passed. The new
+formula suite has 18 methods; the review-binding suite has 14. The complete-page
+audit additionally refuses removing the review descriptor in a new committed
+source with an updated outer pin: a compatible legacy renderer may still read
+such an old-style record, but it cannot pass the complete-localization check.
+The original review JSON and the separate unreviewed presentation in embedded
+machine-readable facts must also match their bound source.
+
+The review renderer suite checks 23 cases, including all eight records and 24
+visible translated fields, verbatim originals, a closed labelled disclosure,
+unchanged status/scope and ten malformed presentations. A prior renderer fails
+the new disclosure regression. The full-width and narrow browser previews use
+actual generated HTML. The long formula has bounded horizontal scrolling while
+the document itself retains its viewport width; this is local browser evidence.
+The final site hosted run, non-author verdict and public served revision are
+recorded separately in the follow-up PR; they are not inferred from these tests.
