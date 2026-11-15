@@ -27,7 +27,7 @@
       },
       "checker": {
         "path": "scripts/attribution/test_attribution_cardinality.py",
-        "blob": "65d5dc86df69a62d3808cc3242d1ef1aac03f2d9"
+        "blob": "759e3229217c1e26d0fdb33903a64e1dfcb3477f"
       }
     }
   ]

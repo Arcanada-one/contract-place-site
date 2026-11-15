@@ -9,7 +9,7 @@ Status: a bounded automated check in CI. It does not replace the human byline re
 1. hashes the checker, the pinned STUDY file and each locale file (`en.md`, `ru.md`, `zh-Hans.md`) the way `git hash-object` does, and fails with exit 2, naming the file, when a blob differs from its pin;
 2. runs `python3 -I scripts/attribution/test_attribution_cardinality.py --check STUDY EN RU ZH` and fails the job on any exit code other than 0.
 
-The checker is a byte-identical copy of blob `65d5dc86df69a62d3808cc3242d1ef1aac03f2d9` from `Arcanada-one/arcanada-workspace` (commit `efc5765d`, PR 1928). Do not edit it; a new checker version is a new reviewed copy with a new pin.
+The checker is a byte-identical copy of blob `759e3229217c1e26d0fdb33903a64e1dfcb3477f` from `Arcanada-one/arcanada-workspace` (commit `23743e9d`, workspace PR #1928, merged). Its licence is Apache-2.0, declared in the file's own SPDX header by its author KC-Brain (mail 20261115T121519Z-49f473fd); DEUS-Arcana passed the exact blob (mail 20261115T122031Z-b03295bf). Do not edit it; a new checker version is a new reviewed copy with a new pin.
 
 ## Codes
 

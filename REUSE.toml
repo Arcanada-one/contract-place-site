@@ -48,16 +48,6 @@ precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
-# Attribution preflight checker, byte-identical copy of blob 65d5dc86df69a62d3808cc3242d1ef1aac03f2d9 from
-# Arcanada-one/arcanada-workspace at efc5765d1b057b3c4328e3ff0aaf95f1eeaed8f4 (arcanada-workspace PR 1928),
-# documentation/plans/knowledge-collective-live-lab/roles/KC-Brain/topics/source-evaluation/test_attribution_cardinality.py.
-# The file carries no header of its own and must not be edited; it keeps the MIT licence of Arcanada-authored shared code.
-[[annotations]]
-path = ["scripts/attribution/test_attribution_cardinality.py"]
-precedence = "override"
-SPDX-FileCopyrightText = "2026 Arcanada"
-SPDX-License-Identifier = "MIT"
-
 # Byte-exact copy of the historical Russian journal text (contract-place-site 49fcebbc, PR 50, blob be2047af7955...) used as a known-red control.
 [[annotations]]
 path = ["scripts/fixtures/attribution/*"]
