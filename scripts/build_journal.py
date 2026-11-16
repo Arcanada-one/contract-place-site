@@ -18,6 +18,8 @@ import re
 import subprocess
 import sys
 
+from build_publication import csp_table_classes
+
 ROOT = Path(__file__).resolve().parents[1]
 JOURNAL_ROOT = ROOT / "src" / "content" / "journal"
 MANIFEST_PATH = JOURNAL_ROOT / "manifest.json"
@@ -96,7 +98,9 @@ def render_body(body: str) -> str:
         ],
         body,
     ).strip()
-    return decorate_inline_links(html)
+    # Use the canonical renderer's local table classes before publishing or
+    # syndicating the same HTML. Importing the helper does not run a build.
+    return decorate_inline_links(csp_table_classes(html))
 
 
 def compile_journal(site: Path | None = None) -> list[dict]:

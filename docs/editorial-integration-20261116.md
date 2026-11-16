@@ -79,3 +79,25 @@ Primary code reference: Pandoc `3.1.3`,
 `src/Text/Pandoc/Writers/HTML.hs`, blob
 `17fe2c945e6c4aaec3bf10922abf2e6da4d2880d` (`tableToHtml`,
 `colSpecListToHtml`, `tableCellToHtml`), plus `Writers/Shared.hs` for alignment.
+
+## Journal CSP and source-text oracle repair
+
+CI 43860274916 on `26b795e442d4ece8f5891f4eaabc8d44e3d53b5a`
+completed the native 328-page compile, then hygiene correctly rejected inline
+styles in the three new Journal pages. Journal now uses the existing
+`build_publication.csp_table_classes` transformation, retaining the same CSP
+and ordinary hygiene gate. Unsupported styles are not silently accepted.
+
+The integrity oracle reads the manuscript with pinned Pandoc 3.1.3's JSON
+reader, independently of the HTML writer and table-class transformation.
+It retains emphasis/link labels, headers, list paragraphs and individual table
+cells. Cell and HTTPS-link multiplicities are checked so a repeated number
+elsewhere cannot mask a changed or deleted cell. Existing digest, locale,
+index, noindex and rendered-link negative controls remain in force.
+
+All six authored manuscripts use absolute HTTPS canonical internal links,
+which the existing Journal decorator permits; no link policy was broadened.
+The referenced core-contract and API-integration routes were checked for
+EN/RU/zh-Hans against the current committed route tree. The six manuscript
+digests were updated for those link-only changes. Native combined tests,
+generated-output reconciliation and non-author release review remain open.

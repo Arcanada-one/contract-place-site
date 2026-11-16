@@ -14,7 +14,7 @@ On 16 November, Yurii Chudinov recommended a closer reading of two works associa
 
 ## DORA: apply the existing framework and account for the gaps
 
-Our [14 November article](/en/journal/dora-gaps-agents-2026-11-14/) now carries a dated correction. Its earlier statement about ICT resilience came from section 1 of the original work. The summary did not adequately convey the practical conclusion in sections 14–15: use existing DORA mechanisms for AI services within the Regulation's scope, while addressing the identified gaps in criteria, controls and evidence. Chudinov's clarification is that this application does not first require amendments to the provisions.
+Our [14 November article](https://contract.place/en/journal/dora-gaps-agents-2026-11-14/) now carries a dated correction. Its earlier statement about ICT resilience came from section 1 of the original work. The summary did not adequately convey the practical conclusion in sections 14–15: use existing DORA mechanisms for AI services within the Regulation's scope, while addressing the identified gaps in criteria, controls and evidence. Chudinov's clarification is that this application does not first require amendments to the provisions.
 
 The authors propose four connected layers: the DORA core, AI/model controls, other applicable requirements, and a common evidence trail. Inventory, change management, incident handling, testing and supplier management remain the operating processes. Their 35 gaps are an analytical result; identifying one does not automatically establish a violation, and their proposed controls do not certify a service. DORA has applied since 17 January 2025; that is its application date, not its entry-into-force date.
 
@@ -62,7 +62,7 @@ The mapping below is ours. It is not an assertion that the frameworks have ident
 
 A valid document hash proves identity of bytes. It does not grant access, establish semantic fit, prove that those bytes were used or accept the resulting work. Likewise, changing a model's name does not by itself establish independent verification. The trial must record the relevant controller, evidence and review procedure.
 
-Source: our proposed crosswalk from Dermenzhy's sections 6–7 and appendices A–B to the [Knowledge Contract core specification](/en/engineering/specifications/knowledge-contract-core/) and [API integration appendix](/en/appendices/api-integration/). This is a design proposal, not a new permission or measured implementation result.
+Source: our proposed crosswalk from Dermenzhy's sections 6–7 and appendices A–B to the [Knowledge Contract core specification](https://contract.place/en/engineering/specifications/knowledge-contract-core/) and [API integration appendix](https://contract.place/en/appendices/api-integration/). This is a design proposal, not a new permission or measured implementation result.
 
 ## One source, two tasks and a visible reason for every transition
 
@@ -74,7 +74,7 @@ We will record two outcomes separately: did an unauthorized action occur, and di
 
 This describes the next test we intend to perform. It does not report a completed protected run or prove that every stage of Live Lab works. Its value will come from the actual evidence that a reader can inspect on both sites.
 
-Source: our experimental proposal, informed by *GPT Deprivation*, sections 7–8, and *Tech Diplomacy*, appendix H; [Knowledge Contract API integration](/en/appendices/api-integration/).
+Source: our experimental proposal, informed by *GPT Deprivation*, sections 7–8, and *Tech Diplomacy*, appendix H; [Knowledge Contract API integration](https://contract.place/en/appendices/api-integration/).
 
 ## TDGI: a possible institutional conversation
 

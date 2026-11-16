@@ -14,7 +14,7 @@ excerpt: "根据 Yurii Chudinov 的建议，我们阅读了 GPT Deprivation 和 
 
 ## DORA：应用现有框架，同时考虑缺口
 
-我们在[11月14日的文章](/zh-Hans/journal/dora-gaps-agents-2026-11-14/)中加入了注明日期的更正。原来关于 ICT 韧性的表述确实来自原文第1节，但概述没有充分呈现第14至15节的实践结论：对于条例适用范围内的 AI 服务，使用现有 DORA 机制，同时处理标准、控制和证据方面已经识别的缺口。Chudinov 澄清，这种应用不需要先修改条文。
+我们在[11月14日的文章](https://contract.place/zh-Hans/journal/dora-gaps-agents-2026-11-14/)中加入了注明日期的更正。原来关于 ICT 韧性的表述确实来自原文第1节，但概述没有充分呈现第14至15节的实践结论：对于条例适用范围内的 AI 服务，使用现有 DORA 机制，同时处理标准、控制和证据方面已经识别的缺口。Chudinov 澄清，这种应用不需要先修改条文。
 
 作者提出四个相互关联的层次：DORA 核心、AI／模型控制、其他适用要求以及共同的证据链。资产清点、变更管理、事件处理、测试和供应商管理仍是实际运行的流程。35处缺口属于分析结果：发现缺口不自动证明违规，提出控制措施也不等于服务已获合规认证。DORA 自2025年1月17日起适用；这是开始适用的日期，不是生效日期。
 
@@ -62,7 +62,7 @@ Albina Dermenzhy 的 *Tech Diplomacy* 将这一术语扩展到人、概率系统
 
 正确的文档哈希证明字节相同。它不会授予访问权限，不会确立语义适用性，不会证明这些字节被使用，也不会验收工作结果。同样，更换模型名称本身不能确立核查的独立性。实验需要记录相关控制环境、证据和评审程序。
 
-来源：我们将 Dermenzhy 第6至7节和附录A至B与[知识契约核心规范](/zh-Hans/engineering/specifications/knowledge-contract-core/)及[API 集成附录](/zh-Hans/appendices/api-integration/)进行的拟议对应。这是设计提案，不是新的权限，也不是已测得的实现结果。
+来源：我们将 Dermenzhy 第6至7节和附录A至B与[知识契约核心规范](https://contract.place/zh-Hans/engineering/specifications/knowledge-contract-core/)及[API 集成附录](https://contract.place/zh-Hans/appendices/api-integration/)进行的拟议对应。这是设计提案，不是新的权限，也不是已测得的实现结果。
 
 ## 一个来源、两个任务，每次转换都有可见依据
 
@@ -74,7 +74,7 @@ Albina Dermenzhy 的 *Tech Diplomacy* 将这一术语扩展到人、概率系统
 
 以上描述的是计划开展的下一项实验，并非一次已经完成的受保护运行，也不能证明 Live Lab 的所有阶段均已运作。其价值需要由读者可以在两个网站上检查的真实证据来确认。
 
-来源：我们的实验提案，参考 *GPT Deprivation* 第7至8节及 *Tech Diplomacy* 附录H；[知识契约 API 集成](/zh-Hans/appendices/api-integration/)。
+来源：我们的实验提案，参考 *GPT Deprivation* 第7至8节及 *Tech Diplomacy* 附录H；[知识契约 API 集成](https://contract.place/zh-Hans/appendices/api-integration/)。
 
 ## TDGI：可能开展的机构交流
 

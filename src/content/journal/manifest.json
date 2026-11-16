@@ -84,15 +84,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "0014561c06163ca2c6465ec00fec5a0e12c10521d5038a19efc4bef32b538e47"
+          "sha256": "91e96d4d5b6ee69c887f33bc24c8a66dac254ade8a101bd423cbc625556f0ee4"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "acad459af9938c5a04d753e6a3d3168836fa87781f671c6136586de2f1a5d273"
+          "sha256": "ba8a0dba5ad7ed3f684d4ecc706419aeca99920a0370fccafbb0e2f6810e216e"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "d8b62548ef4f33696dddb0191329523620d8b68afa47459d05af44c24863f035"
+          "sha256": "f86dc1ba9241e6144312dbec49060beddefc3019467c985b018d82683a1487a1"
         }
       }
     },
@@ -141,15 +141,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "6f6cc8fbb3fa506a5c8ce477048f2b97b4c3d76e602712795c5c150be4cced89"
+          "sha256": "108da26390c34e3d7faac58d5cd24e8249db005033a79943174dc6708419c8d5"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "45aa4a955f67e0d1bb6682ff316bfeb88b3b8e030e8e0d99e8f58657d3587ef7"
+          "sha256": "702b9a10efe236a86ef9102918c2022ac18049f244ad5b6f1871f95e8ba20246"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "4ad4b02d217003562e6ccd1952d8108255bc90353302ffb108a9affeb428dfa7"
+          "sha256": "6d50ea4a82b2e43d1379a89b490cebef7463db01f7c20d21757faa03f89539de"
         }
       }
     }

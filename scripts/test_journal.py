@@ -9,8 +9,10 @@ Run `python3 -B scripts/test_journal.py --mutants` for the honest mutant harness
 """
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass
+from functools import lru_cache
 from hashlib import sha256
 from html.parser import HTMLParser
 import importlib.util
@@ -37,7 +39,6 @@ PIN_EXPECTED = {
     "ru": "8987f7313dd5f15639fbe9583b0a6d3028b386c092917cbe8063a14a3807d029",
     "zh-Hans": "6ce4154acbf3f900732f2eb0772d307c421b22e46d74dcfbcc341bb4aefc2d83",
 }
-MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 FORBIDDEN_SOURCE_HEADINGS = {"sources", "источники", "参考文献", "来源"}
 HEADING_TAG = re.compile(r"<h([2-4])\b[^>]*>(.*?)</h\1>", re.I | re.S)
 SYNTH_SLUG = "synthetic-probe-2099-06-01"
@@ -59,18 +60,26 @@ class TextCollector(HTMLParser):
         super().__init__()
         self.parts: list[str] = []
         self._skip = 0
+        self.cells: list[str] = []
+        self._cell_parts: list[list[str]] = []
 
     def handle_starttag(self, tag, attrs):
         if tag in {"script", "style"}:
             self._skip += 1
+        if tag in {"th", "td"} and not self._skip:
+            self._cell_parts.append([])
 
     def handle_endtag(self, tag):
         if tag in {"script", "style"} and self._skip:
             self._skip -= 1
+        if tag in {"th", "td"} and self._cell_parts and not self._skip:
+            self.cells.append(normalize_ws("".join(self._cell_parts.pop())))
 
     def handle_data(self, data):
         if not self._skip:
             self.parts.append(data)
+            for cell in self._cell_parts:
+                cell.append(data)
 
     def text(self) -> str:
         return normalize_ws("".join(self.parts))
@@ -93,41 +102,108 @@ def split_markdown(path: Path) -> tuple[dict[str, str], str]:
     return meta, match.group(2)
 
 
-def visible_markdown(text: str) -> str:
-    """Replace https Markdown links with their visible labels for text comparisons."""
+@lru_cache(maxsize=128)
+def manuscript_ast(body: str) -> dict:
+    """Independent oracle: pinned Markdown reader, never the HTML writer under test.
 
-    def repl(match: re.Match[str]) -> str:
-        label, url = match.group(1), match.group(2)
-        if url.startswith("https://"):
-            return label
-        return match.group(0)
+    Cache by source text, not path, so source mutations cannot reuse old evidence.
+    Missing/wrong Pandoc is an error; there is no hand-stripped Markdown fallback.
+    """
+    version = subprocess.run(["pandoc", "--version"], text=True, capture_output=True, check=True)
+    assert version.stdout.splitlines()[0] == "pandoc 3.1.3", "Expected Pandoc 3.1.3 for journal text oracle"
+    parsed = subprocess.run(
+        ["pandoc", "--from=markdown+gfm_auto_identifiers+autolink_bare_uris-smart", "--to=json"],
+        input=body, text=True, capture_output=True, check=True,
+    )
+    document = json.loads(parsed.stdout)
+    assert isinstance(document.get("blocks"), list), "Invalid Pandoc journal AST"
+    return document
 
-    return MD_LINK.sub(repl, text)
+
+def ast_nodes(value):
+    if isinstance(value, dict):
+        if "t" in value:
+            yield value
+        yield from ast_nodes(value.get("c"))
+    elif isinstance(value, list):
+        for item in value:
+            yield from ast_nodes(item)
+
+
+def inline_text(inlines: list[dict]) -> str:
+    parts = []
+    for node in inlines:
+        kind, value = node["t"], node.get("c")
+        if kind == "Str":
+            parts.append(value)
+        elif kind in {"Space", "SoftBreak", "LineBreak"}:
+            parts.append(" ")
+        elif kind in {"Emph", "Strong", "Underline", "Strikeout", "Superscript", "Subscript", "SmallCaps"}:
+            parts.append(inline_text(value))
+        elif kind == "Code":
+            parts.append(value[1])
+        elif kind in {"Span", "Cite"}:
+            parts.append(inline_text(value[1]))
+        elif kind == "Link":
+            label, target = inline_text(value[1]), value[2][0]
+            # The current journal decorator intentionally renders non-https
+            # targets (including relative paths) as literal [label](target).
+            parts.append(label if target.startswith("https://") else f"[{label}]({target})")
+        elif kind == "Quoted":
+            left, right = ("‘", "’") if value[0]["t"] == "SingleQuote" else ("“", "”")
+            parts.append(left + inline_text(value[1]) + right)
+        else:
+            raise AssertionError(f"Journal text oracle does not support inline node {kind}")
+    return "".join(parts)
+
+
+def ast_blocks(value) -> list[str]:
+    blocks = []
+    for node in ast_nodes(value):
+        kind, content = node["t"], node.get("c")
+        if kind in {"Para", "Plain"}:
+            blocks.append(inline_text(content))
+        elif kind == "Header":
+            blocks.append(inline_text(content[2]))
+        elif kind == "CodeBlock":
+            blocks.append(content[1])
+        elif kind == "LineBlock":
+            blocks.extend(inline_text(line) for line in content)
+        elif kind == "DefinitionList":
+            blocks.extend(inline_text(term) for term, _ in content)
+        elif kind == "RawBlock":
+            raise AssertionError("Journal text oracle does not support raw blocks")
+    return [normalize_ws(block) for block in blocks if normalize_ws(block)]
 
 
 def manuscript_https_links(body: str) -> list[tuple[str, str]]:
     return [
-        (match.group(1), match.group(2))
-        for match in MD_LINK.finditer(body)
-        if match.group(2).startswith("https://")
+        (inline_text(node["c"][1]), node["c"][2][0])
+        for node in ast_nodes(manuscript_ast(body)["blocks"])
+        if node["t"] == "Link" and node["c"][2][0].startswith("https://")
     ]
 
 
 def manuscript_blocks(body: str) -> list[str]:
-    blocks: list[str] = []
-    for raw in re.split(r"\n\s*\n", body.strip()):
-        line = raw.strip()
-        if not line:
+    return ast_blocks(manuscript_ast(body)["blocks"])
+
+
+def manuscript_cells(body: str) -> list[str]:
+    cells = []
+    for node in ast_nodes(manuscript_ast(body)["blocks"]):
+        if node["t"] != "Table":
             continue
-        if line.startswith("## "):
-            blocks.append(normalize_ws(visible_markdown(line[3:])))
-        elif line.startswith("- "):
-            for item in line.splitlines():
-                text = item[2:] if item.startswith("- ") else item
-                blocks.append(normalize_ws(visible_markdown(text)))
-        else:
-            blocks.append(normalize_ws(visible_markdown(line)))
-    return blocks
+        # Pandoc Table = [attr, caption, colspecs, head, bodies, foot].
+        # Row = [attr, cells]; Cell = [attr, alignment, rowspan, colspan, blocks].
+        _, _, _, head, bodies, foot = node["c"]
+        rows = list(head[1])
+        for table_body in bodies:
+            rows.extend(table_body[2])
+            rows.extend(table_body[3])
+        rows.extend(foot[1])
+        for row in rows:
+            cells.extend(normalize_ws(" ".join(ast_blocks(cell[4]))) for cell in row[1])
+    return cells
 
 
 def heading_text(html: str) -> str:
@@ -157,6 +233,25 @@ class AnchorCollector(HTMLParser):
     def handle_data(self, data):
         if self._href is not None:
             self._parts.append(data)
+
+
+def assert_manuscript_content(body: str, page: str, label: str) -> None:
+    collector = TextCollector()
+    collector.feed(page)
+    rendered = collector.text()
+    actual_cells = Counter(collector.cells)
+    # Count cells separately: a repeated number elsewhere in the article must
+    # not conceal a deleted table cell or a changed value.
+    for cell, count in Counter(manuscript_cells(body)).items():
+        assert actual_cells[cell] >= count, f"{label}: missing table cell {cell[:100]}"
+    for block in manuscript_blocks(body):
+        assert block in rendered, f"{label}: missing {block[:100]}"
+    anchors = AnchorCollector()
+    anchors.feed(page)
+    rendered_links = Counter(anchors.links)
+    expected_links = Counter((href, normalize_ws(text)) for text, href in manuscript_https_links(body))
+    for link, count in expected_links.items():
+        assert rendered_links[link] >= count, f"{label}: missing rendered link {link[0]}"
 
 
 def body_marker(body: str) -> str:
@@ -200,15 +295,7 @@ def assert_locale_page(
         assert en_marker not in rendered, f"{label}: English body on wrong locale page"
     marker = body_marker(body)
     assert marker in rendered, f"{label}: missing body marker from manuscript"
-    for block in manuscript_blocks(body):
-        assert normalize_ws(block) in rendered, f"{label}: missing {block[:100]}"
-    anchors = AnchorCollector()
-    anchors.feed(page)
-    rendered_links = {(href, text) for href, text in anchors.links}
-    for link_text, href in manuscript_https_links(body):
-        assert (href, normalize_ws(link_text)) in rendered_links, (
-            f"{label}: missing rendered link {href}"
-        )
+    assert_manuscript_content(body, page, label)
     for match in HEADING_TAG.finditer(page):
         title = heading_text(match.group(2))
         assert title.casefold() not in FORBIDDEN_SOURCE_HEADINGS, (
@@ -237,6 +324,45 @@ def assert_all_manifest_issues(
 
 
 class JournalTests(unittest.TestCase):
+    def test_ast_oracle_emphasis_and_relative_link_labels(self) -> None:
+        body = (
+            "## *Heading*\n\n**Correction**: Read [*the follow-up*](/en/journal/follow-up/) "
+            "and [**primary source**](https://example.org/source).\n"
+        )
+        # Authored expected HTML is independent of the HTML writer/helper.
+        # Relative links retain the decorator's existing visible-literal policy.
+        page = (
+            '<h2><em>Heading</em></h2>\n<p><strong>Correction</strong>: Read '
+            '[the follow-up](/en/journal/follow-up/) and '
+            '<a href="https://example.org/source"><strong>primary source</strong></a>.</p>'
+        )
+        self.assertEqual(manuscript_blocks(body), [
+            "Heading", "Correction: Read [the follow-up](/en/journal/follow-up/) and primary source.",
+        ])
+        self.assertEqual(manuscript_https_links(body), [("primary source", "https://example.org/source")])
+        assert_manuscript_content(body, page, "fixture/en")
+        flattened = page.replace('<a href="https://example.org/source"><strong>primary source</strong></a>',
+                                 '<strong>primary source</strong>')
+        with self.assertRaisesRegex(AssertionError, "missing rendered link https://example.org/source"):
+            assert_manuscript_content(body, flattened, "fixture/en")
+
+    def test_ast_oracle_refuses_changed_or_deleted_table_cell_despite_repeated_values(self) -> None:
+        body = (
+            "The value 23 also appears outside the table.\n\n"
+            "| Rule | Unknown |\n| --- | --- |\n| alpha | 23 |\n| beta | 23 |\n"
+        )
+        page = (
+            '<p>The value 23 also appears outside the table.</p>\n<table>'
+            '<thead><tr><th>Rule</th><th>Unknown</th></tr></thead><tbody>'
+            '<tr><td>alpha</td><td>23</td></tr><tr><td>beta</td><td>23</td></tr>'
+            '</tbody></table>'
+        )
+        self.assertEqual(manuscript_cells(body), ["Rule", "Unknown", "alpha", "23", "beta", "23"])
+        assert_manuscript_content(body, page, "fixture/en")
+        for replacement in ("<td>24</td>", ""):
+            with self.subTest(replacement=replacement), self.assertRaisesRegex(AssertionError, "missing table cell 23"):
+                assert_manuscript_content(body, page.replace("<td>23</td>", replacement, 1), "fixture/en")
+
     def test_pin_2026_11_11_hash_regressions(self) -> None:
         """Fixed digests for the live 2026-11-11 issue — regression pin, not the generic check."""
         manifest = load_manifest()
@@ -262,6 +388,69 @@ class JournalTests(unittest.TestCase):
 
     def test_rendered_locale_pages_for_every_issue(self) -> None:
         assert_all_manifest_issues()
+
+    def test_native_compiled_journal_tables_preserve_semantics_without_inline_style(self) -> None:
+        from build_journal import compile_journal
+
+        # A long row makes pinned Pandoc emit col widths; equal-width separators
+        # also exercise all three alignments without relying on hand-made HTML.
+        body = (
+            "| Rule | Known | Unknown | Result |\n"
+            "| :---- | ----: | :---: | ----- |\n"
+            "| Verification | 9/10 | 23 | Not established under the study's threshold; "
+            "retain the unknown cases and [Source](https://example.org/evidence). |\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            site = Path(directory)
+            journal = site / "src/content/journal"
+            folder = journal / "2026-11-16-table-fixture"
+            folder.mkdir(parents=True)
+            languages = {}
+            for lang in LANGS:
+                content = (
+                    "---\nsite: contract.place\nsection: journal\n"
+                    "slug: table-fixture\ndate: 2026-11-16\n"
+                    f"lang: {lang}\ntitle: Table fixture {lang}\nexcerpt: Table evidence {lang}\n"
+                    "---\n\n" + body
+                )
+                path = folder / f"{lang}.md"
+                path.write_text(content, encoding="utf-8")
+                languages[lang] = {"file": path.name, "sha256": digest(path)}
+            manifest = {"schema_version": 1, "issues": [{
+                "slug": "table-fixture", "date": "2026-11-16",
+                "folder": folder.name, "languages": languages,
+            }]}
+            (journal / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            compiled = compile_journal(site)
+            self.assertEqual(len(compiled), 1)
+            for lang in LANGS:
+                with self.subTest(lang=lang):
+                    html = compiled[0]["languages"][lang]["html"]
+                    self.assertIn("<table>", html)
+                    self.assertIn("<colgroup>", html)
+                    self.assertIn("<thead>", html)
+                    self.assertIn("<tbody>", html)
+                    self.assertRegex(html, r'class="table-width-[0-9]+"')
+                    for alignment in ("left", "right", "center"):
+                        self.assertIn(f'table-align-{alignment}', html)
+                    visible = html_text(html)
+                    for value in ("Rule", "Known", "Unknown", "Result", "Verification", "9/10", "23"):
+                        self.assertIn(value, visible)
+                    self.assertIn("Not established under the study's threshold", visible)
+                    self.assertIn('<a href="https://example.org/evidence" rel="noopener noreferrer">Source</a>', html)
+                    self.assertNotRegex(html, r"\bstyle\s*=")
+
+    def test_native_journal_unsupported_table_css_is_refused(self) -> None:
+        from build_journal import render_body, require_pandoc
+
+        require_pandoc()
+        for cell in (
+            '<td style="background:url(https://example.org/track)">Cell</td>',
+            '<td style="text-align: left; display:none;">Cell</td>',
+            '<td style="width: 25%">Cell</td>',
+        ):
+            with self.subTest(cell=cell), self.assertRaisesRegex(ValueError, "Unsupported inline table style from renderer"):
+                render_body("<table><tbody><tr>" + cell + "</tr></tbody></table>")
 
 
 @dataclass
