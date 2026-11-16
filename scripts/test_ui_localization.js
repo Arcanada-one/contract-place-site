@@ -217,4 +217,56 @@ check('the one shared static 404 contains three complete language sections witho
     assert.ok(section[1].includes('<a class="button" href="/' + lang + '/">' + home + '</a>'));
   }
 });
+
+
+// Feed discovery updates only existing metadata on eligible, indexable pages.
+// These controls run the actual app render, including locale selection.
+{
+  const queryOne = context.document.querySelector;
+  const queryMany = context.document.querySelectorAll;
+  let robots = null, feedLinks = [];
+  const makeLinks = () => ['rss', 'atom'].map(format => ({
+    attrs: {'data-journal-feed': format, href: 'https://contract.place/en/journal/' + format + '.xml'},
+    removed: false,
+    getAttribute(name) {return this.attrs[name];},
+    setAttribute(name, value) {this.attrs[name] = value;},
+    remove() {this.removed = true;},
+  }));
+  context.document.querySelector = selector => selector === 'meta[name="robots"]' ? robots : queryOne(selector);
+  context.document.querySelectorAll = selector => selector === 'link[data-journal-feed]' ? feedLinks : queryMany(selector);
+  try {
+    for (const lang of langs) {
+      for (const bare of ['', 'journal', data.journal_issues[0].route]) {
+        robots = null; feedLinks = makeLinks(); route(lang, bare); context.render();
+        check('feed discovery locale ' + lang + '/' + bare, () => {
+          assert.equal(feedLinks.length, 2);
+          for (const link of feedLinks) {
+            assert.equal(link.removed, false);
+            assert.equal(link.attrs.href, 'https://contract.place/' + lang + '/journal/' + link.attrs['data-journal-feed'] + '.xml');
+          }
+        });
+      }
+      for (const bare of ['journal/building-a-place', 'lab/knowledge-journey', '__missing_route__',
+                           Object.keys(data.aliases)[0], data.records[0].route.replace(/^\/en\/|\/$/g, '')]) {
+        robots = null; feedLinks = makeLinks(); route(lang, bare); context.render();
+        check('feed discovery stale tags removed ' + lang + '/' + bare, () => {
+          assert.ok(feedLinks.every(link => link.removed));
+        });
+      }
+      robots = {content: 'noindex,follow'}; feedLinks = makeLinks(); route(lang, 'journal'); context.render();
+      check('feed discovery obeys noindex even on a journal route ' + lang, () => {
+        assert.ok(feedLinks.every(link => link.removed));
+      });
+      robots = {content: 'noindex,follow'}; feedLinks = []; route(lang, 'journal/building-a-place'); context.render();
+      check('feed discovery never creates missing metadata on noindex ' + lang, () => {
+        assert.deepEqual(feedLinks, []);
+      });
+    }
+  } finally {
+    context.document.querySelector = queryOne;
+    context.document.querySelectorAll = queryMany;
+  }
+}
+
 console.log(JSON.stringify({schema: 'kc-ui-localization/v1', scope: 'compiled UI and navigation; no native execution or translation acceptance', cases, journal_anchor_joins: journalJoins, programme_anchor_joins: programmeJoins, reader_title_joins: readerJoins, result: 'PASS'}));
+

@@ -65,6 +65,16 @@ jobs:
           test "$(pandoc --version | head -1)" = "pandoc 3.1.3"
       - name: Compile all canonical texts and build the localized site
         run: python3 -B scripts/build_publication.py --source-dir _knowledge-source --roadmap-source-dir _roadmap-source
+      - name: Retain the exact generated publication for review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: generated-publication-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            public/
+            src/content/catalog.json
+            src/site/content-provenance.json
+          if-no-files-found: error
+          retention-days: 1
       - name: Publication, licensing, SEO, CSP and internal navigation
         run: |
           python3 -B scripts/check_publication.py
@@ -78,6 +88,7 @@ jobs:
         run: |
           python3 -B scripts/test_build.py
           python3 -B scripts/test_journal.py
+          python3 -B scripts/test_feeds.py
           python3 -B scripts/test_journal.py --mutants
           python3 -B scripts/test_readback.py
           python3 -B scripts/test_renditions.py
@@ -233,3 +244,4 @@ jobs:
               server.server_close()
               thread.join(timeout=5)
           PY
+

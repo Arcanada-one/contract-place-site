@@ -28,6 +28,7 @@ python3 -B scripts/check_links.py public
 python3 -B scripts/check_roadmap.py public --source-dir /absolute/path/to/knowledge-contract-roadmap
 python3 -B scripts/test_build.py
 python3 -B scripts/test_journal.py
+python3 -B scripts/test_feeds.py
 python3 -B scripts/test_renditions.py
 ROADMAP_SOURCE_DIR=/absolute/path/to/knowledge-contract-roadmap python3 -B scripts/test_roadmap.py
 node scripts/test_search.js
@@ -45,6 +46,8 @@ Daily journal issues are authored in this repository, not in the knowledge pin. 
 2. Append an entry to `src/content/journal/manifest.json` with `slug`, `date`, `folder` and each language's `file` plus `sha256`.
 3. Rebuild (`scripts/build_publication.py` … or at least `node build.mjs` after catalogue compile).
 
+The same build produces RSS and Atom for the manifest-backed daily Journal. Do not add research records, private artifacts, the noindex legacy note or undated source-review pages to these feeds. Preserve the documented date-only convention and stable canonical IDs; see [Daily Journal feeds](docs/journal-feeds.md). Commit all generated feed files and prerendered discovery links with the build.
+
 That is the full checklist: folder + manifest entry + build. Routes become `/{en,ru,zh-Hans}/journal/<slug>/`, the journal index lists issues newest first, and `building-a-place` remains a separate noindex legacy route. `scripts/check_page.py` derives every manifest issue × locale from `manifest.json` and requires each page to be present and indexable; do not hand-edit journal article URLs into the checker.
 
 `scripts/test_journal.py` checks every manifest issue × locale (body, title, index membership, indexability, inline https links rendered as anchors, no closing sources heading), keeps the 2026-11-11 digests as a separate regression pin, and `--mutants` runs an honest harness (a)–(i) that requires a green baseline, proof of mutation, an exact refusal, restore, and INFRA_ERROR (never KILLED) when the environment is broken.
@@ -54,3 +57,4 @@ That is the full checklist: folder + manifest entry + build. Routes become `/{en
 Preserve localized search feedback, request cancellation, pagination visibility, anonymous read-only requests and safe text insertion. Compare provenance to the full publication pin; a backend `current` label is insufficient. A retrieved passage does not establish runtime admission.
 
 Keep deployment dependent on publication validation. Never manufacture a human DCO, alter historical receipts to cover new bytes, or report deployment/index promotion from local checks. Follow the knowledge repository's publication process and report actual merged, deployed and indexed revisions separately.
+

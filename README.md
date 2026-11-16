@@ -25,6 +25,8 @@ Full manuscripts are present in built HTML. Pandoc preserves equations as MathML
 
 Daily journal issues live under `src/content/journal/`: three language Markdown files per issue plus `manifest.json` digests. The six dated issues provide 18 localized journal pages at `/{en,ru,zh-Hans}/journal/<slug>/` and appear on the journal index newest first. Local search includes these issues. The legacy `/journal/building-a-place/` route stays noindex; its retained project note is localized. See AGENTS.md “Daily journal issue”.
 
+The daily Journal also provides full-article RSS 2.0 and Atom 1.0 feeds at `/{en,ru,zh-Hans}/journal/rss.xml` and `/{en,ru,zh-Hans}/journal/atom.xml`. The index and footer expose subscription links, and HTML includes autodiscovery. Feed membership follows the published daily-issue manifest; undated source-review pages, legacy noindex notes, research works and private Lab data are excluded. See [Daily Journal feeds](docs/journal-feeds.md) for scope, day-precision dates, stable IDs and release checks.
+
 `public/` is the complete deployment tree. Its `publication.json` records the source identity and document hashes. The catalogue also drives section indexes, sitemap and `llms.txt`. Do not edit generated HTML or replace manuscript paragraphs in generated data: change the canonical Markdown and rebuild.
 
 Runtime script and stylesheet URLs include their file-content hashes, so changed interface code does not reuse an earlier edition's browser cache entry. The compiled catalogue URL retains the full publication source pin.
@@ -109,3 +111,4 @@ Contributions require the Developer Certificate of Origin. The actual contributo
 ## Security
 
 See [SECURITY.md](SECURITY.md) for private vulnerability reporting.
+

@@ -116,5 +116,13 @@ const lines=['# Knowledge Contract Arcana','',
 'Text: CC BY 4.0. Code and schemas: Apache-2.0. Credit Pavel Valentov, Knowledge Contract Arcana, https://contract.place, and retain upstream sources.',
 'Historical source versions and Russian manuscripts: '+base+'/en/appendices/source-map/.',''];
 fs.writeFileSync(path.join(out,'llms.txt'),lines.join('\n'));
+// Reuse the exact compiled Journal entries: research records and legacy pages are not feed entries.
+const feedChild=spawnSync('python3',['-B',path.join(src,'journal_feeds.py'),out],{
+  cwd:root,encoding:'utf8',input:JSON.stringify(data.journal_issues||[])
+});
+if(feedChild.error)throw feedChild.error;
+if(feedChild.status!==0)throw new Error(feedChild.stderr||feedChild.stdout||'journal feeds failed');
+process.stdout.write(feedChild.stdout);
 const child=spawnSync(process.execPath,[path.join(src,'prerender.mjs'),out],{cwd:root,stdio:'inherit'});
 if(child.error)throw child.error;process.exit(child.status??1);
+
