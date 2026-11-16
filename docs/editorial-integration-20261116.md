@@ -1,7 +1,8 @@
 # Chudinov correction, tech diplomacy and current Journal integration
 
 Source preparation on 16 November 2026 for Pavel's direct publication request.
-This record does not assert a completed build, review, deployment or Live Lab.
+The initial source-only state is historical. Native build evidence is recorded below;
+this record does not assert independent review, deployment or Live Lab completion.
 
 ## Exact inputs
 
@@ -48,10 +49,11 @@ repository's supported Node version, then commit the actual generated output.
 The source-only integration commit intentionally retains main's generated
 baseline until that build; it is not a releasable reproducible publication.
 
-KC-SWE owns the requested native build/commit handoff, with no competing
-worker. Record the actual HTML/index/feed inventory, all usual checks and
-the generated diff. Confirm Books preservation, eight entries per locale in
-RSS and Atom, corrected DORA bodies and the seventh issue's presence.
+The initial native-build handoff was superseded by agreement with KC-SWE:
+Agent-Brain owns this combined branch and retains ordinary CI's actual generated
+bytes; KC-SWE remains the normal release owner. No competing worker is created.
+Confirm Books preservation, eight entries per locale in RSS and Atom, corrected
+DORA bodies and the seventh issue's presence.
 
 KC-Brain and DEUS-Arcana should provide scoped non-author content/language
 review. Internal cross-review by the authoring context is not independent
@@ -116,3 +118,39 @@ The ordinary publication checker covers every generated HTML page. A native
 Journal regression changes only Journal input with a byte-identical publication
 manifest, requires a different key, refuses the old source-pin-only key and
 requires deterministic bytes/key when rebuilding identical inputs.
+
+## Non-author correspondence findings and retained native output
+
+KC-Brain review [6916080839](https://github.com/Arcanada-one/contract-place-site/pull/57#issuecomment-6916080839)
+identified two meaning changes in four RU/zh-Hans spans: controller identity
+became environment, and a concrete assignment became general tool purpose.
+Commit `fc1e2324d52622cff876a50dfbc74503cf3d8946` applies exactly the
+four proposed replacements and updates only the two manuscript digests.
+The other four editorial bodies remain unchanged. Re-reading the corrected
+spans by the non-author reviewer is a separate gate; structural/numeric/link
+parity alone did not detect these distinctions.
+
+`docs/editorial-native-build-20261116.json` records the actual successor
+native source, synthetic checkout, workflow, artifact SHA256 and all 377 output
+identities. Run 43867888073 / job 133301057854 produced 328 HTML pages,
+eight issues in each of six feeds and actual content.js cache key
+`4d92b5be88f90474178258964d811b477e7bc27cdd3e6767ae85fcc67766acb0` on every page.
+All four corrected wording spans were read in the artifact. DORA retains its
+14 November publication date and declares its 16 November correction date.
+
+The native run passed eight Journal tests, 19 feed tests, all 126 rendition
+tests and the remaining renderer/search and pinned regression groups. It then
+failed only at the unchanged committed-output reproducibility gate because this
+bundle had not yet been committed. Served readback was skipped. This is not a
+green release workflow.
+
+The previous capture's rendition-comparison failure has been resolved: the
+test validates each page's cache key against its own content bytes before
+normalizing that one verified URL. Existing other-byte, wrong-language and
+extra-byte controls remain, and the old source-pin URL is rejected. The native
+successor above actually executed that repair.
+
+The output commit removes the temporary collector and retains exact native
+bytes. A new normal exact-head workflow must reproduce the committed bundle
+and pass all remaining checks, including served readback. This record is not
+a production or independent editorial acceptance receipt.
