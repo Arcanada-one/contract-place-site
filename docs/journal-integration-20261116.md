@@ -34,7 +34,9 @@ and adds a localized link to its dated `docs/lab-asset-delivery-20261115.json`.
 The receipt describes the 15 November HTTP readback, not new runtime acceptance.
 Those two historical delivery documents remain byte-identical to the old PR
 head. Article prose outside the authorized Russian excerpt and final source
-groups is unchanged; earlier journal entries are retained.
+groups is unchanged; earlier journal entries are retained. README counts now
+describe seven issues, 21 localized Journal pages and the 325-page HTML
+inventory (324 index routes, 648 first-attempt readback requests).
 
 The full local compile used Pandoc 3.1.3 and Node 24.22.1 with clean source
 checkouts at manuscript `39e4054830d9cb05bc0432d25f7320cb8a97f054` and roadmap
