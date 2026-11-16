@@ -101,3 +101,18 @@ The referenced core-contract and API-integration routes were checked for
 EN/RU/zh-Hans against the current committed route tree. The six manuscript
 digests were updated for those link-only changes. Native combined tests,
 generated-output reconciliation and non-author release review remain open.
+
+## Journal-only client cache identity
+
+The previous `/content.js?v=<knowledge pin>` URL could remain unchanged when
+Journal bytes changed. `app.js` reads `window.CP_CONTENT` and replaces the
+prerendered main body, so an old cached catalogue could overwrite a corrected
+article. Source inspection establishes that key collision; production warm-cache
+behaviour is not claimed as measured.
+
+The build now hashes the exact emitted content.js bytes and uses that SHA256
+in every HTML reference, while keeping the scientific source pin in the data.
+The ordinary publication checker covers every generated HTML page. A native
+Journal regression changes only Journal input with a byte-identical publication
+manifest, requires a different key, refuses the old source-pin-only key and
+requires deterministic bytes/key when rebuilding identical inputs.

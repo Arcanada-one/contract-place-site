@@ -386,6 +386,51 @@ class JournalTests(unittest.TestCase):
         catalog = json.loads((ROOT / "src/content/catalog.json").read_text(encoding="utf-8"))
         self.assertTrue(any(item["slug"] == PIN_SLUG for item in catalog.get("journal_issues", [])))
 
+    def test_journal_content_cache_identity(self) -> None:
+        """Journal edits change the catalog cache key without changing the source pin."""
+        def assert_html_identity(html: str, expected: str, label: str) -> None:
+            urls = re.findall(r'src="(/content\.js(?:\?[^"]*)?)"', html)
+            self.assertEqual(urls, ["/content.js?v=" + expected], label)
+
+        def assert_public_identity(public_root: Path) -> tuple[bytes, str]:
+            content = (public_root / "content.js").read_bytes()
+            expected = sha256(content).hexdigest()
+            pages = list(public_root.rglob("*.html"))
+            self.assertTrue(pages, "No generated HTML pages")
+            for page in pages:
+                assert_html_identity(page.read_text(encoding="utf-8"), expected, str(page))
+            return content, expected
+
+        _, baseline_hash = assert_public_identity(ROOT / "public")
+        source_manifest = (ROOT / "publication-manifest.json").read_bytes()
+        source_pin = json.loads(source_manifest)["commit"]
+
+        with tempfile.TemporaryDirectory() as directory:
+            site = Path(directory) / "site"
+            public_root, _, _ = prepare_temp_site(site)
+            self.assertEqual((site / "publication-manifest.json").read_bytes(), source_manifest)
+            changed_content, changed_hash = assert_public_identity(public_root)
+            self.assertNotEqual(changed_hash, baseline_hash, "New journal issue reused the old cache key")
+            self.assertNotEqual(changed_hash, source_pin)
+            for lang in LANGS:
+                self.assertTrue((public_root / lang / "journal" / SYNTH_SLUG / "index.html").is_file())
+
+            # A source-pin-only URL is stale even when the manuscript revision is correct.
+            home = (public_root / "en" / "index.html").read_text(encoding="utf-8")
+            stale = home.replace("/content.js?v=" + changed_hash, "/content.js?v=" + source_pin)
+            self.assertNotEqual(stale, home)
+            with self.assertRaises(AssertionError):
+                assert_html_identity(stale, changed_hash, "old source-pin cache key")
+
+            result = subprocess.run(
+                ["node", "build.mjs"], cwd=site, capture_output=True, text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+            rebuilt_content, rebuilt_hash = assert_public_identity(public_root)
+            self.assertEqual(rebuilt_content, changed_content, "Unchanged inputs changed catalog bytes")
+            self.assertEqual(rebuilt_hash, changed_hash)
+            self.assertEqual((site / "publication-manifest.json").read_bytes(), source_manifest)
+
     def test_rendered_locale_pages_for_every_issue(self) -> None:
         assert_all_manifest_issues()
 
