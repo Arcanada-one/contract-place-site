@@ -92,13 +92,11 @@ validation, stable IDs, XML escaping, malformed or active HTML refusal,
 duplicate/missing records, deterministic order and truncation, empty output,
 manifest membership and links in generated HTML.
 
-The existing exact-generated-output gate is unchanged. A read-only CI artifact
-stores only `public/`, `src/content/catalog.json` and
-`src/site/content-provenance.json`, named by the immutable build SHA and run
-attempt, for one day. It helps commit the native build's exact output when the
-contributor is using the GitHub connector. An artifact upload is not approval,
-successful validation or deployment; a source-only candidate still fails the
-normal gate until generated files are committed and the same checks pass.
+The existing exact-generated-output gate is unchanged. During initial
+connector-based implementation, a temporary read-only CI artifact supplied
+the native build output. That collection step was removed after retrieval;
+it is not an ongoing publication or storage dependency. Generated files must
+be committed and the normal reproducibility checks must pass before release.
 
 ## Release verification
 
