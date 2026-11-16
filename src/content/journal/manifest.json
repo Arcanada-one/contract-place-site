@@ -153,6 +153,25 @@
           "sha256": "27ff08e2ba056e028c0272134bbfb154c9eafb2ff3b279a54c32571dca04bf91"
         }
       }
+    },
+    {
+      "slug": "execution-provenance-retrieval-2026-11-16",
+      "date": "2026-11-16",
+      "folder": "2026-11-16-execution-provenance-retrieval",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "73892092935ff11374406619432e5f7acfc35de4ddca02de27ba0a076cd0ad61"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "de457b7dac6239d36ff84ffa68c359ba0c41b73e899eff6eea3511a1a14fd6ea"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "9399ba708f15f6d0bb4cde293111880877838ffa27f439fe8049bf10721500c0"
+        }
+      }
     }
   ]
 }
