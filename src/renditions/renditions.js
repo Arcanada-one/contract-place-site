@@ -34,6 +34,8 @@
     noneMade: L('none made', 'не вносились', '无'),
     time: L('Time (UTC)', 'Время (UTC)', '时间 (UTC)'),
     limits: L('Limitations', 'Ограничения', '局限'),
+    reviewTranslationNotice: L('These translations of historical review text have not undergone semantic review. They do not extend the scope of the original review.', 'Эти переводы текста исторической рецензии не прошли смысловую проверку. Они не расширяют область исходной рецензии.', '以下历史审校记录的译文尚未经语义审校，也不扩大原审校的范围。'),
+    originalReviewText: L('Original review text (English)', 'Исходный текст рецензии (английский)', '原始审校记录（英文）'),
     evidence: L('Evidence', 'Свидетельства', '依据'),
     issueUnbound: L('A review is claimed but it is not bound to the pinned source, translation or evidence file. It is not counted.', 'Заявлена рецензия, но она не привязана к закреплённым источнику, переводу или файлу свидетельств. Она не учитывается.', '已声明审校，但未绑定到固定版本的源文、译文或依据文件，不予计入。'),
     issueIndependent: L('A review is claimed but the reviewer is not independent of the author. It is not counted.', 'Заявлена рецензия, но рецензент не независим от автора. Она не учитывается.', '已声明审校，但审校者并非独立于译者，不予计入。'),
@@ -43,6 +45,18 @@
   const RENDERED = ['reviewed', 'partially-reviewed', 'unreviewed'];
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const short = h => (h || '').slice(0, 12);
+  function reviewLocalization(rd, locale) {
+    if (rd.review_localization === undefined) return null;
+    const projection = rd.review_localization;
+    const names = ['independence_basis', 'method', 'limitations'];
+    if (!projection || projection.review_state !== 'unreviewed' || projection.language !== locale ||
+        !projection.fields || typeof projection.fields !== 'object' || Array.isArray(projection.fields) ||
+        Object.keys(projection.fields).length !== names.length ||
+        names.some(name => typeof projection.fields[name] !== 'string' || !projection.fields[name].trim())) {
+      throw new Error('REVIEW_LOCALIZATION_RENDER_INVALID: expected three complete unreviewed fields in the current locale');
+    }
+    return projection;
+  }
   function stateBox(record, rd, locale) {
     const t = k => LABELS[k][locale];
     const rendered = RENDERED.includes(rd.state);
@@ -57,22 +71,33 @@
       pins.push('<dt>' + esc(t('translation')) + '</dt><dd><a href="' + esc(rd.rendition.url) + '" lang="en">' + esc(rd.rendition.path) + '</a> <code>' + esc(short(rd.rendition.sha256)) + '</code> <code>' + esc(short(rd.rendition.revision)) + '</code></dd>');
     }
     const v = rd.review;
+    const reviewProjection = rendered && v ? reviewLocalization(rd, locale) : null;
     if (rendered && v) {
       const code = x => '<code>' + esc(short(x)) + '</code>';
       const list = (label, items) => items.length ? esc(t(label)) + ': ' + items.map(esc).join('; ') : '';
       const scope = [list('sectionsLabel', v.scope.sections), list('claimsLabel', v.scope.claims), list('proofsLabel', v.scope.proofs)].filter(Boolean).join(' · ');
       pins.push('<dt>' + esc(t('reviewer')) + '</dt><dd lang="en">' + esc(v.reviewer.identity) + ' (' + esc(v.reviewer.kind) + ')</dd>');
       pins.push('<dt>' + esc(t('author')) + '</dt><dd lang="en">' + esc(v.author) + '</dd>');
-      pins.push('<dt>' + esc(t('independence')) + '</dt><dd><span>' + esc(t('independentYes')) + '</span> <span lang="en">' + esc(v.reviewer.independence_basis) + '</span></dd>');
-      pins.push('<dt>' + esc(t('method')) + '</dt><dd lang="en">' + esc(v.method) + '</dd>');
+      if (reviewProjection) {
+        lines.push('<p class="rendition-review-translation-note" data-review-localization-state="unreviewed">' + esc(t('reviewTranslationNotice')) + '</p>');
+        pins.push('<dt>' + esc(t('independence')) + '</dt><dd><span>' + esc(t('independentYes')) + '</span> <span data-review-localization-field="independence_basis" lang="' + locale + '">' + esc(reviewProjection.fields.independence_basis) + '</span></dd>');
+        pins.push('<dt>' + esc(t('method')) + '</dt><dd data-review-localization-field="method" lang="' + locale + '">' + esc(reviewProjection.fields.method) + '</dd>');
+      } else {
+        pins.push('<dt>' + esc(t('independence')) + '</dt><dd><span>' + esc(t('independentYes')) + '</span> <span lang="en">' + esc(v.reviewer.independence_basis) + '</span></dd>');
+        pins.push('<dt>' + esc(t('method')) + '</dt><dd lang="en">' + esc(v.method) + '</dd>');
+      }
       pins.push('<dt>' + esc(t('reviewedBlobs')) + '</dt><dd>' + code(v.reviewed.source_blob) + ' ' + code(v.reviewed.rendition_blob) + '</dd>');
       pins.push('<dt>' + esc(t('scope')) + '</dt><dd>' + esc(t(v.scope.coverage === 'full' ? 'coverageFull' : 'coveragePartial')) + ' <span lang="en">' + scope + '</span></dd>');
       pins.push('<dt>' + esc(t('corrections')) + '</dt><dd lang="en">' + (v.corrections.length ? v.corrections.map(c => esc(c.section + ': ' + c.description)).join('; ') : '<span lang="' + locale + '">' + esc(t('noneMade')) + '</span>') + '</dd>');
       pins.push('<dt>' + esc(t('time')) + '</dt><dd><time datetime="' + esc(v.reviewed_at) + '">' + esc(v.reviewed_at) + '</time></dd>');
-      pins.push('<dt>' + esc(t('limits')) + '</dt><dd lang="en">' + esc(v.limitations) + '</dd>');
+      pins.push('<dt>' + esc(t('limits')) + '</dt><dd' + (reviewProjection ? ' data-review-localization-field="limitations" lang="' + locale + '"' : ' lang="en"') + '>' + esc(reviewProjection ? reviewProjection.fields.limitations : v.limitations) + '</dd>');
       pins.push('<dt>' + esc(t('evidence')) + '</dt><dd><a href="' + esc(v.evidence.url) + '" lang="en">' + esc(v.evidence.path) + '</a> ' + code(v.evidence.blob) + '</dd>');
     }
     lines.push('<dl class="rendition-pins">' + pins.join('') + '</dl>');
+    if (reviewProjection) {
+      const originals = [['independence_basis', 'independence', v.reviewer.independence_basis], ['method', 'method', v.method], ['limitations', 'limits', v.limitations]];
+      lines.push('<details class="rendition-review-original" data-review-original="true" lang="en"><summary lang="' + locale + '">' + esc(t('originalReviewText')) + '</summary><dl class="rendition-pins">' + originals.map(([field, label, text]) => '<dt>' + esc(LABELS[label].en) + '</dt><dd data-review-original-field="' + field + '" lang="en">' + esc(text) + '</dd>').join('') + '</dl></details>');
+    }
     lines.push('<p><a href="' + esc(record.route) + '" hreflang="en" lang="en">' + esc(LABELS.sourceText[locale]) + '</a></p>');
     // C4: machine-readable pins and review with full digests (served-page bytes alone).
     const facts = {
@@ -92,6 +117,7 @@
     if (rd.current_source_sha256) facts.current_source_sha256 = rd.current_source_sha256;
     if (rd.review_issue) facts.review_issue = rd.review_issue;
     if (rendered && rd.review) facts.review = rd.review;
+    if (reviewProjection) facts.review_localization = {review_state: reviewProjection.review_state, language: reviewProjection.language, source: reviewProjection.source};
     lines.push('<script type="application/json" class="rendition-facts">' + JSON.stringify(facts).replaceAll('<', '\\u003c') + '</script>');
     // Keep the four data-* attributes before lang= in the order publication_checks expects; C4 pins follow.
     return '<aside class="rendition-state" data-state="' + esc(rd.state) + '" data-language="' + esc(rd.language) + '" data-body-language="' + (rendered ? esc(rd.language) : 'en') + '" data-independent-source="false" lang="' + locale + '" aria-label="' + esc(t('stateLabel')) + '" data-relation="rendition_of" data-work="' + esc(record.id) + '" data-source-sha256="' + esc(rd.source.sha256) + '"' + (rd.rendition ? ' data-rendition-sha256="' + esc(rd.rendition.sha256) + '"' : '') + '>' + lines.join('') + '</aside>';

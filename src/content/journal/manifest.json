@@ -107,7 +107,7 @@
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "73114d3ac34f2990e23a73a32de06f4b773f04c6861ea52b68c93228f9c7fdb1"
+          "sha256": "e0a179e73ac070cb92668444132fdcd96d0b6c173895333aa2fc4632f98d5b9a"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
@@ -122,15 +122,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "4a3c1084ed1396d25958d2228e9285e6e47df7643ea684b7b9ac490dc4edb795"
+          "sha256": "51741cd9b9c062b12d6ce312f1d47f3dd7e4441c7394ca15a2901164f0a7fd08"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "884f60cfced7f17e62af69964376159577186674f9b2679405de097fb7674bf3"
+          "sha256": "bc2489659bf43b3863192fb52dbae484900917b11dbe33e909c062080397a4e4"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "217b6a354f89c61a741f2fa203538bebcbd0e318e5ef21f8da7e074f31180f8e"
+          "sha256": "f51a476f31a9ce6daf603edf43c3f09e645c2188a362bbbc2d4c434677722f54"
         }
       }
     }

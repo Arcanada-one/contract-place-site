@@ -1513,8 +1513,10 @@ class PrerenderedSite(unittest.TestCase):
         With first-admission renditions committed, every public HTML page ships renditions.js/css, so no
         committed page is byte-independent of the sidecar. The binding guarantee is therefore:
         (a) two stripped no-sidecar builds reproduce the five named files byte for byte; and
-        (b) for pages that carry no rendition aside/facts (English reading page and locale homes), the
-            committed tree differs from the stripped switch-off build ONLY in the two rendition asset lines.
+        (b) non-work shells differ only in the two rendition asset lines; and
+        (c) the locale home additionally changes a card's body-language label
+            when that card loses its real translated full text. All other
+            homepage bytes remain identical.
         """
         named = (
             "sitemap.xml",
@@ -1529,13 +1531,36 @@ class PrerenderedSite(unittest.TestCase):
             r'|<link rel="stylesheet" href="/renditions\.css\?v=[0-9a-f]{64}">'
         )
         # No committed HTML is free of renditions.js/css once a sidecar exists. Reading pages that carry
-        # rendition records also change hreflang under C5, so they are not asset-only. Locale homes and
-        # non-work shells differ from the stripped switch-off build ONLY in the two asset tags.
+        # rendition records also change hreflang under C5, so they are not asset-only.
+        # Locale-home body-language labels are separately controlled below.
         asset_only_pages = (
             "index.html",
-            "zh-Hans/index.html",
             "en/about/index.html",
         )
+        real_catalog = json.loads((ROOT / "src/content/catalog.json").read_text(encoding="utf-8"))
+        home_records = {record["route"].replace("/en/", "/zh-Hans/", 1): record for record in real_catalog["records"]}
+        home_card = re.compile(r'<article class="paper-card"[^>]*>.*?</article>', re.S)
+
+        def expected_home_label(card):
+            route = re.search(r'<a href="([^"]+)" class="paper-cover"', card)
+            self.assertIsNotNone(route, "homepage paper card has no bound route")
+            self.assertIn(route[1], home_records, "homepage card route is not a published work")
+            rendition = home_records[route[1]].get("renditions", {}).get("zh-Hans", {})
+            shown = rendition.get("state") in {"reviewed", "partially-reviewed", "unreviewed"}
+            return "中文全文" if shown else "英文全文"
+
+        def without_home_rendition_labels(html):
+            def replace_card(match):
+                card = match[0]
+                expected = expected_home_label(card)
+                other = "英文全文" if expected == "中文全文" else "中文全文"
+                self.assertEqual(card.count(f"<span>{expected}</span>"), 1, "homepage body-language label")
+                self.assertNotIn(f"<span>{other}</span>", card, "homepage body-language label")
+                return card.replace(f"<span>{expected}</span>", "<span>英文全文</span>", 1)
+            result, count = home_card.subn(replace_card, html)
+            self.assertGreater(count, 0, "homepage has no cards to test")
+            return result
+
         script = (ROOT / "src/prerender.mjs").read_text(encoding="utf-8")
         self.assertEqual(script.count("const APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS=false;"), 1)
         for value, expect_noindex in (("false", False), ("true", True)):
@@ -1585,6 +1610,22 @@ class PrerenderedSite(unittest.TestCase):
                         built = (site / "public" / name).read_text(encoding="utf-8")
                         self.assertNotIn("renditions.js", built, name)
                         self.assertEqual(rendition_asset.sub("", committed), built, name)
+                    # (c) Removing full translations changes exactly the known
+                    # per-card body-language labels, not titles, prose, links,
+                    # head metadata or any other homepage bytes.
+                    committed_home = (ROOT / "public/zh-Hans/index.html").read_text(encoding="utf-8")
+                    stripped_home = (site / "public/zh-Hans/index.html").read_text(encoding="utf-8")
+                    expected_home = rendition_asset.sub("", without_home_rendition_labels(committed_home))
+                    self.assertEqual(expected_home, stripped_home, "zh-Hans/index.html")
+                    # A wrong language claim in a real card must not be hidden
+                    # by the permitted, narrowly scoped normalization.
+                    first_card = home_card.search(committed_home)
+                    label = expected_home_label(first_card[0])
+                    wrong_label = "英文全文" if label == "中文全文" else "中文全文"
+                    wrong_card = first_card[0].replace(f"<span>{label}</span>", f"<span>{wrong_label}</span>", 1)
+                    wrong_home = committed_home[:first_card.start()] + wrong_card + committed_home[first_card.end():]
+                    with self.assertRaisesRegex(AssertionError, "body-language label"):
+                        without_home_rendition_labels(wrong_home)
                     # Injecting one unrelated byte into a named file breaks the reproduction assertion.
                     victim = site / "public/index.html"
                     victim.write_bytes(first["index.html"] + b"X")

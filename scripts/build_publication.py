@@ -177,6 +177,10 @@ class Renderer:
         self.source, self.output, self.manifest, self.documents = source, output, manifest, documents
         self.by_path = {doc["path"]: doc for doc in documents}
         self.site_routes: set[str] = set()
+        from formula_localization import FormulaLocalizations
+        self.formula_localizations = FormulaLocalizations(source, manifest, documents)
+        from review_localization import ReviewLocalizations
+        self.review_localizations = ReviewLocalizations(source, manifest, documents)
 
     def source_url(self, path: str, history: bool = False) -> str:
         return f"{GITHUB}/{'commits' if history else 'blob'}/{self.manifest['commit']}/{quote(path, safe='/')}"

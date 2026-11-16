@@ -85,7 +85,12 @@ def check_footer(page: str, where: str) -> None:
     assert footer, where + ": no <footer>"
     f = footer.group(1)
     text = re.sub(r"<[^>]+>", "", f)
-    assert "Credit: Knowledge Contract Arcana," in text and "https://contract.place" in text, where + ": footer credit text missing"
+    language = re.search(r'<html\b[^>]*\blang="([^"]+)"', page)
+    assert language and language.group(1) in LOCALES, where + ": unknown page language"
+    credit = {"en": "Credit: Knowledge Contract Arcana,",
+              "ru": "Атрибуция: Knowledge Contract Arcana,",
+              "zh-Hans": "署名: Knowledge Contract Arcana,"}[language.group(1)]
+    assert credit in text and "https://contract.place" in text, where + ": localized footer credit text missing"
     for url in (CC_DEED, APACHE, ATTR, "https://arcanada.ai"):
         assert 'href="' + url + '"' in f, where + ": footer link missing: " + url
 
@@ -186,7 +191,11 @@ def check_laboratory(root: Path) -> None:
         footer = re.search(r'<footer\b[^>]*>(.*?)</footer>', page, re.S).group(1)
         assert 'href="/' + locale + '/lab/knowledge-journey/"' in footer, where + ": footer link missing"
         header = re.search(r'<header\b[^>]*>(.*?)</header>', page, re.S).group(1)
-        assert '/lab/knowledge-journey' not in header, where + ": lab must not enter primary navigation"
+        # Locale links may preserve the current Lab route; the primary menu
+        # must still exclude Lab. Inspect that menu rather than all header links.
+        primary = re.search(r'<nav\b[^>]*class="desktop-nav"[^>]*>(.*?)</nav>', header, re.S)
+        assert primary, where + ": primary navigation missing"
+        assert '/lab/knowledge-journey' not in primary.group(1), where + ": lab must not enter primary navigation"
         assert '<meta name="robots" content="noindex,follow">' in page, where + ": lab must be noindex"
         assert '<meta name="referrer" content="no-referrer">' in page, where + ": lab selection must not be a referrer"
         for other in LOCALES:

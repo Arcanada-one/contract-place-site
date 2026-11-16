@@ -3,7 +3,7 @@
   "status": "planned work; no execution state is published",
   "roadmap_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
     "files": [
       {
         "path": "ROADMAP.md",
@@ -34,15 +34,40 @@
         "path": "roadmap/SITE_DELIVERY.md",
         "role": "introduction",
         "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246"
+      },
+      {
+        "path": "roadmap/localizations.json",
+        "role": "rendition-manifest",
+        "sha256": "e6f11eb6e749aaf409f63f06b88d7e2277f458baa292ad1173940b9b13c0aabb"
+      },
+      {
+        "path": "roadmap/ROADMAP.full.ru.md",
+        "role": "rendition",
+        "sha256": "2840af6ae601d2085f97f9358c218e7782289cc94876c3fa242ed8d2a830f167"
+      },
+      {
+        "path": "roadmap/ROADMAP.full.zh-Hans.md",
+        "role": "rendition",
+        "sha256": "fffe4fa2a97c8fbc41e3f7c5c0e79f477d09bfcd998a534aaa4490ac542c7159"
+      },
+      {
+        "path": "roadmap/TASKS.ru.json",
+        "role": "rendition",
+        "sha256": "bf84e1f3517d5c3eeb43d4d90f4dd9861953df5b362a4064fb5984696b472f67"
+      },
+      {
+        "path": "roadmap/TASKS.zh-Hans.json",
+        "role": "rendition",
+        "sha256": "bbccd4330e5b416add6f8656eae12522bf37d2cdf58b35cf06ebba88eab464a8"
       }
     ]
   },
   "manuscript_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "161a01afb1b756adf059ea2e1cbdd0dca29d83a2",
+    "commit": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
     "edition": "1.1"
   },
-  "same_commit": true,
+  "same_commit": false,
   "definition_revision": "2026-11-06.1",
   "tasks": [
     {

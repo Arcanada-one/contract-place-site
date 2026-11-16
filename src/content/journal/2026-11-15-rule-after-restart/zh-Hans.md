@@ -46,4 +46,4 @@ excerpt: "一个新的离线使用程序把仓库会话与来源规则检查连�
 
 下一步实验室集成可以读取同样的有界回执，并区分观察到的计算与历史计算。真正的浏览器连接仍需要明确的来源绑定、获准的读取路径、会话生命周期以及实际浏览器验收。本篇记录源代码工作，不改变已发布语料库的版本，也不宣布生产环境已经接通。
 
-来源：[“知识旅程”](https://contract.place/zh-Hans/lab/knowledge-journey/)及[现有读取边界](https://github.com/Arcanada-one/contract-place-site/blob/050a4fef55f59f03a6e456e8e27c2bfd02d0a37d/docs/retained-object-reader.md)。
+来源：[“知识旅程”](https://contract.place/zh-Hans/lab/knowledge-journey/)、[现有读取边界](https://github.com/Arcanada-one/contract-place-site/blob/084509513ca71439d585adf5a90f26a60a8a5e7a/docs/retained-object-reader.md)以及[2026年11月15日的资源回读记录](https://github.com/Arcanada-one/contract-place-site/blob/084509513ca71439d585adf5a90f26a60a8a5e7a/docs/lab-asset-delivery-20261115.json)。

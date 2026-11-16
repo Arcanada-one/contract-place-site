@@ -46,4 +46,4 @@ This is an offline engineering step. The public Knowledge Journey page still rep
 
 The next laboratory integration can consume the same bounded receipts and distinguish an observed calculation from a historical one. A live browser connection still needs its own source binding, permitted read path, session lifecycle and actual browser acceptance. This journal entry records source work; it does not advance the published corpus pin or announce a production connection.
 
-Source: [Knowledge Journey](https://contract.place/en/lab/knowledge-journey/) and its [existing reader boundary](https://github.com/Arcanada-one/contract-place-site/blob/050a4fef55f59f03a6e456e8e27c2bfd02d0a37d/docs/retained-object-reader.md).
+Source: [Knowledge Journey](https://contract.place/en/lab/knowledge-journey/), its [existing reader boundary](https://github.com/Arcanada-one/contract-place-site/blob/084509513ca71439d585adf5a90f26a60a8a5e7a/docs/retained-object-reader.md) and the [asset readback of 15 November 2026](https://github.com/Arcanada-one/contract-place-site/blob/084509513ca71439d585adf5a90f26a60a8a5e7a/docs/lab-asset-delivery-20261115.json).
