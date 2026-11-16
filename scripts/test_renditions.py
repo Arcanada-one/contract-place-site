@@ -1513,7 +1513,8 @@ class PrerenderedSite(unittest.TestCase):
         With first-admission renditions committed, every public HTML page ships renditions.js/css, so no
         committed page is byte-independent of the sidecar. The binding guarantee is therefore:
         (a) two stripped no-sidecar builds reproduce the five named files byte for byte; and
-        (b) non-work shells differ only in the two rendition asset lines; and
+        (b) non-work shells differ only in the two rendition asset lines and their independently
+            verified, output-byte-bound catalog cache keys; and
         (c) the locale home additionally changes a card's body-language label
             when that card loses its real translated full text. All other
             homepage bytes remain identical.
@@ -1530,6 +1531,17 @@ class PrerenderedSite(unittest.TestCase):
             r'<script src="/renditions\.js\?v=[0-9a-f]{64}" defer></script>'
             r'|<link rel="stylesheet" href="/renditions\.css\?v=[0-9a-f]{64}">'
         )
+        def normalize_verified_catalog_key(html, public_root, label):
+            expected = sha256((public_root / "content.js").read_bytes()).hexdigest()
+            urls = re.findall(r'<script\b[^>]*\bsrc="(/content\.js(?:\?[^"]*)?)"[^>]*>', html)
+            self.assertEqual(urls, ["/content.js?v=" + expected], "catalog cache key: " + label)
+            # Only the one verified URL changes; every other byte remains observable.
+            return html.replace(
+                'src="/content.js?v=' + expected + '"',
+                'src="/content.js?v=verified-content-digest"',
+                1,
+            )
+
         # No committed HTML is free of renditions.js/css once a sidecar exists. Reading pages that carry
         # rendition records also change hreflang under C5, so they are not asset-only.
         # Locale-home body-language labels are separately controlled below.
@@ -1601,7 +1613,7 @@ class PrerenderedSite(unittest.TestCase):
                     for name in named:
                         self.assertEqual((site / "public" / name).read_bytes(), first[name], name)
                     # (b) No committed HTML page is free of rendition assets once a sidecar exists.
-                    # Asset-only pages must match the stripped build after removing those two tags.
+                    # Verify each tree's own catalog digest before normalizing that key and the two asset tags.
                     for name in asset_only_pages:
                         committed = (ROOT / "public" / name).read_text(encoding="utf-8")
                         self.assertIn("renditions.js", committed, name)
@@ -1609,12 +1621,16 @@ class PrerenderedSite(unittest.TestCase):
                         self.assertNotIn("rendition-facts", committed, name)
                         built = (site / "public" / name).read_text(encoding="utf-8")
                         self.assertNotIn("renditions.js", built, name)
+                        committed = normalize_verified_catalog_key(committed, ROOT / "public", name)
+                        built = normalize_verified_catalog_key(built, site / "public", name)
                         self.assertEqual(rendition_asset.sub("", committed), built, name)
                     # (c) Removing full translations changes exactly the known
                     # per-card body-language labels, not titles, prose, links,
                     # head metadata or any other homepage bytes.
                     committed_home = (ROOT / "public/zh-Hans/index.html").read_text(encoding="utf-8")
                     stripped_home = (site / "public/zh-Hans/index.html").read_text(encoding="utf-8")
+                    committed_home = normalize_verified_catalog_key(committed_home, ROOT / "public", "zh-Hans/index.html")
+                    stripped_home = normalize_verified_catalog_key(stripped_home, site / "public", "zh-Hans/index.html")
                     expected_home = rendition_asset.sub("", without_home_rendition_labels(committed_home))
                     self.assertEqual(expected_home, stripped_home, "zh-Hans/index.html")
                     # A wrong language claim in a real card must not be hidden
@@ -1632,9 +1648,19 @@ class PrerenderedSite(unittest.TestCase):
                     with self.assertRaises(AssertionError):
                         self.assertEqual(victim.read_bytes(), first["index.html"], "index.html")
                     # Same for the asset-only committed comparison: one extra byte is not an asset-line diff.
-                    corrupted_committed = rendition_asset.sub("", (ROOT / "public/index.html").read_text(encoding="utf-8")) + "X"
+                    committed_index = (ROOT / "public/index.html").read_text(encoding="utf-8")
+                    verified_index = normalize_verified_catalog_key(committed_index, ROOT / "public", "index.html")
+                    verified_first = normalize_verified_catalog_key(first["index.html"].decode("utf-8"), site / "public", "index.html")
+                    corrupted_committed = rendition_asset.sub("", verified_index) + "X"
                     with self.assertRaises(AssertionError):
-                        self.assertEqual(corrupted_committed, first["index.html"].decode("utf-8"), "index.html")
+                        self.assertEqual(corrupted_committed, verified_first, "index.html")
+                    # A stale source-pin URL must be rejected before any normalization.
+                    committed_digest = sha256((ROOT / "public/content.js").read_bytes()).hexdigest()
+                    old_pin = json.loads((ROOT / "publication-manifest.json").read_text(encoding="utf-8"))["commit"]
+                    stale_index = committed_index.replace("/content.js?v=" + committed_digest, "/content.js?v=" + old_pin, 1)
+                    self.assertNotEqual(stale_index, committed_index)
+                    with self.assertRaisesRegex(AssertionError, "catalog cache key"):
+                        normalize_verified_catalog_key(stale_index, ROOT / "public", "stale index.html")
 
 
     def test_assets_shipped_only_with_renditions(self):

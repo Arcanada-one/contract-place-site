@@ -146,11 +146,11 @@
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "702b9a10efe236a86ef9102918c2022ac18049f244ad5b6f1871f95e8ba20246"
+          "sha256": "7d9c7d1cbf2c4e58431a3ae5cfbff4a37a35cd3b39c29866ee63ec404567e432"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "6d50ea4a82b2e43d1379a89b490cebef7463db01f7c20d21757faa03f89539de"
+          "sha256": "27ff08e2ba056e028c0272134bbfb154c9eafb2ff3b279a54c32571dca04bf91"
         }
       }
     }
