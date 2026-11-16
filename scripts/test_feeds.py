@@ -93,6 +93,97 @@ class JournalFeedTests(unittest.TestCase):
         self.assertIn('<mspace width="1em"></mspace>', html)
         self.assertEqual(Fragment(html).text, Fragment(source).text)
 
+    def test_pandoc_table_semantics_survive_in_rss_and_atom_without_inline_css(self):
+        # Pinned Pandoc emits integer-percent widths and cell alignment styles.
+        # Preserve the entire semantic table, including headers, spans and links.
+        table = (
+            '<table style="width:96%;"><caption>Evidence &amp; limits</caption>'
+            '<colgroup><col style="width: 32%" /><col style="width: 32%" />'
+            '<col style="width: 32%" /></colgroup><thead><tr class="header">'
+            '<th scope="col" style="text-align: left;">Rule</th>'
+            '<th scope="col" style="text-align: center;">Known</th>'
+            '<th scope="col" style="text-align: right;">Unknown</th></tr></thead>'
+            '<tbody><tr class="odd"><th scope="row" rowspan="2" style="text-align: left;">'
+            '<a href="#rule">Verification</a></th><td style="text-align: right;">21/22</td>'
+            '<td style="text-align: center;">11</td></tr><tr class="even">'
+            '<td style="text-align: right;">9/10</td><td style="text-align: center;">23</td>'
+            '</tr></tbody><tfoot><tr><td colspan="3" style="text-align: left;">'
+            'No causal estimate.</td></tr></tfoot></table>'
+        )
+        expected = (
+            '<table><caption>Evidence &amp; limits</caption>'
+            '<colgroup><col><col><col></colgroup><thead><tr class="header">'
+            '<th scope="col">Rule</th><th scope="col">Known</th>'
+            '<th scope="col">Unknown</th></tr></thead><tbody><tr class="odd">'
+            '<th scope="row" rowspan="2"><a href="{canonical}#rule">Verification</a></th>'
+            '<td>21/22</td><td>11</td></tr><tr class="even"><td>9/10</td><td>23</td>'
+            '</tr></tbody><tfoot><tr><td colspan="3">No causal estimate.</td></tr></tfoot></table>'
+        )
+        source = issue()
+        for lang in feeds.LANGUAGES:
+            with self.subTest(lang=lang):
+                source["languages"][lang]["html"] = table
+                result = feeds.render([source], lang)
+                rss = ET.fromstring(result["rss"]).find("channel/item").findtext(CONTENT)
+                atom = ET.fromstring(result["atom"]).findtext("a:entry/a:content", namespaces=ATOM)
+                canonical = f"https://contract.place/{lang}/journal/example/"
+                self.assertEqual(rss, expected.format(canonical=canonical))
+                self.assertEqual(atom, rss)
+                self.assertNotIn("style=", rss)
+                self.assertEqual(Fragment(rss).text, Fragment(table).text)
+
+    def test_pandoc_table_width_boundaries_and_each_alignment_are_discarded(self):
+        canonical = "https://contract.place/en/journal/example/"
+        for width in (0, 1, 33, 99, 100):
+            with self.subTest(width=width):
+                self.assertEqual(feeds.article_html(f'<table style="width:{width}%;"></table>', canonical),
+                                 "<table></table>")
+                self.assertEqual(feeds.article_html(f'<col style="width: {width}%" />', canonical), "<col>")
+        for tag in ("th", "td"):
+            for align in ("left", "right", "center"):
+                with self.subTest(tag=tag, align=align):
+                    self.assertEqual(feeds.article_html(f'<{tag} style="text-align: {align};">Cell</{tag}>', canonical),
+                                     f"<{tag}>Cell</{tag}>")
+
+    def test_non_pandoc_styles_are_refused_including_table_css(self):
+        for html in (
+            '<td style="color: red;">Cell</td>',
+            '<td style="text-align: left; background:url(https://example.org/track)">Cell</td>',
+            '<td style="text-align: left; display:none;">Cell</td>',
+            '<td style="text-align: left; text-align: right;">Cell</td>',
+            '<td style="text-align: left!important;">Cell</td>',
+            '<td style="text-align: left;/*extra*/">Cell</td>',
+            '<td style="text-align: start;">Cell</td>',
+            '<td style="text-align: LEFT;">Cell</td>',
+            '<td style="text-align: left;\n">Cell</td>',
+            '<td style="">Cell</td>', '<td style>Cell</td>',
+            '<table style="width:101%;"></table>', '<col style="width: -1%">',
+            '<col style="width: 33.3%">', '<col style="width: 033%">',
+            '<col style="width: ３３%">', '<col style="width: 33%;">',
+            '<col style="width: calc(100% - 1px)">',
+            '<table style="width:expression(alert(1));"></table>',
+            '<table style="text-align: left;"></table>',
+            '<td style="width:33%;">Cell</td>',
+            '<colgroup style="width: 33%"></colgroup>',
+            '<p style="text-align: left;">Text</p>',
+            '<div style="width:33%;">Text</div>',
+        ):
+            with self.subTest(html=html), self.assertRaisesRegex(ValueError, "Unsafe journal HTML attribute: style"):
+                feeds.article_html(html, "https://contract.place/en/journal/example/")
+
+    def test_recognized_table_style_does_not_hide_unsafe_or_duplicate_attributes(self):
+        for html in (
+            '<td style="text-align: left;" onclick="alert(1)">Cell</td>',
+            '<td onclick="alert(1)" style="text-align: left;">Cell</td>',
+            '<col style="width: 33%" onload="alert(1)">',
+            '<td style="text-align: left;" style="text-align: left;">Cell</td>',
+            '<td style="text-align: left;" style="display:none;">Cell</td>',
+            '<td style="display:none;" style="text-align: left;">Cell</td>',
+            '<td style="text-align: left;"><a href="javascript:alert(1)">Cell</a></td>',
+        ):
+            with self.subTest(html=html), self.assertRaises(ValueError):
+                feeds.article_html(html, "https://contract.place/en/journal/example/")
+
     def test_active_content_and_unsafe_urls_refused(self):
         for html in (
             '<script>alert(1)</script>', '<iframe src="/private"></iframe>',

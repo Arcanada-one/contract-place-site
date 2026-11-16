@@ -89,6 +89,16 @@ class ArticleHTML(HTMLParser):
                  "columnalign rowalign columnspacing rowspacing columnlines rowlines "
                  "linethickness notation accent accentunder displaystyle scriptlevel "
                  "mathsize mathcolor mathbackground").split())
+    # Exact presentation forms emitted by the pinned Pandoc 3.1.3 HTML writer:
+    # tableToHtml, colSpecListToHtml and tableCellToHtml in Writers/HTML.hs.
+    # Discard these attributes; never forward CSS or parse a general style list.
+    # https://github.com/jgm/pandoc/blob/3.1.3/src/Text/Pandoc/Writers/HTML.hs
+    TABLE_PRESENTATION = {
+        "table": re.compile(r"width:(?:100|[1-9]?[0-9])%;"),
+        "col": re.compile(r"width: (?:100|[1-9]?[0-9])%"),
+        "th": re.compile(r"text-align: (?:left|right|center);"),
+        "td": re.compile(r"text-align: (?:left|right|center);"),
+    }
 
     def __init__(self, canonical: str):
         super().__init__(convert_charrefs=False)
@@ -99,8 +109,15 @@ class ArticleHTML(HTMLParser):
         if tag not in self.TAGS:
             raise ValueError(f"Unsupported active or unknown journal HTML: {tag}")
         safe = []
+        seen_style = False
         for name, value in attrs:
-            if name.startswith("on") or name in {"style", "srcset", "action", "formaction", "xlink:href"}:
+            if name == "style":
+                pattern = self.TABLE_PRESENTATION.get(tag)
+                if seen_style or pattern is None or value is None or not pattern.fullmatch(value):
+                    raise ValueError("Unsafe journal HTML attribute: style")
+                seen_style = True
+                continue
+            if name.startswith("on") or name in {"srcset", "action", "formaction", "xlink:href"}:
                 raise ValueError(f"Unsafe journal HTML attribute: {name}")
             if name in self.URLS:
                 value = urljoin(self.canonical, value or "")

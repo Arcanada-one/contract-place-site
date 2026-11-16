@@ -61,3 +61,21 @@ An earlier green PR #52 or #57 does not establish this combined result.
 
 The original private ARC material remains unavailable. This research does
 not grant source admission, execution permission or a TDGI relationship.
+
+## Native compile finding and bounded source repair
+
+CI 43859078002 at `6ac2dd357803062ed8cd30d4e76d138878d32030` failed
+before reproducibility: the feed projector refused Pandoc's table presentation
+`style` attributes. The pinned Pandoc 3.1.3 writer emits integer percent widths
+on table/col and left/right/center alignment on th/td. The successor parser
+recognizes only those exact forms and discards them; arbitrary CSS, extra
+declarations, duplicate style attributes, event handlers and unsafe URLs remain
+refused. Semantic table structure, headers, spans, text and links are retained.
+Four regression methods cover all three languages and both feed formats,
+width/alignment boundaries, 24 unsupported-style cases and seven combined
+unsafe/duplicate-attribute cases. Native test/build outcomes are still required.
+
+Primary code reference: Pandoc `3.1.3`,
+`src/Text/Pandoc/Writers/HTML.hs`, blob
+`17fe2c945e6c4aaec3bf10922abf2e6da4d2880d` (`tableToHtml`,
+`colSpecListToHtml`, `tableCellToHtml`), plus `Writers/Shared.hs` for alignment.
