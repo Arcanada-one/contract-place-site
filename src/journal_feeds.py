@@ -196,9 +196,12 @@ def entries(issues: object, language: str) -> list[dict]:
         if not title.strip() or not summary.strip():
             raise ValueError("Missing journal metadata")
         published = issue_date(issue.get("date"))
+        updated = issue_date(issue["updated"]) if "updated" in issue else published
+        if updated < published:
+            raise ValueError("Journal updated date precedes publication")
         canonical = ORIGIN + "/" + language + "/journal/" + slug + "/"
         result.append({"id": canonical, "slug": slug, "title": title, "summary": summary,
-                       "published": published, "updated": published,
+                       "published": published, "updated": updated,
                        "html": article_html(page.get("html"), canonical)})
     result.sort(key=lambda item: (-date.fromisoformat(item["published"][:10]).toordinal(), item["slug"]))
     return result[:LIMIT]

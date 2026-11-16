@@ -239,6 +239,50 @@ class JournalFeedTests(unittest.TestCase):
         self.assertNotEqual(before.findtext("a:entry/a:content", namespaces=ATOM),
                             after.findtext("a:entry/a:content", namespaces=ATOM))
 
+    def test_declared_update_preserves_publication_identity_and_publication_order(self):
+        original = issue("corrected", "2026-11-14")
+        corrected = deepcopy(original)
+        corrected["updated"] = "2026-11-16"
+        newer = issue("newer", "2026-11-15")
+        for lang in feeds.LANGUAGES:
+            with self.subTest(lang=lang):
+                before = feeds.render([original, newer], lang)
+                after = feeds.render([corrected, newer], lang)
+                atom_before = ET.fromstring(before["atom"])
+                atom_after = ET.fromstring(after["atom"])
+                rss_before = ET.fromstring(before["rss"])
+                rss_after = ET.fromstring(after["rss"])
+                expected_ids = [f"https://contract.place/{lang}/journal/{slug}/" for slug in ("newer", "corrected")]
+                for root in (atom_before, atom_after):
+                    self.assertEqual([item.findtext("a:id", namespaces=ATOM) for item in root.findall("a:entry", ATOM)], expected_ids)
+                for root in (rss_before, rss_after):
+                    self.assertEqual([item.findtext("guid") for item in root.findall("channel/item")], expected_ids)
+                old_entry = atom_before.findall("a:entry", ATOM)[1]
+                new_entry = atom_after.findall("a:entry", ATOM)[1]
+                self.assertEqual(old_entry.findtext("a:updated", namespaces=ATOM), "2026-11-14T00:00:00Z")
+                self.assertEqual(new_entry.findtext("a:published", namespaces=ATOM), "2026-11-14T00:00:00Z")
+                self.assertEqual(new_entry.findtext("a:updated", namespaces=ATOM), "2026-11-16T00:00:00Z")
+                self.assertEqual(atom_after.findtext("a:updated", namespaces=ATOM), "2026-11-16T00:00:00Z")
+                self.assertEqual(rss_after.findall("channel/item")[1].findtext("pubDate"), "Sat, 14 Nov 2026 00:00:00 GMT")
+                self.assertEqual(rss_after.findtext("channel/lastBuildDate"), "Mon, 16 Nov 2026 00:00:00 GMT")
+
+    def test_missing_or_same_day_update_preserves_historical_feed_bytes(self):
+        source = issue()
+        same_day = deepcopy(source)
+        same_day["updated"] = source["date"]
+        self.assertEqual(feeds.render([source], "en"), feeds.render([same_day], "en"))
+
+    def test_invalid_or_backward_update_is_refused(self):
+        for updated in ("2026-02-30", "2026-1-16", "2026-11-16T10:00:00Z", "", None, 42):
+            source = issue(day="2026-11-14")
+            source["updated"] = updated
+            with self.subTest(updated=updated), self.assertRaisesRegex(ValueError, "Invalid journal date"):
+                feeds.render([source], "en")
+        source = issue(day="2026-11-14")
+        source["updated"] = "2026-11-13"
+        with self.assertRaisesRegex(ValueError, "Journal updated date precedes publication"):
+            feeds.render([source], "en")
+
     def test_sort_limit_and_validation_outside_window(self):
         sources = [issue(f"entry-{index:03}", "2026-11-14") for index in range(60)]
         sources.append(issue("newest", "2026-11-15"))
@@ -247,6 +291,10 @@ class JournalFeedTests(unittest.TestCase):
         self.assertEqual(result[0]["slug"], "newest")
         self.assertEqual(result[1]["slug"], "entry-000")
         self.assertEqual(feeds.render(sources, "en"), feeds.render(list(reversed(sources)), "en"))
+        sources[-2]["updated"] = "2026-11-13"
+        with self.assertRaisesRegex(ValueError, "Journal updated date precedes publication"):
+            feeds.render(sources, "en")
+        del sources[-2]["updated"]
         sources[-2]["languages"]["en"]["sha256"] = "invalid"
         with self.assertRaises(ValueError):
             feeds.render(sources, "en")
@@ -280,6 +328,13 @@ class GeneratedJournalFeeds(unittest.TestCase):
                 self.assertEqual([node.findtext("a:id", namespaces=ATOM) for node in atom.findall("a:entry", ATOM)], expected_ids)
                 by_slug = {row["slug"]: row for row in self.issues}
                 for row, rss_item, atom_item in zip(expected, rss.findall("channel/item"), atom.findall("a:entry", ATOM)):
+                    compiled = by_slug[row["slug"]]
+                    if "updated" in row:
+                        self.assertEqual(compiled["updated"], row["updated"])
+                    else:
+                        self.assertNotIn("updated", compiled)
+                    self.assertEqual(atom_item.findtext("a:published", namespaces=ATOM), row["date"] + "T00:00:00Z")
+                    self.assertEqual(atom_item.findtext("a:updated", namespaces=ATOM), row.get("updated", row["date"]) + "T00:00:00Z")
                     source = by_slug[row["slug"]]["languages"][lang]
                     self.assertEqual(rss_item.findtext("title"), source["title"])
                     self.assertEqual(rss_item.findtext("description"), source["excerpt"])

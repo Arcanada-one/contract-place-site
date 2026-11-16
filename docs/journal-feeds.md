@@ -53,24 +53,30 @@ Each entry's ID/GUID is its absolute, locale-specific canonical article URL.
 Changing a title or correcting the article does not create a new ID. Feed IDs
 and self links use the permanent locale/format address.
 
-Current issue metadata has an authored calendar date, not a publication time
-or source-modification timestamp. RSS `pubDate` and Atom `published` normalize
-that date to 00:00:00 UTC; this is a documented day-precision convention, not
-evidence of a midnight deployment. Atom `updated` currently uses the same
-authored-date fallback because the source has no distinct modification field.
-It must not be interpreted as independently measured edit time. RSS
-`lastBuildDate` and Atom feed `updated` use the greatest included entry date,
-never the current build clock.
+Issue metadata has an authored publication calendar `date`. RSS `pubDate` and
+Atom `published` normalize it to 00:00:00 UTC; this is a documented day-precision
+convention, not evidence of a midnight deployment. An optional manifest
+`updated` records the editor-declared calendar date of a known correction.
+It must be a real ISO `YYYY-MM-DD` date on or after `date`; null, malformed and
+backward values are refused. The compiler propagates it only when provided.
+Atom entry `updated` uses that explicit date at 00:00:00 UTC, otherwise the
+publication-date fallback for historical records whose edit date is unknown.
+Neither value is an independently measured edit timestamp. RSS `lastBuildDate`
+and Atom feed `updated` use the greatest included entry update date, never the
+current build clock. Sorting and the membership window remain based on the
+original publication date.
 
 For an empty feed, the committed creation timestamp
 `2026-11-16T08:30:59Z` supplies Atom's required feed `updated` and RSS
 `lastBuildDate`. Rebuilding identical inputs produces identical feed bytes.
 
 Corrections keep their canonical identity and become visible in the rendered
-content at the next deployment. This first version does not promise that a
-reader will mark an old corrected issue unread: that behavior requires a
-source-owned update timestamp and reader support. Updating the source's
-existing hash pins and rebuilding remains mandatory.
+content at the next deployment. Known dated corrections must declare `updated`;
+unknown historical dates are not invented. The 16 November 2026 DORA correction
+therefore retains publication date `2026-11-14` and declares update date
+`2026-11-16`. Whether a reader marks a corrected issue unread still depends on
+that reader. Updating the source's existing hash pins and rebuilding remains
+mandatory.
 
 ## Build and checks
 

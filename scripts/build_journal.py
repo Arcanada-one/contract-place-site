@@ -160,6 +160,7 @@ def compile_journal(site: Path | None = None) -> list[dict]:
             {
                 "slug": slug,
                 "date": date,
+                **({"updated": entry["updated"]} if "updated" in entry else {}),
                 "folder": folder,
                 "route": f"journal/{slug}",
                 "languages": compiled_langs,
