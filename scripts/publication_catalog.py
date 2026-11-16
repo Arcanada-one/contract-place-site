@@ -8,6 +8,9 @@ from pathlib import Path, PurePosixPath
 import posixpath
 import re
 
+from roadmap import provenance as roadmap_provenance
+from programme import provenance as programme_provenance
+
 
 def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[str, str]:
     """Resolve compatibility pages through actual source links, never guessed IDs."""
@@ -41,13 +44,21 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
     return aliases
 
 
-def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer) -> None:
+def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None, programme=None) -> None:
+    from catalogue_localization import compile_localization, compile_article_localizations
+    localization = compile_localization(source, manifest, documents)
+    formula_localizations = renderer.formula_localizations.provenance()
+    review_localizations = renderer.review_localizations.provenance()
     path = site / 'src/content/catalog.json'
     previous = json.loads(path.read_text())
+    articles, article_localizations = compile_article_localizations(site, previous['articles'])
     aliases = legacy_aliases(source, previous, documents)
+    from build_journal import compile_journal
+    journal_issues = compile_journal(site)
     records = []
     images = ('knowledge-prism.webp', 'knowledge-landscape.webp', 'knowledge-dialogue.webp')
     categories = {
+        'human-meaning-and-computable-knowledge': 'foundations',
         'semantic-objects-and-context': 'foundations',
         'constrained-transformations': 'foundations',
         'retrieval-and-context-composition': 'systems',
@@ -57,8 +68,11 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
         'evidence-and-falsification': 'evaluation',
         'knowledge-utility': 'evaluation',
     }
-    for number, doc in enumerate(documents):
+    accepted = 0  # cover images rotate over accepted documents only, so a draft never shifts the others
+    for doc in documents:
         fragment = renderer.document(doc)
+        number = accepted if 'status' not in doc else 0
+        accepted += 'status' not in doc
         kind = 'spec' if doc['type'] == 'specification' else doc['type']
         records.append({
             'canonical': True, 'id': doc['slug'], 'kind': kind,
@@ -73,19 +87,52 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
             'image': images[number % len(images)],
             'category': categories.get(doc['slug'], 'engineering'),
         })
+        if 'status' in doc:
+            records[-1]['status'] = doc['status']
+        if renditions:
+            records[-1]['renditions'] = renditions.for_work(doc['slug'])
+        if localization:
+            records[-1]['localization'] = localization['records'][doc['slug']]
     payload = {
         'publication': manifest,
-        'records': records, 'articles': previous['articles'], 'aliases': aliases,
+        'records': records, 'articles': articles, 'aliases': aliases,
+        'journal_issues': journal_issues,
+        'roadmap': roadmap,
         'source': 'https://contract.place/', 'license': 'CC-BY-4.0',
         'author': 'Pavel Valentov', 'retrieved': '2026-11-04',
     }
+    if programme:
+        payload['programme'] = programme
+    if renditions:
+        payload['renditions_source'] = renditions.source_kind
+    if localization:
+        payload['localization_source'] = {k: localization['provenance'][k] for k in ('path', 'sha256', 'source')}
+    if article_localizations:
+        payload['article_localizations_source'] = article_localizations
+    if formula_localizations:
+        payload['formula_localization_source'] = formula_localizations
+    if review_localizations:
+        payload['review_localization_source'] = review_localizations
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
     old_provenance = json.loads((site / 'src/site/content-provenance.json').read_text())
     provenance = {
         'publication': manifest,
         'records': [{k: r[k] for k in ('id', 'type', 'path', 'source', 'source_sha256', 'revision')} for r in records],
         'articles': old_provenance['articles'],
+        'roadmap': roadmap_provenance(roadmap),
         'site_integration_base': '91da6a35b4234d409de4c0a0777ff9c469bc8400',
         'license': 'CC-BY-4.0', 'author': 'Pavel Valentov',
     }
+    if programme:
+        provenance['programme'] = programme_provenance(programme)
+    if renditions:
+        provenance['renditions'] = renditions.provenance()
+    if localization:
+        provenance['localizations'] = localization['provenance']
+    if article_localizations:
+        provenance['articles_localizations'] = article_localizations
+    if formula_localizations:
+        provenance['formula_localizations'] = formula_localizations
+    if review_localizations:
+        provenance['review_localizations'] = review_localizations
     (site / 'src/site/content-provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')

@@ -1,0 +1,207 @@
+{
+  "kind": "ChangeAdmissionReceipt/v1",
+  "task_id": "093b8ab8-f5c0-4c29-83c6-5b3fe34fa479",
+  "title": "KCP: Add Google Analytics 4 to contract.place",
+  "prepared_at": "2026-11-10",
+  "host": "arcana-devs (<dev-host mesh address>)",
+  "impact_set": [
+    {
+      "repository": "Arcanada-one/contract-place-site",
+      "merge_commit": "e01585a",
+      "pr": "https://github.com/Arcanada-one/contract-place-site/pull/31",
+      "entities": [
+        {
+          "entity": "src/site/analytics.js",
+          "type": "new-file",
+          "edge_type": "runtime-script",
+          "verdict": "pass",
+          "evidence": "node scripts/test_analytics.js — 10 cases; no tag request without consent"
+        },
+        {
+          "entity": "src/site/app.js",
+          "type": "modified",
+          "edge_type": "runtime-script",
+          "verdict": "pass",
+          "evidence": "node scripts/test_lab.js, node scripts/test_search.js, check_publication.py (300 pages)"
+        },
+        {
+          "entity": "src/site/style.css",
+          "type": "modified",
+          "edge_type": "style",
+          "verdict": "pass",
+          "evidence": "check_hygiene.py — no inline style/handler; upstream .source-body pre rule kept"
+        },
+        {
+          "entity": "src/site/index.html",
+          "type": "modified",
+          "edge_type": "html-template",
+          "verdict": "pass",
+          "evidence": "check_page.py — script sources list; check_publication.py — content.js pin on every page"
+        },
+        {
+          "entity": "build.mjs",
+          "type": "modified",
+          "edge_type": "build",
+          "verdict": "pass",
+          "evidence": "public/analytics.js hashed and reproducible; test_build.py 14 cases"
+        },
+        {
+          "entity": "scripts/check_page.py",
+          "type": "modified",
+          "edge_type": "gate",
+          "verdict": "pass",
+          "evidence": "site checks OK (licensing, SEO, search, robots, sitemap, llms.txt)"
+        },
+        {
+          "entity": "scripts/check_hygiene.py",
+          "type": "modified",
+          "edge_type": "gate",
+          "verdict": "pass",
+          "evidence": "hygiene OK under script-src 'self' https://www.googletagmanager.com"
+        },
+        {
+          "entity": "scripts/test_renditions.py",
+          "type": "modified",
+          "edge_type": "gate",
+          "verdict": "pass",
+          "evidence": "126 tests OK"
+        },
+        {
+          "entity": "scripts/test_analytics.js",
+          "type": "new-file",
+          "edge_type": "test",
+          "verdict": "pass",
+          "evidence": "10 cases OK"
+        },
+        {
+          "entity": "REUSE.toml",
+          "type": "modified",
+          "edge_type": "licence",
+          "verdict": "pass",
+          "evidence": "reuse lint — 403/403 files compliant"
+        },
+        {
+          "entity": ".github/workflows/check-publication.yml",
+          "type": "modified",
+          "edge_type": "ci",
+          "verdict": "pass",
+          "evidence": "CI run 42767664452 — 4 jobs, all success"
+        },
+        {
+          "entity": "public/",
+          "type": "regenerated",
+          "edge_type": "artifact",
+          "verdict": "pass",
+          "evidence": "reproducible build; git status clean after rebuild"
+        }
+      ]
+    },
+    {
+      "repository": "Arcanada-one/arcanada-landing",
+      "merge_commit": "7e2bece",
+      "pr": "https://github.com/Arcanada-one/arcanada-landing/pull/178",
+      "entities": [
+        {
+          "entity": "ops/nginx/contract.place.conf",
+          "type": "modified",
+          "edge_type": "origin-config",
+          "verdict": "pass",
+          "evidence": "sha256 5706d854…; exactly one rewritten line (the policy); live digest matches"
+        },
+        {
+          "entity": "ops/nginx/contract-place-install.sh",
+          "type": "modified",
+          "edge_type": "broker",
+          "verdict": "pass",
+          "evidence": "broker v4 sha256 2308c577…; installed root:root:755 on arcana-www; adopt path verified"
+        },
+        {
+          "entity": ".github/workflows/deploy-contract-place-origin.yml",
+          "type": "modified",
+          "edge_type": "ci",
+          "verdict": "pass",
+          "evidence": "CI run 42767191884 site-contract pass; deploy run 42767992096 success"
+        },
+        {
+          "entity": "ops/nginx/tests/test_contract_place_install.py",
+          "type": "modified",
+          "edge_type": "gate",
+          "verdict": "pass",
+          "evidence": "30 tests OK"
+        },
+        {
+          "entity": "ops/nginx/contract-place-origin.md",
+          "type": "modified",
+          "edge_type": "documentation",
+          "verdict": "pass",
+          "evidence": "policy update and order of operations recorded"
+        }
+      ]
+    }
+  ],
+  "deployment": [
+    {
+      "target": "origin vhost contract.place on arcana-www",
+      "method": "deploy-contract-place-origin.yml (confirm_origin=true)",
+      "run": "42767992096",
+      "result": "success",
+      "live_digest": "5706d854f392c71220b20d0f30ee4cf82edba4cbf50cae3658108fb97b8e246a"
+    },
+    {
+      "target": "contract.place static site",
+      "method": "contract-place-site deploy.yml",
+      "run": "42768542087",
+      "result": "success"
+    }
+  ],
+  "runtime_acceptance": {
+    "no_consent": {
+      "ga_requests": 0,
+      "banner": "shown"
+    },
+    "functional_choice": {
+      "ga_requests": 0,
+      "banner": "not shown"
+    },
+    "accepted_choice": {
+      "ga_requests": 2,
+      "hosts": [
+        "www.googletagmanager.com",
+        "region1.google-analytics.com"
+      ],
+      "collect_status": 204
+    },
+    "spa_navigation": {
+      "page_view_events": 1,
+      "note": "event:page_view queued in dataLayer and sent as /g/collect"
+    },
+    "locales": [
+      "en",
+      "ru",
+      "zh-Hans"
+    ],
+    "console_errors": 0,
+    "ga4_property_evidence": {
+      "property": "532478786 (Arcanada Ecosystem)",
+      "data_stream": "contract.place / G-C5J1NVE11Z / https://contract.place",
+      "realtime_runReport": "streamName dimension -> contract.place, 3 events",
+      "realtime_events": [
+        "page_view",
+        "first_visit",
+        "session_start"
+      ],
+      "realtime_country": "Germany",
+      "collect_endpoint_status": 204,
+      "standard_report_note": "The standard (non-realtime) report for today shows no rows for any host in the property yet; GA4 populates it with a delay of hours to days. The realtime report confirms the hits."
+    }
+  },
+  "limitations": [
+    "The first origin dispatch (run 42767841154) failed its policy check because the check ran about 0.2 s after the nginx reload and hit a worker still holding the previous configuration. The migration itself succeeded; the re-dispatch (42767992096) took the broker's adopt path and passed. The workflow has no wait between reload and header check.",
+    "The GA tag host is granted as https://*.googletagmanager.com and the collection host as https://*.google-analytics.com, because Google chooses the collection region server-side and the site cannot pin one region.",
+    "The Russian and Chinese banner texts are translations written for this change; they have not received the native editorial review the Chinese interface notice refers to.",
+    "A temporary copy of the broker script remains at /root/contract-place-install-v4.sh on arcana-www: it is a non-secret copy of a public reviewed artefact and the delete operation was blocked by the tool policy, so it was not removed.",
+    "GA4 standard reports for the current day showed no rows for any host in the property at the time of checking; the realtime report carries the hits (streamName 'contract.place', page_view / first_visit / session_start). Standard-report latency belongs to Google, not to the site.",
+    "A test comment ('probe') is attached to the Muneral task; the Muneral API offers no endpoint to delete a comment, so it remains as harmless noise next to the receipt."
+  ],
+  "publication_redaction": "Publication redaction (2026-11-10): internal mesh IP addresses and local filesystem paths of the development environment were replaced with placeholders before publication. Host names are kept because they are already published in the reviewed origin documentation. The unredacted original is held in the private task record; the substance of every measurement is unchanged."
+}

@@ -1,0 +1,369 @@
+{
+  "kind": "roadmap-provenance",
+  "status": "planned work; no execution state is published",
+  "roadmap_pin": {
+    "repository": "Arcanada-one/knowledge-contract",
+    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+    "files": [
+      {
+        "path": "ROADMAP.md",
+        "role": "rendered",
+        "sha256": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760"
+      },
+      {
+        "path": "roadmap/TASKS.md",
+        "role": "rendered",
+        "sha256": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7"
+      },
+      {
+        "path": "roadmap/dependencies.json",
+        "role": "rendered",
+        "sha256": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9"
+      },
+      {
+        "path": "roadmap/EXPERIMENTS.md",
+        "role": "linked",
+        "sha256": "b3b7a80ea3b4a11ab05d12e8f07a30badba3fb6e9aa87991548508343055f07d"
+      },
+      {
+        "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
+        "role": "linked",
+        "sha256": "442ba32cadcf9464e95c2d20f7e3857d0b1be679f41eb9a6282fb56dde00679d"
+      },
+      {
+        "path": "roadmap/SITE_DELIVERY.md",
+        "role": "introduction",
+        "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246"
+      },
+      {
+        "path": "roadmap/localizations.json",
+        "role": "rendition-manifest",
+        "sha256": "e6f11eb6e749aaf409f63f06b88d7e2277f458baa292ad1173940b9b13c0aabb"
+      },
+      {
+        "path": "roadmap/ROADMAP.full.ru.md",
+        "role": "rendition",
+        "sha256": "2840af6ae601d2085f97f9358c218e7782289cc94876c3fa242ed8d2a830f167"
+      },
+      {
+        "path": "roadmap/ROADMAP.full.zh-Hans.md",
+        "role": "rendition",
+        "sha256": "fffe4fa2a97c8fbc41e3f7c5c0e79f477d09bfcd998a534aaa4490ac542c7159"
+      },
+      {
+        "path": "roadmap/TASKS.ru.json",
+        "role": "rendition",
+        "sha256": "bf84e1f3517d5c3eeb43d4d90f4dd9861953df5b362a4064fb5984696b472f67"
+      },
+      {
+        "path": "roadmap/TASKS.zh-Hans.json",
+        "role": "rendition",
+        "sha256": "bbccd4330e5b416add6f8656eae12522bf37d2cdf58b35cf06ebba88eab464a8"
+      }
+    ]
+  },
+  "manuscript_pin": {
+    "repository": "Arcanada-one/knowledge-contract",
+    "commit": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+    "edition": "1.1"
+  },
+  "same_commit": false,
+  "definition_revision": "2026-11-06.1",
+  "tasks": [
+    {
+      "id": "RM-01",
+      "priority": "P0",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [],
+      "informs": []
+    },
+    {
+      "id": "RM-02",
+      "priority": "P0",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [],
+      "informs": []
+    },
+    {
+      "id": "RM-03",
+      "priority": "P0",
+      "owner": "KC-SWE",
+      "status": "planned",
+      "requires": [],
+      "informs": []
+    },
+    {
+      "id": "RM-04",
+      "priority": "P0",
+      "owner": "KC-SWE",
+      "status": "planned",
+      "requires": [],
+      "informs": []
+    },
+    {
+      "id": "RM-05",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-06"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-06",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-07",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-05"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-08",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-06",
+        "RM-07"
+      ],
+      "informs": [
+        "RM-12"
+      ]
+    },
+    {
+      "id": "RM-09",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-07",
+        "RM-08",
+        "RM-10"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-10",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-11",
+      "priority": "P1",
+      "owner": "KC-SWE",
+      "status": "planned",
+      "requires": [
+        "RM-02",
+        "RM-09",
+        "RM-10"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-12",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-06",
+        "RM-07"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-13",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-09",
+        "RM-10",
+        "RM-12"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-14",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-07",
+        "RM-12",
+        "RM-13"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-15",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-10"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-16",
+      "priority": "P1",
+      "owner": "Agent-SWE",
+      "status": "planned",
+      "requires": [
+        "RM-11",
+        "RM-15"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-17",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-07",
+        "RM-09",
+        "RM-10"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-18",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-14",
+        "RM-15",
+        "RM-17"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-19",
+      "priority": "P1",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-10",
+        "RM-15"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-20",
+      "priority": "P2",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-16",
+        "RM-18",
+        "RM-19"
+      ],
+      "informs": [
+        "RM-24"
+      ]
+    },
+    {
+      "id": "RM-21",
+      "priority": "P2",
+      "owner": "Agent-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-12",
+        "RM-17"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-22",
+      "priority": "P1",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01"
+      ],
+      "informs": [
+        "RM-02"
+      ]
+    },
+    {
+      "id": "RM-23",
+      "priority": "P2",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-02"
+      ],
+      "informs": [
+        "RM-25"
+      ]
+    },
+    {
+      "id": "RM-24",
+      "priority": "P2",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [
+        "RM-01",
+        "RM-10"
+      ],
+      "informs": []
+    },
+    {
+      "id": "RM-25",
+      "priority": "P0",
+      "owner": "KC-Brain",
+      "status": "planned",
+      "requires": [],
+      "informs": []
+    }
+  ],
+  "advisory_links": [
+    {
+      "from": "RM-23",
+      "to": "RM-25",
+      "kind": "informs_not_blocks"
+    },
+    {
+      "from": "RM-20",
+      "to": "RM-24",
+      "kind": "informs_not_blocks"
+    },
+    {
+      "from": "RM-22",
+      "to": "RM-02",
+      "kind": "informs_not_blocks"
+    },
+    {
+      "from": "RM-08",
+      "to": "RM-12",
+      "kind": "informs_not_blocks"
+    }
+  ]
+}

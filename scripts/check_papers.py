@@ -90,6 +90,10 @@ def parse(path: Path, lang: str):
     for l in p.links:
         t = l["text"].strip()
         label = l["attrs"].get("aria-label", "").strip()
+        # Compatibility fragment destinations (<a id="..."></a> with no href) are
+        # not navigational links; the corpus preserves prior heading anchors after title renames.
+        if not l["href"] and l["attrs"].get("id") and not t and not label:
+            continue
         if not t and not label:
             errs.append("%s: link without text or aria-label: %s" % (path, l["href"]))
         if t.lower() in generic:
@@ -103,8 +107,8 @@ def main(argv):
     root = Path(argv[1])
     catalog = json.loads((root / 'content.js').read_text().split('=', 1)[1].strip().rstrip(';'))
     records = catalog['records']
-    if len(records) != 29:
-        raise SystemExit('Expected the 29 canonical documents of edition 1.0')
+    if len(records) != 31:
+        raise SystemExit('Expected the 31 canonical documents of edition 1.1')
     # Primary references are approved by the canonical source. A rendered page
     # must preserve those exact URLs; it may not invent a different external host.
     approved = set()
@@ -123,15 +127,20 @@ def main(argv):
             page, parsed, e = parse(root / route.lstrip('/') / 'index.html', lang)
             errors += e
             pages += 1
-            if record['html'] not in page:
+            # A language rendition replaces the body only when it is compiled and shown; publication_checks.check_renditions
+            # verifies those pages. Every other page shows the complete English source.
+            shown = (record.get('renditions') or {}).get(lang)
+            shown = shown if shown and shown['state'] in ('reviewed', 'partially-reviewed', 'unreviewed') else None
+            body, body_lang, math_count = (shown['html'], lang, shown['math_count']) if shown else (record['html'], 'en', record['math_count'])
+            if body not in page:
                 errors.append(route + ': full body differs from compiled source')
             for url in (record['source'], record['history']):
                 if not any(link['href'] == url for link in parsed.links):
                     errors.append(route + ': exact source/history missing')
                 source_links.add(url)
-            if 'CC BY 4.0' not in page or 'class="source-body prose" lang="en"' not in page:
-                errors.append(route + ': content licence or English body declaration missing')
-            if page.count('<math ') != record['math_count']:
+            if 'CC BY 4.0' not in page or 'class="source-body prose" lang="%s"' % body_lang not in page:
+                errors.append(route + ': content licence or body language declaration missing')
+            if page.count('<math ') != math_count:
                 errors.append(route + ': mathematical expression count differs')
         for alias, target in catalog['aliases'].items():
             route = root / lang / alias / 'index.html'

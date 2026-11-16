@@ -4,14 +4,14 @@ SPDX-PackageDownloadLocation = "https://github.com/Arcanada-one/contract-place-s
 
 # Text, catalog data, figures and generated pages: CC BY 4.0.
 [[annotations]]
-path = ["README.md", "AGENTS.md", "publication-manifest.json", "public/publication.json", "SECURITY.md", "NOTICE", "src/DESIGN.md", "src/content/**", "src/site/*.md", "src/site/*.txt", "src/site/*.json", "src/site/assets/*.webp", "src/site/assets/*.jpg", "src/site/assets/*.svg", "public/**/*.html", "public/llms.txt", "public/content.js", "public/content-provenance.json", "public/ATTRIBUTION-source.md", "public/LICENSE-content.txt", "public/NOTICE-content.txt", "public/assets/*.webp", "public/assets/*.jpg", "public/assets/*.svg", "public/favicon.svg"]
+path = ["README.md", "AGENTS.md", "publication-manifest.json", "roadmap-manifest.json", "public/publication.json", "public/roadmap.json", "public/programme.json", "SECURITY.md", "NOTICE", "src/DESIGN.md", "docs/*.md", "docs/*.json", "src/content/**", "src/site/*.md", "src/site/*.txt", "src/site/*.json", "src/site/assets/*.webp", "src/site/assets/*.jpg", "src/site/assets/*.svg", "public/**/*.html", "public/llms.txt", "public/content.js", "public/content-provenance.json", "public/ATTRIBUTION-source.md", "public/LICENSE-content.txt", "public/NOTICE-content.txt", "public/assets/*.webp", "public/assets/*.jpg", "public/assets/*.svg", "public/favicon.svg"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 # Site code, build and CI: Apache-2.0.
 [[annotations]]
-path = ["src/site/app.js", "src/site/search.js", "src/site/theme.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "build.mjs", "public/app.js", "public/search.js", "public/theme.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "REUSE.toml"]
+path = ["src/site/app.js", "src/site/search.js", "src/site/analytics.js", "src/site/theme.js", "src/site/style.css", "src/site/index.html", "src/prerender.mjs", "src/renditions/*", "build.mjs", "public/app.js", "public/analytics.js", "public/renditions.js", "public/renditions.css", "public/search.js", "public/theme.js", "public/style.css", "public/robots.txt", "public/sitemap.xml", ".github/**", "scripts/**", "attribution-scope.json", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "Apache-2.0"
@@ -28,3 +28,29 @@ path = ["src/site/assets/SourceSans3-*", "src/site/assets/SourceSerif4-*", "publ
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2010-2024 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'"
 SPDX-License-Identifier = "OFL-1.1"
+
+# Shared observation code and existing test fixtures keep their MIT licence.
+[[annotations]]
+path = ["src/site/lab/access-contracts.46ab74e.js", "src/site/lab/observation-inspector.87457463.js", "src/site/lab/ACCESS-CONTRACTS-LICENSE", "public/lab/access-contracts.46ab74e.js", "public/lab/observation-inspector.87457463.js", "public/lab/ACCESS-CONTRACTS-LICENSE", "scripts/fixtures/knowledge-journey-observation.json", "scripts/fixtures/agent-runs-edge-fixture.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Arcanada"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["src/site/lab/retained-object-reader.js", "public/lab/retained-object-reader.js", "src/site/lab/knowledge-journey-observation.js", "src/site/lab/knowledge-journey-observation.css", "src/site/lab/package.json", "public/lab/knowledge-journey-observation.js", "public/lab/knowledge-journey-observation.css", "public/lab/package.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["src/site/lab/OBSERVATION-PROVENANCE.json", "public/lab/OBSERVATION-PROVENANCE.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Byte-exact copy of the historical Russian journal text (contract-place-site 49fcebbc, PR 50, blob be2047af7955...) used as a known-red control.
+[[annotations]]
+path = ["scripts/fixtures/attribution/*"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "CC-BY-4.0"

@@ -29,6 +29,12 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
               output.write('repository=' + manifest['repository'] + '\n')
               output.write('commit=' + manifest['commit'] + '\n')
+          roadmap = json.loads(Path('roadmap-manifest.json').read_text())
+          assert roadmap['schema_version'] == 1
+          assert roadmap['repository'] == 'Arcanada-one/knowledge-contract'
+          assert re.fullmatch(r'[0-9a-f]{40}', roadmap['commit'])
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('roadmap_commit=' + roadmap['commit'] + '\n')
           PY
       - name: Check out the pinned knowledge source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -36,14 +42,29 @@ jobs:
           repository: ${{ steps.source.outputs.repository }}
           ref: ${{ steps.source.outputs.commit }}
           path: _knowledge-source
+          # Rendition source/rendition revision pins require ancestry against the
+          # publication commit; a depth-1 checkout cannot resolve those ancestors.
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check out the pinned roadmap source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ steps.source.outputs.repository }}
+          ref: ${{ steps.source.outputs.roadmap_commit }}
+          path: _roadmap-source
+          # Roadmap translations bind their source to a verified ancestor.
+          fetch-depth: 0
           persist-credentials: false
       - name: Install the tested Markdown renderer
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends pandoc
+          curl --fail --retry 5 --retry-all-errors --location \
+            --output "$RUNNER_TEMP/pandoc-3.1.3-1-amd64.deb" \
+            https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-amd64.deb
+          echo "caa7e0410f9e2cb1da2eb8db13cc97b5548fe455985e2c944e3929d22f99bcdc  $RUNNER_TEMP/pandoc-3.1.3-1-amd64.deb" | sha256sum -c -
+          sudo dpkg -i "$RUNNER_TEMP/pandoc-3.1.3-1-amd64.deb"
           test "$(pandoc --version | head -1)" = "pandoc 3.1.3"
       - name: Compile all canonical texts and build the localized site
-        run: python3 -B scripts/build_publication.py --source-dir _knowledge-source
+        run: python3 -B scripts/build_publication.py --source-dir _knowledge-source --roadmap-source-dir _roadmap-source
       - name: Publication, licensing, SEO, CSP and internal navigation
         run: |
           python3 -B scripts/check_publication.py
@@ -51,10 +72,102 @@ jobs:
           python3 -B scripts/check_page.py public
           python3 -B scripts/check_papers.py public
           python3 -B scripts/check_links.py public
+          python3 -B scripts/check_roadmap.py public --source-dir _roadmap-source
+          python3 -B scripts/check_localization.py public --source-dir _knowledge-source --roadmap-source-dir _roadmap-source
       - name: Renderer and search boundaries
         run: |
           python3 -B scripts/test_build.py
+          python3 -B scripts/test_journal.py
+          python3 -B scripts/test_journal.py --mutants
+          python3 -B scripts/test_readback.py
+          python3 -B scripts/test_renditions.py
+          python3 -B scripts/test_formula_localization.py
+          python3 -B scripts/test_review_localization.py
+          node scripts/test_review_localization.js
+          python3 -B scripts/test_catalogue_localization.py
+          python3 -B scripts/test_localization.py
+          ROADMAP_SOURCE_DIR=_roadmap-source python3 -B scripts/test_roadmap.py
+          python3 -B scripts/test_roadmap_localization.py
+          READABLE_ROADMAP_SOURCE_DIR=_knowledge-source python3 -B scripts/test_roadmap_names.py
+          python3 -B scripts/test_roadmap_display_names.py
+          PROGRAMME_SOURCE_DIR=_knowledge-source python3 -B scripts/test_programme.py
+          python3 -B scripts/test_rendition_preamble.py
           node scripts/test_search.js
+          node scripts/test_reader_labels.js
+          node scripts/test_ui_localization.js
+          node scripts/test_books_snapshot.js
+          node scripts/test_lab.js
+          node --test scripts/test_lab_observation.mjs
+          node --test scripts/test_retained_object_reader.mjs
+          node scripts/test_analytics.js
+      - name: Check out the exact English source pin for reviewed-file regression
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 46af0f06218e590e047a585ac74820f3c6336604
+          path: _preamble-english-source
+          persist-credentials: false
+      - name: Check out the exact reviewed rendition regression inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: cad15f92f1821cf5ffe9c3d257bdbac8beba23ba
+          path: _rendition-review-source
+          persist-credentials: false
+      - name: Check out the predeclared code-span refusal fixture
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 64aa36781f92b1b1a376613f847c82e098720b1d
+          path: _rendition-code-refusal-source
+          persist-credentials: false
+      - name: Check out the prior formula-order refusal fixtures
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/knowledge-contract
+          ref: 151dc8927547d27a88d0d5082b8abd1f98bd7b33
+          path: _rendition-old-review-source
+          persist-credentials: false
+      - name: Check out the exact earlier compiler for before-and-after comparison
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Arcanada-one/contract-place-site
+          ref: b1a2cb006077eea52fd09ad0b7a6fdbe5f538c65
+          path: _preamble-site-baseline
+          persist-credentials: false
+      - name: Read the pinned attribution study
+        id: attribution
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          scope = json.loads(Path('attribution-scope.json').read_text())
+          assert scope['schema_version'] == 1
+          assert len(scope['entries']) == 1, 'one single-study entry; add a source checkout per reviewed entry'
+          study = scope['entries'][0]['study']
+          assert study['repository'] == 'Arcanada-one/knowledge-contract'
+          assert re.fullmatch(r'[0-9a-f]{40}', study['commit'])
+          assert re.fullmatch(r'[A-Za-z0-9_./-]+', study['path']) and '..' not in study['path']
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('repository=' + study['repository'] + '\n')
+              output.write('commit=' + study['commit'] + '\n')
+              output.write('path=' + study['path'] + '\n')
+          PY
+      - name: Check out the pinned attribution study
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ steps.attribution.outputs.repository }}
+          ref: ${{ steps.attribution.outputs.commit }}
+          path: _attribution-source
+          sparse-checkout: ${{ steps.attribution.outputs.path }}
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Single-study attribution preflight
+        run: |
+          python3 -B scripts/check_attribution.py --source-dir _attribution-source
+          ATTRIBUTION_SOURCE_DIR=_attribution-source python3 -B scripts/test_check_attribution.py
+      - name: Four reviewed-file regressions without changing publication admission
+        run: python3 -B scripts/check_reviewed_preamble.py
       - name: Verify committed inputs and output are reproducible
         run: |
           python3 - <<'PY'
@@ -94,14 +207,20 @@ jobs:
                   ('/en/reference/glossary/', 'Work Item'),
                   ('/en/appendices/api-integration/', 'Pavel Valentov'),
                   ('/en/search/', 'document-search'),
+                  ('/en/programme/', 'Meaning Geometry'),
+                  ('/ru/programme/', 'Геометрия смыслов'),
+                  ('/zh-Hans/programme/', '意义几何'),
+                  ('/en/roadmap/', 'id="rm-25"'),
+                  ('/ru/roadmap/', 'Дорожная карта'),
+                  ('/zh-Hans/roadmap/', '路线图'),
               ]
               for path, needle in pages:
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert needle in response.read().decode('utf-8'), (path, needle)
-              for path in ('/style.css', '/app.js', '/content.js', '/search.js',
+              for path in ('/style.css', '/app.js', '/analytics.js', '/content.js', '/search.js',
                            '/theme.js', '/favicon.svg', '/robots.txt', '/llms.txt',
-                           '/sitemap.xml', '/publication.json', '/404.html'):
+                           '/sitemap.xml', '/publication.json', '/roadmap.json', '/programme.json', '/404.html'):
                   with urlopen(base + path, timeout=5) as response:
                       assert response.status == 200, path
                       assert response.read(), path

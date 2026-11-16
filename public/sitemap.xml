@@ -12,10 +12,12 @@
   <url><loc>https://contract.place/en/research/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/books/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/repository/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/roadmap/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/journal/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/docs/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/docs/availability/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/search/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/science/human-meaning-and-computable-knowledge/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/science/semantic-objects-and-context/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/science/constrained-transformations/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/science/retrieval-and-context-composition/</loc><lastmod>2026-11-04</lastmod></url>
@@ -24,6 +26,7 @@
   <url><loc>https://contract.place/en/science/revision-and-governance/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/science/controlled-knowledge-reuse/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/science/knowledge-utility/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/science/geometry-of-semantic-representations/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/engineering/specifications/knowledge-contract-core/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/engineering/specifications/contract-family/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/engineering/specifications/semantic-types/</loc><lastmod>2026-11-04</lastmod></url>
@@ -47,6 +50,13 @@
   <url><loc>https://contract.place/en/appendices/api-integration/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/journal/knowledge-contract-architecture/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/journal/knowledge-contract-v2/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/source-rule-checks-2026-11-15/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/agent-situation-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/dora-gaps-agents-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/verdict-is-not-a-test-2026-11-13/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/control-for-topic-2026-11-12/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/journal/lesson-without-evidence-2026-11-11/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/en/programme/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/en/about/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/science/</loc><lastmod>2026-11-04</lastmod></url>
@@ -59,41 +69,24 @@
   <url><loc>https://contract.place/ru/research/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/books/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/repository/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/roadmap/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/journal/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/docs/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/docs/availability/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/search/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/semantic-objects-and-context/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/constrained-transformations/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/retrieval-and-context-composition/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/interaction-and-memory/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/evidence-and-falsification/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/revision-and-governance/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/controlled-knowledge-reuse/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/science/knowledge-utility/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/knowledge-contract-core/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/contract-family/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/semantic-types/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/context-package/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/compiled-artifact-contract/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/artifact-registry/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/status-model/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/cache-identity-and-invalidation/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/reuse-policy/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/knowledge-evolution/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/specifications/book-package/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/studies/contract-profile-conformance/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/engineering/studies/dependency-closure-and-package-delivery/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/engineering/studies/source-transcription-and-uncertainty/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/engineering/studies/executable-projections-and-revision/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/engineering/studies/reuse-admission-and-cost-controls/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/engineering/studies/editorial-skill-pilot/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/reference/glossary/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/reference/bibliography/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/appendices/source-map/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/ru/appendices/api-integration/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/journal/knowledge-contract-architecture/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/journal/knowledge-contract-v2/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/source-rule-checks-2026-11-15/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/agent-situation-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/dora-gaps-agents-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/verdict-is-not-a-test-2026-11-13/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/control-for-topic-2026-11-12/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/journal/lesson-without-evidence-2026-11-11/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/ru/programme/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/ru/about/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/science/</loc><lastmod>2026-11-04</lastmod></url>
@@ -106,40 +99,23 @@
   <url><loc>https://contract.place/zh-Hans/research/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/books/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/repository/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/roadmap/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/journal/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/docs/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/docs/availability/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/search/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/semantic-objects-and-context/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/constrained-transformations/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/retrieval-and-context-composition/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/interaction-and-memory/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/evidence-and-falsification/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/revision-and-governance/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/controlled-knowledge-reuse/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/science/knowledge-utility/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/knowledge-contract-core/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/contract-family/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/semantic-types/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/context-package/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/compiled-artifact-contract/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/artifact-registry/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/status-model/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/cache-identity-and-invalidation/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/reuse-policy/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/knowledge-evolution/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/specifications/book-package/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/studies/contract-profile-conformance/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/engineering/studies/source-transcription-and-uncertainty/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/engineering/studies/executable-projections-and-revision/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/engineering/studies/reuse-admission-and-cost-controls/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/engineering/studies/editorial-skill-pilot/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/reference/glossary/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/reference/bibliography/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/appendices/source-map/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://contract.place/zh-Hans/appendices/api-integration/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/journal/knowledge-contract-architecture/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/journal/knowledge-contract-v2/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/source-rule-checks-2026-11-15/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/agent-situation-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/dora-gaps-agents-2026-11-14/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/verdict-is-not-a-test-2026-11-13/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/control-for-topic-2026-11-12/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/journal/lesson-without-evidence-2026-11-11/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://contract.place/zh-Hans/programme/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://contract.place/zh-Hans/about/</loc><lastmod>2026-11-04</lastmod></url>
 </urlset>
