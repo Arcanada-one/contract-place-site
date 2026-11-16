@@ -84,15 +84,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "fc2ceabf8f89fed9cdbb4076c59ec268896b20cbfb16785dc14f61e8aeeb4a45"
+          "sha256": "0014561c06163ca2c6465ec00fec5a0e12c10521d5038a19efc4bef32b538e47"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "bcb54eda58e504e51dc5b285e2f1b9342e5ff2562ea9c32e640dea1c32036c6c"
+          "sha256": "acad459af9938c5a04d753e6a3d3168836fa87781f671c6136586de2f1a5d273"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "798cf2ea0f0fd078310ef1d4786803c65abb03510bbca1ae385e63975b57b607"
+          "sha256": "d8b62548ef4f33696dddb0191329523620d8b68afa47459d05af44c24863f035"
         }
       }
     },
@@ -112,6 +112,44 @@
         "zh-Hans": {
           "file": "zh-Hans.md",
           "sha256": "162be0956b61ac29151634880dc07b4ef6f2a008af47b46be4a8975ea44299c1"
+        }
+      }
+    },
+    {
+      "slug": "rule-after-restart-2026-11-15",
+      "date": "2026-11-15",
+      "folder": "2026-11-15-rule-after-restart",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "51741cd9b9c062b12d6ce312f1d47f3dd7e4441c7394ca15a2901164f0a7fd08"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "bc2489659bf43b3863192fb52dbae484900917b11dbe33e909c062080397a4e4"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "f51a476f31a9ce6daf603edf43c3f09e645c2188a362bbbc2d4c434677722f54"
+        }
+      }
+    },
+    {
+      "slug": "tech-diplomacy-agent-contracts-2026-11-16",
+      "date": "2026-11-16",
+      "folder": "2026-11-16-tech-diplomacy-agent-contracts",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "6f6cc8fbb3fa506a5c8ce477048f2b97b4c3d76e602712795c5c150be4cced89"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "45aa4a955f67e0d1bb6682ff316bfeb88b3b8e030e8e0d99e8f58657d3587ef7"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "4ad4b02d217003562e6ccd1952d8108255bc90353302ffb108a9affeb428dfa7"
         }
       }
     }

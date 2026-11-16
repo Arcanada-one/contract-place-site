@@ -96,6 +96,7 @@ jobs:
           node scripts/test_search.js
           node scripts/test_reader_labels.js
           node scripts/test_ui_localization.js
+          node scripts/test_books_snapshot.js
           node scripts/test_lab.js
           node --test scripts/test_lab_observation.mjs
           node --test scripts/test_retained_object_reader.mjs

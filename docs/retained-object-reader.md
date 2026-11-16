@@ -1,8 +1,31 @@
 # Protected retained-object browser reader
 
-Status: source candidate, not mounted or deployed. This patch prepares a private
-file-inspection component for Knowledge Journey. It does not make the public lab
-connected, change upload/start controls, add a demo dataset, or claim admission.
+Status: delivered as a public asset, not mounted. This component prepares private
+file inspection for Knowledge Journey. It does not make the public lab connected,
+change upload/start controls, add a demo dataset, or claim admission.
+
+## Observed asset delivery — 15 November 2026
+
+Site main `050a4fef55f59f03a6e456e8e27c2bfd02d0a37d` was published by
+[Deploy 43684264241](https://github.com/Arcanada-one/contract-place-site/actions/runs/43684264241).
+Its [HTML readback](https://github.com/Arcanada-one/contract-place-site/actions/runs/43684264241/job/132721971892)
+recorded 321/321 matching routes in both ordinary and readback-query forms.
+That job checks HTML, not JavaScript assets.
+
+A separate anonymous HTTP read on 2026-11-15 at 08:06 UTC obtained the actual
+[`retained-object-reader.js`](https://contract.place/lab/retained-object-reader.js)
+asset with SHA-256
+`20867919f6858595221f42a116952e520d905a836c8e3b0e2e5071ff916ff9ca`,
+equal to the bytes committed at that site revision. The observation adapter and
+main app asset also matched their source blobs. The exact request metadata and
+comparisons are retained in the [asset delivery receipt](lab-asset-delivery-20261115.json).
+
+The three language Knowledge Journey pages still report `unconnected` and keep
+upload/start disabled. Their HTML does not load this reader, and the matching
+app code does not mount it. This observation updates asset-delivery status only:
+no browser interaction, native producer, private grant, same-origin BFF mapping
+or runtime execution was qualified by these HTTP requests. The original source
+preparation notes below retain their historical scope.
 
 ## Existing providers and exact source identities
 

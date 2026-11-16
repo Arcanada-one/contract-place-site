@@ -1,0 +1,63 @@
+# Chudinov correction, tech diplomacy and current Journal integration
+
+Source preparation on 16 November 2026 for Pavel's direct publication request.
+This record does not assert a completed build, review, deployment or Live Lab.
+
+## Exact inputs
+
+- Current site main, including Books: `2f93245563f100188f58359e8cff869771615376`.
+- Existing RSS/Atom PR #57: `ce1075a2dca9263fe68c6ae72930079acfac568d`.
+- Existing Journal PR #52: `631ece58ce82b0da2c209cfad6b96deaee770cfd`.
+- Common base: `d3d17929f209612669f38db6a735d46bc9ec309c`.
+
+The source merge preserves all current Books blocks. The two conflicts were
+adjacent Books/Journal functions in `app.js` and appended Books/subscription
+styles in `style.css`. Both sets are retained. The three rule-after-restart
+Markdown sources and its manifest entry remain byte-identical to PR #52.
+Its dated native-build receipt describes that earlier seven-issue snapshot,
+not this combined candidate.
+
+## Editorial changes
+
+The three 14 November DORA articles retain their original URLs, titles and
+publication dates and gain a dated correction. The genuine §1 statement is
+reconciled with §§14–15: apply the existing framework to in-scope AI services
+while accounting for gaps. The application date is distinguished from entry
+into force; the AI Act scope statement is narrowed against Article 6/Annex III.
+
+Three new Tech Diplomacy articles distinguish original findings, untested
+proposals and our prospective T1 / checked R1 / distinct T2 experiment. The
+GPT Deprivation sensitivity table retains all unknown-case denominators and
+does not infer a population rate or causal protection effect. No TDGI
+affiliation, programme admission or Forbes publication is asserted.
+
+The final authored manifest has **eight issues and 24 localized Journal
+articles**: six current issues, PR #52's seventh issue and this follow-up.
+The separate unapproved daily briefing for 16 November is not included.
+Content digests bind the corrected DORA files and new articles. Publication
+and roadmap pins, existing attribution scope and source review states remain
+unchanged. The multi-source article is not inserted into the single-study
+attribution allowlist.
+
+## Build, review and release boundary
+
+No generated HTML, catalogue or provenance file was hand-edited. This source
+candidate requires the normal native full build on the exact combined head.
+Use the pinned clean manuscript and roadmap checkouts, Pandoc 3.1.3 and the
+repository's supported Node version, then commit the actual generated output.
+The source-only integration commit intentionally retains main's generated
+baseline until that build; it is not a releasable reproducible publication.
+
+KC-SWE owns the requested native build/commit handoff, with no competing
+worker. Record the actual HTML/index/feed inventory, all usual checks and
+the generated diff. Confirm Books preservation, eight entries per locale in
+RSS and Atom, corrected DORA bodies and the seventh issue's presence.
+
+KC-Brain and DEUS-Arcana should provide scoped non-author content/language
+review. Internal cross-review by the authoring context is not independent
+acceptance. Existing exact-head CI, normal merge/deploy, ordinary and
+cache-busting served readback and desktop/mobile inspection remain required.
+An earlier green PR #52 or #57 does not establish this combined result.
+
+The original private ARC material remains unavailable. This research does
+not grant source admission, execution permission or a TDGI relationship.
