@@ -78,6 +78,7 @@ jobs:
         run: |
           python3 -B scripts/test_build.py
           python3 -B scripts/test_journal.py
+          python3 -B scripts/test_feeds.py
           python3 -B scripts/test_journal.py --mutants
           python3 -B scripts/test_readback.py
           python3 -B scripts/test_renditions.py
@@ -234,3 +235,4 @@ jobs:
               server.server_close()
               thread.join(timeout=5)
           PY
+

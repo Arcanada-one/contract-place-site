@@ -1,0 +1,2337 @@
+{
+  "schema": "native-publication-reconciliation/v1",
+  "prepared_at": "2026-11-16",
+  "repository": "Arcanada-one/contract-place-site",
+  "pull_request": 57,
+  "source_head": "fc1e2324d52622cff876a50dfbc74503cf3d8946",
+  "native_checkout": "0d5484b425b80761d5885ac843a2b9a28518fe9d",
+  "workflow_run": 43867888073,
+  "publication_job": 133301057854,
+  "artifact": {
+    "id": 14225818728,
+    "name": "generated-publication-0d5484b425b80761d5885ac843a2b9a28518fe9d-1",
+    "zip_sha256": "6fd8aa73ae362c1f2536566261fe115f80b8bdf6c776e82b3b8a332da8b25588"
+  },
+  "source_pins": {
+    "publication": "39e4054830d9cb05bc0432d25f7320cb8a97f054",
+    "roadmap": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+    "journal_manifest_blob": "871ac918f51922b2c72dbabc0179c6090c83baa4"
+  },
+  "counts": {
+    "files": 377,
+    "html_pages": 328,
+    "journal_issues": 8,
+    "localized_journal_articles": 24,
+    "entries_in_each_rss_and_atom": 8
+  },
+  "content_js_sha256": "4d92b5be88f90474178258964d811b477e7bc27cdd3e6767ae85fcc67766acb0",
+  "native_observed": {
+    "compile": "passed",
+    "publication_hygiene_localization": "passed",
+    "journal_tests": "8 passed",
+    "feed_tests": "19 passed",
+    "rendition_tests": "126 passed, including the actual-content cache-key parity correction",
+    "readback_unit_tests": "32 passed",
+    "journal_mutations": "9 killed; deliberate missing-script control correctly INFRA_ERROR",
+    "renderer_search_and_pinned_regressions": "passed",
+    "overall": "failed only at Verify committed inputs and output are reproducible because generated files were not yet retained; served readback skipped; not a release pass"
+  },
+  "test_only_followup": {
+    "path": "scripts/test_renditions.py",
+    "git_blob": "8a2900e7304240a94f1ca4c3f857d68fea60bbfa",
+    "reason": "Compare shell bytes only after validating each page's cache key against its own actual content.js. Preserve wrong-language and extra-byte controls; reject old source-pin URL before normalization.",
+    "changes_generator_or_inputs": false,
+    "native_result": "included in this captured head and passed within all 126 rendition tests"
+  },
+  "reconciliation": {
+    "zip_digest_verified": true,
+    "allowed_roots": [
+      "public/",
+      "src/content/catalog.json",
+      "src/site/content-provenance.json"
+    ],
+    "all_output_git_blobs_verified": true,
+    "all_html_content_cache_keys_match_actual_bytes": true,
+    "dora_published": "2026-11-14T00:00:00Z",
+    "dora_updated": "2026-11-16T00:00:00Z",
+    "local_project_code_executed": false,
+    "temporary_collector_removed_in_output_commit": true
+  },
+  "acceptance_boundary": "Normal exact-head CI including reproducibility and non-author review are required after this commit. No production deployment, fresh warm-cache browser result, scientific admission or Live Lab completion is asserted by this receipt.",
+  "outputs": [
+    {
+      "path": "public/404.html",
+      "bytes": 10389,
+      "sha256": "2e5928ff6cf3bf9d4847b7250b48b69b031528fef1d13a43a201df91d2288661",
+      "git_blob": "3671ca4eb3225091855f47f8d5ac9096d47648be"
+    },
+    {
+      "path": "public/ATTRIBUTION-source.md",
+      "bytes": 2069,
+      "sha256": "fbd6e39de558f5d87a9713e58f611bd46960457e172bd77e15e2e5dcceefe951",
+      "git_blob": "13b48417cd28e900f3f287a16ff3337fefb84e28"
+    },
+    {
+      "path": "public/LICENSE-content.txt",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "git_blob": "da6ab6cc8f333d7e89a99812866df8f24374d47c"
+    },
+    {
+      "path": "public/NOTICE-content.txt",
+      "bytes": 642,
+      "sha256": "653f267f17b7dbaa7c8d9dd7de68f6388aeddcd6946ce3bc65e581c20466e1bb",
+      "git_blob": "745afcb613978808451d1dc4e10181872fcffe51"
+    },
+    {
+      "path": "public/analytics.js",
+      "bytes": 6202,
+      "sha256": "02e3d1270e7612fd65bc2f922dc6db3029c1f63fa956d5eedac1777e64ad5a96",
+      "git_blob": "27d74ef64b67c68aeb6fe7e023fea67340155230"
+    },
+    {
+      "path": "public/app.js",
+      "bytes": 155014,
+      "sha256": "c4d9b0a3b082dd5768dfdc5369c0e1a4404c2054129e6a111b9c46190ecf8de1",
+      "git_blob": "a8d127e3a9edd72c51ddde1b1478b7c9088e554a"
+    },
+    {
+      "path": "public/appendices/api-integration/index.html",
+      "bytes": 10974,
+      "sha256": "69d09c4cc1be38f8fd70082066a14af526a2d76c0ec3bc92848c2d363788c60b",
+      "git_blob": "1c24a0f559290da50829f67ec3926a8141351439"
+    },
+    {
+      "path": "public/appendices/index.html",
+      "bytes": 10615,
+      "sha256": "c744d17a3370f528e0163943c63b662baeebf60d5d010759cb32c70276c2d84b",
+      "git_blob": "7ee166b3e2460cc3ebc9f01d094fcd4ab9ad855c"
+    },
+    {
+      "path": "public/appendices/source-map/index.html",
+      "bytes": 10989,
+      "sha256": "33e4d89f77b152bac8e5dccf09374f8360b3d24f67b3ff0ab946aefbbc1f5c0b",
+      "git_blob": "c715c3526ecfaee57997e089657d309e2c49f77c"
+    },
+    {
+      "path": "public/assets/Manrope-OFL.txt",
+      "bytes": 4387,
+      "sha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b",
+      "git_blob": "e271172a9ed0cddc895aabb6509f1c7d880b492d"
+    },
+    {
+      "path": "public/assets/Manrope-Variable.ttf",
+      "bytes": 164700,
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "git_blob": "75274da58537d6123b14f2cd0c355ad4681fc2b3"
+    },
+    {
+      "path": "public/assets/SourceSans3-LICENSE.md",
+      "bytes": 4486,
+      "sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328",
+      "git_blob": "22c601b82f29fc6bb801445098c9f23ffdca4f94"
+    },
+    {
+      "path": "public/assets/SourceSans3-Regular.woff2",
+      "bytes": 109632,
+      "sha256": "53492fb3a0def77354f166a55d09b63a10855e91c206c7620a81cf56e97f8ec3",
+      "git_blob": "e2401aa9f8a0eb98127e5435ac069d499600f6e9"
+    },
+    {
+      "path": "public/assets/SourceSerif4-LICENSE.md",
+      "bytes": 4491,
+      "sha256": "c21d7293d87b6d7ab1d0229a2f55b77f33a7613a6a4e66f6693d68d7d8d09464",
+      "git_blob": "5871e1f3d1b3362453b3a1f6c493fbefdbd3dcf3"
+    },
+    {
+      "path": "public/assets/SourceSerif4-Regular.woff2",
+      "bytes": 76260,
+      "sha256": "6b053e98f0838afe81f3e784727be4583a7c13bb42f198dc5202ecffee0aaee0",
+      "git_blob": "0263fc304226d90e224e53053855ad138303b70b"
+    },
+    {
+      "path": "public/assets/architecture-original.jpg",
+      "bytes": 74390,
+      "sha256": "025b473c06d3cf978153bd1380c24578c9fb21f1277d3246bcdda8f70fcf2ae1",
+      "git_blob": "eb9ce27f8c22a3d82cab6a724265083b4a77431a"
+    },
+    {
+      "path": "public/assets/favicon.svg",
+      "bytes": 382,
+      "sha256": "4b297a87a0c85085b53a4dafbfdbd366c6299d46e1ee31dd558e7d371afa7722",
+      "git_blob": "ca1301df1593153edc8c0ea4dd5b0460ac4bea87"
+    },
+    {
+      "path": "public/assets/knowledge-dialogue.webp",
+      "bytes": 93886,
+      "sha256": "3eae15b8c440d5cbdde267ca2321397a1686c120dbf6f71469b0bad0b3a856bf",
+      "git_blob": "88d48f85c5986ab12593c5de42de3a7916c541f8"
+    },
+    {
+      "path": "public/assets/knowledge-landscape.webp",
+      "bytes": 188850,
+      "sha256": "e51c6c8de95df83b56b79657ae77a5ce23533190a4255a2b1de751cf081305e8",
+      "git_blob": "f7e06114439e700b33c8755476a2185af95c288e"
+    },
+    {
+      "path": "public/assets/knowledge-prism.webp",
+      "bytes": 220598,
+      "sha256": "4d77d3c315df64eb5850ff5b6ecfca5f3cd298472af62add9de772ec54cc8f5e",
+      "git_blob": "da72d06e7c7fa63ee4ee151b205a1736db9c9c38"
+    },
+    {
+      "path": "public/assets/knowledge-v2-original.jpg",
+      "bytes": 42010,
+      "sha256": "ae44b2403eb7a90b20786a34a1021f75428a2f0ddcb245c993fe0943d1d701a0",
+      "git_blob": "95958d3d877bdea11a9af02ee76f3dfc444c16ef"
+    },
+    {
+      "path": "public/assets/mark-dark.svg",
+      "bytes": 555,
+      "sha256": "d806083475ffc5040f4b3650c722ee819677541a1ceeacff08a29f673a2564c2",
+      "git_blob": "2b8715c491f06fd57b5e8e7c118b778557dd9dec"
+    },
+    {
+      "path": "public/assets/mark.svg",
+      "bytes": 555,
+      "sha256": "2c2adfc75f1aee9feccbe50c9f0601d375612e16bbb92be6fe21dc45ab909b83",
+      "git_blob": "c7e0f002157d9527a1fd5ccc33d6be62691f653a"
+    },
+    {
+      "path": "public/content-provenance.json",
+      "bytes": 177119,
+      "sha256": "e69bb814e46b7d998205f6d6b1928ab268785c60c78ec1b5874337e37e8e0bd8",
+      "git_blob": "bcd98be32fcb9ac460724dd50a818549b1be4544"
+    },
+    {
+      "path": "public/content.js",
+      "bytes": 3800160,
+      "sha256": "4d92b5be88f90474178258964d811b477e7bc27cdd3e6767ae85fcc67766acb0",
+      "git_blob": "8a029891d0c4f0c70d9e2120682cd3e9fc986317"
+    },
+    {
+      "path": "public/en/about/index.html",
+      "bytes": 12830,
+      "sha256": "129582c2691369e76afce09e532b5c5298b7b33723d9e1d48b3ceeb81a95854c",
+      "git_blob": "63ae18c9b3ec6255e2974f3254ef30010fc69aef"
+    },
+    {
+      "path": "public/en/appendices/api-integration/index.html",
+      "bytes": 33296,
+      "sha256": "255aa45d771b3628d05cf54944c50c98e3b2d9a27f12fad9f6c9945ad18db3ed",
+      "git_blob": "3e4d29ea05296cca7e541451c506a71ca3605f7f"
+    },
+    {
+      "path": "public/en/appendices/index.html",
+      "bytes": 11654,
+      "sha256": "3b6744ff8257856e46622a1fee64ca489282931e3c5399641f4f1930325ed3f8",
+      "git_blob": "eb604fbcb39ab4362e87f7a959aeaf77852023f2"
+    },
+    {
+      "path": "public/en/appendices/source-map/index.html",
+      "bytes": 32631,
+      "sha256": "0089ee614e41d03a528e56625fc706108099d20542c477fa819e2897460faf39",
+      "git_blob": "bf73d8e85b69e2c91190ffd0596e8f8a708e5518"
+    },
+    {
+      "path": "public/en/books/index.html",
+      "bytes": 11358,
+      "sha256": "7e3d82c09e1e3d457e4487ad793dc63d25d32f4f494ea0a87d642497abc3cffb",
+      "git_blob": "2b85ba825b6e128910d64af75a3a19c7544a11d3"
+    },
+    {
+      "path": "public/en/docs/artifact-registry/index.html",
+      "bytes": 10705,
+      "sha256": "65bc69a120a3b99835ecc34556f8cf781b89cc61b48c7be17817aa359363b8c8",
+      "git_blob": "166e76ed26d85c8e51dbc2e58fe9c9176cfff0c6"
+    },
+    {
+      "path": "public/en/docs/availability/index.html",
+      "bytes": 12079,
+      "sha256": "e36ecd0e3c05d5733b167108e588a4a6e4bd64c5a067e25c80efac1bf7fff5e5",
+      "git_blob": "66f9f69932851bd0d514cd96265c302aefeb8d94"
+    },
+    {
+      "path": "public/en/docs/cache-identity-and-invalidation/index.html",
+      "bytes": 10774,
+      "sha256": "f83af16176e8dc8b17380abc3330517297b084592a9f886bee1ecae71a7052d9",
+      "git_blob": "fd38b2eb0b2628985c4ceefe264c7151309fca49"
+    },
+    {
+      "path": "public/en/docs/compiled-artifact-contract/index.html",
+      "bytes": 10744,
+      "sha256": "f52fd60060573144564dcd49fb3b6d45ef9ecc37b4034d3973702e3a7eb0376d",
+      "git_blob": "928737261c43922c2605ba21bc5419c48b6e3ba3"
+    },
+    {
+      "path": "public/en/docs/context-package/index.html",
+      "bytes": 10686,
+      "sha256": "2268a2daeac713c53efe04c24d382c136f45dffdf9f7a525767b2f24940cf0ac",
+      "git_blob": "aeecfc4f0fe64b3122aca5d6e8fc4d7d27cd95bb"
+    },
+    {
+      "path": "public/en/docs/contract-family/index.html",
+      "bytes": 10705,
+      "sha256": "e154250f873dbbdba3db8131c6717a3ad45b37aa0a46ecc1f17a180afc2ac6aa",
+      "git_blob": "2b8bde45216939dec11746831c07c5dc57e523f5"
+    },
+    {
+      "path": "public/en/docs/index.html",
+      "bytes": 11392,
+      "sha256": "7fe351efb7da4e9eb0745960b38efb370436145276590c51beb378be2bcfd02d",
+      "git_blob": "921feb34545ce77fae14c5bd342c0a8257e0960c"
+    },
+    {
+      "path": "public/en/docs/knowledge-contract-v3/index.html",
+      "bytes": 10714,
+      "sha256": "86502228c9de996c99ee7114a5e71005e15243c009ad997cfab950cb995a6b8f",
+      "git_blob": "0f9604888986fdd4013f5bef296220bbc4d96a64"
+    },
+    {
+      "path": "public/en/docs/knowledge-evolution-contract/index.html",
+      "bytes": 10719,
+      "sha256": "f87e3d4da9889545c9511f9afd3a4c4919a82e48b95740bbc04c73a2eb882d61",
+      "git_blob": "d651ac9860c27c6459dfcd1c159d656ec13d4262"
+    },
+    {
+      "path": "public/en/docs/model/index.html",
+      "bytes": 10666,
+      "sha256": "2e81496b69cd6b56937d2b79a01994596af54de754acb7d58c23c5bea202dff0",
+      "git_blob": "910c3d9e5283894bf13f67ac83a153b38192c893"
+    },
+    {
+      "path": "public/en/docs/reuse-policy/index.html",
+      "bytes": 10673,
+      "sha256": "601e37702d164c02013a583fa47fc3fef7f94280746b539ca96e68408d7bbf0b",
+      "git_blob": "8d306ac40b38f02f9f4d0b674aa567a1edff7503"
+    },
+    {
+      "path": "public/en/docs/semantic-types/index.html",
+      "bytes": 10674,
+      "sha256": "301af33d15ca334799d3a5d5de6acb932c524c169f6c96419ab1dbf387f96efe",
+      "git_blob": "721668dd0041dd17fc7adfbfa10de0f68a37d323"
+    },
+    {
+      "path": "public/en/docs/status-model/index.html",
+      "bytes": 10662,
+      "sha256": "3393569cd5e7b64bb4d7f7b0e4bd66909a5cce65a08a95ccdbb7b9f7cf3655e4",
+      "git_blob": "e1b5ac2fde1c7d44b0572ef9a9ca9d0537b0de57"
+    },
+    {
+      "path": "public/en/engineering/index.html",
+      "bytes": 11455,
+      "sha256": "2c4785107c9bef49622b3a4c98766f0ffce8873f754c572dd933ea7c878214e3",
+      "git_blob": "12b685bab878edff92a6e65cf6b3642c18b36e0c"
+    },
+    {
+      "path": "public/en/engineering/specifications/artifact-registry/index.html",
+      "bytes": 25562,
+      "sha256": "416203672c688d34c70a148e14819e26f56e59078cb73279dc672e0e6f6984a8",
+      "git_blob": "d8f09adc00a8e97a424a7134890a688febfded04"
+    },
+    {
+      "path": "public/en/engineering/specifications/book-package/index.html",
+      "bytes": 45633,
+      "sha256": "0bcaa3a4a2db78243fd877992f1dbab4d979b4785424eb86d7414cc3a472aa15",
+      "git_blob": "1b3ea29c8a1c1a3724bf9654f5224b68adc89b16"
+    },
+    {
+      "path": "public/en/engineering/specifications/cache-identity-and-invalidation/index.html",
+      "bytes": 30314,
+      "sha256": "bb32439e952c843bf835a5c80d31d2778c96bab7f28c51b58a28a1d2a08d0580",
+      "git_blob": "e291e0afc7b57466fdf39e84de5334ae89e06d41"
+    },
+    {
+      "path": "public/en/engineering/specifications/compiled-artifact-contract/index.html",
+      "bytes": 24750,
+      "sha256": "61823c912c75d618b46a4e2b9522183bdff25d2fc720b80953da13952e9ed6c6",
+      "git_blob": "22b5218f5259396153803b9b8cce1fed11e989a8"
+    },
+    {
+      "path": "public/en/engineering/specifications/context-package/index.html",
+      "bytes": 24670,
+      "sha256": "f4e00415609976b7fea1ef41a8ee99029575404c603d0b79ae96d73058d4a292",
+      "git_blob": "616bee86b79925f7c7fc42cc7eed56b29d8dc2a2"
+    },
+    {
+      "path": "public/en/engineering/specifications/contract-family/index.html",
+      "bytes": 25794,
+      "sha256": "2df43a476354403b0a5243a45f5464b1504d693aeae1110223414f6bba28fabe",
+      "git_blob": "e0054d8fb8c4b56bd34615e1843077c644c3d616"
+    },
+    {
+      "path": "public/en/engineering/specifications/index.html",
+      "bytes": 17568,
+      "sha256": "3d1500d362981fe6a93403b012c03f2f4304d10bd49b2ceb0e7d4fe92754c9e4",
+      "git_blob": "c2c0f9464bcd52d89f6980cec7852be12bb7077f"
+    },
+    {
+      "path": "public/en/engineering/specifications/knowledge-contract-core/index.html",
+      "bytes": 27167,
+      "sha256": "35c593c194b786cc590bac3b7d57b0e2fcd2026c0ba32eeb65b3500029c799dd",
+      "git_blob": "3c87ee07428997ed5cdc9d7a2dc31adcfcb773a0"
+    },
+    {
+      "path": "public/en/engineering/specifications/knowledge-evolution/index.html",
+      "bytes": 24590,
+      "sha256": "083d071e6c9971d843dcbd15e5fa6857d6c5636e64586372e1eb87e2d1666c90",
+      "git_blob": "17f92918000ab151e518a59bb7bf88e5f62b2d33"
+    },
+    {
+      "path": "public/en/engineering/specifications/reuse-policy/index.html",
+      "bytes": 25900,
+      "sha256": "b336f13f238071fb61acaf0ed48de2d97212a1a29fbc98caa775d443fc0dea44",
+      "git_blob": "364ed071c964147a189227cce9db06e0784305d9"
+    },
+    {
+      "path": "public/en/engineering/specifications/semantic-types/index.html",
+      "bytes": 24126,
+      "sha256": "8ab4e6f4837a74cd80aca65c88a7626b328033699aaeb687adf70fef37ece660",
+      "git_blob": "7e687c0059c2f35231446536e0c855b336179ef2"
+    },
+    {
+      "path": "public/en/engineering/specifications/status-model/index.html",
+      "bytes": 38528,
+      "sha256": "7e5cedf8c79b7d85580e2d44bbe2cb358c2a43e05fa6ab69758631dd9c400526",
+      "git_blob": "8bfeace0888f40dfc8df626b8bf283dae3275ff6"
+    },
+    {
+      "path": "public/en/engineering/studies/contract-profile-conformance/index.html",
+      "bytes": 34564,
+      "sha256": "f59ed5b4bd3ec34066af8854e9113d3c91260fdbb6ac0cef53a5570efd5552dc",
+      "git_blob": "fd20bb70f1b035ae8ee2b76854c1a289b82bce46"
+    },
+    {
+      "path": "public/en/engineering/studies/dependency-closure-and-package-delivery/index.html",
+      "bytes": 37760,
+      "sha256": "8f91023150f6d1d5a5ade96dc376cb21d65c0913cb46aab37c1b6cf54dfbb054",
+      "git_blob": "03d6972f156b63b72ebede85256af241ff658ee6"
+    },
+    {
+      "path": "public/en/engineering/studies/editorial-skill-pilot/index.html",
+      "bytes": 36268,
+      "sha256": "1354a085e29658b41ad6f2b3bda75258cd26abcb2f906284bfbec866ed67c351",
+      "git_blob": "3068e0d9af1e9909bb1b27332c5e4a95fe2f6665"
+    },
+    {
+      "path": "public/en/engineering/studies/executable-projections-and-revision/index.html",
+      "bytes": 37447,
+      "sha256": "2fc681015ef113aa6a7c17c9188223c2cc7a496c06ed38b863ce709926aa3e57",
+      "git_blob": "277c3b8c68b8839cc5180d22b84b13cb6f171250"
+    },
+    {
+      "path": "public/en/engineering/studies/index.html",
+      "bytes": 14488,
+      "sha256": "f4e50452890d2fdedbbd0cc32f8c34c16d28ec05dec484c8c04459f6859db6d8",
+      "git_blob": "9ba34c71c7bc0a8f33480c8874f6ce29f548adec"
+    },
+    {
+      "path": "public/en/engineering/studies/reuse-admission-and-cost-controls/index.html",
+      "bytes": 46838,
+      "sha256": "e1cfb4eaa66219eb547d872770e84344d79d0512fa1fd58ee53859cf4896267c",
+      "git_blob": "1499ae5851ec5bc37e4fffc3674ff7dd2c8e78b7"
+    },
+    {
+      "path": "public/en/engineering/studies/source-transcription-and-uncertainty/index.html",
+      "bytes": 34028,
+      "sha256": "793e608559d4af01d2c3b6fad4c6655ea8bb000bc75c8c7dfa9e634061fef1a0",
+      "git_blob": "2dce57435e69ebc65c5ec11fe84b912cfe75e829"
+    },
+    {
+      "path": "public/en/index.html",
+      "bytes": 21179,
+      "sha256": "da8aa74f27212c246875befd94f9e597bc8069a915fe24c014b639bc6db80766",
+      "git_blob": "83354a841cbec94186a6db8ef9c0067c60decfeb"
+    },
+    {
+      "path": "public/en/journal/agent-situation-2026-11-14/index.html",
+      "bytes": 17493,
+      "sha256": "33e528c6d6b917343c9568d547a3b2d57fe3c0fe22902d44e4de4606d2d435a8",
+      "git_blob": "a094925628f147d3e830aa64ed7a496396879f1e"
+    },
+    {
+      "path": "public/en/journal/atom.xml",
+      "bytes": 70886,
+      "sha256": "278e3f373e58f18554963556bed7fdda7fd139342c115502edf44048271452a8",
+      "git_blob": "3ce2e1980ebc74bff226d21bdc5022faafcee210"
+    },
+    {
+      "path": "public/en/journal/building-a-place/index.html",
+      "bytes": 11777,
+      "sha256": "397bc4cb9eb8916a0ce7d9f0941940a16ebc73b14e5ea75f59a7ebb42318587a",
+      "git_blob": "70cd24b1e12e5c697376ac1ca4ccc91ff5f125bf"
+    },
+    {
+      "path": "public/en/journal/control-for-topic-2026-11-12/index.html",
+      "bytes": 17313,
+      "sha256": "efaf7eaa2d38fc0ec91739e12258f4171101b7c03e051c151b72576385dcb470",
+      "git_blob": "5fcabd06881e35abdae0fb1e8b35c48b8a47347b"
+    },
+    {
+      "path": "public/en/journal/dora-gaps-agents-2026-11-14/index.html",
+      "bytes": 24167,
+      "sha256": "615cee963e8704631aaf193632da14329d4ce569f27d36964ee3e7ac93ab8c09",
+      "git_blob": "359373bc73df8ec9be7d2059cbe01e0f2dbf6a63"
+    },
+    {
+      "path": "public/en/journal/index.html",
+      "bytes": 19350,
+      "sha256": "bfc9dbcdd3b3a0ff7bb1407f7322a7ee1781f90fd422db8a1505fe4cd01751f9",
+      "git_blob": "a3dd233c3cb89ad16c5e71328e1702ba01e07bff"
+    },
+    {
+      "path": "public/en/journal/knowledge-contract-architecture/index.html",
+      "bytes": 14651,
+      "sha256": "7907310c05c0b2a1ec6cbef075bc48a7e68562c68e3435e3f8ccf99828a7f5a0",
+      "git_blob": "96c64821411fc9133ff66d29343b70aef2d0c222"
+    },
+    {
+      "path": "public/en/journal/knowledge-contract-v2/index.html",
+      "bytes": 19473,
+      "sha256": "fd90ec5660041c744ac94436cf062d9267ce2ea3e297b39d1011ce6995f07a50",
+      "git_blob": "caae3afefad37ff94630f2c31fb8a143dc825196"
+    },
+    {
+      "path": "public/en/journal/lesson-without-evidence-2026-11-11/index.html",
+      "bytes": 19368,
+      "sha256": "264abbe8d14e2898fb183f4866c46c62549488dee3d27c078a4af9af966e9fda",
+      "git_blob": "c785f364fa78dfd4031ee618cc6c50abd1a7d2b9"
+    },
+    {
+      "path": "public/en/journal/rss.xml",
+      "bytes": 70467,
+      "sha256": "1917733141d61af0edc647b9c95dfbacfdd0d55e75bb00d0968e41e5bbf4813b",
+      "git_blob": "2523e9228533798855246f49dcde33ec344fbb50"
+    },
+    {
+      "path": "public/en/journal/rule-after-restart-2026-11-15/index.html",
+      "bytes": 18638,
+      "sha256": "625696dca37c30b226516d1841b1e6a57642b8c20d4ffb75ae45a0bdc0f701f7",
+      "git_blob": "94313304ce85c2cef44b2153f5ac125b66eefec2"
+    },
+    {
+      "path": "public/en/journal/source-rule-checks-2026-11-15/index.html",
+      "bytes": 18725,
+      "sha256": "4ed9e751b2e5ed8a6ab773643d635cffd2f8a2310764be630a2c8db63fbc32f9",
+      "git_blob": "070e5c4425eac280a6902840a331f86a9bbb7629"
+    },
+    {
+      "path": "public/en/journal/tech-diplomacy-agent-contracts-2026-11-16/index.html",
+      "bytes": 26140,
+      "sha256": "0c82c760788cbe7c604aa01d60f624b2e89772477ac2a4c19f964ec351f90b50",
+      "git_blob": "fc933c4278b3b1c22aec14c587b57588f385f85c"
+    },
+    {
+      "path": "public/en/journal/verdict-is-not-a-test-2026-11-13/index.html",
+      "bytes": 18789,
+      "sha256": "7bfaa1413dfeab99e545fc6856c122c276137ca7d0db1874809db931e15e2f56",
+      "git_blob": "225711df2b1dd3b90bb109ad577d304722677f3a"
+    },
+    {
+      "path": "public/en/lab/knowledge-journey/index.html",
+      "bytes": 12535,
+      "sha256": "3a17bcb02537fa71899b5db7d79d24a140839746dd18cb5d43cfd5f5932c9767",
+      "git_blob": "e57f8f922b78686a19f6075e4a07502e7c52b3b7"
+    },
+    {
+      "path": "public/en/programme/index.html",
+      "bytes": 35844,
+      "sha256": "634c66317e371c7a6345e3eccacc98175632cafdc0b00ad47e17428737f486ee",
+      "git_blob": "94233551215f0b0f5d24ed99f503c010f286a92f"
+    },
+    {
+      "path": "public/en/reference/bibliography/index.html",
+      "bytes": 36211,
+      "sha256": "c0d8db032a53217b12b08c2bb14d4f04ff683155268385ecff8070371afe3400",
+      "git_blob": "f88e20c9dd4834a74d9fbb3d818129d880c352d5"
+    },
+    {
+      "path": "public/en/reference/glossary/index.html",
+      "bytes": 52759,
+      "sha256": "7a501ff43326fb30c2130b510bd57fa0b9741e1b3695641b4bc8ded4f0dca25a",
+      "git_blob": "3c035dd734c79883ad73b350ca8cfb515f09d12d"
+    },
+    {
+      "path": "public/en/reference/index.html",
+      "bytes": 11612,
+      "sha256": "f55605c8bde231bd0a142f2c1630a1653a5322feba836a507f86139ff8abe9b4",
+      "git_blob": "66492747a83c954c5bd51e67c257796a5f7ec917"
+    },
+    {
+      "path": "public/en/references/index.html",
+      "bytes": 11984,
+      "sha256": "47e94c94d331a836dcb5a9c2dbca12027df4ab546d71085ec51fc6cdd8d80b20",
+      "git_blob": "3b218a4b1760c2090a226a9ce3e31be4707af9cd"
+    },
+    {
+      "path": "public/en/repository/index.html",
+      "bytes": 23046,
+      "sha256": "63b9c57f49ba456d8782ca10ba4ab6dc29af0352fca303515326390225a3fe94",
+      "git_blob": "5c50cd03504aba17263ebe096b33a5254d696274"
+    },
+    {
+      "path": "public/en/research/anthropic/index.html",
+      "bytes": 11214,
+      "sha256": "50eb386e19f990e1b215dbf472817291e305837c6286c684e000443259d7d806",
+      "git_blob": "92fd0fe8a531d5b1f4807d18333285a51a63d315"
+    },
+    {
+      "path": "public/en/research/deepmind/index.html",
+      "bytes": 11233,
+      "sha256": "5a6d5aed8987c164d3897d3dc2083dce60ec8052baea4b82ee1d4de20bed9953",
+      "git_blob": "b909432316c3f4a6ecb860e0111fc555f0cc5c87"
+    },
+    {
+      "path": "public/en/research/hugging-face/index.html",
+      "bytes": 11206,
+      "sha256": "b2f7620bf2dca744cbc73eb6f19f551f73db1cbb82ecf234f05540f2d641dee8",
+      "git_blob": "a71d01422f94f493470969f54fa9dd2dea9c0570"
+    },
+    {
+      "path": "public/en/research/index.html",
+      "bytes": 21264,
+      "sha256": "280662a2591013b12b3965f10ad3c5368af7a3420799989bdc8220e7241caee7",
+      "git_blob": "e39d6811624fbdd67465eb470dac12a589df6fce"
+    },
+    {
+      "path": "public/en/research/mcp/index.html",
+      "bytes": 11273,
+      "sha256": "86d8e07d86c51f2e51f71b7cb85806dbdf3e1b0a0cda515e021484f18b4f589f",
+      "git_blob": "2e748f2e42c35021c5e3e95d6aeea8ae2a97fce6"
+    },
+    {
+      "path": "public/en/research/p00/index.html",
+      "bytes": 10703,
+      "sha256": "755f06036f59bc5dc6b3163bb2fc9c74ec348439972202cc37fa7f1dd43eda4c",
+      "git_blob": "060a8c12fd27803ff70e989af6dcb3655d838ec9"
+    },
+    {
+      "path": "public/en/research/p01/index.html",
+      "bytes": 10703,
+      "sha256": "aff590d51064f6c81fb1fdcf104f9eab1d1006e8a31004cb5391902a1c7ea2ed",
+      "git_blob": "834f224804aa3baade8cf48bc54b4e9ac11952c4"
+    },
+    {
+      "path": "public/en/research/p02/index.html",
+      "bytes": 10703,
+      "sha256": "641fcc66aa2b48fca99b516df3074bd94e8bd62088a789d691020d30e399107e",
+      "git_blob": "e3e194ca6df7f188b2d30230ae2b83011280aed1"
+    },
+    {
+      "path": "public/en/research/p03/index.html",
+      "bytes": 10715,
+      "sha256": "377c5c7856ced65508cf02b2af15d102559404c81ba953e2939c7b4e5d242408",
+      "git_blob": "580c8eab6cfa0d93f57c5f3ad67817a86693d9b4"
+    },
+    {
+      "path": "public/en/research/p04/index.html",
+      "bytes": 10710,
+      "sha256": "3f0de861da289a1bcb77c2c736186b60bca3300db674444be050b0b41c2772af",
+      "git_blob": "639a24436326b829d2e86043185a8db54f3b3ee4"
+    },
+    {
+      "path": "public/en/research/p05/index.html",
+      "bytes": 10710,
+      "sha256": "476eabcec3a59f99ea2b5a96ee352c395cd5e1961c169ab33624bac018d7f543",
+      "git_blob": "f9581d313ff7dffac5b76fb90825eef4692664ed"
+    },
+    {
+      "path": "public/en/research/p06/index.html",
+      "bytes": 10693,
+      "sha256": "dad4bfdc66e3ec4307dd43df28ffbfc5a9db886d946ed700a146bd4e8390119b",
+      "git_blob": "c8dafee3bc2d5b45d64880609bc856e544dd8a20"
+    },
+    {
+      "path": "public/en/research/p07/index.html",
+      "bytes": 10708,
+      "sha256": "0a12173674d1cb81c49d3445bc66266118e43b498c8db8f643b8348ec2e14338",
+      "git_blob": "117b2c5635f3405a1d040eb0c816c74945756daa"
+    },
+    {
+      "path": "public/en/research/p08/index.html",
+      "bytes": 10693,
+      "sha256": "555cc7d832d8dd8219765fdc081afd15c5945ae4ab98c6038c0439d022db1ed4",
+      "git_blob": "00cafa1bf7cc20d5289237138f3480488f3af224"
+    },
+    {
+      "path": "public/en/research/p09/index.html",
+      "bytes": 10679,
+      "sha256": "088e0982ae1c775e204e00123690d0d801cb62d23fc5ead3f39d31fc7e497f94",
+      "git_blob": "5225a19becf8e6d65bd39b551d67fb35e06803b9"
+    },
+    {
+      "path": "public/en/research/p10/index.html",
+      "bytes": 10686,
+      "sha256": "dcae7c71710a83d46ec6c8c7ed5a90cf65a11e179fcb07f2aa92dfcc633d7b2a",
+      "git_blob": "a91fd7c708c9ade2f72c06cfe6456eceac69e403"
+    },
+    {
+      "path": "public/en/research/p11/index.html",
+      "bytes": 10708,
+      "sha256": "c86d278fb68ad6dbd2a05f596cf4f8e5e721a1cd7eb3130d214e9f35d906e0f6",
+      "git_blob": "c0722364663640fbf8c9fd8330216fee8a25db1d"
+    },
+    {
+      "path": "public/en/research/p12/index.html",
+      "bytes": 10679,
+      "sha256": "f126c3d6b20e6149fcf9f72bcda46246c3e4f8e00c6e5de9c0df7f6aea33fbe5",
+      "git_blob": "a768acd18921214b6b4f6d48d9a7ee3956533ac0"
+    },
+    {
+      "path": "public/en/research/p13/index.html",
+      "bytes": 10662,
+      "sha256": "73175a0534616fbd63c0a3683b2bd25db8a6c20e43c82c50ed4b1c65bca05d81",
+      "git_blob": "877b32b580ff6d0457d7a3eb74107baa91e8404d"
+    },
+    {
+      "path": "public/en/research/stripe/index.html",
+      "bytes": 11184,
+      "sha256": "517393f53cd03131682104b455544d4cbd79b25405d925b1b0880b606691500e",
+      "git_blob": "8752821ff38b0f24b6064395902aabc5810fafbc"
+    },
+    {
+      "path": "public/en/research/supabase/index.html",
+      "bytes": 11164,
+      "sha256": "64a764fc0da37666121ca759b1642021d3ca8e1fb529b7d9aa3a483926ee4918",
+      "git_blob": "7177a985dfaa5e20207ae4ccaca8b6b702b49007"
+    },
+    {
+      "path": "public/en/roadmap/index.html",
+      "bytes": 128411,
+      "sha256": "85a4b8844ecb8525fd8de3f149cab26506d4bfd2f98240164fdcb1642d40012a",
+      "git_blob": "f1e891544d5bc112e1834322571b32d3e8f45bdf"
+    },
+    {
+      "path": "public/en/science/constrained-transformations/index.html",
+      "bytes": 64495,
+      "sha256": "9bfac0d31aabb0acb7cbeeecd5075fb3315a49fa0dc2a333709860d05b40be1a",
+      "git_blob": "2936f7844cd3fa8b808de97969ecae8b5360a976"
+    },
+    {
+      "path": "public/en/science/controlled-knowledge-reuse/index.html",
+      "bytes": 55094,
+      "sha256": "72157926c41eca9e0ffea2623d51737ce6387a1f832c3dcd5b437cb30e52f12d",
+      "git_blob": "bd27eba0bf21eff8e95178c2a830e69beb84a1a1"
+    },
+    {
+      "path": "public/en/science/evidence-and-falsification/index.html",
+      "bytes": 44480,
+      "sha256": "fbf83683d52153aabe15449e942d0a473cb0dcd9ac2bc9b9f27c77b278ff9f95",
+      "git_blob": "ad518e96d26ba71682d403e7515a11569436dc88"
+    },
+    {
+      "path": "public/en/science/geometry-of-semantic-representations/index.html",
+      "bytes": 77419,
+      "sha256": "7d7a06246548855456e38e010ad17fdca2ba464653b2a00b202a1a906eb39ea8",
+      "git_blob": "0ddd0900035307acfa1562dd53695d866078184e"
+    },
+    {
+      "path": "public/en/science/human-meaning-and-computable-knowledge/index.html",
+      "bytes": 74312,
+      "sha256": "9300a1ccc27e22b559bd2d4c58db44eeb8558c0ee1124a7a2dda8e1cde1a6511",
+      "git_blob": "81b67fd0bcdb53365358a1a43692c8309896ea44"
+    },
+    {
+      "path": "public/en/science/index.html",
+      "bytes": 21236,
+      "sha256": "c319561565c69183dd8f507086302126e84ad35d0aa1598fb9f7420f52a5d12b",
+      "git_blob": "514f3d7e5498e369986019c60a5785f228cc1d7a"
+    },
+    {
+      "path": "public/en/science/interaction-and-memory/index.html",
+      "bytes": 41946,
+      "sha256": "05cd09c154ec5e4f6e4bbfcb48ef5bb303710c1341ccb60d24fd8f5296f06f4f",
+      "git_blob": "cb5afa125de6b5a8b5d199afe09b7ee7aae06192"
+    },
+    {
+      "path": "public/en/science/knowledge-utility/index.html",
+      "bytes": 45098,
+      "sha256": "cdba6e2f13c55440aa7d39f0cfe859bad380317b755611bb09cde1e765c736f3",
+      "git_blob": "b0948ada676a157abd4dbc60d57fd5f481a4c16d"
+    },
+    {
+      "path": "public/en/science/retrieval-and-context-composition/index.html",
+      "bytes": 52486,
+      "sha256": "d153f29263904432864db248ca0b27fc1d6eb9a2173323527c43f77d43aed7a9",
+      "git_blob": "de5da28babb460a7a85d8ce77c5d8f4a9db672db"
+    },
+    {
+      "path": "public/en/science/revision-and-governance/index.html",
+      "bytes": 42147,
+      "sha256": "d33e33deee74f074a607f7b2f23b701b54e0e9dd4b05947552d2d079c723743f",
+      "git_blob": "392a6b8852a568c7829387f490267c8397c00a10"
+    },
+    {
+      "path": "public/en/science/semantic-objects-and-context/index.html",
+      "bytes": 52039,
+      "sha256": "7729e3edee2c3bf1f675fcada6a1fee86d44d9091397b6eea6219026fcc0e882",
+      "git_blob": "22c4884897af71fbc1cf56de8b2b24b3459ead8e"
+    },
+    {
+      "path": "public/en/search/index.html",
+      "bytes": 20773,
+      "sha256": "8d9e69ae3a4c7d5e6291c476a5ec9958bf67682da1cdf732de011cedc55ea81c",
+      "git_blob": "4fe11a7f0a6f90cdb57c85ad28e7fc5ab6783902"
+    },
+    {
+      "path": "public/en/wiki/index.html",
+      "bytes": 11567,
+      "sha256": "b0fd37cb8426a16849c53924251638df6f8e70fe23495a60361b92d6f2650258",
+      "git_blob": "527b643cfd42703d9f5001331be1fc72d74b3522"
+    },
+    {
+      "path": "public/en/wiki/knowledge-contract/index.html",
+      "bytes": 10705,
+      "sha256": "fd53569afa4d290922f7ed98fc9476b0c6387d22bcd6098984f23143557b5ddf",
+      "git_blob": "33dbd35de94e2a40f2e318f267298360bb4a3426"
+    },
+    {
+      "path": "public/en/wiki/provenance/index.html",
+      "bytes": 10693,
+      "sha256": "52ccc472dda21516bc18b91a660ad4041d2ae5f44ed5888a1acd7f8ec7bc7532",
+      "git_blob": "140176173ba137df8dc95acbda3ef0eaddf66d1a"
+    },
+    {
+      "path": "public/en/wiki/versioned-knowledge/index.html",
+      "bytes": 10703,
+      "sha256": "1975252c42bca9937da419c21f21e4080173679be3ec8539e7a7b84359b578f8",
+      "git_blob": "bae9a05d327a432cb548c36fa4fccc7f8dc0e4fc"
+    },
+    {
+      "path": "public/engineering/index.html",
+      "bytes": 10622,
+      "sha256": "062fa727e93cc43fde983afe4707ae182cec29c8700974e1665c6792282dc210",
+      "git_blob": "a90437f303aa797280bd056840e6aa9a300537e9"
+    },
+    {
+      "path": "public/engineering/specifications/artifact-registry/index.html",
+      "bytes": 11074,
+      "sha256": "cc66bf94cd5914c6d0d907a0a0c118f8ed9974ad2ad51bf6a6837c01e8b18ec0",
+      "git_blob": "9659e43c126fd23f6a8505523ce7b9b581ce8072"
+    },
+    {
+      "path": "public/engineering/specifications/book-package/index.html",
+      "bytes": 11070,
+      "sha256": "519c938b2338f3be4da705a536835607bec91e08e8bf530355d74a6ab5c16277",
+      "git_blob": "304ea53b09d139fc798ba5cfbe0dfce539bebfdc"
+    },
+    {
+      "path": "public/engineering/specifications/cache-identity-and-invalidation/index.html",
+      "bytes": 11238,
+      "sha256": "93ba454327bb6ccb5e17efb4b0857e8f29afdd21ad77de6afd6d40ff5a678f42",
+      "git_blob": "40ff4225d8bcf4c1e29c35a95dbc95cb6bc935c0"
+    },
+    {
+      "path": "public/engineering/specifications/compiled-artifact-contract/index.html",
+      "bytes": 11145,
+      "sha256": "d1ed7bc9cea4aa0233fd7d6d754595bdfef574788dc198e4bd27b500dab7044e",
+      "git_blob": "98ec9a57033d9043d6f47e808b7ecd194a2f51c4"
+    },
+    {
+      "path": "public/engineering/specifications/context-package/index.html",
+      "bytes": 11034,
+      "sha256": "aab50c92d8b38391f43d0f8609d3ea47155837a562ed4d2b36f94361d2d16c50",
+      "git_blob": "907f3fdf29b302bfd100bd1e04e62cb35066da82"
+    },
+    {
+      "path": "public/engineering/specifications/contract-family/index.html",
+      "bytes": 11123,
+      "sha256": "f7e28902dce7b69743743556c9024575f9d336e36cd04eab42820abc63357e08",
+      "git_blob": "c78a1dcbfcf670cc34dde92c0d75cb57017391da"
+    },
+    {
+      "path": "public/engineering/specifications/index.html",
+      "bytes": 10727,
+      "sha256": "ef94d1c219f09a587956eb3449b771f06cb395cd01b84676d1596258cbea02ef",
+      "git_blob": "00a8a9bf21f956e8eda6d3d78d62ca01e85323bc"
+    },
+    {
+      "path": "public/engineering/specifications/knowledge-contract-core/index.html",
+      "bytes": 11101,
+      "sha256": "e855cbc52eac9a9b13417485c5a49424c59479ba46a7ecb32301c6be934bc0c9",
+      "git_blob": "740b24b7a5e7ef098c6d377714d7e9cdd8179443"
+    },
+    {
+      "path": "public/engineering/specifications/knowledge-evolution/index.html",
+      "bytes": 11022,
+      "sha256": "5ad63132b91e6addd297d04758f92ef0a25995ed8c9b479ca716e4bdd058f925",
+      "git_blob": "cb3aac0b5fcf9ded605c14889c8b3b60ef86fa7a"
+    },
+    {
+      "path": "public/engineering/specifications/reuse-policy/index.html",
+      "bytes": 11071,
+      "sha256": "349abc1b1f463da7ed1839d6b3da48fe9ba3c2e46bab594dd4faf17f0e07d338",
+      "git_blob": "a7f165df8ec2f577d21df54493e06c8cb3673109"
+    },
+    {
+      "path": "public/engineering/specifications/semantic-types/index.html",
+      "bytes": 11015,
+      "sha256": "47aaf471163ab361417346d44b935eac3e138313cbd1e5583341be6f1e97d88a",
+      "git_blob": "4136adc9c9700e8128495587931c44fa3e5f73b3"
+    },
+    {
+      "path": "public/engineering/specifications/status-model/index.html",
+      "bytes": 11028,
+      "sha256": "d432e3baf436b123b067783dad86b577b30faf627c53d2da3961a11d9552b400",
+      "git_blob": "7750be1a903ca98242003f29ddd3c4323a23bd84"
+    },
+    {
+      "path": "public/engineering/studies/contract-profile-conformance/index.html",
+      "bytes": 11218,
+      "sha256": "9c9647b667ee301016b8032d627308908b2d9c3f0ee1f68269b627d68011f255",
+      "git_blob": "8b25ae09e49477b890623f76c66e6c0899293f30"
+    },
+    {
+      "path": "public/engineering/studies/dependency-closure-and-package-delivery/index.html",
+      "bytes": 11281,
+      "sha256": "b4f149a4cae8f0a61277bff7c94b5d940621becec1ae1f64bc04147371200c9a",
+      "git_blob": "271bbdda224afc4089a4fa643f9cd28b083998b7"
+    },
+    {
+      "path": "public/engineering/studies/editorial-skill-pilot/index.html",
+      "bytes": 11251,
+      "sha256": "29d54ac05e378108fb2da76164560deed9b84321d2b5156a624ef04996539424",
+      "git_blob": "df481a154ca43aeb25810cb4c5b4acaba7ee6cf0"
+    },
+    {
+      "path": "public/engineering/studies/executable-projections-and-revision/index.html",
+      "bytes": 11216,
+      "sha256": "527ef59d7ea3d0856b1c8a4d8129bdd2708c2df5997f13696c0d1535948f9caf",
+      "git_blob": "59ca6cd81b50e17f95198a98a4904b27a8bee7c6"
+    },
+    {
+      "path": "public/engineering/studies/index.html",
+      "bytes": 10678,
+      "sha256": "e4b38b465e5c04e768e1bcc0f02a7733ae90bf6cbe324f026f314ee11546721e",
+      "git_blob": "93abe9eca6adb970a588dfd97a17940ba8336471"
+    },
+    {
+      "path": "public/engineering/studies/reuse-admission-and-cost-controls/index.html",
+      "bytes": 11325,
+      "sha256": "8a124f03506be17301488df351af28193b360f71dcce9cbf2efae39da69545cc",
+      "git_blob": "43ec456a0950df72c8940e29426ba7d4247d52d4"
+    },
+    {
+      "path": "public/engineering/studies/source-transcription-and-uncertainty/index.html",
+      "bytes": 11285,
+      "sha256": "70fbc00c9439a65d423d631f1123b585dbcfdebd796c54405565bd3f2b710986",
+      "git_blob": "fc02b7b43c511349fe4d34106f01db8af20990f2"
+    },
+    {
+      "path": "public/favicon.svg",
+      "bytes": 382,
+      "sha256": "4b297a87a0c85085b53a4dafbfdbd366c6299d46e1ee31dd558e7d371afa7722",
+      "git_blob": "ca1301df1593153edc8c0ea4dd5b0460ac4bea87"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 21173,
+      "sha256": "2daa6a75f51089ab3c1e6e509e5c4547363eb3fba8039c3e378c0597b1aa816d",
+      "git_blob": "5fe4928db494d263f39148797971969442678d9c"
+    },
+    {
+      "path": "public/lab/ACCESS-CONTRACTS-LICENSE",
+      "bytes": 1065,
+      "sha256": "be74508501f0ea6bbb2537d71d53e40266ad3bcffbfdc75428ed5b67244f9fea",
+      "git_blob": "6acbccfea18b857d9aa0c36f046160e2cdb8ffaf"
+    },
+    {
+      "path": "public/lab/OBSERVATION-PROVENANCE.json",
+      "bytes": 2667,
+      "sha256": "53b7b1805ba9aec1e4a05f99ca8e1d0a3f76e16ecb206efa802057a4b7063fb3",
+      "git_blob": "c9a53b6ab4efaaa8e5eaa44c304aa3b23b7cabc1"
+    },
+    {
+      "path": "public/lab/access-contracts.46ab74e.js",
+      "bytes": 198297,
+      "sha256": "5380a710a0f07cb2b996431b41a196079fcfd4e80c9a92744d44d6ec81fa93ac",
+      "git_blob": "b0000c34016fe2d53e99358d7da02a5aba3aa9c9"
+    },
+    {
+      "path": "public/lab/knowledge-journey-observation.css",
+      "bytes": 905,
+      "sha256": "34ce415ffbc8185eb6c59334a5c102cc9a6baecb49abe514031be8f35b350bf8",
+      "git_blob": "9d32c7411e33271215173e4e1f2081ac975b49a1"
+    },
+    {
+      "path": "public/lab/knowledge-journey-observation.js",
+      "bytes": 8764,
+      "sha256": "c9c659889c9ede874fbf7721459cf3dea8a99327bec6ea06f21114eef1f131fb",
+      "git_blob": "ea8c637ea43ea552ef9f4fef69214bb2b5c5557a"
+    },
+    {
+      "path": "public/lab/observation-inspector.87457463.js",
+      "bytes": 21139,
+      "sha256": "87457463074ec4d95c4fb0f424761809ddf0f616d9a4c1478485ceaf50174176",
+      "git_blob": "528330978f9c4988eb0032479d019eeb2c092054"
+    },
+    {
+      "path": "public/lab/package.json",
+      "bytes": 33,
+      "sha256": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035",
+      "git_blob": "f9ec9b62f616f5c61144ef14c6cbbb1f8454f745"
+    },
+    {
+      "path": "public/lab/retained-object-reader.js",
+      "bytes": 21158,
+      "sha256": "20867919f6858595221f42a116952e520d905a836c8e3b0e2e5071ff916ff9ca",
+      "git_blob": "86c1856ee030f420a74ca6ecbb40fbe5004f854b"
+    },
+    {
+      "path": "public/llms.txt",
+      "bytes": 6887,
+      "sha256": "726266b810622f11e5655d2372ae346ae1bfdc2984a39fa80e6c993c7d594025",
+      "git_blob": "f9dba21ceaf287b806aca851c5b6904e0bbccd10"
+    },
+    {
+      "path": "public/programme.json",
+      "bytes": 17803,
+      "sha256": "354c275d173befbf692ba867ed17abee4da572862c0b83d7f27aaecc80dc29f6",
+      "git_blob": "ac6cb4dadc87802fccc037db89c021f1e9322278"
+    },
+    {
+      "path": "public/publication.json",
+      "bytes": 66365,
+      "sha256": "afd44e19107f38a4233ad42bc2430b3e331e015d2818c49b04f935d1accc881d",
+      "git_blob": "2dd488cc94a335a403fc86c6dcaaf644896daa39"
+    },
+    {
+      "path": "public/reference/bibliography/index.html",
+      "bytes": 10942,
+      "sha256": "36b138c4d53abea9dbf580890a1524376b153990b981896b5872b06449e46273",
+      "git_blob": "0549fc845349359d5c0dbb6e83fda07bf79d7c06"
+    },
+    {
+      "path": "public/reference/glossary/index.html",
+      "bytes": 10845,
+      "sha256": "f4e64d99ba3a9993157e4d298dd3d137cc4fdd8a75cfd15df585df831c031df2",
+      "git_blob": "a0a7dac8e012d815edd5efc0637185f27d5d8a20"
+    },
+    {
+      "path": "public/reference/index.html",
+      "bytes": 10608,
+      "sha256": "bb5393adc85b6a2c313ad9114f9ecc5e6d09239ef79a0f0c06b74b3fae62fc5d",
+      "git_blob": "f107e3304214381ff1f73175372c14552e704061"
+    },
+    {
+      "path": "public/renditions.css",
+      "bytes": 694,
+      "sha256": "a35758b83bbde0b439381aef1d9f13d46f1f1e0c6a7acad51e1c40229ef9201a",
+      "git_blob": "9312331f71771866d271da5ac3deaee33d8c5d4c"
+    },
+    {
+      "path": "public/renditions.js",
+      "bytes": 15870,
+      "sha256": "4e06292a1cdf2f59205b48a92a3246345777175424d576324d15017282887c61",
+      "git_blob": "ac1399fd4adba762b39515368a463ed88163ff43"
+    },
+    {
+      "path": "public/roadmap.json",
+      "bytes": 7655,
+      "sha256": "7b5f8d901d1c0e6f30da8528be07029f8b503da3a3e3f3bfc6a1bcab034bed0b",
+      "git_blob": "0157b63bf1a2e962610f9087167f3a4b2f69240b"
+    },
+    {
+      "path": "public/robots.txt",
+      "bytes": 67,
+      "sha256": "b93259d2d1498bddf15ef38fcd92fa9f8be1909c391d946627f7ba31a4b31a42",
+      "git_blob": "bfac5d9181362f4af87defae873cee648b497ff9"
+    },
+    {
+      "path": "public/ru/about/index.html",
+      "bytes": 15038,
+      "sha256": "b122cb02eafd97a655e7bc91ec7c7d46a5ab2f4386d2f7b8b242e329a4a32b38",
+      "git_blob": "9ff2230fc049f5ba3f6d3bde3edc57a4dc756980"
+    },
+    {
+      "path": "public/ru/appendices/api-integration/index.html",
+      "bytes": 50813,
+      "sha256": "d2def7e81f7c2c061a2d32b6f5a7d4471e5396f9f473a979853f75941c999a5b",
+      "git_blob": "148b4b7c4202f15a4de97a66ee7c856331d8f63a"
+    },
+    {
+      "path": "public/ru/appendices/index.html",
+      "bytes": 12900,
+      "sha256": "4b36336e98b43ba6f501f431ac4bf746246d153be6784cb82818ec666addba89",
+      "git_blob": "237badd5b8a4a10659c77236f910083f290aba97"
+    },
+    {
+      "path": "public/ru/appendices/source-map/index.html",
+      "bytes": 49878,
+      "sha256": "1edfca4c260866a8fe0f4ca7e8b3a2f51bba0a3832161ef1c8d54c888a54d625",
+      "git_blob": "c473938021a4967514208d7878b3d8e72d72a1c2"
+    },
+    {
+      "path": "public/ru/books/index.html",
+      "bytes": 12527,
+      "sha256": "1580cbf97a9d428cb78d3b295d9727df3996ef4e92fd2bf52f9ff72516f4d4a9",
+      "git_blob": "a6da4697a1c3c29cc46845ff10d7ad47687f4fee"
+    },
+    {
+      "path": "public/ru/docs/artifact-registry/index.html",
+      "bytes": 11804,
+      "sha256": "1f100979783e325a2bf3fba6a8b2a50510d09d00de4c0debe19cfb977b288709",
+      "git_blob": "f841fe2eb36138b64175233ec65e3317332f2786"
+    },
+    {
+      "path": "public/ru/docs/availability/index.html",
+      "bytes": 13435,
+      "sha256": "f4c8df57e76ca44e211d4ef9f733cffe85bbcdff921824b5950e0a6efb56e79e",
+      "git_blob": "52853d9435ea1792538ac11f8fc3eaccb05e4464"
+    },
+    {
+      "path": "public/ru/docs/cache-identity-and-invalidation/index.html",
+      "bytes": 11893,
+      "sha256": "334083420e16a79af546378a39d935174cd47bd18ef5213e6adbe2de13f17581",
+      "git_blob": "db7614d98e6e685368a8c2514a0b292a1e5765a4"
+    },
+    {
+      "path": "public/ru/docs/compiled-artifact-contract/index.html",
+      "bytes": 11867,
+      "sha256": "9ff386ee7af9e5a07c20f382fee7d816ba066c8ca8f3f428dcfba5421702666b",
+      "git_blob": "a26d5d7a94ecf4253b88ba3a7c494be8502f280a"
+    },
+    {
+      "path": "public/ru/docs/context-package/index.html",
+      "bytes": 11737,
+      "sha256": "319bbaade5ef6b836f783a064e20606b64f17d35f28297fb1475a92dad38bb60",
+      "git_blob": "26484fdf476b095bb637f8d458088fc0104597a2"
+    },
+    {
+      "path": "public/ru/docs/contract-family/index.html",
+      "bytes": 11767,
+      "sha256": "d3ab1d8abbb3ae7c9b68a8140bdc4aa29f79a35c7cdaa6e5c88c0e22afc6d969",
+      "git_blob": "cfac3c5b8c3a95ebea14a9b6593d6c9113f5490a"
+    },
+    {
+      "path": "public/ru/docs/index.html",
+      "bytes": 12667,
+      "sha256": "4d9ef3fef3985017ac0142ed312ad75550796493741a9203d8775fdffec0dc0c",
+      "git_blob": "04cf9d45f8d113c649b2d28699fd893aa0225390"
+    },
+    {
+      "path": "public/ru/docs/knowledge-contract-v3/index.html",
+      "bytes": 11736,
+      "sha256": "35281d6179ddca1e693b38dffc52ee7aa3dd86ae1e4f6443caa3c9ec5cde16aa",
+      "git_blob": "998df43c6e7df0005d8075b16bec7484aa8f52ed"
+    },
+    {
+      "path": "public/ru/docs/knowledge-evolution-contract/index.html",
+      "bytes": 11783,
+      "sha256": "59f0ddd11aad049a6acd30fd177e4419b5789de16674cfb23098fce88de5660c",
+      "git_blob": "8968735bda1d7dc62d066322d97545524a0337dd"
+    },
+    {
+      "path": "public/ru/docs/model/index.html",
+      "bytes": 11688,
+      "sha256": "4006e8a2f2caa61aea27d978d797226abbd8ee9bd9654ae43c6f59e9fd627ad8",
+      "git_blob": "85f23820bb7725bb22bc611cce69712f4bad3afc"
+    },
+    {
+      "path": "public/ru/docs/reuse-policy/index.html",
+      "bytes": 11758,
+      "sha256": "652212d6698ef3deaaa00d58afb247e2f02222c1648b427e80f0168bd5ac3db1",
+      "git_blob": "c8f1fc02aba8edcf768ab192dfb6a7f0794b7aff"
+    },
+    {
+      "path": "public/ru/docs/semantic-types/index.html",
+      "bytes": 11770,
+      "sha256": "cccb347934a0a8f401eef19444c2b68897a58281524aa34acb7d0f9b5e1df652",
+      "git_blob": "1cad3083d2f7ca967e653370140a7719d1d6bbf7"
+    },
+    {
+      "path": "public/ru/docs/status-model/index.html",
+      "bytes": 11689,
+      "sha256": "f585095d110d735ddec2be639c65be0918b4e1c13c75b066a8009199367f3004",
+      "git_blob": "a3814cf9926c14e7e325c55f55ac340fb30d3ace"
+    },
+    {
+      "path": "public/ru/engineering/index.html",
+      "bytes": 12730,
+      "sha256": "cb069cb20239adc6ec3d0a9c1260bd218e9f187fb41ec7711f48a0584b463433",
+      "git_blob": "76bb2f404cf1d73c46d937be48e7d7e683bbe638"
+    },
+    {
+      "path": "public/ru/engineering/specifications/artifact-registry/index.html",
+      "bytes": 37418,
+      "sha256": "c1795a0c843810fd4cdb97520b0c297e5105bc14bd7803554369323e434b5488",
+      "git_blob": "7a7ee8e56e068cc51452f2bdc7a074cc9f307ea6"
+    },
+    {
+      "path": "public/ru/engineering/specifications/book-package/index.html",
+      "bytes": 69923,
+      "sha256": "37b9c66b50d290ca535836d3222a9d868320f8b6ae659d3b95a4384cd9a72331",
+      "git_blob": "319e3fa060c6b85668082760709bfe38f41658dd"
+    },
+    {
+      "path": "public/ru/engineering/specifications/cache-identity-and-invalidation/index.html",
+      "bytes": 47537,
+      "sha256": "ecc762644859889efc4babc3965267e104462c8d47946ecb909eaef77bc45f16",
+      "git_blob": "38c5b1653f67d5ad142b9ab0d70acdc3893a987f"
+    },
+    {
+      "path": "public/ru/engineering/specifications/compiled-artifact-contract/index.html",
+      "bytes": 37282,
+      "sha256": "7798b7abbe1fc511bc582f1b91e530137836c79da9efe62392342a37ccf80f08",
+      "git_blob": "ec4d4d03fc7ecdcdc0641b6cf88c10233b5ee4b2"
+    },
+    {
+      "path": "public/ru/engineering/specifications/context-package/index.html",
+      "bytes": 36316,
+      "sha256": "3861f29415ccf3f1a783093186cddb18b91dd7262c2a4eff6a61ef4e596259cb",
+      "git_blob": "3733b8d53294f29c4247dcb9e64559d105438c51"
+    },
+    {
+      "path": "public/ru/engineering/specifications/contract-family/index.html",
+      "bytes": 37616,
+      "sha256": "0a300f71aa0d8b69747599f2e038c7148c65d630b4ca6f5c7fa4607bc25b7599",
+      "git_blob": "ca3f609becd4f3ab8d6b0230c69a3008ca0505dc"
+    },
+    {
+      "path": "public/ru/engineering/specifications/index.html",
+      "bytes": 20711,
+      "sha256": "ee47d571de5534629d6578c30ff039c09db90f2248c2c9b8f19caedfa54bc0ee",
+      "git_blob": "1186c7c96f740d14f80e919a8a47d46600b95a33"
+    },
+    {
+      "path": "public/ru/engineering/specifications/knowledge-contract-core/index.html",
+      "bytes": 41370,
+      "sha256": "4ade7f67f8c8961640a5dd9d9a6de28e2916bd1c23537ee19b5515f70e3c5617",
+      "git_blob": "edd4b30c494020c931ef2fee91c8e97ddaff950c"
+    },
+    {
+      "path": "public/ru/engineering/specifications/knowledge-evolution/index.html",
+      "bytes": 36266,
+      "sha256": "f6651ae966c4b4487a392e53f8aed6ef63927ff43f01fa672b8eff6ef330a237",
+      "git_blob": "485229549c01a4bfc32a273c8ccc1dd7cd541d2d"
+    },
+    {
+      "path": "public/ru/engineering/specifications/reuse-policy/index.html",
+      "bytes": 38600,
+      "sha256": "4d623ef7ca557ef1d78d5b686543e0325c470ca91024d22495afd076c4404b20",
+      "git_blob": "6206dd82ae7016208f8c5659f6c227fac8826008"
+    },
+    {
+      "path": "public/ru/engineering/specifications/semantic-types/index.html",
+      "bytes": 35942,
+      "sha256": "cba32a05282b99ed669f4bed6fc25b75cd5af36d14d4592fb4fce7e595031fd6",
+      "git_blob": "f2b08d93dbe5d3fa601417e3081f5d3e071524c2"
+    },
+    {
+      "path": "public/ru/engineering/specifications/status-model/index.html",
+      "bytes": 56380,
+      "sha256": "1230e5f72090653a892584e1d78f3cbdd8a3989c9493f59cfc7109ab416a8261",
+      "git_blob": "e4eba13470188e49d4f6ae1d93b3ed55a9678fae"
+    },
+    {
+      "path": "public/ru/engineering/studies/contract-profile-conformance/index.html",
+      "bytes": 52490,
+      "sha256": "67546b89bdf43f47135da42941aee463653765c2a9e58b8d65bab760f1fd58f8",
+      "git_blob": "0111418b04fa06bce108aa9cc5e151a8ab27ac80"
+    },
+    {
+      "path": "public/ru/engineering/studies/dependency-closure-and-package-delivery/index.html",
+      "bytes": 69562,
+      "sha256": "174e6e7a9ffe0bcd04b741285f49057d996a243bc92a07137b0c328db177518f",
+      "git_blob": "921db989053cec96314540a2b2d270ba6466b760"
+    },
+    {
+      "path": "public/ru/engineering/studies/editorial-skill-pilot/index.html",
+      "bytes": 56058,
+      "sha256": "ed6f83600931f1cf07ab1debfd20a18fd9d36532d1c11a9722120dd10ef2e707",
+      "git_blob": "b04a576caa62ae064876f9908f61fdea067ddbda"
+    },
+    {
+      "path": "public/ru/engineering/studies/executable-projections-and-revision/index.html",
+      "bytes": 71735,
+      "sha256": "91273ca6439ed2a31cf4c9ae9fd2a817e2561f57d8ebcc11ba8bcb781de42805",
+      "git_blob": "7f673f0f6948a3053bbdf3cb1fb8b688017b5647"
+    },
+    {
+      "path": "public/ru/engineering/studies/index.html",
+      "bytes": 16993,
+      "sha256": "7c85d1079fd6bb480ec79abecf679e77bc905fff92fd262478d08ed41bcbc370",
+      "git_blob": "ccc3cbcb2593af93f68fe44f43c69f8570ad1d51"
+    },
+    {
+      "path": "public/ru/engineering/studies/reuse-admission-and-cost-controls/index.html",
+      "bytes": 78282,
+      "sha256": "8f86bf279ec60a34bff08e9037544ad39fe57553819bdb1c215297d8a0c21451",
+      "git_blob": "9671ad7518b9460012aca045ff55253af8378976"
+    },
+    {
+      "path": "public/ru/engineering/studies/source-transcription-and-uncertainty/index.html",
+      "bytes": 62840,
+      "sha256": "ab5efd7de0ed4dfcf6e952622b35c72726f1a6006fe335e318e91e8351661277",
+      "git_blob": "d88683707cd24d59e7ae1734e809aaefa259ad22"
+    },
+    {
+      "path": "public/ru/index.html",
+      "bytes": 25418,
+      "sha256": "4ece4091dea5af0199721182d74942be763b21462e017775c31e74a3b19324f7",
+      "git_blob": "eea57664cbce1fdab60c422008faa8ef488458f9"
+    },
+    {
+      "path": "public/ru/journal/agent-situation-2026-11-14/index.html",
+      "bytes": 24232,
+      "sha256": "9a9908e048b4a6e511ef82b6c1d7805f4edc22585e04defddd5ebf076823db2c",
+      "git_blob": "5bc5435c07d7f51740e43739014c5bd03979e4e3"
+    },
+    {
+      "path": "public/ru/journal/atom.xml",
+      "bytes": 116545,
+      "sha256": "5da95fc64174e226ce1e78808173b07f0d9ccb12b0fecc1618f20a8d08e47deb",
+      "git_blob": "6d89da7cb62e558a8694fe79b4ca09721b9bfe3c"
+    },
+    {
+      "path": "public/ru/journal/building-a-place/index.html",
+      "bytes": 13729,
+      "sha256": "89b735a101ca112deb6fefaf67dfb6e251d727fa590311bd0d0b91b7b4eccc0b",
+      "git_blob": "202a03b6cab7c235713fcf63c979b5b66f3d2ab3"
+    },
+    {
+      "path": "public/ru/journal/control-for-topic-2026-11-12/index.html",
+      "bytes": 22353,
+      "sha256": "26108f55179ed369f3eae799dea018b6061d02c071ea0e53fb7a37fdb683fee9",
+      "git_blob": "ac21f1287ac25c39d175bc5c5799445a7aba7b10"
+    },
+    {
+      "path": "public/ru/journal/dora-gaps-agents-2026-11-14/index.html",
+      "bytes": 33356,
+      "sha256": "4738f8ffb049ec17440678222550c39034326b976149edbefa594dffa890caa7",
+      "git_blob": "e573fc63fe8af832639593d17a29d565c8df84ac"
+    },
+    {
+      "path": "public/ru/journal/index.html",
+      "bytes": 24109,
+      "sha256": "03be89c3b704ecbbff70602fda8217183ad026c4c7749914eca5d8ee1dee5b9e",
+      "git_blob": "280695127bd679bb3867b474b25ce6786d27d2e7"
+    },
+    {
+      "path": "public/ru/journal/knowledge-contract-architecture/index.html",
+      "bytes": 17838,
+      "sha256": "560d1b60ed087c96257a8bbfbf6be6ef136097f394884c2b2e1a7d47a858ce19",
+      "git_blob": "92a8c6ee895b2105f91294367ad633c26e6965e9"
+    },
+    {
+      "path": "public/ru/journal/knowledge-contract-v2/index.html",
+      "bytes": 28513,
+      "sha256": "a45c806acdcb6039a37799f388f78d6e8824e001cc5be37f5a2ee98e5b485842",
+      "git_blob": "2791f2ebbc04e82695339838738f564313094b11"
+    },
+    {
+      "path": "public/ru/journal/lesson-without-evidence-2026-11-11/index.html",
+      "bytes": 25147,
+      "sha256": "a5f18077873afc2133b3fc93e77ef2f01fa9cd793937bdd9163cd4c431cb6912",
+      "git_blob": "d6c3ac386009b1ddf74c4ee75ab3b9e85f62665e"
+    },
+    {
+      "path": "public/ru/journal/rss.xml",
+      "bytes": 116126,
+      "sha256": "0bef549ea2e5b9bd4ed7db9a914035bb410ebde31c089dcb1c05e81a74dd0496",
+      "git_blob": "945898913e777e134e450ad5fc9390e7e227adfe"
+    },
+    {
+      "path": "public/ru/journal/rule-after-restart-2026-11-15/index.html",
+      "bytes": 24382,
+      "sha256": "854ec3f82ce0fd3752b2a804ce16cae559b35e7f01c0fa3a71875d9a3e953325",
+      "git_blob": "5894a874a568be76d7f0461062aa9a01dcd86ac1"
+    },
+    {
+      "path": "public/ru/journal/source-rule-checks-2026-11-15/index.html",
+      "bytes": 24325,
+      "sha256": "d83c38a68d6ffa5d900e3f6918226b5c29665392e85eb17fbbf5362b4c107dcf",
+      "git_blob": "ae7247e8895b4850dbdf7ab0ebfb07b47e5d2d82"
+    },
+    {
+      "path": "public/ru/journal/tech-diplomacy-agent-contracts-2026-11-16/index.html",
+      "bytes": 36544,
+      "sha256": "08bc480b07355438992d0cf548fbd1f124fc35a0f26952ddd43b2619e989eb80",
+      "git_blob": "655a5296e5b6cc9333f8633a6626fe210eb9de5d"
+    },
+    {
+      "path": "public/ru/journal/verdict-is-not-a-test-2026-11-13/index.html",
+      "bytes": 24991,
+      "sha256": "091fd3efa7b0d188f3718641f7317b97060958e23105f04c0e0076e435262a95",
+      "git_blob": "b66955d7a0bdf2e000e4c7806dfb80e00cf8b24c"
+    },
+    {
+      "path": "public/ru/lab/knowledge-journey/index.html",
+      "bytes": 14010,
+      "sha256": "10615d21f94f42ef10eb206d645bc4057283bfbf2b14d6fe4cf88aceb8674cf5",
+      "git_blob": "90fd299dfd7218675dc73ab0a48bfb916130af8f"
+    },
+    {
+      "path": "public/ru/programme/index.html",
+      "bytes": 43845,
+      "sha256": "db50672d57de82dc4d52e17a23aff87bf418992f1162d3e21454145c8ef9a05a",
+      "git_blob": "e341f7b1f28786be094c14a0b80b59a4371edee8"
+    },
+    {
+      "path": "public/ru/reference/bibliography/index.html",
+      "bytes": 52887,
+      "sha256": "f6abeb4c6333259e0e2a833f5c43838c5ba502c5582b95cacb503acd3b190d18",
+      "git_blob": "b18c8efa513e21a1ec5b00d0fa500eb1e34e5f25"
+    },
+    {
+      "path": "public/ru/reference/glossary/index.html",
+      "bytes": 78533,
+      "sha256": "0a9d3047e3cd1cd5fb8b42374dfc29661ac37b563ca6397c62ab90e0a53b55e4",
+      "git_blob": "d5e0a0734deac02ec47653840e7cff7464a24f4b"
+    },
+    {
+      "path": "public/ru/reference/index.html",
+      "bytes": 12920,
+      "sha256": "f89feb10cb9d436a175964c6d7e01fd652bea569673d708c841201671e2c0723",
+      "git_blob": "faa6893e8c478d3198247ec737d00539f398150d"
+    },
+    {
+      "path": "public/ru/references/index.html",
+      "bytes": 13079,
+      "sha256": "dd654547158461a31b0eb21a0cb2b66e0fbcb470976e46f5a586c514812c3560",
+      "git_blob": "b0f42b264997268801b60d104306adda10c0aa8b"
+    },
+    {
+      "path": "public/ru/repository/index.html",
+      "bytes": 26600,
+      "sha256": "214388c04e7c5801c3194d1435b2871e095e39325490a97fe8288d02b0c00355",
+      "git_blob": "0328456188aae364db9b745ccd7c354a202bdba2"
+    },
+    {
+      "path": "public/ru/research/anthropic/index.html",
+      "bytes": 12270,
+      "sha256": "ca0b6e4461aef5475c1ea68c0af195b0d89f1808288c6b5cea879fdc100150f2",
+      "git_blob": "ecf9200e284283b79d1a53c9749888050ad60ed1"
+    },
+    {
+      "path": "public/ru/research/deepmind/index.html",
+      "bytes": 12241,
+      "sha256": "ec5db1010795969c5bd8dbc8d8eafd9f59383ccffd7a4b2fa8ced7ed65683f53",
+      "git_blob": "a45f43c22a8c95ebd9897da1ae2a44c044384d93"
+    },
+    {
+      "path": "public/ru/research/hugging-face/index.html",
+      "bytes": 12188,
+      "sha256": "c4c8e130ffc15be2ba5e463ca5ab67c3913dd07db447138a11d65644d6f604ae",
+      "git_blob": "be8d488300e13ad604a11be9ddcbefebe8b4718b"
+    },
+    {
+      "path": "public/ru/research/index.html",
+      "bytes": 25377,
+      "sha256": "6a05c9e92be8f928bfffc4ec7f7982038ad885c4c587cbee7b9a6ba95ccaa412",
+      "git_blob": "ab3057d48e2a2fa04de9fbb1a49d0196c99de51e"
+    },
+    {
+      "path": "public/ru/research/mcp/index.html",
+      "bytes": 12283,
+      "sha256": "7a79ffdc954b0966396888995a6ee4d1d2c6ce98b802956a62db25d5688d9d0b",
+      "git_blob": "dad7869d17374996aa2b75bc3e79789ea6edc40b"
+    },
+    {
+      "path": "public/ru/research/p00/index.html",
+      "bytes": 11755,
+      "sha256": "486d74868300698913a87c7534e6a6cf82719f29391d8073e333ee56841cc56d",
+      "git_blob": "59f98ef4efd08d11375912d8a78f3065d8f414b6"
+    },
+    {
+      "path": "public/ru/research/p01/index.html",
+      "bytes": 11755,
+      "sha256": "0a46d82b7f73ff28997181df03807e9c98f6fc4f0b7a9aa9f174d0edda7c6458",
+      "git_blob": "1a0fbee9c63d13f462dadbf2c78de2f734b84fa0"
+    },
+    {
+      "path": "public/ru/research/p02/index.html",
+      "bytes": 11755,
+      "sha256": "3e7b7fda5a7058f113ead553398d9e960df71eb40b8b6e90bb7a4bca6cc2e459",
+      "git_blob": "c91c793c84d1fb80982bc1f17e5da5bc3aab7858"
+    },
+    {
+      "path": "public/ru/research/p03/index.html",
+      "bytes": 11761,
+      "sha256": "bcd2b9f1af55df26fbc4af57cc0d46ac5705ee15831b7d6aa350900ebd52d338",
+      "git_blob": "195cce6800e52cbe0e0129d94414ae4e0a967845"
+    },
+    {
+      "path": "public/ru/research/p04/index.html",
+      "bytes": 11775,
+      "sha256": "bf0894edc9a3d6acee285112311f691047a54a089351b75968670af5a23985d3",
+      "git_blob": "f4df8ab861f4fe044975d6e0d55453a4a150af9b"
+    },
+    {
+      "path": "public/ru/research/p05/index.html",
+      "bytes": 11775,
+      "sha256": "e3299f8b58b98d7eeb976607026f79fc4a49970ec320dee40da2f4f5dd94c72d",
+      "git_blob": "e54c4c82778042aa017985478ed1ca5e0e68c7c4"
+    },
+    {
+      "path": "public/ru/research/p06/index.html",
+      "bytes": 11759,
+      "sha256": "f3ccbadfa554ab449d05ac20fee425c1c7ee4fc50b1da7970914dfbd0cdeea9e",
+      "git_blob": "00f118f9f2edba8f681d2facd8be735256159424"
+    },
+    {
+      "path": "public/ru/research/p07/index.html",
+      "bytes": 11817,
+      "sha256": "b5211b1fc22513ae0d79a96d4a30879339a1071ac859b79ed0bac738e8168aeb",
+      "git_blob": "10658591c1765481c7951c60b07965fc24625d15"
+    },
+    {
+      "path": "public/ru/research/p08/index.html",
+      "bytes": 11759,
+      "sha256": "2e0113247724778685e9789aa27af5e8a4bed78aaf3d52aa41394fc459a35d1a",
+      "git_blob": "9b1baad8b3c10016e4db12fb48c1278d8a639db5"
+    },
+    {
+      "path": "public/ru/research/p09/index.html",
+      "bytes": 11788,
+      "sha256": "e2c384ef77f29565c96c73e1a20b012e4568ac47fd15bd3759456c8b6786e843",
+      "git_blob": "f3e67153781cd3354b477c11099ccb2bc6a260b0"
+    },
+    {
+      "path": "public/ru/research/p10/index.html",
+      "bytes": 11727,
+      "sha256": "b6d4884864f1799d919897cdd52925629971c0aa2db19774557c5cac3f2f855d",
+      "git_blob": "3025c480812be7d89caafbf38de145a777ed50a3"
+    },
+    {
+      "path": "public/ru/research/p11/index.html",
+      "bytes": 11817,
+      "sha256": "c0ca0fc2683bd65ca9323544c269cafbde8e74af9f7f204f16cfec892e096dee",
+      "git_blob": "1cd6e01967706197ff0a9cb588869eba74468f41"
+    },
+    {
+      "path": "public/ru/research/p12/index.html",
+      "bytes": 11788,
+      "sha256": "eab04a5d2b4a8172183b423a4722f8bdef6de640068bbf2230d43bf8f8b75b57",
+      "git_blob": "26474d503601a23f8929bc96544d5892e083d12f"
+    },
+    {
+      "path": "public/ru/research/p13/index.html",
+      "bytes": 11717,
+      "sha256": "26c0fd939aeb34fda4f7aff5118a39fa68eb24bce552edc1087187e4a0fadf99",
+      "git_blob": "a8f4b367c5017a6cc46e11b935524a641fd8dd5a"
+    },
+    {
+      "path": "public/ru/research/stripe/index.html",
+      "bytes": 12238,
+      "sha256": "47a135f389dbfb3fd97ad72f809921a406bd1a382801b50d20dfdeaf99501ae9",
+      "git_blob": "a321938c1bd2dfc90cf13de4fce2ab08ac0497dc"
+    },
+    {
+      "path": "public/ru/research/supabase/index.html",
+      "bytes": 12204,
+      "sha256": "135afe30a5b318851e173c9cd4d8d3c642378b706a9311a9d032bc75c96134ab",
+      "git_blob": "43eea1b863612386ed25f2128f6fcb204a997a2f"
+    },
+    {
+      "path": "public/ru/roadmap/index.html",
+      "bytes": 202366,
+      "sha256": "29ae5787af6ac3be51bd9a0ef6f9c5152cbc44ee906a8d5e02e1362a34eccb7f",
+      "git_blob": "813d61f1a939e74d6dd27be16b878a54ec46a8b3"
+    },
+    {
+      "path": "public/ru/science/constrained-transformations/index.html",
+      "bytes": 88602,
+      "sha256": "495c7739545c2116deb9864916ba5a1dcbd62c0bfd88ba5e0dda1cb741428c12",
+      "git_blob": "8da5e155bf1cd4b1f051401ae8f29335d018d47c"
+    },
+    {
+      "path": "public/ru/science/controlled-knowledge-reuse/index.html",
+      "bytes": 78357,
+      "sha256": "9876e55e8266c158c198e9cc9ceea3f60e9836f88a5180ebbaf5817938f92035",
+      "git_blob": "7eb29b67bca657da6c8237ff0b68b8e26e87ab9b"
+    },
+    {
+      "path": "public/ru/science/evidence-and-falsification/index.html",
+      "bytes": 71212,
+      "sha256": "634be5bf53a81198fe817fddfe17f71f1cccb7caf9768f3d3c7a999187c70a2e",
+      "git_blob": "94fb41d6ea52200bc5af8ef5b9de27decdf1a393"
+    },
+    {
+      "path": "public/ru/science/geometry-of-semantic-representations/index.html",
+      "bytes": 107337,
+      "sha256": "01e5133001422e3673d61c1a88772fe295e6e4747b669e2060c9045a35c59aa0",
+      "git_blob": "1ef6847697840e6be0b648efcf2615aeb2619915"
+    },
+    {
+      "path": "public/ru/science/human-meaning-and-computable-knowledge/index.html",
+      "bytes": 116730,
+      "sha256": "79587081360897835696adf065263eaca9777e5d5d07f6a1c0b23f8bef236d0b",
+      "git_blob": "e07c0f2c88a5933f86677fff64f4e2ef1abbf1a3"
+    },
+    {
+      "path": "public/ru/science/index.html",
+      "bytes": 25349,
+      "sha256": "b6b337303d0ca18344082ce2e4817ef70955f29d4310c9dfbd5c36aea52044b3",
+      "git_blob": "777ce83dafad701b72b897e844a8ee2319a017a6"
+    },
+    {
+      "path": "public/ru/science/interaction-and-memory/index.html",
+      "bytes": 69613,
+      "sha256": "d77097a177243f76137aaf305cfdf8b45c5662f2e821847ce2a8a23c10dcba34",
+      "git_blob": "96b9a8e7183f2b61276ba77005946e21a0372c37"
+    },
+    {
+      "path": "public/ru/science/knowledge-utility/index.html",
+      "bytes": 64555,
+      "sha256": "7b4961e3abc7e0df87548d79c34448eddbc51524227dd74e4a2da57af8425b6c",
+      "git_blob": "9577b4ab5e18b6eb1ec4b0a3829ff370705a690a"
+    },
+    {
+      "path": "public/ru/science/retrieval-and-context-composition/index.html",
+      "bytes": 79169,
+      "sha256": "d9721bb8c9ec218123f10e4d4caf4daba5c57cc7d6d8a792face35638506e4d6",
+      "git_blob": "655580e5a7e838f09f4951fec727d063f50cf08c"
+    },
+    {
+      "path": "public/ru/science/revision-and-governance/index.html",
+      "bytes": 68585,
+      "sha256": "3da694bbbc7d6c1a8b6be06fed6bdd99a24af5066347a3065979a8afe465d82f",
+      "git_blob": "751223cf9f9d4ff998ba85b0fe9575150e6aaa47"
+    },
+    {
+      "path": "public/ru/science/semantic-objects-and-context/index.html",
+      "bytes": 76789,
+      "sha256": "b2611ea68c44b2e86dd219e255d9cff4e55bde3787e3718bc4694257eeda880f",
+      "git_blob": "2f3b46254f3a97dd9623275fcc7818e40eded7e4"
+    },
+    {
+      "path": "public/ru/search/index.html",
+      "bytes": 25373,
+      "sha256": "c09557f020f9c522059ee3ef77ddbac8283913c7c5523379c3afd188e64832a8",
+      "git_blob": "ef6d03bc25d5e68f6abfdf7b6c6604c698f7729d"
+    },
+    {
+      "path": "public/ru/wiki/index.html",
+      "bytes": 12875,
+      "sha256": "795f4f50173e50e10980c999b2a757e69dfcba6e500d0a6e84f86e09f1e528a6",
+      "git_blob": "ecbde0d2aee6830fa52479cfd3af089d5a52077f"
+    },
+    {
+      "path": "public/ru/wiki/knowledge-contract/index.html",
+      "bytes": 11727,
+      "sha256": "c803c08c1effcaf4e1cb3f9e46a5fae5a659d48b252c22488f5a8f9d5bb8b1a2",
+      "git_blob": "259e83df16dbdf3cf607d965c769e8ce1751d311"
+    },
+    {
+      "path": "public/ru/wiki/provenance/index.html",
+      "bytes": 11745,
+      "sha256": "2a1aa7be9d99105ad3be8132e8ac1aff0db9265766834a23b4a1500be0509c88",
+      "git_blob": "9d950610b3839e7410f7a8900a3ee5b200528ab0"
+    },
+    {
+      "path": "public/ru/wiki/versioned-knowledge/index.html",
+      "bytes": 11744,
+      "sha256": "35943520003bff078216c4f415d4d62b721f2d5ef6af6c09a483e4615da15a7e",
+      "git_blob": "568a4ffb902f9a7121963552e1d94f9c88b3efd1"
+    },
+    {
+      "path": "public/science/constrained-transformations/index.html",
+      "bytes": 11102,
+      "sha256": "47632c05adddf501f38349cdf23f297ac936bcef8411543e958ca68a6128cb2f",
+      "git_blob": "8227122fb425eb8d404d702e66c74915ac1bed20"
+    },
+    {
+      "path": "public/science/controlled-knowledge-reuse/index.html",
+      "bytes": 11074,
+      "sha256": "69f3fc40cc1b52b7ba3f158a63a534a507ed350ec2a1db416348c8d80582ca96",
+      "git_blob": "61be859b3ba3bd6b3ed1fd148d89226a8e89b534"
+    },
+    {
+      "path": "public/science/evidence-and-falsification/index.html",
+      "bytes": 11112,
+      "sha256": "3f598186c5bd39c58a6592230ebb648165cb5d68da8eedc7c26bfa4291133b11",
+      "git_blob": "5d564ff79bc3df16735425556528a5b43031fa06"
+    },
+    {
+      "path": "public/science/geometry-of-semantic-representations/index.html",
+      "bytes": 11165,
+      "sha256": "21359272a4cf12e38b10627633ba0cd644a0aa6c3aa21424ddf955f7a244b6d3",
+      "git_blob": "5aa0bdb4313ff6983b57a3c990f5b403cde4b21e"
+    },
+    {
+      "path": "public/science/human-meaning-and-computable-knowledge/index.html",
+      "bytes": 11137,
+      "sha256": "feefa3d2b225c81dfb70d8d65e1cb4fb7ff429d0aa9bd1a4a18918a69994ccb8",
+      "git_blob": "d9f2a2be7f871d4d9f89cb12ad8b1e85301dbd63"
+    },
+    {
+      "path": "public/science/index.html",
+      "bytes": 10594,
+      "sha256": "9e4bcfa8f86a97cda2fe8a8221c01b56a22c96698d3c7c936033c7a09be29d4d",
+      "git_blob": "b254952c02cb1e9aeaeb2f6af300b9e7982cce94"
+    },
+    {
+      "path": "public/science/interaction-and-memory/index.html",
+      "bytes": 11077,
+      "sha256": "4b9641075f718450eab10e07d9484b42807c8da21ca84a30762925c4d854011c",
+      "git_blob": "1d71487fbed4c31de2609a8d523644b0a5a7e339"
+    },
+    {
+      "path": "public/science/knowledge-utility/index.html",
+      "bytes": 10956,
+      "sha256": "f0e7da9a9972103c9140df5416a3d6ead5f47c25c3bd9935e853b94f3e94b347",
+      "git_blob": "2df8f1f3464ea4f2624294d17d149f268d93ab7f"
+    },
+    {
+      "path": "public/science/retrieval-and-context-composition/index.html",
+      "bytes": 11147,
+      "sha256": "b15a9e5ec6f3fffe84ab15ae0aabc4f9be4cb09404f51bec946e5aee052708d4",
+      "git_blob": "a6619c02ab31485f1674a3ea944c46af4133d525"
+    },
+    {
+      "path": "public/science/revision-and-governance/index.html",
+      "bytes": 10978,
+      "sha256": "fccf180344fe4f64b36d6e7115968758b32382e46d3e76a9524549dad614e4fb",
+      "git_blob": "9b8fd419bc5a057ae765791991d8c01ab493f15f"
+    },
+    {
+      "path": "public/science/semantic-objects-and-context/index.html",
+      "bytes": 11070,
+      "sha256": "7137dbd37f562bd423875cf5986c722b67db18d5a027c7616d7c3e93e91214e9",
+      "git_blob": "5167af4c5e5e7a0ed96ddda3cb3b8326d9e0ae1c"
+    },
+    {
+      "path": "public/search/index.html",
+      "bytes": 10587,
+      "sha256": "859625e026beab8207ee49a9796cb5b30ad1ed29d762cf99f5ebae402f623af2",
+      "git_blob": "602883430778f6e7942d69347009d4d023af8231"
+    },
+    {
+      "path": "public/search.js",
+      "bytes": 19361,
+      "sha256": "dc4406ba8cff86d05f8ea4167c5c98ba6f0610c1d63851da020b335495527c56",
+      "git_blob": "c292dcfcd4fa8e0f5ce45e6c90da45ddbeec783f"
+    },
+    {
+      "path": "public/sitemap.xml",
+      "bytes": 13627,
+      "sha256": "26f3272b9ab1b5d5b629fc08b84881bb7ecfcfba31fc4a1c2fd53507200828e6",
+      "git_blob": "623954f2ae4bb3ba0b130253bf6a0a31df12b3d9"
+    },
+    {
+      "path": "public/style.css",
+      "bytes": 60264,
+      "sha256": "5f87eadb230971281cf76fa6c27e545362f132baccb03013cccde1f1bd43cc83",
+      "git_blob": "5ec93daeddae70ecb1cca1c9c26426025b9669b9"
+    },
+    {
+      "path": "public/theme.js",
+      "bytes": 202,
+      "sha256": "fbf6f88c25b0a8e49ffc2d4b9012d76e3e1d631df97b5b6a11574b091a63f9ac",
+      "git_blob": "fdcc8934a0efe2f5225ab23676d31fe6cc8182eb"
+    },
+    {
+      "path": "public/zh-Hans/about/index.html",
+      "bytes": 12789,
+      "sha256": "3249ee6265e2f55a06dbd75d8a02649ef2079a40b331b8f5c69834bdac0bfcaf",
+      "git_blob": "50822f2e10c3b65bcf57c46972f7c0f654468f0a"
+    },
+    {
+      "path": "public/zh-Hans/appendices/api-integration/index.html",
+      "bytes": 34736,
+      "sha256": "50e20b330050915ecc00fe1b42230ad3ac50b0701e3f8a9a63bb99f6f9287b9a",
+      "git_blob": "3c00c189df89c217f1d2ee9d9245361d0f228e8c"
+    },
+    {
+      "path": "public/zh-Hans/appendices/index.html",
+      "bytes": 11701,
+      "sha256": "b84d40691d99edf0feb4f5cc86c2bbebe63adc0736d70c683ba2c57ce3300302",
+      "git_blob": "d3f5d5c42b4c6076f785e42a0893f487dee6a520"
+    },
+    {
+      "path": "public/zh-Hans/appendices/source-map/index.html",
+      "bytes": 36078,
+      "sha256": "68d14a76d0b10537489077952bd111b6c2f9ec5a6d36b431ee5dc54d8d8f96c6",
+      "git_blob": "15c4f97b02f6bfec46369f68683e3ce7f11188c3"
+    },
+    {
+      "path": "public/zh-Hans/books/index.html",
+      "bytes": 11457,
+      "sha256": "1dc1ebdc64c0da110e1a0c1807c502dfd3df57f84ee52b058ae7325d786e0250",
+      "git_blob": "f0df36f28c010316a74e0bb39a90c04cee76589e"
+    },
+    {
+      "path": "public/zh-Hans/docs/artifact-registry/index.html",
+      "bytes": 10790,
+      "sha256": "0550890f48c07121a3505b71b53ccfacda027ea2c62bc725f94a0b6445ab7346",
+      "git_blob": "35379575b925b14cf3af34d31644366d7ba77021"
+    },
+    {
+      "path": "public/zh-Hans/docs/availability/index.html",
+      "bytes": 12098,
+      "sha256": "fbd0599197c3dcc037b577b26b3a6eb2811b8a29f214f80b8e799a09a9127065",
+      "git_blob": "07d4b869e6b3fe15c51192fa0e8f6afaadb639c0"
+    },
+    {
+      "path": "public/zh-Hans/docs/cache-identity-and-invalidation/index.html",
+      "bytes": 10859,
+      "sha256": "a6f01490389be90d1904485bd61d2ecd7da0cba1f73becfbfc99c62361e816e2",
+      "git_blob": "1d85bb615cf0fb2724b32f6921d82c2840b7f242"
+    },
+    {
+      "path": "public/zh-Hans/docs/compiled-artifact-contract/index.html",
+      "bytes": 10828,
+      "sha256": "6f7bbf783083e28242440431d9c7f178514a382f902af27012eb3e61c13be8f7",
+      "git_blob": "e3979b2c79fae290aef81792215f219dc32a335e"
+    },
+    {
+      "path": "public/zh-Hans/docs/context-package/index.html",
+      "bytes": 10749,
+      "sha256": "301391be3c36f917f4810dcd0a3f20c369e9d09f32dddd545a2a5114403167dc",
+      "git_blob": "525a603b942618645d2c8cdd08360af377d75d90"
+    },
+    {
+      "path": "public/zh-Hans/docs/contract-family/index.html",
+      "bytes": 10767,
+      "sha256": "3860c0efa9e61f742d4d2297fd57b062f13ec61854a55e421845267dadee21e0",
+      "git_blob": "4ace04c33cd31a8dcda6f27f5a068b1cd48e95de"
+    },
+    {
+      "path": "public/zh-Hans/docs/index.html",
+      "bytes": 11409,
+      "sha256": "392bead60931e1b7f2ad4c18c33e38ce9b013e656c352f5279cf092c1c14119e",
+      "git_blob": "abcb0209ff48f4500d86838752f2837b8b015d61"
+    },
+    {
+      "path": "public/zh-Hans/docs/knowledge-contract-v3/index.html",
+      "bytes": 10807,
+      "sha256": "ca56e2c8acc0cba79e1acf3f6c653ade427a6bd128e0d1e76a23684ca0c2ed2f",
+      "git_blob": "849adfa403f0891269ca004de39f3f803f9ec555"
+    },
+    {
+      "path": "public/zh-Hans/docs/knowledge-evolution-contract/index.html",
+      "bytes": 10799,
+      "sha256": "7fdbb038f73e8956d6566a7b4abc36c0f5ae8bdc145ae39e8bb2564a6955bb95",
+      "git_blob": "a76012dfa68618e9c11bc898cdcd7514e46ec5c2"
+    },
+    {
+      "path": "public/zh-Hans/docs/model/index.html",
+      "bytes": 10759,
+      "sha256": "ca26e80498636664af9c0fa0083655fee8db2abb3c10027d641af15f36750fd6",
+      "git_blob": "5a1f2360a8a17136b1a206d73af95e21bd13cd00"
+    },
+    {
+      "path": "public/zh-Hans/docs/reuse-policy/index.html",
+      "bytes": 10734,
+      "sha256": "3b8416db7730ba3b8bf034034e73abeabcc9899443dd098a4d38e882cb431346",
+      "git_blob": "921049893a6c92c166636586151a16e404d1f9c6"
+    },
+    {
+      "path": "public/zh-Hans/docs/semantic-types/index.html",
+      "bytes": 10762,
+      "sha256": "b4889af6af8958dfb2bddd46d1fd2133507d4d7a89602865e9cf80bcfc749872",
+      "git_blob": "66bc3178bf47f982fbc9bd25fc6e5a723b55ff2a"
+    },
+    {
+      "path": "public/zh-Hans/docs/status-model/index.html",
+      "bytes": 10737,
+      "sha256": "a18f796d14223e15ebce372261fcb9e4d36c4cc2ca5c407e427e0248bba2a632",
+      "git_blob": "72f6a136980636dd9242144eed7a02fe577a8e0f"
+    },
+    {
+      "path": "public/zh-Hans/engineering/index.html",
+      "bytes": 11472,
+      "sha256": "3a4b75fe5bf87d1f7057d298ddbe6e165954a29b6b95edf37922e11082b4d52d",
+      "git_blob": "cd05165b2762f30e8bb16e8a6e0d14f24391b753"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/artifact-registry/index.html",
+      "bytes": 27541,
+      "sha256": "1a2c8184fc4fe46668a52e1d229d83c9d6f583cfa2cac5aa565d4209ba4ba90e",
+      "git_blob": "87f21ec426d63f37ac48c09d0743ce1f8f3b5e59"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/book-package/index.html",
+      "bytes": 47306,
+      "sha256": "4aacb04bfc96f77716199073d18a20e1a3f6bcd600bcd3076b51d1613e5bbe6f",
+      "git_blob": "047dcff39c0e929faec516a7b5cfbfeeb0cbd831"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/cache-identity-and-invalidation/index.html",
+      "bytes": 31945,
+      "sha256": "60849fe4c46f7ac20ed7b46d483cdd9e3fdc4b8c9b6db3486fb8971b550d53b0",
+      "git_blob": "540f69ff30b354d9a381c06dd75df9459ecccec1"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/compiled-artifact-contract/index.html",
+      "bytes": 27072,
+      "sha256": "5c03bdbc83b316befe4d5400f7ce0f25a17d0842b320b4e206527037c0496cb7",
+      "git_blob": "a2e0634db6e32a91b4497859c6f88574f38b4305"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/context-package/index.html",
+      "bytes": 26573,
+      "sha256": "de8fd5efb3f2384b3e7526cbdce402b5928eaa7ec4f92d60b7c0446147dc825b",
+      "git_blob": "f8f205d9e98f9f3316c69378e60d440ac7919a21"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/contract-family/index.html",
+      "bytes": 27491,
+      "sha256": "3cb1a3732dc081f70ba16ad7e8826fcf479ebe12322089a24e902823e4a11208",
+      "git_blob": "61f91a8bb45f933458833604aa1173d2e1fa7cf6"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/index.html",
+      "bytes": 17293,
+      "sha256": "9d9cb764ade16578870e03ba7b38d7bc672f9487a12458c10b344d059d79eb97",
+      "git_blob": "2a7cd0a65cfcf0218fb69335e0709fb95144b2a5"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/knowledge-contract-core/index.html",
+      "bytes": 28917,
+      "sha256": "f98d9186a7bd64e69a0c40aae5c4730a32cff3b3e68d1cddbd89ca46b2821cee",
+      "git_blob": "85de2e2d83ef1c11e36357212553424913be8bd6"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/knowledge-evolution/index.html",
+      "bytes": 26463,
+      "sha256": "ecb655d1817e17d3f4ea44fd3e1dbfe7a76f6a40a5dfe249a3ca6a467e7587ce",
+      "git_blob": "3c3de1e8088280bc2157169dfb7a17de10fc3461"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/reuse-policy/index.html",
+      "bytes": 27899,
+      "sha256": "961dd84068c4822ba01f1b12f4e456842f0137960b9af1754cd13c205eeb8181",
+      "git_blob": "a13b2bd0b7c290a59cd56f28b80b03d7206a279f"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/semantic-types/index.html",
+      "bytes": 26133,
+      "sha256": "5251a105a8a8f28b70a9c2e83ae4b81eac8428e6ddd89e00d28c3a57aa628706",
+      "git_blob": "0ca22d151a156b7b44a5543465fb289bbde14598"
+    },
+    {
+      "path": "public/zh-Hans/engineering/specifications/status-model/index.html",
+      "bytes": 40427,
+      "sha256": "c61bcc95158ca355e8a1f0aea7c89426e5ffde72c929514c59a63213cc98d7c4",
+      "git_blob": "b575bfd46c91b79d7c1dee1bffb24f66e6138aaf"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/contract-profile-conformance/index.html",
+      "bytes": 35349,
+      "sha256": "7e12e76fed7325cceb101737e1208795d48f601a3c72d5cfcd979dcc97637438",
+      "git_blob": "3e0dad49ce2b43af42480f17ff35837f405565b5"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/index.html",
+      "bytes": 49341,
+      "sha256": "5fb483227b36a09dc1646d2379a71373950d436ac450fafa301fefdba5859212",
+      "git_blob": "ab735cdbeb70c8dd9329b24dbaf7af830e69f1e9"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/editorial-skill-pilot/index.html",
+      "bytes": 36781,
+      "sha256": "65dcd35bb001e5e42f95815eb619889b8483cb48b1ba00799da81c7bc591c0ac",
+      "git_blob": "fce2ef2e5ab892814bdc77dd628aa35342a0f7f2"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/executable-projections-and-revision/index.html",
+      "bytes": 48532,
+      "sha256": "5bd11715e06971630a6d4bac3ffce6cc6f275d13e32fa92fe934a0bff831bdf1",
+      "git_blob": "6f2a521fa857aa29c39cc1479d690244225316aa"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/index.html",
+      "bytes": 14365,
+      "sha256": "df358a68e7583354bd7e515ca35fb8159befc920afa2cfeccd6b27e4f9f1e3e8",
+      "git_blob": "3e6655b20e885cb8fd2a10f37618f17f1c3e48ba"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/reuse-admission-and-cost-controls/index.html",
+      "bytes": 56519,
+      "sha256": "7f9c4b2355aa90ba841690d9f6b2e48c98a793e4c989f0fa2e76e96d354c623b",
+      "git_blob": "ae42b2eea4bbe909766153fc589f92f37a8b6cd0"
+    },
+    {
+      "path": "public/zh-Hans/engineering/studies/source-transcription-and-uncertainty/index.html",
+      "bytes": 43553,
+      "sha256": "e26f022b0260f117d8b52f63f5adb55ca51f8738bb43a980a193c2026cc1f920",
+      "git_blob": "c7bd8f335263531f34cffdaca175e96c54eca23e"
+    },
+    {
+      "path": "public/zh-Hans/index.html",
+      "bytes": 20703,
+      "sha256": "d88defa1e7f79b2b0c2b52007897c7129204d29504e39c84ce63bdc3082a24e0",
+      "git_blob": "c3b52d69f1c8e91a5edf805a5a0c7ba70d5054a3"
+    },
+    {
+      "path": "public/zh-Hans/journal/agent-situation-2026-11-14/index.html",
+      "bytes": 17669,
+      "sha256": "501ea275c605a4d580bb0bc43942b3955c255bc59d7df271f92e1884bdcbf52c",
+      "git_blob": "7f55e4638e12a786dee6465f3f124c2e9b062a9e"
+    },
+    {
+      "path": "public/zh-Hans/journal/atom.xml",
+      "bytes": 67552,
+      "sha256": "56098fdb559fdf2c2196e2daf5be819e8c5e17b9c9d1897ffc3c64539c4bdf7c",
+      "git_blob": "a3e10afc4bd3173d0242d516bb999004f63e59b6"
+    },
+    {
+      "path": "public/zh-Hans/journal/building-a-place/index.html",
+      "bytes": 11718,
+      "sha256": "52f69f14b8d5c68fb4215696b4401bc5a4cc3610b58d0d6de638a5bfb8ce1fda",
+      "git_blob": "be1366ae6adec37f9179fb5b1ade18be621eefce"
+    },
+    {
+      "path": "public/zh-Hans/journal/control-for-topic-2026-11-12/index.html",
+      "bytes": 17168,
+      "sha256": "dc75910aa354abf9a278dfc2de9c9d51122e92ca297b8e39d6628afc984f2e7e",
+      "git_blob": "eb6aea38652d389bdfb8106f3ef2159dcab10e87"
+    },
+    {
+      "path": "public/zh-Hans/journal/dora-gaps-agents-2026-11-14/index.html",
+      "bytes": 23671,
+      "sha256": "beb47613927c78418137bc44c5240a2e457140438e6a5b48e48d00f0378299a6",
+      "git_blob": "3bf5b494310039b8bdfbd3963be9934ef0b60831"
+    },
+    {
+      "path": "public/zh-Hans/journal/index.html",
+      "bytes": 19266,
+      "sha256": "4caa282caa2e57f8717512f146b08a176a502c825a9323ffee0251e1ef0067c4",
+      "git_blob": "840b21bf4fc27fecbae2f7727f39b9919a105613"
+    },
+    {
+      "path": "public/zh-Hans/journal/knowledge-contract-architecture/index.html",
+      "bytes": 14369,
+      "sha256": "a633643c69f52e165d302cab8372a57befefa4be42770811ecb5bb7961756462",
+      "git_blob": "448864c0a6e0ed2b53f69185ddf5a412dac14edc"
+    },
+    {
+      "path": "public/zh-Hans/journal/knowledge-contract-v2/index.html",
+      "bytes": 19176,
+      "sha256": "9e51e24ce1aee15e1f4dc5860d86a1b8cad724c24cdb43370ddc3a8540190261",
+      "git_blob": "f8c1d8793f70d4ec20df822f3d92fa89ad826db7"
+    },
+    {
+      "path": "public/zh-Hans/journal/lesson-without-evidence-2026-11-11/index.html",
+      "bytes": 19187,
+      "sha256": "b2f10d3c1791e6d4d1db280309dc05d1f66f673c782fb14d3b02040de4acedcc",
+      "git_blob": "fa5cf1be0d7bc695d17dd6bdc3f51c148fd5240f"
+    },
+    {
+      "path": "public/zh-Hans/journal/rss.xml",
+      "bytes": 67128,
+      "sha256": "5cd6f9b4bdb5c43bd63a5ff4063aa525d1b693b9cebbe507509822c19541fa91",
+      "git_blob": "101f0c1b982c9cd1cc8328c1f067edf72bc57160"
+    },
+    {
+      "path": "public/zh-Hans/journal/rule-after-restart-2026-11-15/index.html",
+      "bytes": 18310,
+      "sha256": "f0759a043e989396e0293da2074016c6f4bc503c76df6abda99216ddd9a0707c",
+      "git_blob": "6bf33f907ef5067241bc332e7bb46ade9a83a455"
+    },
+    {
+      "path": "public/zh-Hans/journal/source-rule-checks-2026-11-15/index.html",
+      "bytes": 18538,
+      "sha256": "e11dc0b00869756cf969c0ff21bfa51cce9b2dc6653746f3658f387c494c98ea",
+      "git_blob": "e0985451ca5580a1c814e76621371ba10ec0d386"
+    },
+    {
+      "path": "public/zh-Hans/journal/tech-diplomacy-agent-contracts-2026-11-16/index.html",
+      "bytes": 25030,
+      "sha256": "25abaefbebaacb93b453907f0a64783457ee9338c957715ca431422a3665f740",
+      "git_blob": "5442b99dedb6e7ae2b7f98b719908b3240f4214d"
+    },
+    {
+      "path": "public/zh-Hans/journal/verdict-is-not-a-test-2026-11-13/index.html",
+      "bytes": 18813,
+      "sha256": "b91b29c64b5ecb3f09917e03f2e5175da2a73a3a6dcf1e819bfe72e3d23f17ac",
+      "git_blob": "7a480220e773523bbbac809d2d2ccd8867dfd464"
+    },
+    {
+      "path": "public/zh-Hans/lab/knowledge-journey/index.html",
+      "bytes": 12578,
+      "sha256": "98940fb1a0ba1f350732b76aec1d91bd951a498e08f90ef94ef75f3ccb3e51b1",
+      "git_blob": "759801704b9e9dbccf1f7c44c702613743b8c126"
+    },
+    {
+      "path": "public/zh-Hans/programme/index.html",
+      "bytes": 30422,
+      "sha256": "63d29fa0d865caf9bbd38e0cdad26bbf054a8ef55f360873c3ad3591b79d0e8a",
+      "git_blob": "0ce4a5bfd8b8866d857f43c546e66e2e32890717"
+    },
+    {
+      "path": "public/zh-Hans/reference/bibliography/index.html",
+      "bytes": 38011,
+      "sha256": "fa81548658ac42c5c81088016ae82c96a47baa7bf59f86d4c371f4088c5bd136",
+      "git_blob": "99382fe538d0124cc9b515fbf24881659db2f8cb"
+    },
+    {
+      "path": "public/zh-Hans/reference/glossary/index.html",
+      "bytes": 52494,
+      "sha256": "45896dc901830d4a96f6fd06710aac383d0c9eeeb2011b0a4882fb23fde0311e",
+      "git_blob": "cb5222a5be92c0219caf126fa28393a6424fcf79"
+    },
+    {
+      "path": "public/zh-Hans/reference/index.html",
+      "bytes": 11691,
+      "sha256": "129625093f91de784aa5bcfb0db9dd5bc30321e4b2728061a21c4978a3ed05d4",
+      "git_blob": "f54d2d151501e2545c685dc80bf81a1f7d87719b"
+    },
+    {
+      "path": "public/zh-Hans/references/index.html",
+      "bytes": 11963,
+      "sha256": "04689b58ef1447a8f745b25e7739b4081803a17abcf129185566cd796ae4409c",
+      "git_blob": "701cad953fde67e5a9b8dd508073856e432bace4"
+    },
+    {
+      "path": "public/zh-Hans/repository/index.html",
+      "bytes": 22660,
+      "sha256": "7290aa0a12461707d5df318f50083ac66401c4e6610987ac67444a328232d252",
+      "git_blob": "d476a0fad72a7eac5182555690b2175d8ca083c1"
+    },
+    {
+      "path": "public/zh-Hans/research/anthropic/index.html",
+      "bytes": 11250,
+      "sha256": "49578a2aa3d3c4e7b29f1c0458d03d0e8fafd95085fdfebc404722282a9cc16a",
+      "git_blob": "98f7f0572d8ac6d5f1f3ce0234c119d2d02a0dfe"
+    },
+    {
+      "path": "public/zh-Hans/research/deepmind/index.html",
+      "bytes": 11263,
+      "sha256": "8ea6cf51e10f4c45e4f7eec3094eb3502cad7c7cdbae43144c03579f2d09cd18",
+      "git_blob": "9be9ad30df62ad897484340c7cd490b440e65c4b"
+    },
+    {
+      "path": "public/zh-Hans/research/hugging-face/index.html",
+      "bytes": 11226,
+      "sha256": "756fd8cf5fb00d248c2aca6ba0bbfb3dea77c75b66bfdd99bb2f06e4327894cb",
+      "git_blob": "bea0bcf0cef2166a2ca7f54a19809258864ab0f8"
+    },
+    {
+      "path": "public/zh-Hans/research/index.html",
+      "bytes": 20676,
+      "sha256": "ace4d49c78b9695c4737539a4aa5123074b824658ce828fbefd8714caf25f2b2",
+      "git_blob": "0ba640ef4607cb86d3f620741516e951dd689040"
+    },
+    {
+      "path": "public/zh-Hans/research/mcp/index.html",
+      "bytes": 11261,
+      "sha256": "43468ea9536af8c3469388cf981fc109c02d2368ffba580251785b93e40e7513",
+      "git_blob": "d039c61a244116197b112f0c7307f873332dcfaf"
+    },
+    {
+      "path": "public/zh-Hans/research/p00/index.html",
+      "bytes": 10753,
+      "sha256": "f785de8fd4a600e89fd1780e62d6560d8549a46aca02f018ed48efb6a9bf3bef",
+      "git_blob": "1e3e4b4c6882d7f8377fce373d453c0165d8362e"
+    },
+    {
+      "path": "public/zh-Hans/research/p01/index.html",
+      "bytes": 10753,
+      "sha256": "188ca5ccc278704347ca10d814b5158370d097a28dea28ae2b0c0bb2fa521dd2",
+      "git_blob": "9c47db4a81903f14abf4a9a67fd2286aa6ce2f2c"
+    },
+    {
+      "path": "public/zh-Hans/research/p02/index.html",
+      "bytes": 10753,
+      "sha256": "92180d5f704e77a52baa5a1d06e752c0280f0c991bea2e142be20d7bdfc94c05",
+      "git_blob": "65316271077678ad99b903176fca8aabbb0d9dbe"
+    },
+    {
+      "path": "public/zh-Hans/research/p03/index.html",
+      "bytes": 10763,
+      "sha256": "4916e5c651f1279a577eec65e43694103fdcde33532d2b6cede20fed0a915fe3",
+      "git_blob": "1cc4ca43487594f73a3fabe1b08086370f8cb9ee"
+    },
+    {
+      "path": "public/zh-Hans/research/p04/index.html",
+      "bytes": 10769,
+      "sha256": "eea35b75828be42e31c53dbde7ad09bf26d06b7d3779d10876985a721daac427",
+      "git_blob": "dc27d453f5f8e84e3cc7874ad41081632869f330"
+    },
+    {
+      "path": "public/zh-Hans/research/p05/index.html",
+      "bytes": 10769,
+      "sha256": "da0f8aad292ac1dcc4fde1932eef2d5b0b52d493f710edb269fe13dd7cfcea76",
+      "git_blob": "d4e8fab398e46656b09df15c443384d1206aa104"
+    },
+    {
+      "path": "public/zh-Hans/research/p06/index.html",
+      "bytes": 10750,
+      "sha256": "d21be99b25d29bf134f5ae25280b42912c956c58b94ef76e51ca7bd94c3c15ec",
+      "git_blob": "665839cf9822a3ed89fb03794c0854c82dd82320"
+    },
+    {
+      "path": "public/zh-Hans/research/p07/index.html",
+      "bytes": 10767,
+      "sha256": "3242108ba27b3f718b60589f9735d512d4fa448b72d14e9b8d7109bbc9e15c33",
+      "git_blob": "b134f81f745cfc20083f0916c33f3027308d991a"
+    },
+    {
+      "path": "public/zh-Hans/research/p08/index.html",
+      "bytes": 10750,
+      "sha256": "c10768755fe4361cee63fe860f2cc7cd18e81ea2135dc1fb4a7f8debe24c8791",
+      "git_blob": "38d5a1f7b213c51757799a270564436f9c665da0"
+    },
+    {
+      "path": "public/zh-Hans/research/p09/index.html",
+      "bytes": 10740,
+      "sha256": "060559c94d0e843a86bbabbb6ccdfd982c205b7d642f96ff57d0fbd6fc6e1476",
+      "git_blob": "25211585d6a293c10c72a65d7b7925644a147919"
+    },
+    {
+      "path": "public/zh-Hans/research/p10/index.html",
+      "bytes": 10734,
+      "sha256": "bd6e77f76efdd0fafe5421fadcd392c9e11ef51f8cbf2626481a6abfb892ef84",
+      "git_blob": "ab43d033a2ed524494004579cf893c0b01c8c573"
+    },
+    {
+      "path": "public/zh-Hans/research/p11/index.html",
+      "bytes": 10767,
+      "sha256": "0b19f35e2eee3e282555461a5f8cfd8ac95851cc829bbdab2d5e0c06edee98d2",
+      "git_blob": "6ef58e0191223a66968340cfb1fb5e91a630fa12"
+    },
+    {
+      "path": "public/zh-Hans/research/p12/index.html",
+      "bytes": 10740,
+      "sha256": "39eea652f5bfd8a34d9d8e9316e21be7a52c5108b16cf44838857e7d382610b0",
+      "git_blob": "d7e7b4ef90725ed51dc2a209915ffaeffe2ae8ca"
+    },
+    {
+      "path": "public/zh-Hans/research/p13/index.html",
+      "bytes": 10737,
+      "sha256": "822f56d11d4cf437a00816abbb1a2f593e61f7643febd058c18af5f818ba62a6",
+      "git_blob": "416a9a0c949a9a6aa1f084e7f76c093b5f73eba1"
+    },
+    {
+      "path": "public/zh-Hans/research/stripe/index.html",
+      "bytes": 11208,
+      "sha256": "b6e7090ec4f1c10f8ac073946a3996e82561e466dc558a5703dbd03de29d2088",
+      "git_blob": "8fa06cdb2da82b2de9977a8a75a456ea37a50ad4"
+    },
+    {
+      "path": "public/zh-Hans/research/supabase/index.html",
+      "bytes": 11148,
+      "sha256": "e9ff6cbcdee009d27ecc2de85acfb59a05435e854ae4f800200084f904af9f5c",
+      "git_blob": "bf1cd4ef464d2898198461f70d3cedfe09a4a6c7"
+    },
+    {
+      "path": "public/zh-Hans/roadmap/index.html",
+      "bytes": 124080,
+      "sha256": "843d8eadebe2e1d8d84875e1009073796fffe6d641b92068a9b3c0737dbf510b",
+      "git_blob": "9c0137db09ac79d55bd6310d0afb3d2a77b263de"
+    },
+    {
+      "path": "public/zh-Hans/science/constrained-transformations/index.html",
+      "bytes": 63574,
+      "sha256": "311e9b0e0544726fd9a74c1189f652ad1fac9a0fd1bb21f0fd69dc5a482bf5bb",
+      "git_blob": "6d22422c0e8eb0335d704def4020583b7eb9ac22"
+    },
+    {
+      "path": "public/zh-Hans/science/controlled-knowledge-reuse/index.html",
+      "bytes": 54598,
+      "sha256": "67474d004db6ef10bf8fe4c6813ad47f8c100dd9c4bb4b3902e9b2ff1cc7fbf2",
+      "git_blob": "f368417c532f9d5ac392f2d3751a4abdd2e1378c"
+    },
+    {
+      "path": "public/zh-Hans/science/evidence-and-falsification/index.html",
+      "bytes": 43635,
+      "sha256": "3ba3e17c6f5f774126189d60706c5391083486d161eb4c3eaf789bff0f4566a7",
+      "git_blob": "3948c76bd75fe0d3752400657c1a46d3e56d651b"
+    },
+    {
+      "path": "public/zh-Hans/science/geometry-of-semantic-representations/index.html",
+      "bytes": 77346,
+      "sha256": "c9c2492adfe07122109d4737a5f00430a1bc6389f4d990d6a70efae43080721b",
+      "git_blob": "83234203140a0c5ea7c1834240f57cccfe4b8a23"
+    },
+    {
+      "path": "public/zh-Hans/science/human-meaning-and-computable-knowledge/index.html",
+      "bytes": 73340,
+      "sha256": "52766bcfe4cba88b35662123b1118f4c0186bd1d96d621cdeff19c261bf47c95",
+      "git_blob": "e35260b20ea010c6baa1dab4b48bf144949db50c"
+    },
+    {
+      "path": "public/zh-Hans/science/index.html",
+      "bytes": 20648,
+      "sha256": "4cae1ec03e26387a34c8c267b330ffca9b2662822f692150d64a56eb82258215",
+      "git_blob": "e306b6f66ae7b86b7e437e122415e0a5b8210e84"
+    },
+    {
+      "path": "public/zh-Hans/science/interaction-and-memory/index.html",
+      "bytes": 41724,
+      "sha256": "ccc8c1acf8f0cdeb39e4b5d46d16129bcdd5129b3d1f64934aa10c0493fc74b5",
+      "git_blob": "bb4c2625be15af3768d554a180df991b52e9f407"
+    },
+    {
+      "path": "public/zh-Hans/science/knowledge-utility/index.html",
+      "bytes": 46216,
+      "sha256": "0da90aa306df07fe4a29f1e6705078c6ce33308abb737426cd72f6afeb9563b3",
+      "git_blob": "127165fc0bbbbf690135193aa3eff8c70c69f0cc"
+    },
+    {
+      "path": "public/zh-Hans/science/retrieval-and-context-composition/index.html",
+      "bytes": 52070,
+      "sha256": "9cbffff3171181eb4f788fadb69cad0f392ac48f9b2977095a6c088e356bc860",
+      "git_blob": "3d7c33ce987df9ef6913cc04f9809e8cabb94ce8"
+    },
+    {
+      "path": "public/zh-Hans/science/revision-and-governance/index.html",
+      "bytes": 43260,
+      "sha256": "fee4d045b2e1980afe3c7b9f925febce75fb38406a0a1dc9abfa6f5cf3a8612c",
+      "git_blob": "11428d0fce2f78ebd5a05d662fafb606ba3842bb"
+    },
+    {
+      "path": "public/zh-Hans/science/semantic-objects-and-context/index.html",
+      "bytes": 52982,
+      "sha256": "64d622aa67b9edeb69c6fbd592872f6ee319175111da62acf96cb9000d17b39a",
+      "git_blob": "19d6b2859b3eca87d939bc2ee6046cf6af4a208c"
+    },
+    {
+      "path": "public/zh-Hans/search/index.html",
+      "bytes": 20317,
+      "sha256": "9fffc7dea7ee95c39bb1c90f9883da862a134a4f40a3689768489c5887b87669",
+      "git_blob": "8ba815b2a9149e4bb0ec4287ac4654c2adeca73c"
+    },
+    {
+      "path": "public/zh-Hans/wiki/index.html",
+      "bytes": 11646,
+      "sha256": "d57d138aa1e82d0f5141ba21bd52e333b36e1fccb2c8f0911df955a01e8e8b3e",
+      "git_blob": "60174b6f47b5334049349760f605454288dfce61"
+    },
+    {
+      "path": "public/zh-Hans/wiki/knowledge-contract/index.html",
+      "bytes": 10798,
+      "sha256": "0f28eded5080a78097b156479f3ee9a6b962ab4162ec39a588911e59e5446b96",
+      "git_blob": "e1680bf32d7b4f6169451b8219520f034fa2c516"
+    },
+    {
+      "path": "public/zh-Hans/wiki/provenance/index.html",
+      "bytes": 10743,
+      "sha256": "8c0054848571d542aaef6edffae04a0c5f69cf747451c578ad43e130355f28c0",
+      "git_blob": "08c9d290a6eea6d80ebe9599b62e1307703fe7fe"
+    },
+    {
+      "path": "public/zh-Hans/wiki/versioned-knowledge/index.html",
+      "bytes": 10751,
+      "sha256": "5dbdb308d9242898fa46266fb3033ae63c2222c02f5560d2e3f33151d1eafc3e",
+      "git_blob": "59c7c8565c0319608fbfa3ab48a2928dc2001ef1"
+    },
+    {
+      "path": "src/content/catalog.json",
+      "bytes": 4023455,
+      "sha256": "b71061a0105f4237eeb2b8e8e6aa609f8b941b36f62ae2b299c46606d772c949",
+      "git_blob": "5c22c38b478fd90953181c4f531a4ecc071e8e98"
+    },
+    {
+      "path": "src/site/content-provenance.json",
+      "bytes": 177119,
+      "sha256": "e69bb814e46b7d998205f6d6b1928ab268785c60c78ec1b5874337e37e8e0bd8",
+      "git_blob": "bcd98be32fcb9ac460724dd50a818549b1be4544"
+    }
+  ],
+  "editorial_review_corrections": {
+    "source_comment": "https://github.com/Arcanada-one/contract-place-site/pull/57#issuecomment-6916080839",
+    "findings": [
+      "J57-T01",
+      "J57-T02"
+    ],
+    "corrected_spans": 4,
+    "ru_blob": "c7fdf4b438bea12dc7964bf09de326c08736d3f5",
+    "zh_Hans_blob": "ed373fb92a1492752aa0c9efcebf95fc69ed7259",
+    "source_and_generated_spans_read_back": true,
+    "non_author_redisposition": "required"
+  }
+}

@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Verify complete article text, source pins, translated UI and compatibility."""
 from collections import Counter
+from hashlib import sha256
 import json
 from pathlib import Path
 import re
@@ -62,9 +63,10 @@ for locale in ('en', 'ru', 'zh-Hans'):
         assert 'name="robots" content="noindex,follow"' in html
         assert 'href="/' + locale + '/' + target + '/"' in html
         assert 'class="source-body prose"' not in html, 'Alias must not duplicate the corpus'
+content_hash = sha256((public / 'content.js').read_bytes()).hexdigest()
 for page in public.rglob('*.html'):
     html = page.read_text()
-    assert 'src="/content.js?v=' + manifest['commit'] + '"' in html, 'Unversioned publication catalog: ' + str(page)
+    assert 'src="/content.js?v=' + content_hash + '"' in html, 'Publication catalog cache key does not match emitted bytes: ' + str(page)
 count = check_site(public)
 labelled = check_status_labels(public, catalog['records'])
 rendition_pages = check_renditions(public, catalog['records'], renditions_source)

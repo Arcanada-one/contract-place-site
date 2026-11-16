@@ -48,10 +48,12 @@ data.reader_aliases={
 for(const record of data.records)data.reader_aliases[record.route.replace(/^\/en\//,'').replace(/\/$/,'')]=record.route;
 fs.rmSync(out,{recursive:true,force:true});
 fs.cpSync(path.join(src,'site'),out,{recursive:true});
-// A previously cached catalog must never replace a new prerendered edition.
-// The source pin is an immutable cache identity shared by every localized page.
+// Journal-only edits can change the emitted catalog without changing the manuscript pin.
+// Hash the exact bytes written below so cached data cannot replace a fresh prerender.
+const contentBytes='window.CP_CONTENT = '+JSON.stringify(data)+';\n';
+const contentHash=createHash('sha256').update(contentBytes).digest('hex');
 let template=fs.readFileSync(path.join(out,'index.html'),'utf8');
-template=template.replace(/src="\/content\.js(?:\?[^"]*)?"/g,'src="/content.js?v='+manifest.commit+'"');
+template=template.replace(/src="\/content\.js(?:\?[^"]*)?"/g,'src="/content.js?v='+contentHash+'"');
 // Changed runtime code or styles must not reuse an earlier edition's browser cache entry.
 const assetHashes=Object.fromEntries(['theme.js','style.css','search.js','analytics.js','app.js'].map(name=>
   [name,createHash('sha256').update(fs.readFileSync(path.join(out,name))).digest('hex')]));
@@ -78,7 +80,7 @@ if(hasRenditions){
 }
 fs.writeFileSync(path.join(out,'index.html'),template);
 fs.copyFileSync(path.join(out,'assets/favicon.svg'),path.join(out,'favicon.svg'));
-fs.writeFileSync(path.join(out,'content.js'),'window.CP_CONTENT = '+JSON.stringify(data)+';\n');
+fs.writeFileSync(path.join(out,'content.js'),contentBytes);
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://contract.place/sitemap.xml\n');
 const renditionSummary=r=>Object.fromEntries(Object.entries(r.renditions).map(([lang,rd])=>[lang,{state:rd.state,source_sha256:rd.source.sha256,current_source_sha256:rd.current_source_sha256??rd.source.sha256,source_revision:rd.source.revision,...(rd.rendition?{rendition_path:rd.rendition.path,rendition_sha256:rd.rendition.sha256,rendition_revision:rd.rendition.revision,review_status:['reviewed','partially-reviewed'].includes(rd.state)?'internal-agent-review':'unreviewed',review_scope:rd.state==='reviewed'?'full':rd.state==='partially-reviewed'?'partial':'none',review_issue:rd.review_issue?rd.review_issue.code:null}:{}),counts_as_independent_source:false}]));
 const documents=data.records.map(r=>({type:r.type,slug:r.id,path:r.path,title:r.title,summary:r.summary,language:'en',route:r.route,sha256:r.source_sha256,math_count:r.math_count,...(r.status?{status:r.status}:{}),...(r.renditions?{renditions:renditionSummary(r)}:{})}));
@@ -116,5 +118,13 @@ const lines=['# Knowledge Contract Arcana','',
 'Text: CC BY 4.0. Code and schemas: Apache-2.0. Credit Pavel Valentov, Knowledge Contract Arcana, https://contract.place, and retain upstream sources.',
 'Historical source versions and Russian manuscripts: '+base+'/en/appendices/source-map/.',''];
 fs.writeFileSync(path.join(out,'llms.txt'),lines.join('\n'));
+// Reuse the exact compiled Journal entries: research records and legacy pages are not feed entries.
+const feedChild=spawnSync('python3',['-B',path.join(src,'journal_feeds.py'),out],{
+  cwd:root,encoding:'utf8',input:JSON.stringify(data.journal_issues||[])
+});
+if(feedChild.error)throw feedChild.error;
+if(feedChild.status!==0)throw new Error(feedChild.stderr||feedChild.stdout||'journal feeds failed');
+process.stdout.write(feedChild.stdout);
 const child=spawnSync(process.execPath,[path.join(src,'prerender.mjs'),out],{cwd:root,stdio:'inherit'});
 if(child.error)throw child.error;process.exit(child.status??1);
+

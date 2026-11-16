@@ -26,6 +26,17 @@ const fallbackIndexing=()=>APPLY_FALLBACK_INDEXING_WITHOUT_RENDITIONS||!!renditi
 const TRANSLATED=['reviewed','partially-reviewed'];
 const workOf=rest=>data.records.find(r=>r.route==='/en/'+rest.replace(/\/+$/,'')+'/');
 const counts=(record,l)=>l==='en'||TRANSLATED.includes(((record.renditions||{})[l]||{state:'missing'}).state);
+function journalFeedHead(route,lang){
+ // Preserve the existing noindex/alias invariant: feeds are discovered only from
+ // indexable home, Journal index and manifest-backed daily issue pages.
+ const match=route.match(/^\/(?:en|ru|zh-Hans)(?:\/(.*))?$/);
+ if(!match)return '';
+ const bare=(match[1]||'').replace(/\/+$/,'');
+ if(NOINDEX.has(bare)||data.aliases[bare])return '';
+ if(bare!==''&&bare!=='journal'&&!(data.journal_issues||[]).some(issue=>issue.route===bare))return '';
+ const title={en:'Daily journal',ru:'Ежедневный журнал','zh-Hans':'每日专栏'}[lang];
+ return ['rss','atom'].map(format=>'<link rel="alternate" data-journal-feed="'+format+'" type="application/'+format+'+xml" title="Knowledge Contract Arcana — '+title+' ('+(format==='rss'?'RSS':'Atom')+')" href="'+ORIGIN+'/'+lang+'/journal/'+format+'.xml">').join('');
+}
 function seo(route,lang){
  if(!/^\/(?:en|ru|zh-Hans)(?:\/|$)/.test(route)&&data.reader_aliases[route.replace(/^\/|\/$/g,'')])return '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url='+data.reader_aliases[route.replace(/^\/|\/$/g,'')]+'">';
  const m=route.match(/^\/(?:en|ru|zh-Hans)(?:\/(.*))?$/);const rest=m&&m[1]?m[1]:'';
@@ -60,7 +71,7 @@ function generate(route,lang,{sharedError=false}={}){
   const names=['English','Русский','简体中文'];
   els['#main'].innerHTML='<div class="container reading" data-shared-error="404"><div class="page-head"><h1>404</h1></div>'+LANGS.map((l,i)=>`<section lang="${l}" aria-labelledby="error-language-${l}"><h2 id="error-language-${l}">${names[i]}</h2><p class="lead">${escape(words.notFound[i])}</p><p><a class="button" href="/${l}/">${escape(words.backHome[i])}</a></p></section>`).join('')+'</div>';
  }
- const html=template.replace('<html lang="en">',`<html lang="${lang}">`).replace(/(<a class="skip" href="#main">)[\s\S]*?<\/a>/,(_,open)=>open+String(els['.skip'].textContent).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</a>').replace(/<meta name="description" content="[^"]*">/,()=>`<meta name="description" content="${String(els['meta[name="description"]'].content||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${seo(route,lang)}`).replace(/<title>.*?<\/title>/,`<title>${document.title}</title>`).replace('<header id="header"></header>',`<header id="header">${els['#header'].innerHTML}</header>`).replace('<main id="main" tabindex="-1"></main>',`<main id="main" tabindex="-1">${els['#main'].innerHTML}</main>`).replace('<footer id="footer"></footer>',`<footer id="footer">${els['#footer'].innerHTML}</footer>`);
+ const html=template.replace('<html lang="en">',`<html lang="${lang}">`).replace(/(<a class="skip" href="#main">)[\s\S]*?<\/a>/,(_,open)=>open+String(els['.skip'].textContent).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</a>').replace(/<meta name="description" content="[^"]*">/,()=>`<meta name="description" content="${String(els['meta[name="description"]'].content||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${seo(route,lang)}${journalFeedHead(route,lang)}`).replace(/<title>.*?<\/title>/,`<title>${document.title}</title>`).replace('<header id="header"></header>',`<header id="header">${els['#header'].innerHTML}</header>`).replace('<main id="main" tabindex="-1"></main>',`<main id="main" tabindex="-1">${els['#main'].innerHTML}</main>`).replace('<footer id="footer"></footer>',`<footer id="footer">${els['#footer'].innerHTML}</footer>`);
  const bare=route.replace(/^\/(?:en|ru|zh-Hans)\/?/,'').replace(/\/$/,'');
  const record=data.records.find(r=>r.route==='/en/'+bare+'/');
  if(record){
@@ -93,3 +104,4 @@ fs.writeFileSync(path.join(root,'index.html'),generate('/en','en').replace('<lin
 fs.writeFileSync(path.join(root,'404.html'),generate('/en/not-found','en',{sharedError:true}).replace(/<link rel="canonical"[^>]*>(<link rel="alternate"[^>]*>)*<meta property="og:url"[^>]*>/,'<meta name="robots" content="noindex">'));
 fs.writeFileSync(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls.map(u=>`  <url><loc>${u}</loc><lastmod>${data.retrieved&&String(data.retrieved).slice(0,10)||'2026-11-04'}</lastmod></url>`).join('\n')+'\n</urlset>\n');
 console.log(`Prerendered ${uniqueRoutes.length*3} localized routes, root and 404; sitemap ${urls.length} URLs.`);
+

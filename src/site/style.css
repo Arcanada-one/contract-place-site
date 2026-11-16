@@ -215,3 +215,8 @@ html[data-theme=dark] {--reader-link:#83dce3;--reader-hover:#b5f4f6;--reader-vis
 .source-body .kc-readable-requirement:hover{background:var(--teal-soft)}
 
 .library-note{max-width:900px;color:var(--secondary)}.library-meta{margin-block:28px 64px;color:var(--secondary);font-size:14px}.library-meta code{overflow-wrap:anywhere;word-break:break-word}.library-table td{overflow-wrap:anywhere}
+
+/* Journal subscription links remain ordinary keyboard-accessible links. */
+.journal-subscriptions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem;margin-block:1.5rem 2rem}
+.journal-subscriptions>span{font-weight:600}
+
