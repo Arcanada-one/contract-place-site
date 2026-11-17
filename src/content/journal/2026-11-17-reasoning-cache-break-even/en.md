@@ -4,8 +4,8 @@ section: journal
 slug: reasoning-cache-break-even-2026-11-17
 date: 2026-11-17
 lang: en
-title: "Reasoning kept as code: in one study a cached solution cost 16 to 291 times less per call than the source model, and 12 to 84 source calls to build"
-excerpt: "Five researchers turned a large model's reasoning traces into small programs that execute as ordinary code on a CPU and call a 1B-parameter model only for language operations. On eight benchmark sets the programs answered about as accurately as the source model and passed at least 90.8% of validated rewordings and re-parameterizations. Building one entry cost 12 to 84 source calls, so reuse pays only after about 13 to 90 repeats. We keep the work as a reference and have changed nothing."
+title: "Reasoning kept as code: API-based cost estimates and the break-even of reuse"
+excerpt: "Five researchers turned a large model's reasoning traces into small programs that execute as ordinary code on a CPU and call a small target model only for language operations. On eight benchmark sets the programs answered about as accurately as the source model and, on problems they already answered correctly, passed at least 90.8% of validated rewordings and re-parameterizations. Using March 2026 retail API rates, the authors estimate construction at the cost of 12 to 84 source calls and break-even at about 13 to 90 invocations of an applicable entry for similar questions; these figures do not measure the cost of a live request stream. We keep the work as a reference and have changed nothing."
 ---
 
 Reusing a result is cheaper than producing it again only if the result is reused often enough and stays correct when the question changes a little. A study submitted on 6 November 2026 puts numbers on both conditions for one form of reuse: a language model's reasoning, rewritten as a program.
@@ -38,11 +38,11 @@ Source: the same work, sections 3.2, 3.4 and 3.6, [arxiv.org/abs/2611.09891v1](h
 
 ## The price of reuse
 
-The cost table has three figures per problem at retail prices: one source call, building the entry, one invocation of the program. An invocation costs $0.0004 to $0.0019, which is 16 to 291 times less than a source call. Building costs 12 to 84 source calls: lowest where the source reasons at length and the computation is simple, highest where the source answers briefly and the entry still needs full construction.
+The cost table reports API-based estimates per problem using March 2026 rates, in three figures: one source call, building the entry, one invocation of the program. An invocation costs $0.0004 to $0.0019, which is 16 to 291 times less than a source call. Building costs 12 to 84 source calls: lowest where the source reasons at length and the computation is simple, highest where the source answers briefly and the entry still needs full construction.
 
 The authors give the break-even themselves: the build cost divided by the saving per call. An entry for the hardest mathematics problems pays for itself after approximately 13 invocations in its neighbourhood of similar questions, an entry for grade-school word problems after approximately 90. The cost of fine-tuning the small target model is not among the three figures. For that model the authors took 20% of the usage examples from the benchmark evaluations, had the source model produce a synthetic set about ten times larger, and fine-tuned on the resulting data; the cost of producing that set is also outside the three figures.
 
-Source: the same work, sections 2.2.4, 3.1 and 3.6, [arxiv.org/abs/2611.09891v1](https://arxiv.org/abs/2611.09891v1).
+Source: the same work, sections 2.2.4, 3.1, 3.5 and 3.6, [arxiv.org/abs/2611.09891v1](https://arxiv.org/abs/2611.09891v1).
 
 ## What the study does not show
 
