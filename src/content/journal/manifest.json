@@ -180,15 +180,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "e4b9212fd36229583db2703f9c36fe8b7ba935f7dc417f2e1a74ea8d9d063ad5"
+          "sha256": "7baab294d8f03d00542ca1278721fbac6b20c463f82248231be25b2e8e77c596"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "8882776b9b6393cdec0eaf37c9fc3f1ffc6378e5d7a72dd9f14b6273acf9cf9f"
+          "sha256": "e1a821126e25ef0b284175ae4a7d494a13e81a12e6eff1bdf3c783cade53fb78"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "ae82d2f8afdd56af1cbd9dd87e0ef9dc9452b9d1baf0d02f3737299c6cb3c873"
+          "sha256": "dcb696147ada43e8a2fd93e32a6991240e3425743ac0e3d6eef638137c47ba1a"
         }
       }
     }
