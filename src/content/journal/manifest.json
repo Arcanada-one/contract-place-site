@@ -172,6 +172,25 @@
           "sha256": "9399ba708f15f6d0bb4cde293111880877838ffa27f439fe8049bf10721500c0"
         }
       }
+    },
+    {
+      "slug": "reasoning-cache-break-even-2026-11-17",
+      "date": "2026-11-17",
+      "folder": "2026-11-17-reasoning-cache-break-even",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "e4b9212fd36229583db2703f9c36fe8b7ba935f7dc417f2e1a74ea8d9d063ad5"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "8882776b9b6393cdec0eaf37c9fc3f1ffc6378e5d7a72dd9f14b6273acf9cf9f"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "ae82d2f8afdd56af1cbd9dd87e0ef9dc9452b9d1baf0d02f3737299c6cb3c873"
+        }
+      }
     }
   ]
 }
