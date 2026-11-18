@@ -27,6 +27,13 @@ const road=data.roadmap;
 if(roadmapManifest.schema_version!==1||roadmapManifest.repository!==manifest.repository||!/^[0-9a-f]{40}$/.test(roadmapManifest.commit))throw new Error('Invalid roadmap pin');
 if(!road||road.pin.commit!==roadmapManifest.commit||road.pin.repository!==roadmapManifest.repository)throw new Error('Compiled roadmap pin mismatch');
 if(JSON.stringify(road.pin.files.map(f=>[f.path,f.role,f.sha256]))!==JSON.stringify(roadmapManifest.files.map(f=>[f.path,f.role,f.sha256])))throw new Error('Compiled roadmap files differ from the roadmap pin');
+const cwManifestPath=path.join(root,'coordinated-work-manifest.json');
+if(fs.existsSync(cwManifestPath)){
+  const cwManifest=JSON.parse(fs.readFileSync(cwManifestPath,'utf8')),cw=data.coordinated_work;
+  if(!cw||cw.status!=='proposed'||cw.execution_state_published!==false||cw.pin.commit!==roadmapManifest.commit||cw.pin.commit!==cwManifest.commit||cw.pin.repository!==cwManifest.repository)throw new Error('Compiled Coordinated Work source/status mismatch');
+  if(JSON.stringify(cw.pin.files.map(f=>[f.path,f.sha256]))!==JSON.stringify(cwManifest.files.map(f=>[f.path,f.sha256])))throw new Error('Compiled Coordinated Work files differ from the source pin');
+  if(!['en','ru','zh-Hans'].every(l=>cw.pages?.[l]?.route===`/${l}/roadmap/coordinated-work/`))throw new Error('Coordinated Work needs all three language pages');
+}else if(data.coordinated_work){throw new Error('Compiled Coordinated Work has no source manifest');}
 if(road.tasks.length!==25||road.tasks.some((k,i)=>k.id!=='RM-'+String(i+1).padStart(2,'0')||k.status!=='planned'))throw new Error('Roadmap must contain RM-01..RM-25, all planned');
 const seen=new Set();
 for(const r of data.records){
@@ -86,6 +93,10 @@ const renditionSummary=r=>Object.fromEntries(Object.entries(r.renditions).map(([
 const documents=data.records.map(r=>({type:r.type,slug:r.id,path:r.path,title:r.title,summary:r.summary,language:'en',route:r.route,sha256:r.source_sha256,math_count:r.math_count,...(r.status?{status:r.status}:{}),...(r.renditions?{renditions:renditionSummary(r)}:{})}));
 fs.writeFileSync(path.join(out,'publication.json'),JSON.stringify({...manifest,renderer:{name:'pandoc',version:'3.1.3',math:'MathML'},interface_languages:['en','ru','zh-Hans'],document_language:'en',...(hasRenditions?{renditions:{schema_version:1,source:data.renditions_source}}:{}),documents},null,2)+'\n');
 fs.writeFileSync(path.join(out,'roadmap.json'),JSON.stringify({kind:'roadmap-provenance',status:'planned work; no execution state is published',roadmap_pin:{repository:road.pin.repository,commit:road.pin.commit,files:road.pin.files.map(({path:p,role,sha256})=>({path:p,role,sha256}))},manuscript_pin:{repository:manifest.repository,commit:manifest.commit,edition:manifest.edition},same_commit:road.pin.commit===manifest.commit,definition_revision:road.revision,tasks:road.tasks.map(k=>({id:k.id,priority:k.priority,owner:k.owner,status:k.status,requires:k.requires,informs:k.informs})),advisory_links:road.advisory},null,2)+'\n');
+if(data.coordinated_work){
+  const cw=data.coordinated_work;
+  fs.writeFileSync(path.join(out,'coordinated-work.json'),JSON.stringify({kind:cw.kind,status:cw.status,programme_id:cw.programme_id,pin:cw.pin,counts:cw.counts,execution_state_published:false},null,2)+'\n');
+}
 if(data.programme){
   const prog=data.programme;
   if(prog.pin.commit!==manifest.commit||prog.pin.repository!==manifest.repository)throw new Error('Programme pin must match the publication pin');
@@ -100,6 +111,7 @@ const lines=['# Knowledge Contract Arcana','',
 '- Science: '+base+'/en/research/',
 '- Meaning programme (reading map): '+base+'/en/programme/ ; '+base+'/ru/programme/ ; '+base+'/zh-Hans/programme/',
 '- Research roadmap (planned work, not results): '+base+'/en/roadmap/ ; provenance '+base+'/roadmap.json',
+...(data.coordinated_work?['- Coordinated Work research programme (proposed): '+base+'/en/roadmap/coordinated-work/ ; '+base+'/ru/roadmap/coordinated-work/ ; '+base+'/zh-Hans/roadmap/coordinated-work/ ; provenance '+base+'/coordinated-work.json']:[]),
 '- Engineering specifications: '+base+'/en/engineering/specifications/',
 '- Engineering studies: '+base+'/en/engineering/studies/',
 '- Glossary and bibliography: '+base+'/en/reference/',

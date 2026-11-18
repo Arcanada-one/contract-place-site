@@ -210,6 +210,25 @@
           "sha256": "82b345adb570e9e8bb5fbfd927ab032dde6a5b44ef0b97735b12ee9725f9a37f"
         }
       }
+    },
+    {
+      "slug": "coordinated-work-2026-11-18",
+      "date": "2026-11-18",
+      "folder": "2026-11-18-coordinated-work",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "648b010c34381ddf1664fa447b5054d3338e7062676645c1a900251d1f09ec11"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "51bbc7d41a121de0527dc692debd7712283035c9e24b602a4241acac11b7024a"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "4524c60c527284d69d5c1c5e838d999a0d6532e83b2b80d417121a22f3050ad5"
+        }
+      }
     }
   ]
 }

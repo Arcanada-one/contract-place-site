@@ -733,7 +733,7 @@ def prepare_temp_site(tmp_root: Path) -> tuple[Path, Path, dict]:
     if tmp_root.exists():
         shutil.rmtree(tmp_root)
     tmp_root.mkdir(parents=True)
-    for name in ("build.mjs", "publication-manifest.json", "roadmap-manifest.json"):
+    for name in ("build.mjs", "publication-manifest.json", "roadmap-manifest.json", "coordinated-work-manifest.json"):
         shutil.copy2(ROOT / name, tmp_root / name)
     shutil.copytree(ROOT / "scripts", tmp_root / "scripts", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     shutil.copytree(ROOT / "src", tmp_root / "src", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
