@@ -191,6 +191,25 @@
           "sha256": "dcb696147ada43e8a2fd93e32a6991240e3425743ac0e3d6eef638137c47ba1a"
         }
       }
+    },
+    {
+      "slug": "verification-transport-2026-11-18",
+      "date": "2026-11-18",
+      "folder": "2026-11-18-verification-transport",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "ff7b30d62bd2f6ced36402f0bdc89731edd008b10865b7e95a30f8e5aa3d4272"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "2a35d0e21a37219d5bb01a64fb366fa4075681d1b562950a1bb6b5de93933ce6"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "82b345adb570e9e8bb5fbfd927ab032dde6a5b44ef0b97735b12ee9725f9a37f"
+        }
+      }
     }
   ]
 }
