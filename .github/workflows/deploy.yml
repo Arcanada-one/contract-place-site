@@ -20,7 +20,7 @@ jobs:
       CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
   readback:
     needs: publish
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Linux, X64, ci-general]
     permissions:
       contents: read
     steps:

@@ -9,6 +9,14 @@ permissions:
   contents: read
 
 jobs:
+  runner-policy:
+    name: no-github-hosted-ubuntu
+    runs-on: [self-hosted, Linux, X64, ci-general]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Refuse GitHub-hosted Ubuntu runners
+        run: bash tools/check-no-github-hosted-runners.sh
+
   smoke:
     name: static-site-smoke
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
@@ -17,7 +25,7 @@ jobs:
   reuse-lint:
     name: reuse-lint
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, ci-general]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
