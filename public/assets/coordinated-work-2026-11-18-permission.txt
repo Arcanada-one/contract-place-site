@@ -1,0 +1,26 @@
+Coordinated Work announcement illustration — permission notice
+
+Supplied by Pavel Valentov for the Coordinated Work announcements on
+Knowledge Contract (contract.place), Talomnia and Arcanada (arcanada.ai).
+The recorded authorization permits use for these three announcements,
+retaining the full composition, aspect ratio, descriptive alternative text
+and conceptual-illustration status. This illustration is not scientific
+or experimental evidence.
+
+This asset is an exception to the site's general CC BY 4.0 content notice.
+The supplied authorization does not establish a general CC BY licence or
+permission for unrelated reuse. This notice records the limited authorization;
+it does not grant additional rights.
+
+Original PNG SHA-256:
+5246275745dc30f0fc5ffa172f976bf62ef16513d11789897a8a381321e717f2
+Original dimensions: 1122 by 1402 pixels; original size: 2166976 bytes.
+JPEG rendition SHA-256:
+eef2326ed8a8c72833724c4ab9a1a4f700c766d2b51c60c6ab8d8a8bfba0e457
+The JPEG is a resized and compressed rendition, without cropping, made by
+the existing arcanada-landing image optimizer at PR229 revision
+133a453364a3da07f246b35a1e48f4ed3c58693d.
+
+Recorded publication instruction and handoff:
+https://github.com/Arcanada-one/contract-place-site/pull/63#issuecomment-6985218645
+https://github.com/Arcanada-one/arcanada-landing/pull/229#issuecomment-6985233566

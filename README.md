@@ -115,7 +115,7 @@ After deployment, read the served homepage, a paper, a specification, a study an
 
 ## Licensing and contributions
 
-Text and original editorial illustrations use [CC BY 4.0](LICENSE); site code uses [Apache-2.0](LICENSE-CODE). Local fonts use SIL OFL 1.1 and retain their notices. Preserve [NOTICE](NOTICE), source credits and `REUSE.toml`. Credit Pavel Valentov, Knowledge Contract Arcana and https://contract.place. Names and logos are not licensed by the text/code licences; attribution does not imply endorsement.
+Text and original editorial illustrations use [CC BY 4.0](LICENSE), except assets with an explicit permission notice. The supplied Coordinated Work illustration has [specific three-announcement permission](src/site/assets/coordinated-work-2026-11-18-permission.txt), not a general CC BY grant; site code uses [Apache-2.0](LICENSE-CODE). Local fonts use SIL OFL 1.1 and retain their notices. Preserve [NOTICE](NOTICE), source credits and `REUSE.toml`. Credit Pavel Valentov, Knowledge Contract Arcana and https://contract.place. Names and logos are not licensed by the text/code licences; attribution does not imply endorsement.
 
 Contributions require the Developer Certificate of Origin. The actual contributor signs off with `git commit -s` using their own identity. Content review, publication, index admission and deployment remain distinct decisions.
 

@@ -11,7 +11,21 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 该计划是在现有 Agent Situation 与 Context Assembly 工作基础上形成的组织领域配置。它不引入新的原生知识制品类型，也不声称智能体已经理解真实企业。拟研究的贡献，是组织知识、决策前提、可选方案与观察到的后果之间可检验的联系。
 
-来源：[协同工作计划及拟研究的贡献](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[协同工作计划及拟研究的贡献](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.md)。
+
+## Talomnia 为什么需要这项研究
+
+Pavel Valentov 这样说明该计划的实际出发点（以下为其提供的说明的中文译文）：
+
+> 为了让智能体在 Talomnia 中开展工作，我需要把企业需求、人员能力、流程与资源分配联系起来。单独的分类体系和模型很多，但我尚未找到满足我们需求的完整系统。
+
+对 [Talomnia](https://talomnia.com/en) 而言，这带来几个问题：一项具体工作实际需要哪些知识与能力，人员、智能体和可用资源如何相互配合，以及什么时候信息还不足以支持建议。Talomnia 的实际问题与 Arcanada 生态系统的工程工作有助于确定计划的任务和约束。拟研究的贡献仍需与包括协调理论在内的既有研究比较，并通过实际案例检验。
+
+作者公告：[Telegram](https://t.me/valentovtypes/455) · [Arcanada AI 的 X 帖子](https://x.com/VeritasArcanaAI/status/2123093943373955265)。
+
+![持有契约的智能体位于中央，周围展示人员、能力、资源、流程、目标与检查。](/assets/coordinated-work-2026-11-18.jpg){width=1024 height=1280}
+
+本公告的插图由 Pavel Valentov 提供。图中展示的是计划概念，并非实验结果或科学证据。 [插图使用许可](https://contract.place/assets/coordinated-work-2026-11-18-permission.txt).
 
 ## 改善整个系统的工作
 
@@ -19,7 +33,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 保留的示例性流动试验包含 10 个确定性场景、100 个“场景—时段”观察和 190 项基本检查。在其明确假设下，将投放量从 80 降至 60 可以消除在制品积累，而未满足的需求保持不变。这些是对小型数值实现的检查，并不验证智能体、招聘政策或真实组织的有效性。
 
-来源：[流动试验、假设与证据边界](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/probes/README.md)。
+来源：[流动试验、假设与证据边界](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/probes/README.md)。
 
 ## 相互关联的科学与工程计划
 
@@ -37,7 +51,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 这些数字描述的是计划，并非已完成论文、已登记任务或已分配人员的数量。依赖图支持在所需输入就绪时并行推进；图中的路径长度不等于交付周期或生产率提升幅度。
 
-来源：[完整计划、论文映射与工作契约](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[完整计划、论文映射与工作契约](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.md)。
 
 ## 实验必须区分什么
 
@@ -45,15 +59,17 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 智能体比较将包括当前方法、强运筹学方法、不检索知识的智能体、普通 RAG 和完整 Knowledge Contract 配置，并明确各自的信息条件和预算。评估将记录组件消融、失败、不确定性，以及准备和维护知识的成本。有关组织效果的主张需要各自适当的因果证据；成功的模拟或格式正确的决策记录不能替代这种评估。
 
-来源：[实验顺序与各类主张的发布条件](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[实验顺序与各类主张的发布条件](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.md)。
 
 ## 首先发布公告与可执行的计划
 
 第一个专题将这一方向纳入专栏、三语路线图、版本库导航和现有 Muneral 项目。[计划阅读页面](https://contract.place/zh-Hans/roadmap/coordinated-work/)连接完整计划、论文与假设映射，以及依赖图源文件。[研究路线图](https://contract.place/zh-Hans/roadmap/)将该计划置于智能体应用方向之下。
 
+[Arcanada 公告](https://arcanada.ai/zh-Hans/blog/coordinated-work-2026-11-18)将该计划与生态系统的工程工作联系起来。
+
 与 Muneral 的核对仍是一项单独任务。已准备的登记工具生成离线模板，并检查所提供的读回记录是否一致；它尚未证明原生任务已登记或已分配。公告可以在登记仍待完成时发布。整个启动交接的完成，则同时需要发布证据和实际任务及依赖关系的读回记录。
 
-来源：[第一个专题与 Muneral 登记契约](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/MUNERAL-REGISTRATION.md)。
+来源：[第一个专题与 Muneral 登记契约](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/MUNERAL-REGISTRATION.md)。
 
 ## 可以从哪里参与研究
 
@@ -61,4 +77,4 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 有价值的首批贡献包括核查最接近的既有研究、评估选定全文、寻找反例、澄清资源与资质语义、审阅因果研究设计，以及独立复现范围明确的实验。贡献应说明来源、假设、观察结果与局限。[现有计划提案](https://github.com/Arcanada-one/knowledge-contract/pull/125)是共同的审查入口；最终论文划分将依据所得证据决定。
 
-来源：[研究协议与来源阅读深度的边界](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/REVIEW_PROTOCOL.md)。
+来源：[研究协议与来源阅读深度的边界](https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/REVIEW_PROTOCOL.md)。

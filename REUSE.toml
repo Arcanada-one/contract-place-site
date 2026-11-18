@@ -55,3 +55,16 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+
+# Specific three-announcement authorization; no general CC BY asset licence recorded.
+[[annotations]]
+path = ["src/site/assets/coordinated-work-2026-11-18.jpg", "public/assets/coordinated-work-2026-11-18.jpg"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Pavel Valentov"
+SPDX-License-Identifier = "LicenseRef-Pavel-Announcement-Permission"
+
+[[annotations]]
+path = ["src/site/assets/coordinated-work-2026-11-18-permission.txt", "public/assets/coordinated-work-2026-11-18-permission.txt"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Pavel Valentov and Knowledge Contract Arcana contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
