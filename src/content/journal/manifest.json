@@ -218,15 +218,15 @@
       "languages": {
         "en": {
           "file": "en.md",
-          "sha256": "648b010c34381ddf1664fa447b5054d3338e7062676645c1a900251d1f09ec11"
+          "sha256": "e7388d2c56b258f66a04e398f12eda6cc624d5113596fff7929a10d6fc77f588"
         },
         "ru": {
           "file": "ru.md",
-          "sha256": "51bbc7d41a121de0527dc692debd7712283035c9e24b602a4241acac11b7024a"
+          "sha256": "d7365100b9dc89f92c905120176f7f89d9aa3d99072f094f7c11c7345db17a58"
         },
         "zh-Hans": {
           "file": "zh-Hans.md",
-          "sha256": "4524c60c527284d69d5c1c5e838d999a0d6532e83b2b80d417121a22f3050ad5"
+          "sha256": "6dbbb343b27b4fd363d67e9186439a09747f709e5f2fbe73837a29a4ac8ad68a"
         }
       }
     }

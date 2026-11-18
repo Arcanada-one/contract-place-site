@@ -279,73 +279,73 @@
   "roadmap": {
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "57377756d81d8eb49e6c7174bd9ec75edfcbb625",
+      "commit": "b9b06226b1d67e82ff78ec2ca922af04a428469f",
       "files": [
         {
           "path": "ROADMAP.md",
           "role": "rendered",
           "sha256": "2a9cc334123f51aaec9fa8684221240f6b0b4716f83b6c284671c1a1f3b77e66",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/ROADMAP.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/ROADMAP.md"
         },
         {
           "path": "roadmap/TASKS.md",
           "role": "rendered",
           "sha256": "a937068aa9fab164cd5471ff9a0613b379bd3e823ac5d286afc23df5cc8242db",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/TASKS.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/TASKS.md"
         },
         {
           "path": "roadmap/dependencies.json",
           "role": "rendered",
           "sha256": "8e6784ef9444d3ecf7c68b8192c775127cecb4d221204069b5ad4bb2fc4aa8b9",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/dependencies.json"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/dependencies.json"
         },
         {
           "path": "roadmap/EXPERIMENTS.md",
           "role": "linked",
           "sha256": "b3b7a80ea3b4a11ab05d12e8f07a30badba3fb6e9aa87991548508343055f07d",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/EXPERIMENTS.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/EXPERIMENTS.md"
         },
         {
           "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
           "role": "linked",
           "sha256": "53279b88b6d0850e44b5c42958c9bfbbc8825e80744224e7666209b215fae51b",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/FOUNDATIONS_RELEASE_PLAN.md"
         },
         {
           "path": "roadmap/SITE_DELIVERY.md",
           "role": "introduction",
           "sha256": "8a3b8df420a512b7c6e00d31b9c587bbb3cb8d38540d4851e6ae856052a7a246",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/SITE_DELIVERY.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/SITE_DELIVERY.md"
         },
         {
           "path": "roadmap/localizations.json",
           "role": "rendition-manifest",
           "sha256": "172d80a619fd855eb5f6ae5eed3e053468478679ecd7654347343d92de9860ce",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/localizations.json"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/localizations.json"
         },
         {
           "path": "roadmap/ROADMAP.full.ru.md",
           "role": "rendition",
           "sha256": "80a834dfa4659ce66a6c50756c1b87fe9d92c7615af5c3c790330a8d52927030",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/ROADMAP.full.ru.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/ROADMAP.full.ru.md"
         },
         {
           "path": "roadmap/ROADMAP.full.zh-Hans.md",
           "role": "rendition",
           "sha256": "b7aff5cc94725925daf51e26d18a4e549aa4eb1b6a0150567249a1cb093e31ef",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/ROADMAP.full.zh-Hans.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/ROADMAP.full.zh-Hans.md"
         },
         {
           "path": "roadmap/TASKS.ru.json",
           "role": "rendition",
           "sha256": "ad5fd54afc04a9d809274237e21add8e73a1943a8cd2ecf36e7e866673653f78",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/TASKS.ru.json"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/TASKS.ru.json"
         },
         {
           "path": "roadmap/TASKS.zh-Hans.json",
           "role": "rendition",
           "sha256": "64de0628f0e22057c9637f614b3aef2bb74b1de3ce41f424190889b2f9a11057",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/TASKS.zh-Hans.json"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/TASKS.zh-Hans.json"
         }
       ]
     },
@@ -880,27 +880,27 @@
     "programme_id": "KC-CW-20261118",
     "pin": {
       "repository": "Arcanada-one/knowledge-contract",
-      "commit": "57377756d81d8eb49e6c7174bd9ec75edfcbb625",
+      "commit": "b9b06226b1d67e82ff78ec2ca922af04a428469f",
       "files": [
         {
           "path": "roadmap/coordinated-work/plan/PROGRAMME.md",
           "sha256": "86b3561ad79717f6971dfed17e4a9f6b4333728a00cd80209ac144385966a5a7",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md"
         },
         {
           "path": "roadmap/coordinated-work/plan/PROGRAMME.ru.md",
           "sha256": "95b0e19d813a2c25216ec62ee26167ccb7153e6953fa8e7de5172d7208035f3b",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.ru.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.ru.md"
         },
         {
           "path": "roadmap/coordinated-work/plan/PROGRAMME.zh-Hans.md",
           "sha256": "454de24bf904762e98a37431bbcb2c1f01e7e738b1d333c0bff7cf7796b86e9d",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.zh-Hans.md"
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.zh-Hans.md"
         },
         {
           "path": "roadmap/coordinated-work/plan/execution-graph.json",
-          "sha256": "16cb4cc7de46e5eeedb4024289ad40b8956c65332f3e9b0ea1788c0e32790731",
-          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/execution-graph.json"
+          "sha256": "8c7b7e6fb1f95df9f9c1c85ce083fa7ba3250ed6637ae7ce1a41d6cc1c49e3a6",
+          "url": "https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/execution-graph.json"
         }
       ]
     },

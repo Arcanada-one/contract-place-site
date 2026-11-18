@@ -11,7 +11,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 该计划是在现有 Agent Situation 与 Context Assembly 工作基础上形成的组织领域配置。它不引入新的原生知识制品类型，也不声称智能体已经理解真实企业。拟研究的贡献，是组织知识、决策前提、可选方案与观察到的后果之间可检验的联系。
 
-来源：[协同工作计划及拟研究的贡献](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[协同工作计划及拟研究的贡献](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
 
 ## 改善整个系统的工作
 
@@ -19,7 +19,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 保留的示例性流动试验包含 10 个确定性场景、100 个“场景—时段”观察和 190 项基本检查。在其明确假设下，将投放量从 80 降至 60 可以消除在制品积累，而未满足的需求保持不变。这些是对小型数值实现的检查，并不验证智能体、招聘政策或真实组织的有效性。
 
-来源：[流动试验、假设与证据边界](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/probes/README.md)。
+来源：[流动试验、假设与证据边界](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/probes/README.md)。
 
 ## 相互关联的科学与工程计划
 
@@ -37,7 +37,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 这些数字描述的是计划，并非已完成论文、已登记任务或已分配人员的数量。依赖图支持在所需输入就绪时并行推进；图中的路径长度不等于交付周期或生产率提升幅度。
 
-来源：[完整计划、论文映射与工作契约](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[完整计划、论文映射与工作契约](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
 
 ## 实验必须区分什么
 
@@ -45,7 +45,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 智能体比较将包括当前方法、强运筹学方法、不检索知识的智能体、普通 RAG 和完整 Knowledge Contract 配置，并明确各自的信息条件和预算。评估将记录组件消融、失败、不确定性，以及准备和维护知识的成本。有关组织效果的主张需要各自适当的因果证据；成功的模拟或格式正确的决策记录不能替代这种评估。
 
-来源：[实验顺序与各类主张的发布条件](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md)。
+来源：[实验顺序与各类主张的发布条件](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md)。
 
 ## 首先发布公告与可执行的计划
 
@@ -53,7 +53,7 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 与 Muneral 的核对仍是一项单独任务。已准备的登记工具生成离线模板，并检查所提供的读回记录是否一致；它尚未证明原生任务已登记或已分配。公告可以在登记仍待完成时发布。整个启动交接的完成，则同时需要发布证据和实际任务及依赖关系的读回记录。
 
-来源：[第一个专题与 Muneral 登记契约](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/MUNERAL-REGISTRATION.md)。
+来源：[第一个专题与 Muneral 登记契约](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/MUNERAL-REGISTRATION.md)。
 
 ## 可以从哪里参与研究
 
@@ -61,4 +61,4 @@ excerpt: "Knowledge Contract 开启关于组织需求、能力、共享资源和
 
 有价值的首批贡献包括核查最接近的既有研究、评估选定全文、寻找反例、澄清资源与资质语义、审阅因果研究设计，以及独立复现范围明确的实验。贡献应说明来源、假设、观察结果与局限。[现有计划提案](https://github.com/Arcanada-one/knowledge-contract/pull/125)是共同的审查入口；最终论文划分将依据所得证据决定。
 
-来源：[研究协议与来源阅读深度的边界](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/REVIEW_PROTOCOL.md)。
+来源：[研究协议与来源阅读深度的边界](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/REVIEW_PROTOCOL.md)。

@@ -3,7 +3,7 @@
  * Test-only harness: load src/site/app.js under Node and print roadmapCard HTML.
  * Stubs browser globals; does not change browser behaviour of app.js.
  *
- * Usage: node scripts/render_roadmap_card.js <locale> [taskId]
+ * Usage: node scripts/render_roadmap_card.js <locale> [taskId] [appPath] [syntheticCorpusPath]
  */
 const fs = require('fs');
 const path = require('path');
@@ -66,7 +66,12 @@ try {
   /* Node may expose a read-only navigator; app.js only needs it in browser handlers. */
 }
 
-const contentJs = fs.readFileSync(path.join(root, 'public/content.js'), 'utf8');
+// An explicit file is test-only input for finite positive/adverse renderer controls.
+// Ordinary calls continue to use the actual compiled publication.
+const contentPath = process.argv[5]
+  ? path.resolve(process.argv[5])
+  : path.join(root, 'public/content.js');
+const contentJs = fs.readFileSync(contentPath, 'utf8');
 const data = JSON.parse(contentJs.replace(/^window\.CP_CONTENT\s*=\s*/, '').replace(/;\s*$/, ''));
 global.window.CP_CONTENT = data;
 

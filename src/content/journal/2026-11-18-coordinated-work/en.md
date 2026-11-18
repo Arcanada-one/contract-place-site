@@ -11,7 +11,7 @@ An agent working for an organization needs more than an instruction to improve p
 
 The programme is an organizational domain profile of the existing Agent Situation and Context Assembly work. It does not introduce a new native knowledge-artifact type or claim that an agent already understands a real company. The proposed contribution is the testable connection between organizational knowledge, decision prerequisites, alternatives and observed consequences.
 
-Source: [Coordinated Work programme and proposed contribution](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md).
+Source: [Coordinated Work programme and proposed contribution](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md).
 
 ## Improve the whole work system
 
@@ -19,7 +19,7 @@ Consider a production line whose next operation can accept only 60 units while t
 
 The retained illustrative flow probe covers 10 deterministic cases, 100 case-period observations and 190 elementary checks. Under its stated assumptions, limiting release from 80 to 60 removes accumulated work in process while leaving unmet demand unchanged. These are checks of a small numerical implementation. They do not establish the effectiveness of an agent, a hiring policy or a real organization.
 
-Source: [Flow probe, assumptions and evidence limits](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/probes/README.md).
+Source: [Flow probe, assumptions and evidence limits](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/probes/README.md).
 
 ## A connected scientific and engineering programme
 
@@ -37,7 +37,7 @@ The scientific series covers organizational needs; work networks; resource seman
 
 These numbers describe the programme. They are not counts of completed papers, registered tasks or people already assigned. The dependency graph supports parallel work where inputs permit it; its path length is not a delivery-time or productivity estimate.
 
-Source: [Complete programme, paper map and task contracts](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md).
+Source: [Complete programme, paper map and task contracts](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md).
 
 ## What the experiments must distinguish
 
@@ -45,7 +45,7 @@ The planned manufacturing stand covers queues, buffers, product mix, shared reso
 
 Agent comparisons will include the current method, a strong operations-research approach, an agent without retrieval, ordinary RAG and the full Knowledge Contract profile, under declared information and budget conditions. Ablations, failures, uncertainty and the cost of preparing and maintaining knowledge are part of the evaluation. Organizational-effect claims require their own appropriate causal evidence; a successful simulation or a well-formed decision record cannot supply it.
 
-Source: [Experimental sequence and claim-specific release boundaries](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/plan/PROGRAMME.md).
+Source: [Experimental sequence and claim-specific release boundaries](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/plan/PROGRAMME.md).
 
 ## Announcements and an executable plan come first
 
@@ -53,7 +53,7 @@ The first epic brings the direction into the Journal, the three-language roadmap
 
 Muneral reconciliation remains a separate task. The prepared registration tooling creates offline templates and checks supplied readback consistency; it has not established native registration or assignments. An announcement can be released while registration is pending. The complete launch handoff requires both publication evidence and actual task/dependency readback.
 
-Source: [First epic and Muneral registration contract](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/MUNERAL-REGISTRATION.md).
+Source: [First epic and Muneral registration contract](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/MUNERAL-REGISTRATION.md).
 
 ## Where research can contribute
 
@@ -61,4 +61,4 @@ The initial register retains 1,176 bibliographic records: 157 checked primary re
 
 Useful first contributions include checking the closest prior work, assessing selected full texts, finding counterexamples, clarifying resource and qualification semantics, reviewing causal designs, and independently reproducing bounded experiments. Contributions should identify their source, assumptions, observed result and limits. The [existing programme proposal](https://github.com/Arcanada-one/knowledge-contract/pull/125) is the shared review entry point; the final division into papers follows the evidence.
 
-Source: [Research protocol and source-reading boundaries](https://github.com/Arcanada-one/knowledge-contract/blob/57377756d81d8eb49e6c7174bd9ec75edfcbb625/roadmap/coordinated-work/REVIEW_PROTOCOL.md).
+Source: [Research protocol and source-reading boundaries](https://github.com/Arcanada-one/knowledge-contract/blob/b9b06226b1d67e82ff78ec2ca922af04a428469f/roadmap/coordinated-work/REVIEW_PROTOCOL.md).
