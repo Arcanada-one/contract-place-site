@@ -61,9 +61,13 @@ class TextCollector(HTMLParser):
         self.parts: list[str] = []
         self._skip = 0
         self.cells: list[str] = []
+        self.images: list[tuple[str, str]] = []
         self._cell_parts: list[list[str]] = []
 
     def handle_starttag(self, tag, attrs):
+        if tag == "img" and not self._skip:
+            attributes = dict(attrs)
+            self.images.append((attributes.get("src", ""), attributes.get("alt", "")))
         if tag in {"script", "style"}:
             self._skip += 1
         if tag in {"th", "td"} and not self._skip:
@@ -149,6 +153,10 @@ def inline_text(inlines: list[dict]) -> str:
             # The current journal decorator intentionally renders non-https
             # targets (including relative paths) as literal [label](target).
             parts.append(label if target.startswith("https://") else f"[{label}]({target})")
+        elif kind == "Image":
+            # Alternative text is an attribute, not a visible prose block.
+            # Exact image source and alt text are checked separately below.
+            continue
         elif kind == "Quoted":
             left, right = ("‘", "’") if value[0]["t"] == "SingleQuote" else ("“", "”")
             parts.append(left + inline_text(value[1]) + right)
@@ -240,6 +248,14 @@ def assert_manuscript_content(body: str, page: str, label: str) -> None:
     collector.feed(page)
     rendered = collector.text()
     actual_cells = Counter(collector.cells)
+    actual_images = Counter(collector.images)
+    expected_images = Counter(
+        (node["c"][2][0], inline_text(node["c"][1]))
+        for node in ast_nodes(manuscript_ast(body)["blocks"])
+        if node["t"] == "Image"
+    )
+    for expected, count in expected_images.items():
+        assert actual_images[expected] >= count, f"{label}: missing rendered image or alt {expected[0]}"
     # Count cells separately: a repeated number elsewhere in the article must
     # not conceal a deleted table cell or a changed value.
     for cell, count in Counter(manuscript_cells(body)).items():
@@ -324,6 +340,18 @@ def assert_all_manifest_issues(
 
 
 class JournalTests(unittest.TestCase):
+    def test_image_oracle_retains_exact_source_and_alternative_text(self) -> None:
+        body = "Synthetic image control.\n\n![Synthetic diagram](/assets/synthetic-diagram.jpg)\n\nConceptual illustration only.\n"
+        picture = '<img src="/assets/synthetic-diagram.jpg" alt="Synthetic diagram">'
+        page = '<p>Synthetic image control.</p><figure>' + picture + '<figcaption>Synthetic diagram</figcaption></figure><p>Conceptual illustration only.</p>'
+        assert_manuscript_content(body, page, "synthetic/en")
+        for changed in (page.replace(picture, ""), page.replace("synthetic-diagram.jpg", "wrong.jpg"), page.replace('alt="Synthetic diagram"', 'alt=""')):
+            with self.subTest(changed=changed):
+                with self.assertRaisesRegex(AssertionError, "missing rendered image or alt"):
+                    assert_manuscript_content(body, changed, "synthetic/en")
+        with self.assertRaisesRegex(AssertionError, "does not support raw blocks"):
+            manuscript_blocks('<figure><img src="/assets/synthetic.jpg"></figure>\n')
+
     def test_ast_oracle_emphasis_and_relative_link_labels(self) -> None:
         body = (
             "## *Heading*\n\n**Correction**: Read [*the follow-up*](/en/journal/follow-up/) "
@@ -733,7 +761,7 @@ def prepare_temp_site(tmp_root: Path) -> tuple[Path, Path, dict]:
     if tmp_root.exists():
         shutil.rmtree(tmp_root)
     tmp_root.mkdir(parents=True)
-    for name in ("build.mjs", "publication-manifest.json", "roadmap-manifest.json"):
+    for name in ("build.mjs", "publication-manifest.json", "roadmap-manifest.json", "coordinated-work-manifest.json"):
         shutil.copy2(ROOT / name, tmp_root / name)
     shutil.copytree(ROOT / "scripts", tmp_root / "scripts", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     shutil.copytree(ROOT / "src", tmp_root / "src", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))

@@ -10,4 +10,5 @@ Derivative works and redistributions must retain this notice (Apache-2.0 section
 and credit the author and source (CC BY 4.0 section 3(a)).
 
 Fonts: Manrope (SIL OFL 1.1, The Manrope Project Authors), Source Sans 3 and Source Serif 4 (SIL OFL 1.1, Adobe). Their licence notices are kept in src/site/assets/ and public/assets/.
-Editorial cover images are illustrations generated for this site (CC BY 4.0); they are not evidence or measured scientific results.
+Editorial cover images are illustrations generated for this site (CC BY 4.0), except the supplied Coordinated Work illustration identified below; they are not evidence or measured scientific results.
+The Coordinated Work illustration has specific three-announcement permission, not a general CC BY grant. See src/site/assets/coordinated-work-2026-11-18-permission.txt and LicenseRef-Pavel-Announcement-Permission.

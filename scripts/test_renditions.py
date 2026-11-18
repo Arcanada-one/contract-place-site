@@ -1579,7 +1579,7 @@ class PrerenderedSite(unittest.TestCase):
             with tempfile.TemporaryDirectory() as temp:
                 site = Path(temp) / "site"
                 shutil.copytree(ROOT / "src", site / "src", ignore=shutil.ignore_patterns("node_modules"))
-                for name in ("build.mjs", "roadmap-manifest.json", "publication-manifest.json"):
+                for name in ("build.mjs", "roadmap-manifest.json", "publication-manifest.json", "coordinated-work-manifest.json"):
                     shutil.copy(ROOT / name, site / name)
                 # This switch is defined for a build without a sidecar; strip committed first-admission
                 # renditions so the no-sidecar baseline remains observable.

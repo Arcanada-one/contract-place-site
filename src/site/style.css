@@ -220,3 +220,6 @@ html[data-theme=dark] {--reader-link:#83dce3;--reader-hover:#b5f4f6;--reader-vis
 .journal-subscriptions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem;margin-block:1.5rem 2rem}
 .journal-subscriptions>span{font-weight:600}
 
+
+/* Full supplied Journal illustrations retain their aspect ratio. */
+.journal-body figure{margin:32px 0}.journal-body figure img{display:block;max-width:100%;height:auto}.journal-body figcaption{font:13px/1.5 var(--sans);color:var(--muted);margin-top:12px}

@@ -92,6 +92,7 @@ for(const alias of Object.keys(data.aliases)){routes.push(alias);NOINDEX.add(ali
 for(const a of data.articles)routes.push('journal/'+a.id);
 for(const issue of data.journal_issues||[])routes.push(issue.route);
 if(data.programme)routes.push('programme');
+if(data.coordinated_work)routes.push('roadmap/coordinated-work');
 routes.push('about','references');
 const uniqueRoutes=[...new Set(routes)];
 const urls=[ORIGIN+'/'];

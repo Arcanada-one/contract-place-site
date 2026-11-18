@@ -297,7 +297,10 @@ def main() -> None:
     renditions = compile_renditions(source, manifest, documents, renderer, run, args.renditions_file.resolve() if args.renditions_file else None)
     from programme import compile_programme
     programme = compile_programme(source, manifest['commit'], renderer)
-    write_catalog(source, ROOT, manifest, documents, renderer, roadmap, renditions, programme)
+    from coordinated_work import compile_coordinated_work
+    coordinated_work_manifest = ROOT / 'coordinated-work-manifest.json'
+    coordinated_work = compile_coordinated_work(roadmap_source, coordinated_work_manifest, roadmap['pin']['commit'])
+    write_catalog(source, ROOT, manifest, documents, renderer, roadmap, renditions, programme, coordinated_work)
     print(run(['node', 'build.mjs'], cwd=ROOT).strip())
     from publication_checks import check_site
     count = check_site(ROOT / 'public')
@@ -306,6 +309,7 @@ def main() -> None:
     load_inputs(source, args.manifest)
     compile_roadmap(roadmap_source, args.roadmap_manifest, manuscripts)
     compile_programme(source, manifest['commit'], renderer)
+    compile_coordinated_work(roadmap_source, coordinated_work_manifest, roadmap['pin']['commit'])
     if renditions:
         print(f'Renditions: {len(renditions.entries)} work/language pairs from the {renditions.source_kind} sidecar {renditions.sidecar_path}.')
     print(f'Built {len(documents)} complete documents in three interface languages / {count} pages; edition {manifest["edition"]}; source {manifest["commit"]}; roadmap of {len(roadmap["tasks"])} planned tasks at {roadmap["pin"]["commit"]}; programme guides at /{{en,ru,zh-Hans}}/programme/.')

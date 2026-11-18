@@ -3,17 +3,17 @@
   "status": "planned work; no execution state is published",
   "roadmap_pin": {
     "repository": "Arcanada-one/knowledge-contract",
-    "commit": "55e279c43dc9bcf8732467a32661c2ac4b7cf920",
+    "commit": "1e9aba657a580535cea4487c87fede13dff28c92",
     "files": [
       {
         "path": "ROADMAP.md",
         "role": "rendered",
-        "sha256": "3f02cb04ede1ac1538edef62e70d2f8fffcbe8ed9a61408c502b951e9b1ea760"
+        "sha256": "2a9cc334123f51aaec9fa8684221240f6b0b4716f83b6c284671c1a1f3b77e66"
       },
       {
         "path": "roadmap/TASKS.md",
         "role": "rendered",
-        "sha256": "3a78d2584825be027917306c3ae6b7062f0ccf7be4accb884ef9e3483cb1a6a7"
+        "sha256": "a937068aa9fab164cd5471ff9a0613b379bd3e823ac5d286afc23df5cc8242db"
       },
       {
         "path": "roadmap/dependencies.json",
@@ -28,7 +28,7 @@
       {
         "path": "roadmap/FOUNDATIONS_RELEASE_PLAN.md",
         "role": "linked",
-        "sha256": "442ba32cadcf9464e95c2d20f7e3857d0b1be679f41eb9a6282fb56dde00679d"
+        "sha256": "53279b88b6d0850e44b5c42958c9bfbbc8825e80744224e7666209b215fae51b"
       },
       {
         "path": "roadmap/SITE_DELIVERY.md",
@@ -38,27 +38,27 @@
       {
         "path": "roadmap/localizations.json",
         "role": "rendition-manifest",
-        "sha256": "e6f11eb6e749aaf409f63f06b88d7e2277f458baa292ad1173940b9b13c0aabb"
+        "sha256": "172d80a619fd855eb5f6ae5eed3e053468478679ecd7654347343d92de9860ce"
       },
       {
         "path": "roadmap/ROADMAP.full.ru.md",
         "role": "rendition",
-        "sha256": "2840af6ae601d2085f97f9358c218e7782289cc94876c3fa242ed8d2a830f167"
+        "sha256": "80a834dfa4659ce66a6c50756c1b87fe9d92c7615af5c3c790330a8d52927030"
       },
       {
         "path": "roadmap/ROADMAP.full.zh-Hans.md",
         "role": "rendition",
-        "sha256": "fffe4fa2a97c8fbc41e3f7c5c0e79f477d09bfcd998a534aaa4490ac542c7159"
+        "sha256": "b7aff5cc94725925daf51e26d18a4e549aa4eb1b6a0150567249a1cb093e31ef"
       },
       {
         "path": "roadmap/TASKS.ru.json",
         "role": "rendition",
-        "sha256": "bf84e1f3517d5c3eeb43d4d90f4dd9861953df5b362a4064fb5984696b472f67"
+        "sha256": "ad5fd54afc04a9d809274237e21add8e73a1943a8cd2ecf36e7e866673653f78"
       },
       {
         "path": "roadmap/TASKS.zh-Hans.json",
         "role": "rendition",
-        "sha256": "bbccd4330e5b416add6f8656eae12522bf37d2cdf58b35cf06ebba88eab464a8"
+        "sha256": "64de0628f0e22057c9637f614b3aef2bb74b1de3ce41f424190889b2f9a11057"
       }
     ]
   },
