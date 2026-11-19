@@ -210,6 +210,25 @@
           "sha256": "82b345adb570e9e8bb5fbfd927ab032dde6a5b44ef0b97735b12ee9725f9a37f"
         }
       }
+    },
+    {
+      "slug": "verifier-generation-2026-11-19",
+      "date": "2026-11-19",
+      "folder": "2026-11-19-verifier-generation",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "e5151204513770e0c18f7c587676bf7423ae6f99ec6db6c57d768d020aca236b"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "8b958b120e7fa80aea682a5e9242d03e02730b397e5d2fb814645d036d5403ee"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "ee329f54dfc99dde69d887d2f497ae810205c76e88366db3e385a317607b7f4f"
+        }
+      }
     }
   ]
 }
