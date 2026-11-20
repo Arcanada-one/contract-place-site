@@ -229,6 +229,25 @@
           "sha256": "ee329f54dfc99dde69d887d2f497ae810205c76e88366db3e385a317607b7f4f"
         }
       }
+    },
+    {
+      "slug": "trial-by-trace-harness-evidence-2026-11-20",
+      "date": "2026-11-20",
+      "folder": "2026-11-20-trial-by-trace-harness-evidence",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "2d1dc2fd6751da9a4ab1a3ca0cf7e112b11623a975c531a3b4d00b35de2b2a99"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "7eb364b92cdcb22b8f6240871dcb28f7c1369f642c7213ef08118de7df65b970"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "b9866862453ef7c35f954b3be42e6f2801697d2a5da0666e64c8756b91d39fab"
+        }
+      }
     }
   ]
 }

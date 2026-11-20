@@ -4,6 +4,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from xml.etree import ElementTree
 
 from check_hygiene import is_inline_script_violation
 
@@ -21,17 +22,18 @@ def journal_manifest_path() -> Path:
     return Path(override) if override else DEFAULT_JOURNAL_MANIFEST
 
 
-def journal_issue_urls(manifest_path: Path | None = None) -> list[str]:
-    """Every daily journal issue × every locale must be indexable and sitemap-listed."""
+def journal_issue_dates(manifest_path: Path | None = None) -> dict[str, str]:
+    """Map each localized daily issue URL to its declared update or publication date."""
     path = journal_manifest_path() if manifest_path is None else manifest_path
     data = json.loads(path.read_text(encoding="utf-8"))
-    urls: list[str] = []
+    dates: dict[str, str] = {}
     for issue in data["issues"]:
         slug = issue["slug"]
         for locale in LOCALES:
             assert locale in issue["languages"], "journal manifest missing language %s for %s" % (locale, slug)
-            urls.append("https://contract.place/%s/journal/%s/" % (locale, slug))
-    return urls
+            url = "https://contract.place/%s/journal/%s/" % (locale, slug)
+            dates[url] = issue.get("updated", issue["date"])
+    return dates
 
 
 def read(root: Path, rel: str) -> str:
@@ -219,19 +221,31 @@ def check_site(root: Path) -> None:
     assert not re.search(r"(?mi)^Disallow:\s*/\s*$", robots), "robots.txt must not disallow the whole site"
     assert "Sitemap: https://contract.place/sitemap.xml" in robots, "robots.txt must point at the sitemap"
 
-    sitemap = read(root, "sitemap.xml")
-    locs = set(re.findall(r"<loc>([^<]+)</loc>", sitemap))
+    sitemap = ElementTree.fromstring(read(root, "sitemap.xml"))
+    ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    entries = sitemap.findall("s:url", ns)
+    by_url = {entry.findtext("s:loc", namespaces=ns): entry for entry in entries}
+    locs = set(by_url)
+    assert len(locs) == len(entries), "sitemap.xml contains duplicate URLs"
     for needed in ("https://contract.place/", "https://contract.place/en/", "https://contract.place/ru/", "https://contract.place/zh-Hans/",
                    "https://contract.place/en/research/", "https://contract.place/en/science/controlled-knowledge-reuse/",
                    "https://contract.place/ru/engineering/studies/dependency-closure-and-package-delivery/",
                    "https://contract.place/zh-Hans/engineering/studies/dependency-closure-and-package-delivery/",
                    "https://contract.place/en/docs/", "https://contract.place/en/search/", "https://contract.place/en/journal/"):
         assert needed in locs, "sitemap.xml missing " + needed
-    for needed in journal_issue_urls():
+    issue_dates = journal_issue_dates()
+    for needed, expected_date in issue_dates.items():
         assert needed in locs, "sitemap.xml missing journal issue " + needed
+        dates = by_url[needed].findall("s:lastmod", ns)
+        actual_dates = [date.text for date in dates]
+        assert actual_dates == [expected_date], (
+            f"sitemap.xml wrong journal lastmod for {needed}: expected {expected_date}, got {actual_dates}"
+        )
         assert url_target(root, needed).is_file(), "journal issue page missing for " + needed
         page = url_target(root, needed).read_text(encoding="utf-8")
         assert 'name="robots" content="noindex' not in page, needed + " must be indexable"
+    for url in locs - issue_dates.keys():
+        assert by_url[url].find("s:lastmod", ns) is None, f"sitemap.xml unbound lastmod for {url}"
     # C5: English-fallback locales of works without a counting review stay out of the sitemap.
     assert "https://contract.place/ru/science/controlled-knowledge-reuse/" not in locs, "unreviewed/missing locale must not be sitemap-listed"
     assert all(u.startswith("https://contract.place/") for u in locs), "sitemap.xml has a foreign host"
