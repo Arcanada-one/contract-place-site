@@ -90,19 +90,27 @@ const data=JSON.parse(content.slice(content.indexOf('=')+1).trim().replace(/;$/,
 for(const r of data.records)routes.push(r.route.replace(/^\/en\//,'').replace(/\/$/,''));
 for(const alias of Object.keys(data.aliases)){routes.push(alias);NOINDEX.add(alias);}
 for(const a of data.articles)routes.push('journal/'+a.id);
-for(const issue of data.journal_issues||[])routes.push(issue.route);
+const issueDates=new Map();
+for(const issue of data.journal_issues||[]){
+ routes.push(issue.route);
+ issueDates.set(issue.route,issue.updated??issue.date);
+}
 if(data.programme)routes.push('programme');
 if(data.coordinated_work)routes.push('roadmap/coordinated-work');
 routes.push('about','references');
 const uniqueRoutes=[...new Set(routes)];
-const urls=[ORIGIN+'/'];
+const sitemapEntries=[{url:ORIGIN+'/'}];
 for(const lang of LANGS)for(const route of uniqueRoutes){const dir=path.join(root,lang,route);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),generate(`/${lang}/${route}`,lang));
  const record=fallbackIndexing()&&route?workOf(route):null;
  const indexable=!NOINDEX.has(route)&&!(record&&!counts(record,lang));
- if(indexable)urls.push(`${ORIGIN}/${lang}/${route?route+'/':''}`);}
+ if(indexable)sitemapEntries.push({url:`${ORIGIN}/${lang}/${route?route+'/':''}`,lastmod:issueDates.get(route)});}
 for(const alias of Object.keys(data.reader_aliases)){const dir=path.join(root,alias);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),generate('/'+alias,'en'));}
 fs.writeFileSync(path.join(root,'index.html'),generate('/en','en').replace('<link rel="canonical" href="'+ORIGIN+'/en/">','<link rel="canonical" href="'+ORIGIN+'/">').replace('<meta property="og:url" content="'+ORIGIN+'/en/">','<meta property="og:url" content="'+ORIGIN+'/">'));
 fs.writeFileSync(path.join(root,'404.html'),generate('/en/not-found','en',{sharedError:true}).replace(/<link rel="canonical"[^>]*>(<link rel="alternate"[^>]*>)*<meta property="og:url"[^>]*>/,'<meta name="robots" content="noindex">'));
-fs.writeFileSync(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls.map(u=>`  <url><loc>${u}</loc><lastmod>${data.retrieved&&String(data.retrieved).slice(0,10)||'2026-11-04'}</lastmod></url>`).join('\n')+'\n</urlset>\n');
-console.log(`Prerendered ${uniqueRoutes.length*3} localized routes, root and 404; sitemap ${urls.length} URLs.`);
+const sitemapRows=sitemapEntries.map(({url,lastmod})=>{
+ const date=lastmod===undefined?'':`<lastmod>${lastmod}</lastmod>`;
+ return `  <url><loc>${url}</loc>${date}</url>`;
+});
+fs.writeFileSync(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+sitemapRows.join('\n')+'\n</urlset>\n');
+console.log(`Prerendered ${uniqueRoutes.length*3} localized routes, root and 404; sitemap ${sitemapEntries.length} URLs.`);
 
