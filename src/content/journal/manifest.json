@@ -248,6 +248,25 @@
           "sha256": "b9866862453ef7c35f954b3be42e6f2801697d2a5da0666e64c8756b91d39fab"
         }
       }
+    },
+    {
+      "slug": "rendered-sources-injection-2026-11-21",
+      "date": "2026-11-21",
+      "folder": "2026-11-21-rendered-sources-injection-2026-11-21",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "d92425703f013fe7191b9d6f9ed300112ce846ecc4c671ed91569fd31294a224"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "caf08e9fc4c528008b968a9eee99da0c786ae8df047ba6822c597a75f03876e4"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "626bc0f460a3d9e515ef15b45895fa7578685172222078fa5a2a515abee469fe"
+        }
+      }
     }
   ]
 }
