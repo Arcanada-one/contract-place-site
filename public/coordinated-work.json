@@ -1,0 +1,39 @@
+{
+  "kind": "planned-research-programme",
+  "status": "proposed",
+  "programme_id": "KC-CW-20261118",
+  "pin": {
+    "repository": "Arcanada-one/knowledge-contract",
+    "commit": "1e9aba657a580535cea4487c87fede13dff28c92",
+    "files": [
+      {
+        "path": "roadmap/coordinated-work/plan/PROGRAMME.md",
+        "sha256": "86b3561ad79717f6971dfed17e4a9f6b4333728a00cd80209ac144385966a5a7",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.md"
+      },
+      {
+        "path": "roadmap/coordinated-work/plan/PROGRAMME.ru.md",
+        "sha256": "95b0e19d813a2c25216ec62ee26167ccb7153e6953fa8e7de5172d7208035f3b",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.ru.md"
+      },
+      {
+        "path": "roadmap/coordinated-work/plan/PROGRAMME.zh-Hans.md",
+        "sha256": "454de24bf904762e98a37431bbcb2c1f01e7e738b1d333c0bff7cf7796b86e9d",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/PROGRAMME.zh-Hans.md"
+      },
+      {
+        "path": "roadmap/coordinated-work/plan/execution-graph.json",
+        "sha256": "8c7b7e6fb1f95df9f9c1c85ce083fa7ba3250ed6637ae7ce1a41d6cc1c49e3a6",
+        "url": "https://github.com/Arcanada-one/knowledge-contract/blob/1e9aba657a580535cea4487c87fede13dff28c92/roadmap/coordinated-work/plan/execution-graph.json"
+      }
+    ]
+  },
+  "counts": {
+    "epics": 23,
+    "packages": 104,
+    "edges": 247,
+    "papers": 16,
+    "hypotheses": 12
+  },
+  "execution_state_published": false
+}

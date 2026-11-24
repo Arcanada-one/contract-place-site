@@ -27,6 +27,12 @@ function localeHash(next,path){
    ['programme-foundations','programme-source'].includes(id)?id:mappedHeading(pages,next,id);
   return target?'#'+encodeURIComponent(target):'';
  }
+ if(path==='roadmap/coordinated-work'&&corpus.coordinated_work){
+  const pages=corpus.coordinated_work.pages;
+  const target=id===pages[locale].title_id?pages[next].title_id:
+   id==='cw-source'?id:mappedHeading(pages,next,id);
+  return target?'#'+encodeURIComponent(target):'';
+ }
  const record=corpus.records.find(r=>recordPath(r)===path);
  if(record){
   const current=recordRendition(record),target=recordRendition(record,next);
@@ -248,7 +254,18 @@ Object.assign(words,{
  programmeFoundations:['Three foundations','Три основания','三项基础'],
  programmeLanguageSwitch:['Guide language','Язык руководства','指南语言'],
  programmeSources:['Source and provenance','Источник и происхождение','来源与出处'],
- programmeReadingNote:['This page renders the programme guide in the selected language. It is an editorial reading map, not a versioned manuscript rendition.','Эта страница показывает руководство на выбранном языке. Это редакционная карта чтения, а не версионированный перевод рукописи.','本页以所选语言呈现计划指南。这是编辑阅读地图，不是版本化的文稿译本。']
+ programmeReadingNote:['This page renders the programme guide in the selected language. It is an editorial reading map, not a versioned manuscript rendition.','Эта страница показывает руководство на выбранном языке. Это редакционная карта чтения, а не версионированный перевод рукописи.','本页以所选语言呈现计划指南。这是编辑阅读地图，不是版本化的文稿译本。'],
+ coordinatedWork:['Coordinated Work','Согласованная деятельность','协同工作'],
+ coordinatedWorkDesc:['A research programme on organizational needs, competencies, shared resources and decisions that improve the whole work system.','Исследовательская программа о потребностях организации, компетенциях, общих ресурсах и решениях, улучшающих работу всей системы.','研究组织需求、能力、共享资源，以及改善整个工作系统的决策。'],
+ coordinatedWorkOpen:['Explore the programme and dependencies','Открыть программу и зависимости','查看计划与依赖关系'],
+ coordinatedWorkNotice:['Research proposal. Work packages, possible papers and hypotheses describe planned work; they do not establish task registration, assignments or validated organizational effects.','Исследовательское предложение. Пакеты работ, возможные статьи и гипотезы описывают план; они не подтверждают регистрацию задач, назначения или проверенный эффект для организации.','研究提案。工作包、候选论文与假设描述的是计划，并不证明任务已登记、已分配或组织效益已得到验证。'],
+ coordinatedWorkLanguage:['The programme is shown in full in the selected language. Russian and Simplified Chinese remain author-prepared translations awaiting a separate fidelity review.','Программа показана полностью на выбранном языке. Русский и упрощённый китайский тексты подготовлены в составе авторской работы и ожидают отдельной проверки точности перевода.','完整计划以所选语言显示。俄语与简体中文文本属于作者准备的译文，仍待单独审查翻译准确性。'],
+ coordinatedWorkEpics:['epics','эпика','个专题'],
+ coordinatedWorkPackages:['work packages','пакета работ','个工作包'],
+ coordinatedWorkPapers:['candidate papers','возможных статей','篇候选论文'],
+ coordinatedWorkHypotheses:['hypotheses','гипотез','项假设'],
+ coordinatedWorkGraph:['Dependency graph','Граф зависимостей','依赖关系图'],
+ coordinatedWorkContracts:['Complete work contracts','Полные контракты работ','完整工作契约']
 });
 function recordPath(r){return r.route.replace(/^\/en\//,'').replace(/\/$/,'');}
 function recordLabel(r){return t({paper:'papers',spec:'specs',study:'studies',glossary:'reference',bibliography:'reference',appendix:'appendices'}[r.kind]);}
@@ -434,7 +451,7 @@ const files=`<div class="table-scroll roadmap-table" role="region" aria-label="$
 const sections=[['roadmap-overview','roadmapOverview'],['roadmap-bands','roadmapBands'],['roadmap-dependencies','roadmapDependencies'],['roadmap-advisory','roadmapAdvisory'],['roadmap-tasks','roadmapTasks'],['roadmap-source','roadmapSources']];
 const toc=sections.map(([id,key])=>`<a class="toc-level-2" href="#${id}">${t(key)}</a>`).join('')+road.overview_toc.map(h=>`<a class="toc-level-3" href="#${esc(h.id)}" lang="${roadmapLanguage()}">${esc(h.title)}</a>`).join('')+road.tasks.map(k=>`<a class="toc-level-3 toc-task" href="#${k.anchor}"><span lang="${roadmapLanguage()}">${esc(roadmapName(k.id))}</span></a>`).join('');
 return `<div class="container source-record publication-record roadmap-page"><div class="page-head"><nav class="breadcrumb" aria-label="${t('breadcrumb')}">${link('',t('home'),'','')}<span>/</span><span>${t('roadmap')}</span></nav><div class="metadata"><span class="tag">${t('roadmapPlanned')}</span><span>${road.tasks.length} ${t('roadmapCounts')}</span><span>${road.required_edges} ${t('roadmapRequiredEdges')}</span><span>${road.advisory.length} ${t('roadmapAdvisoryEdges')}</span></div><h1>${t('roadmap')}</h1><p class="lead" lang="${roadmapLanguage()}">${esc(road.introduction)}</p><p class="roadmap-notice" role="note">${t('roadmapStatusNote')}</p><p class="reading-language-note">${t('roadmapLanguageNote')}</p>${locale!=='en'&&corpus.roadmap.translations?.[locale]?`<p class="intro-note roadmap-translation-note" role="note">${t('roadmapTranslationNotice')}</p>`:''}<div class="provenance metadata"><span>${t('roadmapRoadmapCommit')}: <a href="https://github.com/${pin.repository}/tree/${pin.commit}"><code>${pin.commit}</code></a></span><span>${t('roadmapManuscriptCommit')}: <a href="https://github.com/Arcanada-one/knowledge-contract/tree/${ms}"><code>${ms}</code></a></span></div></div>
-<div class="source-reading"><article class="roadmap-body"><section aria-labelledby="roadmap-overview" id="roadmap-section-overview"><h2 id="roadmap-overview">${t('roadmapOverview')}</h2><div class="source-body prose" lang="${roadmapLanguage()}">${road.overview_html}</div></section>
+<div class="source-reading"><article class="roadmap-body">${coordinatedWorkTeaser()}<section aria-labelledby="roadmap-overview" id="roadmap-section-overview"><h2 id="roadmap-overview">${t('roadmapOverview')}</h2><div class="source-body prose" lang="${roadmapLanguage()}">${road.overview_html}</div></section>
 <section aria-labelledby="roadmap-bands"><h2 id="roadmap-bands">${t('roadmapBands')}</h2><div class="roadmap-bands">${bands}</div></section>
 <section aria-labelledby="roadmap-dependencies"><h2 id="roadmap-dependencies">${t('roadmapDependencies')}</h2><p>${t('roadmapDepsIntro')}</p>${roadmapTable(road)}</section>
 <section aria-labelledby="roadmap-advisory"><h2 id="roadmap-advisory">${t('roadmapAdvisory')}</h2>${advisory}</section>
@@ -452,11 +469,24 @@ return `<div class="container source-record publication-record programme-page"><
 <section class="programme-foundations" aria-labelledby="programme-foundations"><h2 id="programme-foundations">${t('programmeFoundations')}</h2><div class="foundation-grid">${cards}</div></section>
 <div class="source-reading"><article><div class="source-body prose" lang="${locale}">${page.html}</div><section class="document-citation" aria-labelledby="programme-source"><h2 id="programme-source">${t('programmeSources')}</h2><p>Arcanada-one/knowledge-contract @ <code>${pin.commit}</code></p><div class="table-scroll" role="region" tabindex="0"><table><thead><tr><th scope="col">${t('filePath')}</th><th scope="col">SHA-256</th><th scope="col">${t('gitBlob')}</th></tr></thead><tbody>${files}</tbody></table></div></section></article><aside class="article-aside"><details class="reader-contents" open><summary>${t('contents')}</summary><nav aria-label="${t('contents')}">${page.toc.map(h=>`<a class="toc-level-${h.level}" href="#${esc(h.id)}" lang="${locale}">${esc(h.title)}</a>`).join('')}</nav></details><hr><strong>${t('programmeLanguageSwitch')}</strong><div class="programme-langs">${switcher}</div></aside></div></div>`;
 }
+function coordinatedWorkTeaser(){
+ if(!corpus.coordinated_work)return '';
+ return `<section class="document-citation cw-entry" aria-labelledby="cw-entry-title"><h2 id="cw-entry-title">${t('coordinatedWork')}</h2><p>${t('coordinatedWorkDesc')}</p>${link('roadmap/coordinated-work',t('coordinatedWorkOpen'))}</section>`;
+}
+function coordinatedWorkPage(){
+ const cw=corpus.coordinated_work;if(!cw?.pages?.[locale])throw new Error('Coordinated Work language missing: '+locale);
+ const page=cw.pages[locale],pin=cw.pin;
+ const links=[['en','English'],['ru','Русский'],['zh-Hans','简体中文']].map(([l,label])=>l===locale?`<span aria-current="page" lang="${l}">${label}</span>`:`<a href="${esc(localeHref(l))}" hreflang="${l}" lang="${l}">${label}</a>`).join(' · ');
+ const counts=[['epics','coordinatedWorkEpics'],['packages','coordinatedWorkPackages'],['papers','coordinatedWorkPapers'],['hypotheses','coordinatedWorkHypotheses']].map(([key,label])=>`<span>${cw.counts[key]} ${t(label)}</span>`).join('');
+ const sourceBase=`https://github.com/${pin.repository}/blob/${pin.commit}/roadmap/coordinated-work/plan/`;
+ return `<div class="container source-record publication-record coordinated-work-page"><div class="page-head"><nav class="breadcrumb" aria-label="${t('breadcrumb')}">${link('',t('home'),'','')}<span>/</span>${link('roadmap',t('roadmap'),'','')}<span>/</span><span>${t('coordinatedWork')}</span></nav><div class="metadata"><span class="tag">${t('roadmapPlanned')}</span>${counts}</div><h1 id="${esc(page.title_id)}" lang="${locale}">${esc(page.title)}</h1><p class="lead">${t('coordinatedWorkDesc')}</p><p class="roadmap-notice" role="note">${t('coordinatedWorkNotice')}</p><p class="reading-language-note">${t('coordinatedWorkLanguage')}</p><div class="actions">${links}</div><div class="actions"><a class="text-link" href="${sourceBase}execution-graph.json">${t('coordinatedWorkGraph')}${icon('external')}</a><a class="text-link" href="${sourceBase}TASK_CONTRACTS.md">${t('coordinatedWorkContracts')}${icon('external')}</a></div></div><div class="source-reading"><article><div class="source-body prose" lang="${locale}">${page.html}</div><section class="document-citation" aria-labelledby="cw-source"><h2 id="cw-source">${t('programmeSources')}</h2><p><a href="${page.source}" target="_blank" rel="noopener">${t('fullSource')}${icon('external')}</a></p><p>${t('sourceRevision')}: <code class="hash">${pin.commit}</code></p><p>SHA-256: <code class="hash">${page.source_sha256}</code></p><p><a href="/coordinated-work.json">coordinated-work.json</a></p></section></article><aside class="article-aside"><details class="reader-contents" open><summary>${t('contents')}</summary><nav aria-label="${t('contents')}">${page.toc.map(h=>`<a class="toc-level-${h.level}" href="#${esc(h.id)}" lang="${locale}">${esc(h.title)}</a>`).join('')}</nav></details></aside></div></div>`;
+}
 function repository(){
-return `<div class="container">${pageHead(t('repository'),t('repositoryIntro'))}<div class="actions repo-actions"><a class="button" href="https://github.com/Arcanada-one/knowledge-contract/tree/${corpus.publication.commit}" target="_blank" rel="noopener">${t('sourceRepo')}${icon('external')}</a><a class="text-link" href="/publication.json">publication.json</a></div><div class="table-scroll repository-table" role="region" aria-label="${t('repository')}" tabindex="0"><table><thead><tr><th scope="col">${t('article')}</th><th scope="col">${t('sourceStatus')}</th><th scope="col">${t('revision')}</th></tr></thead><tbody>${corpus.records.map(r=>`<tr><td><a href="${url(recordPath(r))}" lang="${recordTitleLanguage(r)}">${esc(recordTitle(r))}</a></td><td>${recordLabel(r)}${statusBadge(r)}</td><td><a href="${r.source}"><code>${r.revision.slice(0,12)}</code></a></td></tr>`).join('')}</tbody></table></div></div>`;
+return `<div class="container">${pageHead(t('repository'),t('repositoryIntro'))}<div class="actions repo-actions"><a class="button" href="https://github.com/Arcanada-one/knowledge-contract/tree/${corpus.publication.commit}" target="_blank" rel="noopener">${t('sourceRepo')}${icon('external')}</a><a class="text-link" href="/publication.json">publication.json</a></div>${coordinatedWorkTeaser()}<div class="table-scroll repository-table" role="region" aria-label="${t('repository')}" tabindex="0"><table><thead><tr><th scope="col">${t('article')}</th><th scope="col">${t('sourceStatus')}</th><th scope="col">${t('revision')}</th></tr></thead><tbody>${corpus.records.map(r=>`<tr><td><a href="${url(recordPath(r))}" lang="${recordTitleLanguage(r)}">${esc(recordTitle(r))}</a></td><td>${recordLabel(r)}${statusBadge(r)}</td><td><a href="${r.source}"><code>${r.revision.slice(0,12)}</code></a></td></tr>`).join('')}</tbody></table></div></div>`;
 }
 function searchItems(q){
  const items=[...corpus.records.map(r=>({title:recordTitle(r),lang:recordTitleLanguage(r),desc:recordSummary(r)+' '+r.title+' '+r.summary+' '+r.id,type:recordLabel(r),badge:statusBadge(r),path:recordPath(r)})),...corpus.articles.map(articleView).map(a=>({title:a.title,desc:a.description,type:t('journal'),path:'journal/'+a.id})),...(corpus.journal_issues||[]).map(j=>({title:j.languages[locale].title,desc:j.languages[locale].excerpt,type:t('journal'),path:j.route})),{title:t('availability'),desc:t('integrationDesc'),type:t('docs'),path:'docs/availability'},...(corpus.programme?[{title:t('programme'),desc:t('programmeDesc'),type:t('programme'),path:'programme'}]:[]),{title:t('roadmap'),desc:t('roadmapDesc'),type:t('roadmap'),path:'roadmap'}];
+ if(corpus.coordinated_work)items.push({title:t('coordinatedWork'),desc:t('coordinatedWorkDesc'),type:t('roadmap'),path:'roadmap/coordinated-work'});
  return items.filter(x=>normalize(x.title+' '+x.desc+' '+x.type).includes(normalize(q)));
 }
 function readerAlias(path,target){
@@ -608,6 +638,7 @@ else if(path==='books'){html=books();title=t('books')}
 else if(path==='repository'){html=repository();title=t('repository')}
 else if(path==='programme'){html=programmePage();title=corpus.programme.pages[locale].title;description=t('programmeDesc')}
 else if(path==='roadmap'){html=roadmapPage();title=t('roadmap');description=t('roadmapDesc')}
+else if(path==='roadmap/coordinated-work'&&corpus.coordinated_work){html=coordinatedWorkPage();title=t('coordinatedWork');description=t('coordinatedWorkDesc')}
 else if(path==='journal'){html=journal();title=t('journal')}
 else if(issue){const page=issue.languages[locale];if(!page)throw new Error('Missing journal language '+locale+' for '+issue.slug);html=journalIssuePage(issue);title=page.title;description=page.excerpt}
 else if(article){html=publication(article);title=articleView(article).title;description=articleView(article).description}

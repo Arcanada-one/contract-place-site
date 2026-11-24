@@ -23,7 +23,7 @@ Full manuscripts are present in built HTML. Pandoc preserves equations as MathML
 
 `publication-manifest.json` pins the knowledge repository to an exact 40-character commit. Its `publication-catalog.json` is authoritative for the 31 catalogued works. The source repository's `publication-localization.json` binds localized titles and summaries separately from the body records in `publication-renditions.json`; see [catalogue localization](docs/catalogue-localization.md). Source-owned `publication-formula-localizations.json` separately binds visible prose inside formulas; the renderer retains canonical TeX and mathematical structure and records an unreviewed presentation scope. `publication-review-localizations.json` separately translates historical review explanations while preserving the original records and their scope. The compiler generates text, routes, metadata and source hashes in `src/content/catalog.json` and `src/site/content-provenance.json`; journal material and design remain in this repository.
 
-Daily journal issues live under `src/content/journal/`: three language Markdown files per issue plus `manifest.json` digests. The eleven dated issues provide 33 localized journal pages at `/{en,ru,zh-Hans}/journal/<slug>/` and appear on the journal index newest first. Each localized homepage automatically shows the three newest issues, sorted by date with a stable slug tie-breaker. Local search includes these issues. The legacy `/journal/building-a-place/` route stays noindex; its retained project note is localized. See AGENTS.md “Daily journal issue”.
+Daily journal issues live under `src/content/journal/`: three language Markdown files per issue plus `manifest.json` digests. The twelve dated issues provide 36 localized journal pages at `/{en,ru,zh-Hans}/journal/<slug>/` and appear on the journal index newest first. Each localized homepage automatically shows the three newest issues, sorted by date with a stable slug tie-breaker. Local search includes these issues. The legacy `/journal/building-a-place/` route stays noindex; its retained project note is localized. See AGENTS.md “Daily journal issue”.
 
 The daily Journal also provides full-article RSS 2.0 and Atom 1.0 feeds at `/{en,ru,zh-Hans}/journal/rss.xml` and `/{en,ru,zh-Hans}/journal/atom.xml`. The index and footer expose subscription links, and HTML includes autodiscovery. Feed membership follows the published daily-issue manifest; undated source-review pages, legacy noindex notes, research works and private Lab data are excluded. See [Daily Journal feeds](docs/journal-feeds.md) for scope, day-precision dates, stable IDs and release checks.
 
@@ -74,6 +74,17 @@ Edit the interface in `src/site/app.js`, CSS in `src/site/style.css` and assets 
 
 The roadmap has its own pin, `roadmap-manifest.json`: repository, a full 40-character commit and the SHA-256 of each source file (`ROADMAP.md`, `roadmap/TASKS.md`, `roadmap/dependencies.json`, the linked `roadmap/EXPERIMENTS.md` and `roadmap/FOUNDATIONS_RELEASE_PLAN.md` (linked at the pin, not rendered), and `roadmap/SITE_DELIVERY.md`, from which only the public introduction is taken). Localization additionally pins `roadmap/localizations.json`, both `roadmap/ROADMAP.full.<locale>.md` overviews and both `roadmap/TASKS.<locale>.json` payloads. It is independent of `publication-manifest.json`; the page shows both commits and states that they are separate. `scripts/roadmap.py` refuses a pin that is not a full commit, a checkout at another commit or with uncommitted changes, a hash mismatch, a missing or duplicate task, any disagreement between a card and `dependencies.json` (priority, owner, required outputs), a dangling or cyclic edge, any task state other than planned, and private identifiers. `scripts/roadmap_localization.py` separately binds translations to unchanged historical and current source bytes, preserves dates, numbers, links, code and mathematics, and rejects translated state/authority injection. Compilation happens before any generated file is written. Known limit: the compiler checks structured state (task fields, `dependencies.json` keys, the one accepted `execution_bindings` value, dates), but it does not scan the free prose of card fields or of `ROADMAP.md` for status words such as "completed" or "active"; that text is published as written by the content owner, who reviews it. The TASKS.md preamble before the first card is rendered above the cards, and any unexpected text between a card header and its first field is refused. The roadmap is separate from the 31-work reading catalogue, and `public/roadmap.json` records its provenance.
 
+## Coordinated Work research programme
+
+`/{en,ru,zh-Hans}/roadmap/coordinated-work/` renders the full Coordinated Work
+programme from its exact roadmap source revision. It connects the scientific
+series, work packages, hypotheses and dependencies while preserving their
+proposed status. The Journal announcement, roadmap, repository and local search
+link to the programme. Its source files and graph are bound separately in
+`coordinated-work-manifest.json`; `/coordinated-work.json` records their public
+provenance. No native task registration or execution state is published by this
+reader. See [source and release boundaries](docs/coordinated-work-publication.md).
+
 ## Search and API
 
 Search uses the existing anonymous, read-only `https://api.contract.place/v1/search` route. Preserve result order, localized feedback, cancellation of earlier requests and pagination visibility. API text must remain text and must not become executable HTML.
@@ -104,7 +115,7 @@ After deployment, read the served homepage, a paper, a specification, a study an
 
 ## Licensing and contributions
 
-Text and original editorial illustrations use [CC BY 4.0](LICENSE); site code uses [Apache-2.0](LICENSE-CODE). Local fonts use SIL OFL 1.1 and retain their notices. Preserve [NOTICE](NOTICE), source credits and `REUSE.toml`. Credit Pavel Valentov, Knowledge Contract Arcana and https://contract.place. Names and logos are not licensed by the text/code licences; attribution does not imply endorsement.
+Text and original editorial illustrations use [CC BY 4.0](LICENSE), except assets with an explicit permission notice. The supplied Coordinated Work illustration has [specific three-announcement permission](src/site/assets/coordinated-work-2026-11-18-permission.txt), not a general CC BY grant; site code uses [Apache-2.0](LICENSE-CODE). Local fonts use SIL OFL 1.1 and retain their notices. Preserve [NOTICE](NOTICE), source credits and `REUSE.toml`. Credit Pavel Valentov, Knowledge Contract Arcana and https://contract.place. Names and logos are not licensed by the text/code licences; attribution does not imply endorsement.
 
 Contributions require the Developer Certificate of Origin. The actual contributor signs off with `git commit -s` using their own identity. Content review, publication, index admission and deployment remain distinct decisions.
 

@@ -44,7 +44,7 @@ def legacy_aliases(source: Path, previous: dict, documents: list[dict]) -> dict[
     return aliases
 
 
-def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None, programme=None) -> None:
+def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict], renderer, roadmap: dict, renditions=None, programme=None, coordinated_work=None) -> None:
     from catalogue_localization import compile_localization, compile_article_localizations
     localization = compile_localization(source, manifest, documents)
     formula_localizations = renderer.formula_localizations.provenance()
@@ -103,6 +103,8 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
     }
     if programme:
         payload['programme'] = programme
+    if coordinated_work:
+        payload['coordinated_work'] = coordinated_work
     if renditions:
         payload['renditions_source'] = renditions.source_kind
     if localization:
@@ -125,6 +127,9 @@ def write_catalog(source: Path, site: Path, manifest: dict, documents: list[dict
     }
     if programme:
         provenance['programme'] = programme_provenance(programme)
+    if coordinated_work:
+        from coordinated_work import provenance as coordinated_work_provenance
+        provenance['coordinated_work'] = coordinated_work_provenance(coordinated_work)
     if renditions:
         provenance['renditions'] = renditions.provenance()
     if localization:

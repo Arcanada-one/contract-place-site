@@ -96,6 +96,7 @@ for(const issue of data.journal_issues||[]){
  issueDates.set(issue.route,issue.updated??issue.date);
 }
 if(data.programme)routes.push('programme');
+if(data.coordinated_work)routes.push('roadmap/coordinated-work');
 routes.push('about','references');
 const uniqueRoutes=[...new Set(routes)];
 const sitemapEntries=[{url:ORIGIN+'/'}];

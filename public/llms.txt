@@ -7,6 +7,7 @@ Complete English documents with an English, Russian and Chinese interface. The C
 - Science: https://contract.place/en/research/
 - Meaning programme (reading map): https://contract.place/en/programme/ ; https://contract.place/ru/programme/ ; https://contract.place/zh-Hans/programme/
 - Research roadmap (planned work, not results): https://contract.place/en/roadmap/ ; provenance https://contract.place/roadmap.json
+- Coordinated Work research programme (proposed): https://contract.place/en/roadmap/coordinated-work/ ; https://contract.place/ru/roadmap/coordinated-work/ ; https://contract.place/zh-Hans/roadmap/coordinated-work/ ; provenance https://contract.place/coordinated-work.json
 - Engineering specifications: https://contract.place/en/engineering/specifications/
 - Engineering studies: https://contract.place/en/engineering/studies/
 - Glossary and bibliography: https://contract.place/en/reference/
