@@ -286,6 +286,25 @@
           "sha256": "626bc0f460a3d9e515ef15b45895fa7578685172222078fa5a2a515abee469fe"
         }
       }
+    },
+    {
+      "slug": "logic-consistency-agentware-2026-11-25",
+      "date": "2026-11-25",
+      "folder": "2026-11-25-logic-consistency-agentware-2026-11-25",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "738dab662d82646be4adb9641c8321cc5ea9e9918f5a3b55f383a6ea5559cfff"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "f17dbad43f0318e70e3e699a9398cda98f904cdb3cb5c2bfcb25fdf267b813f4"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "791b8da52ff6e06c8797047c20b03115f2754f390172b249bbe3bf867410ae68"
+        }
+      }
     }
   ]
 }
