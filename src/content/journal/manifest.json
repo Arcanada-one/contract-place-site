@@ -305,6 +305,25 @@
           "sha256": "791b8da52ff6e06c8797047c20b03115f2754f390172b249bbe3bf867410ae68"
         }
       }
+    },
+    {
+      "slug": "memory-substrates-held-out-evaluation-2026-11-26",
+      "date": "2026-11-26",
+      "folder": "2026-11-26-memory-substrates-held-out-evaluation",
+      "languages": {
+        "en": {
+          "file": "en.md",
+          "sha256": "441e361bfb2cba7785b8c9e0cf89790f57d1cc98fe6b4305a77f089ef175f183"
+        },
+        "ru": {
+          "file": "ru.md",
+          "sha256": "188943da8983bfe64fecc1b49cb47945f2dea886b04be9d63313fe72dc68c130"
+        },
+        "zh-Hans": {
+          "file": "zh-Hans.md",
+          "sha256": "d931e1a12225d4c8040e93344c9f6fb564f3b5f62f747c620cf28d7ece3d1c18"
+        }
+      }
     }
   ]
 }
